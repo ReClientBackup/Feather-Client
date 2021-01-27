@@ -16,7 +16,7 @@ public class GitManager {
 	public GitManager() {
 		try {
 			getGitRepositoryState();
-			Display.setTitle("Feather (1.8.9-" + gitRepositoryState.commitIdAbbrev + "/" + gitRepositoryState.branch + ")");
+			Display.setTitle("Feather (1.8.9-" + gitRepositoryState.getCommitIdAbbrev() + "/" + gitRepositoryState.getBranch() + ")");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
