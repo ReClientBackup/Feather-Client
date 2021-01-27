@@ -2,6 +2,8 @@ package com.murengezi.feather;
 
 import com.murengezi.feather.Config.ConfigManager;
 import com.murengezi.feather.Discord.DiscordRP;
+import com.murengezi.feather.Git.GitManager;
+import com.murengezi.feather.Git.GitRepositoryState;
 import com.murengezi.feather.Gui.Click.ClickGui;
 import com.murengezi.feather.Image.ImageManager;
 import com.murengezi.feather.Module.ModuleManager;
@@ -9,6 +11,8 @@ import com.murengezi.feather.Particle.ParticleManager;
 import com.murengezi.feather.Theme.ThemeManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Properties;
 
 /**
  * @author Tobias Sjöblom
@@ -22,6 +26,7 @@ public class Feather {
     private static ParticleManager particleManager;
     private static ThemeManager themeManager;
     private static ConfigManager configManager;
+    private static GitManager gitManager;
     private static DiscordRP discordRP;
     private static ClickGui clickGui;
 
@@ -32,6 +37,7 @@ public class Feather {
         particleManager = new ParticleManager();
         themeManager = new ThemeManager();
         configManager = new ConfigManager();
+        gitManager = new GitManager();
         discordRP = new DiscordRP();
         clickGui = new ClickGui();
 
@@ -67,6 +73,10 @@ public class Feather {
         return configManager;
     }
 
+    public static GitManager getGitManager() {
+        return gitManager;
+    }
+
     public static DiscordRP getDiscordRP() {
         return discordRP;
     }
@@ -74,4 +84,5 @@ public class Feather {
     public static ClickGui getClickGui() {
         return clickGui;
     }
+
 }

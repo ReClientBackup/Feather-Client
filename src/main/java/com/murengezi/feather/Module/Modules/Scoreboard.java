@@ -48,7 +48,7 @@ public class Scoreboard extends Adjustable {
 
 
 		maxWidth += numbers ? 10 : 3;
-		
+
 		int x = resolution.getScaledWidth() - maxWidth - 1;
 		int y = resolution.getScaledHeight() / 2 - ((list.size() + 1) * (getFr().FONT_HEIGHT + 1) / 2);
 
