@@ -93,7 +93,7 @@ public class PlayerUsageSnooper
         this.addStatToSnooper("os_version", System.getProperty("os.version"));
         this.addStatToSnooper("os_architecture", System.getProperty("os.arch"));
         this.addStatToSnooper("java_version", System.getProperty("java.version"));
-        this.addClientStat("version", "1.8.9");
+        this.addClientStat("version", "1.8.10");
         this.playerStatsCollector.addServerTypeToSnooper(this);
     }
 

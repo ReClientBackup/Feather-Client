@@ -255,7 +255,7 @@ public class Config
     {
         if (minecraftVersionInt < 0)
         {
-            String[] astring = tokenize("1.8.9", ".");
+            String[] astring = tokenize("1.8.10", ".");
             int i = 0;
 
             if (astring.length > 0)

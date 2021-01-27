@@ -3079,7 +3079,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         Map<String, String> map = Maps.newHashMap();
         map.put("X-Minecraft-Username", getMinecraft().getSession().getUsername());
         map.put("X-Minecraft-UUID", getMinecraft().getSession().getPlayerID());
-        map.put("X-Minecraft-Version", "1.8.9");
+        map.put("X-Minecraft-Version", "1.8.10");
         return map;
     }
 

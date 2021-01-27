@@ -4,7 +4,7 @@ import com.darkmagician6.eventapi.EventTarget;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.murengezi.feather.Event.RenderScoreboardEvent;
-import com.murengezi.feather.Module.Adjustable;
+import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Module.ModuleInfo;
 import com.murengezi.feather.Module.Setting.Settings.BooleanSetting;
 import net.minecraft.client.gui.Gui;
@@ -23,10 +23,9 @@ import java.util.stream.Collectors;
  * Created on 2021-01-27 at 12:51
  */
 @ModuleInfo(name = "Scoreboard", description = "Scoreboard", version = "1.0.0", enabled = true)
-public class Scoreboard extends Adjustable {
+public class Scoreboard extends Module {
 
 	public Scoreboard() {
-		super(100, 100);
 		addSetting(new BooleanSetting("Numbers", this, true));
 	}
 
@@ -38,47 +37,9 @@ public class Scoreboard extends Adjustable {
 		Collection<Score> collection = scoreboard.getSortedScores(objective);
 		List<Score> list = collection.stream().filter(score -> score.getPlayerName() != null && !score.getPlayerName().startsWith("#")).collect(Collectors.toList());
 		boolean numbers = getBooleanSetting("Numbers").getValue();
-		int maxWidth = getFr().getStringWidth(objective.getDisplayName());
 
-		for (Score score : list) {
-			ScorePlayerTeam scoreplayerteam = scoreboard.getPlayersTeam(score.getPlayerName());
-			String s = ScorePlayerTeam.formatPlayerName(scoreplayerteam, score.getPlayerName()) + (numbers ? ": " + EnumChatFormatting.RED + score.getScorePoints() : "");
-			maxWidth = Math.max(maxWidth, getFr().getStringWidth(s));
-		}
-
-
-		maxWidth += numbers ? 10 : 3;
-
-		int x = resolution.getScaledWidth() - maxWidth - 1;
-		int y = resolution.getScaledHeight() / 2 - ((list.size() + 1) * (getFr().FONT_HEIGHT + 1) / 2);
-
-
-
-		int i = 0;
-		Gui.drawRect(x, y + i, x + maxWidth, y + i + getFr().FONT_HEIGHT + 1, Integer.MIN_VALUE);
-		Gui.drawRect(x, y + i, x + maxWidth, y + i + getFr().FONT_HEIGHT + 1, Integer.MIN_VALUE);
-		getFr().drawCenteredString(objective.getDisplayName(), x + maxWidth / 2, y + i + 1, 0xffffff);
-		i += getFr().FONT_HEIGHT + 1;
-
-
-		for (Score score : Lists.reverse(list)) {
-			Gui.drawRect(x, y + i, x + maxWidth, y + i + getFr().FONT_HEIGHT + 1, Integer.MIN_VALUE);
-
-			getFr().drawStringWithShadow(score.getPlayerName(), x + 2, y + i + 1, 0xffffff);
-
-			if (numbers) {
-				String points = "" + EnumChatFormatting.RED + score.getScorePoints();
-				getFr().drawStringWithShadow(points, x + maxWidth - getFr().getStringWidth(points) - 1, y + i + 1, 0xffffff);
-			}
-
-			i += getFr().FONT_HEIGHT + 1;
-		}
-
-		setWidth(maxWidth);
-		setHeight(i);
-
-		/*if (list.size() > 15) {
-			collection = Lists.newArrayList(Iterables.skip(list, collection.size() - 15));
+		if (list.size() > 15) {
+			collection = Lists.newArrayList(Iterables.skip(list,collection.size() - 15));
 		} else {
 			collection = list;
 		}
@@ -87,34 +48,36 @@ public class Scoreboard extends Adjustable {
 
 		for (Score score : collection) {
 			ScorePlayerTeam scoreplayerteam = scoreboard.getPlayersTeam(score.getPlayerName());
-			String s = ScorePlayerTeam.formatPlayerName(scoreplayerteam, score.getPlayerName()) + ": " + EnumChatFormatting.RED + score.getScorePoints();
+			String s = ScorePlayerTeam.formatPlayerName(scoreplayerteam, score.getPlayerName()) + (numbers ? ": " + EnumChatFormatting.RED + score.getScorePoints() : "");
 			stringWidth = Math.max(stringWidth, getFr().getStringWidth(s));
 		}
 
+		int offsetRight = 3;
 		int height = collection.size() * getFr().FONT_HEIGHT;
 		int y = resolution.getScaledHeight() / 2 + height / 3;
-		int offsetRight = 3;
 		int x = resolution.getScaledWidth() - stringWidth - offsetRight;
-		int index = 0;
 
-		for (Score score1 : collection) {
-			++index;
+		int finalStringWidth = stringWidth;
+		list.forEach(score1 -> {
+			int index = list.indexOf(score1);
 			ScorePlayerTeam scoreplayerteam1 = scoreboard.getPlayersTeam(score1.getPlayerName());
-			String s1 = ScorePlayerTeam.formatPlayerName(scoreplayerteam1, score1.getPlayerName());
-			String s2 = EnumChatFormatting.RED + "" + score1.getScorePoints();
-			int k = y - index * getFr().FONT_HEIGHT;
-			int l = resolution.getScaledWidth() - offsetRight + 2;
-			Gui.drawRect(x - 2, k, l, k + getFr().FONT_HEIGHT, 1342177280);
-			getFr().drawString(s1, x, k, 553648127);
-			getFr().drawString(s2, l - getFr().getStringWidth(s2), k, 553648127);
-
-			if (index == collection.size()) {
-				String s3 = objective.getDisplayName();
-				Gui.drawRect(x - 2, k - getFr().FONT_HEIGHT - 1, l, k - 1, 1610612736);
-				Gui.drawRect(x - 2, k - 1, l, k, 1342177280);
-				getFr().drawString(s3, x + stringWidth / 2 - getFr().getStringWidth(s3) / 2, k - getFr().FONT_HEIGHT, 553648127);
+			String playerName = ScorePlayerTeam.formatPlayerName(scoreplayerteam1, score1.getPlayerName());
+			String score = EnumChatFormatting.RED + "" + score1.getScorePoints();
+			int yPos = y - index * getFr().FONT_HEIGHT;
+			int xPos = resolution.getScaledWidth() - offsetRight + 1;
+			Gui.drawRect(x - 2, yPos, xPos, yPos + getFr().FONT_HEIGHT, 1342177280);
+			getFr().drawStringWithShadow(playerName, x, yPos, 553648127);
+			if (numbers) {
+				getFr().drawStringWithShadow(score, xPos - getFr().getStringWidth(score) - 1, yPos, 553648127);
 			}
-		}*/
+
+			if (index == list.size() - 1) {
+				String s3 = objective.getDisplayName();
+				Gui.drawRect(x - 2, yPos - getFr().FONT_HEIGHT - 1, xPos, yPos - 1, 1610612736);
+				Gui.drawRect(x - 2, yPos - 1, xPos, yPos, 1342177280);
+				getFr().drawStringWithShadow(s3, x + finalStringWidth / 2 - getFr().getStringWidth(s3) / 2, yPos - getFr().FONT_HEIGHT, 553648127);
+			}
+		});
 	}
 
 }

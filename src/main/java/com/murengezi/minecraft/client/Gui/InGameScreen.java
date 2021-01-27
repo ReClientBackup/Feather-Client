@@ -1,8 +1,6 @@
 package com.murengezi.minecraft.client.Gui;
 
 import com.darkmagician6.eventapi.EventManager;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.murengezi.feather.Event.RenderOverlayEvent;
 import com.murengezi.feather.Event.RenderScoreboardEvent;
 import net.minecraft.block.material.Material;
@@ -28,7 +26,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraft.scoreboard.Score;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.scoreboard.Scoreboard;
@@ -37,10 +34,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.border.WorldBorder;
 import net.optifine.CustomColors;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * @author Tobias Sjöblom
@@ -260,7 +254,7 @@ public class InGameScreen extends Gui {
         ScoreObjective scoreObjective1 = scoreObjective != null ? scoreObjective : scoreboard.getObjectiveInDisplaySlot(1);
 
         if (scoreObjective1 != null) {
-            this.renderScoreboard(scoreObjective1, resolution);
+            EventManager.call(new RenderScoreboardEvent(scoreObjective1, resolution));
         }
 
         GlStateManager.enableBlend();
@@ -441,9 +435,7 @@ public class InGameScreen extends Gui {
                 if (this.mc.objectMouseOver != null && this.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                     BlockPos blockpos = this.mc.objectMouseOver.getBlockPos();
 
-                    if (this.mc.theWorld.getTileEntity(blockpos) instanceof IInventory) {
-                        return true;
-                    }
+                    return this.mc.theWorld.getTileEntity(blockpos) instanceof IInventory;
                 }
                 return false;
             }
@@ -500,7 +492,7 @@ public class InGameScreen extends Gui {
 
             this.playerHealth = ceilingPlayerHealth;
             int j = this.lastPlayerHealth;
-            this.rand.setSeed(this.updateCounter * 312871);
+            this.rand.setSeed(this.updateCounter * 312871L);
             boolean flag1 = false;
             FoodStats foodstats = entityplayer.getFoodStats();
             int k = foodstats.getFoodLevel();
@@ -802,10 +794,6 @@ public class InGameScreen extends Gui {
         }
 
         this.mc.mcProfiler.endSection();
-    }
-
-    private void renderScoreboard(ScoreObjective objective, ScaledResolution resolution) {
-        EventManager.call(new RenderScoreboardEvent(objective, resolution));
     }
 
     public void updateTick() {
