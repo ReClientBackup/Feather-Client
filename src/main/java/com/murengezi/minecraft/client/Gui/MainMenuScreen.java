@@ -82,10 +82,10 @@ public class MainMenuScreen extends Screen {
 
         String playerName = mc.getSession().getUsername();
         drawRect(0, 0, 20 + 3 + mc.fontRendererObj.getStringWidth(playerName) + 8 + 3, 20, Integer.MIN_VALUE);
-        //boolean premium = !mc.getSession().getToken().equals("") && !mc.getSession().getToken().equals("0");
-        //String uuid = premium ? mc.thePlayer.getUniqueID().toString() : "606e2ff0ed7748429d6ce1d3321c7838";
-        //String url = "https://crafatar.com/avatars/" + uuid + "?size=8.png";
-        //Feather.getImageManager().drawImageFromUrl(FilenameUtils.getBaseName(url), url, 2, 2, 16, 16);
+        boolean premium = !mc.getSession().getToken().equals("") && !mc.getSession().getToken().equals("0");
+        String uuid = premium ? mc.getSession().getPlayerID() : "606e2ff0ed7748429d6ce1d3321c7838";
+        String url = "https://crafatar.com/avatars/" + uuid + "?size=8.png";
+        Feather.getImageManager().drawImageFromUrl(FilenameUtils.getBaseName(url), url, 2, 2, 16, 16);
         mc.fontRendererObj.drawStringWithShadow(playerName, 21, 6, 0xffffffff);
 
         GlStateManager.pushMatrix();

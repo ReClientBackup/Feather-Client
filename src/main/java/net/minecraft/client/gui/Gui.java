@@ -14,17 +14,22 @@ public class Gui
     public static final ResourceLocation icons = new ResourceLocation("textures/gui/icons.png");
     protected float zLevel;
 
+    public static void drawBox(float x, float y, float width, float height, int color) {
+        drawVerticalLine(x, y, y + height - 1, color);
+        drawVerticalLine(x + width - 1, y, y + height - 1, color);
+        drawHorizontalLine(x, x + width - 1, y, color);
+        drawHorizontalLine(x, x + width - 1, y + height - 1, color);
+    }
+
     /**
      * Draw a 1 pixel wide horizontal line. Args: x1, x2, y, color
      */
-    protected void drawHorizontalLine(int startX, int endX, int y, int color)
-    {
-        if (endX < startX)
-        {
+    public static void drawHorizontalLine(float startX, float endX, float y, int color) {
+        /*if (endX < startX) {
             int i = startX;
             startX = endX;
             endX = i;
-        }
+        }*/
 
         drawRect(startX, y, endX + 1, y + 1, color);
     }
@@ -32,55 +37,14 @@ public class Gui
     /**
      * Draw a 1 pixel wide vertical line. Args : x, y1, y2, color
      */
-    protected void drawVerticalLine(int x, int startY, int endY, int color)
-    {
-        if (endY < startY)
-        {
+    public static void drawVerticalLine(float x, float startY, float endY, int color) {
+        /*if (endY < startY) {
             int i = startY;
             startY = endY;
             endY = i;
-        }
+        }*/
 
         drawRect(x, startY + 1, x + 1, endY, color);
-    }
-
-    /**
-     * Draws a solid color rectangle with the specified coordinates and color (ARGB format). Args: x1, y1, x2, y2, color
-     */
-    public static void drawRect(int left, int top, int right, int bottom, int color)
-    {
-        if (left < right)
-        {
-            int i = left;
-            left = right;
-            right = i;
-        }
-
-        if (top < bottom)
-        {
-            int j = top;
-            top = bottom;
-            bottom = j;
-        }
-
-        float alpha = (float)(color >> 24 & 255) / 255.0F;
-        float red = (float)(color >> 16 & 255) / 255.0F;
-        float green = (float)(color >> 8 & 255) / 255.0F;
-        float blue = (float)(color & 255) / 255.0F;
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        GlStateManager.enableBlend();
-        GlStateManager.disableTexture2D();
-        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-        GlStateManager.color(red, green, blue, alpha);
-        worldrenderer.begin(7, DefaultVertexFormats.POSITION);
-        worldrenderer.pos(left, bottom, 0.0D).func_181675_d();
-        worldrenderer.pos(right, bottom, 0.0D).func_181675_d();
-        worldrenderer.pos(right, top, 0.0D).func_181675_d();
-        worldrenderer.pos(left, top, 0.0D).func_181675_d();
-        tessellator.draw();
-        GlStateManager.enableTexture2D();
-        GlStateManager.disableBlend();
     }
 
     /**

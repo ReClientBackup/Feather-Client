@@ -371,41 +371,39 @@ public class FontRenderer implements IResourceManagerReloadListener
     /**
      * Draws the specified string with a shadow.
      */
-    public int drawStringWithShadow(String text, float x, float y, int color)
-    {
+    public int drawStringWithShadow(String text, float x, float y, int color) {
         return this.drawString(text, x, y, color, true);
     }
 
     /**
      * Draws the specified string.
      */
-    public int drawString(String text, int x, int y, int color)
-    {
+    public int drawString(String text, int x, int y, int color) {
         return this.drawString(text, (float)x, (float)y, color, false);
+    }
+
+    public int drawString(String text, float x, float y, int color) {
+        return this.drawString(text, x, y, color, false);
     }
 
     /**
      * Renders the specified text to the screen, center-aligned. Args : renderer, string, x, y, color
      */
-    public void drawCenteredString(String text, int x, int y, int color)
-    {
+    public void drawCenteredString(String text, int x, int y, int color) {
         drawStringWithShadow(text, x + 1 - ((float)getStringWidth(text) / 2), y, color);
     }
 
-    public void drawCenteredString(String text, float x, float y, int color)
-    {
+    public void drawCenteredString(String text, float x, float y, int color) {
         drawStringWithShadow(text, x + 1 - ((float)getStringWidth(text) / 2), y, color);
     }
 
     /**
      * Draws the specified string.
      */
-    public int drawString(String text, float x, float y, int color, boolean dropShadow)
-    {
+    public int drawString(String text, float x, float y, int color, boolean dropShadow) {
         this.enableAlpha();
 
-        if (this.blend)
-        {
+        if (this.blend) {
             GlStateManager.getBlendState(this.oldBlendState);
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(770, 771);

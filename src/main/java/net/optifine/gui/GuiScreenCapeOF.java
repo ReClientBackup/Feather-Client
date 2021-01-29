@@ -101,8 +101,7 @@ public class GuiScreenCapeOF extends GuiScreenOF
                 }
             }
 
-            if (button.getId() == 220)
-            {
+            if (button.getId() == 220) {
                 this.showMessage(Lang.get("of.message.capeOF.reloadCape"), 15000L);
 
                 mc.theWorld.loadedEntityList.stream().filter(entity -> entity instanceof EntityPlayer).forEach(player -> {

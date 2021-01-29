@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
+import com.murengezi.feather.Util.TimerUtil;
 import com.murengezi.minecraft.client.Gui.MainMenuScreen;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
@@ -598,51 +599,41 @@ public class EntityRenderer implements IResourceManagerReloadListener
     /**
      * Changes the field of view of the player depending on if they are underwater or not
      */
-    private float getFOVModifier(float partialTicks, boolean p_78481_2_)
-    {
-        if (this.debugView)
-        {
+    private float getFOVModifier(float partialTicks, boolean p_78481_2_) {
+        if (this.debugView) {
             return 90.0F;
-        }
-        else
-        {
+        } else {
             Entity entity = this.mc.getRenderViewEntity();
             float f = 70.0F;
 
-            if (p_78481_2_)
-            {
+            if (p_78481_2_) {
                 f = this.mc.gameSettings.fovSetting;
 
-                if (Config.isDynamicFov())
-                {
+                if (Config.isDynamicFov()) {
                     f *= this.fovModifierHandPrev + (this.fovModifierHand - this.fovModifierHandPrev) * partialTicks;
                 }
             }
 
+            f /= getZoomModifier();
+
             boolean flag = false;
 
-            if (this.mc.currentScreen == null)
-            {
-                GameSettings gamesettings = this.mc.gameSettings;
+            if (this.mc.currentScreen == null) {
                 flag = GameSettings.isKeyDown(this.mc.gameSettings.ofKeyBindZoom);
             }
 
-            if (flag)
-            {
-                if (!Config.zoomMode)
-                {
+            if (flag) {
+                if (!Config.zoomMode) {
                     Config.zoomMode = true;
                     this.mc.gameSettings.smoothCamera = true;
                     this.mc.renderGlobal.displayListEntitiesDirty = true;
                 }
 
-                if (Config.zoomMode)
+                /*if (Config.zoomMode)
                 {
-                    f /= 4.0F;
-                }
-            }
-            else if (Config.zoomMode)
-            {
+                    f /= 4.0f;
+                }*/
+            } else if (Config.zoomMode) {
                 Config.zoomMode = false;
                 this.mc.gameSettings.smoothCamera = false;
                 this.mouseFilterXAxis = new MouseFilter();
@@ -650,21 +641,43 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 this.mc.renderGlobal.displayListEntitiesDirty = true;
             }
 
-            if (entity instanceof EntityLivingBase && ((EntityLivingBase)entity).getHealth() <= 0.0F)
-            {
+            if (entity instanceof EntityLivingBase && ((EntityLivingBase)entity).getHealth() <= 0.0F) {
                 float f1 = (float)((EntityLivingBase)entity).deathTime + partialTicks;
                 f /= (1.0F - 500.0F / (f1 + 500.0F)) * 2.0F + 1.0F;
             }
 
             Block block = ActiveRenderInfo.getBlockAtEntityViewpoint(this.mc.theWorld, entity, partialTicks);
 
-            if (block.getMaterial() == Material.water)
-            {
+            if (block.getMaterial() == Material.water) {
                 f = f * 60.0F / 70.0F;
             }
 
-            return Reflector.ForgeHooksClient_getFOVModifier.exists() ? Reflector.callFloat(Reflector.ForgeHooksClient_getFOVModifier, new Object[] {this, entity, block, Float.valueOf(partialTicks), Float.valueOf(f)}): f;
+            return Reflector.ForgeHooksClient_getFOVModifier.exists() ? Reflector.callFloat(Reflector.ForgeHooksClient_getFOVModifier, this, entity, block, partialTicks, f): f;
         }
+    }
+
+    /**
+     * TODO Smooth Zoom
+     */
+    private TimerUtil timer = new TimerUtil();
+    private static float currentModifier = 0.0F;
+
+    public float getZoomModifier() {
+        float t = 3.0F;
+        if (Config.zoomMode) {
+            if (currentModifier < 1.0F) {
+                currentModifier += 0.005F * (float)timer.getPassed();
+                currentModifier = Math.min(currentModifier, 1.0F);
+            }
+            timer.reset();
+            return 1.0F + t * currentModifier * (2.0F - currentModifier);
+        }
+        if (currentModifier > 0.0F) {
+            currentModifier -= 0.005F * (float)timer.getPassed();
+            currentModifier = Math.max(currentModifier, 0.0F);
+        }
+        timer.reset();
+        return 1.0F + t * currentModifier * currentModifier;
     }
 
     private void hurtCameraEffect(float partialTicks)

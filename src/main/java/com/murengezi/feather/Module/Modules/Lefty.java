@@ -7,6 +7,6 @@ import com.murengezi.feather.Module.ModuleInfo;
  * @author Tobias Sjöblom
  * Created on 2021-01-24 at 13:12
  */
-@ModuleInfo(name = "Lefty", description = "", version = "1.0.0", enabled = true)
+@ModuleInfo(name = "Lefty", description = "", version = "1.0.0")
 public class Lefty extends Module {
 }

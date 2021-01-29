@@ -32,15 +32,11 @@ public class Keystrokes extends Adjustable {
 
 	SpaceKey spaceKey = new SpaceKey(EnumChatFormatting.STRIKETHROUGH + "----", Keyboard.KEY_SPACE);
 
-	public Keystrokes() {
-		super(64, 76);
-	}
-
-
 	@EventTarget
 	public void Render(RenderOverlayEvent event) {
 		ScaledResolution resolution = event.getScaledResolution();
-		int x = getX(resolution.getScaledWidth()), y = getY(resolution.getScaledHeight());
+		float x = getX();
+		float y = getY();
 
 		int offset = 2;
 
@@ -53,6 +49,9 @@ public class Keystrokes extends Adjustable {
 		mouseRight.render(x + mouseLeft.getWidth() + offset, y + keyW.getHeight() + offset + keyD.getHeight() + offset);
 
 		spaceKey.render(x, y + keyW.getHeight() + offset + keyA.getHeight() + offset + mouseLeft.getHeight() + offset);
+
+		setWidth(KeyType.LETTER.getWidth() * 3 + 2 + 2);
+		setHeight(KeyType.LETTER.getHeight() * 2 + 2 + 2 + KeyType.MOUSE.getHeight() + 2 + KeyType.SPACE.getHeight());
 	}
 
 	@EventTarget
@@ -152,7 +151,7 @@ public class Keystrokes extends Adjustable {
 			this.boxColor = Integer.MIN_VALUE;
 		}
 
-		public void render(int x, int y) {
+		public void render(float x, float y) {
 			Color color = Feather.getThemeManager().getActiveTheme().getColor();
 			int red, green, blue;
 
@@ -229,7 +228,7 @@ public class Keystrokes extends Adjustable {
 		}
 
 		@Override
-		public void render(int x, int y) {
+		public void render(float x, float y) {
 			super.render(x, y);
 			getFr().drawCenteredString(letter, x + (float)(getWidth() / 2) - 0.5f, (float)((y + getHeight() / 2) - (getFr().FONT_HEIGHT / 2)) + 0.5f, getTextColor());
 		}
@@ -253,12 +252,12 @@ public class Keystrokes extends Adjustable {
 		}
 
 		@Override
-		public void render(int x, int y) {
+		public void render(float x, float y) {
 			super.render(x, y);
 			getFr().drawCenteredString(display, x + (float)(getWidth() / 2) - 0.5f, (float)((y + getHeight() / 2) - (getFr().FONT_HEIGHT / 2)) - 2f, getTextColor());
 			GlStateManager.pushMatrix();
 			GlStateManager.scale(0.5f, 0.5f, 0.5f);
-			getFr().drawCenteredString(getClicks() + " C/S", (x + (float)(getWidth() / 2) - 0.5f) * 2, ((float)((y + getHeight() / 2) - (getFr().FONT_HEIGHT / 2)) + 7.5f) * 2, getTextColor());
+			getFr().drawCenteredString(getClicks() + " CPS", (x + (float)(getWidth() / 2) - 0.5f) * 2, ((float)((y + getHeight() / 2) - (getFr().FONT_HEIGHT / 2)) + 7.5f) * 2, getTextColor());
 			GlStateManager.popMatrix();
 		}
 
@@ -292,7 +291,7 @@ public class Keystrokes extends Adjustable {
 		}
 
 		@Override
-		public void render(int x, int y) {
+		public void render(float x, float y) {
 			super.render(x, y);
 			getFr().drawCenteredString(text, x + getWidth() / 2, y + getHeight() / 2 - getFr().FONT_HEIGHT / 2 + 0.5f, getTextColor());
 		}

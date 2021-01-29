@@ -4,6 +4,7 @@ import com.murengezi.feather.Config.ConfigManager;
 import com.murengezi.feather.Discord.DiscordRP;
 import com.murengezi.feather.Git.GitManager;
 import com.murengezi.feather.Git.GitRepositoryState;
+import com.murengezi.feather.Gui.Adjust.AdjustScreen;
 import com.murengezi.feather.Gui.Click.ClickGui;
 import com.murengezi.feather.Image.ImageManager;
 import com.murengezi.feather.Module.ModuleManager;
@@ -28,7 +29,7 @@ public class Feather {
     private static ConfigManager configManager;
     private static GitManager gitManager;
     private static DiscordRP discordRP;
-    private static ClickGui clickGui;
+    private static AdjustScreen adjustScreen;
 
     public static void start() {
         logger = LogManager.getLogger();
@@ -39,7 +40,7 @@ public class Feather {
         configManager = new ConfigManager();
         gitManager = new GitManager();
         discordRP = new DiscordRP();
-        clickGui = new ClickGui();
+        adjustScreen = new AdjustScreen();
 
         Runtime.getRuntime().addShutdownHook(new Thread(Feather::shutdown));
     }
@@ -81,8 +82,8 @@ public class Feather {
         return discordRP;
     }
 
-    public static ClickGui getClickGui() {
-        return clickGui;
+    public static AdjustScreen getAdjustScreen() {
+        return adjustScreen;
     }
 
 }

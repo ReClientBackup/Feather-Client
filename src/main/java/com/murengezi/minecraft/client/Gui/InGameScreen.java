@@ -1,6 +1,7 @@
 package com.murengezi.minecraft.client.Gui;
 
 import com.darkmagician6.eventapi.EventManager;
+import com.murengezi.feather.Event.RenderCrosshairEvent;
 import com.murengezi.feather.Event.RenderOverlayEvent;
 import com.murengezi.feather.Event.RenderScoreboardEvent;
 import net.minecraft.block.material.Material;
@@ -426,7 +427,10 @@ public class InGameScreen extends Gui {
     }
 
     protected boolean showCrosshair() {
-        if (this.mc.gameSettings.showDebugInfo && !this.mc.thePlayer.hasReducedDebug() && !this.mc.gameSettings.reducedDebugInfo) {
+        RenderCrosshairEvent renderCrosshairEvent = new RenderCrosshairEvent();
+        EventManager.call(renderCrosshairEvent);
+
+        if (this.mc.gameSettings.showDebugInfo && !this.mc.thePlayer.hasReducedDebug() && !this.mc.gameSettings.reducedDebugInfo && !renderCrosshairEvent.isCancelled()) {
             return false;
         } else if (this.mc.playerController.isSpectator()) {
             if (this.mc.pointedEntity != null) {

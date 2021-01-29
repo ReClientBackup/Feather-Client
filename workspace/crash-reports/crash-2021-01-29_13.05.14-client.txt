@@ -1,0 +1,116 @@
+---- Minecraft Crash Report ----
+// Hi. I'm Minecraft, and I'm a crashaholic.
+
+Time: 2021-01-29 13:05
+Description: Rendering screen
+
+java.lang.NullPointerException: Rendering screen
+	at com.murengezi.feather.Module.Adjustable.getX(Adjustable.java:127)
+	at com.murengezi.feather.Module.Adjustable.isMouseOver(Adjustable.java:61)
+	at com.murengezi.feather.Module.Adjustable.render(Adjustable.java:38)
+	at com.murengezi.feather.Gui.Adjust.AdjustScreen.lambda$drawScreen$2(AdjustScreen.java:39)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:497)
+	at com.murengezi.feather.Gui.Adjust.AdjustScreen.drawScreen(AdjustScreen.java:39)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1395)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1047)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:393)
+	at net.minecraft.client.main.Main.main(Main.java:97)
+	at Start.main(Start.java:8)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at com.murengezi.feather.Module.Adjustable.getX(Adjustable.java:127)
+	at com.murengezi.feather.Module.Adjustable.isMouseOver(Adjustable.java:61)
+	at com.murengezi.feather.Module.Adjustable.render(Adjustable.java:38)
+	at com.murengezi.feather.Gui.Adjust.AdjustScreen.lambda$drawScreen$2(AdjustScreen.java:39)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:497)
+	at com.murengezi.feather.Gui.Adjust.AdjustScreen.drawScreen(AdjustScreen.java:39)
+
+-- Screen render details --
+Details:
+	Screen name: com.murengezi.feather.Gui.Adjust.AdjustScreen
+	Mouse location: Scaled: (213, 119). Absolute: (427, 240)
+	Screen size: Scaled: (427, 240). Absolute: (854, 480). Scale factor of 2
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player437'/99, l='MpServer', x=588,14, y=70,00, z=135,43]]
+	Chunk stats: MultiplayerChunkCache: 529, 529
+	Level seed: 0
+	Level generator: ID 02 - largeBiomes, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: 584,00,64,00,166,00 - World: (584,64,166), Chunk: (at 8,4,6 in 36,10; contains blocks 576,0,160 to 591,255,175), Region: (1,0; contains chunks 32,0 to 63,31, blocks 512,0,0 to 1023,255,511)
+	Level time: 1774496 game time, 247368 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 28 total; [EntitySquid['Squid'/67, l='MpServer', x=643,32, y=58,40, z=73,41], EntitySquid['Squid'/68, l='MpServer', x=639,99, y=58,94, z=89,64], EntityPig['Pig'/69, l='MpServer', x=637,66, y=66,00, z=145,91], EntityMinecartChest['container.minecart'/76, l='MpServer', x=642,50, y=13,06, z=62,50], EntitySquid['Squid'/77, l='MpServer', x=643,76, y=57,92, z=83,32], EntityBat['Bat'/20, l='MpServer', x=510,53, y=46,13, z=184,44], EntityBat['Bat'/21, l='MpServer', x=524,47, y=36,88, z=60,53], EntityBat['Bat'/23, l='MpServer', x=537,31, y=18,84, z=59,59], EntityBat['Bat'/24, l='MpServer', x=538,50, y=29,59, z=75,06], EntityBat['Bat'/25, l='MpServer', x=536,69, y=30,38, z=74,88], EntitySquid['Squid'/26, l='MpServer', x=530,42, y=56,19, z=142,37], EntitySquid['Squid'/27, l='MpServer', x=530,60, y=56,20, z=143,62], EntitySquid['Squid'/28, l='MpServer', x=533,27, y=58,13, z=152,13], EntitySquid['Squid'/29, l='MpServer', x=533,95, y=56,09, z=141,78], EntityBat['Bat'/37, l='MpServer', x=567,20, y=24,04, z=174,47], EntityBat['Bat'/38, l='MpServer', x=566,77, y=24,38, z=168,58], EntitySquid['Squid'/39, l='MpServer', x=588,52, y=58,09, z=76,41], EntitySquid['Squid'/40, l='MpServer', x=583,17, y=58,78, z=81,87], EntityPlayerSP['Player437'/99, l='MpServer', x=588,14, y=70,00, z=135,43], EntityBat['Bat'/41, l='MpServer', x=583,03, y=55,10, z=136,44], EntityBat['Bat'/42, l='MpServer', x=580,75, y=54,10, z=138,75], EntityBat['Bat'/43, l='MpServer', x=586,75, y=59,10, z=133,25], EntityBat['Bat'/44, l='MpServer', x=580,75, y=53,10, z=140,75], EntityBat['Bat'/45, l='MpServer', x=577,97, y=54,10, z=135,16], EntityBat['Bat'/46, l='MpServer', x=591,69, y=55,10, z=137,44], EntityBat['Bat'/47, l='MpServer', x=587,28, y=54,10, z=141,75], EntitySquid['Squid'/48, l='MpServer', x=591,32, y=60,58, z=85,28], EntityMinecartChest['container.minecart'/61, l='MpServer', x=613,47, y=12,06, z=82,50]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:392)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2655)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:406)
+	at net.minecraft.client.main.Main.main(Main.java:97)
+	at Start.main(Start.java:8)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.10
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 11.0.9.1, JetBrains s.r.o.
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), JetBrains s.r.o.
+	Memory: 73772632 bytes (70 MB) / 322961408 bytes (308 MB) up to 4263510016 bytes (4066 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 99
+	Launched Version: 1.8
+	LWJGL: 2.9.4
+	OpenGL: GeForce GTX 1070/PCIe/SSE2 GL version 4.6.0 NVIDIA 461.09, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'Feather'
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 8x Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz
+	OptiFine Version: OptiFine_1.8.9_HD_U_L5
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 11
+	Mipmaps: 0
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: 4.6.0 NVIDIA 461.09
+	OpenGlRenderer: GeForce GTX 1070/PCIe/SSE2
+	OpenGlVendor: NVIDIA Corporation
+	CpuCount: 8

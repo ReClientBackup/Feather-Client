@@ -14,15 +14,11 @@ import org.lwjgl.opengl.GL11;
  * @author Tobias Sjöblom
  * Created on 2021-01-12 at 13:37
  */
-@ModuleInfo(name = "MouseCircle", description = "A circle that simulates your mouse movement.", version = "1.0.0", enabled = true)
+@ModuleInfo(name = "MouseCircle", description = "A circle that simulates your mouse movement.", version = "1.0.0")
 public class MouseCircle extends Adjustable {
 
     private float deltaX;
     private float deltaY;
-
-    public MouseCircle() {
-        super(25, 25);
-    }
 
     @EventTarget
     public void onRender(RenderOverlayEvent event) {
@@ -61,10 +57,10 @@ public class MouseCircle extends Adjustable {
             }
         }
 
-        Gui.drawRect(getX(width), getY(height), getX(width) + getWidth(), getY(height) + getHeight(), Integer.MIN_VALUE);
+        Gui.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MIN_VALUE);
 
-        float baseX = getX(width) + (float)getWidth() / 2;
-        float baseY = getY(height) + (float)getHeight() / 2;
+        float baseX = getX() + getWidth() / 2;
+        float baseY = getY() + getHeight() / 2;
         float radius = 4.5F;
 
         RenderHelper.prepare();

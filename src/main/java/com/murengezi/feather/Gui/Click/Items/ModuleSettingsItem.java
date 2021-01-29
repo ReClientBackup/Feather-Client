@@ -4,6 +4,7 @@ import com.murengezi.feather.Gui.Click.Item;
 import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Module.Setting.Setting;
 import com.murengezi.feather.Module.Setting.Settings.BooleanSetting;
+import com.murengezi.feather.Module.Setting.Settings.ModeSetting;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 
@@ -37,6 +38,11 @@ public class ModuleSettingsItem extends Item {
 					getFr().drawStringWithShadow("✔", getX() + 5.5f, getY() + 2, 0xffffff);
 				}
 				break;
+			case NUMBER:
+				break;
+			case MODE:
+				getFr().drawStringWithShadow("§7" + setting.getName() + ": " + ((ModeSetting)setting).getValue(), getX() + 4, getY() + 3, 0xffffff);
+				break;
 		}
 	}
 
@@ -48,6 +54,17 @@ public class ModuleSettingsItem extends Item {
 					case BOOLEAN:
 						BooleanSetting booleanSetting = (BooleanSetting) setting;
 						booleanSetting.setValue(!booleanSetting.getValue());
+						break;
+					case NUMBER:
+						break;
+					case MODE:
+						ModeSetting modeSetting = (ModeSetting) setting;
+						if (modeSetting.getModes().indexOf(modeSetting.getValue()) + 1 == modeSetting.getModes().size()) {
+							modeSetting.setValue(modeSetting.getModes().get(0));
+						} else {
+							modeSetting.setValue(modeSetting.getModes().get(modeSetting.getModes().indexOf(modeSetting.getValue()) + 1));
+						}
+						break;
 				}
 			}
 		}

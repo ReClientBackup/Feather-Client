@@ -23,4 +23,8 @@ public class TimerUtil {
     public long getLastMS() {
         return lastMS;
     }
+
+    public long getPassed() {
+        return System.currentTimeMillis() - lastMS;
+    }
 }
