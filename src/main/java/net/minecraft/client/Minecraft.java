@@ -1819,8 +1819,6 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
                     if (Keyboard.getEventKeyState()) {
                         //TODO KeyboardPressEvent
                         EventManager.call(new KeyboardPressEvent(key));
-                        //TODO Module Toggle
-                        Feather.getModuleManager().getModules().stream().filter(module -> module.getKeyBind() == key).forEach(module -> module.Toggle(true));
                     } else {
                         //TODO KeyboardPressEvent
                         EventManager.call(new KeyboardReleaseEvent(key));

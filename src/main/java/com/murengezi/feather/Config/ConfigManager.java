@@ -65,8 +65,8 @@ public class ConfigManager extends MinecraftUtils {
 				if (adjustable) {
 					Adjustable adjustableModule = (Adjustable) module;
 					if (jsonObject.has("x") && jsonObject.has("y")) {
-						//adjustableModule.setX(jsonObject.getFloat("x"));
-						//adjustableModule.setY(jsonObject.getFloat("y"));
+						adjustableModule.setX(jsonObject.getFloat("x"));
+						adjustableModule.setY(jsonObject.getFloat("y"));
 					}
 				}
 			}
@@ -94,8 +94,8 @@ public class ConfigManager extends MinecraftUtils {
 			jsonObject.put("enabled", module.isEnabled());
 			if (adjustable) {
 				Adjustable adjustableModule = (Adjustable) module;
-				//jsonObject.put("x", adjustableModule.getX());
-				//jsonObject.put("y", adjustableModule.getY());
+				jsonObject.put("x", adjustableModule.getX());
+				jsonObject.put("y", adjustableModule.getY());
 			}
 
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));

@@ -4,16 +4,12 @@ import com.darkmagician6.eventapi.EventManager;
 import com.darkmagician6.eventapi.EventTarget;
 import com.murengezi.feather.Event.KeyboardPressEvent;
 import com.murengezi.feather.Feather;
-import com.murengezi.feather.Gui.Click.Frame;
-import com.murengezi.feather.Gui.Click.Frames.ThemesFrame;
-import com.murengezi.feather.Gui.Click.Items.ThemeItem;
 import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.Gui.Screen;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;
@@ -39,7 +35,6 @@ public class AdjustScreen extends Screen {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		ScaledResolution resolution = new ScaledResolution(MinecraftUtils.getMc());
-		getMods().stream().filter(Module::isEnabled).forEach(moduleDraggable -> moduleDraggable.render(mouseX, mouseY, resolution));
 
 		getMods().stream().filter(Module::isEnabled).forEach(adjustable -> {
 			if (isMouseOver(mouseX, mouseY, adjustable) || getSelected() == adjustable) {

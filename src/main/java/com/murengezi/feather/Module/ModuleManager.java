@@ -1,5 +1,10 @@
 package com.murengezi.feather.Module;
 
+import com.darkmagician6.eventapi.EventManager;
+import com.darkmagician6.eventapi.EventTarget;
+import com.murengezi.feather.Event.KeyboardPressEvent;
+import com.murengezi.feather.Event.RenderOverlayEvent;
+import com.murengezi.feather.Feather;
 import com.murengezi.feather.Module.Modules.*;
 import com.murengezi.feather.Module.Modules.BetterHat;
 
@@ -24,6 +29,8 @@ public class ModuleManager {
         load(new Lefty());
         load(new FPS());
         load(new Scoreboard());
+
+        EventManager.register(this);
     }
 
     public List<Module> getModules() {
@@ -40,5 +47,15 @@ public class ModuleManager {
 
     public void unload(Module module) {
         getModules().remove(module);
+    }
+
+    @EventTarget
+    public void onKeyPress(KeyboardPressEvent event) {
+        getModules().stream().filter(module -> module.getKeyBind() == event.getKey()).forEach(module -> module.Toggle(true));
+    }
+
+    @EventTarget
+    public void onRender(RenderOverlayEvent event) {
+        getModules().stream().filter(module -> module instanceof Adjustable).forEach(module -> ((Adjustable) module).render(event.getScaledResolution()));
     }
 }
