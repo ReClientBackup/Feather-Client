@@ -474,45 +474,45 @@ public class InGameScreen extends Gui {
 
     private void renderPlayerStats(ScaledResolution resolution) {
         if (this.mc.getRenderViewEntity() instanceof EntityPlayer) {
-            EntityPlayer entityplayer = (EntityPlayer)this.mc.getRenderViewEntity();
-            int ceilingPlayerHealth = MathHelper.ceiling_float_int(entityplayer.getHealth());
-            boolean flag = this.healthUpdateCounter > (long)this.updateCounter && (this.healthUpdateCounter - (long)this.updateCounter) / 3L % 2L == 1L;
+            EntityPlayer player = (EntityPlayer)this.mc.getRenderViewEntity();
+            int health = MathHelper.ceiling_float_int(player.getHealth());
+            boolean highlight = this.healthUpdateCounter > (long)this.updateCounter && (this.healthUpdateCounter - (long)this.updateCounter) / 3L % 2L == 1L;
 
-            if (ceilingPlayerHealth < this.playerHealth && entityplayer.hurtResistantTime > 0) {
+            if (health < this.playerHealth && player.hurtResistantTime > 0) {
                 this.lastSystemTime = Minecraft.getSystemTime();
                 this.healthUpdateCounter = this.updateCounter + 20;
-            } else if (ceilingPlayerHealth > this.playerHealth && entityplayer.hurtResistantTime > 0) {
+            } else if (health > this.playerHealth && player.hurtResistantTime > 0) {
                 this.lastSystemTime = Minecraft.getSystemTime();
                 this.healthUpdateCounter = this.updateCounter + 10;
             }
 
             if (Minecraft.getSystemTime() - this.lastSystemTime > 1000L) {
-                this.playerHealth = ceilingPlayerHealth;
-                this.lastPlayerHealth = ceilingPlayerHealth;
+                this.playerHealth = health;
+                this.lastPlayerHealth = health;
                 this.lastSystemTime = Minecraft.getSystemTime();
             }
 
-            this.playerHealth = ceilingPlayerHealth;
-            int j = this.lastPlayerHealth;
+            this.playerHealth = health;
+            int healthLast = this.lastPlayerHealth;
             this.rand.setSeed(this.updateCounter * 312871L);
             boolean flag1 = false;
-            FoodStats foodstats = entityplayer.getFoodStats();
+            FoodStats foodstats = player.getFoodStats();
             int k = foodstats.getFoodLevel();
             int l = foodstats.getPrevFoodLevel();
-            IAttributeInstance iattributeinstance = entityplayer.getEntityAttribute(SharedMonsterAttributes.maxHealth);
-            int healthAndArmorX = resolution.getScaledWidth() / 2 - 91;
+            IAttributeInstance attributeMaxHealth = player.getEntityAttribute(SharedMonsterAttributes.maxHealth);
+            int left = resolution.getScaledWidth() / 2 - 91;
             int foodAndAirX = resolution.getScaledWidth() / 2 + 91;
-            int yPos = resolution.getScaledHeight() - 39;
-            float attributeValue = (float)iattributeinstance.getAttributeValue();
-            float absorptionAmount = entityplayer.getAbsorptionAmount();
-            int l1 = MathHelper.ceiling_float_int((attributeValue + absorptionAmount) / 2.0F / 10.0F);
-            int i2 = Math.max(10 - (l1 - 2), 3);
-            int j2 = yPos - (l1 - 1) * (this.mc.playerController.shouldDrawHUD() ? i2 : 1) - (this.mc.playerController.shouldDrawHUD() ? 10 : 0);
+            int top = resolution.getScaledHeight() - 39;
+            float attributeValue = (float)attributeMaxHealth.getAttributeValue();
+            float absorptionAmount = player.getAbsorptionAmount();
+            int healthRows = MathHelper.ceiling_float_int((attributeValue + absorptionAmount) / 2.0F / 10.0F);
+            int rowHeight = Math.max(10 - (healthRows - 2), 3);
+            int j2 = top - (healthRows - 1) * (this.mc.playerController.shouldDrawHUD() ? rowHeight : 1) - (this.mc.playerController.shouldDrawHUD() ? 10 : 0);
             float f2 = absorptionAmount;
-            int armorValue = entityplayer.getTotalArmorValue();
+            int armorValue = player.getTotalArmorValue();
             int l2 = -1;
 
-            if (entityplayer.isPotionActive(Potion.regeneration)) {
+            if (player.isPotionActive(Potion.regeneration)) {
                 l2 = this.updateCounter % MathHelper.ceiling_float_int(attributeValue + 5.0F);
             }
 
@@ -520,7 +520,7 @@ public class InGameScreen extends Gui {
 
             for (int index = 0; index < 10; ++index) {
                 if (armorValue > 0) {
-                    int j3 = healthAndArmorX + index * 8;
+                    int j3 = left + index * 8;
 
                     if (index * 2 + 1 < armorValue) {
                         this.drawTexturedModalRect(j3, j2, 34, 9, 9, 9);
@@ -543,23 +543,23 @@ public class InGameScreen extends Gui {
                 for (int i6 = MathHelper.ceiling_float_int((attributeValue + absorptionAmount) / 2.0F) - 1; i6 >= 0; --i6) {
                     int j6 = 16;
 
-                    if (entityplayer.isPotionActive(Potion.poison)) {
+                    if (player.isPotionActive(Potion.poison)) {
                         j6 += 36;
-                    } else if (entityplayer.isPotionActive(Potion.wither)) {
+                    } else if (player.isPotionActive(Potion.wither)) {
                         j6 += 72;
                     }
 
                     int k3 = 0;
 
-                    if (flag) {
+                    if (highlight) {
                         k3 = 1;
                     }
 
                     int l3 = MathHelper.ceiling_float_int((float)(i6 + 1) / 10.0F) - 1;
-                    int i4 = healthAndArmorX + i6 % 10 * 8;
-                    int j4 = yPos - l3 * i2;
+                    int i4 = left + i6 % 10 * 8;
+                    int j4 = top - l3 * rowHeight;
 
-                    if (ceilingPlayerHealth <= 4) {
+                    if (health <= 4) {
                         j4 += this.rand.nextInt(2);
                     }
 
@@ -569,28 +569,18 @@ public class InGameScreen extends Gui {
 
                     int k4 = 0;
 
-                    if (entityplayer.worldObj.getWorldInfo().isHardcoreModeEnabled()) {
+                    if (player.worldObj.getWorldInfo().isHardcoreModeEnabled()) {
                         k4 = 5;
                     }
 
                     this.drawTexturedModalRect(i4, j4, 16 + k3 * 9, 9 * k4, 9, 9);
 
-                    if (flag) {
-                        if (i6 * 2 + 1 < j) {
-                            this.drawTexturedModalRect(i4, j4, j6 + 54, 9 * k4, 9, 9);
-                        }
-
-                        if (i6 * 2 + 1 == j) {
-                            this.drawTexturedModalRect(i4, j4, j6 + 63, 9 * k4, 9, 9);
-                        }
-                    }
-
                     if (f2 <= 0.0F) {
-                        if (i6 * 2 + 1 < ceilingPlayerHealth) {
+                        if (i6 * 2 + 1 < health) {
                             this.drawTexturedModalRect(i4, j4, j6 + 36, 9 * k4, 9, 9);
                         }
 
-                        if (i6 * 2 + 1 == ceilingPlayerHealth) {
+                        if (i6 * 2 + 1 == health) {
                             this.drawTexturedModalRect(i4, j4, j6 + 45, 9 * k4, 9, 9);
                         }
                     } else {
@@ -604,23 +594,23 @@ public class InGameScreen extends Gui {
                     }
                 }
 
-                Entity entity = entityplayer.ridingEntity;
+                Entity entity = player.ridingEntity;
 
                 if (entity == null) {
                     this.mc.mcProfiler.endStartSection("food");
 
                     for (int k6 = 0; k6 < 10; ++k6) {
-                        int j7 = yPos;
+                        int j7 = top;
                         int l7 = 16;
                         int k8 = 0;
 
-                        if (entityplayer.isPotionActive(Potion.hunger)) {
+                        if (player.isPotionActive(Potion.hunger)) {
                             l7 += 36;
                             k8 = 13;
                         }
 
-                        if (entityplayer.getFoodStats().getSaturationLevel() <= 0.0F && this.updateCounter % (k * 3 + 1) == 0) {
-                            j7 = yPos + (this.rand.nextInt(3) - 1);
+                        if (player.getFoodStats().getSaturationLevel() <= 0.0F && this.updateCounter % (k * 3 + 1) == 0) {
+                            j7 = top + (this.rand.nextInt(3) - 1);
                         }
 
                         if (flag1) {
@@ -659,7 +649,7 @@ public class InGameScreen extends Gui {
                         j8 = 30;
                     }
 
-                    int i9 = yPos;
+                    int i9 = top;
 
                     for (int k9 = 0; j8 > 0; k9 += 20) {
                         int l4 = Math.min(j8, 10);
@@ -691,7 +681,7 @@ public class InGameScreen extends Gui {
 
                 this.mc.mcProfiler.endStartSection("air");
 
-                if (entityplayer.isInsideOfMaterial(Material.water)) {
+                if (player.isInsideOfMaterial(Material.water)) {
                     int l6 = this.mc.thePlayer.getAir();
                     int k7 = MathHelper.ceiling_double_int((double)(l6 - 2) * 10.0D / 300.0D);
                     int i8 = MathHelper.ceiling_double_int((double)l6 * 10.0D / 300.0D) - k7;
@@ -779,8 +769,13 @@ public class InGameScreen extends Gui {
             int y = resolution.getScaledHeight() - 59;
 
             if (!this.mc.playerController.shouldDrawHUD()) {
-                y += 14;
+                y += 10;
+            } else {
+                if (this.mc.thePlayer.getAbsorptionAmount() > 0) {
+                    y -= 10;
+                }
             }
+
 
             int k = (int)((float)this.remainingHighlightTicks * 256.0F / 10.0F);
 

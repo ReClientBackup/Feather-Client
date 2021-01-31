@@ -15,7 +15,7 @@ public class Adjustable extends Module {
 	private ScaledResolution resolution;
 	private boolean dragging;
 
-	private enum Region {
+	public enum Region {
 		TOP_LEFT(1, 1), TOP_CENTER(2, 1), TOP_RIGHT(3, 1),
 		CENTER_LEFT(1, 2), CENTER(2, 2), CENTER_RIGHT(3, 2),
 		BOTTOM_LEFT(1, 3), BOTTOM_CENTER(2, 3), BOTTOM_RIGHT(3, 3);

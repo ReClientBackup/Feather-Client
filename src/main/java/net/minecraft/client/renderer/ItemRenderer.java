@@ -410,17 +410,8 @@ public class ItemRenderer
             }
         }
 
-        if (!this.mc.thePlayer.isSpectator())
-        {
-            if (this.mc.thePlayer.isInsideOfMaterial(Material.water) && !Reflector.callBoolean(Reflector.ForgeEventFactory_renderWaterOverlay, new Object[] {this.mc.thePlayer, Float.valueOf(partialTicks)}))
-            {
-                this.renderWaterOverlayTexture(partialTicks);
-            }
-
-            if (this.mc.thePlayer.isBurning() && !Reflector.callBoolean(Reflector.ForgeEventFactory_renderFireOverlay, new Object[] {this.mc.thePlayer, Float.valueOf(partialTicks)}))
-            {
-                this.renderFireInFirstPerson(partialTicks);
-            }
+        if (!this.mc.thePlayer.isSpectator() &&this.mc.thePlayer.isBurning() && !Reflector.callBoolean(Reflector.ForgeEventFactory_renderFireOverlay, new Object[] {this.mc.thePlayer, Float.valueOf(partialTicks)})) {
+            this.renderFireInFirstPerson(partialTicks);
         }
 
         GlStateManager.enableAlpha();
@@ -454,45 +445,9 @@ public class ItemRenderer
     }
 
     /**
-     * Renders a texture that warps around based on the direction the player is looking. Texture needs to be bound
-     * before being called. Used for the water overlay. Args: parialTickTime
-     */
-    private void renderWaterOverlayTexture(float p_78448_1_)
-    {
-        if (!Config.isShaders() || Shaders.isUnderwaterOverlay())
-        {
-            this.mc.getTextureManager().bindTexture(RES_UNDERWATER_OVERLAY);
-            Tessellator tessellator = Tessellator.getInstance();
-            WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-            float f = this.mc.thePlayer.getBrightness(p_78448_1_);
-            GlStateManager.color(f, f, f, 0.5F);
-            GlStateManager.enableBlend();
-            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-            GlStateManager.pushMatrix();
-            float f1 = 4.0F;
-            float f2 = -1.0F;
-            float f3 = 1.0F;
-            float f4 = -1.0F;
-            float f5 = 1.0F;
-            float f6 = -0.5F;
-            float f7 = -this.mc.thePlayer.rotationYaw / 64.0F;
-            float f8 = this.mc.thePlayer.rotationPitch / 64.0F;
-            worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-            worldrenderer.pos(-1.0D, -1.0D, -0.5D).tex(4.0F + f7, 4.0F + f8).func_181675_d();
-            worldrenderer.pos(1.0D, -1.0D, -0.5D).tex(0.0F + f7, 4.0F + f8).func_181675_d();
-            worldrenderer.pos(1.0D, 1.0D, -0.5D).tex(0.0F + f7, 0.0F + f8).func_181675_d();
-            worldrenderer.pos(-1.0D, 1.0D, -0.5D).tex(4.0F + f7, 0.0F + f8).func_181675_d();
-            tessellator.draw();
-            GlStateManager.popMatrix();
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            GlStateManager.disableBlend();
-        }
-    }
-
-    /**
      * Renders the fire on the screen for first person mode. Arg: partialTickTime
      */
-    private void renderFireInFirstPerson(float p_78442_1_)
+    private void renderFireInFirstPerson(float partialTicks)
     {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();

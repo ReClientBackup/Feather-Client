@@ -616,26 +616,19 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
             f /= getZoomModifier();
 
-            boolean flag = false;
+            boolean zoom = false;
 
             if (this.mc.currentScreen == null) {
-                flag = GameSettings.isKeyDown(this.mc.gameSettings.ofKeyBindZoom);
+                zoom = GameSettings.isKeyDown(this.mc.gameSettings.ofKeyBindZoom);
             }
 
-            if (flag) {
+            if (zoom) {
                 if (!Config.zoomMode) {
                     Config.zoomMode = true;
-                    this.mc.gameSettings.smoothCamera = true;
                     this.mc.renderGlobal.displayListEntitiesDirty = true;
                 }
-
-                /*if (Config.zoomMode)
-                {
-                    f /= 4.0f;
-                }*/
             } else if (Config.zoomMode) {
                 Config.zoomMode = false;
-                this.mc.gameSettings.smoothCamera = false;
                 this.mouseFilterXAxis = new MouseFilter();
                 this.mouseFilterYAxis = new MouseFilter();
                 this.mc.renderGlobal.displayListEntitiesDirty = true;
@@ -647,11 +640,6 @@ public class EntityRenderer implements IResourceManagerReloadListener
             }
 
             Block block = ActiveRenderInfo.getBlockAtEntityViewpoint(this.mc.theWorld, entity, partialTicks);
-
-            if (block.getMaterial() == Material.water) {
-                f = f * 60.0F / 70.0F;
-            }
-
             return Reflector.ForgeHooksClient_getFOVModifier.exists() ? Reflector.callFloat(Reflector.ForgeHooksClient_getFOVModifier, this, entity, block, partialTicks, f): f;
         }
     }
@@ -924,23 +912,6 @@ public class EntityRenderer implements IResourceManagerReloadListener
             this.setupViewBobbing(partialTicks);
         }
 
-        float f1 = this.mc.thePlayer.prevTimeInPortal + (this.mc.thePlayer.timeInPortal - this.mc.thePlayer.prevTimeInPortal) * partialTicks;
-
-        if (f1 > 0.0F)
-        {
-            int i = 20;
-
-            if (this.mc.thePlayer.isPotionActive(Potion.confusion))
-            {
-                i = 7;
-            }
-
-            float f2 = 5.0F / (f1 * f1 + 5.0F) - f1 * 0.04F;
-            f2 = f2 * f2;
-            GlStateManager.rotate(((float)this.rendererUpdateCount + partialTicks) * (float)i, 0.0F, 1.0F, 1.0F);
-            GlStateManager.scale(1.0F / f2, 1.0F, 1.0F);
-            GlStateManager.rotate(-((float)this.rendererUpdateCount + partialTicks) * (float)i, 0.0F, 1.0F, 1.0F);
-        }
 
         this.orientCamera(partialTicks);
 

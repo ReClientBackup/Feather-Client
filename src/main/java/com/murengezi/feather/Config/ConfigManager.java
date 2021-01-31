@@ -64,7 +64,8 @@ public class ConfigManager extends MinecraftUtils {
 
 				if (adjustable) {
 					Adjustable adjustableModule = (Adjustable) module;
-					if (jsonObject.has("x") && jsonObject.has("y")) {
+					if (jsonObject.has("region") && jsonObject.has("x") && jsonObject.has("y")) {
+						adjustableModule.setRegion(jsonObject.getEnum(Adjustable.Region.class, "region"));
 						adjustableModule.setX(jsonObject.getFloat("x"));
 						adjustableModule.setY(jsonObject.getFloat("y"));
 					}
@@ -94,6 +95,7 @@ public class ConfigManager extends MinecraftUtils {
 			jsonObject.put("enabled", module.isEnabled());
 			if (adjustable) {
 				Adjustable adjustableModule = (Adjustable) module;
+				jsonObject.put("region", adjustableModule.getRegion());
 				jsonObject.put("x", adjustableModule.getRelativeX());
 				jsonObject.put("y", adjustableModule.getRelativeY());
 			}
