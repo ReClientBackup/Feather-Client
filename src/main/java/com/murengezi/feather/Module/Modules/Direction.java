@@ -16,15 +16,14 @@ import net.minecraft.util.ResourceLocation;
  * Created on 2021-01-11 at 21:03
  */
 
-@ModuleInfo(name = "Direction", description = "Shows the direction you are facing.", version = "1.0.0")
+@ModuleInfo(name = "Direction", description = "Shows the direction you are facing.", version = "1.0.0", enabled = true)
 public class Direction extends Adjustable {
 
     @EventTarget
     public void onRender(RenderOverlayEvent event) {
-        ScaledResolution resolution = event.getScaledResolution();
-
         Gui.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MIN_VALUE);
-
+        setWidth(40f);
+        setHeight(40f);
         /*
          * FONT HEIGHT 9.0f
          */

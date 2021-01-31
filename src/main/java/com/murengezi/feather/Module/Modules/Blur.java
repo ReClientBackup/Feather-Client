@@ -19,7 +19,7 @@ import java.util.List;
  * Created on 2021-01-13 at 23:11
  */
 
-@ModuleInfo(name = "Blur", description = "Blurs the background when gui is open.", version = "1.0.0", enabled = true)
+@ModuleInfo(name = "Blur", description = "Blurs the background when gui is open.", version = "1.0.0", enabled = false)
 public class Blur extends Module {
 
     private TimerUtil timer;

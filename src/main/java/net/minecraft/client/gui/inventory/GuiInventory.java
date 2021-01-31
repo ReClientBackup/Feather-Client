@@ -84,10 +84,10 @@ public class GuiInventory extends InventoryEffectRenderer
     {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(inventoryBackground);
-        int i = this.guiLeft;
-        int j = this.guiTop;
-        this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
-        drawEntityOnScreen(i + 51, j + 75, 30, (float)(i + 51) - this.oldMouseX, (float)(j + 75 - 50) - this.oldMouseY, this.mc.thePlayer);
+        int left = this.guiLeft;
+        int top = this.guiTop;
+        this.drawTexturedModalRect(left, top, 0, 0, this.xSize, this.ySize);
+        drawEntityOnScreen(left + 51, top + 75, 30, (float)(left + 51) - this.oldMouseX, (float)(top + 75 - 50) - this.oldMouseY, this.mc.thePlayer);
     }
 
     /**
@@ -95,6 +95,7 @@ public class GuiInventory extends InventoryEffectRenderer
      */
     public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, EntityLivingBase ent)
     {
+        GlStateManager.enableDepth();
         GlStateManager.enableColorMaterial();
         GlStateManager.pushMatrix();
         GlStateManager.translate((float)posX, (float)posY, 50.0F);
@@ -131,6 +132,7 @@ public class GuiInventory extends InventoryEffectRenderer
         GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
         GlStateManager.disableTexture2D();
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+        GlStateManager.enableDepth();
     }
 
     /**

@@ -60,8 +60,8 @@ public class Scoreboard extends Module {
 		int finalStringWidth = stringWidth;
 		list.forEach(score1 -> {
 			int index = list.indexOf(score1);
-			ScorePlayerTeam scoreplayerteam1 = scoreboard.getPlayersTeam(score1.getPlayerName());
-			String playerName = ScorePlayerTeam.formatPlayerName(scoreplayerteam1, score1.getPlayerName());
+			ScorePlayerTeam scorePlayerTeam = scoreboard.getPlayersTeam(score1.getPlayerName());
+			String playerName = ScorePlayerTeam.formatPlayerName(scorePlayerTeam, score1.getPlayerName());
 			String score = EnumChatFormatting.RED + "" + score1.getScorePoints();
 			int yPos = y - index * getFr().FONT_HEIGHT;
 			int xPos = resolution.getScaledWidth() - offsetRight + 1;
@@ -75,7 +75,7 @@ public class Scoreboard extends Module {
 				String s3 = objective.getDisplayName();
 				Gui.drawRect(x - 2, yPos - getFr().FONT_HEIGHT - 1, xPos, yPos - 1, 1610612736);
 				Gui.drawRect(x - 2, yPos - 1, xPos, yPos, 1342177280);
-				getFr().drawStringWithShadow(s3, x + finalStringWidth / 2 - getFr().getStringWidth(s3) / 2, yPos - getFr().FONT_HEIGHT, 553648127);
+				getFr().drawStringWithShadow(s3, x + (float) finalStringWidth / 2 - (float) getFr().getStringWidth(s3) / 2, yPos - getFr().FONT_HEIGHT, 553648127);
 			}
 		});
 	}

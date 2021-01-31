@@ -563,25 +563,16 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         Display.setResizable(true);
         Display.setTitle("Feather (?-?/?)");
 
-        try
-        {
+        try {
             Display.create((new PixelFormat()).withDepthBits(24));
-        }
-        catch (LWJGLException lwjglexception)
-        {
+        } catch (LWJGLException lwjglexception) {
             logger.error("Couldn\'t set pixel format", lwjglexception);
 
-            try
-            {
+            try {
                 Thread.sleep(1000L);
-            }
-            catch (InterruptedException var3)
-            {
-                ;
-            }
+            } catch (InterruptedException var3) {}
 
-            if (this.fullscreen)
-            {
+            if (this.fullscreen) {
                 this.updateDisplayMode();
             }
 
@@ -2246,8 +2237,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
     /**
      * par2Str is displayed on the loading screen to the user unloads the current world first
      */
-    public void loadWorld(WorldClient worldClientIn, String loadingMessage)
-    {
+    public void loadWorld(WorldClient worldClientIn, String loadingMessage) {
+        System.gc();
         if (worldClientIn == null)
         {
             NetHandlerPlayClient nethandlerplayclient = this.getNetHandler();

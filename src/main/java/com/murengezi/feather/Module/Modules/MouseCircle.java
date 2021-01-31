@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
  * @author Tobias Sjöblom
  * Created on 2021-01-12 at 13:37
  */
-@ModuleInfo(name = "MouseCircle", description = "A circle that simulates your mouse movement.", version = "1.0.0")
+@ModuleInfo(name = "MouseCircle", description = "A circle that simulates your mouse movement.", version = "1.0.0", enabled = true)
 public class MouseCircle extends Adjustable {
 
     private float deltaX;
@@ -22,12 +22,11 @@ public class MouseCircle extends Adjustable {
 
     @EventTarget
     public void onRender(RenderOverlayEvent event) {
-        ScaledResolution resolution = event.getScaledResolution();
-        int width = resolution.getScaledWidth();
-        int height = resolution.getScaledHeight();
+        setWidth(40);
+        setHeight(40);
 
-        float circleX = MathHelper.clamp_float(getMc().mouseHelper.deltaX * 2.0f, -((float)getWidth() / 4), (float)getWidth() / 4);
-        float circleY = MathHelper.clamp_float(-getMc().mouseHelper.deltaY * 2.0f, -((float)getHeight() / 4), (float)getHeight() / 4);
+        float circleX = MathHelper.clamp_float(getMc().mouseHelper.deltaX * 2.0f, -(getWidth() / 4), getWidth() / 4);
+        float circleY = MathHelper.clamp_float(-getMc().mouseHelper.deltaY * 2.0f, -(getHeight() / 4), getHeight() / 4);
         float delta = 0.3f;
         if (this.deltaX < circleX) {
             if (this.deltaX + delta > circleX) {

@@ -129,9 +129,7 @@ public class InGameScreen extends Gui {
         this.renderBossHealth(resolution);
         this.mc.mcProfiler.endSection();
 
-        if (this.mc.playerController.shouldDrawHUD()) {
-            this.renderPlayerStats(resolution);
-        }
+        this.renderPlayerStats(resolution);
 
         GlStateManager.disableBlend();
 
@@ -158,7 +156,7 @@ public class InGameScreen extends Gui {
 
         if (this.mc.thePlayer.isRidingHorse()) {
             this.renderHorseJumpBar(resolution, expBarPosX);
-        } else if (this.mc.playerController.gameIsSurvivalOrAdventure()) {
+        } else {
             this.renderExpBar(resolution, expBarPosX);
         }
 
@@ -385,8 +383,8 @@ public class InGameScreen extends Gui {
             this.drawTexturedModalRect(width - 91, resolution.getScaledHeight() - 22, 0, 0, 182, 22);
             this.drawTexturedModalRect(width - 91 - 1 + entityplayer.inventory.currentItem * 20, resolution.getScaledHeight() - 22 - 1, 0, 22, 24, 22);
             this.zLevel = prevZLevel;
-            GlStateManager.enableRescaleNormal();
             GlStateManager.enableBlend();
+            GlStateManager.enableRescaleNormal();
             GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
             RenderHelper.enableGUIStandardItemLighting();
 
@@ -502,210 +500,213 @@ public class InGameScreen extends Gui {
             int k = foodstats.getFoodLevel();
             int l = foodstats.getPrevFoodLevel();
             IAttributeInstance iattributeinstance = entityplayer.getEntityAttribute(SharedMonsterAttributes.maxHealth);
-            int i1 = resolution.getScaledWidth() / 2 - 91;
-            int j1 = resolution.getScaledWidth() / 2 + 91;
-            int k1 = resolution.getScaledHeight() - 39;
-            float f = (float)iattributeinstance.getAttributeValue();
-            float f1 = entityplayer.getAbsorptionAmount();
-            int l1 = MathHelper.ceiling_float_int((f + f1) / 2.0F / 10.0F);
+            int healthAndArmorX = resolution.getScaledWidth() / 2 - 91;
+            int foodAndAirX = resolution.getScaledWidth() / 2 + 91;
+            int yPos = resolution.getScaledHeight() - 39;
+            float attributeValue = (float)iattributeinstance.getAttributeValue();
+            float absorptionAmount = entityplayer.getAbsorptionAmount();
+            int l1 = MathHelper.ceiling_float_int((attributeValue + absorptionAmount) / 2.0F / 10.0F);
             int i2 = Math.max(10 - (l1 - 2), 3);
-            int j2 = k1 - (l1 - 1) * i2 - 10;
-            float f2 = f1;
-            int k2 = entityplayer.getTotalArmorValue();
+            int j2 = yPos - (l1 - 1) * (this.mc.playerController.shouldDrawHUD() ? i2 : 1) - (this.mc.playerController.shouldDrawHUD() ? 10 : 0);
+            float f2 = absorptionAmount;
+            int armorValue = entityplayer.getTotalArmorValue();
             int l2 = -1;
 
             if (entityplayer.isPotionActive(Potion.regeneration)) {
-                l2 = this.updateCounter % MathHelper.ceiling_float_int(f + 5.0F);
+                l2 = this.updateCounter % MathHelper.ceiling_float_int(attributeValue + 5.0F);
             }
 
             this.mc.mcProfiler.startSection("armor");
 
-            for (int i3 = 0; i3 < 10; ++i3) {
-                if (k2 > 0) {
-                    int j3 = i1 + i3 * 8;
+            for (int index = 0; index < 10; ++index) {
+                if (armorValue > 0) {
+                    int j3 = healthAndArmorX + index * 8;
 
-                    if (i3 * 2 + 1 < k2) {
+                    if (index * 2 + 1 < armorValue) {
                         this.drawTexturedModalRect(j3, j2, 34, 9, 9, 9);
                     }
 
-                    if (i3 * 2 + 1 == k2) {
+                    if (index * 2 + 1 == armorValue) {
                         this.drawTexturedModalRect(j3, j2, 25, 9, 9, 9);
                     }
 
-                    if (i3 * 2 + 1 > k2) {
+                    if (index * 2 + 1 > armorValue) {
                         this.drawTexturedModalRect(j3, j2, 16, 9, 9, 9);
                     }
                 }
             }
 
-            this.mc.mcProfiler.endStartSection("health");
 
-            for (int i6 = MathHelper.ceiling_float_int((f + f1) / 2.0F) - 1; i6 >= 0; --i6) {
-                int j6 = 16;
+            if (this.mc.playerController.shouldDrawHUD()) {
+                this.mc.mcProfiler.endStartSection("health");
 
-                if (entityplayer.isPotionActive(Potion.poison)) {
-                    j6 += 36;
-                } else if (entityplayer.isPotionActive(Potion.wither)) {
-                    j6 += 72;
-                }
+                for (int i6 = MathHelper.ceiling_float_int((attributeValue + absorptionAmount) / 2.0F) - 1; i6 >= 0; --i6) {
+                    int j6 = 16;
 
-                int k3 = 0;
-
-                if (flag) {
-                    k3 = 1;
-                }
-
-                int l3 = MathHelper.ceiling_float_int((float)(i6 + 1) / 10.0F) - 1;
-                int i4 = i1 + i6 % 10 * 8;
-                int j4 = k1 - l3 * i2;
-
-                if (ceilingPlayerHealth <= 4) {
-                    j4 += this.rand.nextInt(2);
-                }
-
-                if (i6 == l2) {
-                    j4 -= 2;
-                }
-
-                int k4 = 0;
-
-                if (entityplayer.worldObj.getWorldInfo().isHardcoreModeEnabled()) {
-                    k4 = 5;
-                }
-
-                this.drawTexturedModalRect(i4, j4, 16 + k3 * 9, 9 * k4, 9, 9);
-
-                if (flag) {
-                    if (i6 * 2 + 1 < j) {
-                        this.drawTexturedModalRect(i4, j4, j6 + 54, 9 * k4, 9, 9);
+                    if (entityplayer.isPotionActive(Potion.poison)) {
+                        j6 += 36;
+                    } else if (entityplayer.isPotionActive(Potion.wither)) {
+                        j6 += 72;
                     }
 
-                    if (i6 * 2 + 1 == j) {
-                        this.drawTexturedModalRect(i4, j4, j6 + 63, 9 * k4, 9, 9);
-                    }
-                }
+                    int k3 = 0;
 
-                if (f2 <= 0.0F) {
-                    if (i6 * 2 + 1 < ceilingPlayerHealth) {
-                        this.drawTexturedModalRect(i4, j4, j6 + 36, 9 * k4, 9, 9);
+                    if (flag) {
+                        k3 = 1;
                     }
 
-                    if (i6 * 2 + 1 == ceilingPlayerHealth) {
-                        this.drawTexturedModalRect(i4, j4, j6 + 45, 9 * k4, 9, 9);
+                    int l3 = MathHelper.ceiling_float_int((float)(i6 + 1) / 10.0F) - 1;
+                    int i4 = healthAndArmorX + i6 % 10 * 8;
+                    int j4 = yPos - l3 * i2;
+
+                    if (ceilingPlayerHealth <= 4) {
+                        j4 += this.rand.nextInt(2);
                     }
-                } else {
-                    if (f2 == f1 && f1 % 2.0F == 1.0F) {
-                        this.drawTexturedModalRect(i4, j4, j6 + 153, 9 * k4, 9, 9);
+
+                    if (i6 == l2) {
+                        j4 -= 2;
+                    }
+
+                    int k4 = 0;
+
+                    if (entityplayer.worldObj.getWorldInfo().isHardcoreModeEnabled()) {
+                        k4 = 5;
+                    }
+
+                    this.drawTexturedModalRect(i4, j4, 16 + k3 * 9, 9 * k4, 9, 9);
+
+                    if (flag) {
+                        if (i6 * 2 + 1 < j) {
+                            this.drawTexturedModalRect(i4, j4, j6 + 54, 9 * k4, 9, 9);
+                        }
+
+                        if (i6 * 2 + 1 == j) {
+                            this.drawTexturedModalRect(i4, j4, j6 + 63, 9 * k4, 9, 9);
+                        }
+                    }
+
+                    if (f2 <= 0.0F) {
+                        if (i6 * 2 + 1 < ceilingPlayerHealth) {
+                            this.drawTexturedModalRect(i4, j4, j6 + 36, 9 * k4, 9, 9);
+                        }
+
+                        if (i6 * 2 + 1 == ceilingPlayerHealth) {
+                            this.drawTexturedModalRect(i4, j4, j6 + 45, 9 * k4, 9, 9);
+                        }
                     } else {
-                        this.drawTexturedModalRect(i4, j4, j6 + 144, 9 * k4, 9, 9);
-                    }
-
-                    f2 -= 2.0F;
-                }
-            }
-
-            Entity entity = entityplayer.ridingEntity;
-
-            if (entity == null) {
-                this.mc.mcProfiler.endStartSection("food");
-
-                for (int k6 = 0; k6 < 10; ++k6) {
-                    int j7 = k1;
-                    int l7 = 16;
-                    int k8 = 0;
-
-                    if (entityplayer.isPotionActive(Potion.hunger)) {
-                        l7 += 36;
-                        k8 = 13;
-                    }
-
-                    if (entityplayer.getFoodStats().getSaturationLevel() <= 0.0F && this.updateCounter % (k * 3 + 1) == 0) {
-                        j7 = k1 + (this.rand.nextInt(3) - 1);
-                    }
-
-                    if (flag1) {
-                        k8 = 1;
-                    }
-
-                    int j9 = j1 - k6 * 8 - 9;
-                    this.drawTexturedModalRect(j9, j7, 16 + k8 * 9, 27, 9, 9);
-
-                    if (flag1) {
-                        if (k6 * 2 + 1 < l) {
-                            this.drawTexturedModalRect(j9, j7, l7 + 54, 27, 9, 9);
+                        if (f2 == absorptionAmount && absorptionAmount % 2.0F == 1.0F) {
+                            this.drawTexturedModalRect(i4, j4, j6 + 153, 9 * k4, 9, 9);
+                        } else {
+                            this.drawTexturedModalRect(i4, j4, j6 + 144, 9 * k4, 9, 9);
                         }
 
-                        if (k6 * 2 + 1 == l) {
-                            this.drawTexturedModalRect(j9, j7, l7 + 63, 27, 9, 9);
+                        f2 -= 2.0F;
+                    }
+                }
+
+                Entity entity = entityplayer.ridingEntity;
+
+                if (entity == null) {
+                    this.mc.mcProfiler.endStartSection("food");
+
+                    for (int k6 = 0; k6 < 10; ++k6) {
+                        int j7 = yPos;
+                        int l7 = 16;
+                        int k8 = 0;
+
+                        if (entityplayer.isPotionActive(Potion.hunger)) {
+                            l7 += 36;
+                            k8 = 13;
                         }
-                    }
 
-                    if (k6 * 2 + 1 < k) {
-                        this.drawTexturedModalRect(j9, j7, l7 + 36, 27, 9, 9);
-                    }
-
-                    if (k6 * 2 + 1 == k) {
-                        this.drawTexturedModalRect(j9, j7, l7 + 45, 27, 9, 9);
-                    }
-                }
-            } else if (entity instanceof EntityLivingBase) {
-                this.mc.mcProfiler.endStartSection("mountHealth");
-                EntityLivingBase entitylivingbase = (EntityLivingBase)entity;
-                int i7 = (int)Math.ceil(entitylivingbase.getHealth());
-                float f3 = entitylivingbase.getMaxHealth();
-                int j8 = (int)(f3 + 0.5F) / 2;
-
-                if (j8 > 30) {
-                    j8 = 30;
-                }
-
-                int i9 = k1;
-
-                for (int k9 = 0; j8 > 0; k9 += 20) {
-                    int l4 = Math.min(j8, 10);
-                    j8 -= l4;
-
-                    for (int i5 = 0; i5 < l4; ++i5) {
-                        int j5 = 52;
-                        int k5 = 0;
+                        if (entityplayer.getFoodStats().getSaturationLevel() <= 0.0F && this.updateCounter % (k * 3 + 1) == 0) {
+                            j7 = yPos + (this.rand.nextInt(3) - 1);
+                        }
 
                         if (flag1) {
-                            k5 = 1;
+                            k8 = 1;
                         }
 
-                        int l5 = j1 - i5 * 8 - 9;
-                        this.drawTexturedModalRect(l5, i9, j5 + k5 * 9, 9, 9, 9);
+                        int j9 = foodAndAirX - k6 * 8 - 9;
+                        this.drawTexturedModalRect(j9, j7, 16 + k8 * 9, 27, 9, 9);
 
-                        if (i5 * 2 + 1 + k9 < i7) {
-                            this.drawTexturedModalRect(l5, i9, j5 + 36, 9, 9, 9);
+                        if (flag1) {
+                            if (k6 * 2 + 1 < l) {
+                                this.drawTexturedModalRect(j9, j7, l7 + 54, 27, 9, 9);
+                            }
+
+                            if (k6 * 2 + 1 == l) {
+                                this.drawTexturedModalRect(j9, j7, l7 + 63, 27, 9, 9);
+                            }
                         }
 
-                        if (i5 * 2 + 1 + k9 == i7) {
-                            this.drawTexturedModalRect(l5, i9, j5 + 45, 9, 9, 9);
+                        if (k6 * 2 + 1 < k) {
+                            this.drawTexturedModalRect(j9, j7, l7 + 36, 27, 9, 9);
+                        }
+
+                        if (k6 * 2 + 1 == k) {
+                            this.drawTexturedModalRect(j9, j7, l7 + 45, 27, 9, 9);
                         }
                     }
+                } else if (entity instanceof EntityLivingBase) {
+                    this.mc.mcProfiler.endStartSection("mountHealth");
+                    EntityLivingBase entitylivingbase = (EntityLivingBase)entity;
+                    int i7 = (int)Math.ceil(entitylivingbase.getHealth());
+                    float f3 = entitylivingbase.getMaxHealth();
+                    int j8 = (int)(f3 + 0.5F) / 2;
 
-                    i9 -= 10;
-                }
-            }
+                    if (j8 > 30) {
+                        j8 = 30;
+                    }
 
-            this.mc.mcProfiler.endStartSection("air");
+                    int i9 = yPos;
 
-            if (entityplayer.isInsideOfMaterial(Material.water)) {
-                int l6 = this.mc.thePlayer.getAir();
-                int k7 = MathHelper.ceiling_double_int((double)(l6 - 2) * 10.0D / 300.0D);
-                int i8 = MathHelper.ceiling_double_int((double)l6 * 10.0D / 300.0D) - k7;
+                    for (int k9 = 0; j8 > 0; k9 += 20) {
+                        int l4 = Math.min(j8, 10);
+                        j8 -= l4;
 
-                for (int l8 = 0; l8 < k7 + i8; ++l8) {
-                    if (l8 < k7) {
-                        this.drawTexturedModalRect(j1 - l8 * 8 - 9, j2, 16, 18, 9, 9);
-                    } else {
-                        this.drawTexturedModalRect(j1 - l8 * 8 - 9, j2, 25, 18, 9, 9);
+                        for (int i5 = 0; i5 < l4; ++i5) {
+                            int j5 = 52;
+                            int k5 = 0;
+
+                            if (flag1) {
+                                k5 = 1;
+                            }
+
+                            int l5 = foodAndAirX - i5 * 8 - 9;
+                            this.drawTexturedModalRect(l5, i9, j5 + k5 * 9, 9, 9, 9);
+
+                            if (i5 * 2 + 1 + k9 < i7) {
+                                this.drawTexturedModalRect(l5, i9, j5 + 36, 9, 9, 9);
+                            }
+
+                            if (i5 * 2 + 1 + k9 == i7) {
+                                this.drawTexturedModalRect(l5, i9, j5 + 45, 9, 9, 9);
+                            }
+                        }
+
+                        i9 -= 10;
                     }
                 }
-            }
 
-            this.mc.mcProfiler.endSection();
+                this.mc.mcProfiler.endStartSection("air");
+
+                if (entityplayer.isInsideOfMaterial(Material.water)) {
+                    int l6 = this.mc.thePlayer.getAir();
+                    int k7 = MathHelper.ceiling_double_int((double)(l6 - 2) * 10.0D / 300.0D);
+                    int i8 = MathHelper.ceiling_double_int((double)l6 * 10.0D / 300.0D) - k7;
+
+                    for (int l8 = 0; l8 < k7 + i8; ++l8) {
+                        if (l8 < k7) {
+                            this.drawTexturedModalRect(foodAndAirX - l8 * 8 - 9, j2, 16, 18, 9, 9);
+                        } else {
+                            this.drawTexturedModalRect(foodAndAirX - l8 * 8 - 9, j2, 25, 18, 9, 9);
+                        }
+                    }
+                }
+
+                this.mc.mcProfiler.endSection();
+            }
         }
     }
 

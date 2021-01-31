@@ -4,6 +4,8 @@ import com.google.common.base.Charsets;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -85,9 +87,16 @@ public abstract class AbstractResourcePack implements IResourcePack
         return p_110596_0_.parseMetadataSection(p_110596_2_, jsonobject);
     }
 
-    public BufferedImage getPackImage() throws IOException
-    {
-        return TextureUtil.readBufferedImage(this.getInputStreamByName("pack.png"));
+    public BufferedImage getPackImage() throws IOException {
+        BufferedImage image = TextureUtil.readBufferedImage(this.getInputStreamByName("pack.png"));
+        if (image == null)
+            return null;
+        System.out.println("Scaling resource pack icon from " + image.getWidth() + " to 64");
+        BufferedImage smallImage = new BufferedImage(64, 64, 2);
+        Graphics graphics = smallImage.getGraphics();
+        graphics.drawImage(image, 0, 0, 64, 64, null);
+        graphics.dispose();
+        return smallImage;
     }
 
     public String getPackName()

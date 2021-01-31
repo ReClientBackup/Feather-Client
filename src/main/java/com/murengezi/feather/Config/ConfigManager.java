@@ -94,8 +94,8 @@ public class ConfigManager extends MinecraftUtils {
 			jsonObject.put("enabled", module.isEnabled());
 			if (adjustable) {
 				Adjustable adjustableModule = (Adjustable) module;
-				jsonObject.put("x", adjustableModule.getX());
-				jsonObject.put("y", adjustableModule.getY());
+				jsonObject.put("x", adjustableModule.getRelativeX());
+				jsonObject.put("y", adjustableModule.getRelativeY());
 			}
 
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));

@@ -19,8 +19,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
-public abstract class GuiContainer extends GuiScreen
-{
+public abstract class GuiContainer extends GuiScreen {
     /** The location of the inventory background texture */
     protected static final ResourceLocation inventoryBackground = new ResourceLocation("textures/gui/container/inventory.png");
 
@@ -75,8 +74,7 @@ public abstract class GuiContainer extends GuiScreen
     private boolean doubleClick;
     private ItemStack shiftClickedSlot;
 
-    public GuiContainer(Container inventorySlotsIn)
-    {
+    public GuiContainer(Container inventorySlotsIn) {
         this.inventorySlots = inventorySlotsIn;
         this.ignoreMouseUp = true;
     }
@@ -85,8 +83,7 @@ public abstract class GuiContainer extends GuiScreen
      * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
      * window resizes, the buttonList is cleared beforehand.
      */
-    public void initGui()
-    {
+    public void initGui() {
         super.initGui();
         this.mc.thePlayer.openContainer = this.inventorySlots;
         this.guiLeft = (this.width - this.xSize) / 2;
@@ -96,9 +93,7 @@ public abstract class GuiContainer extends GuiScreen
     /**
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
-        //this.drawDefaultBackground();
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         int i = this.guiLeft;
         int j = this.guiTop;
         this.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);

@@ -103,8 +103,6 @@ public class Adjustable extends Module {
 
 		this.x /= width;
 		this.y /= height;
-
-		System.out.println("X" + this.x + " Y:" + this.y);
 	}
 
 	public float getX() {
@@ -130,6 +128,10 @@ public class Adjustable extends Module {
 		this.x = x;
 	}
 
+	public float getRelativeX() {
+		return this.x;
+	}
+
 	public float getY() {
 		float height = (float) resolution.getScaledHeight();
 		switch (getRegion()) {
@@ -147,6 +149,10 @@ public class Adjustable extends Module {
 				return height - (this.y * height) - getHeight();
 		}
 		return y;
+	}
+
+	public float getRelativeY() {
+		return this.y;
 	}
 
 	public void setY(float y) {

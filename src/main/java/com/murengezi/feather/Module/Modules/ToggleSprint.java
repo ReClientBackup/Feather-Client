@@ -38,6 +38,8 @@ public class ToggleSprint extends Adjustable {
     public void onRender(RenderOverlayEvent event) {
         Gui.drawRect(getX(), getY(), getX() + getFr().getStringWidth(text) + 3, getY() + getFr().FONT_HEIGHT + 3, Integer.MIN_VALUE);
         getFr().drawStringWithShadow(text, getX() + 2, getY() + 2, 0xffffffff);
+        setWidth(getFr().getStringWidth(text) + 3);
+        setHeight(getFr().FONT_HEIGHT + 3);
     }
 
 }
