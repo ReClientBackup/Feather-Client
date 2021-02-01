@@ -1,11 +1,12 @@
 package net.optifine.reflect;
 
+import net.minecraft.src.Config;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import net.minecraft.src.Config;
 
 public class FieldLocatorTypes implements IFieldLocator
 {

@@ -1,18 +1,18 @@
 package net.optifine.gui;
 
 import com.mojang.authlib.exceptions.InvalidCredentialsException;
-import java.math.BigInteger;
-import java.net.URI;
-import java.util.Random;
-
+import com.murengezi.minecraft.client.Gui.GuiButton;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
-import com.murengezi.minecraft.client.Gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.src.Config;
 import net.optifine.Lang;
+
+import java.math.BigInteger;
+import java.net.URI;
+import java.util.Random;
 
 public class GuiScreenCapeOF extends GuiScreenOF
 {

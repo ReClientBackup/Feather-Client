@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import com.murengezi.minecraft.client.Gui.GuiButton;
 import com.murengezi.minecraft.client.Gui.GuiListExtended;
 import com.murengezi.minecraft.client.Gui.Multiplayer.ConnectingScreen;
-import com.murengezi.minecraft.client.Gui.Multiplayer.MultiplayerScreen;
 import com.murengezi.minecraft.client.Gui.Screen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.ServerData;

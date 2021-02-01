@@ -1,10 +1,11 @@
 package net.optifine.gui;
 
-import java.io.IOException;
-import java.util.List;
 import com.murengezi.minecraft.client.Gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiVideoSettings;
+
+import java.io.IOException;
+import java.util.List;
 
 public class GuiScreenOF extends GuiScreen
 {

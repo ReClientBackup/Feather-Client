@@ -6,10 +6,7 @@ import com.murengezi.feather.Event.PlayerUpdateEvent;
 import com.murengezi.feather.Event.RenderOverlayEvent;
 import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.ModuleInfo;
-import com.murengezi.feather.Module.Module;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
-import org.lwjgl.input.Keyboard;
 
 /**
  * @author Tobias Sjöblom

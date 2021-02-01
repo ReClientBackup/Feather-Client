@@ -3,7 +3,6 @@ package com.murengezi.feather.Module;
 import com.darkmagician6.eventapi.EventManager;
 import com.murengezi.feather.Event.ModuleDisableEvent;
 import com.murengezi.feather.Event.ModuleEnableEvent;
-import com.murengezi.feather.Feather;
 import com.murengezi.feather.Module.Setting.Setting;
 import com.murengezi.feather.Module.Setting.SettingType;
 import com.murengezi.feather.Module.Setting.Settings.BooleanSetting;

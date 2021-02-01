@@ -3,14 +3,6 @@ package net.minecraft.client.renderer;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.gson.JsonSyntaxException;
-import java.io.IOException;
-import java.nio.FloatBuffer;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.Callable;
-
 import com.murengezi.feather.Util.TimerUtil;
 import com.murengezi.minecraft.client.Gui.MainMenuScreen;
 import net.minecraft.block.Block;
@@ -58,19 +50,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.src.Config;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MouseFilter;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.ReportedException;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldSettings;
@@ -95,6 +75,13 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.glu.Project;
+
+import java.io.IOException;
+import java.nio.FloatBuffer;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 public class EntityRenderer implements IResourceManagerReloadListener
 {
@@ -864,13 +851,11 @@ public class EntityRenderer implements IResourceManagerReloadListener
     {
         this.farPlaneDistance = (float)(this.mc.gameSettings.renderDistanceChunks * 16);
 
-        if (Config.isFogFancy())
-        {
+        if (Config.isFogFancy()) {
             this.farPlaneDistance *= 0.95F;
         }
 
-        if (Config.isFogFast())
-        {
+        if (Config.isFogFast()) {
             this.farPlaneDistance *= 0.83F;
         }
 
@@ -878,20 +863,17 @@ public class EntityRenderer implements IResourceManagerReloadListener
         GlStateManager.loadIdentity();
         float f = 0.07F;
 
-        if (this.mc.gameSettings.anaglyph)
-        {
+        if (this.mc.gameSettings.anaglyph) {
             GlStateManager.translate((float)(-(pass * 2 - 1)) * f, 0.0F, 0.0F);
         }
 
         this.clipDistance = this.farPlaneDistance * 2.0F;
 
-        if (this.clipDistance < 173.0F)
-        {
+        if (this.clipDistance < 173.0F) {
             this.clipDistance = 173.0F;
         }
 
-        if (this.cameraZoom != 1.0D)
-        {
+        if (this.cameraZoom != 1.0D) {
             GlStateManager.translate((float)this.cameraYaw, (float)(-this.cameraPitch), 0.0F);
             GlStateManager.scale(this.cameraZoom, this.cameraZoom, 1.0D);
         }
@@ -900,43 +882,36 @@ public class EntityRenderer implements IResourceManagerReloadListener
         GlStateManager.matrixMode(5888);
         GlStateManager.loadIdentity();
 
-        if (this.mc.gameSettings.anaglyph)
-        {
+        if (this.mc.gameSettings.anaglyph) {
             GlStateManager.translate((float)(pass * 2 - 1) * 0.1F, 0.0F, 0.0F);
         }
 
         this.hurtCameraEffect(partialTicks);
 
-        if (this.mc.gameSettings.viewBobbing)
-        {
+        if (this.mc.gameSettings.viewBobbing) {
             this.setupViewBobbing(partialTicks);
         }
 
 
         this.orientCamera(partialTicks);
 
-        if (this.debugView)
-        {
-            switch (this.debugViewDirection)
-            {
+        if (this.debugView) {
+            switch (this.debugViewDirection) {
                 case 0:
                     GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
                     break;
-
                 case 1:
                     GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
                     break;
-
                 case 2:
                     GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
                     break;
-
                 case 3:
                     GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
                     break;
-
                 case 4:
                     GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
+                    break;
             }
         }
     }
@@ -946,54 +921,53 @@ public class EntityRenderer implements IResourceManagerReloadListener
      *  
      * @param partialTicks The amount of time passed during the current tick, ranging from 0 to 1.
      */
-    private void renderHand(float partialTicks, int xOffset)
-    {
+    private void renderHand(float partialTicks, int xOffset) {
         this.renderHand(partialTicks, xOffset, true, true, false);
     }
 
-    public void renderHand(float p_renderHand_1_, int p_renderHand_2_, boolean p_renderHand_3_, boolean p_renderHand_4_, boolean p_renderHand_5_) {
+    public void renderHand(float partialTicks, int xOffset, boolean p_renderHand_3_, boolean p_renderHand_4_, boolean p_renderHand_5_) {
         if (!this.debugView) {
             GlStateManager.matrixMode(5889);
             GlStateManager.loadIdentity();
             float f = 0.07F;
 
             if (this.mc.gameSettings.anaglyph) {
-                GlStateManager.translate((float)(-(p_renderHand_2_ * 2 - 1)) * f, 0.0F, 0.0F);
+                GlStateManager.translate((float)(-(xOffset * 2 - 1)) * f, 0.0F, 0.0F);
             }
 
             if (Config.isShaders()) {
                 Shaders.applyHandDepth();
             }
 
-            Project.gluPerspective(this.getFOVModifier(p_renderHand_1_, false), (float)this.mc.displayWidth / (float)this.mc.displayHeight, 0.05F, this.farPlaneDistance * 2.0F);
+            Project.gluPerspective(this.getFOVModifier(partialTicks, false), (float)this.mc.displayWidth / (float)this.mc.displayHeight, 0.05F, this.farPlaneDistance * 2.0F);
             GlStateManager.matrixMode(5888);
             GlStateManager.loadIdentity();
 
             if (this.mc.gameSettings.anaglyph) {
-                GlStateManager.translate((float)(p_renderHand_2_ * 2 - 1) * 0.1F, 0.0F, 0.0F);
+                GlStateManager.translate((float)(xOffset * 2 - 1) * 0.1F, 0.0F, 0.0F);
             }
 
             boolean flag = false;
 
             if (p_renderHand_3_) {
                 GlStateManager.pushMatrix();
-                this.hurtCameraEffect(p_renderHand_1_);
+                this.hurtCameraEffect(partialTicks);
 
                 if (this.mc.gameSettings.viewBobbing) {
-                    this.setupViewBobbing(p_renderHand_1_);
+                    this.setupViewBobbing(partialTicks);
                 }
 
                 flag = this.mc.getRenderViewEntity() instanceof EntityLivingBase && ((EntityLivingBase)this.mc.getRenderViewEntity()).isPlayerSleeping();
-                boolean flag1 = !ReflectorForge.renderFirstPersonHand(this.mc.renderGlobal, p_renderHand_1_, p_renderHand_2_);
+                boolean flag1 = !ReflectorForge.renderFirstPersonHand(this.mc.renderGlobal, partialTicks, xOffset);
 
                 if (flag1 && this.mc.gameSettings.thirdPersonView == 0 && !flag && !this.mc.gameSettings.hideGUI && !this.mc.playerController.isSpectator()) {
                     this.enableLightmap();
 
                     if (Config.isShaders()) {
-                        ShadersRender.renderItemFP(this.itemRenderer, p_renderHand_1_, p_renderHand_5_);
+                        ShadersRender.renderItemFP(this.itemRenderer, partialTicks, p_renderHand_5_);
                     } else {
                         this.itemRenderer.attemptSwing();
-                        this.itemRenderer.renderItemInFirstPerson(p_renderHand_1_);
+                        this.itemRenderer.renderItemInFirstPerson(partialTicks);
                     }
 
                     this.disableLightmap();
@@ -1009,30 +983,27 @@ public class EntityRenderer implements IResourceManagerReloadListener
             this.disableLightmap();
 
             if (this.mc.gameSettings.thirdPersonView == 0 && !flag) {
-                this.itemRenderer.renderOverlays(p_renderHand_1_);
-                this.hurtCameraEffect(p_renderHand_1_);
+                this.itemRenderer.renderOverlays(partialTicks);
+                this.hurtCameraEffect(partialTicks);
             }
 
             if (this.mc.gameSettings.viewBobbing) {
-                this.setupViewBobbing(p_renderHand_1_);
+                this.setupViewBobbing(partialTicks);
             }
         }
     }
 
-    public void disableLightmap()
-    {
+    public void disableLightmap() {
         GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
         GlStateManager.disableTexture2D();
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
 
-        if (Config.isShaders())
-        {
+        if (Config.isShaders()) {
             Shaders.disableLightmap();
         }
     }
 
-    public void enableLightmap()
-    {
+    public void enableLightmap() {
         GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
         GlStateManager.matrixMode(5890);
         GlStateManager.loadIdentity();
@@ -1049,8 +1020,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
         GlStateManager.enableTexture2D();
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
 
-        if (Config.isShaders())
-        {
+        if (Config.isShaders()) {
             Shaders.enableLightmap();
         }
     }
@@ -1215,34 +1185,27 @@ public class EntityRenderer implements IResourceManagerReloadListener
         }
     }
 
-    public float getNightVisionBrightness(EntityLivingBase entitylivingbaseIn, float partialTicks)
-    {
+    public float getNightVisionBrightness(EntityLivingBase entitylivingbaseIn, float partialTicks) {
         int i = entitylivingbaseIn.getActivePotionEffect(Potion.nightVision).getDuration();
         return i > 200 ? 1.0F : 0.7F + MathHelper.sin(((float)i - partialTicks) * (float)Math.PI * 0.2F) * 0.3F;
     }
 
-    public void func_181560_a(float p_181560_1_, long p_181560_2_)
-    {
-        Config.renderPartialTicks = p_181560_1_;
+    public void func_181560_a(float partialTicks, long p_181560_2_) {
+        Config.renderPartialTicks = partialTicks;
         this.frameInit();
         boolean flag = Display.isActive();
 
-        if (!flag && this.mc.gameSettings.pauseOnLostFocus && (!this.mc.gameSettings.touchscreen || !Mouse.isButtonDown(1)))
-        {
-            if (Minecraft.getSystemTime() - this.prevFrameTime > 500L)
-            {
+        if (!flag && this.mc.gameSettings.pauseOnLostFocus && (!this.mc.gameSettings.touchscreen || !Mouse.isButtonDown(1))) {
+            if (Minecraft.getSystemTime() - this.prevFrameTime > 500L) {
                 this.mc.displayInGameMenu();
             }
-        }
-        else
-        {
+        } else {
             this.prevFrameTime = Minecraft.getSystemTime();
         }
 
         this.mc.mcProfiler.startSection("mouse");
 
-        if (flag && Minecraft.isRunningOnMac && this.mc.inGameHasFocus && !Mouse.isInsideWindow())
-        {
+        if (flag && Minecraft.isRunningOnMac && this.mc.inGameHasFocus && !Mouse.isInsideWindow()) {
             Mouse.setGrabbed(false);
             Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
             Mouse.setGrabbed(true);
@@ -1257,60 +1220,51 @@ public class EntityRenderer implements IResourceManagerReloadListener
             float f3 = (float)this.mc.mouseHelper.deltaY * f1;
             int i = 1;
 
-            if (this.mc.gameSettings.invertMouse)
-            {
+            if (this.mc.gameSettings.invertMouse) {
                 i = -1;
             }
 
-            if (this.mc.gameSettings.smoothCamera)
-            {
+            if (this.mc.gameSettings.smoothCamera) {
                 this.smoothCamYaw += f2;
                 this.smoothCamPitch += f3;
-                float f4 = p_181560_1_ - this.smoothCamPartialTicks;
-                this.smoothCamPartialTicks = p_181560_1_;
+                float f4 = partialTicks - this.smoothCamPartialTicks;
+                this.smoothCamPartialTicks = partialTicks;
                 f2 = this.smoothCamFilterX * f4;
                 f3 = this.smoothCamFilterY * f4;
-                this.mc.thePlayer.setAngles(f2, f3 * (float)i);
-            }
-            else
-            {
+            } else {
                 this.smoothCamYaw = 0.0F;
                 this.smoothCamPitch = 0.0F;
-                this.mc.thePlayer.setAngles(f2, f3 * (float)i);
             }
+            this.mc.thePlayer.setAngles(f2, f3 * (float)i);
         }
 
         this.mc.mcProfiler.endSection();
 
-        if (!this.mc.skipRenderWorld)
-        {
+        if (!this.mc.skipRenderWorld) {
             anaglyphEnable = this.mc.gameSettings.anaglyph;
-            final ScaledResolution scaledresolution = new ScaledResolution(this.mc);
-            int i1 = scaledresolution.getScaledWidth();
-            int j1 = scaledresolution.getScaledHeight();
-            final int k1 = Mouse.getX() * i1 / this.mc.displayWidth;
-            final int l1 = j1 - Mouse.getY() * j1 / this.mc.displayHeight - 1;
+            final ScaledResolution scaledResolution = new ScaledResolution(this.mc);
+            int width = scaledResolution.getScaledWidth();
+            int height = scaledResolution.getScaledHeight();
+            final int mouseX = Mouse.getX() * width / this.mc.displayWidth;
+            final int mouseY = height - Mouse.getY() * height / this.mc.displayHeight - 1;
             int i2 = this.mc.gameSettings.limitFramerate;
 
-            if (this.mc.theWorld != null)
-            {
+            if (this.mc.theWorld != null) {
                 this.mc.mcProfiler.startSection("level");
                 int j = Math.min(Minecraft.getDebugFPS(), i2);
                 j = Math.max(j, 60);
                 long k = System.nanoTime() - p_181560_2_;
                 long l = Math.max((long)(1000000000 / j / 4) - k, 0L);
-                this.renderWorld(p_181560_1_, System.nanoTime() + l);
+                this.renderWorld(partialTicks, System.nanoTime() + l);
 
-                if (OpenGlHelper.shadersSupported)
-                {
+                if (OpenGlHelper.shadersSupported) {
                     this.mc.renderGlobal.renderEntityOutlineFramebuffer();
 
-                    if (this.theShaderGroup != null && this.useShader)
-                    {
+                    if (this.theShaderGroup != null && this.useShader) {
                         GlStateManager.matrixMode(5890);
                         GlStateManager.pushMatrix();
                         GlStateManager.loadIdentity();
-                        this.theShaderGroup.loadShaderGroup(p_181560_1_);
+                        this.theShaderGroup.loadShaderGroup(partialTicks);
                         GlStateManager.popMatrix();
                     }
 
@@ -1320,26 +1274,23 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 this.renderEndNanoTime = System.nanoTime();
                 this.mc.mcProfiler.endStartSection("gui");
 
-                if (!this.mc.gameSettings.hideGUI || this.mc.currentScreen != null)
-                {
+                if (!this.mc.gameSettings.hideGUI || this.mc.currentScreen != null) {
                     GlStateManager.alphaFunc(516, 0.1F);
-                    this.mc.inGameScreen.renderGameOverlay(p_181560_1_);
+                    GlStateManager.enableDepth();
+                    GlStateManager.depthFunc(515);
+                    this.mc.inGameScreen.renderGameOverlay(partialTicks);
 
-                    if (this.mc.gameSettings.ofShowFps && !this.mc.gameSettings.showDebugInfo)
-                    {
+                    if (this.mc.gameSettings.ofShowFps && !this.mc.gameSettings.showDebugInfo) {
                         Config.drawFps();
                     }
 
-                    if (this.mc.gameSettings.showDebugInfo)
-                    {
-                        Lagometer.showLagometer(scaledresolution);
+                    if (this.mc.gameSettings.showDebugInfo) {
+                        Lagometer.showLagometer(scaledResolution);
                     }
                 }
 
                 this.mc.mcProfiler.endSection();
-            }
-            else
-            {
+            } else {
                 GlStateManager.viewport(0, 0, this.mc.displayWidth, this.mc.displayHeight);
                 GlStateManager.matrixMode(5889);
                 GlStateManager.loadIdentity();
@@ -1351,46 +1302,21 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 TileEntityRendererDispatcher.instance.fontRenderer = this.mc.fontRendererObj;
             }
 
-            if (this.mc.currentScreen != null)
-            {
+            if (this.mc.currentScreen != null) {
                 GlStateManager.clear(256);
 
-                try
-                {
-                    if (Reflector.ForgeHooksClient_drawScreen.exists())
-                    {
-                        Reflector.callVoid(Reflector.ForgeHooksClient_drawScreen, new Object[] {this.mc.currentScreen, Integer.valueOf(k1), Integer.valueOf(l1), Float.valueOf(p_181560_1_)});
+                try {
+                    if (Reflector.ForgeHooksClient_drawScreen.exists()) {
+                        Reflector.callVoid(Reflector.ForgeHooksClient_drawScreen, this.mc.currentScreen, mouseX, mouseY, partialTicks);
+                    } else {
+                        this.mc.currentScreen.drawScreen(mouseX, mouseY, partialTicks);
                     }
-                    else
-                    {
-                        this.mc.currentScreen.drawScreen(k1, l1, p_181560_1_);
-                    }
-                }
-                catch (Throwable throwable)
-                {
+                } catch (Throwable throwable) {
                     CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Rendering screen");
                     CrashReportCategory crashreportcategory = crashreport.makeCategory("Screen render details");
-                    crashreportcategory.addCrashSectionCallable("Screen name", new Callable<String>()
-                    {
-                        public String call() throws Exception
-                        {
-                            return EntityRenderer.this.mc.currentScreen.getClass().getCanonicalName();
-                        }
-                    });
-                    crashreportcategory.addCrashSectionCallable("Mouse location", new Callable<String>()
-                    {
-                        public String call() throws Exception
-                        {
-                            return String.format("Scaled: (%d, %d). Absolute: (%d, %d)", new Object[] {Integer.valueOf(k1), Integer.valueOf(l1), Integer.valueOf(Mouse.getX()), Integer.valueOf(Mouse.getY())});
-                        }
-                    });
-                    crashreportcategory.addCrashSectionCallable("Screen size", new Callable<String>()
-                    {
-                        public String call() throws Exception
-                        {
-                            return String.format("Scaled: (%d, %d). Absolute: (%d, %d). Scale factor of %d", new Object[] {Integer.valueOf(scaledresolution.getScaledWidth()), Integer.valueOf(scaledresolution.getScaledHeight()), Integer.valueOf(EntityRenderer.this.mc.displayWidth), Integer.valueOf(EntityRenderer.this.mc.displayHeight), Integer.valueOf(scaledresolution.getScaleFactor())});
-                        }
-                    });
+                    crashreportcategory.addCrashSectionCallable("Screen name", () -> this.mc.currentScreen.getClass().getCanonicalName());
+                    crashreportcategory.addCrashSectionCallable("Mouse location", () -> String.format("Scaled: (%d, %d). Absolute: (%d, %d)", mouseX, mouseY, Mouse.getX(), Mouse.getY()));
+                    crashreportcategory.addCrashSectionCallable("Screen size", () -> String.format("Scaled: (%d, %d). Absolute: (%d, %d). Scale factor of %d", scaledResolution.getScaledWidth(), scaledResolution.getScaledHeight(), this.mc.displayWidth, this.mc.displayHeight, scaledResolution.getScaleFactor()));
                     throw new ReportedException(crashreport);
                 }
             }

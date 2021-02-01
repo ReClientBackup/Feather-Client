@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Base64;
-import java.util.Map;
 
 /**
  * @author Tobias Sjöblom

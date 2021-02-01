@@ -1,10 +1,7 @@
 package net.optifine.shaders.gui;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import net.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.Gui.GuiButton;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -16,6 +13,10 @@ import net.optifine.shaders.Shaders;
 import net.optifine.shaders.ShadersTex;
 import net.optifine.shaders.config.EnumShaderOption;
 import org.lwjgl.Sys;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
 
 public class GuiShaders extends GuiScreen
 {

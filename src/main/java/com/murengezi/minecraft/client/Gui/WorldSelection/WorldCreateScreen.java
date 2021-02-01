@@ -2,7 +2,6 @@ package com.murengezi.minecraft.client.Gui.WorldSelection;
 
 import com.murengezi.minecraft.client.Gui.GuiButton;
 import com.murengezi.minecraft.client.Gui.Screen;
-import net.minecraft.client.gui.GuiCreateFlatWorld;
 import net.minecraft.client.gui.GuiCustomizeWorldScreen;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;

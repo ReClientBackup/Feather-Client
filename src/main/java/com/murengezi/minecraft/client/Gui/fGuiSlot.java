@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.Gui;
 
-import com.murengezi.minecraft.client.Gui.Options.ResourcePack.ResourcePackList;
 import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.minecraft.client.Gui.Options.ResourcePack.ResourcePackList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;

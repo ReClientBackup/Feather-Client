@@ -5,7 +5,8 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 
-import static net.minecraft.client.renderer.OpenGlHelper.*;
+import static net.minecraft.client.renderer.OpenGlHelper.defaultTexUnit;
+import static net.minecraft.client.renderer.OpenGlHelper.lightmapTexUnit;
 
 /**
  * @author Tobias Sjöblom

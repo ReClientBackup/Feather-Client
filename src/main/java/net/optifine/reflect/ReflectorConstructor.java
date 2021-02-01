@@ -1,7 +1,8 @@
 package net.optifine.reflect;
 
-import java.lang.reflect.Constructor;
 import net.minecraft.src.Config;
+
+import java.lang.reflect.Constructor;
 
 public class ReflectorConstructor
 {

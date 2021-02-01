@@ -361,13 +361,11 @@ public class ShaderGroup
         this.mainFramebufferHeight = this.mainFramebuffer.framebufferTextureHeight;
         this.resetProjectionMatrix();
 
-        for (Shader shader : this.listShaders)
-        {
+        for (Shader shader : this.listShaders) {
             shader.setProjectionMatrix(this.projectionMatrix);
         }
 
-        for (Framebuffer framebuffer : this.listFramebuffers)
-        {
+        for (Framebuffer framebuffer : this.listFramebuffers) {
             framebuffer.createBindFramebuffer(width, height);
         }
     }

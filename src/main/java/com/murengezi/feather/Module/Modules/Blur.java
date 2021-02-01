@@ -1,9 +1,11 @@
 package com.murengezi.feather.Module.Modules;
 
 import com.darkmagician6.eventapi.EventTarget;
-import com.murengezi.feather.Event.*;
-import com.murengezi.feather.Module.ModuleInfo;
+import com.murengezi.feather.Event.ModuleDisableEvent;
+import com.murengezi.feather.Event.ModuleEnableEvent;
+import com.murengezi.feather.Event.TickEvent;
 import com.murengezi.feather.Module.Module;
+import com.murengezi.feather.Module.ModuleInfo;
 import com.murengezi.feather.Util.TimerUtil;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -19,7 +21,7 @@ import java.util.List;
  * Created on 2021-01-13 at 23:11
  */
 
-@ModuleInfo(name = "Blur", description = "Blurs the background when gui is open.", version = "1.0.0", enabled = false)
+@ModuleInfo(name = "Blur", description = "Blurs the background when gui is open.", version = "1.0.0", enabled = true)
 public class Blur extends Module {
 
     private TimerUtil timer;

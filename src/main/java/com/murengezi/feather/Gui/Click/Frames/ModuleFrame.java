@@ -1,6 +1,5 @@
 package com.murengezi.feather.Gui.Click.Frames;
 
-import com.murengezi.feather.Feather;
 import com.murengezi.feather.Gui.Click.Frame;
 import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Util.TimerUtil;

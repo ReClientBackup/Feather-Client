@@ -4,9 +4,7 @@ import com.darkmagician6.eventapi.EventManager;
 import com.darkmagician6.eventapi.EventTarget;
 import com.murengezi.feather.Event.KeyboardPressEvent;
 import com.murengezi.feather.Event.RenderOverlayEvent;
-import com.murengezi.feather.Feather;
 import com.murengezi.feather.Module.Modules.*;
-import com.murengezi.feather.Module.Modules.BetterHat;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,7 +24,6 @@ public class ModuleManager {
         load(new Blur());
         load(new Keystrokes());
         //load(new BetterHat());
-        load(new Lefty());
         load(new FPS());
         load(new Scoreboard());
 

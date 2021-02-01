@@ -5,7 +5,7 @@ import com.murengezi.minecraft.client.Gui.Screen;
 import com.murengezi.minecraft.client.Gui.fGuiSlot;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;

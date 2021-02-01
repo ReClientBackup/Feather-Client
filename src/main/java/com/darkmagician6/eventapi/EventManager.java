@@ -1,5 +1,9 @@
 package com.darkmagician6.eventapi;
 
+import com.darkmagician6.eventapi.events.Event;
+import com.darkmagician6.eventapi.events.EventStoppable;
+import com.darkmagician6.eventapi.types.Priority;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -7,10 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import com.darkmagician6.eventapi.events.Event;
-import com.darkmagician6.eventapi.events.EventStoppable;
-import com.darkmagician6.eventapi.types.Priority;
 
 /**
  * 

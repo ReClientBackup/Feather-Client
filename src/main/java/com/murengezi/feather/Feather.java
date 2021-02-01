@@ -3,17 +3,13 @@ package com.murengezi.feather;
 import com.murengezi.feather.Config.ConfigManager;
 import com.murengezi.feather.Discord.DiscordRP;
 import com.murengezi.feather.Git.GitManager;
-import com.murengezi.feather.Git.GitRepositoryState;
 import com.murengezi.feather.Gui.Adjust.AdjustScreen;
-import com.murengezi.feather.Gui.Click.ClickGui;
 import com.murengezi.feather.Image.ImageManager;
 import com.murengezi.feather.Module.ModuleManager;
 import com.murengezi.feather.Particle.ParticleManager;
 import com.murengezi.feather.Theme.ThemeManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Properties;
 
 /**
  * @author Tobias Sjöblom

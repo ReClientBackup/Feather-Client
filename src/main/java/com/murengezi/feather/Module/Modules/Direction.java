@@ -6,7 +6,6 @@ import com.murengezi.feather.Feather;
 import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.ModuleInfo;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;

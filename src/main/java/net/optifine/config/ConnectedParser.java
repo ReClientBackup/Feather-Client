@@ -1,16 +1,5 @@
 package net.optifine.config;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.properties.IProperty;
@@ -26,6 +15,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.optifine.ConnectedProperties;
 import net.optifine.util.EntityUtils;
+
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class ConnectedParser
 {

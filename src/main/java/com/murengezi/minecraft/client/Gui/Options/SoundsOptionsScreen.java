@@ -1,11 +1,11 @@
 package com.murengezi.minecraft.client.Gui.Options;
 
+import com.murengezi.minecraft.client.Gui.GuiButton;
 import com.murengezi.minecraft.client.Gui.Screen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.audio.SoundHandler;
-import com.murengezi.minecraft.client.Gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

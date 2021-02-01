@@ -1,12 +1,13 @@
 package net.optifine.gui;
 
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.List;
 import com.murengezi.minecraft.client.Gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.settings.GameSettings;
 import net.optifine.Lang;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TooltipProviderOptions implements TooltipProvider
 {

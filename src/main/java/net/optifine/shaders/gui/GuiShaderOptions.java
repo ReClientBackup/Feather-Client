@@ -1,7 +1,7 @@
 package net.optifine.shaders.gui;
 
-import net.minecraft.client.gui.FontRenderer;
 import com.murengezi.minecraft.client.Gui.GuiButton;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;

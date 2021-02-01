@@ -1,8 +1,8 @@
 package com.murengezi.minecraft.client.Gui.Multiplayer.Lan;
 
 import com.murengezi.minecraft.client.Gui.GuiButton;
-import com.murengezi.minecraft.client.Gui.Multiplayer.ConnectingScreen;
 import com.murengezi.minecraft.client.Gui.GuiListExtended;
+import com.murengezi.minecraft.client.Gui.Multiplayer.ConnectingScreen;
 import com.murengezi.minecraft.client.Gui.Screen;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;

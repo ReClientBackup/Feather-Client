@@ -1,7 +1,6 @@
 package com.murengezi.feather.Module.Modules.betterhat;
 
 import com.google.common.collect.Lists;
-import java.util.List;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
@@ -10,6 +9,8 @@ import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import org.lwjgl.opengl.GL11;
+
+import java.util.List;
 
 public class ModelRendererUV extends ModelRenderer
 {

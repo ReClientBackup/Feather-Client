@@ -217,20 +217,16 @@ public class RenderItem implements IResourceManagerReloadListener
         }
     }
 
-    private void renderEffect(IBakedModel model)
-    {
-        if (!Config.isCustomItems() || CustomItems.isUseGlint())
-        {
-            if (!Config.isShaders() || !Shaders.isShadowPass)
-            {
+    private void renderEffect(IBakedModel model) {
+        if (!Config.isCustomItems() || CustomItems.isUseGlint()) {
+            if (!Config.isShaders() || !Shaders.isShadowPass) {
                 GlStateManager.depthMask(false);
                 GlStateManager.depthFunc(514);
                 GlStateManager.disableLighting();
                 GlStateManager.blendFunc(768, 1);
                 this.textureManager.bindTexture(RES_ITEM_GLINT);
 
-                if (Config.isShaders() && !this.renderItemGui)
-                {
+                if (Config.isShaders() && !this.renderItemGui) {
                     ShadersRender.renderEnchantedGlintBegin();
                 }
 
@@ -256,80 +252,62 @@ public class RenderItem implements IResourceManagerReloadListener
                 GlStateManager.depthMask(true);
                 this.textureManager.bindTexture(TextureMap.locationBlocksTexture);
 
-                if (Config.isShaders() && !this.renderItemGui)
-                {
+                if (Config.isShaders() && !this.renderItemGui) {
                     ShadersRender.renderEnchantedGlintEnd();
                 }
             }
         }
     }
 
-    private void putQuadNormal(WorldRenderer renderer, BakedQuad quad)
-    {
+    private void putQuadNormal(WorldRenderer renderer, BakedQuad quad) {
         Vec3i vec3i = quad.getFace().getDirectionVec();
         renderer.putNormal((float)vec3i.getX(), (float)vec3i.getY(), (float)vec3i.getZ());
     }
 
-    private void renderQuad(WorldRenderer renderer, BakedQuad quad, int color)
-    {
-        if (this.renderModelEmissive)
-        {
-            if (quad.getQuadEmissive() == null)
-            {
+    private void renderQuad(WorldRenderer renderer, BakedQuad quad, int color) {
+        if (this.renderModelEmissive) {
+            if (quad.getQuadEmissive() == null) {
                 return;
             }
 
             quad = quad.getQuadEmissive();
-        }
-        else if (quad.getQuadEmissive() != null)
-        {
+        } else if (quad.getQuadEmissive() != null) {
             this.renderModelHasEmissive = true;
         }
 
-        if (renderer.isMultiTexture())
-        {
+        if (renderer.isMultiTexture()) {
             renderer.addVertexData(quad.getVertexDataSingle());
-        }
-        else
-        {
+        } else {
             renderer.addVertexData(quad.getVertexData());
         }
 
         renderer.putSprite(quad.getSprite());
 
-        if (Reflector.IColoredBakedQuad.exists() && Reflector.IColoredBakedQuad.isInstance(quad))
-        {
+        if (Reflector.IColoredBakedQuad.exists() && Reflector.IColoredBakedQuad.isInstance(quad)) {
             forgeHooksClient_putQuadColor(renderer, quad, color);
-        }
-        else
-        {
+        } else {
             renderer.putColor4(color);
         }
 
         this.putQuadNormal(renderer, quad);
     }
 
-    private void renderQuads(WorldRenderer renderer, List<BakedQuad> quads, int color, ItemStack stack)
-    {
+    private void renderQuads(WorldRenderer renderer, List<BakedQuad> quads, int color, ItemStack stack) {
         boolean flag = color == -1 && stack != null;
         int i = 0;
 
-        for (int j = quads.size(); i < j; ++i)
-        {
+        for (int j = quads.size(); i < j; ++i) {
             BakedQuad bakedquad = quads.get(i);
             int k = color;
 
-            if (flag && bakedquad.hasTintIndex())
-            {
+            if (flag && bakedquad.hasTintIndex()) {
                 k = stack.getItem().getColorFromItemStack(stack, bakedquad.getTintIndex());
 
-                if (Config.isCustomColors())
-                {
+                if (Config.isCustomColors()) {
                     k = CustomColors.getColorFromItemStack(stack, bakedquad.getTintIndex(), k);
                 }
 
-                if (EntityRenderer.anaglyphEnable)
-                {
+                if (EntityRenderer.anaglyphEnable) {
                     k = TextureUtil.anaglyphColor(k);
                 }
 
@@ -340,23 +318,19 @@ public class RenderItem implements IResourceManagerReloadListener
         }
     }
 
-    public boolean shouldRenderItemIn3D(ItemStack stack)
-    {
+    public boolean shouldRenderItemIn3D(ItemStack stack) {
         IBakedModel ibakedmodel = this.itemModelMesher.getItemModel(stack);
         return ibakedmodel == null ? false : ibakedmodel.isGui3d();
     }
 
-    private void preTransform(ItemStack stack)
-    {
+    private void preTransform(ItemStack stack) {
         IBakedModel ibakedmodel = this.itemModelMesher.getItemModel(stack);
         Item item = stack.getItem();
 
-        if (item != null)
-        {
+        if (item != null) {
             boolean flag = ibakedmodel.isGui3d();
 
-            if (!flag)
-            {
+            if (!flag) {
                 GlStateManager.scale(2.0F, 2.0F, 2.0F);
             }
 
@@ -364,10 +338,8 @@ public class RenderItem implements IResourceManagerReloadListener
         }
     }
 
-    public void func_181564_a(ItemStack p_181564_1_, ItemCameraTransforms.TransformType p_181564_2_)
-    {
-        if (p_181564_1_ != null)
-        {
+    public void func_181564_a(ItemStack p_181564_1_, ItemCameraTransforms.TransformType p_181564_2_) {
+        if (p_181564_1_ != null) {
             IBakedModel ibakedmodel = this.itemModelMesher.getItemModel(p_181564_1_);
             this.renderItemModelTransform(p_181564_1_, ibakedmodel, p_181564_2_);
         }

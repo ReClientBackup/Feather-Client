@@ -1,9 +1,7 @@
 package net.minecraft.client.renderer;
 
 import com.murengezi.feather.Feather;
-import com.murengezi.feather.Module.Modules.Lefty;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -318,12 +316,6 @@ public class ItemRenderer
             this.func_178110_a((EntityPlayerSP)abstractclientplayer, partialTicks);
             GlStateManager.enableRescaleNormal();
             GlStateManager.pushMatrix();
-
-            //TODO Lefty
-            if (Feather.getModuleManager().get(Lefty.class).isEnabled()) {
-                GlStateManager.scale(-1.0F, 1.0F, 1.0F);
-                GlStateManager.disableCull();
-            }
 
             if (this.itemToRender != null) {
                 boolean rod = (this.itemToRender.getItem() instanceof ItemFishingRod);

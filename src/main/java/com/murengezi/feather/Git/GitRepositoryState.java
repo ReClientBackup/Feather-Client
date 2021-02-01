@@ -1,6 +1,5 @@
 package com.murengezi.feather.Git;
 
-import java.util.Locale;
 import java.util.Properties;
 
 /**

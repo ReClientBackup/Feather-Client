@@ -1,9 +1,5 @@
 package net.optifine.shaders.gui;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Properties;
-
 import com.murengezi.minecraft.client.Gui.WorldSelection.YesNoCallback;
 import com.murengezi.minecraft.client.Gui.YesNoScreen;
 import net.minecraft.client.gui.GuiSlot;
@@ -13,6 +9,10 @@ import net.optifine.Lang;
 import net.optifine.shaders.IShaderPack;
 import net.optifine.shaders.Shaders;
 import net.optifine.util.ResUtils;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Properties;
 
 class GuiSlotShaders extends GuiSlot
 {

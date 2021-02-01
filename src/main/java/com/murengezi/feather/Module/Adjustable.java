@@ -1,6 +1,7 @@
 package com.murengezi.feather.Module;
 
 import net.minecraft.client.gui.ScaledResolution;
+
 import java.util.Arrays;
 
 /**

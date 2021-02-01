@@ -1,9 +1,9 @@
 package com.murengezi.minecraft.client.Gui.Multiplayer;
 
 import com.murengezi.feather.Feather;
+import com.murengezi.feather.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.Gui.GuiButton;
 import com.murengezi.minecraft.client.Gui.Screen;
-import com.murengezi.feather.Util.MinecraftUtils;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.ServerAddress;
 import net.minecraft.client.multiplayer.ServerData;

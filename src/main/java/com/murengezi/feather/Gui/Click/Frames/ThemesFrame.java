@@ -1,6 +1,5 @@
 package com.murengezi.feather.Gui.Click.Frames;
 
-import com.murengezi.feather.Feather;
 import com.murengezi.feather.Gui.Click.Frame;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;

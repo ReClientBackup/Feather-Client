@@ -6,7 +6,6 @@ import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.ModuleInfo;
 import com.murengezi.feather.Util.RenderHelper;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 

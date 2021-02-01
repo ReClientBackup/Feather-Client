@@ -2,9 +2,6 @@ package me.superblaubeere27.particle;
 
 import com.murengezi.feather.Util.MinecraftUtils;
 import me.superblaubeere27.util.MathUtil;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.Random;
