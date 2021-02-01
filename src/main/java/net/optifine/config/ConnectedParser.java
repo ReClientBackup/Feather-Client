@@ -899,8 +899,7 @@ public class ConnectedParser
 
             try
             {
-                int i = (int)(Long.parseLong(str, 16) & -1L);
-                return i;
+                return (int)(Long.parseLong(str, 16));
             }
             catch (NumberFormatException var3)
             {

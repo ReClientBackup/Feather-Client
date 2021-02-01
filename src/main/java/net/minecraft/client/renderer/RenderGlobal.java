@@ -3157,7 +3157,7 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
                 int j1 = Items.potionitem.getColorFromDamage(p_180439_4_);
                 float f = (float)(j1 >> 16 & 255) / 255.0F;
                 float f1 = (float)(j1 >> 8 & 255) / 255.0F;
-                float f2 = (float)(j1 >> 0 & 255) / 255.0F;
+                float f2 = (float)(j1 & 255) / 255.0F;
                 EnumParticleTypes enumparticletypes = EnumParticleTypes.SPELL;
 
                 if (Items.potionitem.isEffectInstant(p_180439_4_))

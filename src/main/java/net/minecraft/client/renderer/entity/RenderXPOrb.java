@@ -78,7 +78,7 @@ public class RenderXPOrb extends Render<EntityXPOrb>
             {
                 k1 = j2 >> 16 & 255;
                 l1 = j2 >> 8 & 255;
-                i2 = j2 >> 0 & 255;
+                i2 = j2 & 255;
             }
         }
 

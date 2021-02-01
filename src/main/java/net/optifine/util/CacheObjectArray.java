@@ -6,33 +6,11 @@ import net.minecraft.src.Config;
 import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 
-public class CacheObjectArray
-{
-    private static ArrayDeque<int[]> arrays = new ArrayDeque();
-    private static int maxCacheSize = 10;
+public class CacheObjectArray {
 
-    private static synchronized int[] allocateArray(int size)
-    {
-        int[] aint = arrays.pollLast();
+    private static final ArrayDeque<int[]> arrays = new ArrayDeque();
 
-        if (aint == null || aint.length < size)
-        {
-            aint = new int[size];
-        }
-
-        return aint;
-    }
-
-    public static synchronized void freeArray(int[] ints)
-    {
-        if (arrays.size() < maxCacheSize)
-        {
-            arrays.add(ints);
-        }
-    }
-
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         int i = 4096;
         int j = 500000;
         testNew(i, j);
