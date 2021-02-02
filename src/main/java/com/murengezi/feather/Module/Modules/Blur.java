@@ -7,7 +7,7 @@ import com.murengezi.feather.Event.TickEvent;
 import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Module.ModuleInfo;
 import com.murengezi.feather.Util.TimerUtil;
-import net.minecraft.client.gui.GuiChat;
+import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.shader.Shader;
 import net.minecraft.client.shader.ShaderGroup;
@@ -55,7 +55,7 @@ public class Blur extends Module {
     public void onTick(TickEvent event) {
         if (getWorld() != null) {
             EntityRenderer entityRenderer = getMc().entityRenderer;
-            if (getMc().currentScreen != null && !(getMc().currentScreen instanceof GuiChat)) {
+            if (getMc().currentScreen != null && !(getMc().currentScreen instanceof ChatScreen)) {
                 if (!shaderActive) {
                     entityRenderer.loadShader(new ResourceLocation("shaders/post/fade_in_blur.json"));
                     timer.reset();

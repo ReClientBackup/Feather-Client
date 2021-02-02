@@ -6,7 +6,7 @@ import com.murengezi.minecraft.potion.Potion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.gui.GuiCommandBlock;
+import com.murengezi.minecraft.client.gui.InGame.CommandBlockScreen;
 import net.minecraft.client.gui.GuiEnchantment;
 import net.minecraft.client.gui.GuiHopper;
 import net.minecraft.client.gui.GuiMerchant;
@@ -386,7 +386,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
     }
 
     public void openEditCommandBlock(CommandBlockLogic cmdBlockLogic) {
-        this.mc.displayGuiScreen(new GuiCommandBlock(cmdBlockLogic));
+        this.mc.displayGuiScreen(new CommandBlockScreen(cmdBlockLogic));
     }
 
     public void displayGUIBook(ItemStack bookStack) {

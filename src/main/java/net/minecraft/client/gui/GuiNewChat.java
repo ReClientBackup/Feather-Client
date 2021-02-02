@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
 
+import com.murengezi.minecraft.client.gui.Chat.ChatLine;
+import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.Minecraft;
@@ -186,7 +188,7 @@ public class GuiNewChat extends GUI
         for (int i = this.chatLines.size() - 1; i >= 0; --i)
         {
             ChatLine chatline = this.chatLines.get(i);
-            this.setChatLine(chatline.getChatComponent(), chatline.getChatLineID(), chatline.getUpdatedCounter(), true);
+            this.setChatLine(chatline.getChatComponent(), chatline.getId(), chatline.getUpdatedCounter(), true);
         }
     }
 
@@ -300,7 +302,7 @@ public class GuiNewChat extends GUI
      */
     public boolean getChatOpen()
     {
-        return this.mc.currentScreen instanceof GuiChat;
+        return this.mc.currentScreen instanceof ChatScreen;
     }
 
     /**
@@ -314,7 +316,7 @@ public class GuiNewChat extends GUI
         {
             ChatLine chatline = iterator.next();
 
-            if (chatline.getChatLineID() == p_146242_1_)
+            if (chatline.getId() == p_146242_1_)
             {
                 iterator.remove();
             }
@@ -326,7 +328,7 @@ public class GuiNewChat extends GUI
         {
             ChatLine chatline1 = iterator.next();
 
-            if (chatline1.getChatLineID() == p_146242_1_)
+            if (chatline1.getId() == p_146242_1_)
             {
                 iterator.remove();
                 break;

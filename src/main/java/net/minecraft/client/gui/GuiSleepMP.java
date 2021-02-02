@@ -2,13 +2,18 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
+import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.network.play.client.C0BPacketEntityAction;
 
-public class GuiSleepMP extends GuiChat
+public class GuiSleepMP extends ChatScreen
 {
+    public GuiSleepMP() {
+        super("");
+    }
+
     /**
      * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
      * window resizes, the buttonList is cleared beforehand.

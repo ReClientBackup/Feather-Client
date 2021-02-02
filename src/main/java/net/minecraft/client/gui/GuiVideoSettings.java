@@ -2,6 +2,7 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
+import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.client.gui.Screen;
@@ -219,7 +220,7 @@ public class GuiVideoSettings extends GuiScreenOF
         return button.getHeight();
     }
 
-    public static String getGuiChatText(GuiChat chat) {
-        return chat.inputField.getText();
+    public static String getGuiChatText(ChatScreen chat) {
+        return chat.getInputField().getText();
     }
 }

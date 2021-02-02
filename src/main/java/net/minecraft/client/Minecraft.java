@@ -48,8 +48,8 @@ import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.SoundHandler;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiGameOver;
+import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
+import com.murengezi.minecraft.client.gui.GameOverScreen;
 import net.minecraft.client.gui.GuiMemoryErrorScreen;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiSleepMP;
@@ -891,7 +891,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         if (screen == null && this.theWorld == null) {
             screen = new MainMenuScreen();
         } else if (screen == null && this.thePlayer.getHealth() <= 0.0F) {
-            screen = new GuiGameOver();
+            screen = new GameOverScreen();
         }
 
         if (screen instanceof MainMenuScreen) {
@@ -1996,12 +1996,12 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 
             while (this.gameSettings.keyBindChat.isPressed() && flag)
             {
-                this.displayGuiScreen(new GuiChat());
+                this.displayGuiScreen(new ChatScreen(""));
             }
 
             if (this.currentScreen == null && this.gameSettings.keyBindCommand.isPressed() && flag)
             {
-                this.displayGuiScreen(new GuiChat("/"));
+                this.displayGuiScreen(new ChatScreen("/"));
             }
 
             if (this.thePlayer.isUsingItem())
@@ -2340,7 +2340,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         this.playerController.setPlayerCapabilities(this.thePlayer);
         this.thePlayer.setReducedDebug(entityplayersp.hasReducedDebug());
 
-        if (this.currentScreen instanceof GuiGameOver)
+        if (this.currentScreen instanceof GameOverScreen)
         {
             this.displayGuiScreen(null);
         }

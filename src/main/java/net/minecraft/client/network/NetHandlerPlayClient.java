@@ -25,7 +25,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.GuardianSound;
 import com.murengezi.minecraft.client.entity.EntityOtherPlayerMP;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.GuiChat;
+import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
 import net.minecraft.client.gui.GuiMerchant;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiScreenBook;
@@ -1640,9 +1640,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
         String[] astring = packetIn.func_149630_c();
 
-        if (this.gameController.currentScreen instanceof GuiChat)
+        if (this.gameController.currentScreen instanceof ChatScreen)
         {
-            GuiChat guichat = (GuiChat)this.gameController.currentScreen;
+            ChatScreen guichat = (ChatScreen)this.gameController.currentScreen;
             guichat.onAutocompleteResponse(astring);
         }
     }

@@ -708,8 +708,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
             }
         }
 
-        //TODO Can render name
-        return Minecraft.isGuiEnabled() && /*entity != this.renderManager.livingPlayer &&*/ !entity.isInvisibleToPlayer(entityplayersp) && entity.riddenByEntity == null;
+        return Minecraft.isGuiEnabled() && !entity.isInvisibleToPlayer(entityplayersp) && entity.riddenByEntity == null;
     }
 
     public void setRenderOutlines(boolean renderOutlinesIn)

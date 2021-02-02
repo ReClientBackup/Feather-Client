@@ -250,7 +250,7 @@ public class WorldSelectionScreen extends Screen {
             if (saveFormatComparator.requiresConversion()) {
                 description = WorldSelectionScreen.this.conversationString + " ";
             } else {
-                description = I18n.format("gameMode." + saveFormatComparator.getEnumGameType().getName());
+                description = I18n.format("gameMode." + (saveFormatComparator.isHardcoreModeEnabled() ? "hardcore" : saveFormatComparator.getEnumGameType().getName()));
 
                 if (saveFormatComparator.isHardcoreModeEnabled()) {
                     description = EnumChatFormatting.DARK_RED + description + EnumChatFormatting.RESET;

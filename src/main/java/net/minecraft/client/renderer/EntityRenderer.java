@@ -13,7 +13,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.gui.GuiChat;
+import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
 import net.minecraft.client.gui.MapItemRenderer;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.particle.EffectRenderer;
@@ -2601,9 +2601,9 @@ public class EntityRenderer implements IResourceManagerReloadListener
             Shaders.configAntialiasingLevel = 0;
         }
 
-        if (this.mc.currentScreen != null && this.mc.currentScreen.getClass() == GuiChat.class)
+        if (this.mc.currentScreen != null && this.mc.currentScreen.getClass() == ChatScreen.class)
         {
-            this.mc.displayGuiScreen(new GuiChatOF((GuiChat)this.mc.currentScreen));
+            this.mc.displayGuiScreen(new GuiChatOF((ChatScreen)this.mc.currentScreen));
         }
     }
 
