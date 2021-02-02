@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui;
 
-import com.murengezi.minecraft.client.gui.WorldSelection.YesNoCallback;
+import com.murengezi.minecraft.client.gui.Singleplayer.YesNoCallback;
 import net.minecraft.client.resources.I18n;
 
 import java.io.IOException;
@@ -30,7 +30,6 @@ public class ConfirmOpenLinkScreen extends YesNoScreen {
         addButton(new GuiButton(0, this.width / 2 - 50 - 105, this.height / 6 + 96, 100, 20, this.getYesButtonText()));
         addButton(new GuiButton(2, this.width / 2 - 50, this.height / 6 + 96, 100, 20, this.copyLinkButtonText));
         addButton(new GuiButton(1, this.width / 2 - 50 + 105, this.height / 6 + 96, 100, 20, this.getNoButtonText()));
-
         //super.initGui(); Not create the other buttons
     }
 

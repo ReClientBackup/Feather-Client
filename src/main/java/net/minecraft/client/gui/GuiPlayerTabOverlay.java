@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.murengezi.minecraft.client.gui.GUI;
-import com.murengezi.minecraft.client.gui.InGameScreen;
+import com.murengezi.minecraft.client.gui.InGame.InGameScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.network.NetworkPlayerInfo;

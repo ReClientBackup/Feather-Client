@@ -1,9 +1,11 @@
-package com.murengezi.minecraft.client.gui;
+package com.murengezi.minecraft.client.gui.InGame;
 
 import com.darkmagician6.eventapi.EventManager;
 import com.murengezi.feather.Event.RenderCrosshairEvent;
 import com.murengezi.feather.Event.RenderOverlayEvent;
 import com.murengezi.feather.Event.RenderScoreboardEvent;
+import com.murengezi.minecraft.client.gui.GUI;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.potion.Potion;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;

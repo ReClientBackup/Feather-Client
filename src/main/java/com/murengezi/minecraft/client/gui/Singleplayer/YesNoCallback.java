@@ -1,4 +1,4 @@
-package com.murengezi.minecraft.client.gui.WorldSelection;
+package com.murengezi.minecraft.client.gui.Singleplayer;
 
 /**
  * @author Tobias Sjöblom

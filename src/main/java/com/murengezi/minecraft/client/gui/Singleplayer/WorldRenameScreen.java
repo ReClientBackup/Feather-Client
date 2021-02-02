@@ -1,4 +1,4 @@
-package com.murengezi.minecraft.client.gui.WorldSelection;
+package com.murengezi.minecraft.client.gui.Singleplayer;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;

@@ -1,6 +1,6 @@
 package net.optifine.shaders.gui;
 
-import com.murengezi.minecraft.client.gui.WorldSelection.YesNoCallback;
+import com.murengezi.minecraft.client.gui.Singleplayer.YesNoCallback;
 import com.murengezi.minecraft.client.gui.YesNoScreen;
 import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.resources.I18n;

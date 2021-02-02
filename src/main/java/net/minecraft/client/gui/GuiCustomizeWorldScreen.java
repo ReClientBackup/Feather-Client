@@ -8,7 +8,7 @@ import java.util.Random;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
-import com.murengezi.minecraft.client.gui.WorldSelection.WorldCreateScreen;
+import com.murengezi.minecraft.client.gui.Singleplayer.WorldCreateScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;

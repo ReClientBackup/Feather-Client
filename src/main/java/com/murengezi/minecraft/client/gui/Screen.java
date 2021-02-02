@@ -16,9 +16,8 @@ import java.util.List;
 import java.util.Set;
 
 import com.murengezi.feather.Feather;
-import com.murengezi.minecraft.client.gui.WorldSelection.YesNoCallback;
+import com.murengezi.minecraft.client.gui.Singleplayer.YesNoCallback;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;

@@ -4,7 +4,7 @@ import com.murengezi.feather.Feather;
 import com.murengezi.minecraft.client.gui.BrowseServers.BrowseScreen;
 import com.murengezi.minecraft.client.gui.Multiplayer.MultiplayerScreen;
 import com.murengezi.minecraft.client.gui.Options.OptionsScreen;
-import com.murengezi.minecraft.client.gui.WorldSelection.WorldSelectionScreen;
+import com.murengezi.minecraft.client.gui.Singleplayer.WorldSelectionScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;

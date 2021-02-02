@@ -1,7 +1,10 @@
-package com.murengezi.minecraft.client.gui;
+package com.murengezi.minecraft.client.gui.InGame;
 
+import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.gui.MainMenuScreen;
 import com.murengezi.minecraft.client.gui.Multiplayer.MultiplayerScreen;
 import com.murengezi.minecraft.client.gui.Options.OptionsScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.client.gui.achievement.GuiStats;
 import net.minecraft.client.resources.I18n;

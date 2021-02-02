@@ -37,8 +37,8 @@ import javax.imageio.ImageIO;
 
 import com.murengezi.feather.Event.*;
 import com.murengezi.feather.Feather;
-import com.murengezi.minecraft.client.gui.InGameMenuScreen;
-import com.murengezi.minecraft.client.gui.InGameScreen;
+import com.murengezi.minecraft.client.gui.InGame.InGameMenuScreen;
+import com.murengezi.minecraft.client.gui.InGame.InGameScreen;
 import com.murengezi.minecraft.client.gui.MainMenuScreen;
 import com.murengezi.minecraft.client.gui.Multiplayer.ConnectingScreen;
 import com.murengezi.minecraft.client.main.GameConfiguration;

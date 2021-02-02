@@ -4,6 +4,7 @@ package com.murengezi.minecraft.client.gui.Multiplayer;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.murengezi.minecraft.client.gui.*;
+import com.murengezi.minecraft.client.gui.InGame.InGameMenuScreen;
 import com.murengezi.minecraft.client.gui.Multiplayer.Lan.LanScreen;
 import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.ScaledResolution;

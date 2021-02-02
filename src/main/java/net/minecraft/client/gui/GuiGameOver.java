@@ -5,7 +5,7 @@ import java.io.IOException;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.MainMenuScreen;
 import com.murengezi.minecraft.client.gui.Screen;
-import com.murengezi.minecraft.client.gui.WorldSelection.YesNoCallback;
+import com.murengezi.minecraft.client.gui.Singleplayer.YesNoCallback;
 import com.murengezi.minecraft.client.gui.YesNoScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

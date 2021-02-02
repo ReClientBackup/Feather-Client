@@ -1,4 +1,4 @@
-package com.murengezi.minecraft.client.gui.WorldSelection;
+package com.murengezi.minecraft.client.gui.Singleplayer;
 
 import java.io.IOException;
 import java.util.Random;

@@ -40,17 +40,17 @@ public class GuiButton extends GUI {
     }
 
     public void drawButton(int mouseX, int mouseY) {
-        if (this.visible) {
-            this.hovered = (mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height) && this.enabled;
+        if (isVisible()) {
+            setHovered((mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height) && isEnabled());
 
-            if (this.hovered != this.wasHovered) {
-                this.wasHovered = hovered;
+            if (isHovered() != this.wasHovered) {
+                this.wasHovered = isHovered();
                 this.lastHover = System.currentTimeMillis();
             }
 
             Color color = Feather.getThemeManager().getActiveTheme().getColor();
 
-            if (this.hovered) {
+            if (isHovered()) {
                 boxColorRed = Math.min(color.getRed(), (int)((System.currentTimeMillis() - this.lastHover)));
                 boxColorGreen = Math.min(color.getGreen(), (int)((System.currentTimeMillis() - this.lastHover)));
                 boxColorBlue = Math.min(color.getBlue(), (int)((System.currentTimeMillis() - this.lastHover)));
@@ -62,7 +62,6 @@ public class GuiButton extends GUI {
 
 
             drawRect(this.x, this.y, this.x + this.width, this.y + this.height, Integer.MIN_VALUE + (boxColorRed << 16) + (boxColorGreen << 8) + boxColorBlue);
-            this.mouseDragged(getMc(), mouseX, mouseY);
             int colorInt = 0xffffff;
 
             if (!this.enabled) {
@@ -72,6 +71,7 @@ public class GuiButton extends GUI {
             }
 
             this.drawCenteredString(getFr(), this.displayString, this.x + this.width / 2, this.y + (this.height - 8) / 2, colorInt);
+            this.mouseDragged(getMc(), mouseX, mouseY);
         }
     }
 
