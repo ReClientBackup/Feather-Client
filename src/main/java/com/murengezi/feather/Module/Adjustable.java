@@ -41,10 +41,6 @@ public class Adjustable extends Module {
 		this.resolution = resolution;
 	}
 
-	public void mouseClicked(int mouseX, int mouseY) {
-
-	}
-
 	public void setPosition(float x, float y) {
 		float width = (float) resolution.getScaledWidth();
 		float height = (float) resolution.getScaledHeight();

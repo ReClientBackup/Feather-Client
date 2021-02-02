@@ -52,8 +52,6 @@ public class AdjustScreen extends Screen {
 
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-		ScaledResolution resolution = new ScaledResolution(MinecraftUtils.getMc());
-
 		getMods().stream().filter(Module::isEnabled).forEach(adjustable -> {
 			if (isMouseOver(mouseX, mouseY, adjustable)) {
 				adjustable.setDragging(true);

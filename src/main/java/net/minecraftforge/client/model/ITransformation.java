@@ -1,4 +1,4 @@
-package net.minecraft.client.model;
+package net.minecraftforge.client.model;
 
 import javax.vecmath.Matrix4f;
 import net.minecraft.util.EnumFacing;

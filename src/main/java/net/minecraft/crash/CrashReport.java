@@ -130,8 +130,8 @@ public class CrashReport
 
         if (Reflector.FMLCommonHandler_enhanceCrashReport.exists())
         {
-            Object object = Reflector.call(Reflector.FMLCommonHandler_instance, new Object[0]);
-            Reflector.callString(object, Reflector.FMLCommonHandler_enhanceCrashReport, new Object[] {this, this.theReportCategory});
+            Object object = Reflector.call(Reflector.FMLCommonHandler_instance);
+            Reflector.callString(object, Reflector.FMLCommonHandler_enhanceCrashReport, this, this.theReportCategory);
         }
     }
 

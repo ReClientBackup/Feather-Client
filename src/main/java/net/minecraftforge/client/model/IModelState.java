@@ -1,4 +1,4 @@
-package net.minecraft.client.model;
+package net.minecraftforge.client.model;
 
 import com.google.common.base.Optional;
 

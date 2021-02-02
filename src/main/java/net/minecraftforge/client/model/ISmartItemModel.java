@@ -1,4 +1,4 @@
-package net.minecraft.client.model;
+package net.minecraftforge.client.model;
 
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.item.ItemStack;
