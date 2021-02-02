@@ -1,7 +1,7 @@
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.entity.EntityPlayerSP;
+import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
+import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerArrow;

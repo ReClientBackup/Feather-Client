@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -2018,7 +2018,7 @@ public class Config
 
                 if (minecraft.currentScreen != null)
                 {
-                    ScaledResolution scaledresolution = new ScaledResolution(minecraft);
+                    ScaledResolution scaledresolution = new ScaledResolution();
                     int i = scaledresolution.getScaledWidth();
                     int j = scaledresolution.getScaledHeight();
                     minecraft.currentScreen.setWorldAndResolution(minecraft, i, j);

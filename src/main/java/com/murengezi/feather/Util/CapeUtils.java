@@ -1,7 +1,7 @@
 package com.murengezi.feather.Util;
 
 import com.murengezi.feather.API.MurengeziAPI;
-import net.minecraft.client.entity.AbstractClientPlayer;
+import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.SimpleTexture;
@@ -37,7 +37,7 @@ public class CapeUtils extends MinecraftUtils{
 
 				if (threadDownloadImageData.imageFound != null) {
 					if (threadDownloadImageData.imageFound) {
-						player.setLocationOfCape(resourcelocation);
+						player.setCapeLocation(resourcelocation);
 					}
 					return;
 				}
@@ -78,7 +78,7 @@ public class CapeUtils extends MinecraftUtils{
 			textureManager.deleteTexture(resourceLocation);
 		}
 
-		player.setLocationOfCape(null);
+		player.setCapeLocation(null);
 		downloadCape(player);
 	}
 }

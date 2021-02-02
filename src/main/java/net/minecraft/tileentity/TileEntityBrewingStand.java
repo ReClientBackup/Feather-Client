@@ -2,6 +2,9 @@ package net.minecraft.tileentity;
 
 import java.util.Arrays;
 import java.util.List;
+
+import com.murengezi.minecraft.potion.PotionEffect;
+import com.murengezi.minecraft.potion.PotionHelper;
 import net.minecraft.block.BlockBrewingStand;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,8 +18,6 @@ import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 

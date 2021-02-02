@@ -1,7 +1,7 @@
 package net.optifine.reflect;
 
 import com.google.common.base.Optional;
-import com.murengezi.minecraft.client.Gui.MainMenuScreen;
+import com.murengezi.minecraft.client.gui.MainMenuScreen;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiEnchantment;

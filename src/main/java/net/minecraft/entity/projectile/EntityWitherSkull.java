@@ -1,11 +1,11 @@
 package net.minecraft.entity.projectile;
 
+import com.murengezi.minecraft.potion.Potion;
+import com.murengezi.minecraft.potion.PotionEffect;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityWither;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
@@ -107,9 +107,7 @@ public class EntityWitherSkull extends EntityFireball
                     }
 
                     if (i > 0)
-                    {
-                        ((EntityLivingBase)movingObject.entityHit).addPotionEffect(new PotionEffect(Potion.wither.id, 20 * i, 1));
-                    }
+                        ((EntityLivingBase) movingObject.entityHit).addPotionEffect(new PotionEffect(Potion.wither.id, 20 * i, 1));
                 }
             }
 

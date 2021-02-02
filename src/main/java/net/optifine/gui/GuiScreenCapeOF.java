@@ -1,8 +1,8 @@
 package net.optifine.gui;
 
 import com.mojang.authlib.exceptions.InvalidCredentialsException;
-import com.murengezi.minecraft.client.Gui.GuiButton;
-import net.minecraft.client.entity.AbstractClientPlayer;
+import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

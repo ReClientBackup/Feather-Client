@@ -6,7 +6,7 @@ import com.mojang.authlib.GameProfile;
 import java.util.Comparator;
 import java.util.List;
 
-import com.murengezi.minecraft.client.Gui.InGameScreen;
+import com.murengezi.minecraft.client.gui.InGameScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.network.NetworkPlayerInfo;

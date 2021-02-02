@@ -1,9 +1,10 @@
 package net.minecraft.command;
 
 import java.util.List;
+
+import com.murengezi.minecraft.potion.Potion;
+import com.murengezi.minecraft.potion.PotionEffect;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
@@ -124,9 +125,9 @@ public class CommandEffect extends CommandBase
 
                     if (l > 0)
                     {
-                        PotionEffect potioneffect = new PotionEffect(i, j, k, false, flag);
-                        entitylivingbase.addPotionEffect(potioneffect);
-                        notifyOperators(sender, this, "commands.effect.success", new Object[] {new ChatComponentTranslation(potioneffect.getEffectName(), new Object[0]), Integer.valueOf(i), Integer.valueOf(k), entitylivingbase.getCommandSenderName(), Integer.valueOf(l)});
+                        PotionEffect effect = new PotionEffect(i, j, k, false, flag);
+                        entitylivingbase.addPotionEffect(effect);
+                        notifyOperators(sender, this, "commands.effect.success", new Object[] {new ChatComponentTranslation(effect.getEffectName(), new Object[0]), Integer.valueOf(i), Integer.valueOf(k), entitylivingbase.getCommandSenderName(), Integer.valueOf(l)});
                     }
                     else if (entitylivingbase.isPotionActive(i))
                     {

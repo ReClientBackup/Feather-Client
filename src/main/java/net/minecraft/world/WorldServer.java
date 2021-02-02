@@ -39,7 +39,7 @@ import net.minecraft.network.play.server.S27PacketExplosion;
 import net.minecraft.network.play.server.S2APacketParticles;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.network.play.server.S2CPacketSpawnGlobalEntity;
-import net.minecraft.profiler.Profiler;
+import com.murengezi.minecraft.profiler.Profiler;
 import net.minecraft.scoreboard.ScoreboardSaveData;
 import net.minecraft.scoreboard.ServerScoreboard;
 import net.minecraft.server.MinecraftServer;

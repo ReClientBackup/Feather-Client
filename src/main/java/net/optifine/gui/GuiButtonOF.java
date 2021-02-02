@@ -1,6 +1,6 @@
 package net.optifine.gui;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 
 public class GuiButtonOF extends GuiButton
 {

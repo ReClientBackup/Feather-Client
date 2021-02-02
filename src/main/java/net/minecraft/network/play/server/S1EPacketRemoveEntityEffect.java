@@ -1,10 +1,11 @@
 package net.minecraft.network.play.server;
 
 import java.io.IOException;
+
+import com.murengezi.minecraft.potion.PotionEffect;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;
-import net.minecraft.potion.PotionEffect;
 
 public class S1EPacketRemoveEntityEffect implements Packet<INetHandlerPlayClient>
 {

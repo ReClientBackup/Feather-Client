@@ -1,6 +1,6 @@
 package net.optifine.player;
 
-import net.minecraft.client.entity.AbstractClientPlayer;
+import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ImageBufferDownload;
 import net.minecraft.util.ResourceLocation;
 
@@ -27,7 +27,7 @@ public class CapeImageBuffer extends ImageBufferDownload
     {
         if (this.player != null)
         {
-            this.player.setLocationOfCape(this.resourceLocation);
+            this.player.setCapeLocation(this.resourceLocation);
         }
 
         this.cleanup();

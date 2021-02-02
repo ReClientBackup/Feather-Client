@@ -13,6 +13,8 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 import javax.imageio.ImageIO;
+
+import com.murengezi.minecraft.potion.Potion;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.BlockStem;
@@ -29,7 +31,6 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.src.Config;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;

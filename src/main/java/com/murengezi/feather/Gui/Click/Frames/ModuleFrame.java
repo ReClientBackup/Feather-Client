@@ -4,7 +4,7 @@ import com.murengezi.feather.Gui.Click.Frame;
 import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Util.TimerUtil;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 
 /**
  * @author Tobias Sjöblom

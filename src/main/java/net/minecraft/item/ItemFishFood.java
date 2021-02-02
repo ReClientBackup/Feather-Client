@@ -3,11 +3,12 @@ package net.minecraft.item;
 import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
+
+import com.murengezi.minecraft.potion.Potion;
+import com.murengezi.minecraft.potion.PotionEffect;
+import com.murengezi.minecraft.potion.PotionHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHelper;
 import net.minecraft.world.World;
 
 public class ItemFishFood extends ItemFood

@@ -2,8 +2,8 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
-import com.murengezi.minecraft.client.Gui.MainMenuScreen;
+import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.gui.MainMenuScreen;
 import net.minecraft.client.resources.I18n;
 
 public class GuiMemoryErrorScreen extends GuiScreen

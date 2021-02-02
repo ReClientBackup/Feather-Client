@@ -5,7 +5,7 @@ import com.mojang.authlib.exceptions.AuthenticationException;
 import com.mojang.authlib.exceptions.AuthenticationUnavailableException;
 import com.mojang.authlib.exceptions.InvalidCredentialsException;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
-import com.murengezi.minecraft.client.Gui.Multiplayer.DisconnectedScreen;
+import com.murengezi.minecraft.client.gui.Multiplayer.DisconnectedScreen;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import java.math.BigInteger;

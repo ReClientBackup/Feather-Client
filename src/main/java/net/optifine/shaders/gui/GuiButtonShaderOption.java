@@ -1,6 +1,6 @@
 package net.optifine.shaders.gui;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.optifine.shaders.config.ShaderOption;
 
 public class GuiButtonShaderOption extends GuiButton

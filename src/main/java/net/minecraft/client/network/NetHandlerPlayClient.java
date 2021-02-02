@@ -4,10 +4,12 @@ import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.mojang.authlib.GameProfile;
-import com.murengezi.minecraft.client.Gui.MainMenuScreen;
-import com.murengezi.minecraft.client.Gui.Multiplayer.DisconnectedScreen;
-import com.murengezi.minecraft.client.Gui.Multiplayer.MultiplayerScreen;
-import com.murengezi.minecraft.client.Gui.YesNoScreen;
+import com.murengezi.minecraft.client.gui.DownloadTerrainScreen;
+import com.murengezi.minecraft.client.gui.MainMenuScreen;
+import com.murengezi.minecraft.client.gui.Multiplayer.DisconnectedScreen;
+import com.murengezi.minecraft.client.gui.Multiplayer.MultiplayerScreen;
+import com.murengezi.minecraft.client.gui.YesNoScreen;
+import com.murengezi.minecraft.potion.PotionEffect;
 import io.netty.buffer.Unpooled;
 import java.io.File;
 import java.io.IOException;
@@ -21,10 +23,9 @@ import net.minecraft.block.Block;
 import net.minecraft.client.ClientBrandRetriever;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.GuardianSound;
-import net.minecraft.client.entity.EntityOtherPlayerMP;
-import net.minecraft.client.entity.EntityPlayerSP;
+import com.murengezi.minecraft.client.entity.EntityOtherPlayerMP;
+import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiDownloadTerrain;
 import net.minecraft.client.gui.GuiMerchant;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiScreenBook;
@@ -168,7 +169,6 @@ import net.minecraft.network.play.server.S46PacketSetCompressionLevel;
 import net.minecraft.network.play.server.S47PacketPlayerListHeaderFooter;
 import net.minecraft.network.play.server.S48PacketResourcePackSend;
 import net.minecraft.network.play.server.S49PacketUpdateEntityNBT;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.scoreboard.IScoreObjectiveCriteria;
 import net.minecraft.scoreboard.Score;
 import net.minecraft.scoreboard.ScoreObjective;
@@ -273,7 +273,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         this.gameController.gameSettings.difficulty = packetIn.getDifficulty();
         this.gameController.loadWorld(this.clientWorldController);
         this.gameController.thePlayer.dimension = packetIn.getDimension();
-        this.gameController.displayGuiScreen(new GuiDownloadTerrain(this));
+        this.gameController.displayGuiScreen(new DownloadTerrainScreen(this));
         this.gameController.thePlayer.setEntityId(packetIn.getEntityId());
         this.currentServerMaxPlayers = packetIn.getMaxPlayers();
         this.gameController.thePlayer.setReducedDebug(packetIn.isReducedDebugInfo());
@@ -570,12 +570,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             float f = (float)(packetIn.getYaw() * 360) / 256.0F;
             float f1 = (float)(packetIn.getPitch() * 360) / 256.0F;
 
-            if (Math.abs(entity.posX - d0) < 0.03125D && Math.abs(entity.posY - d1) < 0.015625D && Math.abs(entity.posZ - d2) < 0.03125D)
-            {
+            if (Math.abs(entity.posX - d0) < 0.03125D && Math.abs(entity.posY - d1) < 0.015625D && Math.abs(entity.posZ - d2) < 0.03125D) {
                 entity.setPositionAndRotation2(entity.posX, entity.posY, entity.posZ, f, f1, 3, true);
-            }
-            else
-            {
+            } else {
                 entity.setPositionAndRotation2(d0, d1, d2, f, f1, 3, true);
             }
 
@@ -1045,7 +1042,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             this.clientWorldController.setWorldScoreboard(scoreboard);
             this.gameController.loadWorld(this.clientWorldController);
             this.gameController.thePlayer.dimension = packetIn.getDimensionID();
-            this.gameController.displayGuiScreen(new GuiDownloadTerrain(this));
+            this.gameController.displayGuiScreen(new DownloadTerrainScreen(this));
         }
 
         this.gameController.setDimensionAndSpawnPlayer(packetIn.getDimensionID());
@@ -1464,9 +1461,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
         if (entity instanceof EntityLivingBase)
         {
-            PotionEffect potioneffect = new PotionEffect(packetIn.getEffectId(), packetIn.getDuration(), packetIn.getAmplifier(), false, packetIn.func_179707_f());
-            potioneffect.setPotionDurationMax(packetIn.func_149429_c());
-            ((EntityLivingBase)entity).addPotionEffect(potioneffect);
+            PotionEffect effect = new PotionEffect(packetIn.getEffectId(), packetIn.getDuration(), packetIn.getAmplifier(), false, packetIn.func_179707_f());
+            effect.setPotionDurationMax(packetIn.func_149429_c());
+            ((EntityLivingBase)entity).addPotionEffect(effect);
         }
     }
 

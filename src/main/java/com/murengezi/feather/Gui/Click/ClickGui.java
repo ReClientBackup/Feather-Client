@@ -8,8 +8,8 @@ import com.murengezi.feather.Gui.Click.Frames.ThemesFrame;
 import com.murengezi.feather.Gui.Click.Items.ThemeItem;
 import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Util.MinecraftUtils;
-import com.murengezi.minecraft.client.Gui.Screen;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.Screen;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class ClickGui extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        ScaledResolution resolution = new ScaledResolution(MinecraftUtils.getMc());
+        ScaledResolution resolution = new ScaledResolution();
         frames.forEach(frame -> frame.render(mouseX, mouseY, resolution));
         //mods.stream().filter(Module::isEnabled).forEach(moduleDraggable -> moduleDraggable.render(mouseX, mouseY, resolution));
         super.drawScreen(mouseX, mouseY, partialTicks);

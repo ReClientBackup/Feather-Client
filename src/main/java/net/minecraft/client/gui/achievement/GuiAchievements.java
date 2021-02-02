@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.IProgressMeter;

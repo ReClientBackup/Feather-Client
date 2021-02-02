@@ -4,17 +4,18 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.gson.JsonSyntaxException;
 import com.murengezi.feather.Util.TimerUtil;
-import com.murengezi.minecraft.client.Gui.MainMenuScreen;
+import com.murengezi.minecraft.client.gui.DownloadTerrainScreen;
+import com.murengezi.minecraft.client.gui.MainMenuScreen;
+import com.murengezi.minecraft.potion.Potion;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
+import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiDownloadTerrain;
 import net.minecraft.client.gui.MapItemRenderer;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.chunk.RenderChunk;
 import net.minecraft.client.renderer.culling.ClippingHelper;
@@ -47,7 +48,6 @@ import net.minecraft.event.ClickEvent;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.src.Config;
 import net.minecraft.util.*;
@@ -1242,7 +1242,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         if (!this.mc.skipRenderWorld) {
             anaglyphEnable = this.mc.gameSettings.anaglyph;
-            final ScaledResolution scaledResolution = new ScaledResolution(this.mc);
+            final ScaledResolution scaledResolution = new ScaledResolution();
             int width = scaledResolution.getScaledWidth();
             int height = scaledResolution.getScaledHeight();
             final int mouseX = Mouse.getX() * width / this.mc.displayWidth;
@@ -2090,7 +2090,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
      */
     public void setupOverlayRendering()
     {
-        ScaledResolution scaledresolution = new ScaledResolution(this.mc);
+        ScaledResolution scaledresolution = new ScaledResolution();
         GlStateManager.clear(256);
         GlStateManager.matrixMode(5889);
         GlStateManager.loadIdentity();
@@ -2468,7 +2468,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 {
                     boolean flag = this.mc.isGamePaused();
 
-                    if (!flag && !(this.mc.currentScreen instanceof GuiDownloadTerrain))
+                    if (!flag && !(this.mc.currentScreen instanceof DownloadTerrainScreen))
                     {
                         if (this.serverWaitTime > 0)
                         {
@@ -2525,7 +2525,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     }
                     else
                     {
-                        if (this.mc.currentScreen instanceof GuiDownloadTerrain)
+                        if (this.mc.currentScreen instanceof DownloadTerrainScreen)
                         {
                             Config.sleep(20L);
                         }

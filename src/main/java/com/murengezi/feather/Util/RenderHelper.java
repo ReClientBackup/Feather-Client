@@ -2,7 +2,7 @@ package com.murengezi.feather.Util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -128,7 +128,7 @@ public class RenderHelper {
     }
 
     public static ScaledResolution getScaledResolution() {
-        return new ScaledResolution(Minecraft.getMinecraft());
+        return new ScaledResolution();
     }
 
     public static FontRenderer getFontRenderer() {

@@ -1,9 +1,9 @@
 package net.optifine.gui;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
@@ -70,7 +70,7 @@ public class GuiQualitySettingsOF extends GuiScreen
 
             if (guibutton.getId() != GameSettings.Options.AA_LEVEL.ordinal())
             {
-                ScaledResolution scaledresolution = new ScaledResolution(this.mc);
+                ScaledResolution scaledresolution = new ScaledResolution();
                 this.setWorldAndResolution(this.mc, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
             }
         }

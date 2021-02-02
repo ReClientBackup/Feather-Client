@@ -1,6 +1,6 @@
 package net.minecraft.client.gui;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import io.netty.buffer.Unpooled;
 import java.io.IOException;
 import net.minecraft.client.resources.I18n;
@@ -11,8 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
-public class GuiCommandBlock extends GuiScreen
-{
+public class GuiCommandBlock extends GuiScreen {
     private static final Logger field_146488_a = LogManager.getLogger();
 
     /** Text field containing the command block's command. */

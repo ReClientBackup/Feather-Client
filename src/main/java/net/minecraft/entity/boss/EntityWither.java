@@ -3,6 +3,8 @@ package net.minecraft.entity.boss;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import java.util.List;
+
+import com.murengezi.minecraft.potion.PotionEffect;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -27,7 +29,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;

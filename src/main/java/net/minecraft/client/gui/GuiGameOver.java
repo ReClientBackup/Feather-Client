@@ -2,10 +2,10 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
-import com.murengezi.minecraft.client.Gui.MainMenuScreen;
-import com.murengezi.minecraft.client.Gui.WorldSelection.YesNoCallback;
-import com.murengezi.minecraft.client.Gui.YesNoScreen;
+import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.gui.MainMenuScreen;
+import com.murengezi.minecraft.client.gui.WorldSelection.YesNoCallback;
+import com.murengezi.minecraft.client.gui.YesNoScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;

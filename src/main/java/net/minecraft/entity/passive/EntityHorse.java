@@ -1,6 +1,7 @@
 package net.minecraft.entity.passive;
 
 import com.google.common.base.Predicate;
+import com.murengezi.minecraft.potion.Potion;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -30,7 +31,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.potion.Potion;
 import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;

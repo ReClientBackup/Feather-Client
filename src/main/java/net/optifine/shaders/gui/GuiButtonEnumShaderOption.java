@@ -1,6 +1,6 @@
 package net.optifine.shaders.gui;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.optifine.shaders.Shaders;
 import net.optifine.shaders.config.EnumShaderOption;

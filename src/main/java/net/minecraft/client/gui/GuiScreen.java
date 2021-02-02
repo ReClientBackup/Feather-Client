@@ -15,9 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import com.murengezi.minecraft.client.Gui.ConfirmOpenLinkScreen;
-import com.murengezi.minecraft.client.Gui.GuiButton;
-import com.murengezi.minecraft.client.Gui.WorldSelection.YesNoCallback;
+import com.murengezi.minecraft.client.gui.ConfirmOpenLinkScreen;
+import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.gui.WorldSelection.YesNoCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;

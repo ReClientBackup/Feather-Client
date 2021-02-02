@@ -3,6 +3,8 @@ package net.minecraft.client.gui;
 import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
+
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -243,7 +245,7 @@ public class GuiNewChat extends Gui
         }
         else
         {
-            ScaledResolution scaledresolution = new ScaledResolution(this.mc);
+            ScaledResolution scaledresolution = new ScaledResolution();
             int i = scaledresolution.getScaleFactor();
             float f = this.getChatScale();
             int j = p_146236_1_ / i - 3;

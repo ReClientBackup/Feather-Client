@@ -1,6 +1,6 @@
 package net.minecraft.world;
 
-import net.minecraft.profiler.Profiler;
+import com.murengezi.minecraft.profiler.Profiler;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.village.VillageCollection;
 import net.minecraft.world.border.IBorderListener;

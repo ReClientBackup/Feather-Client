@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.spectator.ISpectatorMenuObject;
 import net.minecraft.client.gui.spectator.ISpectatorMenuRecipient;
@@ -44,7 +45,7 @@ public class GuiSpectator extends Gui implements ISpectatorMenuRecipient
         return MathHelper.clamp_float((float)i / 2000.0F, 0.0F, 1.0F);
     }
 
-    public void renderTooltip(ScaledResolution p_175264_1_, float p_175264_2_)
+    public void renderTooltip(ScaledResolution resolution, float p_175264_2_)
     {
         if (this.field_175271_i != null)
         {
@@ -56,12 +57,12 @@ public class GuiSpectator extends Gui implements ISpectatorMenuRecipient
             }
             else
             {
-                int i = p_175264_1_.getScaledWidth() / 2;
+                int i = resolution.getScaledWidth() / 2;
                 float f1 = this.zLevel;
                 this.zLevel = -90.0F;
-                float f2 = (float)p_175264_1_.getScaledHeight() - 22.0F * f;
+                float f2 = (float)resolution.getScaledHeight() - 22.0F * f;
                 SpectatorDetails spectatordetails = this.field_175271_i.func_178646_f();
-                this.func_175258_a(p_175264_1_, f, i, f2, spectatordetails);
+                this.func_175258_a(resolution, f, i, f2, spectatordetails);
                 this.zLevel = f1;
             }
         }

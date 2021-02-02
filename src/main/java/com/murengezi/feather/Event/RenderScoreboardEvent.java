@@ -1,7 +1,7 @@
 package com.murengezi.feather.Event;
 
 import com.darkmagician6.eventapi.events.Event;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.scoreboard.ScoreObjective;
 
 /**

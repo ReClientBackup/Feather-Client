@@ -2,7 +2,7 @@ package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
 import com.google.gson.JsonParseException;
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import io.netty.buffer.Unpooled;
 import java.io.IOException;
 import java.util.List;

@@ -7,9 +7,9 @@ import com.murengezi.feather.Feather;
 import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Util.MinecraftUtils;
-import com.murengezi.minecraft.client.Gui.Screen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class AdjustScreen extends Screen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		ScaledResolution resolution = new ScaledResolution(MinecraftUtils.getMc());
+		ScaledResolution resolution = new ScaledResolution();
 
 		getMods().stream().filter(Module::isEnabled).forEach(adjustable -> {
 			if (isMouseOver(mouseX, mouseY, adjustable) || getSelected() == adjustable) {

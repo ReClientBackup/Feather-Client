@@ -1,11 +1,11 @@
 package com.murengezi.feather.Util;
 
+import com.murengezi.minecraft.potion.Potion;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
+import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.potion.Potion;
 
 /**
  * @author Tobias Sjöblom
@@ -30,7 +30,7 @@ public class MinecraftUtils {
     }
 
     public static ScaledResolution getSr() {
-        return new ScaledResolution(getMc());
+        return new ScaledResolution();
     }
 
     private static boolean canSprint = true;

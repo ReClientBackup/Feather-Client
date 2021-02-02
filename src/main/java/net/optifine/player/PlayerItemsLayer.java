@@ -1,6 +1,6 @@
 package net.optifine.player;
 
-import net.minecraft.client.entity.AbstractClientPlayer;
+import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;

@@ -6,7 +6,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import java.util.List;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IntHashMap;
 

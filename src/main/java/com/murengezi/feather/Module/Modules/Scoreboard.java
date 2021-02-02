@@ -8,7 +8,7 @@ import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Module.ModuleInfo;
 import com.murengezi.feather.Module.Setting.Settings.BooleanSetting;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.scoreboard.Score;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.ScorePlayerTeam;

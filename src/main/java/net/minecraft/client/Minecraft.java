@@ -37,25 +37,25 @@ import javax.imageio.ImageIO;
 
 import com.murengezi.feather.Event.*;
 import com.murengezi.feather.Feather;
-import com.murengezi.minecraft.client.Gui.InGameMenuScreen;
-import com.murengezi.minecraft.client.Gui.InGameScreen;
-import com.murengezi.minecraft.client.Gui.MainMenuScreen;
-import com.murengezi.minecraft.client.Gui.Multiplayer.ConnectingScreen;
+import com.murengezi.minecraft.client.gui.InGameMenuScreen;
+import com.murengezi.minecraft.client.gui.InGameScreen;
+import com.murengezi.minecraft.client.gui.MainMenuScreen;
+import com.murengezi.minecraft.client.gui.Multiplayer.ConnectingScreen;
+import com.murengezi.minecraft.client.main.GameConfiguration;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.client.entity.EntityPlayerSP;
+import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.gui.GuiMemoryErrorScreen;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSleepMP;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.achievement.GuiAchievement;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.main.GameConfiguration;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -130,9 +130,9 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.handshake.client.C00Handshake;
 import net.minecraft.network.login.client.C00PacketLoginStart;
 import net.minecraft.network.play.client.C16PacketClientStatus;
-import net.minecraft.profiler.IPlayerUsage;
-import net.minecraft.profiler.PlayerUsageSnooper;
-import net.minecraft.profiler.Profiler;
+import com.murengezi.minecraft.profiler.IPlayerUsage;
+import com.murengezi.minecraft.profiler.PlayerUsageSnooper;
+import com.murengezi.minecraft.profiler.Profiler;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.stats.AchievementList;
@@ -348,7 +348,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         this.fileAssets = gameConfig.folderInfo.assetsDir;
         this.fileResourcepacks = gameConfig.folderInfo.resourcePacksDir;
         this.launchedVersion = gameConfig.gameInfo.version;
-        this.field_181038_N = gameConfig.userInfo.field_181172_c;
+        this.field_181038_N = gameConfig.userInfo.profileProperties;
         this.mcDefaultResourcePack = new DefaultResourcePack((new ResourceIndex(gameConfig.folderInfo.assetsDir, gameConfig.folderInfo.assetIndex)).getResourceMap());
         this.proxy = gameConfig.userInfo.proxy == null ? Proxy.NO_PROXY : gameConfig.userInfo.proxy;
         this.sessionService = (new YggdrasilAuthenticationService(this.proxy, UUID.randomUUID().toString())).createMinecraftSessionService();
@@ -807,7 +807,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 
     private void drawSplashScreen(TextureManager textureManagerInstance) throws LWJGLException
     {
-        ScaledResolution scaledresolution = new ScaledResolution(this);
+        ScaledResolution scaledresolution = new ScaledResolution();
         int i = scaledresolution.getScaleFactor();
         Framebuffer framebuffer = new Framebuffer(scaledresolution.getScaledWidth() * i, scaledresolution.getScaledHeight() * i, true);
         framebuffer.bindFramebuffer(false);
@@ -903,7 +903,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 
         if (guiScreenIn != null) {
             this.setIngameNotInFocus();
-            ScaledResolution scaledresolution = new ScaledResolution(this);
+            ScaledResolution scaledresolution = new ScaledResolution();
             int i = scaledresolution.getScaledWidth();
             int j = scaledresolution.getScaledHeight();
             guiScreenIn.setWorldAndResolution(this, i, j);
@@ -1578,7 +1578,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 
         if (this.currentScreen != null)
         {
-            ScaledResolution scaledresolution = new ScaledResolution(this);
+            ScaledResolution scaledresolution = new ScaledResolution();
             this.currentScreen.onResize(this, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
         }
 

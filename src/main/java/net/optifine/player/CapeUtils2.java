@@ -1,7 +1,7 @@
 package net.optifine.player;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
+import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.SimpleTexture;
@@ -36,7 +36,7 @@ public class CapeUtils2
                 {
                     if (threaddownloadimagedata.imageFound.booleanValue())
                     {
-                        player.setLocationOfCape(resourcelocation);
+                        player.setCapeLocation(resourcelocation);
                     }
 
                     return;
@@ -81,7 +81,7 @@ public class CapeUtils2
             texturemanager.deleteTexture(resourcelocation);
         }
 
-        player.setLocationOfCape(null);
+        player.setCapeLocation(null);
         downloadCape(player);
     }
 }

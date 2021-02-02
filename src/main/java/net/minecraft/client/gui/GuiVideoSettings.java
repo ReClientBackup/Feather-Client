@@ -2,7 +2,8 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.src.Config;
@@ -120,7 +121,7 @@ public class GuiVideoSettings extends GuiScreenOF
 
             if (this.guiGameSettings.guiScale != i)
             {
-                ScaledResolution scaledresolution = new ScaledResolution(this.mc);
+                ScaledResolution scaledresolution = new ScaledResolution();
                 int j = scaledresolution.getScaledWidth();
                 int k = scaledresolution.getScaledHeight();
                 this.setWorldAndResolution(this.mc, j, k);

@@ -1,9 +1,10 @@
 package net.minecraft.client.gui.inventory;
 
+import com.murengezi.minecraft.potion.Potion;
 import io.netty.buffer.Unpooled;
 import java.io.IOException;
 import net.minecraft.client.Minecraft;
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
@@ -14,7 +15,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C17PacketCustomPayload;
-import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -307,7 +307,7 @@ public class GuiBeacon extends GuiContainer
 
         public void drawButtonForegroundLayer(int mouseX, int mouseY)
         {
-            String s = I18n.format(Potion.potionTypes[this.field_146149_p].getName(), new Object[0]);
+            String s = I18n.format(Potion.potionTypes[this.field_146149_p].getName());
 
             if (this.field_146148_q >= 3 && this.field_146149_p != Potion.regeneration.id)
             {

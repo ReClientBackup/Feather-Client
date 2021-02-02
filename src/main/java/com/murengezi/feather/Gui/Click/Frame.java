@@ -1,7 +1,7 @@
 package com.murengezi.feather.Gui.Click;
 
 import com.murengezi.feather.Util.MinecraftUtils;
-import net.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.ScaledResolution;
 
 import java.util.ArrayList;
 import java.util.List;
