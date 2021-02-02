@@ -28,7 +28,7 @@ public class GUI extends MinecraftUtils {
     }
 
     public static void drawVerticalLine(float x, float startY, float endY, int color) {
-        drawRect(x, startY + 1, x + 1, endY, color);
+        drawRect(x, startY, x + 1, endY, color);
     }
 
     /**

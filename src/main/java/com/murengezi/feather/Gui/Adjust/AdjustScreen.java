@@ -12,6 +12,7 @@ import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,16 +38,55 @@ public class AdjustScreen extends Screen {
 		ScaledResolution resolution = new ScaledResolution();
 
 		getMods().stream().filter(Module::isEnabled).forEach(adjustable -> {
-			if (isMouseOver(mouseX, mouseY, adjustable) || getSelected() == adjustable) {
+			if (isMouseOver(mouseX, mouseY, adjustable) && getSelected() == null) {
 				GUI.drawBox(adjustable.getX(), adjustable.getY(), adjustable.getWidth(), adjustable.getHeight(), 0xffffffff);
+			}
+
+			if (getSelected() == adjustable) {
+				GUI.drawBox(adjustable.getX(), adjustable.getY(), adjustable.getWidth(), adjustable.getHeight(), 0xfffaf884);
+
 			}
 		});
 
 		if (getSelected() != null) {
 			getSelected().setPosition(mouseX - getDragX(), mouseY - getDragY());
+
+			float x = getSelected().getX() + getSelected().getWidth() / 2;
+			float y = getSelected().getY() + getSelected().getHeight() / 2;
+			float resolutionWidth = resolution.getScaledWidth();
+			float resolutionHeight = resolution.getScaledHeight();
+			Adjustable.Region selectedRegion = getSelected().getRegion();
+			GUI.drawRect((resolutionWidth / 3) * Math.max(selectedRegion.getWidthThirds() - 1, 0), (resolutionHeight / 3) * Math.max(selectedRegion.getHeightThirds() - 1, 0),
+					(resolutionWidth / 3) * selectedRegion.getWidthThirds(), (resolutionHeight / 3) * selectedRegion.getHeightThirds(), Integer.MAX_VALUE);
+
+			boolean adjustX = false, adjustY = false;
+			for (Adjustable.Region region : Adjustable.Region.values()) {
+				float regionWidthHalf = (resolutionWidth / 3) * region.getWidthThirds() - (resolutionWidth / 6);
+				float regionHeightHalf = (resolutionHeight / 3) * region.getHeightThirds() - (resolutionHeight / 6);
+
+				if (x >= regionWidthHalf - 10 && x <= regionWidthHalf + 10) {
+					drawVerticalLine(regionWidthHalf, 0, resolutionHeight, 0xfffaf884);
+					if (!adjustX) {
+						getSelected().setAlignX(Adjustable.Align.CENTER);
+						adjustX = true;
+					}
+				} else if (!adjustX) {
+					getSelected().setAlignX(Adjustable.Align.NONE);
+				}
+
+				if (y >= regionHeightHalf - 10 && y <= regionHeightHalf + 10) {
+					drawHorizontalLine(0, resolutionWidth, regionHeightHalf, 0xfffaf884);
+					if (!adjustY) {
+						getSelected().setAlignY(Adjustable.Align.CENTER);
+						adjustY = true;
+					}
+				} else if (!adjustY) {
+					getSelected().setAlignY(Adjustable.Align.NONE);
+				}
+			}
 		}
 
-		GUI.drawBox(0, 0, resolution.getScaledWidth(), resolution.getScaledHeight(), 0xfffea3aa);
+		GUI.drawBox(0, 0, resolution.getScaledWidth(), resolution.getScaledHeight(), 0xfffaf884);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
@@ -67,6 +107,7 @@ public class AdjustScreen extends Screen {
 	protected void mouseReleased(int mouseX, int mouseY, int mouseButton) {
 		if (getSelected() != null) {
 			getSelected().setDragging(false);
+			getSelected().mouseReleased();
 			setSelected(null);
 		}
 		super.mouseReleased(mouseX, mouseY, mouseButton);

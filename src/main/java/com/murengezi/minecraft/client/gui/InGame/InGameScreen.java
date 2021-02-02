@@ -59,17 +59,21 @@ public class InGameScreen extends GUI {
     public float prevVignetteBrightness = 1.0F;
     private int remainingHighlightTicks;
     private ItemStack highlightingItemStack;
-    private final GuiOverlayDebug overlayDebug;
+    private final OverlayDebugScreen overlayDebug;
     private final GuiSpectator spectatorGui;
     private final GuiPlayerTabOverlay overlayPlayerList;
     private String displayedTitle = "", displayedSubTitle = "";
-    private int titlesTimer, titleFadeIn, titleDisplayTime, titleFadeOut, playerHealth = 0, lastPlayerHealth = 0;
+    private int titlesTimer;
+    private int titleFadeIn;
+    private int titleDisplayTime;
+    private int titleFadeOut;
+    private int playerHealth = 0;
     private long lastSystemTime = 0L, healthUpdateCounter = 0L;
 
     public InGameScreen(Minecraft mc) {
         this.mc = mc;
         this.itemRenderer = mc.getRenderItem();
-        this.overlayDebug = new GuiOverlayDebug(mc);
+        this.overlayDebug = new OverlayDebugScreen();
         this.spectatorGui = new GuiSpectator(mc);
         this.persistantChatGUI = new GuiNewChat(mc);
         this.overlayPlayerList = new GuiPlayerTabOverlay(mc, this);
@@ -98,7 +102,10 @@ public class InGameScreen extends GUI {
         ItemStack itemStack = this.mc.thePlayer.inventory.armorItemInSlot(3);
 
         if (this.mc.gameSettings.thirdPersonView == 0 && itemStack != null && itemStack.getItem() == Item.getItemFromBlock(Blocks.pumpkin)) {
-            this.renderPumpkinOverlay(resolution);
+            GlStateManager.disableAlpha();
+            getMc().getTextureManager().bindTexture(pumpkinBlurTexPath);
+            drawModalRectWithCustomSizedTexture(0, 0, 0, 0, resolution.getScaledWidth(), resolution.getScaledHeight(), resolution.getScaledWidth(), resolution.getScaledHeight());
+            GlStateManager.enableAlpha();
         }
 
         if (!this.mc.thePlayer.isPotionActive(Potion.confusion)) {
@@ -321,26 +328,6 @@ public class InGameScreen extends GUI {
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
     }
 
-    private void renderPumpkinOverlay(ScaledResolution resolution) {
-        GlStateManager.disableDepth();
-        GlStateManager.depthMask(false);
-        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        GlStateManager.disableAlpha();
-        this.mc.getTextureManager().bindTexture(pumpkinBlurTexPath);
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(0.0D, resolution.getScaledHeight(), -90.0D).tex(0.0D, 1.0D).func_181675_d();
-        worldrenderer.pos(resolution.getScaledWidth(), resolution.getScaledHeight(), -90.0D).tex(1.0D, 1.0D).func_181675_d();
-        worldrenderer.pos(resolution.getScaledWidth(), 0.0D, -90.0D).tex(1.0D, 0.0D).func_181675_d();
-        worldrenderer.pos(0.0D, 0.0D, -90.0D).tex(0.0D, 0.0D).func_181675_d();
-        tessellator.draw();
-        GlStateManager.depthMask(true);
-        GlStateManager.enableDepth();
-        GlStateManager.enableAlpha();
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    }
 
     private void renderPortal(float ticks, ScaledResolution resolution) {
         if (ticks < 1.0F) {
@@ -490,17 +477,13 @@ public class InGameScreen extends GUI {
 
             if (Minecraft.getSystemTime() - this.lastSystemTime > 1000L) {
                 this.playerHealth = health;
-                this.lastPlayerHealth = health;
                 this.lastSystemTime = Minecraft.getSystemTime();
             }
 
             this.playerHealth = health;
-            int healthLast = this.lastPlayerHealth;
             this.rand.setSeed(this.updateCounter * 312871L);
-            boolean flag1 = false;
             FoodStats foodstats = player.getFoodStats();
             int k = foodstats.getFoodLevel();
-            int l = foodstats.getPrevFoodLevel();
             IAttributeInstance attributeMaxHealth = player.getEntityAttribute(SharedMonsterAttributes.maxHealth);
             int left = resolution.getScaledWidth() / 2 - 91;
             int foodAndAirX = resolution.getScaledWidth() / 2 + 91;
@@ -615,22 +598,8 @@ public class InGameScreen extends GUI {
                             j7 = top + (this.rand.nextInt(3) - 1);
                         }
 
-                        if (flag1) {
-                            k8 = 1;
-                        }
-
                         int j9 = foodAndAirX - k6 * 8 - 9;
                         this.drawTexturedModalRect(j9, j7, 16 + k8 * 9, 27, 9, 9);
-
-                        if (flag1) {
-                            if (k6 * 2 + 1 < l) {
-                                this.drawTexturedModalRect(j9, j7, l7 + 54, 27, 9, 9);
-                            }
-
-                            if (k6 * 2 + 1 == l) {
-                                this.drawTexturedModalRect(j9, j7, l7 + 63, 27, 9, 9);
-                            }
-                        }
 
                         if (k6 * 2 + 1 < k) {
                             this.drawTexturedModalRect(j9, j7, l7 + 36, 27, 9, 9);
@@ -659,14 +628,9 @@ public class InGameScreen extends GUI {
 
                         for (int i5 = 0; i5 < l4; ++i5) {
                             int j5 = 52;
-                            int k5 = 0;
-
-                            if (flag1) {
-                                k5 = 1;
-                            }
 
                             int l5 = foodAndAirX - i5 * 8 - 9;
-                            this.drawTexturedModalRect(l5, i9, j5 + k5 * 9, 9, 9, 9);
+                            this.drawTexturedModalRect(l5, i9, j5, 9, 9, 9);
 
                             if (i5 * 2 + 1 + k9 < i7) {
                                 this.drawTexturedModalRect(l5, i9, j5 + 36, 9, 9, 9);

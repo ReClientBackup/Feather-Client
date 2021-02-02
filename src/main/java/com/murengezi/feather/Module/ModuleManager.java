@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ModuleManager {
 
-    private List<Module> modules = new LinkedList<>();
+    private final List<Module> modules = new LinkedList<>();
 
     public ModuleManager() {
         load(new ToggleSprint());

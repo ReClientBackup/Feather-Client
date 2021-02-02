@@ -10,11 +10,23 @@ import java.util.Arrays;
  */
 public class Adjustable extends Module {
 
-	private float x = 0.0f, y = 0.0f;
-	private float width, height;
-	private Region region = Region.TOP_LEFT;
+	private float x, y, width, height;
+	private Region region;
+	private Align alignX = Align.NONE, alignY = Align.NONE;
 	private ScaledResolution resolution;
 	private boolean dragging;
+
+	public Adjustable() {
+		x = 0.0f;
+		y = 0.0f;
+		region = Region.TOP_LEFT;
+	}
+
+	public Adjustable(float x, float y, Region region) {
+		this.x = x;
+		this.y = y;
+		this.region = region;
+	}
 
 	public enum Region {
 		TOP_LEFT(1, 1), TOP_CENTER(2, 1), TOP_RIGHT(3, 1),
@@ -37,8 +49,29 @@ public class Adjustable extends Module {
 		}
 	}
 
+	public enum Align {
+		NONE, CENTER;
+	}
+
 	public void render(ScaledResolution resolution) {
 		this.resolution = resolution;
+	}
+
+	public void mouseReleased() {
+		float resolutionWidth = resolution.getScaledWidth();
+		float resolutionHeight = resolution.getScaledHeight();
+		float posX = getX();
+		float posY = getY();
+
+		if (getAlignX() == Align.CENTER) {
+			posX = (resolutionWidth / 3) * getRegion().getWidthThirds() - (resolutionWidth / 6) - getWidth() / 2;
+		}
+
+		if (getAlignY() == Align.CENTER) {
+			posY = (resolutionHeight / 3) * getRegion().getHeightThirds() - (resolutionHeight / 6) - getHeight() / 2;
+		}
+
+		setPosition(posX, posY);
 	}
 
 	public void setPosition(float x, float y) {
@@ -58,7 +91,11 @@ public class Adjustable extends Module {
 			case TOP_LEFT:
 			case CENTER_LEFT:
 			case BOTTOM_LEFT:
-				this.x = x;
+				if (x < 1.0f && this.x < 1.0f) {
+					this.x = 1.0f;
+				} else {
+					this.x = x;
+				}
 				break;
 			case TOP_CENTER:
 			case CENTER:
@@ -72,7 +109,11 @@ public class Adjustable extends Module {
 			case TOP_RIGHT:
 			case CENTER_RIGHT:
 			case BOTTOM_RIGHT:
-				this.x = width - x - getWidth();
+				if (width - x - getWidth() < 1.0f && this.x < 1.0f) {
+					this.x = 1.0f;
+				} else {
+					this.x = width - x - getWidth();
+				}
 				break;
 		}
 
@@ -80,7 +121,11 @@ public class Adjustable extends Module {
 			case TOP_LEFT:
 			case TOP_CENTER:
 			case TOP_RIGHT:
-				this.y = y;
+				if (y < 1.0f && this.y < 1.0f) {
+					this.y = 1.0f;
+				} else {
+					this.y = y;
+				}
 				break;
 			case CENTER_LEFT:
 			case CENTER:
@@ -94,7 +139,11 @@ public class Adjustable extends Module {
 			case BOTTOM_LEFT:
 			case BOTTOM_CENTER:
 			case BOTTOM_RIGHT:
-				this.y = height - y - getHeight();
+				if (height - y - getHeight() < 1.0f && this.y < 1.0f) {
+					this.y = 1.0f;
+				} else {
+					this.y = height - y - getHeight();
+				}
 				break;
 		}
 
@@ -178,6 +227,22 @@ public class Adjustable extends Module {
 
 	public void setRegion(Region region) {
 		this.region = region;
+	}
+
+	public Align getAlignX() {
+		return alignX;
+	}
+
+	public void setAlignX(Align alignX) {
+		this.alignX = alignX;
+	}
+
+	public Align getAlignY() {
+		return alignY;
+	}
+
+	public void setAlignY(Align alignY) {
+		this.alignY = alignY;
 	}
 
 	public ScaledResolution getResolution() {
