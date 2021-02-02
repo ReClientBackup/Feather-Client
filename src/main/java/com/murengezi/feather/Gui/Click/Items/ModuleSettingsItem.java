@@ -5,7 +5,7 @@ import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Module.Setting.Setting;
 import com.murengezi.feather.Module.Setting.Settings.BooleanSetting;
 import com.murengezi.feather.Module.Setting.Settings.ModeSetting;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.client.renderer.GlStateManager;
 
 /**
@@ -24,11 +24,11 @@ public class ModuleSettingsItem extends Item {
 
 	@Override
 	public void render(int mouseX, int mouseY) {
-		Gui.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MIN_VALUE);
+		GUI.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MIN_VALUE);
 		switch (setting.getType()) {
 			case BOOLEAN:
 				BooleanSetting booleanSetting = (BooleanSetting) setting;
-				Gui.drawRect(getX() + 4, getY() + 2, getX() + 14, getY() + 12, Integer.MIN_VALUE);
+				GUI.drawRect(getX() + 4, getY() + 2, getX() + 14, getY() + 12, Integer.MIN_VALUE);
 				GlStateManager.pushMatrix();
 				float scale = 0.5f;
 				GlStateManager.scale(scale, scale, scale);

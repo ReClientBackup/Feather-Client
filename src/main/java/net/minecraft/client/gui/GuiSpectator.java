@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.spectator.ISpectatorMenuObject;
@@ -12,7 +13,7 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiSpectator extends Gui implements ISpectatorMenuRecipient
+public class GuiSpectator extends GUI implements ISpectatorMenuRecipient
 {
     private static final ResourceLocation field_175267_f = new ResourceLocation("textures/gui/widgets.png");
     public static final ResourceLocation field_175269_a = new ResourceLocation("textures/gui/spectator_widgets.png");

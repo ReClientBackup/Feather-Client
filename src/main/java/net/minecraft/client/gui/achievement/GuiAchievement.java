@@ -1,7 +1,7 @@
 package net.minecraft.client.gui.achievement;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -10,7 +10,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiAchievement extends Gui
+public class GuiAchievement extends GUI
 {
     private static final ResourceLocation achievementBg = new ResourceLocation("textures/gui/achievement/achievement_background.png");
     private Minecraft mc;

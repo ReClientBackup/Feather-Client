@@ -12,7 +12,7 @@ import java.math.BigInteger;
 import java.security.PublicKey;
 import javax.crypto.SecretKey;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.network.EnumConnectionState;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.login.INetHandlerLoginClient;
@@ -31,11 +31,11 @@ public class NetHandlerLoginClient implements INetHandlerLoginClient
 {
     private static final Logger logger = LogManager.getLogger();
     private final Minecraft mc;
-    private final GuiScreen previousGuiScreen;
+    private final Screen previousGuiScreen;
     private final NetworkManager networkManager;
     private GameProfile gameProfile;
 
-    public NetHandlerLoginClient(NetworkManager p_i45059_1_, Minecraft mcIn, GuiScreen p_i45059_3_)
+    public NetHandlerLoginClient(NetworkManager p_i45059_1_, Minecraft mcIn, Screen p_i45059_3_)
     {
         this.networkManager = p_i45059_1_;
         this.mc = mcIn;

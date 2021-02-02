@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 import net.minecraft.client.gui.GuiEnchantment;
 import net.minecraft.client.gui.GuiHopper;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.inventory.GuiBeacon;
 import net.minecraft.client.gui.inventory.GuiBrewingStand;
 import net.minecraft.client.gui.inventory.GuiChest;
@@ -339,7 +339,7 @@ public class CustomGuiProperties
         }
     }
 
-    public boolean matchesPos(CustomGuiProperties.EnumContainer ec, BlockPos pos, IBlockAccess blockAccess, GuiScreen screen)
+    public boolean matchesPos(CustomGuiProperties.EnumContainer ec, BlockPos pos, IBlockAccess blockAccess, Screen screen)
     {
         if (!this.matchesGeneral(ec, pos, blockAccess))
         {
@@ -374,18 +374,18 @@ public class CustomGuiProperties
         }
     }
 
-    public static String getName(GuiScreen screen)
+    public static String getName(Screen screen)
     {
         IWorldNameable iworldnameable = getWorldNameable(screen);
         return iworldnameable == null ? null : iworldnameable.getDisplayName().getUnformattedText();
     }
 
-    private static IWorldNameable getWorldNameable(GuiScreen screen)
+    private static IWorldNameable getWorldNameable(Screen screen)
     {
         return screen instanceof GuiBeacon ? getWorldNameable(screen, Reflector.GuiBeacon_tileBeacon) : (screen instanceof GuiBrewingStand ? getWorldNameable(screen, Reflector.GuiBrewingStand_tileBrewingStand) : (screen instanceof GuiChest ? getWorldNameable(screen, Reflector.GuiChest_lowerChestInventory) : (screen instanceof GuiDispenser ? ((GuiDispenser)screen).dispenserInventory : (screen instanceof GuiEnchantment ? getWorldNameable(screen, Reflector.GuiEnchantment_nameable) : (screen instanceof GuiFurnace ? getWorldNameable(screen, Reflector.GuiFurnace_tileFurnace) : (screen instanceof GuiHopper ? getWorldNameable(screen, Reflector.GuiHopper_hopperInventory) : null))))));
     }
 
-    private static IWorldNameable getWorldNameable(GuiScreen screen, ReflectorField fieldInventory)
+    private static IWorldNameable getWorldNameable(Screen screen, ReflectorField fieldInventory)
     {
         Object object = Reflector.getFieldValue(screen, fieldInventory);
         return !(object instanceof IWorldNameable) ? null : (IWorldNameable)object;

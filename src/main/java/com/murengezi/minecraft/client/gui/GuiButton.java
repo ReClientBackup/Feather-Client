@@ -5,12 +5,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
 
-public class GuiButton extends Gui {
+public class GuiButton extends GUI {
+
     protected static final ResourceLocation buttonTextures = new ResourceLocation("textures/gui/widgets.png");
     private int width;
     private int height;
@@ -39,13 +39,8 @@ public class GuiButton extends Gui {
         this.displayString = buttonText;
     }
 
-    /**
-     * Draws this button to the screen.
-     */
-
-    public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+    public void drawButton(int mouseX, int mouseY) {
         if (this.visible) {
-            FontRenderer fontrenderer = mc.fontRendererObj;
             this.hovered = (mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height) && this.enabled;
 
             if (this.hovered != this.wasHovered) {
@@ -67,7 +62,7 @@ public class GuiButton extends Gui {
 
 
             drawRect(this.x, this.y, this.x + this.width, this.y + this.height, Integer.MIN_VALUE + (boxColorRed << 16) + (boxColorGreen << 8) + boxColorBlue);
-            this.mouseDragged(mc, mouseX, mouseY);
+            this.mouseDragged(getMc(), mouseX, mouseY);
             int colorInt = 0xffffff;
 
             if (!this.enabled) {
@@ -76,24 +71,14 @@ public class GuiButton extends Gui {
                 colorInt = color.getRGB();
             }
 
-            this.drawCenteredString(fontrenderer, this.displayString, this.x + this.width / 2, this.y + (this.height - 8) / 2, colorInt);
+            this.drawCenteredString(getFr(), this.displayString, this.x + this.width / 2, this.y + (this.height - 8) / 2, colorInt);
         }
     }
 
-    /**
-     * Fired when the mouse button is dragged. Equivalent of MouseListener.mouseDragged(MouseEvent e).
-     */
     protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {}
 
-    /**
-     * Fired when the mouse button is released. Equivalent of MouseListener.mouseReleased(MouseEvent e).
-     */
     public void mouseReleased(int mouseX, int mouseY) {}
 
-    /**
-     * Returns true if the mouse has been pressed on this control. Equivalent of MouseListener.mousePressed(MouseEvent
-     * e).
-     */
     public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
         return this.enabled && this.visible && mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
     }

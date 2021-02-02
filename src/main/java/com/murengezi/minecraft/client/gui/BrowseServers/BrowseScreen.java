@@ -41,7 +41,7 @@ public class BrowseScreen extends Screen {
 	public void initGui() {
 		if (!this.initialized) {
 			this.initialized = true;
-			this.serverList = new ServerList(this.mc);
+			this.serverList = new ServerList(getMc());
 			this.serverList.loadServerList();
 			this.serverListSelector = new ServerSelectionList(this, this.width, this.height, 32, this.height - 64, 36);
 			this.serverListSelector.loadNormalEntries(serverList);
@@ -98,7 +98,7 @@ public class BrowseScreen extends Screen {
 		GL11.glDisable(GL11.GL_SCISSOR_TEST);
 		drawRect(0, 0, serverListSelector.getWidth(), serverListSelector.getTop(), Integer.MIN_VALUE);
 		drawRect(0, serverListSelector.getBottom(), serverListSelector.getWidth(), this.height, Integer.MIN_VALUE);
-		mc.fontRendererObj.drawCenteredString(I18n.format("multiplayer.title"), (float)this.width / 2, 20, 0xffffff);
+		getFr().drawCenteredString(I18n.format("multiplayer.title"), (float)this.width / 2, 20, 0xffffff);
 
 		if (this.hoveringText != null) {
 			drawHoveringText(Lists.newArrayList(Splitter.on("\n").split(this.hoveringText)), mouseX, mouseY);

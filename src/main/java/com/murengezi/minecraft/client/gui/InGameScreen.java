@@ -41,7 +41,7 @@ import java.util.Random;
  * @author Tobias Sjöblom
  * Created on 2021-01-20 at 16:58
  */
-public class InGameScreen extends Gui {
+public class InGameScreen extends GUI {
 
     private static final ResourceLocation vignetteTexPath = new ResourceLocation("textures/misc/vignette.png");
     private static final ResourceLocation widgetsTexPath = new ResourceLocation("textures/gui/widgets.png");
@@ -702,7 +702,7 @@ public class InGameScreen extends Gui {
 
     public void renderHorseJumpBar(ScaledResolution resolution, int x) {
         this.mc.mcProfiler.startSection("jumpBar");
-        this.mc.getTextureManager().bindTexture(Gui.icons);
+        this.mc.getTextureManager().bindTexture(GUI.icons);
         float horseJumpPower = this.mc.thePlayer.getHorseJumpPower();
         int width = 182;
         int jumpProcess = (int)(horseJumpPower * (float)(width + 1));
@@ -718,7 +718,7 @@ public class InGameScreen extends Gui {
 
     public void renderExpBar(ScaledResolution resolution, int x) {
         this.mc.mcProfiler.startSection("expBar");
-        this.mc.getTextureManager().bindTexture(Gui.icons);
+        this.mc.getTextureManager().bindTexture(GUI.icons);
         int xpBarCap = this.mc.thePlayer.xpBarCap();
 
         if (xpBarCap > 0) {

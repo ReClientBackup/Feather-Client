@@ -51,7 +51,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.gui.GuiMemoryErrorScreen;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiSleepMP;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.achievement.GuiAchievement;
@@ -229,7 +229,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
     public FontRenderer standardGalacticFontRenderer;
 
     /** The GuiScreen that's being displayed at the moment. */
-    public GuiScreen currentScreen;
+    public Screen currentScreen;
     public LoadingScreenRenderer loadingScreen;
     public EntityRenderer entityRenderer;
 
@@ -883,30 +883,28 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
     /**
      * Sets the argument GuiScreen as the main (topmost visible) screen.
      */
-    public void displayGuiScreen(GuiScreen guiScreenIn) {
+    public void displayGuiScreen(Screen screen) {
         if (this.currentScreen != null) {
             this.currentScreen.onGuiClosed();
         }
 
-        if (guiScreenIn == null && this.theWorld == null) {
-            guiScreenIn = new MainMenuScreen();
-        } else if (guiScreenIn == null && this.thePlayer.getHealth() <= 0.0F) {
-            guiScreenIn = new GuiGameOver();
+        if (screen == null && this.theWorld == null) {
+            screen = new MainMenuScreen();
+        } else if (screen == null && this.thePlayer.getHealth() <= 0.0F) {
+            screen = new GuiGameOver();
         }
 
-        if (guiScreenIn instanceof MainMenuScreen) {
+        if (screen instanceof MainMenuScreen) {
             this.gameSettings.showDebugInfo = false;
             this.inGameScreen.getChatGUI().clearChatMessages();
         }
 
-        this.currentScreen = guiScreenIn;
+        this.currentScreen = screen;
 
-        if (guiScreenIn != null) {
+        if (screen != null) {
             this.setIngameNotInFocus();
             ScaledResolution scaledresolution = new ScaledResolution();
-            int i = scaledresolution.getScaledWidth();
-            int j = scaledresolution.getScaledHeight();
-            guiScreenIn.setWorldAndResolution(this, i, j);
+            screen.setWorldAndResolution(scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
             this.skipRenderWorld = false;
         }
         else
@@ -1579,7 +1577,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         if (this.currentScreen != null)
         {
             ScaledResolution scaledresolution = new ScaledResolution();
-            this.currentScreen.onResize(this, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
+            this.currentScreen.onResize(scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
         }
 
         this.loadingScreen = new LoadingScreenRenderer(this);
@@ -1876,7 +1874,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 
                         if (key == 33 && Keyboard.isKeyDown(61))
                         {
-                            this.gameSettings.setOptionValue(GameSettings.Options.RENDER_DISTANCE, GuiScreen.isShiftKeyDown() ? -1 : 1);
+                            this.gameSettings.setOptionValue(GameSettings.Options.RENDER_DISTANCE, Screen.isShiftKeyDown() ? -1 : 1);
                         }
 
                         if (key == 30 && Keyboard.isKeyDown(61))
@@ -1909,8 +1907,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
                         if (key == 61)
                         {
                             this.gameSettings.showDebugInfo = !this.gameSettings.showDebugInfo;
-                            this.gameSettings.showDebugProfilerChart = GuiScreen.isShiftKeyDown();
-                            this.gameSettings.field_181657_aC = GuiScreen.isAltKeyDown();
+                            this.gameSettings.showDebugProfilerChart = Screen.isShiftKeyDown();
+                            this.gameSettings.field_181657_aC = Screen.isAltKeyDown();
                         }
 
                         if (this.gameSettings.keyBindTogglePerspective.isPressed())
@@ -1992,7 +1990,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
             {
                 if (!this.thePlayer.isSpectator())
                 {
-                    this.thePlayer.dropOneItem(GuiScreen.isCtrlKeyDown());
+                    this.thePlayer.dropOneItem(Screen.isCtrlKeyDown());
                 }
             }
 
@@ -2401,7 +2399,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
                     return;
                 }
 
-                if (flag && GuiScreen.isCtrlKeyDown())
+                if (flag && Screen.isCtrlKeyDown())
                 {
                     tileentity = this.theWorld.getTileEntity(blockpos);
                 }

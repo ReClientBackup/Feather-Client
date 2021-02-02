@@ -74,8 +74,8 @@ public class GuiMerchant extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
         String s = this.chatComponent.getUnformattedText();
-        this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-        this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+        getFr().drawString(s, this.xSize / 2 - getFr().getStringWidth(s) / 2, 6, 4210752);
+        getFr().drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**
@@ -84,7 +84,7 @@ public class GuiMerchant extends GuiContainer
     public void updateScreen()
     {
         super.updateScreen();
-        MerchantRecipeList merchantrecipelist = this.merchant.getRecipes(this.mc.thePlayer);
+        MerchantRecipeList merchantrecipelist = this.merchant.getRecipes(getPlayer());
 
         if (merchantrecipelist != null)
         {
@@ -103,7 +103,7 @@ public class GuiMerchant extends GuiContainer
         if (button == this.nextButton)
         {
             ++this.selectedMerchantRecipe;
-            MerchantRecipeList merchantrecipelist = this.merchant.getRecipes(this.mc.thePlayer);
+            MerchantRecipeList merchantrecipelist = this.merchant.getRecipes(getPlayer());
 
             if (merchantrecipelist != null && this.selectedMerchantRecipe >= merchantrecipelist.size())
             {
@@ -129,7 +129,7 @@ public class GuiMerchant extends GuiContainer
             ((ContainerMerchant)this.inventorySlots).setCurrentRecipeIndex(this.selectedMerchantRecipe);
             PacketBuffer packetbuffer = new PacketBuffer(Unpooled.buffer());
             packetbuffer.writeInt(this.selectedMerchantRecipe);
-            this.mc.getNetHandler().addToSendQueue(new C17PacketCustomPayload("MC|TrSel", packetbuffer));
+            getMc().getNetHandler().addToSendQueue(new C17PacketCustomPayload("MC|TrSel", packetbuffer));
         }
     }
 
@@ -139,11 +139,11 @@ public class GuiMerchant extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(MERCHANT_GUI_TEXTURE);
+        getMc().getTextureManager().bindTexture(MERCHANT_GUI_TEXTURE);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
-        MerchantRecipeList merchantrecipelist = this.merchant.getRecipes(this.mc.thePlayer);
+        MerchantRecipeList merchantrecipelist = this.merchant.getRecipes(getPlayer());
 
         if (merchantrecipelist != null && !merchantrecipelist.isEmpty())
         {
@@ -158,7 +158,7 @@ public class GuiMerchant extends GuiContainer
 
             if (merchantrecipe.isRecipeDisabled())
             {
-                this.mc.getTextureManager().bindTexture(MERCHANT_GUI_TEXTURE);
+                getMc().getTextureManager().bindTexture(MERCHANT_GUI_TEXTURE);
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 GlStateManager.disableLighting();
                 this.drawTexturedModalRect(this.guiLeft + 83, this.guiTop + 21, 212, 0, 28, 21);
@@ -173,7 +173,7 @@ public class GuiMerchant extends GuiContainer
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         super.drawScreen(mouseX, mouseY, partialTicks);
-        MerchantRecipeList merchantrecipelist = this.merchant.getRecipes(this.mc.thePlayer);
+        MerchantRecipeList merchantrecipelist = this.merchant.getRecipes(getPlayer());
 
         if (merchantrecipelist != null && !merchantrecipelist.isEmpty())
         {
@@ -192,16 +192,16 @@ public class GuiMerchant extends GuiContainer
             GlStateManager.enableLighting();
             this.itemRender.zLevel = 100.0F;
             this.itemRender.renderItemAndEffectIntoGUI(itemstack, i + 36, j + 24);
-            this.itemRender.renderItemOverlays(this.fontRendererObj, itemstack, i + 36, j + 24);
+            this.itemRender.renderItemOverlays(getFr(), itemstack, i + 36, j + 24);
 
             if (itemstack1 != null)
             {
                 this.itemRender.renderItemAndEffectIntoGUI(itemstack1, i + 62, j + 24);
-                this.itemRender.renderItemOverlays(this.fontRendererObj, itemstack1, i + 62, j + 24);
+                this.itemRender.renderItemOverlays(getFr(), itemstack1, i + 62, j + 24);
             }
 
             this.itemRender.renderItemAndEffectIntoGUI(itemstack2, i + 120, j + 24);
-            this.itemRender.renderItemOverlays(this.fontRendererObj, itemstack2, i + 120, j + 24);
+            this.itemRender.renderItemOverlays(getFr(), itemstack2, i + 120, j + 24);
             this.itemRender.zLevel = 0.0F;
             GlStateManager.disableLighting();
 

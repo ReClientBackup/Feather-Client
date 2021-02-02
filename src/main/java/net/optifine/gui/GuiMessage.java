@@ -3,23 +3,23 @@ package net.optifine.gui;
 import com.google.common.collect.Lists;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.src.Config;
 
 import java.io.IOException;
 import java.util.List;
 
-public class GuiMessage extends GuiScreen
+public class GuiMessage extends Screen
 {
-    private GuiScreen parentScreen;
+    private Screen parentScreen;
     private String messageLine1;
     private String messageLine2;
     private final List listLines2 = Lists.newArrayList();
     protected String confirmButtonText;
     private int ticksUntilEnable;
 
-    public GuiMessage(GuiScreen parentScreen, String line1, String line2)
+    public GuiMessage(Screen parentScreen, String line1, String line2)
     {
         this.parentScreen = parentScreen;
         this.messageLine1 = line1;
@@ -35,7 +35,7 @@ public class GuiMessage extends GuiScreen
     {
         this.buttonList.add(new GuiOptionButton(0, this.width / 2 - 74, this.height / 6 + 96, this.confirmButtonText));
         this.listLines2.clear();
-        this.listLines2.addAll(this.fontRendererObj.listFormattedStringToWidth(this.messageLine2, this.width - 50));
+        this.listLines2.addAll(getFr().listFormattedStringToWidth(this.messageLine2, this.width - 50));
     }
 
     /**
@@ -52,14 +52,14 @@ public class GuiMessage extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.messageLine1, this.width / 2, 70, 16777215);
+        getFr().drawCenteredString(this.messageLine1, this.width / 2, 70, 16777215);
         int i = 90;
 
         for (Object e : this.listLines2)
         {
             String s = (String) e;
-            this.drawCenteredString(this.fontRendererObj, s, this.width / 2, i, 16777215);
-            i += this.fontRendererObj.FONT_HEIGHT;
+            getFr().drawCenteredString(s, this.width / 2, i, 16777215);
+            i += getFr().FONT_HEIGHT;
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);

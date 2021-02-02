@@ -2,19 +2,19 @@ package net.optifine.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
-public class GuiDetailSettingsOF extends GuiScreen
+public class GuiDetailSettingsOF extends Screen
 {
-    private GuiScreen prevScreen;
+    private Screen prevScreen;
     protected String title;
     private GameSettings settings;
     private static GameSettings.Options[] enumOptions = new GameSettings.Options[] {GameSettings.Options.CLOUDS, GameSettings.Options.CLOUD_HEIGHT, GameSettings.Options.TREES, GameSettings.Options.RAIN, GameSettings.Options.SKY, GameSettings.Options.STARS, GameSettings.Options.SUN_MOON, GameSettings.Options.SHOW_CAPES, GameSettings.Options.FOG_FANCY, GameSettings.Options.FOG_START, GameSettings.Options.TRANSLUCENT_BLOCKS, GameSettings.Options.HELD_ITEM_TOOLTIPS, GameSettings.Options.DROPPED_ITEMS, GameSettings.Options.ENTITY_SHADOWS, GameSettings.Options.VIGNETTE, GameSettings.Options.ALTERNATE_BLOCKS, GameSettings.Options.SWAMP_COLORS, GameSettings.Options.SMOOTH_BIOMES};
     private TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderOptions());
 
-    public GuiDetailSettingsOF(GuiScreen guiscreen, GameSettings gamesettings)
+    public GuiDetailSettingsOF(Screen guiscreen, GameSettings gamesettings)
     {
         this.prevScreen = guiscreen;
         this.settings = gamesettings;
@@ -63,8 +63,8 @@ public class GuiDetailSettingsOF extends GuiScreen
 
             if (guibutton.getId() == 200)
             {
-                this.mc.gameSettings.saveOptions();
-                this.mc.displayGuiScreen(this.prevScreen);
+                saveSettings();
+                changeScreen(this.prevScreen);
             }
         }
     }
@@ -75,7 +75,7 @@ public class GuiDetailSettingsOF extends GuiScreen
     public void drawScreen(int x, int y, float f)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.title, this.width / 2, 15, 16777215);
+        getFr().drawCenteredString(this.title, this.width / 2, 15, 16777215);
         super.drawScreen(x, y, f);
         this.tooltipManager.drawTooltips(x, y, this.buttonList);
     }

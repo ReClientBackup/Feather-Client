@@ -2,6 +2,8 @@ package net.minecraft.client.gui;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.murengezi.minecraft.client.gui.GUI;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -9,10 +11,9 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.MathHelper;
 
-public class GuiTextField extends Gui
+public class GuiTextField extends GUI
 {
     private final int id;
-    private final FontRenderer fontRendererInstance;
     public int xPosition;
     public int yPosition;
 
@@ -57,10 +58,9 @@ public class GuiTextField extends Gui
     private GuiPageButtonList.GuiResponder field_175210_x;
     private Predicate<String> field_175209_y = Predicates.alwaysTrue();
 
-    public GuiTextField(int componentId, FontRenderer fontrendererObj, int x, int y, int par5Width, int par6Height)
+    public GuiTextField(int componentId, int x, int y, int par5Width, int par6Height)
     {
         this.id = componentId;
-        this.fontRendererInstance = fontrendererObj;
         this.xPosition = x;
         this.yPosition = y;
         this.width = par5Width;
@@ -332,21 +332,21 @@ public class GuiTextField extends Gui
     public boolean textBoxKeyTyped(char typedChar, int keyCode) {
         if (!this.isFocused) {
             return false;
-        } else if (GuiScreen.isKeyComboCtrlA(keyCode)) {
+        } else if (Screen.isKeyComboCtrlA(keyCode)) {
             this.setCursorPositionEnd();
             this.setSelectionPos(0);
             return true;
-        } else if (GuiScreen.isKeyComboCtrlC(keyCode)) {
-            GuiScreen.setClipboardString(this.getSelectedText());
+        } else if (Screen.isKeyComboCtrlC(keyCode)) {
+            Screen.setClipboardString(this.getSelectedText());
             return true;
-        } else if (GuiScreen.isKeyComboCtrlV(keyCode)) {
+        } else if (Screen.isKeyComboCtrlV(keyCode)) {
             if (this.isEnabled) {
-                this.writeText(GuiScreen.getClipboardString());
+                this.writeText(Screen.getClipboardString());
             }
 
             return true;
-        } else if (GuiScreen.isKeyComboCtrlX(keyCode)) {
-            GuiScreen.setClipboardString(this.getSelectedText());
+        } else if (Screen.isKeyComboCtrlX(keyCode)) {
+            Screen.setClipboardString(this.getSelectedText());
 
             if (this.isEnabled) {
                 this.writeText("");
@@ -356,7 +356,7 @@ public class GuiTextField extends Gui
         } else {
             switch (keyCode) {
                 case 14:
-                    if (GuiScreen.isCtrlKeyDown()) {
+                    if (Screen.isCtrlKeyDown()) {
                         if (this.isEnabled) {
                             this.deleteWords(-1);
                         }
@@ -367,7 +367,7 @@ public class GuiTextField extends Gui
                     return true;
 
                 case 199:
-                    if (GuiScreen.isShiftKeyDown()) {
+                    if (Screen.isShiftKeyDown()) {
                         this.setSelectionPos(0);
                     } else {
                         this.setCursorPositionZero();
@@ -376,13 +376,13 @@ public class GuiTextField extends Gui
                     return true;
 
                 case 203:
-                    if (GuiScreen.isShiftKeyDown()) {
-                        if (GuiScreen.isCtrlKeyDown()) {
+                    if (Screen.isShiftKeyDown()) {
+                        if (Screen.isCtrlKeyDown()) {
                             this.setSelectionPos(this.getNthWordFromPos(-1, this.getSelectionEnd()));
                         } else {
                             this.setSelectionPos(this.getSelectionEnd() - 1);
                         }
-                    } else if (GuiScreen.isCtrlKeyDown()) {
+                    } else if (Screen.isCtrlKeyDown()) {
                         this.setCursorPosition(this.getNthWordFromCursor(-1));
                     } else {
                         this.moveCursorBy(-1);
@@ -391,13 +391,13 @@ public class GuiTextField extends Gui
                     return true;
 
                 case 205:
-                    if (GuiScreen.isShiftKeyDown()) {
-                        if (GuiScreen.isCtrlKeyDown()) {
+                    if (Screen.isShiftKeyDown()) {
+                        if (Screen.isCtrlKeyDown()) {
                             this.setSelectionPos(this.getNthWordFromPos(1, this.getSelectionEnd()));
                         } else {
                             this.setSelectionPos(this.getSelectionEnd() + 1);
                         }
-                    } else if (GuiScreen.isCtrlKeyDown()) {
+                    } else if (Screen.isCtrlKeyDown()) {
                         this.setCursorPosition(this.getNthWordFromCursor(1));
                     } else {
                         this.moveCursorBy(1);
@@ -406,7 +406,7 @@ public class GuiTextField extends Gui
                     return true;
 
                 case 207:
-                    if (GuiScreen.isShiftKeyDown()) {
+                    if (Screen.isShiftKeyDown()) {
                         this.setSelectionPos(this.text.length());
                     } else {
                         this.setCursorPositionEnd();
@@ -415,7 +415,7 @@ public class GuiTextField extends Gui
                     return true;
 
                 case 211:
-                    if (GuiScreen.isCtrlKeyDown()) {
+                    if (Screen.isCtrlKeyDown()) {
                         if (this.isEnabled) {
                             this.deleteWords(1);
                         }
@@ -456,8 +456,8 @@ public class GuiTextField extends Gui
                 i -= 4;
             }
 
-            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth());
-            this.setCursorPosition(this.fontRendererInstance.trimStringToWidth(s, i).length() + this.lineScrollOffset);
+            String s = getFr().trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth());
+            this.setCursorPosition(getFr().trimStringToWidth(s, i).length() + this.lineScrollOffset);
         }
     }
 
@@ -477,7 +477,7 @@ public class GuiTextField extends Gui
             int i = this.isEnabled ? this.enabledColor : this.disabledColor;
             int j = this.cursorPosition - this.lineScrollOffset;
             int k = this.selectionEnd - this.lineScrollOffset;
-            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth());
+            String s = getFr().trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth());
             boolean flag = j >= 0 && j <= s.length();
             boolean flag1 = this.isFocused && this.cursorCounter / 6 % 2 == 0 && flag;
             int l = this.enableBackgroundDrawing ? this.xPosition + 4 : this.xPosition;
@@ -492,7 +492,7 @@ public class GuiTextField extends Gui
             if (s.length() > 0)
             {
                 String s1 = flag ? s.substring(0, j) : s;
-                j1 = this.fontRendererInstance.drawStringWithShadow(s1, (float)l, (float)i1, i);
+                j1 = getFr().drawStringWithShadow(s1, (float)l, (float)i1, i);
             }
 
             boolean flag2 = this.cursorPosition < this.text.length() || this.text.length() >= this.getMaxStringLength();
@@ -510,25 +510,25 @@ public class GuiTextField extends Gui
 
             if (s.length() > 0 && flag && j < s.length())
             {
-                j1 = this.fontRendererInstance.drawStringWithShadow(s.substring(j), (float)j1, (float)i1, i);
+                j1 = getFr().drawStringWithShadow(s.substring(j), (float)j1, (float)i1, i);
             }
 
             if (flag1)
             {
                 if (flag2)
                 {
-                    Gui.drawRect(k1, i1 - 1, k1 + 1, i1 + 1 + this.fontRendererInstance.FONT_HEIGHT, -3092272);
+                    GUI.drawRect(k1, i1 - 1, k1 + 1, i1 + 1 + getFr().FONT_HEIGHT, -3092272);
                 }
                 else
                 {
-                    this.fontRendererInstance.drawStringWithShadow("_", (float)k1, (float)i1, i);
+                    getFr().drawStringWithShadow("_", (float)k1, (float)i1, i);
                 }
             }
 
             if (k != j)
             {
-                int l1 = l + this.fontRendererInstance.getStringWidth(s.substring(0, k));
-                this.drawCursorVertical(k1, i1 - 1, l1 - 1, i1 + 1 + this.fontRendererInstance.FONT_HEIGHT);
+                int l1 = l + getFr().getStringWidth(s.substring(0, k));
+                this.drawCursorVertical(k1, i1 - 1, l1 - 1, i1 + 1 + getFr().FONT_HEIGHT);
             }
         }
     }
@@ -692,7 +692,7 @@ public class GuiTextField extends Gui
 
         this.selectionEnd = p_146199_1_;
 
-        if (this.fontRendererInstance != null)
+        if (getFr() != null)
         {
             if (this.lineScrollOffset > i)
             {
@@ -700,12 +700,12 @@ public class GuiTextField extends Gui
             }
 
             int j = this.getWidth();
-            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), j);
+            String s = getFr().trimStringToWidth(this.text.substring(this.lineScrollOffset), j);
             int k = s.length() + this.lineScrollOffset;
 
             if (p_146199_1_ == this.lineScrollOffset)
             {
-                this.lineScrollOffset -= this.fontRendererInstance.trimStringToWidth(this.text, j, true).length();
+                this.lineScrollOffset -= getFr().trimStringToWidth(this.text, j, true).length();
             }
 
             if (p_146199_1_ > k)

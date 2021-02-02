@@ -3,8 +3,8 @@ package net.optifine.gui;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.GUI;
+import com.murengezi.minecraft.client.gui.Screen;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -12,13 +12,13 @@ import java.util.List;
 
 public class TooltipManager
 {
-    private GuiScreen guiScreen;
+    private Screen guiScreen;
     private TooltipProvider tooltipProvider;
     private int lastMouseX = 0;
     private int lastMouseY = 0;
     private long mouseStillTime = 0L;
 
-    public TooltipManager(GuiScreen guiScreen, TooltipProvider tooltipProvider)
+    public TooltipManager(Screen guiScreen, TooltipProvider tooltipProvider)
     {
         this.guiScreen = guiScreen;
         this.tooltipProvider = tooltipProvider;
@@ -53,7 +53,7 @@ public class TooltipManager
                             this.drawRectBorder(rectangle.x, rectangle.y, rectangle.x + rectangle.width, rectangle.y + rectangle.height, j);
                         }
 
-                        Gui.drawRect(rectangle.x, rectangle.y, rectangle.x + rectangle.width, rectangle.y + rectangle.height, -536870912);
+                        GUI.drawRect(rectangle.x, rectangle.y, rectangle.x + rectangle.width, rectangle.y + rectangle.height, -536870912);
 
                         for (int l = 0; l < astring.length; ++l)
                         {
@@ -82,9 +82,9 @@ public class TooltipManager
 
     private void drawRectBorder(int x1, int y1, int x2, int y2, int col)
     {
-        Gui.drawRect(x1, y1 - 1, x2, y1, col);
-        Gui.drawRect(x1, y2, x2, y2 + 1, col);
-        Gui.drawRect(x1 - 1, y1, x1, y2, col);
-        Gui.drawRect(x2, y1, x2 + 1, y2, col);
+        GUI.drawRect(x1, y1 - 1, x2, y1, col);
+        GUI.drawRect(x1, y2, x2, y2 + 1, col);
+        GUI.drawRect(x1 - 1, y1, x1, y2, col);
+        GUI.drawRect(x2, y1, x2 + 1, y2, col);
     }
 }

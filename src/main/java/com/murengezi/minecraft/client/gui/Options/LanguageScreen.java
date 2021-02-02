@@ -5,9 +5,8 @@ import com.google.common.collect.Maps;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.fGuiSlot;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.client.gui.GuiOptionButton;
-import net.minecraft.client.gui.GuiScreen;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -25,7 +24,7 @@ import java.util.Map;
  */
 public class LanguageScreen extends Screen {
 	
-	private final GuiScreen previousScreen;
+	private final Screen previousScreen;
 	private LanguageSlots languageSlots;
 	private final GameSettings gameSettings;
 	private final LanguageManager languageManager;
@@ -33,7 +32,7 @@ public class LanguageScreen extends Screen {
 	public static final int UNICODE = 0;
 	public static final int DONE = 1;
 
-	public LanguageScreen(GuiScreen previousScreen, GameSettings gameSettings, LanguageManager manager) {
+	public LanguageScreen(Screen previousScreen, GameSettings gameSettings, LanguageManager manager) {
 		this.previousScreen = previousScreen;
 		this.gameSettings = gameSettings;
 		this.languageManager = manager;
@@ -62,7 +61,7 @@ public class LanguageScreen extends Screen {
 					this.gameSettings.setOptionValue(((GuiOptionButton)button).returnEnumOptions(), 1);
 					button.displayString = this.gameSettings.getKeyBinding(GameSettings.Options.FORCE_UNICODE_FONT);
 					ScaledResolution resolution = new ScaledResolution();
-					this.setWorldAndResolution(this.mc, resolution.getScaledWidth(), resolution.getScaledHeight());
+					this.setWorldAndResolution(resolution.getScaledWidth(), resolution.getScaledHeight());
 					break;
 				case DONE:
 					changeScreen(previousScreen);
@@ -85,12 +84,12 @@ public class LanguageScreen extends Screen {
 		languageSlots.drawScreen(mouseX, mouseY, partialTicks);
 		GL11.glDisable(GL11.GL_SCISSOR_TEST);
 		GlStateManager.popMatrix();
-		Gui.drawRect(0, 0, languageSlots.getWidth(), languageSlots.getTop(), Integer.MIN_VALUE);
-		Gui.drawRect(0, languageSlots.getBottom(), languageSlots.getWidth(), this.height, Integer.MIN_VALUE);
+		GUI.drawRect(0, 0, languageSlots.getWidth(), languageSlots.getTop(), Integer.MIN_VALUE);
+		GUI.drawRect(0, languageSlots.getBottom(), languageSlots.getWidth(), this.height, Integer.MIN_VALUE);
 
 
-		this.drawCenteredString(this.fontRendererObj, I18n.format("options.language"), this.width / 2, 16, 16777215);
-		this.drawCenteredString(this.fontRendererObj, "(" + I18n.format("options.languageWarning") + ")", this.width / 2, this.height - 56, 8421504);
+		getFr().drawCenteredString(I18n.format("options.language"), this.width / 2, 16, 16777215);
+		getFr().drawCenteredString("(" + I18n.format("options.languageWarning") + ")", this.width / 2, this.height - 56, 8421504);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
@@ -118,9 +117,9 @@ public class LanguageScreen extends Screen {
 			Language language = this.languageMap.get(this.langCodeList.get(slotIndex));
 			LanguageScreen.this.languageManager.setCurrentLanguage(language);
 			LanguageScreen.this.gameSettings.language = language.getLanguageCode();
-			LanguageScreen.this.mc.refreshResources();
-			LanguageScreen.this.fontRendererObj.setUnicodeFlag(LanguageScreen.this.languageManager.isCurrentLocaleUnicode() || LanguageScreen.this.gameSettings.forceUnicodeFont);
-			LanguageScreen.this.fontRendererObj.setBidiFlag(LanguageScreen.this.languageManager.isCurrentLanguageBidirectional());
+			getMc().refreshResources();
+			getFr().setUnicodeFlag(LanguageScreen.this.languageManager.isCurrentLocaleUnicode() || LanguageScreen.this.gameSettings.forceUnicodeFont);
+			getFr().setBidiFlag(LanguageScreen.this.languageManager.isCurrentLanguageBidirectional());
 			LanguageScreen.this.getButton(DONE).displayString = I18n.format("gui.done");
 			LanguageScreen.this.getButton(UNICODE).displayString = LanguageScreen.this.gameSettings.getKeyBinding(GameSettings.Options.FORCE_UNICODE_FONT);
 			saveSettings();
@@ -141,9 +140,9 @@ public class LanguageScreen extends Screen {
 
 		@Override
 		protected void drawSlot(int entryID, int x, int y, int p_180791_4_, int mouseXIn, int mouseYIn) {
-			LanguageScreen.this.fontRendererObj.setBidiFlag(true);
-			LanguageScreen.this.drawCenteredString(LanguageScreen.this.fontRendererObj, this.languageMap.get(this.langCodeList.get(entryID)).toString(), this.width / 2, y + 1, 16777215);
-			LanguageScreen.this.fontRendererObj.setBidiFlag(LanguageScreen.this.languageManager.getCurrentLanguage().isBidirectional());
+			getFr().setBidiFlag(true);
+			getFr().drawCenteredString(this.languageMap.get(this.langCodeList.get(entryID)).toString(), this.width / 2, y + 1, 16777215);
+			getFr().setBidiFlag(LanguageScreen.this.languageManager.getCurrentLanguage().isBidirectional());
 		}
 	}
 	

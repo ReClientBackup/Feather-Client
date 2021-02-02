@@ -2,7 +2,7 @@ package com.murengezi.feather.Image;
 
 import com.murengezi.feather.Util.MinecraftUtils;
 import com.murengezi.feather.Util.TimerUtil;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.ResourceLocation;
@@ -43,7 +43,7 @@ public class ImageManager extends MinecraftUtils {
                     GlStateManager.pushMatrix();
                     GlStateManager.color(1f, 1f, 1f);
                     getMc().getTextureManager().bindTexture(resourceLocation);
-                    Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, width, height, width, height);
+                    GUI.drawModalRectWithCustomSizedTexture(x, y, 0, 0, width, height, width, height);
                     GlStateManager.popMatrix();
                 }
             } else if (!getQueue().contains(url)) {

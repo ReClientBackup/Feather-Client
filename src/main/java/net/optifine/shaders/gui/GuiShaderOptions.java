@@ -2,7 +2,7 @@ package net.optifine.shaders.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.src.Config;
@@ -18,7 +18,7 @@ import net.optifine.shaders.config.ShaderOptionScreen;
 
 public class GuiShaderOptions extends GuiScreenOF
 {
-    private GuiScreen prevScreen;
+    private Screen prevScreen;
     protected String title;
     private GameSettings settings;
     private TooltipManager tooltipManager;
@@ -29,7 +29,7 @@ public class GuiShaderOptions extends GuiScreenOF
     public static final String OPTION_EMPTY = "<empty>";
     public static final String OPTION_REST = "*";
 
-    public GuiShaderOptions(GuiScreen guiscreen, GameSettings gamesettings)
+    public GuiShaderOptions(Screen guiscreen, GameSettings gamesettings)
     {
         this.tooltipManager = new TooltipManager(this, new TooltipProviderShaderOptions());
         this.screenName = null;
@@ -40,7 +40,7 @@ public class GuiShaderOptions extends GuiScreenOF
         this.settings = gamesettings;
     }
 
-    public GuiShaderOptions(GuiScreen guiscreen, GameSettings gamesettings, String screenName)
+    public GuiShaderOptions(Screen guiscreen, GameSettings gamesettings, String screenName)
     {
         this(guiscreen, gamesettings);
         this.screenName = screenName;
@@ -151,7 +151,7 @@ public class GuiShaderOptions extends GuiScreenOF
                 {
                     String s = shaderoption.getName();
                     GuiShaderOptions guishaderoptions = new GuiShaderOptions(this, this.settings, s);
-                    this.mc.displayGuiScreen(guishaderoptions);
+                    changeScreen(guishaderoptions);
                     return;
                 }
 
@@ -191,7 +191,7 @@ public class GuiShaderOptions extends GuiScreenOF
                     Shaders.uninit();
                 }
 
-                this.mc.displayGuiScreen(this.prevScreen);
+                changeScreen(this.prevScreen);
             }
         }
     }
@@ -262,11 +262,11 @@ public class GuiShaderOptions extends GuiScreenOF
 
         if (this.screenText != null)
         {
-            this.drawCenteredString(this.fontRendererObj, this.screenText, this.width / 2, 15, 16777215);
+            getFr().drawCenteredString(this.screenText, this.width / 2, 15, 16777215);
         }
         else
         {
-            this.drawCenteredString(this.fontRendererObj, this.title, this.width / 2, 15, 16777215);
+            getFr().drawCenteredString(this.title, this.width / 2, 15, 16777215);
         }
 
         super.drawScreen(x, y, f);

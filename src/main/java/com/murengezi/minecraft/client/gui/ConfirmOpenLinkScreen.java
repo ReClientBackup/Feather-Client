@@ -53,7 +53,7 @@ public class ConfirmOpenLinkScreen extends YesNoScreen {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
         if (this.showSecurityWarning) {
-            this.drawCenteredString(this.fontRendererObj, this.openLinkWarning, this.width / 2, 110, 16764108);
+            getFr().drawCenteredString(this.openLinkWarning, this.width / 2, 110, 16764108);
         }
     }
 

@@ -19,7 +19,7 @@ public class GuiChatOF extends GuiChat
     {
         if (this.checkCustomCommand(msg))
         {
-            this.mc.inGameScreen.getChatGUI().addToSentMessages(msg);
+            getMc().inGameScreen.getChatGUI().addToSentMessages(msg);
         }
         else
         {
@@ -49,7 +49,7 @@ public class GuiChatOF extends GuiChat
             }
             else if (msg.equals("/reloadChunks"))
             {
-                this.mc.renderGlobal.loadRenderers();
+                getMc().renderGlobal.loadRenderers();
                 return true;
             }
             else

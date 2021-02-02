@@ -2,7 +2,6 @@ package com.murengezi.minecraft.client.gui.Options;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.util.EnumChatFormatting;
@@ -18,12 +17,12 @@ import java.util.Arrays;
  */
 public class SkinOptionsScreen extends Screen {
 
-    private final GuiScreen previousScreen;
+    private final Screen previousScreen;
 
     private static final int OPTIFINECAPE = 0;
     private static final int DONE = 1;
 
-    public SkinOptionsScreen(GuiScreen previousScreen) {
+    public SkinOptionsScreen(Screen previousScreen) {
         this.previousScreen = previousScreen;
     }
 
@@ -46,13 +45,13 @@ public class SkinOptionsScreen extends Screen {
                 changeScreen(new GuiScreenCapeOF(this));
                 break;
             case DONE:
-                mc.gameSettings.saveOptions();
+                saveSettings();
                 changeScreen(getPreviousScreen());
                 break;
             default:
                 if (button instanceof Button) {
                     EnumPlayerModelParts playerModelParts = ((Button)button).getPlayerModelParts();
-                    mc.gameSettings.switchModelPartEnabled(playerModelParts);
+                    getMc().gameSettings.switchModelPartEnabled(playerModelParts);
                     button.displayString = getLabel(playerModelParts);
                 }
                 break;
@@ -65,15 +64,15 @@ public class SkinOptionsScreen extends Screen {
         drawDefaultBackground(mouseX, mouseY, 60);
 
         drawRect(this.width / 2 - 160, this.height / 6 + 15, this.width / 2 + 160, this.height / 6 + 169, Integer.MIN_VALUE);
-        drawCenteredString(fontRendererObj, EnumChatFormatting.UNDERLINE + I18n.format("options.skinCustomisation.title"), this.width / 2, this.height / 6 + 20, 0xffffff);
+        getFr().drawCenteredString(EnumChatFormatting.UNDERLINE + I18n.format("options.skinCustomisation.title"), this.width / 2, this.height / 6 + 20, 0xffffff);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     private String getLabel(EnumPlayerModelParts playerModelParts) {
-        return playerModelParts.getChatComponent().getFormattedText() + ": " + I18n.format("options." + (mc.gameSettings.getModelParts().contains(playerModelParts) ? "on" : "off"));
+        return playerModelParts.getChatComponent().getFormattedText() + ": " + I18n.format("options." + (getMc().gameSettings.getModelParts().contains(playerModelParts) ? "on" : "off"));
     }
 
-    public GuiScreen getPreviousScreen() {
+    public Screen getPreviousScreen() {
         return previousScreen;
     }
 

@@ -1,7 +1,7 @@
 package net.optifine.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.settings.GameSettings;
 import net.optifine.Lang;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TooltipProviderOptions implements TooltipProvider
 {
-    public Rectangle getTooltipBounds(GuiScreen guiScreen, int x, int y)
+    public Rectangle getTooltipBounds(Screen guiScreen, int x, int y)
     {
         int i = guiScreen.width / 2 - 150;
         int j = guiScreen.height / 6 - 7;

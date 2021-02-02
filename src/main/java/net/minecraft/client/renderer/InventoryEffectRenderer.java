@@ -31,7 +31,7 @@ public abstract class InventoryEffectRenderer extends GuiContainer
     protected void updateActivePotionEffects()
     {
         this.guiLeft = (this.width - this.xSize) / 2;
-        this.hasActivePotionEffects = !this.mc.thePlayer.getActivePotionEffects().isEmpty();
+        this.hasActivePotionEffects = !getPlayer().getActivePotionEffects().isEmpty();
     }
 
     /**
@@ -55,7 +55,7 @@ public abstract class InventoryEffectRenderer extends GuiContainer
         int i = this.guiLeft - 124;
         int j = this.guiTop;
         int k = 166;
-        Collection<PotionEffect> collection = this.mc.thePlayer.getActivePotionEffects();
+        Collection<PotionEffect> collection = getPlayer().getActivePotionEffects();
 
         if (!collection.isEmpty())
         {
@@ -68,11 +68,11 @@ public abstract class InventoryEffectRenderer extends GuiContainer
                 l = 132 / (collection.size() - 1);
             }
 
-            for (PotionEffect effect : this.mc.thePlayer.getActivePotionEffects())
+            for (PotionEffect effect : getPlayer().getActivePotionEffects())
             {
                 Potion potion = Potion.potionTypes[effect.getPotionID()];
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-                this.mc.getTextureManager().bindTexture(inventoryBackground);
+                getMc().getTextureManager().bindTexture(inventoryBackground);
                 this.drawTexturedModalRect(i, j, 0, 166, 140, 32);
 
                 if (potion.hasStatusIcon())
@@ -96,9 +96,9 @@ public abstract class InventoryEffectRenderer extends GuiContainer
                     s1 = s1 + " " + I18n.format("enchantment.level.4", new Object[0]);
                 }
 
-                this.fontRendererObj.drawStringWithShadow(s1, (float)(i + 10 + 18), (float)(j + 6), 16777215);
+                getFr().drawStringWithShadow(s1, (float)(i + 10 + 18), (float)(j + 6), 16777215);
                 String s = Potion.getDurationString(effect);
-                this.fontRendererObj.drawStringWithShadow(s, (float)(i + 10 + 18), (float)(j + 6 + 10), 8355711);
+                getFr().drawStringWithShadow(s, (float)(i + 10 + 18), (float)(j + 6 + 10), 8355711);
                 j += l;
             }
         }

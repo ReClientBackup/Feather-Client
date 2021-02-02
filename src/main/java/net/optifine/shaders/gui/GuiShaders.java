@@ -2,7 +2,7 @@ package net.optifine.shaders.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.src.Config;
@@ -18,9 +18,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
-public class GuiShaders extends GuiScreen
+public class GuiShaders extends Screen
 {
-    protected GuiScreen parentGui;
+    protected Screen parentGui;
     protected String screenTitle = "Shaders";
     private TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderEnumShaderOptions());
     private int updateTimer = -1;
@@ -36,7 +36,7 @@ public class GuiShaders extends GuiScreen
     public static final int EnumOS_SOLARIS = 3;
     public static final int EnumOS_LINUX = 4;
 
-    public GuiShaders(GuiScreen par1GuiScreen, GameSettings par2GameSettings)
+    public GuiShaders(Screen par1GuiScreen, GameSettings par2GameSettings)
     {
         this.parentGui = par1GuiScreen;
     }
@@ -123,13 +123,13 @@ public class GuiShaders extends GuiScreen
                     case NORMAL_MAP:
                         Shaders.configNormalMap = !Shaders.configNormalMap;
                         Shaders.uninit();
-                        this.mc.scheduleResourcesRefresh();
+                        getMc().scheduleResourcesRefresh();
                         break;
 
                     case SPECULAR_MAP:
                         Shaders.configSpecularMap = !Shaders.configSpecularMap;
                         Shaders.uninit();
-                        this.mc.scheduleResourcesRefresh();
+                        getMc().scheduleResourcesRefresh();
                         break;
 
                     case RENDER_RES_MUL:
@@ -230,7 +230,7 @@ public class GuiShaders extends GuiScreen
                         Shaders.configOldLighting.nextValue();
                         Shaders.updateBlockLightLevel();
                         Shaders.uninit();
-                        this.mc.scheduleResourcesRefresh();
+                        getMc().scheduleResourcesRefresh();
                         break;
 
                     case TWEAK_BLOCK_DAMAGE:
@@ -307,7 +307,7 @@ public class GuiShaders extends GuiScreen
                         {
                             Class oclass1 = Class.forName("java.awt.Desktop");
                             Object object1 = oclass1.getMethod("getDesktop", new Class[0]).invoke(null, new Object[0]);
-                            oclass1.getMethod("browse", new Class[] {URI.class}).invoke(object1, new Object[] {(new File(this.mc.mcDataDir, "shaderpacks")).toURI()});
+                            oclass1.getMethod("browse", new Class[] {URI.class}).invoke(object1, new Object[] {(new File(getMc().mcDataDir, "shaderpacks")).toURI()});
                         }
                         catch (Throwable throwable1)
                         {
@@ -326,7 +326,7 @@ public class GuiShaders extends GuiScreen
                     case 202:
                         Shaders.storeConfig();
                         this.saved = true;
-                        this.mc.displayGuiScreen(this.parentGui);
+                        changeScreen(this.parentGui);
                         break;
 
                     case 203:
@@ -338,8 +338,8 @@ public class GuiShaders extends GuiScreen
                         try
                         {
                             Class<?> oclass = Class.forName("java.awt.Desktop");
-                            Object object = oclass.getMethod("getDesktop", new Class[0]).invoke(null, new Object[0]);
-                            oclass.getMethod("browse", new Class[] {URI.class}).invoke(object, new Object[] {new URI("http://optifine.net/shaderPacks")});
+                            Object object = oclass.getMethod("getDesktop").invoke(null);
+                            oclass.getMethod("browse", URI.class).invoke(object, new URI("http://optifine.net/shaderPacks"));
                         }
                         catch (Throwable throwable)
                         {
@@ -386,17 +386,17 @@ public class GuiShaders extends GuiScreen
             this.updateTimer += 20;
         }
 
-        this.drawCenteredString(this.fontRendererObj, this.screenTitle + " ", this.width / 2, 15, 16777215);
+        getFr().drawCenteredString(this.screenTitle + " ", this.width / 2, 15, 16777215);
         String s = "OpenGL: " + Shaders.glVersionString + ", " + Shaders.glVendorString + ", " + Shaders.glRendererString;
-        int i = this.fontRendererObj.getStringWidth(s);
+        int stringWidth = getFr().getStringWidth(s);
 
-        if (i < this.width - 5)
+        if (stringWidth < this.width - 5)
         {
-            this.drawCenteredString(this.fontRendererObj, s, this.width / 2, this.height - 40, 8421504);
+            getFr().drawCenteredString(s, this.width / 2, this.height - 40, 8421504);
         }
         else
         {
-            this.drawString(this.fontRendererObj, s, 5, this.height - 40, 8421504);
+            getFr().drawString(s, 5, this.height - 40, 8421504);
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -412,14 +412,9 @@ public class GuiShaders extends GuiScreen
         --this.updateTimer;
     }
 
-    public Minecraft getMc()
-    {
-        return this.mc;
-    }
-
     public void drawCenteredString(String text, int x, int y, int color)
     {
-        this.drawCenteredString(this.fontRendererObj, text, x, y, color);
+        getFr().drawCenteredString(text, x, y, color);
     }
 
     public static String toStringOnOff(boolean value)

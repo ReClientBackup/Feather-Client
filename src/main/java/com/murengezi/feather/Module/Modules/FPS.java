@@ -6,7 +6,7 @@ import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.ModuleInfo;
 import com.murengezi.feather.Module.Setting.Settings.ModeSetting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.util.EnumChatFormatting;
 
 import java.util.Arrays;
@@ -30,7 +30,7 @@ public class FPS extends Adjustable {
 		switch (getModeSetting("Mode").getValue()) {
 			case "Normal":
 				String fps = "FPS: " + Minecraft.getDebugFPS();
-				Gui.drawRect(x, y, x + getFr().getStringWidth(fps), y + getFr().FONT_HEIGHT, Integer.MIN_VALUE);
+				GUI.drawRect(x, y, x + getFr().getStringWidth(fps), y + getFr().FONT_HEIGHT, Integer.MIN_VALUE);
 				getFr().drawStringWithShadow(fps, x, y, 0xffffff);
 				setWidth(getFr().getStringWidth(fps));
 				break;

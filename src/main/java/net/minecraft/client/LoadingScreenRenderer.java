@@ -1,6 +1,6 @@
 package net.minecraft.client;
 
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -184,7 +184,7 @@ public class LoadingScreenRenderer implements IProgressUpdate
                     }
                     else
                     {
-                        this.mc.getTextureManager().bindTexture(Gui.optionsBackground);
+                        this.mc.getTextureManager().bindTexture(GUI.optionsBackground);
                         float f = 32.0F;
                         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
                         worldrenderer.pos(0.0D, l, 0.0D).tex(0.0D, (float)l / f).color(64, 64, 64, 255).func_181675_d();

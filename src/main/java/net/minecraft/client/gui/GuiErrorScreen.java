@@ -3,9 +3,10 @@ package net.minecraft.client.gui;
 import java.io.IOException;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
 
-public class GuiErrorScreen extends GuiScreen
+public class GuiErrorScreen extends Screen
 {
     private String field_146313_a;
     private String field_146312_f;
@@ -32,8 +33,8 @@ public class GuiErrorScreen extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawGradientRect(0, 0, this.width, this.height, -12574688, -11530224);
-        this.drawCenteredString(this.fontRendererObj, this.field_146313_a, this.width / 2, 90, 16777215);
-        this.drawCenteredString(this.fontRendererObj, this.field_146312_f, this.width / 2, 110, 16777215);
+        getFr().drawCenteredString(this.field_146313_a, this.width / 2, 90, 16777215);
+        getFr().drawCenteredString(this.field_146312_f, this.width / 2, 110, 16777215);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -48,8 +49,7 @@ public class GuiErrorScreen extends GuiScreen
     /**
      * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
      */
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
-        this.mc.displayGuiScreen(null);
+    protected void actionPerformed(GuiButton button) throws IOException {
+        changeScreen(null);
     }
 }

@@ -4,19 +4,19 @@ import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.WorldSelection.YesNoCallback;
 import com.murengezi.minecraft.client.gui.YesNoScreen;
 import net.minecraft.client.gui.GuiOptionButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
-public class GuiOtherSettingsOF extends GuiScreen implements YesNoCallback
+public class GuiOtherSettingsOF extends Screen implements YesNoCallback
 {
-    private GuiScreen prevScreen;
+    private Screen prevScreen;
     protected String title;
     private GameSettings settings;
     private static GameSettings.Options[] enumOptions = new GameSettings.Options[] {GameSettings.Options.LAGOMETER, GameSettings.Options.PROFILER, GameSettings.Options.SHOW_FPS, GameSettings.Options.ADVANCED_TOOLTIPS, GameSettings.Options.WEATHER, GameSettings.Options.TIME, GameSettings.Options.USE_FULLSCREEN, GameSettings.Options.FULLSCREEN_MODE, GameSettings.Options.ANAGLYPH, GameSettings.Options.AUTOSAVE_TICKS, GameSettings.Options.SCREENSHOT_SIZE, GameSettings.Options.SHOW_GL_ERRORS};
     private TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderOptions());
 
-    public GuiOtherSettingsOF(GuiScreen guiscreen, GameSettings gamesettings)
+    public GuiOtherSettingsOF(Screen guiscreen, GameSettings gamesettings)
     {
         this.prevScreen = guiscreen;
         this.settings = gamesettings;
@@ -66,27 +66,26 @@ public class GuiOtherSettingsOF extends GuiScreen implements YesNoCallback
 
             if (guibutton.getId() == 200)
             {
-                this.mc.gameSettings.saveOptions();
-                this.mc.displayGuiScreen(this.prevScreen);
+                saveSettings();
+                changeScreen(this.prevScreen);
             }
 
             if (guibutton.getId() == 210)
             {
-                this.mc.gameSettings.saveOptions();
+                saveSettings();
                 YesNoScreen yesNoScreen = new YesNoScreen(this, I18n.format("of.message.other.reset"), "", 9999);
-                this.mc.displayGuiScreen(yesNoScreen);
+                changeScreen(yesNoScreen);
             }
         }
     }
 
     public void confirmClicked(boolean flag, int i)
     {
-        if (flag)
-        {
-            this.mc.gameSettings.resetSettings();
+        if (flag) {
+            getMc().gameSettings.resetSettings();
         }
 
-        this.mc.displayGuiScreen(this);
+        changeScreen(this);
     }
 
     /**
@@ -95,7 +94,7 @@ public class GuiOtherSettingsOF extends GuiScreen implements YesNoCallback
     public void drawScreen(int x, int y, float f)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.title, this.width / 2, 15, 16777215);
+        getFr().drawCenteredString(this.title, this.width / 2, 15, 16777215);
         super.drawScreen(x, y, f);
         this.tooltipManager.drawTooltips(x, y, this.buttonList);
     }

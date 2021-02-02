@@ -1,13 +1,13 @@
 package net.optifine.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 
 import java.awt.*;
 
 public interface TooltipProvider
 {
-    Rectangle getTooltipBounds(GuiScreen var1, int var2, int var3);
+    Rectangle getTooltipBounds(Screen var1, int var2, int var3);
 
     String[] getTooltipLines(GuiButton var1, int var2);
 

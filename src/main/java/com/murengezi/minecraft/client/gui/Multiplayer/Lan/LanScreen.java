@@ -4,7 +4,6 @@ import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.GuiListExtended;
 import com.murengezi.minecraft.client.gui.Multiplayer.ConnectingScreen;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.GuiScreen;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.I18n;
@@ -20,7 +19,7 @@ import java.util.List;
  */
 public class LanScreen extends Screen {
 
-    private final GuiScreen previousScreen;
+    private final Screen previousScreen;
     private ServerData selectedServer;
     private LanSelectionList lanSelectionList;
     private LanServerDetector.LanServerList lanServerList;
@@ -33,7 +32,7 @@ public class LanScreen extends Screen {
     private static final int REFRESH = 1;
     private static final int CANCEL = 2;
 
-    public LanScreen(GuiScreen previousScreen) {
+    public LanScreen(Screen previousScreen) {
         this.previousScreen = previousScreen;
     }
 
@@ -120,7 +119,7 @@ public class LanScreen extends Screen {
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
         drawRect(0, 0, lanSelectionList.getWidth(), lanSelectionList.getTop(), Integer.MIN_VALUE);
         drawRect(0, lanSelectionList.getBottom(), lanSelectionList.getWidth(), this.height, Integer.MIN_VALUE);
-        mc.fontRendererObj.drawCenteredString(I18n.format("LAN"), (float)this.width / 2, 20, 0xffffff);
+        getFr().drawCenteredString(I18n.format("LAN"), (float)this.width / 2, 20, 0xffffff);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 

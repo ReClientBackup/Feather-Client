@@ -12,7 +12,7 @@ import net.minecraft.client.gui.GuiEnchantment;
 import net.minecraft.client.gui.GuiHopper;
 import net.minecraft.client.gui.GuiMerchant;
 import net.minecraft.client.gui.GuiRepair;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.inventory.GuiBeacon;
 import net.minecraft.client.gui.inventory.GuiBrewingStand;
 import net.minecraft.client.gui.inventory.GuiChest;
@@ -48,7 +48,7 @@ public class CustomGuis
         }
         else
         {
-            GuiScreen guiscreen = mc.currentScreen;
+            Screen guiscreen = mc.currentScreen;
 
             if (!(guiscreen instanceof GuiContainer))
             {
@@ -154,7 +154,7 @@ public class CustomGuis
         }
     }
 
-    private static ResourceLocation getTexturePos(CustomGuiProperties.EnumContainer container, BlockPos pos, IBlockAccess blockAccess, ResourceLocation loc, GuiScreen screen)
+    private static ResourceLocation getTexturePos(CustomGuiProperties.EnumContainer container, BlockPos pos, IBlockAccess blockAccess, ResourceLocation loc, Screen screen)
     {
         CustomGuiProperties[] acustomguiproperties = guiProperties[container.ordinal()];
 

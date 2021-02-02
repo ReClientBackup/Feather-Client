@@ -2,19 +2,19 @@ package net.optifine.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
-public class GuiPerformanceSettingsOF extends GuiScreen
+public class GuiPerformanceSettingsOF extends Screen
 {
-    private GuiScreen prevScreen;
+    private Screen prevScreen;
     protected String title;
     private GameSettings settings;
     private static GameSettings.Options[] enumOptions = new GameSettings.Options[] {GameSettings.Options.SMOOTH_FPS, GameSettings.Options.SMOOTH_WORLD, GameSettings.Options.FAST_RENDER, GameSettings.Options.FAST_MATH, GameSettings.Options.CHUNK_UPDATES, GameSettings.Options.CHUNK_UPDATES_DYNAMIC, GameSettings.Options.RENDER_REGIONS, GameSettings.Options.LAZY_CHUNK_LOADING, GameSettings.Options.SMART_ANIMATIONS};
     private TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderOptions());
 
-    public GuiPerformanceSettingsOF(GuiScreen guiscreen, GameSettings gamesettings)
+    public GuiPerformanceSettingsOF(Screen guiscreen, GameSettings gamesettings)
     {
         this.prevScreen = guiscreen;
         this.settings = gamesettings;
@@ -63,8 +63,8 @@ public class GuiPerformanceSettingsOF extends GuiScreen
 
             if (guibutton.getId() == 200)
             {
-                this.mc.gameSettings.saveOptions();
-                this.mc.displayGuiScreen(this.prevScreen);
+                saveSettings();
+                changeScreen(this.prevScreen);
             }
         }
     }
@@ -75,7 +75,7 @@ public class GuiPerformanceSettingsOF extends GuiScreen
     public void drawScreen(int x, int y, float f)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.title, this.width / 2, 15, 16777215);
+        getFr().drawCenteredString(this.title, this.width / 2, 15, 16777215);
         super.drawScreen(x, y, f);
         this.tooltipManager.drawTooltips(x, y, this.buttonList);
     }

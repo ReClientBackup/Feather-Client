@@ -2,11 +2,13 @@ package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
 import java.util.List;
+
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 
-public class GuiLabel extends Gui
+public class GuiLabel extends GUI
 {
     protected int field_146167_a = 200;
     protected int field_146161_f = 20;
@@ -56,24 +58,18 @@ public class GuiLabel extends Gui
         return this;
     }
 
-    public void drawLabel(Minecraft mc, int mouseX, int mouseY)
-    {
-        if (this.visible)
-        {
+    public void drawLabel(int mouseX, int mouseY) {
+        if (this.visible) {
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-            this.drawLabelBackground(mc, mouseX, mouseY);
+            this.drawLabelBackground(getMc(), mouseX, mouseY);
             int i = this.field_146174_h + this.field_146161_f / 2 + this.field_146163_s / 2;
             int j = i - this.field_146173_k.size() * 10 / 2;
 
-            for (int k = 0; k < this.field_146173_k.size(); ++k)
-            {
-                if (this.centered)
-                {
+            for (int k = 0; k < this.field_146173_k.size(); ++k) {
+                if (this.centered) {
                     this.drawCenteredString(this.fontRenderer, this.field_146173_k.get(k), this.field_146162_g + this.field_146167_a / 2, j + k * 10, this.field_146168_n);
-                }
-                else
-                {
+                } else {
                     this.drawString(this.fontRenderer, this.field_146173_k.get(k), this.field_146162_g, j + k * 10, this.field_146168_n);
                 }
             }

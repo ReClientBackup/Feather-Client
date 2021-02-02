@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.src.Config;
@@ -22,7 +23,7 @@ import net.optifine.shaders.gui.GuiShaders;
 
 public class GuiVideoSettings extends GuiScreenOF
 {
-    private GuiScreen parentGuiScreen;
+    private Screen parentGuiScreen;
     protected String screenTitle = "Video Settings";
     private GameSettings guiGameSettings;
 
@@ -30,7 +31,7 @@ public class GuiVideoSettings extends GuiScreenOF
     private static GameSettings.Options[] videoOptions = new GameSettings.Options[] {GameSettings.Options.GRAPHICS, GameSettings.Options.RENDER_DISTANCE, GameSettings.Options.AMBIENT_OCCLUSION, GameSettings.Options.FRAMERATE_LIMIT, GameSettings.Options.AO_LEVEL, GameSettings.Options.VIEW_BOBBING, GameSettings.Options.GUI_SCALE, GameSettings.Options.USE_VBO, GameSettings.Options.GAMMA, GameSettings.Options.BLOCK_ALTERNATIVES, GameSettings.Options.DYNAMIC_LIGHTS, GameSettings.Options.DYNAMIC_FOV};
     private TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderOptions());
 
-    public GuiVideoSettings(GuiScreen parentScreenIn, GameSettings gameSettingsIn)
+    public GuiVideoSettings(Screen parentScreenIn, GameSettings gameSettingsIn)
     {
         this.parentGuiScreen = parentScreenIn;
         this.guiGameSettings = gameSettingsIn;
@@ -42,7 +43,7 @@ public class GuiVideoSettings extends GuiScreenOF
      */
     public void initGui()
     {
-        this.screenTitle = I18n.format("options.videoTitle", new Object[0]);
+        this.screenTitle = I18n.format("options.videoTitle");
         this.buttonList.clear();
 
         for (int i = 0; i < videoOptions.length; ++i)
@@ -82,7 +83,7 @@ public class GuiVideoSettings extends GuiScreenOF
         i1 = this.width / 2 - 155 + 160;
         this.buttonList.add(new GuiOptionButton(222, i1, l, Lang.get("of.options.other")));
         l = l + 21;
-        this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168 + 11, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168 + 11, I18n.format("gui.done")));
     }
 
     /**
@@ -115,51 +116,49 @@ public class GuiVideoSettings extends GuiScreenOF
 
             if (p_actionPerformed_1_.getId() == 200)
             {
-                this.mc.gameSettings.saveOptions();
-                this.mc.displayGuiScreen(this.parentGuiScreen);
+                saveSettings();
+                changeScreen(this.parentGuiScreen);
             }
 
             if (this.guiGameSettings.guiScale != i)
             {
-                ScaledResolution scaledresolution = new ScaledResolution();
-                int j = scaledresolution.getScaledWidth();
-                int k = scaledresolution.getScaledHeight();
-                this.setWorldAndResolution(this.mc, j, k);
+                ScaledResolution resolution = new ScaledResolution();
+                this.setWorldAndResolution(resolution.getScaledWidth(), resolution.getScaledHeight());
             }
 
             if (p_actionPerformed_1_.getId() == 201)
             {
-                this.mc.gameSettings.saveOptions();
+                saveSettings();
                 GuiDetailSettingsOF guidetailsettingsof = new GuiDetailSettingsOF(this, this.guiGameSettings);
-                this.mc.displayGuiScreen(guidetailsettingsof);
+                changeScreen(guidetailsettingsof);
             }
 
             if (p_actionPerformed_1_.getId() == 202)
             {
-                this.mc.gameSettings.saveOptions();
+                saveSettings();
                 GuiQualitySettingsOF guiqualitysettingsof = new GuiQualitySettingsOF(this, this.guiGameSettings);
-                this.mc.displayGuiScreen(guiqualitysettingsof);
+                changeScreen(guiqualitysettingsof);
             }
 
             if (p_actionPerformed_1_.getId() == 211)
             {
-                this.mc.gameSettings.saveOptions();
+                saveSettings();
                 GuiAnimationSettingsOF guianimationsettingsof = new GuiAnimationSettingsOF(this, this.guiGameSettings);
-                this.mc.displayGuiScreen(guianimationsettingsof);
+                changeScreen(guianimationsettingsof);
             }
 
             if (p_actionPerformed_1_.getId() == 212)
             {
-                this.mc.gameSettings.saveOptions();
+                saveSettings();
                 GuiPerformanceSettingsOF guiperformancesettingsof = new GuiPerformanceSettingsOF(this, this.guiGameSettings);
-                this.mc.displayGuiScreen(guiperformancesettingsof);
+                changeScreen(guiperformancesettingsof);
             }
 
             if (p_actionPerformed_1_.getId() == 222)
             {
-                this.mc.gameSettings.saveOptions();
+                saveSettings();
                 GuiOtherSettingsOF guiothersettingsof = new GuiOtherSettingsOF(this, this.guiGameSettings);
-                this.mc.displayGuiScreen(guiothersettingsof);
+                changeScreen(guiothersettingsof);
             }
 
             if (p_actionPerformed_1_.getId() == 231)
@@ -188,9 +187,9 @@ public class GuiVideoSettings extends GuiScreenOF
                     return;
                 }
 
-                this.mc.gameSettings.saveOptions();
+                saveSettings();
                 GuiShaders guishaders = new GuiShaders(this, this.guiGameSettings);
-                this.mc.displayGuiScreen(guishaders);
+                changeScreen(guishaders);
             }
         }
     }
@@ -198,53 +197,29 @@ public class GuiVideoSettings extends GuiScreenOF
     /**
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.screenTitle, this.width / 2, 15, 16777215);
-        String s = Config.getVersion();
-        String s1 = "HD_U";
-
-        if (s1.equals("HD"))
-        {
-            s = "OptiFine HD L5";
-        }
-
-        if (s1.equals("HD_U"))
-        {
-            s = "OptiFine HD L5 Ultra";
-        }
-
-        if (s1.equals("L"))
-        {
-            s = "OptiFine L5 Light";
-        }
-
-        this.drawString(this.fontRendererObj, s, 2, this.height - 10, 8421504);
-        String s2 = "Minecraft 1.8.10";
-        int i = this.fontRendererObj.getStringWidth(s2);
-        this.drawString(this.fontRendererObj, s2, this.width - i - 2, this.height - 10, 8421504);
+        getFr().drawCenteredString(this.screenTitle, this.width / 2, 15, 16777215);
+        String ofVersion = "OptiFine HD L5 Ultra";
+        getFr().drawString(ofVersion, 2, this.height - 10, 8421504);
+        String mcVersion = "Minecraft 1.8.10";
+        int stringWidth = getFr().getStringWidth(mcVersion);
+        getFr().drawString(mcVersion, this.width - stringWidth - 2, this.height - 10, 8421504);
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.tooltipManager.drawTooltips(mouseX, mouseY, this.buttonList);
     }
 
-    public static int getButtonWidth(GuiButton p_getButtonWidth_0_)
+    public static int getButtonWidth(GuiButton button)
     {
-        return p_getButtonWidth_0_.getWidth();
+        return button.getWidth();
     }
 
-    public static int getButtonHeight(GuiButton p_getButtonHeight_0_)
+    public static int getButtonHeight(GuiButton button)
     {
-        return p_getButtonHeight_0_.getHeight();
+        return button.getHeight();
     }
 
-    public static void drawGradientRect(GuiScreen p_drawGradientRect_0_, int p_drawGradientRect_1_, int p_drawGradientRect_2_, int p_drawGradientRect_3_, int p_drawGradientRect_4_, int p_drawGradientRect_5_, int p_drawGradientRect_6_)
-    {
-        p_drawGradientRect_0_.drawGradientRect(p_drawGradientRect_1_, p_drawGradientRect_2_, p_drawGradientRect_3_, p_drawGradientRect_4_, p_drawGradientRect_5_, p_drawGradientRect_6_);
-    }
-
-    public static String getGuiChatText(GuiChat p_getGuiChatText_0_)
-    {
-        return p_getGuiChatText_0_.inputField.getText();
+    public static String getGuiChatText(GuiChat chat) {
+        return chat.inputField.getText();
     }
 }

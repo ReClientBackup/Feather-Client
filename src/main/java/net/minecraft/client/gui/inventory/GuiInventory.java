@@ -33,9 +33,9 @@ public class GuiInventory extends InventoryEffectRenderer
      */
     public void updateScreen()
     {
-        if (this.mc.playerController.isInCreativeMode())
+        if (getMc().playerController.isInCreativeMode())
         {
-            this.mc.displayGuiScreen(new GuiContainerCreative(this.mc.thePlayer));
+            changeScreen(new GuiContainerCreative(getPlayer()));
         }
 
         this.updateActivePotionEffects();
@@ -49,9 +49,9 @@ public class GuiInventory extends InventoryEffectRenderer
     {
         this.buttonList.clear();
 
-        if (this.mc.playerController.isInCreativeMode())
+        if (getMc().playerController.isInCreativeMode())
         {
-            this.mc.displayGuiScreen(new GuiContainerCreative(this.mc.thePlayer));
+            changeScreen(new GuiContainerCreative(getPlayer()));
         }
         else
         {
@@ -62,9 +62,8 @@ public class GuiInventory extends InventoryEffectRenderer
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items). Args : mouseX, mouseY
      */
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-    {
-        this.fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 86, 16, 4210752);
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        getFr().drawString(I18n.format("container.crafting", new Object[0]), 86, 16, 4210752);
     }
 
     /**
@@ -80,14 +79,13 @@ public class GuiInventory extends InventoryEffectRenderer
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-    {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(inventoryBackground);
+        getMc().getTextureManager().bindTexture(inventoryBackground);
         int left = this.guiLeft;
         int top = this.guiTop;
         this.drawTexturedModalRect(left, top, 0, 0, this.xSize, this.ySize);
-        drawEntityOnScreen(left + 51, top + 75, 30, (float)(left + 51) - this.oldMouseX, (float)(top + 75 - 50) - this.oldMouseY, this.mc.thePlayer);
+        drawEntityOnScreen(left + 51, top + 75, 30, (float)(left + 51) - this.oldMouseX, (float)(top + 75 - 50) - this.oldMouseY, getPlayer());
     }
 
     /**
@@ -142,12 +140,12 @@ public class GuiInventory extends InventoryEffectRenderer
     {
         if (button.getId() == 0)
         {
-            this.mc.displayGuiScreen(new GuiAchievements(this, this.mc.thePlayer.getStatFileWriter()));
+            changeScreen(new GuiAchievements(this, getPlayer().getStatFileWriter()));
         }
 
         if (button.getId() == 1)
         {
-            this.mc.displayGuiScreen(new GuiStats(this, this.mc.thePlayer.getStatFileWriter()));
+            changeScreen(new GuiStats(this, getPlayer().getStatFileWriter()));
         }
     }
 }

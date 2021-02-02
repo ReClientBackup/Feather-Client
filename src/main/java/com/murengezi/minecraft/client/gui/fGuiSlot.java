@@ -3,7 +3,6 @@ package com.murengezi.minecraft.client.gui;
 import com.murengezi.feather.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.Options.ResourcePack.ResourcePackList;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -248,9 +247,9 @@ public abstract class fGuiSlot extends MinecraftUtils {
                     l1 = this.top;
                 }
 
-                Gui.drawRect(i, this.top, j, this.bottom, 0xff000000);
-                Gui.drawRect(i, l1, j, l1 + k1, 0xff808080);
-                Gui.drawRect(i, l1, j - 1, l1 + k1 - 1, 0xffc0c0c0);
+                GUI.drawRect(i, this.top, j, this.bottom, 0xff000000);
+                GUI.drawRect(i, l1, j, l1 + k1, 0xff808080);
+                GUI.drawRect(i, l1, j - 1, l1 + k1 - 1, 0xffc0c0c0);
             }
 
             this.func_148142_b(mouseXIn, mouseYIn);
@@ -414,7 +413,7 @@ public abstract class fGuiSlot extends MinecraftUtils {
                 int i1 = this.left + (this.width / 2 - this.getListWidth() / 2);
                 int j1 = this.left + this.width / 2 + this.getListWidth() / 2;
 
-                Gui.drawRect(i1, k - 2, j1,k + l + 2, Integer.MIN_VALUE);
+                GUI.drawRect(i1, k - 2, j1,k + l + 2, Integer.MIN_VALUE);
             }
 
             if (!(this instanceof ResourcePackList) || k >= this.top - this.slotHeight && k <= this.bottom)

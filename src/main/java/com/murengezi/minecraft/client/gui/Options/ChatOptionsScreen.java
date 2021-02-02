@@ -4,7 +4,6 @@ import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiOptionSlider;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.EnumChatFormatting;
@@ -20,7 +19,7 @@ import java.util.List;
  */
 public class ChatOptionsScreen extends Screen {
 
-    private GuiScreen previousScreen;
+    private Screen previousScreen;
     private GameSettings gameSettings;
     private static final List<GameSettings.Options> chatOptions = new ArrayList<>(Arrays.asList(
             GameSettings.Options.CHAT_VISIBILITY,
@@ -38,7 +37,7 @@ public class ChatOptionsScreen extends Screen {
 
 
 
-    public ChatOptionsScreen(GuiScreen previousScreen, GameSettings gameSettings) {
+    public ChatOptionsScreen(Screen previousScreen, GameSettings gameSettings) {
         this.previousScreen = previousScreen;
         this.gameSettings = gameSettings;
     }
@@ -81,7 +80,7 @@ public class ChatOptionsScreen extends Screen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground(mouseX, mouseY, 60);
         drawRect(this.width / 2 - 160, this.height / 6 + 15, this.width / 2 + 160, this.height / 6 + 193, Integer.MIN_VALUE);
-        drawCenteredString(this.fontRendererObj, EnumChatFormatting.UNDERLINE + I18n.format("options.chat.title"), this.width / 2, this.height / 6 + 20, 0xffffffff);
+        drawCenteredString(getFr(), EnumChatFormatting.UNDERLINE + I18n.format("options.chat.title"), this.width / 2, this.height / 6 + 20, 0xffffffff);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

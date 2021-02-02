@@ -8,8 +8,8 @@ import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.base64.Base64;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.GUI;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.DynamicTexture;
@@ -123,8 +123,8 @@ public class ServerListEntryNormal implements GuiListExtended.IGuiListEntry {
         }
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(Gui.icons);
-        Gui.drawModalRectWithCustomSizedTexture(x + listWidth - 15, y, (float)(k * 10), (float)(176 + l * 8), 10, 8, 256.0F, 256.0F);
+        this.mc.getTextureManager().bindTexture(GUI.icons);
+        GUI.drawModalRectWithCustomSizedTexture(x + listWidth - 15, y, (float)(k * 10), (float)(176 + l * 8), 10, 8, 256.0F, 256.0F);
 
         if (this.serverData.getBase64EncodedIconData() != null && !this.serverData.getBase64EncodedIconData().equals(this.encodedIconData)) {
             this.encodedIconData = this.serverData.getBase64EncodedIconData();
@@ -149,32 +149,32 @@ public class ServerListEntryNormal implements GuiListExtended.IGuiListEntry {
 
         if (this.mc.gameSettings.touchscreen || isSelected) {
             this.mc.getTextureManager().bindTexture(SERVER_SELECTION_BUTTONS);
-            Gui.drawRect(x, y, x + 32, y + 32, -1601138544);
+            GUI.drawRect(x, y, x + 32, y + 32, -1601138544);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             int k1 = mouseX - x;
             int l1 = mouseY - y;
 
             if (this.func_178013_b()) {
                 if (k1 < 32 && k1 > 16) {
-                    Gui.drawModalRectWithCustomSizedTexture(x, y, 0.0F, 32.0F, 32, 32, 256.0F, 256.0F);
+                    GUI.drawModalRectWithCustomSizedTexture(x, y, 0.0F, 32.0F, 32, 32, 256.0F, 256.0F);
                 } else {
-                    Gui.drawModalRectWithCustomSizedTexture(x, y, 0.0F, 0.0F, 32, 32, 256.0F, 256.0F);
+                    GUI.drawModalRectWithCustomSizedTexture(x, y, 0.0F, 0.0F, 32, 32, 256.0F, 256.0F);
                 }
             }
 
             if (slotIndex > 0) {
                 if (k1 < 16 && l1 < 16) {
-                    Gui.drawModalRectWithCustomSizedTexture(x, y, 96.0F, 32.0F, 32, 32, 256.0F, 256.0F);
+                    GUI.drawModalRectWithCustomSizedTexture(x, y, 96.0F, 32.0F, 32, 32, 256.0F, 256.0F);
                 } else {
-                    Gui.drawModalRectWithCustomSizedTexture(x, y, 96.0F, 0.0F, 32, 32, 256.0F, 256.0F);
+                    GUI.drawModalRectWithCustomSizedTexture(x, y, 96.0F, 0.0F, 32, 32, 256.0F, 256.0F);
                 }
             }
 
             if (slotIndex < this.parentScreen.getServerList().countServers() - 1) {
                 if (k1 < 16 && l1 > 16) {
-                    Gui.drawModalRectWithCustomSizedTexture(x, y, 64.0F, 32.0F, 32, 32, 256.0F, 256.0F);
+                    GUI.drawModalRectWithCustomSizedTexture(x, y, 64.0F, 32.0F, 32, 32, 256.0F, 256.0F);
                 } else {
-                    Gui.drawModalRectWithCustomSizedTexture(x, y, 64.0F, 0.0F, 32, 32, 256.0F, 256.0F);
+                    GUI.drawModalRectWithCustomSizedTexture(x, y, 64.0F, 0.0F, 32, 32, 256.0F, 256.0F);
                 }
             }
         }
@@ -184,7 +184,7 @@ public class ServerListEntryNormal implements GuiListExtended.IGuiListEntry {
     {
         this.mc.getTextureManager().bindTexture(p_178012_3_);
         GlStateManager.enableBlend();
-        Gui.drawModalRectWithCustomSizedTexture(p_178012_1_, p_178012_2_, 0.0F, 0.0F, 32, 32, 32.0F, 32.0F);
+        GUI.drawModalRectWithCustomSizedTexture(p_178012_1_, p_178012_2_, 0.0F, 0.0F, 32, 32, 32.0F, 32.0F);
         GlStateManager.disableBlend();
     }
 
@@ -244,13 +244,13 @@ public class ServerListEntryNormal implements GuiListExtended.IGuiListEntry {
 
             if (p_148278_5_ < 16 && p_148278_6_ < 16 && slotIndex > 0)
             {
-                this.parentScreen.swapDown(this, slotIndex, GuiScreen.isShiftKeyDown());
+                this.parentScreen.swapDown(this, slotIndex, Screen.isShiftKeyDown());
                 return true;
             }
 
             if (p_148278_5_ < 16 && p_148278_6_ > 16 && slotIndex < this.parentScreen.getServerList().countServers() - 1)
             {
-                this.parentScreen.swapUp(this, slotIndex, GuiScreen.isShiftKeyDown());
+                this.parentScreen.swapUp(this, slotIndex, Screen.isShiftKeyDown());
                 return true;
             }
         }

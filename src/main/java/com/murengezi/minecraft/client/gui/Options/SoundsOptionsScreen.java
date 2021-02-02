@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -23,12 +22,12 @@ import java.util.Arrays;
  */
 public class SoundsOptionsScreen extends Screen {
 
-    private final GuiScreen previousScreen;
+    private final Screen previousScreen;
     private final GameSettings gameSettings;
 
     public static final int DONE = 0;
 
-    public SoundsOptionsScreen(GuiScreen previousScreen, GameSettings gameSettings) {
+    public SoundsOptionsScreen(Screen previousScreen, GameSettings gameSettings) {
         this.previousScreen = previousScreen;
         this.gameSettings = gameSettings;
     }
@@ -66,7 +65,7 @@ public class SoundsOptionsScreen extends Screen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground(mouseX, mouseY, 60);
         drawRect(this.width / 2 - 160, this.height / 6 + 15, this.width / 2 + 160, this.height / 6 + 193, Integer.MIN_VALUE);
-        drawCenteredString(fontRendererObj, EnumChatFormatting.UNDERLINE + I18n.format("options.sounds.title"), this.width / 2, this.height / 6 + 20, 0xffffffff);
+        drawCenteredString(getFr(), EnumChatFormatting.UNDERLINE + I18n.format("options.sounds.title"), this.width / 2, this.height / 6 + 20, 0xffffffff);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -117,7 +116,7 @@ public class SoundsOptionsScreen extends Screen {
         public void setSoundLevelFromMouseX(int mouseX) {
             this.soundLevel = (float) (mouseX - (this.getX() + 4)) / (float) (this.getWidth() - 8);
             this.soundLevel = MathHelper.clamp_float(this.soundLevel, 0.0f, 1.0f);
-            mc.gameSettings.setSoundLevel(soundCategory, this.soundLevel);
+            getMc().gameSettings.setSoundLevel(soundCategory, this.soundLevel);
             this.displayString = this.label + ": " + soundsOptionsScreen.getSoundVolume(soundCategory);
         }
 
@@ -128,8 +127,8 @@ public class SoundsOptionsScreen extends Screen {
         public void mouseReleased(int mouseX, int mouseY) {
             if (this.b) {
                 if (this.soundCategory != SoundCategory.MASTER) {
-                    soundsOptionsScreen.mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
-                    mc.gameSettings.saveOptions();
+                    getMc().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
+                    saveSettings();
                 }
                 this.b = false;
             }

@@ -22,7 +22,7 @@ import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.gui.GuiNewChat;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
@@ -450,7 +450,7 @@ public class GameSettings
         {
             this.guiScale += p_74306_2_;
 
-            if (GuiScreen.isShiftKeyDown())
+            if (Screen.isShiftKeyDown())
             {
                 this.guiScale = 0;
             }

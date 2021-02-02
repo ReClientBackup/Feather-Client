@@ -3,7 +3,7 @@ package com.murengezi.feather.Gui.Click.Items;
 import com.murengezi.feather.Feather;
 import com.murengezi.feather.Gui.Click.Item;
 import com.murengezi.feather.Theme.Theme;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.client.renderer.GlStateManager;
 
 /**
@@ -20,8 +20,8 @@ public class ThemeItem extends Item {
 
     @Override
     public void render(int mouseX, int mouseY) {
-        Gui.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MIN_VALUE);
-        Gui.drawRect(getX() + 4, getY() + 2, getX() + 14, getY() + 12, Integer.MIN_VALUE);
+        GUI.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MIN_VALUE);
+        GUI.drawRect(getX() + 4, getY() + 2, getX() + 14, getY() + 12, Integer.MIN_VALUE);
         GlStateManager.pushMatrix();
         float scale = 0.5f;
         GlStateManager.scale(scale, scale, scale);

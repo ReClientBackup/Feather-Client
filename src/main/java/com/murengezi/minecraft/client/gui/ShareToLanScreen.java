@@ -1,6 +1,5 @@
 package com.murengezi.minecraft.client.gui;
 
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
@@ -15,7 +14,7 @@ import java.io.IOException;
  */
 public class ShareToLanScreen extends Screen {
 
-	private final GuiScreen previousScreen;
+	private final Screen previousScreen;
 	private boolean allowCommands;
 	private int lanGamemode = 0;
 
@@ -24,7 +23,7 @@ public class ShareToLanScreen extends Screen {
 	private static final int GAMEMODE = 2;
 	private static final int ALLOWCOMMANDS = 3;
 
-	public ShareToLanScreen(GuiScreen previousScreen) {
+	public ShareToLanScreen(Screen previousScreen) {
 		this.previousScreen = previousScreen;
 	}
 
@@ -48,7 +47,7 @@ public class ShareToLanScreen extends Screen {
 		switch (button.getId()) {
 			case START:
 				changeScreen(null);
-				String s = this.mc.getIntegratedServer().shareToLAN(WorldSettings.GameType.getByID(lanGamemode), this.allowCommands);
+				String s = getMc().getIntegratedServer().shareToLAN(WorldSettings.GameType.getByID(lanGamemode), this.allowCommands);
 				IChatComponent ichatcomponent;
 
 				if (s != null) {
@@ -57,7 +56,7 @@ public class ShareToLanScreen extends Screen {
 					ichatcomponent = new ChatComponentText("commands.publish.failed");
 				}
 
-				this.mc.inGameScreen.getChatGUI().printChatMessage(ichatcomponent);
+				getMc().inGameScreen.getChatGUI().printChatMessage(ichatcomponent);
 				break;
 			case CANCEL:
 				changeScreen(previousScreen);
@@ -79,8 +78,8 @@ public class ShareToLanScreen extends Screen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		this.drawCenteredString(this.fontRendererObj, I18n.format("lanServer.title"), this.width / 2, this.height / 2 - 82, 16777215);
-		this.drawCenteredString(this.fontRendererObj, I18n.format("lanServer.otherPlayers"), this.width / 2, this.height / 2 - 50, 16777215);
+		getFr().drawCenteredString(I18n.format("lanServer.title"), this.width / 2, this.height / 2 - 82, 16777215);
+		getFr().drawCenteredString(I18n.format("lanServer.otherPlayers"), this.width / 2, this.height / 2 - 50, 16777215);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 }

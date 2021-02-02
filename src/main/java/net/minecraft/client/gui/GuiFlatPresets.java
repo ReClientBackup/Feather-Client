@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -23,7 +25,7 @@ import net.minecraft.world.gen.FlatGeneratorInfo;
 import net.minecraft.world.gen.FlatLayerInfo;
 import org.lwjgl.input.Keyboard;
 
-public class GuiFlatPresets extends GuiScreen
+public class GuiFlatPresets extends Screen
 {
     private static final List<GuiFlatPresets.LayerItem> FLAT_WORLD_PRESETS = Lists.<GuiFlatPresets.LayerItem>newArrayList();
 
@@ -49,15 +51,15 @@ public class GuiFlatPresets extends GuiScreen
     {
         this.buttonList.clear();
         Keyboard.enableRepeatEvents(true);
-        this.presetsTitle = I18n.format("createWorld.customize.presets.title", new Object[0]);
-        this.presetsShare = I18n.format("createWorld.customize.presets.share", new Object[0]);
-        this.field_146436_r = I18n.format("createWorld.customize.presets.list", new Object[0]);
-        this.field_146433_u = new GuiTextField(2, this.fontRendererObj, 50, 40, this.width - 100, 20);
+        this.presetsTitle = I18n.format("createWorld.customize.presets.title");
+        this.presetsShare = I18n.format("createWorld.customize.presets.share");
+        this.field_146436_r = I18n.format("createWorld.customize.presets.list");
+        this.field_146433_u = new GuiTextField(2, 50, 40, this.width - 100, 20);
         this.field_146435_s = new GuiFlatPresets.ListSlot();
         this.field_146433_u.setMaxStringLength(1230);
         this.field_146433_u.setText(this.parentScreen.func_146384_e());
-        this.buttonList.add(this.field_146434_t = new GuiButton(0, this.width / 2 - 155, this.height - 28, 150, 20, I18n.format("createWorld.customize.presets.select", new Object[0])));
-        this.buttonList.add(new GuiButton(1, this.width / 2 + 5, this.height - 28, 150, 20, I18n.format("gui.cancel", new Object[0])));
+        this.buttonList.add(this.field_146434_t = new GuiButton(0, this.width / 2 - 155, this.height - 28, 150, 20, I18n.format("createWorld.customize.presets.select")));
+        this.buttonList.add(new GuiButton(1, this.width / 2 + 5, this.height - 28, 150, 20, I18n.format("gui.cancel")));
         this.func_146426_g();
     }
 
@@ -106,11 +108,11 @@ public class GuiFlatPresets extends GuiScreen
         if (button.getId() == 0 && this.func_146430_p())
         {
             this.parentScreen.func_146383_a(this.field_146433_u.getText());
-            this.mc.displayGuiScreen(this.parentScreen);
+            changeScreen(this.parentScreen);
         }
         else if (button.getId() == 1)
         {
-            this.mc.displayGuiScreen(this.parentScreen);
+            changeScreen(this.parentScreen);
         }
     }
 
@@ -121,9 +123,9 @@ public class GuiFlatPresets extends GuiScreen
     {
         this.drawDefaultBackground();
         this.field_146435_s.drawScreen(mouseX, mouseY, partialTicks);
-        this.drawCenteredString(this.fontRendererObj, this.presetsTitle, this.width / 2, 8, 16777215);
-        this.drawString(this.fontRendererObj, this.presetsShare, 50, 30, 10526880);
-        this.drawString(this.fontRendererObj, this.field_146436_r, 50, 70, 10526880);
+        getFr().drawCenteredString(this.presetsTitle, this.width / 2, 8, 16777215);
+        getFr().drawString(this.presetsShare, 50, 30, 10526880);
+        getFr().drawString(this.field_146436_r, 50, 70, 10526880);
         this.field_146433_u.drawTextBox();
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -215,7 +217,7 @@ public class GuiFlatPresets extends GuiScreen
 
         public ListSlot()
         {
-            super(GuiFlatPresets.this.mc, GuiFlatPresets.this.width, GuiFlatPresets.this.height, 80, GuiFlatPresets.this.height - 37, 24);
+            super(getMc(), GuiFlatPresets.this.width, GuiFlatPresets.this.height, 80, GuiFlatPresets.this.height - 37, 24);
         }
 
         private void func_178054_a(int p_178054_1_, int p_178054_2_, Item p_178054_3_, int p_178054_4_)
@@ -236,7 +238,7 @@ public class GuiFlatPresets extends GuiScreen
         private void func_148171_c(int p_148171_1_, int p_148171_2_, int p_148171_3_, int p_148171_4_)
         {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            this.mc.getTextureManager().bindTexture(Gui.statIcons);
+            this.mc.getTextureManager().bindTexture(GUI.statIcons);
             float f = 0.0078125F;
             float f1 = 0.0078125F;
             int i = 18;
@@ -274,9 +276,9 @@ public class GuiFlatPresets extends GuiScreen
 
         protected void drawSlot(int entryID, int x, int y, int p_180791_4_, int mouseXIn, int mouseYIn)
         {
-            GuiFlatPresets.LayerItem guiflatpresets$layeritem = GuiFlatPresets.FLAT_WORLD_PRESETS.get(entryID);
-            this.func_178054_a(x, y, guiflatpresets$layeritem.field_148234_a, guiflatpresets$layeritem.field_179037_b);
-            GuiFlatPresets.this.fontRendererObj.drawString(guiflatpresets$layeritem.field_148232_b, x + 18 + 5, y + 6, 16777215);
+            GuiFlatPresets.LayerItem layerItem = GuiFlatPresets.FLAT_WORLD_PRESETS.get(entryID);
+            this.func_178054_a(x, y, layerItem.field_148234_a, layerItem.field_179037_b);
+            getFr().drawString(layerItem.field_148232_b, x + 18 + 5, y + 6, 16777215);
         }
     }
 }

@@ -4,7 +4,7 @@ import com.mojang.authlib.exceptions.InvalidCredentialsException;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.src.Config;
@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class GuiScreenCapeOF extends GuiScreenOF
 {
-    private final GuiScreen parentScreen;
+    private final Screen parentScreen;
     private String title;
     private String message;
     private long messageHideTimeMs;
@@ -24,7 +24,7 @@ public class GuiScreenCapeOF extends GuiScreenOF
     private GuiButtonOF buttonCopyLink;
     private FontRenderer fontRenderer;
 
-    public GuiScreenCapeOF(GuiScreen parentScreenIn)
+    public GuiScreenCapeOF(Screen parentScreenIn)
     {
         this.fontRenderer = Config.getMinecraft().fontRendererObj;
         this.parentScreen = parentScreenIn;
@@ -58,23 +58,23 @@ public class GuiScreenCapeOF extends GuiScreenOF
         {
             if (button.getId() == 200)
             {
-                this.mc.displayGuiScreen(this.parentScreen);
+                changeScreen(this.parentScreen);
             }
 
             if (button.getId() == 210)
             {
                 try
                 {
-                    String s = this.mc.getSession().getProfile().getName();
-                    String s1 = this.mc.getSession().getProfile().getId().toString().replace("-", "");
-                    String s2 = this.mc.getSession().getToken();
+                    String s = getMc().getSession().getProfile().getName();
+                    String s1 = getMc().getSession().getProfile().getId().toString().replace("-", "");
+                    String s2 = getMc().getSession().getToken();
                     Random random = new Random();
                     Random random1 = new Random(System.identityHashCode(new Object()));
                     BigInteger biginteger = new BigInteger(128, random);
                     BigInteger biginteger1 = new BigInteger(128, random1);
                     BigInteger biginteger2 = biginteger.xor(biginteger1);
                     String s3 = biginteger2.toString(16);
-                    this.mc.getSessionService().joinServer(this.mc.getSession().getProfile(), s2, s3);
+                    getMc().getSessionService().joinServer(getMc().getSession().getProfile(), s2, s3);
                     String s4 = "https://optifine.net/capeChange?u=" + s1 + "&n=" + s + "&s=" + s3;
                     boolean flag = Config.openWebLink(new URI(s4));
 
@@ -104,7 +104,7 @@ public class GuiScreenCapeOF extends GuiScreenOF
             if (button.getId() == 220) {
                 this.showMessage(Lang.get("of.message.capeOF.reloadCape"), 15000L);
 
-                mc.theWorld.loadedEntityList.stream().filter(entity -> entity instanceof EntityPlayer).forEach(player -> {
+                getWorld().loadedEntityList.stream().filter(entity -> entity instanceof EntityPlayer).forEach(player -> {
                     long i = 15000L;
                     long j = System.currentTimeMillis() + i;
                     AbstractClientPlayer abstractClientPlayer = (AbstractClientPlayer) player;

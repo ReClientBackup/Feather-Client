@@ -1,7 +1,7 @@
 package net.optifine.shaders.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.MathHelper;
 import net.optifine.shaders.config.ShaderOption;
@@ -36,7 +36,7 @@ public class GuiSliderShaderOption extends GuiButtonShaderOption
     {
         if (this.isVisible())
         {
-            if (this.dragging && !GuiScreen.isShiftKeyDown())
+            if (this.dragging && !Screen.isShiftKeyDown())
             {
                 this.sliderValue = (float)(mouseX - (this.getX() + 4)) / (float)(this.getWidth() - 8);
                 this.sliderValue = MathHelper.clamp_float(this.sliderValue, 0.0F, 1.0F);

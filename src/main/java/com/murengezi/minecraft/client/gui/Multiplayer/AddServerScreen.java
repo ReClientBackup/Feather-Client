@@ -2,7 +2,6 @@ package com.murengezi.minecraft.client.gui.Multiplayer;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.I18n;
@@ -16,7 +15,7 @@ import java.io.IOException;
  */
 public class AddServerScreen extends Screen {
 
-    private final GuiScreen previousScreen;
+    private final Screen previousScreen;
     private final ServerData serverData;
     private GuiTextField serverName, serverIp;
 
@@ -24,7 +23,7 @@ public class AddServerScreen extends Screen {
     private static final int CANCEL = 1;
     private static final int RESOURCEPACK = 2;
 
-    public AddServerScreen(GuiScreen previousScreen, ServerData serverData) {
+    public AddServerScreen(Screen previousScreen, ServerData serverData) {
         this.previousScreen = previousScreen;
         this.serverData = serverData;
     }
@@ -35,10 +34,10 @@ public class AddServerScreen extends Screen {
         addButton(new GuiButton(ADD, this.width / 2 - 100, this.height / 4 + 96 + 18, I18n.format("addServer.add")));
         addButton(new GuiButton(CANCEL, this.width / 2 - 100, this.height / 4 + 120 + 18, I18n.format("gui.cancel")));
         addButton(new GuiButton(RESOURCEPACK, this.width / 2 - 100, this.height / 4 + 72, I18n.format("addServer.resourcePack") + ": " + this.serverData.getResourceMode().getMotd().getFormattedText()));
-        this.serverName = new GuiTextField(0, this.fontRendererObj, this.width / 2 - 100, 66, 200, 20);
+        this.serverName = new GuiTextField(0, this.width / 2 - 100, 66, 200, 20);
         this.serverName.setFocused(true);
         this.serverName.setText(this.serverData.serverName);
-        this.serverIp = new GuiTextField(1, this.fontRendererObj, this.width / 2 - 100, 106, 200, 20);
+        this.serverIp = new GuiTextField(1, this.width / 2 - 100, 106, 200, 20);
         this.serverIp.setMaxStringLength(128);
         this.serverIp.setText(this.serverData.serverIP);
         getButton(ADD).setEnabled(this.serverIp.getText().length() > 0 && this.serverIp.getText().split(":").length > 0 && this.serverName.getText().length() > 0);
@@ -110,9 +109,9 @@ public class AddServerScreen extends Screen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground(mouseX, mouseY, 60);
-        this.drawCenteredString(this.fontRendererObj, I18n.format("addServer.title"), this.width / 2, 17, 16777215);
-        this.drawString(this.fontRendererObj, I18n.format("addServer.enterName"), this.width / 2 - 100, 53, 10526880);
-        this.drawString(this.fontRendererObj, I18n.format("addServer.enterIp"), this.width / 2 - 100, 94, 10526880);
+        getFr().drawCenteredString(I18n.format("addServer.title"), this.width / 2, 17, 16777215);
+        getFr().drawString(I18n.format("addServer.enterName"), this.width / 2 - 100, 53, 10526880);
+        getFr().drawString(I18n.format("addServer.enterIp"), this.width / 2 - 100, 94, 10526880);
         this.serverName.drawTextBox();
         this.serverIp.drawTextBox();
         super.drawScreen(mouseX, mouseY, partialTicks);

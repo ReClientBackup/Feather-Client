@@ -4,7 +4,6 @@ import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Options.Controls.ControlsScreen;
 import com.murengezi.minecraft.client.gui.Options.ResourcePack.ResourcePacksScreen;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiVideoSettings;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -18,7 +17,7 @@ import java.io.IOException;
  */
 public class OptionsScreen extends Screen {
 
-    private final GuiScreen previousScreen;
+    private final Screen previousScreen;
     private final GameSettings gameSettings;
 
     private static final int SOUNDS = 0;
@@ -31,7 +30,7 @@ public class OptionsScreen extends Screen {
     private static final int SNOOPER = 7;
     private static final int DONE = 8;
 
-    public OptionsScreen(GuiScreen previousScreen, GameSettings gameSettings) {
+    public OptionsScreen(Screen previousScreen, GameSettings gameSettings) {
         this.previousScreen = previousScreen;
         this.gameSettings = gameSettings;
     }
@@ -76,7 +75,7 @@ public class OptionsScreen extends Screen {
                 break;
             case LANGUAGE:
                 saveSettings();
-                changeScreen(new LanguageScreen(this, gameSettings, mc.getLanguageManager()));
+                changeScreen(new LanguageScreen(this, gameSettings, getMc().getLanguageManager()));
                 break;
             case CHAT:
                 saveSettings();
@@ -107,12 +106,8 @@ public class OptionsScreen extends Screen {
         drawDefaultBackground(mouseX, mouseY, 120);
 
         drawRect(this.width / 2 - 160, this.height / 6 + 15, this.width / 2 + 160, this.height / 6 + 169, Integer.MIN_VALUE);
-        fontRendererObj.drawCenteredString(EnumChatFormatting.UNDERLINE + I18n.format("options.title"), this.width / 2, this.height / 6 + 20, 0xffffffff);
+        getFr().drawCenteredString(EnumChatFormatting.UNDERLINE + I18n.format("options.title"), this.width / 2, this.height / 6 + 20, 0xffffffff);
         super.drawScreen(mouseX, mouseY, partialTicks);
-    }
-
-    public void changeScreen(GuiScreen guiScreen) {
-        mc.displayGuiScreen(guiScreen);
     }
 
 }

@@ -2,20 +2,20 @@ package net.optifine.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
-public class GuiQualitySettingsOF extends GuiScreen
+public class GuiQualitySettingsOF extends Screen
 {
-    private GuiScreen prevScreen;
+    private Screen prevScreen;
     protected String title;
     private GameSettings settings;
     private static GameSettings.Options[] enumOptions = new GameSettings.Options[] {GameSettings.Options.MIPMAP_LEVELS, GameSettings.Options.MIPMAP_TYPE, GameSettings.Options.AF_LEVEL, GameSettings.Options.AA_LEVEL, GameSettings.Options.CLEAR_WATER, GameSettings.Options.RANDOM_ENTITIES, GameSettings.Options.BETTER_GRASS, GameSettings.Options.BETTER_SNOW, GameSettings.Options.CUSTOM_FONTS, GameSettings.Options.CUSTOM_COLORS, GameSettings.Options.CONNECTED_TEXTURES, GameSettings.Options.NATURAL_TEXTURES, GameSettings.Options.CUSTOM_SKY, GameSettings.Options.CUSTOM_ITEMS, GameSettings.Options.CUSTOM_ENTITY_MODELS, GameSettings.Options.CUSTOM_GUIS, GameSettings.Options.EMISSIVE_TEXTURES};
     private TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderOptions());
 
-    public GuiQualitySettingsOF(GuiScreen guiscreen, GameSettings gamesettings)
+    public GuiQualitySettingsOF(Screen guiscreen, GameSettings gamesettings)
     {
         this.prevScreen = guiscreen;
         this.settings = gamesettings;
@@ -64,14 +64,14 @@ public class GuiQualitySettingsOF extends GuiScreen
 
             if (guibutton.getId() == 200)
             {
-                this.mc.gameSettings.saveOptions();
-                this.mc.displayGuiScreen(this.prevScreen);
+                saveSettings();
+                changeScreen(this.prevScreen);
             }
 
             if (guibutton.getId() != GameSettings.Options.AA_LEVEL.ordinal())
             {
                 ScaledResolution scaledresolution = new ScaledResolution();
-                this.setWorldAndResolution(this.mc, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
+                this.setWorldAndResolution(scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
             }
         }
     }
@@ -82,7 +82,7 @@ public class GuiQualitySettingsOF extends GuiScreen
     public void drawScreen(int x, int y, float f)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.title, this.width / 2, 15, 16777215);
+        getFr().drawCenteredString(this.title, this.width / 2, 15, 16777215);
         super.drawScreen(x, y, f);
         this.tooltipManager.drawTooltips(x, y, this.buttonList);
     }

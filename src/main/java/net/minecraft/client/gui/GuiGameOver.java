@@ -4,13 +4,14 @@ import java.io.IOException;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.MainMenuScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.WorldSelection.YesNoCallback;
 import com.murengezi.minecraft.client.gui.YesNoScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
 
-public class GuiGameOver extends GuiScreen implements YesNoCallback
+public class GuiGameOver extends Screen implements YesNoCallback
 {
     /**
      * The integer value containing the number of ticks that have passed since the player's death
@@ -26,9 +27,9 @@ public class GuiGameOver extends GuiScreen implements YesNoCallback
     {
         this.buttonList.clear();
 
-        if (this.mc.theWorld.getWorldInfo().isHardcoreModeEnabled())
+        if (getWorld().getWorldInfo().isHardcoreModeEnabled())
         {
-            if (this.mc.isIntegratedServerRunning())
+            if (getMc().isIntegratedServerRunning())
             {
                 this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 96, I18n.format("deathScreen.deleteWorld", new Object[0])));
             }
@@ -42,7 +43,7 @@ public class GuiGameOver extends GuiScreen implements YesNoCallback
             this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 72, I18n.format("deathScreen.respawn", new Object[0])));
             this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 96, I18n.format("deathScreen.titleScreen", new Object[0])));
 
-            if (this.mc.getSession() == null)
+            if (getMc().getSession() == null)
             {
                 this.buttonList.get(1).setEnabled(false);
             }
@@ -70,19 +71,16 @@ public class GuiGameOver extends GuiScreen implements YesNoCallback
         switch (button.getId())
         {
             case 0:
-                this.mc.thePlayer.respawnPlayer();
-                this.mc.displayGuiScreen(null);
+                getPlayer().respawnPlayer();
+                changeScreen(null);
                 break;
 
             case 1:
-                if (this.mc.theWorld.getWorldInfo().isHardcoreModeEnabled())
-                {
-                    this.mc.displayGuiScreen(new MainMenuScreen());
-                }
-                else
-                {
+                if (getWorld().getWorldInfo().isHardcoreModeEnabled()) {
+                    changeScreen(new MainMenuScreen());
+                } else {
                     YesNoScreen yesNoScreen = new YesNoScreen(this, I18n.format("deathScreen.quit.confirm"), "", I18n.format("deathScreen.titleScreen", new Object[0]), I18n.format("deathScreen.respawn", new Object[0]), 0);
-                    this.mc.displayGuiScreen(yesNoScreen);
+                    changeScreen(yesNoScreen);
                     //guiyesno.setButtonDelay(20);
                 }
         }
@@ -92,14 +90,14 @@ public class GuiGameOver extends GuiScreen implements YesNoCallback
     {
         if (result)
         {
-            this.mc.theWorld.sendQuittingDisconnectingPacket();
-            this.mc.loadWorld(null);
-            this.mc.displayGuiScreen(new MainMenuScreen());
+            getWorld().sendQuittingDisconnectingPacket();
+            getMc().loadWorld(null);
+            changeScreen(new MainMenuScreen());
         }
         else
         {
-            this.mc.thePlayer.respawnPlayer();
-            this.mc.displayGuiScreen(null);
+            getPlayer().respawnPlayer();
+            changeScreen(null);
         }
     }
 
@@ -111,17 +109,17 @@ public class GuiGameOver extends GuiScreen implements YesNoCallback
         this.drawGradientRect(0, 0, this.width, this.height, 1615855616, -1602211792);
         GlStateManager.pushMatrix();
         GlStateManager.scale(2.0F, 2.0F, 2.0F);
-        boolean flag = this.mc.theWorld.getWorldInfo().isHardcoreModeEnabled();
-        String s = flag ? I18n.format("deathScreen.title.hardcore", new Object[0]) : I18n.format("deathScreen.title", new Object[0]);
-        this.drawCenteredString(this.fontRendererObj, s, this.width / 2 / 2, 30, 16777215);
+        boolean flag = getWorld().getWorldInfo().isHardcoreModeEnabled();
+        String s = flag ? I18n.format("deathScreen.title.hardcore") : I18n.format("deathScreen.title");
+        getFr().drawCenteredString(s, this.width / 2 / 2, 30, 16777215);
         GlStateManager.popMatrix();
 
         if (flag)
         {
-            this.drawCenteredString(this.fontRendererObj, I18n.format("deathScreen.hardcoreInfo", new Object[0]), this.width / 2, 144, 16777215);
+            getFr().drawCenteredString(I18n.format("deathScreen.hardcoreInfo"), this.width / 2, 144, 16777215);
         }
 
-        this.drawCenteredString(this.fontRendererObj, I18n.format("deathScreen.score", new Object[0]) + ": " + EnumChatFormatting.YELLOW + this.mc.thePlayer.getScore(), this.width / 2, 100, 16777215);
+        getFr().drawCenteredString(I18n.format("deathScreen.score") + ": " + EnumChatFormatting.YELLOW + getPlayer().getScore(), this.width / 2, 100, 16777215);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -34,7 +35,7 @@ import net.optifine.util.NativeMemory;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
-public class GuiOverlayDebug extends Gui
+public class GuiOverlayDebug extends GUI
 {
     private final Minecraft mc;
     private final FontRenderer fontRenderer;

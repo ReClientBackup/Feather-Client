@@ -1,5 +1,6 @@
 package com.murengezi.minecraft.client.gui.Options.Controls;
 
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.client.gui.Screen;
@@ -21,7 +22,7 @@ public class ControlsScreen extends Screen {
 
 	private static final GameSettings.Options[] optionsArr = new GameSettings.Options[] {GameSettings.Options.INVERT_MOUSE, GameSettings.Options.SENSITIVITY, GameSettings.Options.TOUCHSCREEN};
 
-	private GuiScreen previousScreen;
+	private Screen previousScreen;
 	private GameSettings gameSettings;
 
 	/** The ID of the button that has been pressed. */
@@ -30,7 +31,7 @@ public class ControlsScreen extends Screen {
 	private KeybindingList keyBindingList;
 	private GuiButton buttonReset;
 
-	public ControlsScreen(GuiScreen previousScreen, GameSettings gameSettings)
+	public ControlsScreen(Screen previousScreen, GameSettings gameSettings)
 	{
 		this.previousScreen = previousScreen;
 		this.gameSettings = gameSettings;
@@ -38,20 +39,20 @@ public class ControlsScreen extends Screen {
 
 	@Override
 	public void initGui() {
-		this.keyBindingList = new KeybindingList(this, mc);
+		this.keyBindingList = new KeybindingList(this);
 		this.buttonList.add(new GuiButton(200, this.width / 2 - 155, this.height - 29, 150, 20, I18n.format("gui.done")));
 		this.buttonList.add(this.buttonReset = new GuiButton(201, this.width / 2 - 155 + 160, this.height - 29, 150, 20, I18n.format("controls.resetAll")));
 		int i = 0;
 
-		for (GameSettings.Options gamesettings$options : optionsArr)
+		for (GameSettings.Options options : optionsArr)
 		{
-			if (gamesettings$options.getEnumFloat())
+			if (options.getEnumFloat())
 			{
-				this.buttonList.add(new GuiOptionSlider(gamesettings$options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, 18 + 24 * (i >> 1), gamesettings$options));
+				this.buttonList.add(new GuiOptionSlider(options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, 18 + 24 * (i >> 1), options));
 			}
 			else
 			{
-				this.buttonList.add(new GuiOptionButton(gamesettings$options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, 18 + 24 * (i >> 1), gamesettings$options, this.gameSettings.getKeyBinding(gamesettings$options)));
+				this.buttonList.add(new GuiOptionButton(options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, 18 + 24 * (i >> 1), options, this.gameSettings.getKeyBinding(options)));
 			}
 
 			++i;
@@ -73,7 +74,7 @@ public class ControlsScreen extends Screen {
 		if (button.getId() == 200) {
 			changeScreen(previousScreen);
 		} else if (button.getId() == 201) {
-			for (KeyBinding keybinding : this.mc.gameSettings.keyBindings) {
+			for (KeyBinding keybinding : getMc().gameSettings.keyBindings) {
 				keybinding.setKeyCode(keybinding.getKeyCodeDefault());
 			}
 
@@ -134,10 +135,10 @@ public class ControlsScreen extends Screen {
 		GL11.glDisable(GL11.GL_SCISSOR_TEST);
 		GlStateManager.popMatrix();
 
-		Gui.drawRect(0, 0, keyBindingList.getWidth(), keyBindingList.getTop(), Integer.MIN_VALUE);
-		Gui.drawRect(0, keyBindingList.getBottom(), keyBindingList.getWidth(), this.height, Integer.MIN_VALUE);
+		GUI.drawRect(0, 0, keyBindingList.getWidth(), keyBindingList.getTop(), Integer.MIN_VALUE);
+		GUI.drawRect(0, keyBindingList.getBottom(), keyBindingList.getWidth(), this.height, Integer.MIN_VALUE);
 
-		this.drawCenteredString(this.fontRendererObj, I18n.format("controls.title"), this.width / 2, 8, 16777215);
+		getFr().drawCenteredString(I18n.format("controls.title"), this.width / 2, 8, 16777215);
 		boolean flag = true;
 
 		for (KeyBinding keybinding : this.gameSettings.keyBindings)

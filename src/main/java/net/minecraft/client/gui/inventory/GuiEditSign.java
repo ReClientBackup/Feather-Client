@@ -3,7 +3,7 @@ package net.minecraft.client.gui.inventory;
 import java.io.IOException;
 import net.minecraft.block.Block;
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
@@ -15,7 +15,7 @@ import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.ChatComponentText;
 import org.lwjgl.input.Keyboard;
 
-public class GuiEditSign extends GuiScreen
+public class GuiEditSign extends Screen
 {
     /** Reference to the sign object. */
     private TileEntitySign tileSign;
@@ -52,7 +52,7 @@ public class GuiEditSign extends GuiScreen
     public void onGuiClosed()
     {
         Keyboard.enableRepeatEvents(false);
-        NetHandlerPlayClient nethandlerplayclient = this.mc.getNetHandler();
+        NetHandlerPlayClient nethandlerplayclient = getMc().getNetHandler();
 
         if (nethandlerplayclient != null)
         {
@@ -80,7 +80,7 @@ public class GuiEditSign extends GuiScreen
             if (button.getId() == 0)
             {
                 this.tileSign.markDirty();
-                this.mc.displayGuiScreen(null);
+                changeScreen(null);
             }
         }
     }
@@ -108,7 +108,7 @@ public class GuiEditSign extends GuiScreen
             s = s.substring(0, s.length() - 1);
         }
 
-        if (ChatAllowedCharacters.isAllowedCharacter(typedChar) && this.fontRendererObj.getStringWidth(s + typedChar) <= 90)
+        if (ChatAllowedCharacters.isAllowedCharacter(typedChar) && getFr().getStringWidth(s + typedChar) <= 90)
         {
             s = s + typedChar;
         }
@@ -124,10 +124,9 @@ public class GuiEditSign extends GuiScreen
     /**
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("sign.edit", new Object[0]), this.width / 2, 40, 16777215);
+        getFr().drawCenteredString(I18n.format("sign.edit"), this.width / 2, 40, 16777215);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.pushMatrix();
         GlStateManager.translate((float)(this.width / 2), 0.0F, 50.0F);
@@ -136,14 +135,10 @@ public class GuiEditSign extends GuiScreen
         GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
         Block block = this.tileSign.getBlockType();
 
-        if (block == Blocks.standing_sign)
-        {
+        if (block == Blocks.standing_sign) {
             float f1 = (float)(this.tileSign.getBlockMetadata() * 360) / 16.0F;
             GlStateManager.rotate(f1, 0.0F, 1.0F, 0.0F);
-            GlStateManager.translate(0.0F, -1.0625F, 0.0F);
-        }
-        else
-        {
+        } else {
             int i = this.tileSign.getBlockMetadata();
             float f2 = 0.0F;
 
@@ -163,11 +158,11 @@ public class GuiEditSign extends GuiScreen
             }
 
             GlStateManager.rotate(f2, 0.0F, 1.0F, 0.0F);
-            GlStateManager.translate(0.0F, -1.0625F, 0.0F);
         }
 
-        if (this.updateCounter / 6 % 2 == 0)
-        {
+        GlStateManager.translate(0.0F, -1.0625F, 0.0F);
+
+        if (this.updateCounter / 6 % 2 == 0) {
             this.tileSign.lineBeingEdited = this.editLine;
         }
 

@@ -3,6 +3,7 @@ package net.minecraft.client.gui;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonParseException;
 import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.gui.Screen;
 import io.netty.buffer.Unpooled;
 import java.io.IOException;
 import java.util.List;
@@ -28,7 +29,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
-public class GuiScreenBook extends GuiScreen
+public class GuiScreenBook extends Screen
 {
     private static final Logger logger = LogManager.getLogger();
     private static final ResourceLocation bookGuiTextures = new ResourceLocation("textures/gui/book.png");
@@ -207,7 +208,7 @@ public class GuiScreenBook extends GuiScreen
 
                 PacketBuffer packetbuffer = new PacketBuffer(Unpooled.buffer());
                 packetbuffer.writeItemStackToBuffer(this.bookObj);
-                this.mc.getNetHandler().addToSendQueue(new C17PacketCustomPayload(s2, packetbuffer));
+                getMc().getNetHandler().addToSendQueue(new C17PacketCustomPayload(s2, packetbuffer));
             }
         }
     }
@@ -221,7 +222,7 @@ public class GuiScreenBook extends GuiScreen
         {
             if (button.getId() == 0)
             {
-                this.mc.displayGuiScreen(null);
+                changeScreen(null);
                 this.sendBookToServer(false);
             }
             else if (button.getId() == 3 && this.bookIsUnsigned)
@@ -254,7 +255,7 @@ public class GuiScreenBook extends GuiScreen
             else if (button.getId() == 5 && this.bookGettingSigned)
             {
                 this.sendBookToServer(true);
-                this.mc.displayGuiScreen(null);
+                changeScreen(null);
             }
             else if (button.getId() == 4 && this.bookGettingSigned)
             {
@@ -304,9 +305,9 @@ public class GuiScreenBook extends GuiScreen
      */
     private void keyTypedInBook(char typedChar, int keyCode)
     {
-        if (GuiScreen.isKeyComboCtrlV(keyCode))
+        if (Screen.isKeyComboCtrlV(keyCode))
         {
-            this.pageInsertIntoCurrent(GuiScreen.getClipboardString());
+            this.pageInsertIntoCurrent(Screen.getClipboardString());
         }
         else
         {
@@ -357,7 +358,7 @@ public class GuiScreenBook extends GuiScreen
                 if (!this.bookTitle.isEmpty())
                 {
                     this.sendBookToServer(true);
-                    this.mc.displayGuiScreen(null);
+                    changeScreen(null);
                 }
 
                 return;
@@ -399,7 +400,7 @@ public class GuiScreenBook extends GuiScreen
     {
         String s = this.pageGetCurrent();
         String s1 = s + p_146459_1_;
-        int i = this.fontRendererObj.splitStringWidth(s1 + "" + EnumChatFormatting.BLACK + "_", 118);
+        int i = getFr().splitStringWidth(s1 + "" + EnumChatFormatting.BLACK + "_", 118);
 
         if (i <= 128 && s1.length() < 256)
         {
@@ -413,7 +414,7 @@ public class GuiScreenBook extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(bookGuiTextures);
+        getMc().getTextureManager().bindTexture(bookGuiTextures);
         int i = (this.width - this.bookImageWidth) / 2;
         int j = 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.bookImageWidth, this.bookImageHeight);
@@ -434,20 +435,20 @@ public class GuiScreenBook extends GuiScreen
                 }
             }
 
-            String s1 = I18n.format("book.editTitle", new Object[0]);
-            int k = this.fontRendererObj.getStringWidth(s1);
-            this.fontRendererObj.drawString(s1, i + 36 + (116 - k) / 2, j + 16 + 16, 0);
-            int l = this.fontRendererObj.getStringWidth(s);
-            this.fontRendererObj.drawString(s, i + 36 + (116 - l) / 2, j + 48, 0);
-            String s2 = I18n.format("book.byAuthor", new Object[] {this.editingPlayer.getCommandSenderName()});
-            int i1 = this.fontRendererObj.getStringWidth(s2);
-            this.fontRendererObj.drawString(EnumChatFormatting.DARK_GRAY + s2, i + 36 + (116 - i1) / 2, j + 48 + 10, 0);
-            String s3 = I18n.format("book.finalizeWarning", new Object[0]);
-            this.fontRendererObj.drawSplitString(s3, i + 36, j + 80, 116, 0);
+            String s1 = I18n.format("book.editTitle");
+            int k = getFr().getStringWidth(s1);
+            getFr().drawString(s1, i + 36 + (116 - k) / 2, j + 16 + 16, 0);
+            int l = getFr().getStringWidth(s);
+            getFr().drawString(s, i + 36 + (116 - l) / 2, j + 48, 0);
+            String s2 = I18n.format("book.byAuthor", this.editingPlayer.getCommandSenderName());
+            int i1 = getFr().getStringWidth(s2);
+            getFr().drawString(EnumChatFormatting.DARK_GRAY + s2, i + 36 + (116 - i1) / 2, j + 48 + 10, 0);
+            String s3 = I18n.format("book.finalizeWarning");
+            getFr().drawSplitString(s3, i + 36, j + 80, 116, 0);
         }
         else
         {
-            String s4 = I18n.format("book.pageIndicator", new Object[] {Integer.valueOf(this.currPage + 1), Integer.valueOf(this.bookTotalPages)});
+            String s4 = I18n.format("book.pageIndicator", Integer.valueOf(this.currPage + 1), Integer.valueOf(this.bookTotalPages));
             String s5 = "";
 
             if (this.bookPages != null && this.currPage >= 0 && this.currPage < this.bookPages.tagCount())
@@ -457,7 +458,7 @@ public class GuiScreenBook extends GuiScreen
 
             if (this.bookIsUnsigned)
             {
-                if (this.fontRendererObj.getBidiFlag())
+                if (getFr().getBidiFlag())
                 {
                     s5 = s5 + "_";
                 }
@@ -477,7 +478,7 @@ public class GuiScreenBook extends GuiScreen
                     try
                     {
                         IChatComponent ichatcomponent = IChatComponent.Serializer.jsonToComponent(s5);
-                        this.field_175386_A = ichatcomponent != null ? GuiUtilRenderComponents.func_178908_a(ichatcomponent, 116, this.fontRendererObj, true, true) : null;
+                        this.field_175386_A = ichatcomponent != null ? GuiUtilRenderComponents.func_178908_a(ichatcomponent, 116, getFr(), true, true) : null;
                     }
                     catch (JsonParseException var13)
                     {
@@ -493,21 +494,21 @@ public class GuiScreenBook extends GuiScreen
                 this.field_175387_B = this.currPage;
             }
 
-            int j1 = this.fontRendererObj.getStringWidth(s4);
-            this.fontRendererObj.drawString(s4, i - j1 + this.bookImageWidth - 44, j + 16, 0);
+            int j1 = getFr().getStringWidth(s4);
+            getFr().drawString(s4, i - j1 + this.bookImageWidth - 44, j + 16, 0);
 
             if (this.field_175386_A == null)
             {
-                this.fontRendererObj.drawSplitString(s5, i + 36, j + 16 + 16, 116, 0);
+                getFr().drawSplitString(s5, i + 36, j + 16 + 16, 116, 0);
             }
             else
             {
-                int k1 = Math.min(128 / this.fontRendererObj.FONT_HEIGHT, this.field_175386_A.size());
+                int k1 = Math.min(128 / getFr().FONT_HEIGHT, this.field_175386_A.size());
 
                 for (int l1 = 0; l1 < k1; ++l1)
                 {
                     IChatComponent ichatcomponent2 = this.field_175386_A.get(l1);
-                    this.fontRendererObj.drawString(ichatcomponent2.getUnformattedText(), i + 36, j + 16 + 16 + l1 * this.fontRendererObj.FONT_HEIGHT, 0);
+                    getFr().drawString(ichatcomponent2.getUnformattedText(), i + 36, j + 16 + 16 + l1 * getFr().FONT_HEIGHT, 0);
                 }
 
                 IChatComponent ichatcomponent1 = this.func_175385_b(mouseX, mouseY);
@@ -542,9 +543,9 @@ public class GuiScreenBook extends GuiScreen
     /**
      * Executes the click event specified by the given chat component
      */
-    protected boolean handleComponentClick(IChatComponent p_175276_1_)
+    protected boolean handleComponentClick(IChatComponent chatComponent)
     {
-        ClickEvent clickevent = p_175276_1_ == null ? null : p_175276_1_.getChatStyle().getChatClickEvent();
+        ClickEvent clickevent = chatComponent == null ? null : chatComponent.getChatStyle().getChatClickEvent();
 
         if (clickevent == null)
         {
@@ -574,11 +575,11 @@ public class GuiScreenBook extends GuiScreen
         }
         else
         {
-            boolean flag = super.handleComponentClick(p_175276_1_);
+            boolean flag = super.handleComponentClick(chatComponent);
 
             if (flag && clickevent.getAction() == ClickEvent.Action.RUN_COMMAND)
             {
-                this.mc.displayGuiScreen(null);
+                changeScreen(null);
             }
 
             return flag;
@@ -598,11 +599,11 @@ public class GuiScreenBook extends GuiScreen
 
             if (i >= 0 && j >= 0)
             {
-                int k = Math.min(128 / this.fontRendererObj.FONT_HEIGHT, this.field_175386_A.size());
+                int k = Math.min(128 / getFr().FONT_HEIGHT, this.field_175386_A.size());
 
-                if (i <= 116 && j < this.mc.fontRendererObj.FONT_HEIGHT * k + k)
+                if (i <= 116 && j < getFr().FONT_HEIGHT * k + k)
                 {
-                    int l = j / this.mc.fontRendererObj.FONT_HEIGHT;
+                    int l = j / getFr().FONT_HEIGHT;
 
                     if (l >= 0 && l < this.field_175386_A.size())
                     {
@@ -613,7 +614,7 @@ public class GuiScreenBook extends GuiScreen
                         {
                             if (ichatcomponent1 instanceof ChatComponentText)
                             {
-                                i1 += this.mc.fontRendererObj.getStringWidth(((ChatComponentText)ichatcomponent1).getChatComponentText_TextValue());
+                                i1 += getFr().getStringWidth(((ChatComponentText)ichatcomponent1).getChatComponentText_TextValue());
 
                                 if (i1 > i)
                                 {

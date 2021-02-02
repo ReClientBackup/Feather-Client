@@ -1,13 +1,13 @@
 package net.optifine.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiVideoSettings;
 
 import java.io.IOException;
 import java.util.List;
 
-public class GuiScreenOF extends GuiScreen
+public class GuiScreenOF extends Screen
 {
     protected void actionPerformedRightClick(GuiButton button) throws IOException
     {
@@ -25,7 +25,7 @@ public class GuiScreenOF extends GuiScreen
 
             if (guibutton != null && guibutton.isEnabled())
             {
-                guibutton.playPressSound(this.mc.getSoundHandler());
+                guibutton.playPressSound(getMc().getSoundHandler());
                 try {
                     this.actionPerformedRightClick(guibutton);
                 } catch (IOException e) {

@@ -5,7 +5,7 @@ import com.murengezi.feather.Event.*;
 import com.murengezi.feather.Feather;
 import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.ModuleInfo;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
@@ -166,7 +166,7 @@ public class Keystrokes extends Adjustable {
 			}
 			setBoxColor(Integer.MIN_VALUE + (red << 16) + (green << 8) + blue);
 			setTextColor(this.pressed ? color.getRGB() : 0xffffffff);
-			Gui.drawRect(x, y, x + getWidth(), y + getHeight(), getBoxColor());
+			GUI.drawRect(x, y, x + getWidth(), y + getHeight(), getBoxColor());
 		}
 
 		public void press() {

@@ -1,7 +1,7 @@
 package net.optifine.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.optifine.shaders.config.EnumShaderOption;
 import net.optifine.shaders.gui.GuiButtonDownloadShaders;
 import net.optifine.shaders.gui.GuiButtonEnumShaderOption;
@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class TooltipProviderEnumShaderOptions implements TooltipProvider
 {
-    public Rectangle getTooltipBounds(GuiScreen guiScreen, int x, int y)
+    public Rectangle getTooltipBounds(Screen guiScreen, int x, int y)
     {
         int i = guiScreen.width - 450;
         int j = 35;

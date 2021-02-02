@@ -32,7 +32,7 @@ public class InGameMenuScreen extends Screen {
         addButton(new GuiButton(LAN, this.width / 2 + 2, this.height / 4 + 80, 98, 20, I18n.format("menu.shareToLan")));
         addButton(new GuiButton(DISCONNECT, this.width / 2 - 100, this.height / 4 + 104, I18n.format("menu.disconnect")));
 
-        getButton(LAN).setEnabled(this.mc.isSingleplayer() && !this.mc.getIntegratedServer().getPublic());
+        getButton(LAN).setEnabled(getMc().isSingleplayer() && !getMc().getIntegratedServer().getPublic());
         super.initGui();
     }
 
@@ -41,27 +41,27 @@ public class InGameMenuScreen extends Screen {
         switch (button.getId()) {
             case RETURN:
                 changeScreen(null);
-                mc.setIngameFocus();
+                getMc().setIngameFocus();
                 break;
             case STATS:
-                changeScreen(new GuiStats(this, mc.thePlayer.getStatFileWriter()));
+                changeScreen(new GuiStats(this, getPlayer().getStatFileWriter()));
                 break;
             case ACHIEVEMENTS:
-                changeScreen(new GuiAchievements(this, mc.thePlayer.getStatFileWriter()));
+                changeScreen(new GuiAchievements(this, getPlayer().getStatFileWriter()));
                 break;
             case MULTIPLAYER:
                 changeScreen(new MultiplayerScreen(this));
                 break;
             case OPTIONS:
-                changeScreen(new OptionsScreen(this, mc.gameSettings));
+                changeScreen(new OptionsScreen(this, getMc().gameSettings));
                 break;
             case LAN:
                 changeScreen(new ShareToLanScreen(this));
                 break;
             case DISCONNECT:
                 button.setEnabled(false);
-                mc.theWorld.sendQuittingDisconnectingPacket();
-                mc.loadWorld(null);
+                getWorld().sendQuittingDisconnectingPacket();
+                getMc().loadWorld(null);
                 changeScreen(new MainMenuScreen());
                 break;
         }

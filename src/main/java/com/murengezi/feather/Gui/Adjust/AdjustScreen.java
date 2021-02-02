@@ -8,7 +8,7 @@ import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 
@@ -38,7 +38,7 @@ public class AdjustScreen extends Screen {
 
 		getMods().stream().filter(Module::isEnabled).forEach(adjustable -> {
 			if (isMouseOver(mouseX, mouseY, adjustable) || getSelected() == adjustable) {
-				Gui.drawBox(adjustable.getX(), adjustable.getY(), adjustable.getWidth(), adjustable.getHeight(), 0xffffffff);
+				GUI.drawBox(adjustable.getX(), adjustable.getY(), adjustable.getWidth(), adjustable.getHeight(), 0xffffffff);
 			}
 		});
 
@@ -46,7 +46,7 @@ public class AdjustScreen extends Screen {
 			getSelected().setPosition(mouseX - getDragX(), mouseY - getDragY());
 		}
 
-		Gui.drawBox(0, 0, resolution.getScaledWidth(), resolution.getScaledHeight(), 0xfffea3aa);
+		GUI.drawBox(0, 0, resolution.getScaledWidth(), resolution.getScaledHeight(), 0xfffea3aa);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 

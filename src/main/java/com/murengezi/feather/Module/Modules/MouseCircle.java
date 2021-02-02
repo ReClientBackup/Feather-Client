@@ -5,7 +5,7 @@ import com.murengezi.feather.Event.RenderOverlayEvent;
 import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.ModuleInfo;
 import com.murengezi.feather.Util.RenderHelper;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
@@ -55,7 +55,7 @@ public class MouseCircle extends Adjustable {
             }
         }
 
-        Gui.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MIN_VALUE);
+        GUI.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MIN_VALUE);
 
         float baseX = getX() + getWidth() / 2;
         float baseY = getY() + getHeight() / 2;

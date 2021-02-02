@@ -2,20 +2,20 @@ package net.optifine.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.optifine.Lang;
 
-public class GuiAnimationSettingsOF extends GuiScreen
+public class GuiAnimationSettingsOF extends Screen
 {
-    private GuiScreen prevScreen;
+    private Screen prevScreen;
     protected String title;
     private GameSettings settings;
     private static GameSettings.Options[] enumOptions = new GameSettings.Options[] {GameSettings.Options.ANIMATED_WATER, GameSettings.Options.ANIMATED_LAVA, GameSettings.Options.ANIMATED_FIRE, GameSettings.Options.ANIMATED_PORTAL, GameSettings.Options.ANIMATED_REDSTONE, GameSettings.Options.ANIMATED_EXPLOSION, GameSettings.Options.ANIMATED_FLAME, GameSettings.Options.ANIMATED_SMOKE, GameSettings.Options.VOID_PARTICLES, GameSettings.Options.WATER_PARTICLES, GameSettings.Options.RAIN_SPLASH, GameSettings.Options.PORTAL_PARTICLES, GameSettings.Options.POTION_PARTICLES, GameSettings.Options.DRIPPING_WATER_LAVA, GameSettings.Options.ANIMATED_TERRAIN, GameSettings.Options.ANIMATED_TEXTURES, GameSettings.Options.FIREWORK_PARTICLES, GameSettings.Options.PARTICLES};
 
-    public GuiAnimationSettingsOF(GuiScreen guiscreen, GameSettings gamesettings)
+    public GuiAnimationSettingsOF(Screen guiscreen, GameSettings gamesettings)
     {
         this.prevScreen = guiscreen;
         this.settings = gamesettings;
@@ -66,22 +66,22 @@ public class GuiAnimationSettingsOF extends GuiScreen
 
             if (guibutton.getId() == 200)
             {
-                this.mc.gameSettings.saveOptions();
-                this.mc.displayGuiScreen(this.prevScreen);
+                saveSettings();
+                changeScreen(this.prevScreen);
             }
 
             if (guibutton.getId() == 210)
             {
-                this.mc.gameSettings.setAllAnimations(true);
+                getMc().gameSettings.setAllAnimations(true);
             }
 
             if (guibutton.getId() == 211)
             {
-                this.mc.gameSettings.setAllAnimations(false);
+                getMc().gameSettings.setAllAnimations(false);
             }
 
             ScaledResolution scaledresolution = new ScaledResolution();
-            this.setWorldAndResolution(this.mc, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
+            this.setWorldAndResolution(scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
         }
     }
 
@@ -91,7 +91,7 @@ public class GuiAnimationSettingsOF extends GuiScreen
     public void drawScreen(int x, int y, float f)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.title, this.width / 2, 15, 16777215);
+        getFr().drawCenteredString(this.title, this.width / 2, 15, 16777215);
         super.drawScreen(x, y, f);
     }
 }

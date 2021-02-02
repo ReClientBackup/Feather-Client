@@ -131,7 +131,7 @@ public class GuiBeacon extends GuiContainer
     {
         if (button.getId() == -2)
         {
-            this.mc.displayGuiScreen(null);
+            changeScreen(null);
         }
         else if (button.getId() == -1)
         {
@@ -139,8 +139,8 @@ public class GuiBeacon extends GuiContainer
             PacketBuffer packetbuffer = new PacketBuffer(Unpooled.buffer());
             packetbuffer.writeInt(this.tileBeacon.getField(1));
             packetbuffer.writeInt(this.tileBeacon.getField(2));
-            this.mc.getNetHandler().addToSendQueue(new C17PacketCustomPayload(s, packetbuffer));
-            this.mc.displayGuiScreen(null);
+            getMc().getNetHandler().addToSendQueue(new C17PacketCustomPayload(s, packetbuffer));
+            changeScreen(null);
         }
         else if (button instanceof GuiBeacon.PowerButton)
         {
@@ -174,8 +174,8 @@ public class GuiBeacon extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
         RenderHelper.disableStandardItemLighting();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("tile.beacon.primary", new Object[0]), 62, 10, 14737632);
-        this.drawCenteredString(this.fontRendererObj, I18n.format("tile.beacon.secondary", new Object[0]), 169, 10, 14737632);
+        getFr().drawCenteredString(I18n.format("tile.beacon.primary", new Object[0]), 62, 10, 14737632);
+        getFr().drawCenteredString(I18n.format("tile.beacon.secondary", new Object[0]), 169, 10, 14737632);
 
         for (GuiButton guibutton : this.buttonList)
         {
@@ -195,7 +195,7 @@ public class GuiBeacon extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(beaconGuiTextures);
+        getMc().getTextureManager().bindTexture(beaconGuiTextures);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);

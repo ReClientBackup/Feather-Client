@@ -1,7 +1,7 @@
 package net.optifine;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -204,7 +204,7 @@ public class Lagometer
                 int k1 = l2 << 16 | i1 << 8 | j1;
                 int l1 = 512 / scaledResolution.getScaleFactor() + 2;
                 int i2 = mc.displayHeight / scaledResolution.getScaleFactor() - 8;
-                Gui.drawRect(l1 - 1, i2 - 1, l1 + 50, i2 + 10, -1605349296);
+                GUI.drawRect(l1 - 1, i2 - 1, l1 + 50, i2 + 10, -1605349296);
                 mc.fontRendererObj.drawString(" " + memMbSec + " MB/s", l1, i2, k1);
                 renderTimeNano = System.nanoTime() - i;
             }

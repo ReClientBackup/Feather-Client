@@ -5,9 +5,7 @@ import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.YesNoScreen;
 import com.murengezi.minecraft.client.gui.fGuiSlot;
 import net.minecraft.client.AnvilConverterException;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiCreateWorld;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -31,7 +29,7 @@ import java.util.List;
  */
 public class WorldSelectionScreen extends Screen {
 
-    private final GuiScreen previousScreen;
+    private final Screen previousScreen;
 
     private static final int SELECT = 0;
     private static final int CREATE = 1;
@@ -47,7 +45,7 @@ public class WorldSelectionScreen extends Screen {
     private DateFormat dateFormat;
     private WorldSlot worldSlot;
 
-    public WorldSelectionScreen(GuiScreen parentScreen) {
+    public WorldSelectionScreen(Screen parentScreen) {
         this.previousScreen = parentScreen;
     }
 
@@ -74,7 +72,7 @@ public class WorldSelectionScreen extends Screen {
 
     private void loadWorldList() {
         try {
-            ISaveFormat iSaveFormat = mc.getSaveLoader();
+            ISaveFormat iSaveFormat = getMc().getSaveLoader();
             worldList = iSaveFormat.getSaveList();
             Collections.sort(worldList);
             selectedSlot = -1;
@@ -104,10 +102,10 @@ public class WorldSelectionScreen extends Screen {
         worldSlot.drawScreen(mouseX, mouseY, partialTicks);
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
         GlStateManager.popMatrix();
-        Gui.drawRect(0, 0, worldSlot.getWidth(), worldSlot.getTop(), Integer.MIN_VALUE);
-        Gui.drawRect(0, worldSlot.getBottom(), worldSlot.getWidth(), this.height, Integer.MIN_VALUE);
+        GUI.drawRect(0, 0, worldSlot.getWidth(), worldSlot.getTop(), Integer.MIN_VALUE);
+        GUI.drawRect(0, worldSlot.getBottom(), worldSlot.getWidth(), this.height, Integer.MIN_VALUE);
 
-        mc.fontRendererObj.drawCenteredString(I18n.format("selectWorld.title"), (float)this.width / 2, 20, 0xffffff);
+        getFr().drawCenteredString(I18n.format("selectWorld.title"), (float)this.width / 2, 20, 0xffffff);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -118,7 +116,7 @@ public class WorldSelectionScreen extends Screen {
                 selectWorld(selectedSlot);
                 break;
             case CREATE:
-                changeScreen(new GuiCreateWorld(this));
+                changeScreen(new WorldCreateScreen(this));
                 break;
             case RENAME:
                 changeScreen(new WorldRenameScreen(this, this.getFileName(this.selectedSlot)));
@@ -132,12 +130,12 @@ public class WorldSelectionScreen extends Screen {
                 }
                 break;
             case RECREATE:
-                GuiCreateWorld guicreateworld = new GuiCreateWorld(this);
-                ISaveHandler isavehandler = mc.getSaveLoader().getSaveLoader(this.getFileName(this.selectedSlot), false);
+                WorldCreateScreen worldCreateScreen = new WorldCreateScreen(this);
+                ISaveHandler isavehandler = getMc().getSaveLoader().getSaveLoader(this.getFileName(this.selectedSlot), false);
                 WorldInfo worldinfo = isavehandler.loadWorldInfo();
                 isavehandler.flush();
-                guicreateworld.func_146318_a(worldinfo);
-                this.mc.displayGuiScreen(guicreateworld);
+                worldCreateScreen.func_146318_a(worldinfo);
+                changeScreen(worldCreateScreen);
                 break;
             case CANCEL:
                 changeScreen(getPreviousScreen());
@@ -157,7 +155,7 @@ public class WorldSelectionScreen extends Screen {
             this.deleteWorld = false;
 
             if (result) {
-                ISaveFormat isaveformat = this.mc.getSaveLoader();
+                ISaveFormat isaveformat = getMc().getSaveLoader();
                 isaveformat.flushCache();
                 isaveformat.deleteWorldDirectory(this.getFileName(id));
 
@@ -168,11 +166,7 @@ public class WorldSelectionScreen extends Screen {
         }
     }
 
-    public void changeScreen(GuiScreen guiScreen) {
-        mc.displayGuiScreen(guiScreen);
-    }
-
-    public GuiScreen getPreviousScreen() {
+    public Screen getPreviousScreen() {
         return previousScreen;
     }
 
@@ -193,8 +187,8 @@ public class WorldSelectionScreen extends Screen {
                 displayName = "World" + index;
             }
 
-            if (mc.getSaveLoader().canLoadWorld(fileName)) {
-                mc.launchIntegratedServer(fileName, displayName, null);
+            if (getMc().getSaveLoader().canLoadWorld(fileName)) {
+                getMc().launchIntegratedServer(fileName, displayName, null);
             }
         }
     }
@@ -267,9 +261,9 @@ public class WorldSelectionScreen extends Screen {
                 }
             }
 
-            mc.fontRendererObj.drawStringWithShadow(displayName, x + 2, y + 1, 0xffffffff);
-            mc.fontRendererObj.drawStringWithShadow(fileName, x + 2, y + 12, 0xffaaaaaa);
-            mc.fontRendererObj.drawStringWithShadow(description, x + 2, y + 12 + 10, 0xffaaaaaa);
+            getFr().drawStringWithShadow(displayName, x + 2, y + 1, 0xffffffff);
+            getFr().drawStringWithShadow(fileName, x + 2, y + 12, 0xffaaaaaa);
+            getFr().drawStringWithShadow(description, x + 2, y + 12 + 10, 0xffaaaaaa);
         }
 
         @Override

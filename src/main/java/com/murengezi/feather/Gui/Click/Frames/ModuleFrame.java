@@ -3,7 +3,7 @@ package com.murengezi.feather.Gui.Click.Frames;
 import com.murengezi.feather.Gui.Click.Frame;
 import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Util.TimerUtil;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 
 /**
@@ -24,13 +24,13 @@ public class ModuleFrame extends Frame {
 
     @Override
     public void render(int mouseX, int mouseY, ScaledResolution scaledResolution) {
-        Gui.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MAX_VALUE);
+        GUI.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MAX_VALUE);
         getFr().drawCenteredString(getTitle(), getX() + 40, getY() + 3, 0xffffff);
 
         if (isMouseOn(mouseX, mouseY)) {
             if (hoverX == mouseX && hoverY == mouseY && !isSelected()) {
                 if (hoverTimer.hasPassed(1000)) {
-                    Gui.drawRect(mouseX, mouseY - getFr().FONT_HEIGHT - 4, mouseX + getFr().getStringWidth(module.getDescription()) + 4, mouseY, Integer.MIN_VALUE);
+                    GUI.drawRect(mouseX, mouseY - getFr().FONT_HEIGHT - 4, mouseX + getFr().getStringWidth(module.getDescription()) + 4, mouseY, Integer.MIN_VALUE);
                     getFr().drawStringWithShadow(module.getDescription(), mouseX + 2, mouseY - getFr().FONT_HEIGHT - 1.5f, 0xffffffff);
                 }
             } else {

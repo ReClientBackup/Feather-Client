@@ -5,7 +5,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.murengezi.minecraft.client.gui.*;
 import com.murengezi.minecraft.client.gui.Multiplayer.Lan.LanScreen;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.ServerList;
@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public class MultiplayerScreen extends Screen {
 
-    private final GuiScreen previousScreen;
+    private final Screen previousScreen;
     private final OldServerPinger oldServerPinger = new OldServerPinger();
     private ServerData selectedServer;
     private ServerSelectionList serverListSelector;
@@ -41,7 +41,7 @@ public class MultiplayerScreen extends Screen {
     private static final int CANCEL = 6;
     private static final int LAN = 7;
 
-    public MultiplayerScreen(GuiScreen previousScreen) {
+    public MultiplayerScreen(Screen previousScreen) {
         this.previousScreen = previousScreen;
     }
 
@@ -51,7 +51,7 @@ public class MultiplayerScreen extends Screen {
 
         if (!this.initialized) {
             this.initialized = true;
-            this.serverList = new ServerList(this.mc);
+            this.serverList = new ServerList(getMc());
             this.serverList.loadServerList();
             this.serverListSelector = new ServerSelectionList(this, this.width, this.height, 32, this.height - 64, 36);
             this.serverListSelector.loadNormalEntries(serverList);
@@ -114,7 +114,7 @@ public class MultiplayerScreen extends Screen {
                         ServerData serverdata = ((ServerListEntryNormal)guiListEntry).getServerData();
                         this.selectedServer = new ServerData(serverdata.serverName, serverdata.serverIP, false);
                         this.selectedServer.copyFrom(serverdata);
-                        this.mc.displayGuiScreen(new AddServerScreen(this, this.selectedServer));
+                        changeScreen(new AddServerScreen(this, this.selectedServer));
                     }
                     break;
                 case DELETE:
@@ -130,7 +130,7 @@ public class MultiplayerScreen extends Screen {
                     this.refreshServerList();
                     break;
                 case CANCEL:
-                    if (this.previousScreen instanceof InGameMenuScreen && mc.theWorld == null) {
+                    if (this.previousScreen instanceof InGameMenuScreen && getWorld() == null) {
                         changeScreen(new MainMenuScreen());
                     } else {
                         changeScreen(this.previousScreen);
@@ -153,7 +153,7 @@ public class MultiplayerScreen extends Screen {
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
         drawRect(0, 0, serverListSelector.getWidth(), serverListSelector.getTop(), Integer.MIN_VALUE);
         drawRect(0, serverListSelector.getBottom(), serverListSelector.getWidth(), this.height, Integer.MIN_VALUE);
-        mc.fontRendererObj.drawCenteredString(I18n.format("multiplayer.title"), (float)this.width / 2, 20, 0xffffff);
+        getFr().drawCenteredString(I18n.format("multiplayer.title"), (float)this.width / 2, 20, 0xffffff);
 
         if (this.hoveringText != null) {
             drawHoveringText(Lists.newArrayList(Splitter.on("\n").split(this.hoveringText)), mouseX, mouseY);

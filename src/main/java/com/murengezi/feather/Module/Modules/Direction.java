@@ -5,7 +5,7 @@ import com.murengezi.feather.Event.RenderOverlayEvent;
 import com.murengezi.feather.Feather;
 import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.ModuleInfo;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -20,7 +20,7 @@ public class Direction extends Adjustable {
 
     @EventTarget
     public void onRender(RenderOverlayEvent event) {
-        Gui.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MIN_VALUE);
+        GUI.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MIN_VALUE);
         setWidth(40f);
         setHeight(40f);
         /*
@@ -39,7 +39,7 @@ public class Direction extends Adjustable {
         ResourceLocation mapIcons = new ResourceLocation("textures/map/map_icons.png");
         getMc().getTextureManager().bindTexture(mapIcons);
         GlStateManager.translate(-3.5f, -3.5f, 0);
-        Gui.drawModalRectWithCustomSizedTexture(0, 0, 1, 0, 7, 7, 32, 32);
+        GUI.drawModalRectWithCustomSizedTexture(0, 0, 1, 0, 7, 7, 32, 32);
         GlStateManager.popMatrix();
     }
 

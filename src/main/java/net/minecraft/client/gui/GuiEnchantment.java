@@ -67,8 +67,8 @@ public class GuiEnchantment extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
-        this.fontRendererObj.drawString(this.field_175380_I.getDisplayName().getUnformattedText(), 12, 5, 4210752);
-        this.fontRendererObj.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+        getFr().drawString(this.field_175380_I.getDisplayName().getUnformattedText(), 12, 5, 4210752);
+        getFr().drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**
@@ -93,9 +93,9 @@ public class GuiEnchantment extends GuiContainer
             int l = mouseX - (i + 60);
             int i1 = mouseY - (j + 14 + 19 * k);
 
-            if (l >= 0 && i1 >= 0 && l < 108 && i1 < 19 && this.container.enchantItem(this.mc.thePlayer, k))
+            if (l >= 0 && i1 >= 0 && l < 108 && i1 < 19 && this.container.enchantItem(getPlayer(), k))
             {
-                this.mc.playerController.sendEnchantPacket(this.container.windowId, k);
+                getMc().playerController.sendEnchantPacket(this.container.windowId, k);
             }
         }
     }
@@ -106,7 +106,7 @@ public class GuiEnchantment extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(ENCHANTMENT_TABLE_GUI_TEXTURE);
+        getMc().getTextureManager().bindTexture(ENCHANTMENT_TABLE_GUI_TEXTURE);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
@@ -127,7 +127,7 @@ public class GuiEnchantment extends GuiContainer
         float f1 = 5.0F;
         GlStateManager.scale(f1, f1, f1);
         GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(ENCHANTMENT_TABLE_BOOK_TEXTURE);
+        getMc().getTextureManager().bindTexture(ENCHANTMENT_TABLE_BOOK_TEXTURE);
         GlStateManager.rotate(20.0F, 1.0F, 0.0F, 0.0F);
         float f2 = this.field_147076_A + (this.field_147080_z - this.field_147076_A) * partialTicks;
         GlStateManager.translate((1.0F - f2) * 0.2F, (1.0F - f2) * 0.1F, (1.0F - f2) * 0.25F);
@@ -163,7 +163,7 @@ public class GuiEnchantment extends GuiContainer
         GlStateManager.disableRescaleNormal();
         RenderHelper.disableStandardItemLighting();
         GlStateManager.matrixMode(5889);
-        GlStateManager.viewport(0, 0, this.mc.displayWidth, this.mc.displayHeight);
+        GlStateManager.viewport(0, 0, getMc().displayWidth, getMc().displayHeight);
         GlStateManager.popMatrix();
         GlStateManager.matrixMode(5888);
         GlStateManager.popMatrix();
@@ -179,7 +179,7 @@ public class GuiEnchantment extends GuiContainer
             int k1 = 86;
             String s = EnchantmentNameParts.getInstance().generateNewRandomName();
             this.zLevel = 0.0F;
-            this.mc.getTextureManager().bindTexture(ENCHANTMENT_TABLE_GUI_TEXTURE);
+            getMc().getTextureManager().bindTexture(ENCHANTMENT_TABLE_GUI_TEXTURE);
             int l1 = this.container.enchantLevels[l];
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -190,14 +190,14 @@ public class GuiEnchantment extends GuiContainer
             else
             {
                 String s1 = "" + l1;
-                FontRenderer fontrenderer = this.mc.standardGalacticFontRenderer;
+                FontRenderer galacticFontRenderer = getMc().standardGalacticFontRenderer;
                 int i2 = 6839882;
 
-                if ((k < l + 1 || this.mc.thePlayer.experienceLevel < l1) && !this.mc.thePlayer.capabilities.isCreativeMode)
+                if ((k < l + 1 || getPlayer().experienceLevel < l1) && !getPlayer().capabilities.isCreativeMode)
                 {
                     this.drawTexturedModalRect(i1, j + 14 + 19 * l, 0, 185, 108, 19);
                     this.drawTexturedModalRect(i1 + 1, j + 15 + 19 * l, 16 * l, 239, 16, 16);
-                    fontrenderer.drawSplitString(s, j1, j + 16 + 19 * l, k1, (i2 & 16711422) >> 1);
+                    galacticFontRenderer.drawSplitString(s, j1, j + 16 + 19 * l, k1, (i2 & 16711422) >> 1);
                     i2 = 4226832;
                 }
                 else
@@ -216,12 +216,11 @@ public class GuiEnchantment extends GuiContainer
                     }
 
                     this.drawTexturedModalRect(i1 + 1, j + 15 + 19 * l, 16 * l, 223, 16, 16);
-                    fontrenderer.drawSplitString(s, j1, j + 16 + 19 * l, k1, i2);
+                    galacticFontRenderer.drawSplitString(s, j1, j + 16 + 19 * l, k1, i2);
                     i2 = 8453920;
                 }
 
-                fontrenderer = this.mc.fontRendererObj;
-                fontrenderer.drawStringWithShadow(s1, (float)(j1 + 86 - fontrenderer.getStringWidth(s1)), (float)(j + 16 + 19 * l + 7), i2);
+                getFr().drawStringWithShadow(s1, (float)(j1 + 86 - getFr().getStringWidth(s1)), (float)(j + 16 + 19 * l + 7), i2);
             }
         }
     }
@@ -232,7 +231,7 @@ public class GuiEnchantment extends GuiContainer
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         super.drawScreen(mouseX, mouseY, partialTicks);
-        boolean flag = this.mc.thePlayer.capabilities.isCreativeMode;
+        boolean flag = getPlayer().capabilities.isCreativeMode;
         int i = this.container.getLapisAmount();
 
         for (int j = 0; j < 3; ++j)
@@ -258,7 +257,7 @@ public class GuiEnchantment extends GuiContainer
                         list.add("");
                     }
 
-                    if (this.mc.thePlayer.experienceLevel < k)
+                    if (getPlayer().experienceLevel < k)
                     {
                         list.add(EnumChatFormatting.RED.toString() + "Level Requirement: " + this.container.enchantLevels[j]);
                     }

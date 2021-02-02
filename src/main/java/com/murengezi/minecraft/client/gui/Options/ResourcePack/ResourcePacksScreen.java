@@ -5,7 +5,6 @@ import com.murengezi.feather.Feather;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiOptionButton;
-import net.minecraft.client.gui.GuiScreen;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.ResourcePackRepository;
@@ -26,7 +25,7 @@ import java.util.List;
  */
 public class ResourcePacksScreen extends Screen {
 
-	private GuiScreen previousScreen;
+	private Screen previousScreen;
 	private List<ResourcePackListEntry> availableResourcePacks;
 	private List<ResourcePackListEntry> selectedResourcePacks;
 	private ResourcePackAvailableList availableResourcePacksList;
@@ -36,7 +35,7 @@ public class ResourcePacksScreen extends Screen {
 	private static final int FOLDER = 0;
 	private static final int DONE = 1;
 
-	public ResourcePacksScreen(GuiScreen previousScreen) {
+	public ResourcePacksScreen(Screen previousScreen) {
 		this.previousScreen = previousScreen;
 	}
 
@@ -48,7 +47,7 @@ public class ResourcePacksScreen extends Screen {
 		if (!this.changed) {
 			availableResourcePacks = new ArrayList<>();
 			selectedResourcePacks = new ArrayList<>();
-			ResourcePackRepository repository = this.mc.getResourcePackRepository();
+			ResourcePackRepository repository = getMc().getResourcePackRepository();
 			repository.updateRepositoryEntriesAll();
 			List<ResourcePackRepository.Entry> list = Lists.newArrayList(repository.getRepositoryEntriesAll());
 			list.removeAll(repository.getRepositoryEntries());
@@ -102,7 +101,7 @@ public class ResourcePacksScreen extends Screen {
 		if (button.isEnabled()) {
 			switch (button.getId()) {
 				case FOLDER:
-					File file1 = this.mc.getResourcePackRepository().getDirResourcepacks();
+					File file1 = getMc().getResourcePackRepository().getDirResourcepacks();
 					String s = file1.getAbsolutePath();
 
 					if (Util.getOSType() == Util.EnumOS.OSX) {
@@ -152,22 +151,22 @@ public class ResourcePacksScreen extends Screen {
 						}
 
 						Collections.reverse(list);
-						this.mc.getResourcePackRepository().setRepositories(list);
-						this.mc.gameSettings.resourcePacks.clear();
-						this.mc.gameSettings.field_183018_l.clear();
+						getMc().getResourcePackRepository().setRepositories(list);
+						getMc().gameSettings.resourcePacks.clear();
+						getMc().gameSettings.field_183018_l.clear();
 
 						for (ResourcePackRepository.Entry entry : list)
 						{
-							this.mc.gameSettings.resourcePacks.add(entry.getResourcePackName());
+							getMc().gameSettings.resourcePacks.add(entry.getResourcePackName());
 
 							if (entry.getPackFormat() != 1)
 							{
-								this.mc.gameSettings.field_183018_l.add(entry.getResourcePackName());
+								getMc().gameSettings.field_183018_l.add(entry.getResourcePackName());
 							}
 						}
 
 						saveSettings();
-						this.mc.refreshResources();
+						getMc().refreshResources();
 					}
 
 					changeScreen(this.previousScreen);
@@ -203,8 +202,8 @@ public class ResourcePacksScreen extends Screen {
 		drawRect(0, 0, this.width, availableResourcePacksList.getTop(), Integer.MIN_VALUE);
 		drawRect(0, availableResourcePacksList.getBottom(), this.width, this.height, Integer.MIN_VALUE);
 
-		this.drawCenteredString(this.fontRendererObj, I18n.format("resourcePack.title"), this.width / 2, 16, 16777215);
-		this.drawCenteredString(this.fontRendererObj, I18n.format("resourcePack.folderInfo"), this.width / 2 - 77, this.height - 18, 8421504);
+		getFr().drawCenteredString(I18n.format("resourcePack.title"), this.width / 2, 16, 16777215);
+		getFr().drawCenteredString(I18n.format("resourcePack.folderInfo"), this.width / 2 - 77, this.height - 18, 8421504);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 

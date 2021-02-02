@@ -2,7 +2,6 @@ package com.murengezi.minecraft.client.gui.WorldSelection;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.world.storage.ISaveFormat;
@@ -17,14 +16,14 @@ import java.io.IOException;
  */
 public class WorldRenameScreen extends Screen {
 
-    private final GuiScreen previousScreen;
+    private final Screen previousScreen;
     private GuiTextField textField;
     private final String saveName;
 
     private static final int RENAME = 0;
     private static final int CANCEL = 1;
 
-    public WorldRenameScreen(GuiScreen previousScreen, String saveName) {
+    public WorldRenameScreen(Screen previousScreen, String saveName) {
         this.previousScreen = previousScreen;
         this.saveName = saveName;
     }
@@ -34,10 +33,10 @@ public class WorldRenameScreen extends Screen {
         Keyboard.enableRepeatEvents(true);
         addButton(new GuiButton(RENAME, this.width / 2 - 100, this.height / 4 + 96 + 12, I18n.format("selectWorld.renameButton")));
         addButton(new GuiButton(CANCEL, this.width / 2 - 100, this.height / 4 + 120 + 12, I18n.format("gui.cancel")));
-        ISaveFormat isaveformat = mc.getSaveLoader();
-        WorldInfo worldinfo = isaveformat.getWorldInfo(saveName);
+        ISaveFormat saveFormat = getMc().getSaveLoader();
+        WorldInfo worldinfo = saveFormat.getWorldInfo(saveName);
         String worldName = worldinfo.getWorldName();
-        textField = new GuiTextField(2, fontRendererObj, width / 2 - 100, 60, 200, 20);
+        textField = new GuiTextField(2, width / 2 - 100, 60, 200, 20);
         textField.setFocused(true);
         textField.setText(worldName);
     }
@@ -57,12 +56,12 @@ public class WorldRenameScreen extends Screen {
         if (button.isEnabled()) {
             switch (button.getId()) {
                 case RENAME:
-                    ISaveFormat isaveformat = mc.getSaveLoader();
-                    isaveformat.renameWorld(saveName, textField.getText().trim());
-                    mc.displayGuiScreen(previousScreen);
+                    ISaveFormat saveFormat = getMc().getSaveLoader();
+                    saveFormat.renameWorld(saveName, textField.getText().trim());
+                    changeScreen(previousScreen);
                     break;
                 case CANCEL:
-                    mc.displayGuiScreen(previousScreen);
+                    changeScreen(previousScreen);
                     break;
             }
         }
@@ -88,8 +87,8 @@ public class WorldRenameScreen extends Screen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground(mouseX, mouseY, 60);
 
-        this.drawCenteredString(this.fontRendererObj, I18n.format("selectWorld.renameTitle"), this.width / 2, 20, 0xffffffff);
-        this.drawString(this.fontRendererObj, I18n.format("selectWorld.enterName"), this.width / 2 - 100, 47, 0xffA0A0A0);
+        getFr().drawCenteredString(I18n.format("selectWorld.renameTitle"), this.width / 2, 20, 0xffffffff);
+        getFr().drawString(I18n.format("selectWorld.enterName"), this.width / 2 - 100, 47, 0xffA0A0A0);
         textField.drawTextBox();
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

@@ -4,7 +4,6 @@ import com.murengezi.feather.Feather;
 import com.murengezi.feather.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.ServerAddress;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.network.NetHandlerLoginClient;
@@ -31,22 +30,21 @@ public class ConnectingScreen extends Screen {
     private static final AtomicInteger CONNECTION_ID = new AtomicInteger(0);
     private NetworkManager networkManager;
     private boolean cancelled;
-    private final GuiScreen previousScreen;
+    private final Screen previousScreen;
 
     private static final int CANCEL = 0;
 
-    public ConnectingScreen(GuiScreen previousScreen, ServerData serverData) {
-        this.mc = MinecraftUtils.getMc();
+    public ConnectingScreen(Screen previousScreen, ServerData serverData) {
         this.previousScreen = previousScreen;
         ServerAddress serverAddress = ServerAddress.getAddressFromString(serverData.serverIP);
-        this.mc.loadWorld(null);
-        this.mc.setServerData(serverData);
+        getMc().loadWorld(null);
+        getMc().setServerData(serverData);
         this.connect(serverAddress.getIP(), serverAddress.getPort());
     }
 
-    public ConnectingScreen(GuiScreen previousScreen, String hostName, int port) {
+    public ConnectingScreen(Screen previousScreen, String hostName, int port) {
         this.previousScreen = previousScreen;
-        this.mc.loadWorld(null);
+        getMc().loadWorld(null);
         this.connect(hostName, port);
     }
 
@@ -85,10 +83,10 @@ public class ConnectingScreen extends Screen {
                     }
 
                     inetAddress = InetAddress.getByName(ip);
-                    setNetworkManager(NetworkManager.func_181124_a(inetAddress, port, mc.gameSettings.func_181148_f()));
-                    getNetworkManager().setNetHandler(new NetHandlerLoginClient(getNetworkManager(), mc, previousScreen));
+                    setNetworkManager(NetworkManager.func_181124_a(inetAddress, port, getMc().gameSettings.func_181148_f()));
+                    getNetworkManager().setNetHandler(new NetHandlerLoginClient(getNetworkManager(), getMc(), previousScreen));
                     getNetworkManager().sendPacket(new C00Handshake(47, ip, port, EnumConnectionState.LOGIN));
-                    getNetworkManager().sendPacket(new C00PacketLoginStart(mc.getSession().getProfile()));
+                    getNetworkManager().sendPacket(new C00PacketLoginStart(getMc().getSession().getProfile()));
 
                 } catch (UnknownHostException e) {
                     if (isCancelled()) {
@@ -132,7 +130,7 @@ public class ConnectingScreen extends Screen {
         this.drawDefaultBackground(mouseX, mouseY, 60);
 
 
-        this.drawCenteredString(this.fontRendererObj, I18n.format(getNetworkManager() == null ? "connect.connecting" : "connect.authorizing"), this.width / 2, this.height / 2 - 50, 16777215);
+        getFr().drawCenteredString(I18n.format(getNetworkManager() == null ? "connect.connecting" : "connect.authorizing"), this.width / 2, this.height / 2 - 50, 16777215);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

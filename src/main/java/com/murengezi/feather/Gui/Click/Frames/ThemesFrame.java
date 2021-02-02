@@ -1,7 +1,7 @@
 package com.murengezi.feather.Gui.Click.Frames;
 
 import com.murengezi.feather.Gui.Click.Frame;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 
 /**
@@ -16,7 +16,7 @@ public class ThemesFrame extends Frame {
 
     @Override
     public void render(int mouseX, int mouseY, ScaledResolution scaledResolution) {
-        Gui.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MAX_VALUE);
+        GUI.drawRect(getX(), getY(), getX() + getWidth(), getY() + getHeight(), Integer.MAX_VALUE);
         getFr().drawCenteredString(getTitle(), getX() + 40, getY() + 3, 0xffffff);
         super.render(mouseX, mouseY, scaledResolution);
     }

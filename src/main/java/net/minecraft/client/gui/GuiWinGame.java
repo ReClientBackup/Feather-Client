@@ -7,6 +7,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Random;
+
+import com.murengezi.minecraft.client.gui.GUI;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.renderer.GlStateManager;
@@ -20,7 +23,7 @@ import org.apache.commons.io.Charsets;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class GuiWinGame extends GuiScreen
+public class GuiWinGame extends Screen
 {
     private static final Logger logger = LogManager.getLogger();
     private static final ResourceLocation MINECRAFT_LOGO = new ResourceLocation("textures/gui/title/minecraft.png");
@@ -28,15 +31,15 @@ public class GuiWinGame extends GuiScreen
     private int field_146581_h;
     private List<String> field_146582_i;
     private int field_146579_r;
-    private float field_146578_s = 0.5F;
+    private final float field_146578_s = 0.5F;
 
     /**
      * Called from the main game loop to update the screen.
      */
     public void updateScreen()
     {
-        MusicTicker musicticker = this.mc.func_181535_r();
-        SoundHandler soundhandler = this.mc.getSoundHandler();
+        MusicTicker musicticker = getMc().func_181535_r();
+        SoundHandler soundhandler = getMc().getSoundHandler();
 
         if (this.field_146581_h == 0)
         {
@@ -67,10 +70,9 @@ public class GuiWinGame extends GuiScreen
         }
     }
 
-    private void sendRespawnPacket()
-    {
-        this.mc.thePlayer.sendQueue.addToSendQueue(new C16PacketClientStatus(C16PacketClientStatus.EnumState.PERFORM_RESPAWN));
-        this.mc.displayGuiScreen(null);
+    private void sendRespawnPacket() {
+        getPlayer().sendQueue.addToSendQueue(new C16PacketClientStatus(C16PacketClientStatus.EnumState.PERFORM_RESPAWN));
+        changeScreen(null);
     }
 
     /**
@@ -89,14 +91,14 @@ public class GuiWinGame extends GuiScreen
     {
         if (this.field_146582_i == null)
         {
-            this.field_146582_i = Lists.<String>newArrayList();
+            this.field_146582_i = Lists.newArrayList();
 
             try
             {
-                String s = "";
+                String s;
                 String s1 = "" + EnumChatFormatting.WHITE + EnumChatFormatting.OBFUSCATED + EnumChatFormatting.GREEN + EnumChatFormatting.AQUA;
                 int i = 274;
-                InputStream inputstream = this.mc.getResourceManager().getResource(new ResourceLocation("texts/end.txt")).getInputStream();
+                InputStream inputstream = getMc().getResourceManager().getResource(new ResourceLocation("texts/end.txt")).getInputStream();
                 BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(inputstream, Charsets.UTF_8));
                 Random random = new Random(8124371L);
 
@@ -105,14 +107,14 @@ public class GuiWinGame extends GuiScreen
                     String s2;
                     String s3;
 
-                    for (s = s.replaceAll("PLAYERNAME", this.mc.getSession().getUsername()); s.contains(s1); s = s2 + EnumChatFormatting.WHITE + EnumChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, random.nextInt(4) + 3) + s3)
+                    for (s = s.replaceAll("PLAYERNAME", getMc().getSession().getUsername()); s.contains(s1); s = s2 + EnumChatFormatting.WHITE + EnumChatFormatting.OBFUSCATED + "XXXXXXXX".substring(0, random.nextInt(4) + 3) + s3)
                     {
                         int j = s.indexOf(s1);
                         s2 = s.substring(0, j);
                         s3 = s.substring(j + s1.length());
                     }
 
-                    this.field_146582_i.addAll(this.mc.fontRendererObj.listFormattedStringToWidth(s, i));
+                    this.field_146582_i.addAll(getMc().fontRendererObj.listFormattedStringToWidth(s, i));
                     this.field_146582_i.add("");
                 }
 
@@ -123,32 +125,31 @@ public class GuiWinGame extends GuiScreen
                     this.field_146582_i.add("");
                 }
 
-                inputstream = this.mc.getResourceManager().getResource(new ResourceLocation("texts/credits.txt")).getInputStream();
+                inputstream = getMc().getResourceManager().getResource(new ResourceLocation("texts/credits.txt")).getInputStream();
                 bufferedreader = new BufferedReader(new InputStreamReader(inputstream, Charsets.UTF_8));
 
                 while ((s = bufferedreader.readLine()) != null)
                 {
-                    s = s.replaceAll("PLAYERNAME", this.mc.getSession().getUsername());
+                    s = s.replaceAll("PLAYERNAME", getMc().getSession().getUsername());
                     s = s.replaceAll("\t", "    ");
-                    this.field_146582_i.addAll(this.mc.fontRendererObj.listFormattedStringToWidth(s, i));
+                    this.field_146582_i.addAll(getFr().listFormattedStringToWidth(s, i));
                     this.field_146582_i.add("");
                 }
 
                 inputstream.close();
                 this.field_146579_r = this.field_146582_i.size() * 12;
             }
-            catch (Exception exception)
-            {
-                logger.error("Couldn\'t load credits", exception);
+            catch (Exception exception) {
+                logger.error("Couldn't load credits", exception);
             }
         }
     }
 
-    private void drawWinGameScreen(int p_146575_1_, int p_146575_2_, float p_146575_3_)
+    private void drawWinGameScreen(float p_146575_3_)
     {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        this.mc.getTextureManager().bindTexture(Gui.optionsBackground);
+        getMc().getTextureManager().bindTexture(GUI.optionsBackground);
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
         int i = this.width;
         float f = 0.0F - ((float)this.field_146581_h + p_146575_3_) * 0.5F * this.field_146578_s;
@@ -182,7 +183,7 @@ public class GuiWinGame extends GuiScreen
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
-        this.drawWinGameScreen(mouseX, mouseY, partialTicks);
+        this.drawWinGameScreen(partialTicks);
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         int i = 274;
@@ -191,7 +192,7 @@ public class GuiWinGame extends GuiScreen
         float f = -((float)this.field_146581_h + partialTicks) * this.field_146578_s;
         GlStateManager.pushMatrix();
         GlStateManager.translate(0.0F, f, 0.0F);
-        this.mc.getTextureManager().bindTexture(MINECRAFT_LOGO);
+        getMc().getTextureManager().bindTexture(MINECRAFT_LOGO);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.drawTexturedModalRect(j, k, 0, 0, 155, 44);
         this.drawTexturedModalRect(j + 155, k, 0, 45, 155, 44);
@@ -215,12 +216,12 @@ public class GuiWinGame extends GuiScreen
 
                 if (s.startsWith("[C]"))
                 {
-                    this.fontRendererObj.drawStringWithShadow(s.substring(3), (float)(j + (i - this.fontRendererObj.getStringWidth(s.substring(3))) / 2), (float)l, 16777215);
+                    getFr().drawStringWithShadow(s.substring(3), (float)(j + (i - getFr().getStringWidth(s.substring(3))) / 2), (float)l, 16777215);
                 }
                 else
                 {
-                    this.fontRendererObj.fontRandom.setSeed((long)i1 * 4238972211L + (long)(this.field_146581_h / 4));
-                    this.fontRendererObj.drawStringWithShadow(s, (float)j, (float)l, 16777215);
+                    getFr().fontRandom.setSeed((long)i1 * 4238972211L + (long)(this.field_146581_h / 4));
+                    getFr().drawStringWithShadow(s, (float)j, (float)l, 16777215);
                 }
             }
 
@@ -228,7 +229,7 @@ public class GuiWinGame extends GuiScreen
         }
 
         GlStateManager.popMatrix();
-        this.mc.getTextureManager().bindTexture(VIGNETTE_TEXTURE);
+        getMc().getTextureManager().bindTexture(VIGNETTE_TEXTURE);
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(0, 769);
         int j1 = this.width;

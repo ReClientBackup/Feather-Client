@@ -45,7 +45,7 @@ public class YesNoScreen extends Screen {
         addButton(new GuiOptionButton(YES, this.width / 2 - 155, this.height / 6 + 96, this.yesButtonText));
         addButton(new GuiOptionButton(NO, this.width / 2 - 155 + 160, this.height / 6 + 96, this.noButtonText));
         this.lines.clear();
-        this.lines.addAll(this.fontRendererObj.listFormattedStringToWidth(this.messageLine2, this.width - 50));
+        this.lines.addAll(getFr().listFormattedStringToWidth(this.messageLine2, this.width - 50));
         super.initGui();
     }
 
@@ -58,8 +58,8 @@ public class YesNoScreen extends Screen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground(mouseX, mouseY, 60);
-        this.drawCenteredString(this.fontRendererObj, this.messageLine1, this.width / 2, 70, 16777215);
-        this.lines.forEach(line -> this.drawCenteredString(this.fontRendererObj, line, this.width / 2, 90 + (this.lines.indexOf(line) * this.fontRendererObj.FONT_HEIGHT), 16777215));
+        getFr().drawCenteredString(this.messageLine1, this.width / 2, 70, 16777215);
+        this.lines.forEach(line -> getFr().drawCenteredString(line, this.width / 2, 90 + (this.lines.indexOf(line) * getFr().FONT_HEIGHT), 16777215));
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -14,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.ChunkProviderSettings;
 import org.lwjgl.input.Keyboard;
 
-public class GuiScreenCustomizePresets extends GuiScreen
+public class GuiScreenCustomizePresets extends Screen
 {
     private static final List<GuiScreenCustomizePresets.Info> field_175310_f = Lists.<GuiScreenCustomizePresets.Info>newArrayList();
     private GuiScreenCustomizePresets.ListPreset field_175311_g;
@@ -41,7 +42,7 @@ public class GuiScreenCustomizePresets extends GuiScreen
         this.field_175315_a = I18n.format("createWorld.customize.custom.presets.title", new Object[0]);
         this.field_175313_s = I18n.format("createWorld.customize.presets.share", new Object[0]);
         this.field_175312_t = I18n.format("createWorld.customize.presets.list", new Object[0]);
-        this.field_175317_i = new GuiTextField(2, this.fontRendererObj, 50, 40, this.width - 100, 20);
+        this.field_175317_i = new GuiTextField(2, 50, 40, this.width - 100, 20);
         this.field_175311_g = new GuiScreenCustomizePresets.ListPreset();
         this.field_175317_i.setMaxStringLength(2000);
         this.field_175317_i.setText(this.field_175314_r.func_175323_a());
@@ -96,11 +97,11 @@ public class GuiScreenCustomizePresets extends GuiScreen
         {
             case 0:
                 this.field_175314_r.func_175324_a(this.field_175317_i.getText());
-                this.mc.displayGuiScreen(this.field_175314_r);
+                changeScreen(this.field_175314_r);
                 break;
 
             case 1:
-                this.mc.displayGuiScreen(this.field_175314_r);
+                changeScreen(this.field_175314_r);
         }
     }
 
@@ -111,9 +112,9 @@ public class GuiScreenCustomizePresets extends GuiScreen
     {
         this.drawDefaultBackground();
         this.field_175311_g.drawScreen(mouseX, mouseY, partialTicks);
-        this.drawCenteredString(this.fontRendererObj, this.field_175315_a, this.width / 2, 8, 16777215);
-        this.drawString(this.fontRendererObj, this.field_175313_s, 50, 30, 10526880);
-        this.drawString(this.fontRendererObj, this.field_175312_t, 50, 70, 10526880);
+        getFr().drawCenteredString(this.field_175315_a, this.width / 2, 8, 16777215);
+        getFr().drawString(this.field_175313_s, 50, 30, 10526880);
+        getFr().drawString(this.field_175312_t, 50, 70, 10526880);
         this.field_175317_i.drawTextBox();
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -182,7 +183,7 @@ public class GuiScreenCustomizePresets extends GuiScreen
 
         public ListPreset()
         {
-            super(GuiScreenCustomizePresets.this.mc, GuiScreenCustomizePresets.this.width, GuiScreenCustomizePresets.this.height, 80, GuiScreenCustomizePresets.this.height - 32, 38);
+            super(getMc(), GuiScreenCustomizePresets.this.width, GuiScreenCustomizePresets.this.height, 80, GuiScreenCustomizePresets.this.height - 32, 38);
         }
 
         protected int getSize()
@@ -231,7 +232,7 @@ public class GuiScreenCustomizePresets extends GuiScreen
         {
             GuiScreenCustomizePresets.Info guiscreencustomizepresets$info = GuiScreenCustomizePresets.field_175310_f.get(entryID);
             this.func_178051_a(x, y, guiscreencustomizepresets$info.field_178953_b);
-            GuiScreenCustomizePresets.this.fontRendererObj.drawString(guiscreencustomizepresets$info.field_178955_a, x + 32 + 10, y + 14, 16777215);
+            getFr().drawString(guiscreencustomizepresets$info.field_178955_a, x + 32 + 10, y + 14, 16777215);
         }
     }
 }

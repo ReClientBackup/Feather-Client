@@ -27,7 +27,7 @@ import com.murengezi.minecraft.client.entity.EntityOtherPlayerMP;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiMerchant;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiScreenBook;
 import net.minecraft.client.gui.GuiWinGame;
 import net.minecraft.client.gui.IProgressMeter;
@@ -219,7 +219,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
      * Seems to be either null (integrated server) or an instance of either GuiMultiplayer (when connecting to a server)
      * or GuiScreenReamlsTOS (when connecting to MCO server)
      */
-    private final GuiScreen guiScreenServer;
+    private final Screen guiScreenServer;
 
     /**
      * Reference to the Minecraft instance, which many handler methods operate on
@@ -246,7 +246,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
      */
     private final Random avRandomizer = new Random();
 
-    public NetHandlerPlayClient(Minecraft mc, GuiScreen guiScreen, NetworkManager networkManager, GameProfile gameProfile) {
+    public NetHandlerPlayClient(Minecraft mc, Screen guiScreen, NetworkManager networkManager, GameProfile gameProfile) {
         this.gameController = mc;
         this.guiScreenServer = guiScreen;
         this.netManager = networkManager;
@@ -1781,7 +1781,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             try
             {
                 int i = packetbuffer.readInt();
-                GuiScreen guiscreen = this.gameController.currentScreen;
+                Screen guiscreen = this.gameController.currentScreen;
 
                 if (guiscreen != null && guiscreen instanceof GuiMerchant && i == this.gameController.thePlayer.openContainer.windowId)
                 {

@@ -7,7 +7,7 @@ import com.murengezi.feather.Event.RenderScoreboardEvent;
 import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Module.ModuleInfo;
 import com.murengezi.feather.Module.Setting.Settings.BooleanSetting;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.scoreboard.Score;
 import net.minecraft.scoreboard.ScoreObjective;
@@ -65,7 +65,7 @@ public class Scoreboard extends Module {
 			String score = EnumChatFormatting.RED + "" + score1.getScorePoints();
 			int yPos = y - index * getFr().FONT_HEIGHT;
 			int xPos = resolution.getScaledWidth() - offsetRight + 1;
-			Gui.drawRect(x - 2, yPos, xPos, yPos + getFr().FONT_HEIGHT, 1342177280);
+			GUI.drawRect(x - 2, yPos, xPos, yPos + getFr().FONT_HEIGHT, 1342177280);
 			getFr().drawStringWithShadow(playerName, x, yPos, 553648127);
 			if (numbers) {
 				getFr().drawStringWithShadow(score, xPos - getFr().getStringWidth(score) - 1, yPos, 553648127);
@@ -73,8 +73,8 @@ public class Scoreboard extends Module {
 
 			if (index == list.size() - 1) {
 				String s3 = objective.getDisplayName();
-				Gui.drawRect(x - 2, yPos - getFr().FONT_HEIGHT - 1, xPos, yPos - 1, 1610612736);
-				Gui.drawRect(x - 2, yPos - 1, xPos, yPos, 1342177280);
+				GUI.drawRect(x - 2, yPos - getFr().FONT_HEIGHT - 1, xPos, yPos - 1, 1610612736);
+				GUI.drawRect(x - 2, yPos - 1, xPos, yPos, 1342177280);
 				getFr().drawStringWithShadow(s3, x + (float) finalStringWidth / 2 - (float) getFr().getStringWidth(s3) / 2, yPos - getFr().FONT_HEIGHT, 553648127);
 			}
 		});

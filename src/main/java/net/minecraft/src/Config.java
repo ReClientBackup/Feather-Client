@@ -2018,10 +2018,8 @@ public class Config
 
                 if (minecraft.currentScreen != null)
                 {
-                    ScaledResolution scaledresolution = new ScaledResolution();
-                    int i = scaledresolution.getScaledWidth();
-                    int j = scaledresolution.getScaledHeight();
-                    minecraft.currentScreen.setWorldAndResolution(minecraft, i, j);
+                    ScaledResolution resolution = new ScaledResolution();
+                    minecraft.currentScreen.setWorldAndResolution(resolution.getScaledWidth(), resolution.getScaledHeight());
                 }
 
                 updateFramebufferSize();

@@ -6,7 +6,7 @@ import com.murengezi.feather.Event.PlayerUpdateEvent;
 import com.murengezi.feather.Event.RenderOverlayEvent;
 import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Module.ModuleInfo;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 
 /**
  * @author Tobias Sjöblom
@@ -33,7 +33,7 @@ public class ToggleSprint extends Adjustable {
 
     @EventTarget
     public void onRender(RenderOverlayEvent event) {
-        Gui.drawRect(getX(), getY(), getX() + getFr().getStringWidth(text) + 3, getY() + getFr().FONT_HEIGHT + 3, Integer.MIN_VALUE);
+        GUI.drawRect(getX(), getY(), getX() + getFr().getStringWidth(text) + 3, getY() + getFr().FONT_HEIGHT + 3, Integer.MIN_VALUE);
         getFr().drawStringWithShadow(text, getX() + 2, getY() + 2, 0xffffffff);
         setWidth(getFr().getStringWidth(text) + 3);
         setHeight(getFr().FONT_HEIGHT + 3);

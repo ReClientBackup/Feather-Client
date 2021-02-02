@@ -3,6 +3,8 @@ package net.minecraft.client.gui;
 import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.List;
+
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.network.play.client.C14PacketTabComplete;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
@@ -15,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-public class GuiChat extends GuiScreen
+public class GuiChat extends Screen
 {
     private static final Logger logger = LogManager.getLogger();
     private String historyBuffer = "";
@@ -54,8 +56,8 @@ public class GuiChat extends GuiScreen
     public void initGui()
     {
         Keyboard.enableRepeatEvents(true);
-        this.sentHistoryCursor = this.mc.inGameScreen.getChatGUI().getSentMessages().size();
-        this.inputField = new GuiTextField(0, this.fontRendererObj, 4, this.height - 12, this.width - 4, 12);
+        this.sentHistoryCursor = getMc().inGameScreen.getChatGUI().getSentMessages().size();
+        this.inputField = new GuiTextField(0, 4, this.height - 12, this.width - 4, 12);
         this.inputField.setMaxStringLength(100);
         this.inputField.setEnableBackgroundDrawing(false);
         this.inputField.setFocused(true);
@@ -69,7 +71,7 @@ public class GuiChat extends GuiScreen
     public void onGuiClosed()
     {
         Keyboard.enableRepeatEvents(false);
-        this.mc.inGameScreen.getChatGUI().resetScroll();
+        getMc().inGameScreen.getChatGUI().resetScroll();
     }
 
     /**
@@ -99,7 +101,7 @@ public class GuiChat extends GuiScreen
 
         if (keyCode == 1)
         {
-            this.mc.displayGuiScreen(null);
+            changeScreen(null);
         }
         else if (keyCode != 28 && keyCode != 156)
         {
@@ -113,11 +115,11 @@ public class GuiChat extends GuiScreen
             }
             else if (keyCode == 201)
             {
-                this.mc.inGameScreen.getChatGUI().scroll(this.mc.inGameScreen.getChatGUI().getLineCount() - 1);
+                getMc().inGameScreen.getChatGUI().scroll(getMc().inGameScreen.getChatGUI().getLineCount() - 1);
             }
             else if (keyCode == 209)
             {
-                this.mc.inGameScreen.getChatGUI().scroll(-this.mc.inGameScreen.getChatGUI().getLineCount() + 1);
+                getMc().inGameScreen.getChatGUI().scroll(-getMc().inGameScreen.getChatGUI().getLineCount() + 1);
             }
             else
             {
@@ -133,7 +135,7 @@ public class GuiChat extends GuiScreen
                 this.sendChatMessage(s);
             }
 
-            this.mc.displayGuiScreen(null);
+            changeScreen(null);
         }
     }
 
@@ -162,7 +164,7 @@ public class GuiChat extends GuiScreen
                 i *= 7;
             }
 
-            this.mc.inGameScreen.getChatGUI().scroll(i);
+            getMc().inGameScreen.getChatGUI().scroll(i);
         }
     }
 
@@ -172,7 +174,7 @@ public class GuiChat extends GuiScreen
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         if (mouseButton == 0)
         {
-            IChatComponent ichatcomponent = this.mc.inGameScreen.getChatGUI().getChatComponent(Mouse.getX(), Mouse.getY());
+            IChatComponent ichatcomponent = getMc().inGameScreen.getChatGUI().getChatComponent(Mouse.getX(), Mouse.getY());
 
             if (this.handleComponentClick(ichatcomponent))
             {
@@ -245,7 +247,7 @@ public class GuiChat extends GuiScreen
                 stringbuilder.append(s2);
             }
 
-            this.mc.inGameScreen.getChatGUI().printChatMessageWithOptionalDeletion(new ChatComponentText(stringbuilder.toString()), 1);
+            getMc().inGameScreen.getChatGUI().printChatMessageWithOptionalDeletion(new ChatComponentText(stringbuilder.toString()), 1);
         }
 
         this.inputField.writeText(this.foundPlayerNames.get(this.autocompleteIndex++));
@@ -257,12 +259,12 @@ public class GuiChat extends GuiScreen
         {
             BlockPos blockpos = null;
 
-            if (this.mc.objectMouseOver != null && this.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+            if (getMc().objectMouseOver != null && getMc().objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
             {
-                blockpos = this.mc.objectMouseOver.getBlockPos();
+                blockpos = getMc().objectMouseOver.getBlockPos();
             }
 
-            this.mc.thePlayer.sendQueue.addToSendQueue(new C14PacketTabComplete(p_146405_1_, blockpos));
+            getPlayer().sendQueue.addToSendQueue(new C14PacketTabComplete(p_146405_1_, blockpos));
             this.waitingOnAutocomplete = true;
         }
     }
@@ -276,7 +278,7 @@ public class GuiChat extends GuiScreen
     public void getSentHistory(int msgPos)
     {
         int i = this.sentHistoryCursor + msgPos;
-        int j = this.mc.inGameScreen.getChatGUI().getSentMessages().size();
+        int j = getMc().inGameScreen.getChatGUI().getSentMessages().size();
         i = MathHelper.clamp_int(i, 0, j);
 
         if (i != this.sentHistoryCursor)
@@ -293,7 +295,7 @@ public class GuiChat extends GuiScreen
                     this.historyBuffer = this.inputField.getText();
                 }
 
-                this.inputField.setText(this.mc.inGameScreen.getChatGUI().getSentMessages().get(i));
+                this.inputField.setText(getMc().inGameScreen.getChatGUI().getSentMessages().get(i));
                 this.sentHistoryCursor = i;
             }
         }
@@ -306,7 +308,7 @@ public class GuiChat extends GuiScreen
     {
         drawRect(2, this.height - 14, this.width - 2, this.height - 2, Integer.MIN_VALUE);
         this.inputField.drawTextBox();
-        IChatComponent ichatcomponent = this.mc.inGameScreen.getChatGUI().getChatComponent(Mouse.getX(), Mouse.getY());
+        IChatComponent ichatcomponent = getMc().inGameScreen.getChatGUI().getChatComponent(Mouse.getX(), Mouse.getY());
 
         if (ichatcomponent != null && ichatcomponent.getChatStyle().getChatHoverEvent() != null)
         {
