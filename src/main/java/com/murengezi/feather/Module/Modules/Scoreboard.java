@@ -60,16 +60,12 @@ public class Scoreboard extends Adjustable {
 		float y = getY();
 		float x = getX();
 		setHeight(height + 3);
-		setWidth(stringWidth + 4);
+		setWidth(stringWidth + 3);
 
 		GUI.drawRect(x, y, x + getWidth(), y + getFr().FONT_HEIGHT + 1, 1342177280 + 1610612736);
 		GUI.drawRect(x, y + getFr().FONT_HEIGHT + 1, x + getWidth(), y + getHeight(), 1342177280);
-		//GUI.drawRect(x, y - getFr().FONT_HEIGHT - 1, x, yPos - 1, 1610612736);
-		//GUI.drawRect(x, y - 1, x, yPos, 1342177280);
 		String s3 = objective.getDisplayName();
 		getFr().drawCenteredString(s3, x + getWidth() / 2, y + 1, 553648127);
-
-		int finalStringWidth = stringWidth;
 
 		list.forEach(score -> {
 			int index = list.indexOf(score) + 1;
@@ -85,7 +81,7 @@ public class Scoreboard extends Adjustable {
 			getFr().drawStringWithShadow(playerName, x + 2, yPos, 553648127);
 
 			if (showNumbers) {
-				getFr().drawStringWithShadow(point, x + getWidth() - getFr().getStringWidth(point) - 2, yPos, 553648127);
+				getFr().drawStringWithShadow(point, x + getWidth() - getFr().getStringWidth(point) - 1, yPos, 553648127);
 			}
 		});
 	}
