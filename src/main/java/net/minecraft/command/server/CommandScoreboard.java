@@ -19,12 +19,12 @@ import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
-import net.minecraft.scoreboard.IScoreObjectiveCriteria;
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.ScorePlayerTeam;
-import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.Team;
+import com.murengezi.minecraft.scoreboard.IScoreObjectiveCriteria;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.Team;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
@@ -581,15 +581,13 @@ public class CommandScoreboard extends CommandBase
         }
     }
 
-    protected void removeTeam(ICommandSender p_147194_1_, String[] p_147194_2_, int p_147194_3_) throws CommandException
-    {
+    protected void removeTeam(ICommandSender commandSender, String[] p_147194_2_, int p_147194_3_) throws CommandException {
         Scoreboard scoreboard = this.getScoreboard();
-        ScorePlayerTeam scoreplayerteam = this.getTeam(p_147194_2_[p_147194_3_]);
+        ScorePlayerTeam playerTeam = this.getTeam(p_147194_2_[p_147194_3_]);
 
-        if (scoreplayerteam != null)
-        {
-            scoreboard.removeTeam(scoreplayerteam);
-            notifyOperators(p_147194_1_, this, "commands.scoreboard.teams.remove.success", new Object[] {scoreplayerteam.getRegisteredName()});
+        if (playerTeam != null) {
+            scoreboard.removeTeam(playerTeam);
+            notifyOperators(commandSender, this, "commands.scoreboard.teams.remove.success", new Object[] {playerTeam.getRegisteredName()});
         }
     }
 
@@ -952,7 +950,7 @@ public class CommandScoreboard extends CommandBase
             }
             else if (s.equalsIgnoreCase("add"))
             {
-                score.increseScore(j);
+                score.increaseScore(j);
             }
             else
             {

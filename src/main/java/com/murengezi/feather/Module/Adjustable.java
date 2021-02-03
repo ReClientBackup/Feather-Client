@@ -14,7 +14,6 @@ public class Adjustable extends Module {
 	private Region region;
 	private Align alignX = Align.NONE, alignY = Align.NONE;
 	private ScaledResolution resolution;
-	private boolean dragging;
 
 	public Adjustable() {
 		x = 0.0f;
@@ -50,7 +49,7 @@ public class Adjustable extends Module {
 	}
 
 	public enum Align {
-		NONE, CENTER;
+		NONE, CENTER
 	}
 
 	public void render(ScaledResolution resolution) {
@@ -251,13 +250,5 @@ public class Adjustable extends Module {
 
 	public void setResolution(ScaledResolution resolution) {
 		this.resolution = resolution;
-	}
-
-	public boolean isDragging() {
-		return dragging;
-	}
-
-	public void setDragging(boolean dragging) {
-		this.dragging = dragging;
 	}
 }

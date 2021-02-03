@@ -94,7 +94,6 @@ public class AdjustScreen extends Screen {
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
 		getMods().stream().filter(Module::isEnabled).forEach(adjustable -> {
 			if (isMouseOver(mouseX, mouseY, adjustable)) {
-				adjustable.setDragging(true);
 				setSelected(adjustable);
 				setDragX(mouseX - adjustable.getX());
 				setDragY(mouseY - adjustable.getY());
@@ -106,7 +105,6 @@ public class AdjustScreen extends Screen {
 	@Override
 	protected void mouseReleased(int mouseX, int mouseY, int mouseButton) {
 		if (getSelected() != null) {
-			getSelected().setDragging(false);
 			getSelected().mouseReleased();
 			setSelected(null);
 		}
@@ -116,6 +114,12 @@ public class AdjustScreen extends Screen {
 	@Override
 	public boolean doesGuiPauseGame() {
 		return false;
+	}
+
+	@Override
+	public void onGuiClosed() {
+		Feather.getConfigManager().saveAllConfigs();
+		super.onGuiClosed();
 	}
 
 	@EventTarget

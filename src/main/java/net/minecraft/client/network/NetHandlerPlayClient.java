@@ -169,12 +169,12 @@ import net.minecraft.network.play.server.S46PacketSetCompressionLevel;
 import net.minecraft.network.play.server.S47PacketPlayerListHeaderFooter;
 import net.minecraft.network.play.server.S48PacketResourcePackSend;
 import net.minecraft.network.play.server.S49PacketUpdateEntityNBT;
-import net.minecraft.scoreboard.IScoreObjectiveCriteria;
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.ScorePlayerTeam;
-import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.Team;
+import com.murengezi.minecraft.scoreboard.IScoreObjectiveCriteria;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.Team;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatBase;
@@ -1895,54 +1895,44 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
      * Updates a team managed by the scoreboard: Create/Remove the team registration, Register/Remove the player-team-
      * memberships, Set team displayname/prefix/suffix and/or whether friendly fire is enabled
      */
-    public void handleTeams(S3EPacketTeams packetIn)
+    public void handleTeams(S3EPacketTeams packet)
     {
-        PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
+        PacketThreadUtil.checkThreadAndEnqueue(packet, this, this.gameController);
         Scoreboard scoreboard = this.clientWorldController.getScoreboard();
         ScorePlayerTeam scoreplayerteam;
 
-        if (packetIn.func_149307_h() == 0)
-        {
-            scoreplayerteam = scoreboard.createTeam(packetIn.func_149312_c());
-        }
-        else
-        {
-            scoreplayerteam = scoreboard.getTeam(packetIn.func_149312_c());
+        if (packet.func_149307_h() == 0) {
+            scoreplayerteam = scoreboard.createTeam(packet.func_149312_c());
+        } else {
+            scoreplayerteam = scoreboard.getTeam(packet.func_149312_c());
         }
 
-        if (packetIn.func_149307_h() == 0 || packetIn.func_149307_h() == 2)
-        {
-            scoreplayerteam.setTeamName(packetIn.func_149306_d());
-            scoreplayerteam.setNamePrefix(packetIn.func_149311_e());
-            scoreplayerteam.setNameSuffix(packetIn.func_149309_f());
-            scoreplayerteam.setChatFormat(EnumChatFormatting.func_175744_a(packetIn.func_179813_h()));
-            scoreplayerteam.func_98298_a(packetIn.func_149308_i());
-            Team.EnumVisible team$enumvisible = Team.EnumVisible.func_178824_a(packetIn.func_179814_i());
+        if (packet.func_149307_h() == 0 || packet.func_149307_h() == 2) {
+            scoreplayerteam.setTeamName(packet.func_149306_d());
+            scoreplayerteam.setNamePrefix(packet.func_149311_e());
+            scoreplayerteam.setNameSuffix(packet.func_149309_f());
+            scoreplayerteam.setChatFormat(EnumChatFormatting.func_175744_a(packet.func_179813_h()));
+            scoreplayerteam.func_98298_a(packet.func_149308_i());
+            Team.EnumVisible visible = Team.EnumVisible.func_178824_a(packet.func_179814_i());
 
-            if (team$enumvisible != null)
-            {
-                scoreplayerteam.setNameTagVisibility(team$enumvisible);
+            if (visible != null) {
+                scoreplayerteam.setNameTagVisibility(visible);
             }
         }
 
-        if (packetIn.func_149307_h() == 0 || packetIn.func_149307_h() == 3)
-        {
-            for (String s : packetIn.func_149310_g())
-            {
-                scoreboard.addPlayerToTeam(s, packetIn.func_149312_c());
+        if (packet.func_149307_h() == 0 || packet.func_149307_h() == 3) {
+            for (String s : packet.func_149310_g()) {
+                scoreboard.addPlayerToTeam(s, packet.func_149312_c());
             }
         }
 
-        if (packetIn.func_149307_h() == 4)
-        {
-            for (String s1 : packetIn.func_149310_g())
-            {
+        if (packet.func_149307_h() == 4) {
+            for (String s1 : packet.func_149310_g()) {
                 scoreboard.removePlayerFromTeam(s1, scoreplayerteam);
             }
         }
 
-        if (packetIn.func_149307_h() == 1)
-        {
+        if (packet.func_149307_h() == 1) {
             scoreboard.removeTeam(scoreplayerteam);
         }
     }

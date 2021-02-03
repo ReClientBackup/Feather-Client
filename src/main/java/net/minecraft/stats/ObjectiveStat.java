@@ -1,6 +1,6 @@
 package net.minecraft.stats;
 
-import net.minecraft.scoreboard.ScoreDummyCriteria;
+import com.murengezi.minecraft.scoreboard.ScoreDummyCriteria;
 
 public class ObjectiveStat extends ScoreDummyCriteria
 {

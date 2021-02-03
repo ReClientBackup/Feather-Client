@@ -5,14 +5,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.murengezi.feather.Event.RenderScoreboardEvent;
 import com.murengezi.feather.Module.Adjustable;
-import com.murengezi.feather.Module.Module;
 import com.murengezi.feather.Module.ModuleInfo;
 import com.murengezi.feather.Module.Setting.Settings.BooleanSetting;
 import com.murengezi.minecraft.client.gui.GUI;
-import com.murengezi.minecraft.client.gui.ScaledResolution;
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.ScorePlayerTeam;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.EnumChatFormatting;
 
 import java.util.Collection;
@@ -35,7 +33,7 @@ public class Scoreboard extends Adjustable {
 	@EventTarget
 	public void onRenderScoreboard(RenderScoreboardEvent event) {
 		ScoreObjective objective = event.getObjective();
-		net.minecraft.scoreboard.Scoreboard scoreboard = objective.getScoreboard();
+		com.murengezi.minecraft.scoreboard.Scoreboard scoreboard = objective.getScoreboard();
 		Collection<Score> collection = scoreboard.getSortedScores(objective);
 		List<Score> list = collection.stream().filter(score -> score.getPlayerName() != null && !score.getPlayerName().startsWith("#")).collect(Collectors.toList());
 		Collections.reverse(list);

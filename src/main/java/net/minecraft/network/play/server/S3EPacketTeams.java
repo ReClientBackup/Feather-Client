@@ -6,8 +6,8 @@ import java.util.Collection;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;
-import net.minecraft.scoreboard.ScorePlayerTeam;
-import net.minecraft.scoreboard.Team;
+import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
+import com.murengezi.minecraft.scoreboard.Team;
 
 public class S3EPacketTeams implements Packet<INetHandlerPlayClient>
 {

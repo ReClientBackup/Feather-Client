@@ -1,4 +1,4 @@
-package net.minecraft.scoreboard;
+package com.murengezi.minecraft.scoreboard;
 
 import com.google.common.collect.Maps;
 import java.util.List;
@@ -8,7 +8,7 @@ import net.minecraft.util.EnumChatFormatting;
 
 public interface IScoreObjectiveCriteria
 {
-    Map<String, IScoreObjectiveCriteria> INSTANCES = Maps.<String, IScoreObjectiveCriteria>newHashMap();
+    Map<String, IScoreObjectiveCriteria> INSTANCES = Maps.newHashMap();
     IScoreObjectiveCriteria DUMMY = new ScoreDummyCriteria("dummy");
     IScoreObjectiveCriteria TRIGGER = new ScoreDummyCriteria("trigger");
     IScoreObjectiveCriteria deathCount = new ScoreDummyCriteria("deathCount");
@@ -20,40 +20,35 @@ public interface IScoreObjectiveCriteria
 
     String getName();
 
-    int func_96635_a(List<EntityPlayer> p_96635_1_);
+    int getScorePoints(List<EntityPlayer> players);
 
     boolean isReadOnly();
 
     IScoreObjectiveCriteria.EnumRenderType getRenderType();
 
-    public static enum EnumRenderType
-    {
+    enum EnumRenderType {
         INTEGER("integer"),
         HEARTS("hearts");
 
-        private static final Map<String, IScoreObjectiveCriteria.EnumRenderType> field_178801_c = Maps.<String, IScoreObjectiveCriteria.EnumRenderType>newHashMap();
-        private final String field_178798_d;
+        private static final Map<String, IScoreObjectiveCriteria.EnumRenderType> renderTypes = Maps.newHashMap();
+        private final String name;
 
-        private EnumRenderType(String p_i45548_3_)
-        {
-            this.field_178798_d = p_i45548_3_;
+        EnumRenderType(String name) {
+            this.name = name;
         }
 
-        public String func_178796_a()
-        {
-            return this.field_178798_d;
+        public String getName() {
+            return this.name;
         }
 
-        public static IScoreObjectiveCriteria.EnumRenderType func_178795_a(String p_178795_0_)
-        {
-            IScoreObjectiveCriteria.EnumRenderType iscoreobjectivecriteria$enumrendertype = field_178801_c.get(p_178795_0_);
-            return iscoreobjectivecriteria$enumrendertype == null ? INTEGER : iscoreobjectivecriteria$enumrendertype;
+        public static IScoreObjectiveCriteria.EnumRenderType getRenderType(String name) {
+            IScoreObjectiveCriteria.EnumRenderType renderType = renderTypes.get(name);
+            return renderType == null ? INTEGER : renderType;
         }
 
         static {
-            for (IScoreObjectiveCriteria.EnumRenderType iscoreobjectivecriteria$enumrendertype : values())
-            {
-                field_178801_c.put(iscoreobjectivecriteria$enumrendertype.func_178796_a(), iscoreobjectivecriteria$enumrendertype);
+            for (IScoreObjectiveCriteria.EnumRenderType renderType : values()) {
+                renderTypes.put(renderType.getName(), renderType);
             }
         }
     }

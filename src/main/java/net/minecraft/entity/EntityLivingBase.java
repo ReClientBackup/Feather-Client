@@ -40,7 +40,7 @@ import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.network.play.server.S04PacketEntityEquipment;
 import net.minecraft.network.play.server.S0BPacketAnimation;
 import net.minecraft.network.play.server.S0DPacketCollectItem;
-import net.minecraft.scoreboard.Team;
+import com.murengezi.minecraft.scoreboard.Team;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.CombatTracker;

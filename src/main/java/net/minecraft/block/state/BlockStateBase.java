@@ -7,6 +7,8 @@ import com.google.common.collect.Iterables;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.util.ResourceLocation;
@@ -112,7 +114,7 @@ public abstract class BlockStateBase implements IBlockState
         if (!this.getProperties().isEmpty())
         {
             stringbuilder.append("[");
-            COMMA_JOINER.appendTo(stringbuilder, Iterables.transform(this.getProperties().entrySet(), MAP_ENTRY_TO_STRING));
+            COMMA_JOINER.appendTo(stringbuilder, this.getProperties().entrySet().stream().map(MAP_ENTRY_TO_STRING::apply).collect(Collectors.toList()));
             stringbuilder.append("]");
         }
 

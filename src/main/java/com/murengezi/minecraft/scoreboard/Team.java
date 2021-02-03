@@ -1,4 +1,4 @@
-package net.minecraft.scoreboard;
+package com.murengezi.minecraft.scoreboard;
 
 import com.google.common.collect.Maps;
 import java.util.Collection;

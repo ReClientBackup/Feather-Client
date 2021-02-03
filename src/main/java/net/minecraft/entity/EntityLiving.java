@@ -28,7 +28,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.server.S1BPacketEntityAttach;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.scoreboard.Team;
+import com.murengezi.minecraft.scoreboard.Team;
 import net.minecraft.src.Config;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.util.BlockPos;

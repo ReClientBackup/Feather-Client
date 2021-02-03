@@ -9,8 +9,7 @@ import net.minecraft.util.ResourceLocation;
  */
 public class PotionAttackDamage extends Potion {
 
-	protected PotionAttackDamage(int id, ResourceLocation location, boolean badEffect, int liquidColor)
-	{
+	protected PotionAttackDamage(int id, ResourceLocation location, boolean badEffect, int liquidColor) {
 		super(id, location, badEffect, liquidColor);
 	}
 

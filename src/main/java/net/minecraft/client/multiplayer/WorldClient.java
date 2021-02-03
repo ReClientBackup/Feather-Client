@@ -19,7 +19,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import com.murengezi.minecraft.profiler.Profiler;
-import net.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
 import net.minecraft.src.Config;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;

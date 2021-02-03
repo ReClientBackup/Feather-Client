@@ -2,7 +2,7 @@ package com.murengezi.feather.Event;
 
 import com.darkmagician6.eventapi.events.Event;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
-import net.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
 
 /**
  * @author Tobias Sjöblom

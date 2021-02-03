@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.List;
 import net.minecraft.entity.Entity;
-import net.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityCommandBlock;

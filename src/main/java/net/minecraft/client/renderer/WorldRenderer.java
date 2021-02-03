@@ -593,7 +593,7 @@ public class WorldRenderer
         }
     }
 
-    public WorldRenderer pos(double p_181662_1_, double p_181662_3_, double p_181662_5_)
+    public WorldRenderer pos(double p_181662_1_, double p_181662_3_, double zLevel)
     {
         if (Config.isShaders())
         {
@@ -607,28 +607,28 @@ public class WorldRenderer
             case FLOAT:
                 this.byteBuffer.putFloat(i, (float)(p_181662_1_ + this.xOffset));
                 this.byteBuffer.putFloat(i + 4, (float)(p_181662_3_ + this.yOffset));
-                this.byteBuffer.putFloat(i + 8, (float)(p_181662_5_ + this.zOffset));
+                this.byteBuffer.putFloat(i + 8, (float)(zLevel + this.zOffset));
                 break;
 
             case UINT:
             case INT:
                 this.byteBuffer.putInt(i, Float.floatToRawIntBits((float)(p_181662_1_ + this.xOffset)));
                 this.byteBuffer.putInt(i + 4, Float.floatToRawIntBits((float)(p_181662_3_ + this.yOffset)));
-                this.byteBuffer.putInt(i + 8, Float.floatToRawIntBits((float)(p_181662_5_ + this.zOffset)));
+                this.byteBuffer.putInt(i + 8, Float.floatToRawIntBits((float)(zLevel + this.zOffset)));
                 break;
 
             case USHORT:
             case SHORT:
                 this.byteBuffer.putShort(i, (short)((int)(p_181662_1_ + this.xOffset)));
                 this.byteBuffer.putShort(i + 2, (short)((int)(p_181662_3_ + this.yOffset)));
-                this.byteBuffer.putShort(i + 4, (short)((int)(p_181662_5_ + this.zOffset)));
+                this.byteBuffer.putShort(i + 4, (short)((int)(zLevel + this.zOffset)));
                 break;
 
             case UBYTE:
             case BYTE:
                 this.byteBuffer.put(i, (byte)((int)(p_181662_1_ + this.xOffset)));
                 this.byteBuffer.put(i + 1, (byte)((int)(p_181662_3_ + this.yOffset)));
-                this.byteBuffer.put(i + 2, (byte)((int)(p_181662_5_ + this.zOffset)));
+                this.byteBuffer.put(i + 2, (byte)((int)(zLevel + this.zOffset)));
         }
 
         this.func_181667_k();

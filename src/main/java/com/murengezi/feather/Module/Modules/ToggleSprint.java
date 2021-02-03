@@ -12,7 +12,7 @@ import com.murengezi.minecraft.client.gui.GUI;
  * @author Tobias Sjöblom
  * Created on 2021-01-12 at 01:17
  */
-@ModuleInfo(name = "ToggleSprint", description = "A mod to always have sprint on.", version = "1.0.0", enabled = true)
+@ModuleInfo(name = "Toggle Sprint", description = "A mod to always have sprint on.", version = "1.0.0", enabled = true)
 public class ToggleSprint extends Adjustable {
 
     private static final String text = "Sprint (Toggled)";

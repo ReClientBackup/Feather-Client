@@ -26,6 +26,7 @@ public class ModuleManager {
         //load(new BetterHat());
         load(new FPS());
         load(new Scoreboard());
+        load(new PotionEffects());
 
         EventManager.register(this);
     }

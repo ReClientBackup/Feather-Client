@@ -14,7 +14,7 @@ import net.minecraft.client.gui.spectator.SpectatorMenu;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.DefaultPlayerSkin;
-import net.minecraft.scoreboard.ScorePlayerTeam;
+import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;

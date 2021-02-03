@@ -28,7 +28,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import com.murengezi.minecraft.profiler.Profiler;
-import net.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;

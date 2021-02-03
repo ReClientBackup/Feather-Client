@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 import net.minecraft.event.HoverEvent;
-import net.minecraft.scoreboard.IScoreObjectiveCriteria;
+import com.murengezi.minecraft.scoreboard.IScoreObjectiveCriteria;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;

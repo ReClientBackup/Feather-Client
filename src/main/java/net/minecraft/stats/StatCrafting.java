@@ -1,7 +1,7 @@
 package net.minecraft.stats;
 
 import net.minecraft.item.Item;
-import net.minecraft.scoreboard.IScoreObjectiveCriteria;
+import com.murengezi.minecraft.scoreboard.IScoreObjectiveCriteria;
 import net.minecraft.util.IChatComponent;
 
 public class StatCrafting extends StatBase

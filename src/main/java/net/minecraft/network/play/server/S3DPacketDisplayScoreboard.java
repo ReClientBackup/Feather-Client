@@ -4,7 +4,7 @@ import java.io.IOException;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;
-import net.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
 
 public class S3DPacketDisplayScoreboard implements Packet<INetHandlerPlayClient>
 {

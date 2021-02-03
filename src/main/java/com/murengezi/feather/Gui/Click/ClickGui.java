@@ -63,6 +63,12 @@ public class ClickGui extends Screen {
     }
 
     @Override
+    public void onGuiClosed() {
+        Feather.getConfigManager().saveAllConfigs();
+        super.onGuiClosed();
+    }
+
+    @Override
     public boolean doesGuiPauseGame() {
         return false;
     }

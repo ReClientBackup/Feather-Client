@@ -4,8 +4,8 @@ import java.io.IOException;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;
-import net.minecraft.scoreboard.IScoreObjectiveCriteria;
-import net.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.IScoreObjectiveCriteria;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
 
 public class S3BPacketScoreboardObjective implements Packet<INetHandlerPlayClient>
 {
@@ -37,7 +37,7 @@ public class S3BPacketScoreboardObjective implements Packet<INetHandlerPlayClien
         if (this.field_149342_c == 0 || this.field_149342_c == 2)
         {
             this.objectiveValue = buf.readStringFromBuffer(32);
-            this.type = IScoreObjectiveCriteria.EnumRenderType.func_178795_a(buf.readStringFromBuffer(16));
+            this.type = IScoreObjectiveCriteria.EnumRenderType.getRenderType(buf.readStringFromBuffer(16));
         }
     }
 
@@ -52,7 +52,7 @@ public class S3BPacketScoreboardObjective implements Packet<INetHandlerPlayClien
         if (this.field_149342_c == 0 || this.field_149342_c == 2)
         {
             buf.writeString(this.objectiveValue);
-            buf.writeString(this.type.func_178796_a());
+            buf.writeString(this.type.getName());
         }
     }
 

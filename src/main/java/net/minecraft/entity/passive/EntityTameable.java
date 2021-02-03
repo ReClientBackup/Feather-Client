@@ -6,7 +6,7 @@ import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.scoreboard.Team;
+import com.murengezi.minecraft.scoreboard.Team;
 import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;

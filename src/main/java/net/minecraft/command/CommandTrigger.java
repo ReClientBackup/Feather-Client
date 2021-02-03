@@ -4,10 +4,10 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.scoreboard.IScoreObjectiveCriteria;
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.IScoreObjectiveCriteria;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 
@@ -103,7 +103,7 @@ public class CommandTrigger extends CommandBase
                                 throw new CommandException("commands.trigger.invalidMode", new Object[] {args[1]});
                             }
 
-                            score.increseScore(i);
+                            score.increaseScore(i);
                         }
 
                         score.setLocked(true);

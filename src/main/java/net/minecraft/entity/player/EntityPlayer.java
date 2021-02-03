@@ -51,12 +51,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.server.S12PacketEntityVelocity;
-import net.minecraft.scoreboard.IScoreObjectiveCriteria;
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.ScorePlayerTeam;
-import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.Team;
+import com.murengezi.minecraft.scoreboard.IScoreObjectiveCriteria;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.Team;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatBase;
@@ -783,7 +783,7 @@ public abstract class EntityPlayer extends EntityLivingBase
         for (ScoreObjective scoreobjective : collection)
         {
             Score score = this.getWorldScoreboard().getValueFromObjective(this.getCommandSenderName(), scoreobjective);
-            score.func_96648_a();
+            score.increaseByOne();
         }
     }
 
@@ -800,7 +800,7 @@ public abstract class EntityPlayer extends EntityLivingBase
                 for (ScoreObjective scoreobjective : this.getWorldScoreboard().getObjectivesFromCriteria(IScoreObjectiveCriteria.field_178793_i[i]))
                 {
                     Score score = this.getWorldScoreboard().getValueFromObjective(p_175137_1_.getCommandSenderName(), scoreobjective);
-                    score.func_96648_a();
+                    score.increaseByOne();
                 }
             }
         }

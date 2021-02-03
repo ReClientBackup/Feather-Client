@@ -93,6 +93,7 @@ public class GuiInventory extends InventoryEffectRenderer
      */
     public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, EntityLivingBase ent)
     {
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
         GlStateManager.enableDepth();
         GlStateManager.enableColorMaterial();
         GlStateManager.pushMatrix();

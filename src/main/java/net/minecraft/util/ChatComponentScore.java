@@ -1,8 +1,8 @@
 package net.minecraft.util;
 
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
 import net.minecraft.server.MinecraftServer;
 
 public class ChatComponentScore extends ChatComponentStyle

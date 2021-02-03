@@ -64,10 +64,10 @@ import net.minecraft.network.play.server.S3FPacketCustomPayload;
 import net.minecraft.network.play.server.S42PacketCombatEvent;
 import net.minecraft.network.play.server.S43PacketCamera;
 import net.minecraft.network.play.server.S48PacketResourcePackSend;
-import net.minecraft.scoreboard.IScoreObjectiveCriteria;
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.Team;
+import com.murengezi.minecraft.scoreboard.IScoreObjectiveCriteria;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.Team;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ItemInWorldManager;
 import net.minecraft.server.management.UserListOpsEntry;
@@ -517,7 +517,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         for (ScoreObjective scoreobjective : this.worldObj.getScoreboard().getObjectivesFromCriteria(IScoreObjectiveCriteria.deathCount))
         {
             Score score = this.getWorldScoreboard().getValueFromObjective(this.getCommandSenderName(), scoreobjective);
-            score.func_96648_a();
+            score.increaseByOne();
         }
 
         EntityLivingBase entitylivingbase = this.func_94060_bK();
@@ -964,7 +964,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 
             for (ScoreObjective scoreobjective : this.getWorldScoreboard().getObjectivesFromCriteria(stat.func_150952_k()))
             {
-                this.getWorldScoreboard().getValueFromObjective(this.getCommandSenderName(), scoreobjective).increseScore(amount);
+                this.getWorldScoreboard().getValueFromObjective(this.getCommandSenderName(), scoreobjective).increaseScore(amount);
             }
 
             if (this.statsFile.func_150879_e())
