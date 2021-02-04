@@ -580,7 +580,7 @@ public class WorldRenderer
         }
     }
 
-    public void func_181675_d()
+    public void endVertex()
     {
         ++this.vertexCount;
         this.func_181670_b(this.vertexFormat.func_181719_f());

@@ -20,7 +20,7 @@ public class LayerSlimeGel implements LayerRenderer<EntitySlime>
     {
         if (!entitylivingbaseIn.isInvisible())
         {
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             GlStateManager.enableNormalize();
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(770, 771);

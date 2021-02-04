@@ -38,13 +38,10 @@ public class AdjustScreen extends Screen {
 		ScaledResolution resolution = new ScaledResolution();
 
 		getMods().stream().filter(Module::isEnabled).forEach(adjustable -> {
-			if (isMouseOver(mouseX, mouseY, adjustable) && getSelected() == null) {
-				GUI.drawBox(adjustable.getX(), adjustable.getY(), adjustable.getWidth(), adjustable.getHeight(), 0xffffffff);
-			}
-
 			if (getSelected() == adjustable) {
 				GUI.drawBox(adjustable.getX(), adjustable.getY(), adjustable.getWidth(), adjustable.getHeight(), 0xfffaf884);
-
+			} else {
+				GUI.drawBox(adjustable.getX(), adjustable.getY(), adjustable.getWidth(), adjustable.getHeight(), 0xffffffff);
 			}
 		});
 

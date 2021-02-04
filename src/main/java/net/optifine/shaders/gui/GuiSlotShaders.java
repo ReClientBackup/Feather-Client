@@ -19,12 +19,12 @@ class GuiSlotShaders extends GuiSlot
     private ArrayList shaderslist;
     private int selectedIndex;
     private long lastClickedCached = 0L;
-    final GuiShaders shadersGui;
+    final GuiShaders guiShaders;
 
-    public GuiSlotShaders(GuiShaders par1GuiShaders, int width, int height, int top, int bottom, int slotHeight)
+    public GuiSlotShaders(GuiShaders guiShaders, int width, int height, int top, int bottom, int slotHeight)
     {
-        super(par1GuiShaders.getMc(), width, height, top, bottom, slotHeight);
-        this.shadersGui = par1GuiShaders;
+        super(width, height, top, bottom, slotHeight);
+        this.guiShaders = guiShaders;
         this.updateList();
         this.amountScrolled = 0.0F;
         int i = this.selectedIndex * slotHeight;
@@ -88,7 +88,7 @@ class GuiSlotShaders extends GuiSlot
         this.lastClickedCached = this.lastClicked;
         Shaders.setShaderPack((String)this.shaderslist.get(index));
         Shaders.uninit();
-        this.shadersGui.updateButtons();
+        this.guiShaders.updateButtons();
     }
 
     private boolean checkCompatible(IShaderPack sp, final int index)
@@ -136,10 +136,10 @@ class GuiSlotShaders extends GuiSlot
                                 GuiSlotShaders.this.selectIndex(index);
                             }
 
-                            GuiSlotShaders.this.mc.displayGuiScreen(GuiSlotShaders.this.shadersGui);
+                            getMc().displayGuiScreen(GuiSlotShaders.this.guiShaders);
                         };
                         YesNoScreen yesNoScreen = new YesNoScreen(yesNoCallback, s4, s5, 0);
-                        this.mc.displayGuiScreen(yesNoScreen);
+                        getMc().displayGuiScreen(yesNoScreen);
                         return false;
                     }
                 }
@@ -185,7 +185,7 @@ class GuiSlotShaders extends GuiSlot
             s = Lang.get("of.options.shaders.packDefault");
         }
 
-        this.shadersGui.drawCenteredString(s, this.width / 2, y + 1, 14737632);
+        this.guiShaders.drawCenteredString(s, this.width / 2, y + 1, 14737632);
     }
 
     public int getSelectedIndex()

@@ -38,8 +38,6 @@ public class ConfigManager extends MinecraftUtils {
 			if (file.createNewFile()) {
 				Feather.getLogger().info("Created " + file.getName());
 			} else {
-				Feather.getLogger().info("Loading " + file.getName());
-
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				StringBuilder stringBuilder = new StringBuilder();
 				String line;
@@ -89,8 +87,6 @@ public class ConfigManager extends MinecraftUtils {
 				Feather.getLogger().info("Created " + file.getName());
 			}
 
-			Feather.getLogger().info("Writing to " + file.getName());
-
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("enabled", module.isEnabled());
 			if (adjustable) {
@@ -107,8 +103,6 @@ public class ConfigManager extends MinecraftUtils {
 		} catch (IOException e) {
 			Feather.getLogger().error("Error while creating or writing config: " + file.getName(), e);
 		}
-
-
 	}
 
 	@EventTarget

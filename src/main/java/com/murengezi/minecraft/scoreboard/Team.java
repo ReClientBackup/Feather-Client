@@ -4,8 +4,7 @@ import com.google.common.collect.Maps;
 import java.util.Collection;
 import java.util.Map;
 
-public abstract class Team
-{
+public abstract class Team {
     /**
      * Same as ==
      */

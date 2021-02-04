@@ -12,7 +12,7 @@ import java.util.Map.Entry;
 import com.murengezi.minecraft.potion.Potion;
 import com.murengezi.minecraft.potion.PotionEffect;
 import com.murengezi.minecraft.potion.PotionHelper;
-import net.minecraft.creativetab.CreativeTabs;
+import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;

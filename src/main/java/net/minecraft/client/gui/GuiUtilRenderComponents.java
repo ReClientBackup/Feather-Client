@@ -7,24 +7,22 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 
-public class GuiUtilRenderComponents
-{
-    public static String func_178909_a(String p_178909_0_, boolean p_178909_1_)
-    {
+public class GuiUtilRenderComponents {
+
+    public static String func_178909_a(String p_178909_0_, boolean p_178909_1_) {
         return !p_178909_1_ && !Minecraft.getMinecraft().gameSettings.chatColours ? EnumChatFormatting.getTextWithoutFormattingCodes(p_178909_0_) : p_178909_0_;
     }
 
-    public static List<IChatComponent> func_178908_a(IChatComponent p_178908_0_, int p_178908_1_, FontRenderer p_178908_2_, boolean p_178908_3_, boolean p_178908_4_)
-    {
+    public static List<IChatComponent> func_178908_a(IChatComponent p_178908_0_, int p_178908_1_, FontRenderer p_178908_2_, boolean p_178908_3_, boolean p_178908_4_) {
         int i = 0;
         IChatComponent ichatcomponent = new ChatComponentText("");
-        List<IChatComponent> list = Lists.<IChatComponent>newArrayList();
+        List<IChatComponent> list = Lists.newArrayList();
         List<IChatComponent> list1 = Lists.newArrayList(p_178908_0_);
 
         for (int j = 0; j < list1.size(); ++j)
         {
-            IChatComponent ichatcomponent1 = list1.get(j);
-            String s = ichatcomponent1.getUnformattedTextForChat();
+            IChatComponent iChatComponent = list1.get(j);
+            String s = iChatComponent.getUnformattedTextForChat();
             boolean flag = false;
 
             if (s.contains("\n"))
@@ -32,17 +30,17 @@ public class GuiUtilRenderComponents
                 int k = s.indexOf(10);
                 String s1 = s.substring(k + 1);
                 s = s.substring(0, k + 1);
-                ChatComponentText chatcomponenttext = new ChatComponentText(s1);
-                chatcomponenttext.setChatStyle(ichatcomponent1.getChatStyle().createShallowCopy());
-                list1.add(j + 1, chatcomponenttext);
+                ChatComponentText chatComponents = new ChatComponentText(s1);
+                chatComponents.setChatStyle(iChatComponent.getChatStyle().createShallowCopy());
+                list1.add(j + 1, chatComponents);
                 flag = true;
             }
 
-            String s4 = func_178909_a(ichatcomponent1.getChatStyle().getFormattingCode() + s, p_178908_4_);
+            String s4 = func_178909_a(iChatComponent.getChatStyle().getFormattingCode() + s, p_178908_4_);
             String s5 = s4.endsWith("\n") ? s4.substring(0, s4.length() - 1) : s4;
             int i1 = p_178908_2_.getStringWidth(s5);
-            ChatComponentText chatcomponenttext1 = new ChatComponentText(s5);
-            chatcomponenttext1.setChatStyle(ichatcomponent1.getChatStyle().createShallowCopy());
+            ChatComponentText chatComponents = new ChatComponentText(s5);
+            chatComponents.setChatStyle(iChatComponent.getChatStyle().createShallowCopy());
 
             if (i + i1 > p_178908_1_)
             {
@@ -71,20 +69,20 @@ public class GuiUtilRenderComponents
                     }
 
                     ChatComponentText chatcomponenttext2 = new ChatComponentText(s3);
-                    chatcomponenttext2.setChatStyle(ichatcomponent1.getChatStyle().createShallowCopy());
+                    chatcomponenttext2.setChatStyle(iChatComponent.getChatStyle().createShallowCopy());
                     list1.add(j + 1, chatcomponenttext2);
                 }
 
                 i1 = p_178908_2_.getStringWidth(s2);
-                chatcomponenttext1 = new ChatComponentText(s2);
-                chatcomponenttext1.setChatStyle(ichatcomponent1.getChatStyle().createShallowCopy());
+                chatComponents = new ChatComponentText(s2);
+                chatComponents.setChatStyle(iChatComponent.getChatStyle().createShallowCopy());
                 flag = true;
             }
 
             if (i + i1 <= p_178908_1_)
             {
                 i += i1;
-                ichatcomponent.appendSibling(chatcomponenttext1);
+                ichatcomponent.appendSibling(chatComponents);
             }
             else
             {

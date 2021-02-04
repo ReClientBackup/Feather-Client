@@ -22,175 +22,126 @@ import net.optifine.gui.TooltipManager;
 import net.optifine.gui.TooltipProviderOptions;
 import net.optifine.shaders.gui.GuiShaders;
 
-public class GuiVideoSettings extends GuiScreenOF
-{
-    private Screen parentGuiScreen;
-    protected String screenTitle = "Video Settings";
-    private GameSettings guiGameSettings;
+public class GuiVideoSettings extends GuiScreenOF {
+    
+    private final Screen previousScreen;
+    private static final GameSettings.Options[] videoOptions = new GameSettings.Options[] {GameSettings.Options.GRAPHICS, GameSettings.Options.RENDER_DISTANCE, GameSettings.Options.AMBIENT_OCCLUSION, GameSettings.Options.FRAMERATE_LIMIT, GameSettings.Options.AO_LEVEL, GameSettings.Options.VIEW_BOBBING, GameSettings.Options.GUI_SCALE, GameSettings.Options.USE_VBO, GameSettings.Options.GAMMA, GameSettings.Options.BLOCK_ALTERNATIVES, GameSettings.Options.DYNAMIC_LIGHTS, GameSettings.Options.DYNAMIC_FOV};
+    private final TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderOptions());
 
-    /** An array of all of GameSettings.Options's video options. */
-    private static GameSettings.Options[] videoOptions = new GameSettings.Options[] {GameSettings.Options.GRAPHICS, GameSettings.Options.RENDER_DISTANCE, GameSettings.Options.AMBIENT_OCCLUSION, GameSettings.Options.FRAMERATE_LIMIT, GameSettings.Options.AO_LEVEL, GameSettings.Options.VIEW_BOBBING, GameSettings.Options.GUI_SCALE, GameSettings.Options.USE_VBO, GameSettings.Options.GAMMA, GameSettings.Options.BLOCK_ALTERNATIVES, GameSettings.Options.DYNAMIC_LIGHTS, GameSettings.Options.DYNAMIC_FOV};
-    private TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderOptions());
+    private static final int SHADERS = 231, QUALITY = 202, DETAILS = 201, PERFORMANCE = 212, ANIMATIONS = 211, OTHER = 222, DONE = 200;
 
-    public GuiVideoSettings(Screen parentScreenIn, GameSettings gameSettingsIn)
-    {
-        this.parentGuiScreen = parentScreenIn;
-        this.guiGameSettings = gameSettingsIn;
+    public GuiVideoSettings(Screen previousScreen) {
+        this.previousScreen = previousScreen;
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
-    public void initGui()
-    {
-        this.screenTitle = I18n.format("options.videoTitle");
-        this.buttonList.clear();
+    @Override
+    public void initGui() {
+        for (int i = 0; i < videoOptions.length; ++i) {
+            GameSettings.Options option = videoOptions[i];
 
-        for (int i = 0; i < videoOptions.length; ++i)
-        {
-            GameSettings.Options gamesettings$options = videoOptions[i];
+            int j = this.width / 2 - 155 + i % 2 * 160;
+            int k = this.height / 6 + 21 * (i / 2) - 12;
 
-            if (gamesettings$options != null)
-            {
-                int j = this.width / 2 - 155 + i % 2 * 160;
-                int k = this.height / 6 + 21 * (i / 2) - 12;
-
-                if (gamesettings$options.getEnumFloat())
-                {
-                    this.buttonList.add(new GuiOptionSliderOF(gamesettings$options.returnEnumOrdinal(), j, k, gamesettings$options));
-                }
-                else
-                {
-                    this.buttonList.add(new GuiOptionButtonOF(gamesettings$options.returnEnumOrdinal(), j, k, gamesettings$options, this.guiGameSettings.getKeyBinding(gamesettings$options)));
-                }
+            if (option.getEnumFloat()) {
+                addButton(new GuiOptionSliderOF(option.returnEnumOrdinal(), j, k, option));
+            } else {
+                addButton(new GuiOptionButtonOF(option.returnEnumOrdinal(), j, k, option, getGs().getKeyBinding(option)));
             }
         }
 
         int l = this.height / 6 + 21 * (videoOptions.length / 2) - 12;
-        int i1 = 0;
-        i1 = this.width / 2 - 155 + 0;
-        this.buttonList.add(new GuiOptionButton(231, i1, l, Lang.get("of.options.shaders")));
-        i1 = this.width / 2 - 155 + 160;
-        this.buttonList.add(new GuiOptionButton(202, i1, l, Lang.get("of.options.quality")));
+        addButton(new GuiOptionButton(SHADERS, this.width / 2 - 155, l, Lang.get("of.options.shaders")));
+        addButton(new GuiOptionButton(QUALITY, this.width / 2 + 5, l, Lang.get("of.options.quality")));
         l = l + 21;
-        i1 = this.width / 2 - 155 + 0;
-        this.buttonList.add(new GuiOptionButton(201, i1, l, Lang.get("of.options.details")));
-        i1 = this.width / 2 - 155 + 160;
-        this.buttonList.add(new GuiOptionButton(212, i1, l, Lang.get("of.options.performance")));
+        addButton(new GuiOptionButton(DETAILS, this.width /2 - 155, l, Lang.get("of.options.details")));
+        addButton(new GuiOptionButton(PERFORMANCE, this.width / 2 + 5, l, Lang.get("of.options.performance")));
         l = l + 21;
-        i1 = this.width / 2 - 155 + 0;
-        this.buttonList.add(new GuiOptionButton(211, i1, l, Lang.get("of.options.animations")));
-        i1 = this.width / 2 - 155 + 160;
-        this.buttonList.add(new GuiOptionButton(222, i1, l, Lang.get("of.options.other")));
-        l = l + 21;
-        this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168 + 11, I18n.format("gui.done")));
+        addButton(new GuiOptionButton(ANIMATIONS, this.width /2 - 155, l, Lang.get("of.options.animations")));
+        addButton(new GuiOptionButton(OTHER, this.width / 2 + 5, l, Lang.get("of.options.other")));
+        addButton(new GuiButton(DONE, this.width / 2 - 100, this.height / 6 + 168 + 11, I18n.format("gui.done")));
+        super.initGui();
     }
 
     /**
      * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
      */
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
+    protected void actionPerformed(GuiButton button) throws IOException {
         this.actionPerformed(button, 1);
     }
 
-    protected void actionPerformedRightClick(GuiButton p_actionPerformedRightClick_1_)
-    {
-        if (p_actionPerformedRightClick_1_.getId() == GameSettings.Options.GUI_SCALE.ordinal())
-        {
+    protected void actionPerformedRightClick(GuiButton p_actionPerformedRightClick_1_) {
+        if (p_actionPerformedRightClick_1_.getId() == GameSettings.Options.GUI_SCALE.ordinal()) {
             this.actionPerformed(p_actionPerformedRightClick_1_, -1);
         }
     }
 
-    private void actionPerformed(GuiButton p_actionPerformed_1_, int p_actionPerformed_2_)
-    {
-        if (p_actionPerformed_1_.isEnabled())
-        {
-            int i = this.guiGameSettings.guiScale;
+    private void actionPerformed(GuiButton button, int p_actionPerformed_2_) {
+        if (button.isEnabled()) {
+            int i = getGs().guiScale;
 
-            if (p_actionPerformed_1_.getId() < 200 && p_actionPerformed_1_ instanceof GuiOptionButton)
-            {
-                this.guiGameSettings.setOptionValue(((GuiOptionButton)p_actionPerformed_1_).returnEnumOptions(), p_actionPerformed_2_);
-                p_actionPerformed_1_.displayString = this.guiGameSettings.getKeyBinding(GameSettings.Options.getEnumOptions(p_actionPerformed_1_.getId()));
+            if (button.getId() < 200 && button instanceof GuiOptionButton) {
+                getGs().setOptionValue(((GuiOptionButton)button).getOptions(), p_actionPerformed_2_);
+                button.displayString = getGs().getKeyBinding(GameSettings.Options.getEnumOptions(button.getId()));
             }
 
-            if (p_actionPerformed_1_.getId() == 200)
-            {
+            if (button.getId() == DONE) {
                 saveSettings();
-                changeScreen(this.parentGuiScreen);
+                changeScreen(this.previousScreen);
             }
 
-            if (this.guiGameSettings.guiScale != i)
-            {
+            if (getGs().guiScale != i) {
                 ScaledResolution resolution = new ScaledResolution();
                 this.setWorldAndResolution(resolution.getScaledWidth(), resolution.getScaledHeight());
             }
 
-            if (p_actionPerformed_1_.getId() == 201)
-            {
+            if (button.getId() == DETAILS) {
                 saveSettings();
-                GuiDetailSettingsOF guidetailsettingsof = new GuiDetailSettingsOF(this, this.guiGameSettings);
-                changeScreen(guidetailsettingsof);
+                changeScreen(new GuiDetailSettingsOF(this, getGs()));
             }
 
-            if (p_actionPerformed_1_.getId() == 202)
-            {
+            if (button.getId() == QUALITY) {
                 saveSettings();
-                GuiQualitySettingsOF guiqualitysettingsof = new GuiQualitySettingsOF(this, this.guiGameSettings);
-                changeScreen(guiqualitysettingsof);
+                changeScreen(new GuiQualitySettingsOF(this, getGs()));
             }
 
-            if (p_actionPerformed_1_.getId() == 211)
-            {
+            if (button.getId() == ANIMATIONS) {
                 saveSettings();
-                GuiAnimationSettingsOF guianimationsettingsof = new GuiAnimationSettingsOF(this, this.guiGameSettings);
-                changeScreen(guianimationsettingsof);
+                changeScreen(new GuiAnimationSettingsOF(this, getGs()));
             }
 
-            if (p_actionPerformed_1_.getId() == 212)
-            {
+            if (button.getId() == PERFORMANCE) {
                 saveSettings();
-                GuiPerformanceSettingsOF guiperformancesettingsof = new GuiPerformanceSettingsOF(this, this.guiGameSettings);
-                changeScreen(guiperformancesettingsof);
+                changeScreen(new GuiPerformanceSettingsOF(this, getGs()));
             }
 
-            if (p_actionPerformed_1_.getId() == 222)
-            {
+            if (button.getId() == OTHER) {
                 saveSettings();
-                GuiOtherSettingsOF guiothersettingsof = new GuiOtherSettingsOF(this, this.guiGameSettings);
-                changeScreen(guiothersettingsof);
+                changeScreen(new GuiOtherSettingsOF(this, getGs()));
             }
 
-            if (p_actionPerformed_1_.getId() == 231)
-            {
-                if (Config.isAntialiasing() || Config.isAntialiasingConfigured())
-                {
+            if (button.getId() == SHADERS) {
+                if (Config.isAntialiasing() || Config.isAntialiasingConfigured()) {
                     Config.showGuiMessage(Lang.get("of.message.shaders.aa1"), Lang.get("of.message.shaders.aa2"));
                     return;
                 }
 
-                if (Config.isAnisotropicFiltering())
-                {
+                if (Config.isAnisotropicFiltering()) {
                     Config.showGuiMessage(Lang.get("of.message.shaders.af1"), Lang.get("of.message.shaders.af2"));
                     return;
                 }
 
-                if (Config.isFastRender())
-                {
+                if (Config.isFastRender()) {
                     Config.showGuiMessage(Lang.get("of.message.shaders.fr1"), Lang.get("of.message.shaders.fr2"));
                     return;
                 }
 
-                if (Config.getGameSettings().anaglyph)
-                {
+                if (Config.getGameSettings().anaglyph) {
                     Config.showGuiMessage(Lang.get("of.message.shaders.an1"), Lang.get("of.message.shaders.an2"));
                     return;
                 }
 
                 saveSettings();
-                GuiShaders guishaders = new GuiShaders(this, this.guiGameSettings);
-                changeScreen(guishaders);
+                changeScreen(new GuiShaders(this, getGs()));
             }
         }
     }
@@ -199,24 +150,19 @@ public class GuiVideoSettings extends GuiScreenOF
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground();
-        getFr().drawCenteredString(this.screenTitle, this.width / 2, 15, 16777215);
+        drawDefaultBackground(mouseX, mouseY, 60);
+        getFr().drawCenteredString(I18n.format("options.videoTitle"), this.width / 2, 15, 16777215);
         String ofVersion = "OptiFine HD L5 Ultra";
         getFr().drawString(ofVersion, 2, this.height - 10, 8421504);
-        String mcVersion = "Minecraft 1.8.10";
-        int stringWidth = getFr().getStringWidth(mcVersion);
-        getFr().drawString(mcVersion, this.width - stringWidth - 2, this.height - 10, 8421504);
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.tooltipManager.drawTooltips(mouseX, mouseY, this.buttonList);
     }
 
-    public static int getButtonWidth(GuiButton button)
-    {
+    public static int getButtonWidth(GuiButton button) {
         return button.getWidth();
     }
 
-    public static int getButtonHeight(GuiButton button)
-    {
+    public static int getButtonHeight(GuiButton button) {
         return button.getHeight();
     }
 

@@ -1,7 +1,6 @@
 package net.minecraft.client.renderer.entity;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import com.murengezi.feather.Util.MinecraftUtils;
 import net.minecraft.block.Block;
@@ -44,8 +43,8 @@ import net.minecraft.client.resources.IResourceManagerReloadListener;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
+import com.murengezi.minecraft.crash.CrashReport;
+import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -180,7 +179,7 @@ public class RenderItem implements IResourceManagerReloadListener
             {
                 GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
                 GlStateManager.translate(-0.5F, -0.5F, -0.5F);
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.colorAllMax();
                 GlStateManager.enableRescaleNormal();
                 TileEntityItemStackRenderer.instance.renderByItem(stack);
             }
@@ -334,7 +333,7 @@ public class RenderItem implements IResourceManagerReloadListener
                 GlStateManager.scale(2.0F, 2.0F, 2.0F);
             }
 
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
         }
     }
 
@@ -456,7 +455,7 @@ public class RenderItem implements IResourceManagerReloadListener
         GlStateManager.alphaFunc(516, 0.1F);
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(770, 771);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         this.setupGuiTransform(x, y, ibakedmodel.isGui3d());
 
         if (Reflector.ForgeHooksClient_handleCameraTransforms.exists())
@@ -596,10 +595,10 @@ public class RenderItem implements IResourceManagerReloadListener
     private void func_181565_a(WorldRenderer p_181565_1_, int p_181565_2_, int p_181565_3_, int p_181565_4_, int p_181565_5_, int p_181565_6_, int p_181565_7_, int p_181565_8_, int p_181565_9_)
     {
         p_181565_1_.begin(7, DefaultVertexFormats.POSITION_COLOR);
-        p_181565_1_.pos(p_181565_2_ + 0, p_181565_3_ + 0, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).func_181675_d();
-        p_181565_1_.pos(p_181565_2_ + 0, p_181565_3_ + p_181565_5_, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).func_181675_d();
-        p_181565_1_.pos(p_181565_2_ + p_181565_4_, p_181565_3_ + p_181565_5_, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).func_181675_d();
-        p_181565_1_.pos(p_181565_2_ + p_181565_4_, p_181565_3_ + 0, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).func_181675_d();
+        p_181565_1_.pos(p_181565_2_ + 0, p_181565_3_ + 0, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
+        p_181565_1_.pos(p_181565_2_ + 0, p_181565_3_ + p_181565_5_, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
+        p_181565_1_.pos(p_181565_2_ + p_181565_4_, p_181565_3_ + p_181565_5_, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
+        p_181565_1_.pos(p_181565_2_ + p_181565_4_, p_181565_3_ + 0, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
         Tessellator.getInstance().draw();
     }
 

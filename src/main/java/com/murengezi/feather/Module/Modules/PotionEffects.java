@@ -46,7 +46,7 @@ public class PotionEffects extends Adjustable {
 			for (PotionEffect effect : getPlayer().getActivePotionEffects()) {
 				Potion potion = Potion.potionTypes[effect.getPotionID()];
 				getMc().getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
-				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.colorAllMax();
 
 				if (getBooleanSetting("Background").getValue()) {
 					GUI.drawModalRectWithCustomSizedTexture(getX(), getY() + offsetY, 0, 166, 120, 32, 256, 256);

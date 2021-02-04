@@ -473,7 +473,7 @@ public class GuiAchievements extends Screen implements IProgressMeter
                     this.itemRender.func_175039_a(true);
                 }
 
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.colorAllMax();
 
                 if (f3 >= (float)l6 && f3 <= (float)(l6 + 22) && f4 >= (float)j7 && f4 <= (float)(j7 + 22))
                 {
@@ -485,7 +485,7 @@ public class GuiAchievements extends Screen implements IProgressMeter
         GlStateManager.disableDepth();
         GlStateManager.enableBlend();
         GlStateManager.popMatrix();
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         getMc().getTextureManager().bindTexture(ACHIEVEMENT_BACKGROUND);
         this.drawTexturedModalRect(k, l, 0, 0, this.field_146555_f, this.field_146557_g);
         this.zLevel = 0.0F;

@@ -54,7 +54,7 @@ public class LayerCustomHead implements LayerRenderer<EntityLivingBase>
             }
 
             this.field_177209_a.postRender(0.0625F);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
 
             if (item instanceof ItemBlock)
             {

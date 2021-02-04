@@ -78,7 +78,7 @@ public class TileEntityBannerRenderer extends TileEntitySpecialRenderer<TileEnti
             GlStateManager.popMatrix();
         }
 
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         GlStateManager.popMatrix();
     }
 

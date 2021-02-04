@@ -58,7 +58,7 @@ public class GuiQualitySettingsOF extends Screen
         {
             if (guibutton.getId() < 200 && guibutton instanceof GuiOptionButton)
             {
-                this.settings.setOptionValue(((GuiOptionButton)guibutton).returnEnumOptions(), 1);
+                this.settings.setOptionValue(((GuiOptionButton)guibutton).getOptions(), 1);
                 guibutton.displayString = this.settings.getKeyBinding(GameSettings.Options.getEnumOptions(guibutton.getId()));
             }
 

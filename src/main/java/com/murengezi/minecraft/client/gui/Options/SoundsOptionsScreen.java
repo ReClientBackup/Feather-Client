@@ -23,13 +23,11 @@ import java.util.Arrays;
 public class SoundsOptionsScreen extends Screen {
 
     private final Screen previousScreen;
-    private final GameSettings gameSettings;
 
     public static final int DONE = 0;
 
-    public SoundsOptionsScreen(Screen previousScreen, GameSettings gameSettings) {
+    public SoundsOptionsScreen(Screen previousScreen) {
         this.previousScreen = previousScreen;
-        this.gameSettings = gameSettings;
     }
 
     @Override
@@ -70,7 +68,7 @@ public class SoundsOptionsScreen extends Screen {
     }
 
     protected String getSoundVolume(SoundCategory soundCategory) {
-        float soundLevel = gameSettings.getSoundLevel(soundCategory);
+        float soundLevel = getGs().getSoundLevel(soundCategory);
         return soundLevel == 0.0f ? I18n.format("options.off") : (int)(soundLevel * 100.0f) + "%";
     }
 
@@ -88,7 +86,7 @@ public class SoundsOptionsScreen extends Screen {
             this.soundCategory = soundCategory;
             this.label = I18n.format("soundCategory." + soundCategory.getCategoryName());
             this.displayString = this.label + ": " + soundsOptionsScreen.getSoundVolume(soundCategory);
-            this.soundLevel = soundsOptionsScreen.gameSettings.getSoundLevel(soundCategory);
+            this.soundLevel = getGs().getSoundLevel(soundCategory);
         }
 
         @Override
@@ -98,8 +96,8 @@ public class SoundsOptionsScreen extends Screen {
                     setSoundLevelFromMouseX(mouseX);
                 }
 
-                GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-                drawRect(getX() + (int) (this.soundLevel * (float)(this.getWidth() - 8)), this.getY(), getX() + (int) (this.soundLevel * (float)(this.getWidth() - 8)) + 4, this.getY() + this.getHeight(), Integer.MIN_VALUE + (boxColorRed << 16) + (boxColorGreen << 8) + boxColorBlue);
+                GlStateManager.colorAllMax();
+                drawRect(getX() + (int) (this.soundLevel * (float)(this.getWidth() - 8)), this.getY(), getX() + (int) (this.soundLevel * (float)(this.getWidth() - 8)) + 8, this.getY() + this.getHeight(), Integer.MIN_VALUE + (boxColorRed << 16) + (boxColorGreen << 8) + boxColorBlue);
             }
         }
 
@@ -126,10 +124,8 @@ public class SoundsOptionsScreen extends Screen {
         @Override
         public void mouseReleased(int mouseX, int mouseY) {
             if (this.b) {
-                if (this.soundCategory != SoundCategory.MASTER) {
-                    getMc().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
-                    saveSettings();
-                }
+                getMc().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
+                saveSettings();
                 this.b = false;
             }
         }

@@ -128,6 +128,13 @@ public class GameSettings
     public boolean field_181150_U = true;
     public boolean field_181151_V = true;
     public boolean field_183509_X = true;
+
+    /**
+     * Perspective mod
+     */
+    public KeyBinding keyPerspective = new KeyBinding("Toggle Perspective", Keyboard.KEY_LMENU, "Perspective Mod");
+
+
     public KeyBinding keyBindForward = new KeyBinding("key.forward", 17, "key.categories.movement");
     public KeyBinding keyBindLeft = new KeyBinding("key.left", 30, "key.categories.movement");
     public KeyBinding keyBindBack = new KeyBinding("key.back", 31, "key.categories.movement");
@@ -266,7 +273,7 @@ public class GameSettings
 
     public GameSettings(Minecraft mcIn, File p_i46326_2_)
     {
-        this.keyBindings = ArrayUtils.addAll(new KeyBinding[] {this.keyBindAttack, this.keyBindUseItem, this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump, this.keyBindSneak, this.keyBindSprint, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.keyBindPlayerList, this.keyBindPickBlock, this.keyBindCommand, this.keyBindScreenshot, this.keyBindTogglePerspective, this.keyBindSmoothCamera, this.keyBindFullscreen, this.keyBindSpectatorOutlines}, this.keyBindsHotbar);
+        this.keyBindings = ArrayUtils.addAll(new KeyBinding[] {this.keyBindAttack, this.keyBindUseItem, this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump, this.keyBindSneak, this.keyBindSprint, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.keyBindPlayerList, this.keyBindPickBlock, this.keyBindCommand, this.keyBindScreenshot, this.keyBindTogglePerspective, this.keyBindSmoothCamera, this.keyBindFullscreen, this.keyBindSpectatorOutlines, this.keyPerspective}, this.keyBindsHotbar);
         this.difficulty = EnumDifficulty.NORMAL;
         this.lastServer = "";
         this.fovSetting = 70.0F;
@@ -3269,19 +3276,17 @@ public class GameSettings
             return null;
         }
 
-        private Options(String p_i1015_3_, boolean p_i1015_4_, boolean p_i1015_5_)
-        {
-            this(p_i1015_3_, p_i1015_4_, p_i1015_5_, 0.0F, 1.0F, 0.0F);
+        Options(String enumString, boolean enumFloat, boolean enumBoolean) {
+            this(enumString, enumFloat, enumBoolean, 0.0F, 1.0F, 0.0F);
         }
 
-        private Options(String p_i45004_3_, boolean p_i45004_4_, boolean p_i45004_5_, float p_i45004_6_, float p_i45004_7_, float p_i45004_8_)
-        {
-            this.enumString = p_i45004_3_;
-            this.enumFloat = p_i45004_4_;
-            this.enumBoolean = p_i45004_5_;
-            this.valueMin = p_i45004_6_;
-            this.valueMax = p_i45004_7_;
-            this.valueStep = p_i45004_8_;
+        Options(String enumString, boolean enumFloat, boolean enumBoolean, float valueMin, float valueMax, float valueStep) {
+            this.enumString = enumString;
+            this.enumFloat = enumFloat;
+            this.enumBoolean = enumBoolean;
+            this.valueMin = valueMin;
+            this.valueMax = valueMax;
+            this.valueStep = valueStep;
         }
 
         public boolean getEnumFloat()

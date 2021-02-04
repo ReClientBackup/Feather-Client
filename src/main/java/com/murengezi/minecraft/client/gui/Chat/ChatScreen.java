@@ -37,7 +37,7 @@ public class ChatScreen extends Screen {
         this.sentHistoryCursor = getMc().inGameScreen.getChatGUI().getSentMessages().size();
         this.inputField = new GuiTextField(0, 4, this.height - 12, this.width - 4, 12);
         this.inputField.setMaxStringLength(100);
-        this.inputField.setEnableBackgroundDrawing(false);
+        this.inputField.setDrawBackground(false);
         this.inputField.setFocused(true);
         this.inputField.setText(this.defaultInputFieldText);
         this.inputField.setCanLoseFocus(false);

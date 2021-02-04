@@ -34,12 +34,12 @@ public abstract class ResourcePackListEntry extends MinecraftUtils implements Gu
 		int i = this.getPackFormat();
 
 		if (i != 1) {
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.colorAllMax();
 			GUI.drawRect(x - 1, y - 1, x + listWidth - 9, y + slotHeight + 1, -8978432);
 		}
 
 		this.loadIcon();
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.colorAllMax();
 		GUI.drawModalRectWithCustomSizedTexture(x, y, 0.0F, 0.0F, 32, 32, 32.0F, 32.0F);
 		String s = this.getName();
 		String s1 = this.getDescription();
@@ -47,7 +47,7 @@ public abstract class ResourcePackListEntry extends MinecraftUtils implements Gu
 		if ((getMc().gameSettings.touchscreen || isSelected) && this.func_148310_d()) {
 			getMc().getTextureManager().bindTexture(RESOURCE_PACKS_TEXTURE);
 			GUI.drawRect(x, y, x + 32, y + 32, -1601138544);
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.colorAllMax();
 			int j = mouseX - x;
 			int k = mouseY - y;
 

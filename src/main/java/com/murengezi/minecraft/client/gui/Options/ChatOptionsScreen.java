@@ -19,8 +19,7 @@ import java.util.List;
  */
 public class ChatOptionsScreen extends Screen {
 
-    private Screen previousScreen;
-    private GameSettings gameSettings;
+    private final Screen previousScreen;
     private static final List<GameSettings.Options> chatOptions = new ArrayList<>(Arrays.asList(
             GameSettings.Options.CHAT_VISIBILITY,
             GameSettings.Options.CHAT_COLOR,
@@ -35,11 +34,8 @@ public class ChatOptionsScreen extends Screen {
 
     private static final int DONE = 0;
 
-
-
-    public ChatOptionsScreen(Screen previousScreen, GameSettings gameSettings) {
+    public ChatOptionsScreen(Screen previousScreen) {
         this.previousScreen = previousScreen;
-        this.gameSettings = gameSettings;
     }
 
     @Override
@@ -49,7 +45,7 @@ public class ChatOptionsScreen extends Screen {
             if (option.getEnumFloat()) {
                 this.buttonList.add(new GuiOptionSlider(option.returnEnumOrdinal(), this.width / 2 - 155 + index % 2 * 160, this.height / 6 + 42 + 24 * (index >> 1), option));
             } else {
-                this.buttonList.add(new GuiOptionButton(option.returnEnumOrdinal(), this.width / 2 - 155 + index % 2 * 160, this.height / 6 + 42 + 24 * (index >> 1), option, this.gameSettings.getKeyBinding(option)));
+                this.buttonList.add(new GuiOptionButton(option.returnEnumOrdinal(), this.width / 2 - 155 + index % 2 * 160, this.height / 6 + 42 + 24 * (index >> 1), option, getGs().getKeyBinding(option)));
             }
         });
 
@@ -67,8 +63,8 @@ public class ChatOptionsScreen extends Screen {
                     break;
                 default:
                     if (button instanceof GuiOptionButton) {
-                        gameSettings.setOptionValue(((GuiOptionButton)button).returnEnumOptions(), 1);
-                        button.displayString = gameSettings.getKeyBinding(GameSettings.Options.getEnumOptions(button.getId()));
+                        getGs().setOptionValue(((GuiOptionButton)button).getOptions(), 1);
+                        button.displayString = getGs().getKeyBinding(GameSettings.Options.getEnumOptions(button.getId()));
                     }
                     break;
             }

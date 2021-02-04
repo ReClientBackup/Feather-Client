@@ -26,8 +26,8 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityList;
-import net.minecraft.event.ClickEvent;
-import net.minecraft.event.HoverEvent;
+import com.murengezi.minecraft.event.ClickEvent;
+import com.murengezi.minecraft.event.HoverEvent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTException;
@@ -70,7 +70,7 @@ public abstract class Screen extends GUI implements YesNoCallback {
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         getButtonList().forEach(guiButton -> guiButton.drawButton(mouseX, mouseY));
-        getLabelList().forEach(guiLabel -> guiLabel.drawLabel(mouseX, mouseY));
+        getLabelList().forEach(guiLabel -> guiLabel.drawLabel());
     }
 
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
@@ -332,18 +332,22 @@ public abstract class Screen extends GUI implements YesNoCallback {
     }
 
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        if (mouseButton == 0) {
-            this.buttonList.forEach(guiButton -> {
-                if (guiButton.mousePressed(getMc(), mouseX, mouseY)) {
-                    this.selectedButton = guiButton;
-                    guiButton.playPressSound(getMc().getSoundHandler());
-                    try {
-                        this.actionPerformed(guiButton);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        try {
+            if (mouseButton == 0) {
+                for (GuiButton button : this.buttonList) {
+                    if (button.mousePressed(getMc(), mouseX, mouseY)) {
+                        this.selectedButton = button;
+                        button.playPressSound(getMc().getSoundHandler());
+                        try {
+                            this.actionPerformed(button);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -444,13 +448,13 @@ public abstract class Screen extends GUI implements YesNoCallback {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         getMc().getTextureManager().bindTexture(optionsBackground);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         float f = 32.0F;
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        worldrenderer.pos(0.0D, this.height, 0.0D).tex(0.0D, (float)this.height / f + (float)tint).color(64, 64, 64, 255).func_181675_d();
-        worldrenderer.pos(this.width, this.height, 0.0D).tex((float)this.width / f, (float)this.height / f + (float)tint).color(64, 64, 64, 255).func_181675_d();
-        worldrenderer.pos(this.width, 0.0D, 0.0D).tex((float)this.width / f, tint).color(64, 64, 64, 255).func_181675_d();
-        worldrenderer.pos(0.0D, 0.0D, 0.0D).tex(0.0D, tint).color(64, 64, 64, 255).func_181675_d();
+        worldrenderer.pos(0.0D, this.height, 0.0D).tex(0.0D, (float)this.height / f + (float)tint).color(64, 64, 64, 255).endVertex();
+        worldrenderer.pos(this.width, this.height, 0.0D).tex((float)this.width / f, (float)this.height / f + (float)tint).color(64, 64, 64, 255).endVertex();
+        worldrenderer.pos(this.width, 0.0D, 0.0D).tex((float)this.width / f, tint).color(64, 64, 64, 255).endVertex();
+        worldrenderer.pos(0.0D, 0.0D, 0.0D).tex(0.0D, tint).color(64, 64, 64, 255).endVertex();
         tessellator.draw();
     }
 

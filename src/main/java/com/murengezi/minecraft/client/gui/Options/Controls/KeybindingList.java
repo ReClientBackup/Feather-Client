@@ -2,7 +2,6 @@ package com.murengezi.minecraft.client.gui.Options.Controls;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.GuiListExtended;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
@@ -106,7 +105,7 @@ public class KeybindingList extends GuiListExtended {
 		}
 
 		public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected) {
-			boolean flag = KeybindingList.this.controlsScreen.buttonId == this.keyBinding;
+			boolean flag = KeybindingList.this.controlsScreen.keyBinding == this.keyBinding;
 			getFr().drawStringWithShadow(this.keyDesc, x + 90 - KeybindingList.this.maxListLabelWidth, y + slotHeight / 2 - getFr().FONT_HEIGHT / 2, 16777215);
 			this.btnReset.setX(x + 190);
 			this.btnReset.setY(y);
@@ -145,7 +144,7 @@ public class KeybindingList extends GuiListExtended {
 		{
 			if (this.btnChangeKeyBinding.mousePressed(getMc(), p_148278_2_, p_148278_3_))
 			{
-				KeybindingList.this.controlsScreen.buttonId = this.keyBinding;
+				KeybindingList.this.controlsScreen.keyBinding = this.keyBinding;
 				return true;
 			}
 			else if (this.btnReset.mousePressed(getMc(), p_148278_2_, p_148278_3_))

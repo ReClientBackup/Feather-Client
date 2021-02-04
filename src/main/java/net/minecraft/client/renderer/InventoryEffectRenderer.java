@@ -58,7 +58,7 @@ public abstract class InventoryEffectRenderer extends GuiContainer
 
         if (!collection.isEmpty())
         {
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             GlStateManager.disableLighting();
             int l = 33;
 
@@ -70,7 +70,7 @@ public abstract class InventoryEffectRenderer extends GuiContainer
             for (PotionEffect effect : getPlayer().getActivePotionEffects())
             {
                 Potion potion = Potion.potionTypes[effect.getPotionID()];
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.colorAllMax();
                 getMc().getTextureManager().bindTexture(inventoryBackground);
                 this.drawTexturedModalRect(x, y, 0, 166, 140, 32);
 

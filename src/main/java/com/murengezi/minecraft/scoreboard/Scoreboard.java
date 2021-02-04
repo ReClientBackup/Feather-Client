@@ -203,8 +203,7 @@ public class Scoreboard {
         if (this.teams.containsKey(team.getRegisteredName())) {
             this.teams.remove(team.getRegisteredName());
 
-            for (String s : team.getMembershipCollection())
-            {
+            for (String s : team.getMembershipCollection()) {
                 this.teamMemberships.remove(s);
             }
 

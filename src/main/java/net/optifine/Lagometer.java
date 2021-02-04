@@ -221,8 +221,8 @@ public class Lagometer
         }
         else
         {
-            tessellator.pos((float)frameNum + 0.5F, baseHeight - (float)i + 0.5F, 0.0D).color(r, g, b, 255).func_181675_d();
-            tessellator.pos((float)frameNum + 0.5F, baseHeight + 0.5F, 0.0D).color(r, g, b, 255).func_181675_d();
+            tessellator.pos((float)frameNum + 0.5F, baseHeight - (float)i + 0.5F, 0.0D).color(r, g, b, 255).endVertex();
+            tessellator.pos((float)frameNum + 0.5F, baseHeight + 0.5F, 0.0D).color(r, g, b, 255).endVertex();
             return i;
         }
     }
@@ -237,8 +237,8 @@ public class Lagometer
         }
         else
         {
-            tessellator.pos((float)frameStart + 0.5F, baseHeight - (float)i + 0.5F, 0.0D).color(r, g, b, 255).func_181675_d();
-            tessellator.pos((float)frameEnd + 0.5F, baseHeight - (float)i + 0.5F, 0.0D).color(r, g, b, 255).func_181675_d();
+            tessellator.pos((float)frameStart + 0.5F, baseHeight - (float)i + 0.5F, 0.0D).color(r, g, b, 255).endVertex();
+            tessellator.pos((float)frameEnd + 0.5F, baseHeight - (float)i + 0.5F, 0.0D).color(r, g, b, 255).endVertex();
             return i;
         }
     }

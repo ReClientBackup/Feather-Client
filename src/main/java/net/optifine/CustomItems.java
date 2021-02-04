@@ -911,7 +911,7 @@ public class CustomItems
                     GlStateManager.enableAlpha();
                     GlStateManager.enableBlend();
                     GlStateManager.blendFunc(770, 771);
-                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                    GlStateManager.colorAllMax();
                     GlStateManager.matrixMode(5888);
                     GlStateManager.enableLighting();
                     GlStateManager.depthFunc(515);
@@ -1012,7 +1012,7 @@ public class CustomItems
                     GlStateManager.enableAlpha();
                     GlStateManager.enableBlend();
                     GlStateManager.blendFunc(770, 771);
-                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                    GlStateManager.colorAllMax();
                     GlStateManager.matrixMode(5890);
                     GlStateManager.loadIdentity();
                     GlStateManager.matrixMode(5888);

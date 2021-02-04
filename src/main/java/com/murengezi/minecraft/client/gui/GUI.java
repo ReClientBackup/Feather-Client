@@ -59,10 +59,10 @@ public class GUI extends MinecraftUtils {
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.color(f, f1, f2, f3);
         worldrenderer.begin(7, DefaultVertexFormats.POSITION);
-        worldrenderer.pos(left, bottom, 0.0D).func_181675_d();
-        worldrenderer.pos(right, bottom, 0.0D).func_181675_d();
-        worldrenderer.pos(right, top, 0.0D).func_181675_d();
-        worldrenderer.pos(left, top, 0.0D).func_181675_d();
+        worldrenderer.pos(left, bottom, 0.0D).endVertex();
+        worldrenderer.pos(right, bottom, 0.0D).endVertex();
+        worldrenderer.pos(right, top, 0.0D).endVertex();
+        worldrenderer.pos(left, top, 0.0D).endVertex();
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
@@ -85,10 +85,10 @@ public class GUI extends MinecraftUtils {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
-        worldrenderer.pos(right, top, this.zLevel).color(f1, f2, f3, f).func_181675_d();
-        worldrenderer.pos(left, top, this.zLevel).color(f1, f2, f3, f).func_181675_d();
-        worldrenderer.pos(left, bottom, this.zLevel).color(f5, f6, f7, f4).func_181675_d();
-        worldrenderer.pos(right, bottom, this.zLevel).color(f5, f6, f7, f4).func_181675_d();
+        worldrenderer.pos(right, top, this.zLevel).color(f1, f2, f3, f).endVertex();
+        worldrenderer.pos(left, top, this.zLevel).color(f1, f2, f3, f).endVertex();
+        worldrenderer.pos(left, bottom, this.zLevel).color(f5, f6, f7, f4).endVertex();
+        worldrenderer.pos(right, bottom, this.zLevel).color(f5, f6, f7, f4).endVertex();
         tessellator.draw();
         GlStateManager.shadeModel(7424);
         GlStateManager.disableBlend();
@@ -113,10 +113,10 @@ public class GUI extends MinecraftUtils {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(x, y + height, this.zLevel).tex((float)(textureX) * f, (float)(textureY + height) * f1).func_181675_d();
-        worldrenderer.pos(x + width, y + height, this.zLevel).tex((float)(textureX + width) * f, (float)(textureY + height) * f1).func_181675_d();
-        worldrenderer.pos(x + width, y, this.zLevel).tex((float)(textureX + width) * f, (float)(textureY) * f1).func_181675_d();
-        worldrenderer.pos(x, y, this.zLevel).tex((float)(textureX) * f, (float)(textureY) * f1).func_181675_d();
+        worldrenderer.pos(x, y + height, this.zLevel).tex((float)(textureX) * f, (float)(textureY + height) * f1).endVertex();
+        worldrenderer.pos(x + width, y + height, this.zLevel).tex((float)(textureX + width) * f, (float)(textureY + height) * f1).endVertex();
+        worldrenderer.pos(x + width, y, this.zLevel).tex((float)(textureX + width) * f, (float)(textureY) * f1).endVertex();
+        worldrenderer.pos(x, y, this.zLevel).tex((float)(textureX) * f, (float)(textureY) * f1).endVertex();
         tessellator.draw();
     }
 
@@ -126,10 +126,10 @@ public class GUI extends MinecraftUtils {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(xCoord + 0.0F, yCoord + (float)maxV, this.zLevel).tex((float)(minU) * f, (float)(minV + maxV) * f1).func_181675_d();
-        worldrenderer.pos(xCoord + (float)maxU, yCoord + (float)maxV, this.zLevel).tex((float)(minU + maxU) * f, (float)(minV + maxV) * f1).func_181675_d();
-        worldrenderer.pos(xCoord + (float)maxU, yCoord + 0.0F, this.zLevel).tex((float)(minU + maxU) * f, (float)(minV) * f1).func_181675_d();
-        worldrenderer.pos(xCoord + 0.0F, yCoord + 0.0F, this.zLevel).tex((float)(minU) * f, (float)(minV) * f1).func_181675_d();
+        worldrenderer.pos(xCoord + 0.0F, yCoord + (float)maxV, this.zLevel).tex((float)(minU) * f, (float)(minV + maxV) * f1).endVertex();
+        worldrenderer.pos(xCoord + (float)maxU, yCoord + (float)maxV, this.zLevel).tex((float)(minU + maxU) * f, (float)(minV + maxV) * f1).endVertex();
+        worldrenderer.pos(xCoord + (float)maxU, yCoord + 0.0F, this.zLevel).tex((float)(minU + maxU) * f, (float)(minV) * f1).endVertex();
+        worldrenderer.pos(xCoord + 0.0F, yCoord + 0.0F, this.zLevel).tex((float)(minU) * f, (float)(minV) * f1).endVertex();
         tessellator.draw();
     }
 
@@ -137,10 +137,10 @@ public class GUI extends MinecraftUtils {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(xCoord, yCoord + heightIn, this.zLevel).tex(textureSprite.getMinU(), textureSprite.getMaxV()).func_181675_d();
-        worldrenderer.pos(xCoord + widthIn, yCoord + heightIn, this.zLevel).tex(textureSprite.getMaxU(), textureSprite.getMaxV()).func_181675_d();
-        worldrenderer.pos(xCoord + widthIn, yCoord, this.zLevel).tex(textureSprite.getMaxU(), textureSprite.getMinV()).func_181675_d();
-        worldrenderer.pos(xCoord, yCoord, this.zLevel).tex(textureSprite.getMinU(), textureSprite.getMinV()).func_181675_d();
+        worldrenderer.pos(xCoord, yCoord + heightIn, this.zLevel).tex(textureSprite.getMinU(), textureSprite.getMaxV()).endVertex();
+        worldrenderer.pos(xCoord + widthIn, yCoord + heightIn, this.zLevel).tex(textureSprite.getMaxU(), textureSprite.getMaxV()).endVertex();
+        worldrenderer.pos(xCoord + widthIn, yCoord, this.zLevel).tex(textureSprite.getMaxU(), textureSprite.getMinV()).endVertex();
+        worldrenderer.pos(xCoord, yCoord, this.zLevel).tex(textureSprite.getMinU(), textureSprite.getMinV()).endVertex();
         tessellator.draw();
     }
 
@@ -157,10 +157,10 @@ public class GUI extends MinecraftUtils {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(x, y + height, 0.0D).tex(u * f, (v + (float)height) * f1).func_181675_d();
-        worldrenderer.pos(x + width, y + height, 0.0D).tex((u + (float)width) * f, (v + (float)height) * f1).func_181675_d();
-        worldrenderer.pos(x + width, y, 0.0D).tex((u + (float)width) * f, v * f1).func_181675_d();
-        worldrenderer.pos(x, y, 0.0D).tex(u * f, v * f1).func_181675_d();
+        worldrenderer.pos(x, y + height, 0.0D).tex(u * f, (v + (float)height) * f1).endVertex();
+        worldrenderer.pos(x + width, y + height, 0.0D).tex((u + (float)width) * f, (v + (float)height) * f1).endVertex();
+        worldrenderer.pos(x + width, y, 0.0D).tex((u + (float)width) * f, v * f1).endVertex();
+        worldrenderer.pos(x, y, 0.0D).tex(u * f, v * f1).endVertex();
         tessellator.draw();
     }
 
@@ -170,10 +170,10 @@ public class GUI extends MinecraftUtils {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(x, y + height, 0.0D).tex(u * f, (v + (float)vHeight) * f1).func_181675_d();
-        worldrenderer.pos(x + width, y + height, 0.0D).tex((u + (float)uWidth) * f, (v + (float)vHeight) * f1).func_181675_d();
-        worldrenderer.pos(x + width, y, 0.0D).tex((u + (float)uWidth) * f, v * f1).func_181675_d();
-        worldrenderer.pos(x, y, 0.0D).tex(u * f, v * f1).func_181675_d();
+        worldrenderer.pos(x, y + height, 0.0D).tex(u * f, (v + (float)vHeight) * f1).endVertex();
+        worldrenderer.pos(x + width, y + height, 0.0D).tex((u + (float)uWidth) * f, (v + (float)vHeight) * f1).endVertex();
+        worldrenderer.pos(x + width, y, 0.0D).tex((u + (float)uWidth) * f, v * f1).endVertex();
+        worldrenderer.pos(x, y, 0.0D).tex(u * f, v * f1).endVertex();
         tessellator.draw();
     }
 }

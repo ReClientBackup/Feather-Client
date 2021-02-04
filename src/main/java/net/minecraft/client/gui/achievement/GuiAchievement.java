@@ -109,7 +109,7 @@ public class GuiAchievement extends GUI
             d1 = d1 * d1;
             int i = this.width - 160;
             int j = 0 - (int)(d1 * 36.0D);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             GlStateManager.enableTexture2D();
             this.mc.getTextureManager().bindTexture(achievementBg);
             GlStateManager.disableLighting();

@@ -96,7 +96,7 @@ public abstract class GuiContainer extends Screen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         int i = this.guiLeft;
         int j = this.guiTop;
-        this.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+        this.drawGuiContainerBackgroundLayer(mouseX, mouseY, partialTicks);
         GlStateManager.disableRescaleNormal();
         RenderHelper.disableStandardItemLighting();
         GlStateManager.disableLighting();
@@ -105,13 +105,13 @@ public abstract class GuiContainer extends Screen {
         RenderHelper.enableGUIStandardItemLighting();
         GlStateManager.pushMatrix();
         GlStateManager.translate((float)i, (float)j, 0.0F);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         GlStateManager.enableRescaleNormal();
         this.theSlot = null;
         int k = 240;
         int l = 240;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) k, (float) l);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
 
         for (int i1 = 0; i1 < this.inventorySlots.inventorySlots.size(); ++i1)
         {
@@ -218,7 +218,7 @@ public abstract class GuiContainer extends Screen {
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected abstract void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY);
+    protected abstract void drawGuiContainerBackgroundLayer(int mouseX, int mouseY, float partialTicks);
 
     private void drawSlot(Slot slotIn)
     {

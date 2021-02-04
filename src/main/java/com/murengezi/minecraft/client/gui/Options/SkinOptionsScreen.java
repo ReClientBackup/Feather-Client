@@ -19,8 +19,7 @@ public class SkinOptionsScreen extends Screen {
 
     private final Screen previousScreen;
 
-    private static final int OPTIFINECAPE = 0;
-    private static final int DONE = 1;
+    private static final int CAPE = 0, DONE = 1;
 
     public SkinOptionsScreen(Screen previousScreen) {
         this.previousScreen = previousScreen;
@@ -32,7 +31,7 @@ public class SkinOptionsScreen extends Screen {
             addButton(new Button( 2 + playerModelParts.getPartId(), this.width / 2 - 155 + playerModelParts.getPartId() % 2 * 160, this.height / 6 + 42 + 24 * (playerModelParts.getPartId() >> 1), 150, 20, this, playerModelParts));
         });
 
-        this.buttonList.add(new GuiButtonOF(OPTIFINECAPE, this.width / 2 + 5, this.height / 6 + 42 + 24 * (EnumPlayerModelParts.values().length >> 1), 150, 20, I18n.format("of.options.skinCustomisation.ofCape")));
+        this.buttonList.add(new GuiButtonOF(CAPE, this.width / 2 + 5, this.height / 6 + 42 + 24 * (EnumPlayerModelParts.values().length >> 1), 150, 20, I18n.format("of.options.skinCustomisation.ofCape")));
         addButton(new GuiButton(DONE, this.width / 2 - 75, this.height / 6 + 24 + 24 * (EnumPlayerModelParts.values().length + 4 >> 1), 150, 20, I18n.format("gui.done")));
 
         super.initGui();
@@ -41,7 +40,7 @@ public class SkinOptionsScreen extends Screen {
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         switch (button.getId()) {
-            case OPTIFINECAPE:
+            case CAPE:
                 changeScreen(new GuiScreenCapeOF(this));
                 break;
             case DONE:

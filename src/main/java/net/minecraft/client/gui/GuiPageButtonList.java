@@ -22,9 +22,9 @@ public class GuiPageButtonList extends GuiListExtended
     private GuiPageButtonList.GuiResponder field_178076_z;
     private GUI field_178075_A;
 
-    public GuiPageButtonList(Minecraft mcIn, int widthIn, int heightIn, int topIn, int bottomIn, int slotHeightIn, GuiPageButtonList.GuiResponder p_i45536_7_, GuiPageButtonList.GuiListEntry[]... p_i45536_8_)
+    public GuiPageButtonList(int widthIn, int heightIn, int topIn, int bottomIn, int slotHeightIn, GuiPageButtonList.GuiResponder p_i45536_7_, GuiPageButtonList.GuiListEntry[]... p_i45536_8_)
     {
-        super(mcIn, widthIn, heightIn, topIn, bottomIn, slotHeightIn);
+        super(widthIn, heightIn, topIn, bottomIn, slotHeightIn);
         this.field_178076_z = p_i45536_7_;
         this.field_178078_x = p_i45536_8_;
         this.field_148163_i = false;
@@ -237,11 +237,11 @@ public class GuiPageButtonList extends GuiListExtended
 
         if (p_178063_4_)
         {
-            guilabel = new GuiLabel(this.mc.fontRendererObj, p_178063_3_.func_178935_b(), p_178063_1_, p_178063_2_, this.width - p_178063_1_ * 2, 20, -1);
+            guilabel = new GuiLabel(p_178063_3_.func_178935_b(), p_178063_1_, p_178063_2_, this.width - p_178063_1_ * 2, 20, -1);
         }
         else
         {
-            guilabel = new GuiLabel(this.mc.fontRendererObj, p_178063_3_.func_178935_b(), p_178063_1_, p_178063_2_, 150, 20, -1);
+            guilabel = new GuiLabel(p_178063_3_.func_178935_b(), p_178063_1_, p_178063_2_, 150, 20, -1);
         }
 
         guilabel.visible = p_178063_3_.func_178934_d();
@@ -286,8 +286,8 @@ public class GuiPageButtonList extends GuiListExtended
                     this.field_178075_A = this.field_178072_w.get(k);
                     guitextfield = (GuiTextField)this.field_178075_A;
                     guitextfield.setFocused(true);
-                    int l = guitextfield.yPosition + this.slotHeight;
-                    int i1 = guitextfield.yPosition;
+                    int l = guitextfield.y + this.slotHeight;
+                    int i1 = guitextfield.y;
 
                     if (l > this.bottom)
                     {
@@ -450,7 +450,7 @@ public class GuiPageButtonList extends GuiListExtended
 
         private void func_178027_a(GuiTextField p_178027_1_, int p_178027_2_, boolean p_178027_3_)
         {
-            p_178027_1_.yPosition = p_178027_2_;
+            p_178027_1_.y = p_178027_2_;
 
             if (!p_178027_3_)
             {
@@ -464,20 +464,20 @@ public class GuiPageButtonList extends GuiListExtended
 
             if (!p_178025_5_)
             {
-                p_178025_1_.drawLabel(p_178025_3_, p_178025_4_);
+                p_178025_1_.drawLabel();
             }
         }
 
-        public void setSelected(int p_178011_1_, int p_178011_2_, int p_178011_3_)
+        public void setSelected(int slotIndex, int x, int y)
         {
-            this.func_178017_a(this.field_178029_b, p_178011_3_, 0, 0, true);
-            this.func_178017_a(this.field_178030_c, p_178011_3_, 0, 0, true);
+            this.func_178017_a(this.field_178029_b, y, 0, 0, true);
+            this.func_178017_a(this.field_178030_c, y, 0, 0, true);
         }
 
-        public boolean mousePressed(int slotIndex, int p_148278_2_, int p_148278_3_, int p_148278_4_, int p_148278_5_, int p_148278_6_)
+        public boolean mousePressed(int slotIndex, int x, int y, int mouseEvent, int relativeX, int relativeY)
         {
-            boolean flag = this.func_178026_a(this.field_178029_b, p_148278_2_, p_148278_3_, p_148278_4_);
-            boolean flag1 = this.func_178026_a(this.field_178030_c, p_148278_2_, p_148278_3_, p_148278_4_);
+            boolean flag = this.func_178026_a(this.field_178029_b, x, y, mouseEvent);
+            boolean flag1 = this.func_178026_a(this.field_178030_c, x, y, mouseEvent);
             return flag || flag1;
         }
 

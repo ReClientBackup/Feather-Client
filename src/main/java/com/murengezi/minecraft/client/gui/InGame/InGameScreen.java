@@ -122,7 +122,7 @@ public class InGameScreen extends GUI {
             this.renderTooltip(resolution, partialTicks);
         }
 
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.colorAllMax();
         this.mc.getTextureManager().bindTexture(icons);
         GlStateManager.enableBlend();
 
@@ -160,7 +160,7 @@ public class InGameScreen extends GUI {
             this.mc.mcProfiler.endSection();
         }
 
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.colorAllMax();
         int expBarPosX = width / 2 - 91;
 
         if (this.mc.thePlayer.isRidingHorse()) {
@@ -283,7 +283,7 @@ public class InGameScreen extends GUI {
             this.overlayPlayerList.updatePlayerList(false);
         }
 
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.colorAllMax();
         GlStateManager.disableLighting();
         GlStateManager.enableAlpha();
     }
@@ -317,14 +317,14 @@ public class InGameScreen extends GUI {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldRenderer = tessellator.getWorldRenderer();
         worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldRenderer.pos(0.0D, resolution.getScaledHeight(), -90.0D).tex(0.0D, 1.0D).func_181675_d();
-        worldRenderer.pos(resolution.getScaledWidth(), resolution.getScaledHeight(), -90.0D).tex(1.0D, 1.0D).func_181675_d();
-        worldRenderer.pos(resolution.getScaledWidth(), 0.0D, -90.0D).tex(1.0D, 0.0D).func_181675_d();
-        worldRenderer.pos(0.0D, 0.0D, -90.0D).tex(0.0D, 0.0D).func_181675_d();
+        worldRenderer.pos(0.0D, resolution.getScaledHeight(), -90.0D).tex(0.0D, 1.0D).endVertex();
+        worldRenderer.pos(resolution.getScaledWidth(), resolution.getScaledHeight(), -90.0D).tex(1.0D, 1.0D).endVertex();
+        worldRenderer.pos(resolution.getScaledWidth(), 0.0D, -90.0D).tex(1.0D, 0.0D).endVertex();
+        worldRenderer.pos(0.0D, 0.0D, -90.0D).tex(0.0D, 0.0D).endVertex();
         tessellator.draw();
         GlStateManager.depthMask(true);
         GlStateManager.enableDepth();
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.colorAllMax();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
     }
 
@@ -350,20 +350,20 @@ public class InGameScreen extends GUI {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(0.0D, resolution.getScaledHeight(), -90.0D).tex(f, f3).func_181675_d();
-        worldrenderer.pos(resolution.getScaledWidth(), resolution.getScaledHeight(), -90.0D).tex(f2, f3).func_181675_d();
-        worldrenderer.pos(resolution.getScaledWidth(), 0.0D, -90.0D).tex(f2, f1).func_181675_d();
-        worldrenderer.pos(0.0D, 0.0D, -90.0D).tex(f, f1).func_181675_d();
+        worldrenderer.pos(0.0D, resolution.getScaledHeight(), -90.0D).tex(f, f3).endVertex();
+        worldrenderer.pos(resolution.getScaledWidth(), resolution.getScaledHeight(), -90.0D).tex(f2, f3).endVertex();
+        worldrenderer.pos(resolution.getScaledWidth(), 0.0D, -90.0D).tex(f2, f1).endVertex();
+        worldrenderer.pos(0.0D, 0.0D, -90.0D).tex(f, f1).endVertex();
         tessellator.draw();
         GlStateManager.depthMask(true);
         GlStateManager.enableDepth();
         GlStateManager.enableAlpha();
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
     }
 
     public void renderTooltip(ScaledResolution resolution, float partialTicks) {
         if (this.mc.getRenderViewEntity() instanceof EntityPlayer) {
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             this.mc.getTextureManager().bindTexture(widgetsTexPath);
             EntityPlayer entityplayer = (EntityPlayer)this.mc.getRenderViewEntity();
             int width = resolution.getScaledWidth() / 2;
@@ -452,7 +452,7 @@ public class InGameScreen extends GUI {
 
             String bossName = BossStatus.bossName;
             this.getFontRenderer().drawStringWithShadow(bossName, (float)(width / 2 - this.getFontRenderer().getStringWidth(bossName) / 2), (float)(y - 10), 16777215);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             this.mc.getTextureManager().bindTexture(icons);
         }
     }

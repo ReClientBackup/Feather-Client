@@ -4,7 +4,6 @@ import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -20,43 +19,24 @@ import java.io.IOException;
  */
 public class ControlsScreen extends Screen {
 
-	private static final GameSettings.Options[] optionsArr = new GameSettings.Options[] {GameSettings.Options.INVERT_MOUSE, GameSettings.Options.SENSITIVITY, GameSettings.Options.TOUCHSCREEN};
-
-	private Screen previousScreen;
-	private GameSettings gameSettings;
-
-	/** The ID of the button that has been pressed. */
-	public KeyBinding buttonId = null;
-	public long time;
+	private final Screen previousScreen;
+	public KeyBinding keyBinding = null;
 	private KeybindingList keyBindingList;
-	private GuiButton buttonReset;
 
-	public ControlsScreen(Screen previousScreen, GameSettings gameSettings)
-	{
+	private static final int DONE = 0, RESET = 1, INVERT_MOUSE = 2, SENSITIVITY = 3;
+
+	public ControlsScreen(Screen previousScreen) {
 		this.previousScreen = previousScreen;
-		this.gameSettings = gameSettings;
 	}
 
 	@Override
 	public void initGui() {
 		this.keyBindingList = new KeybindingList(this);
-		this.buttonList.add(new GuiButton(200, this.width / 2 - 155, this.height - 29, 150, 20, I18n.format("gui.done")));
-		this.buttonList.add(this.buttonReset = new GuiButton(201, this.width / 2 - 155 + 160, this.height - 29, 150, 20, I18n.format("controls.resetAll")));
-		int i = 0;
-
-		for (GameSettings.Options options : optionsArr)
-		{
-			if (options.getEnumFloat())
-			{
-				this.buttonList.add(new GuiOptionSlider(options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, 18 + 24 * (i >> 1), options));
-			}
-			else
-			{
-				this.buttonList.add(new GuiOptionButton(options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, 18 + 24 * (i >> 1), options, this.gameSettings.getKeyBinding(options)));
-			}
-
-			++i;
-		}
+		addButton(new GuiButton(DONE, this.width / 2 - 155, this.height - 26, 150, 20, I18n.format("gui.done")));
+		addButton(new GuiButton(RESET, this.width / 2 - 155 + 160, this.height - 26, 150, 20, I18n.format("controls.resetAll")));
+		addButton(new GuiOptionButton(INVERT_MOUSE, this.width / 2 - 155, 18, GameSettings.Options.INVERT_MOUSE, getGs().getKeyBinding(GameSettings.Options.INVERT_MOUSE)));
+		addButton(new GuiOptionSlider(SENSITIVITY, this.width / 2 - 155 + 160, 18, GameSettings.Options.SENSITIVITY));
+		super.initGui();
 	}
 
 	@Override
@@ -65,31 +45,32 @@ public class ControlsScreen extends Screen {
 		super.handleMouseInput();
 	}
 
-	/**
-	 * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-	 */
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 
-		if (button.getId() == 200) {
-			changeScreen(previousScreen);
-		} else if (button.getId() == 201) {
-			for (KeyBinding keybinding : getMc().gameSettings.keyBindings) {
-				keybinding.setKeyCode(keybinding.getKeyCodeDefault());
-			}
-
-			KeyBinding.resetKeyBindingArrayAndHash();
-		} else if (button.getId() < 100 && button instanceof GuiOptionButton) {
-			this.gameSettings.setOptionValue(((GuiOptionButton)button).returnEnumOptions(), 1);
-			button.displayString = this.gameSettings.getKeyBinding(GameSettings.Options.getEnumOptions(button.getId()));
+		switch (button.getId()) {
+			case DONE:
+				changeScreen(previousScreen);
+				break;
+			case RESET:
+				for (KeyBinding keybinding : getMc().gameSettings.keyBindings) {
+					keybinding.setKeyCode(keybinding.getKeyCodeDefault());
+				}
+				KeyBinding.resetKeyBindingArrayAndHash();
+				break;
+			case INVERT_MOUSE:
+				getGs().setOptionValue(((GuiOptionButton)button).getOptions(), 1);
+				button.displayString = getGs().getKeyBinding(GameSettings.Options.getEnumOptions(0));
+				break;
 		}
+		super.actionPerformed(button);
 	}
 
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-		if (this.buttonId != null) {
-			this.gameSettings.setOptionKeyBinding(this.buttonId, -100 + mouseButton);
-			this.buttonId = null;
+		if (this.keyBinding != null) {
+			getGs().setOptionKeyBinding(this.keyBinding, -100 + mouseButton);
+			this.keyBinding = null;
 			KeyBinding.resetKeyBindingArrayAndHash();
 		} else if (mouseButton != 0 || !this.keyBindingList.mouseClicked(mouseX, mouseY, mouseButton)) {
 			super.mouseClicked(mouseX, mouseY, mouseButton);
@@ -105,26 +86,23 @@ public class ControlsScreen extends Screen {
 
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) throws IOException {
-		if (this.buttonId != null) {
+		if (this.keyBinding != null) {
 			if (keyCode == 1) {
-				this.gameSettings.setOptionKeyBinding(this.buttonId, 0);
+				getGs().setOptionKeyBinding(this.keyBinding, 0);
 			} else if (keyCode != 0) {
-				this.gameSettings.setOptionKeyBinding(this.buttonId, keyCode);
+				getGs().setOptionKeyBinding(this.keyBinding, keyCode);
 			} else if (typedChar > 0) {
-				this.gameSettings.setOptionKeyBinding(this.buttonId, typedChar + 256);
+				getGs().setOptionKeyBinding(this.keyBinding, typedChar + 256);
 			}
 
-			this.buttonId = null;
-			this.time = Minecraft.getSystemTime();
+			this.keyBinding = null;
 			KeyBinding.resetKeyBindingArrayAndHash();
 		} else {
 			super.keyTyped(typedChar, keyCode);
 		}
 	}
 
-	/**
-	 * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-	 */
+	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground(mouseX, mouseY, 60);
 
@@ -139,18 +117,17 @@ public class ControlsScreen extends Screen {
 		GUI.drawRect(0, keyBindingList.getBottom(), keyBindingList.getWidth(), this.height, Integer.MIN_VALUE);
 
 		getFr().drawCenteredString(I18n.format("controls.title"), this.width / 2, 8, 16777215);
-		boolean flag = true;
 
-		for (KeyBinding keybinding : this.gameSettings.keyBindings)
-		{
-			if (keybinding.getKeyCode() != keybinding.getKeyCodeDefault())
-			{
-				flag = false;
+		boolean edited = false;
+
+		for (KeyBinding keybinding : getGs().keyBindings) {
+			if (keybinding.getKeyCode() != keybinding.getKeyCodeDefault()) {
+				edited = true;
 				break;
 			}
 		}
 
-		this.buttonReset.setEnabled(!flag);
+		getButton(RESET).setEnabled(edited);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 }

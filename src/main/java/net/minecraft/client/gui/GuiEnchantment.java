@@ -103,9 +103,9 @@ public class GuiEnchantment extends GuiContainer
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    protected void drawGuiContainerBackgroundLayer(int mouseX, int mouseY, float partialTicks)
     {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         getMc().getTextureManager().bindTexture(ENCHANTMENT_TABLE_GUI_TEXTURE);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
@@ -168,7 +168,7 @@ public class GuiEnchantment extends GuiContainer
         GlStateManager.matrixMode(5888);
         GlStateManager.popMatrix();
         RenderHelper.disableStandardItemLighting();
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         EnchantmentNameParts.getInstance().reseedRandomGenerator(this.container.xpSeed);
         int k = this.container.getLapisAmount();
 
@@ -181,7 +181,7 @@ public class GuiEnchantment extends GuiContainer
             this.zLevel = 0.0F;
             getMc().getTextureManager().bindTexture(ENCHANTMENT_TABLE_GUI_TEXTURE);
             int l1 = this.container.enchantLevels[l];
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
 
             if (l1 == 0)
             {

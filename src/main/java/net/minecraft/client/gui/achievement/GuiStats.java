@@ -54,7 +54,7 @@ public class GuiStats extends Screen implements IProgressMeter
      */
     public void initGui()
     {
-        this.screenTitle = I18n.format("gui.stats", new Object[0]);
+        this.screenTitle = I18n.format("gui.stats");
         this.doesGuiPauseGame = true;
         getMc().getNetHandler().addToSendQueue(new C16PacketClientStatus(C16PacketClientStatus.EnumState.REQUEST_STATS));
     }
@@ -74,11 +74,11 @@ public class GuiStats extends Screen implements IProgressMeter
 
     public void func_175366_f()
     {
-        this.generalStats = new GuiStats.StatsGeneral(getMc());
+        this.generalStats = new GuiStats.StatsGeneral();
         this.generalStats.registerScrollButtons(1, 1);
-        this.itemStats = new GuiStats.StatsItem(getMc());
+        this.itemStats = new GuiStats.StatsItem();
         this.itemStats.registerScrollButtons(1, 1);
-        this.blockStats = new GuiStats.StatsBlock(getMc());
+        this.blockStats = new GuiStats.StatsBlock();
         this.blockStats.registerScrollButtons(1, 1);
         this.mobStats = new GuiStats.StatsMobsList(getMc());
         this.mobStats.registerScrollButtons(1, 1);
@@ -206,7 +206,7 @@ public class GuiStats extends Screen implements IProgressMeter
      */
     private void drawSprite(int p_146527_1_, int p_146527_2_, int p_146527_3_, int p_146527_4_)
     {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         getMc().getTextureManager().bindTexture(statIcons);
         float f = 0.0078125F;
         float f1 = 0.0078125F;
@@ -215,10 +215,10 @@ public class GuiStats extends Screen implements IProgressMeter
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(p_146527_1_ + 0, p_146527_2_ + 18, this.zLevel).tex((float)(p_146527_3_ + 0) * 0.0078125F, (float)(p_146527_4_ + 18) * 0.0078125F).func_181675_d();
-        worldrenderer.pos(p_146527_1_ + 18, p_146527_2_ + 18, this.zLevel).tex((float)(p_146527_3_ + 18) * 0.0078125F, (float)(p_146527_4_ + 18) * 0.0078125F).func_181675_d();
-        worldrenderer.pos(p_146527_1_ + 18, p_146527_2_ + 0, this.zLevel).tex((float)(p_146527_3_ + 18) * 0.0078125F, (float)(p_146527_4_ + 0) * 0.0078125F).func_181675_d();
-        worldrenderer.pos(p_146527_1_ + 0, p_146527_2_ + 0, this.zLevel).tex((float)(p_146527_3_ + 0) * 0.0078125F, (float)(p_146527_4_ + 0) * 0.0078125F).func_181675_d();
+        worldrenderer.pos(p_146527_1_ + 0, p_146527_2_ + 18, this.zLevel).tex((float)(p_146527_3_ + 0) * 0.0078125F, (float)(p_146527_4_ + 18) * 0.0078125F).endVertex();
+        worldrenderer.pos(p_146527_1_ + 18, p_146527_2_ + 18, this.zLevel).tex((float)(p_146527_3_ + 18) * 0.0078125F, (float)(p_146527_4_ + 18) * 0.0078125F).endVertex();
+        worldrenderer.pos(p_146527_1_ + 18, p_146527_2_ + 0, this.zLevel).tex((float)(p_146527_3_ + 18) * 0.0078125F, (float)(p_146527_4_ + 0) * 0.0078125F).endVertex();
+        worldrenderer.pos(p_146527_1_ + 0, p_146527_2_ + 0, this.zLevel).tex((float)(p_146527_3_ + 0) * 0.0078125F, (float)(p_146527_4_ + 0) * 0.0078125F).endVertex();
         tessellator.draw();
     }
 
@@ -230,9 +230,9 @@ public class GuiStats extends Screen implements IProgressMeter
         protected int field_148217_o = -1;
         protected int field_148215_p;
 
-        protected Stats(Minecraft mcIn)
+        protected Stats()
         {
-            super(mcIn, GuiStats.this.width, GuiStats.this.height, 32, GuiStats.this.height - 64, 20);
+            super(GuiStats.this.width, GuiStats.this.height, 32, GuiStats.this.height - 64, 20);
             this.setShowSelectionBox(false);
             this.setHasListHeader(true, 20);
         }
@@ -454,9 +454,9 @@ public class GuiStats extends Screen implements IProgressMeter
 
     class StatsBlock extends GuiStats.Stats
     {
-        public StatsBlock(Minecraft mcIn)
+        public StatsBlock()
         {
-            super(mcIn);
+            super();
             this.statsHolder = Lists.<StatCrafting>newArrayList();
 
             for (StatCrafting statcrafting : StatList.objectMineStats)
@@ -585,9 +585,9 @@ public class GuiStats extends Screen implements IProgressMeter
 
     class StatsGeneral extends GuiSlot
     {
-        public StatsGeneral(Minecraft mcIn)
+        public StatsGeneral()
         {
-            super(mcIn, GuiStats.this.width, GuiStats.this.height, 32, GuiStats.this.height - 64, 10);
+            super(GuiStats.this.width, GuiStats.this.height, 32, GuiStats.this.height - 64, 10);
             this.setShowSelectionBox(false);
         }
 
@@ -626,9 +626,9 @@ public class GuiStats extends Screen implements IProgressMeter
 
     class StatsItem extends GuiStats.Stats
     {
-        public StatsItem(Minecraft mcIn)
+        public StatsItem()
         {
-            super(mcIn);
+            super();
             this.statsHolder = Lists.<StatCrafting>newArrayList();
 
             for (StatCrafting statcrafting : StatList.itemStats)
@@ -761,7 +761,7 @@ public class GuiStats extends Screen implements IProgressMeter
 
         public StatsMobsList(Minecraft mcIn)
         {
-            super(mcIn, GuiStats.this.width, GuiStats.this.height, 32, GuiStats.this.height - 64, GuiStats.getFr().FONT_HEIGHT * 4);
+            super(GuiStats.this.width, GuiStats.this.height, 32, GuiStats.this.height - 64, GuiStats.getFr().FONT_HEIGHT * 4);
             this.setShowSelectionBox(false);
 
             for (EntityList.EntityEggInfo entitylist$entityegginfo : EntityList.entityEggs.values())

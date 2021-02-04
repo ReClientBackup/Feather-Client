@@ -45,7 +45,7 @@ public class Shader
 
     private void preLoadShader()
     {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         GlStateManager.disableBlend();
         GlStateManager.disableDepth();
         GlStateManager.disableAlpha();
@@ -90,10 +90,10 @@ public class Shader
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
-        worldrenderer.pos(0.0D, f1, 500.0D).color(255, 255, 255, 255).func_181675_d();
-        worldrenderer.pos(f, f1, 500.0D).color(255, 255, 255, 255).func_181675_d();
-        worldrenderer.pos(f, 0.0D, 500.0D).color(255, 255, 255, 255).func_181675_d();
-        worldrenderer.pos(0.0D, 0.0D, 500.0D).color(255, 255, 255, 255).func_181675_d();
+        worldrenderer.pos(0.0D, f1, 500.0D).color(255, 255, 255, 255).endVertex();
+        worldrenderer.pos(f, f1, 500.0D).color(255, 255, 255, 255).endVertex();
+        worldrenderer.pos(f, 0.0D, 500.0D).color(255, 255, 255, 255).endVertex();
+        worldrenderer.pos(0.0D, 0.0D, 500.0D).color(255, 255, 255, 255).endVertex();
         tessellator.draw();
         GlStateManager.depthMask(true);
         GlStateManager.colorMask(true, true, true, true);

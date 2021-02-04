@@ -66,45 +66,45 @@ public class RenderHelper {
     }
 
     public static void drawPoint(int x, int y) {
-        wr.pos(x, y, 0.0D).color(r, g, b, a).func_181675_d();
+        wr.pos(x, y, 0.0D).color(r, g, b, a).endVertex();
     }
 
     public static void drawPoint(double x, double y) {
-        wr.pos(x, y, 0.0D).color(r, g, b, a).func_181675_d();
+        wr.pos(x, y, 0.0D).color(r, g, b, a).endVertex();
     }
 
     public static void drawLine(int x1, int y1, int x2, int y2) {
-        wr.pos(x1, y1, 0.0D).color(r, g, b, a).func_181675_d();
-        wr.pos(x2, y2, 0.0D).color(r, g, b, a).func_181675_d();
+        wr.pos(x1, y1, 0.0D).color(r, g, b, a).endVertex();
+        wr.pos(x2, y2, 0.0D).color(r, g, b, a).endVertex();
     }
 
     public static void drawLine(double x1, double y1, double x2, double y2) {
-        wr.pos(x1, y1, 0.0D).color(r, g, b, a).func_181675_d();
-        wr.pos(x2, y2, 0.0D).color(r, g, b, a).func_181675_d();
+        wr.pos(x1, y1, 0.0D).color(r, g, b, a).endVertex();
+        wr.pos(x2, y2, 0.0D).color(r, g, b, a).endVertex();
     }
 
     public static void drawQuad(int topLeftX, int topLeftY, int width, int height) {
-        wr.pos(topLeftX, topLeftY, 0.0D).color(r, g, b, a).func_181675_d();
-        wr.pos(topLeftX, (topLeftY + height), 0.0D).color(r, g, b, a).func_181675_d();
-        wr.pos((topLeftX + width), (topLeftY + height), 0.0D).color(r, g, b, a).func_181675_d();
-        wr.pos((topLeftX + width), topLeftY, 0.0D).color(r, g, b, a).func_181675_d();
+        wr.pos(topLeftX, topLeftY, 0.0D).color(r, g, b, a).endVertex();
+        wr.pos(topLeftX, (topLeftY + height), 0.0D).color(r, g, b, a).endVertex();
+        wr.pos((topLeftX + width), (topLeftY + height), 0.0D).color(r, g, b, a).endVertex();
+        wr.pos((topLeftX + width), topLeftY, 0.0D).color(r, g, b, a).endVertex();
     }
 
     public static void drawQuad(double topLeftX, double topLeftY, double width, double height) {
-        wr.pos(topLeftX, topLeftY, 0.0D).color(r, g, b, a).func_181675_d();
-        wr.pos(topLeftX, topLeftY + height, 0.0D).color(r, g, b, a).func_181675_d();
-        wr.pos(topLeftX + width, topLeftY + height, 0.0D).color(r, g, b, a).func_181675_d();
-        wr.pos(topLeftX + width, topLeftY, 0.0D).color(r, g, b, a).func_181675_d();
+        wr.pos(topLeftX, topLeftY, 0.0D).color(r, g, b, a).endVertex();
+        wr.pos(topLeftX, topLeftY + height, 0.0D).color(r, g, b, a).endVertex();
+        wr.pos(topLeftX + width, topLeftY + height, 0.0D).color(r, g, b, a).endVertex();
+        wr.pos(topLeftX + width, topLeftY, 0.0D).color(r, g, b, a).endVertex();
     }
 
     public static void drawPolygon(int... points) {
         for (int i = 0; i < points.length; i += 2)
-            wr.pos(points[i], points[i + 1], 0.0D).color(r, g, b, a).func_181675_d();
+            wr.pos(points[i], points[i + 1], 0.0D).color(r, g, b, a).endVertex();
     }
 
     public static void drawPolygon(double... points) {
         for (int i = 0; i < points.length / 2; i += 2)
-            wr.pos(points[i], points[i + 1], 0.0D).color(r, g, b, a).func_181675_d();
+            wr.pos(points[i], points[i + 1], 0.0D).color(r, g, b, a).endVertex();
     }
 
     public static void drawCircle(float x, float y, float radius, boolean filled) {
@@ -113,12 +113,12 @@ public class RenderHelper {
             for (angle = 1.0F; angle < 361.0F; angle = (float)(angle + 0.2D)) {
                 float x2 = x + MathHelper.sin(angle) * radius;
                 float y2 = y + MathHelper.cos(angle) * radius;
-                wr.pos(x2, y2, 0.0D).color(r, g, b, a).func_181675_d();
+                wr.pos(x2, y2, 0.0D).color(r, g, b, a).endVertex();
             }
         } else {
             for (int i = 0; i < 360; i++) {
                 float degInRad = i * DEG2RAD;
-                wr.pos((x + MathHelper.cos(degInRad) * radius), (y + MathHelper.sin(degInRad) * radius), 0.0D).color(r, g, b, a).func_181675_d();
+                wr.pos((x + MathHelper.cos(degInRad) * radius), (y + MathHelper.sin(degInRad) * radius), 0.0D).color(r, g, b, a).endVertex();
             }
         }
     }

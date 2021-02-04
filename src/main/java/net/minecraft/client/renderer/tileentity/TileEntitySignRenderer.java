@@ -124,7 +124,7 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer<TileEntity
         }
 
         GlStateManager.depthMask(true);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         GlStateManager.popMatrix();
 
         if (destroyStage >= 0)

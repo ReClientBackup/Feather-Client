@@ -5,8 +5,6 @@ import java.util.Random;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.GuiCreateFlatWorld;
-import net.minecraft.client.gui.GuiCustomizeWorldScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatAllowedCharacters;
@@ -41,15 +39,7 @@ public class WorldCreateScreen extends Screen {
     private static final String[] disallowedFilenames = new String[] {"CON", "COM", "PRN", "AUX", "CLOCK$", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"};
 
 
-    private static final int CREATE = 0;
-    private static final int CANCEL = 1;
-    private static final int GAMEMODE = 2;
-    private static final int MOREOPTIONS = 3;
-    private static final int MAPFEATURES = 4;
-    private static final int MAPTYPE = 5;
-    private static final int ALLOWCOMMANDS = 6;
-    private static final int BONUSITEMS = 7;
-    private static final int CUSTOMIZETYPE = 8;
+    private static final int CREATE = 0, CANCEL = 1, GAMEMODE = 2, MOREOPTIONS = 3, MAPFEATURES = 4, MAPTYPE = 5, ALLOWCOMMANDS = 6, BONUSITEMS = 7;
 
     public WorldCreateScreen(Screen previousScreen) {
         this.previousScreen = previousScreen;
@@ -84,9 +74,6 @@ public class WorldCreateScreen extends Screen {
         
         addButton(new GuiButton(ALLOWCOMMANDS, this.width / 2 - 155, 151, 150, 20, I18n.format("selectWorld.allowCommands")));
         getButton(ALLOWCOMMANDS).setVisible(false);
-        
-        addButton(new GuiButton(CUSTOMIZETYPE, this.width / 2 + 5, 120, 150, 20, I18n.format("selectWorld.customizeType")));
-        getButton(CUSTOMIZETYPE).setVisible(false);
         
         this.worldName = new GuiTextField(9, this.width / 2 - 100, 60, 200, 20);
         this.worldName.setFocused(true);
@@ -279,14 +266,6 @@ public class WorldCreateScreen extends Screen {
                     this.bonusItems = !this.bonusItems;
                     this.updateDisplayStrings();
                     break;
-                case CUSTOMIZETYPE:
-                    if (WorldType.worldTypes[this.selectedIndex] == WorldType.FLAT)
-                    {
-                        changeScreen(new GuiCreateFlatWorld(this, this.chunkProviderSettingsJson));
-                    } else {
-                        changeScreen(new GuiCustomizeWorldScreen(this, this.chunkProviderSettingsJson));
-                    }
-                    break;
             }
         }
     }
@@ -312,7 +291,6 @@ public class WorldCreateScreen extends Screen {
             getButton(BONUSITEMS).setVisible(false);
             getButton(MAPTYPE).setVisible(this.field_146344_y);
             getButton(ALLOWCOMMANDS).setVisible(false);
-            getButton(CUSTOMIZETYPE).setVisible(false);
         } else {
             getButton(GAMEMODE).setVisible(!this.field_146344_y);
             getButton(GAMEMODE).setEnabled(true);
@@ -326,7 +304,6 @@ public class WorldCreateScreen extends Screen {
             getButton(BONUSITEMS).setVisible(this.field_146344_y);
             getButton(MAPTYPE).setVisible(this.field_146344_y);
             getButton(ALLOWCOMMANDS).setVisible(this.field_146344_y);
-            getButton(CUSTOMIZETYPE).setVisible(this.field_146344_y && (WorldType.worldTypes[this.selectedIndex] == WorldType.FLAT || WorldType.worldTypes[this.selectedIndex] == WorldType.CUSTOMIZED));
         }
 
         this.updateDisplayStrings();

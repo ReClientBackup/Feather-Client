@@ -20,8 +20,7 @@ public class WorldRenameScreen extends Screen {
     private GuiTextField textField;
     private final String saveName;
 
-    private static final int RENAME = 0;
-    private static final int CANCEL = 1;
+    private static final int RENAME = 0, CANCEL = 1;
 
     public WorldRenameScreen(Screen previousScreen, String saveName) {
         this.previousScreen = previousScreen;

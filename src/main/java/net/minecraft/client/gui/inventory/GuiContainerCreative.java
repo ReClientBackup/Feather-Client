@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.creativetab.CreativeTabs;
+import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -252,7 +252,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 
         if (this.searchField != null && this.guiLeft != i)
         {
-            this.searchField.xPosition = this.guiLeft + 82;
+            this.searchField.x = this.guiLeft + 82;
         }
     }
 
@@ -269,7 +269,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
             Keyboard.enableRepeatEvents(true);
             this.searchField = new GuiTextField(0, this.guiLeft + 82, this.guiTop + 6, 89, getFr().FONT_HEIGHT);
             this.searchField.setMaxStringLength(15);
-            this.searchField.setEnableBackgroundDrawing(false);
+            this.searchField.setDrawBackground(false);
             this.searchField.setVisible(false);
             this.searchField.setTextColor(16777215);
             int i = selectedTabIndex;
@@ -459,7 +459,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         GuiContainerCreative.ContainerCreative guicontainercreative$containercreative = (GuiContainerCreative.ContainerCreative)this.inventorySlots;
         this.dragSplittingSlots.clear();
         guicontainercreative$containercreative.itemList.clear();
-        p_147050_1_.displayAllReleventItems(guicontainercreative$containercreative.itemList);
+        p_147050_1_.displayAllRelevantItems(guicontainercreative$containercreative.itemList);
 
         if (p_147050_1_ == CreativeTabs.tabInventory)
         {
@@ -614,7 +614,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
             this.drawCreativeTabHoveringText(I18n.format("inventory.binSlot", new Object[0]), mouseX, mouseY);
         }
 
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         GlStateManager.disableLighting();
     }
 
@@ -672,9 +672,9 @@ public class GuiContainerCreative extends InventoryEffectRenderer
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    protected void drawGuiContainerBackgroundLayer(int mouseX, int mouseY, float partialTicks)
     {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         RenderHelper.enableGUIStandardItemLighting();
         CreativeTabs creativetabs = CreativeTabs.creativeTabArray[selectedTabIndex];
 
@@ -691,7 +691,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         getMc().getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/creative_inventory/tab_" + creativetabs.getBackgroundImageName()));
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
         this.searchField.drawTextBox();
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         int i = this.guiLeft + 175;
         int j = this.guiTop + 18;
         int k = j + 112;

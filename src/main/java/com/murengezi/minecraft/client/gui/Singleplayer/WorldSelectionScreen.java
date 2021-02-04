@@ -3,10 +3,10 @@ package com.murengezi.minecraft.client.gui.Singleplayer;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.YesNoScreen;
-import com.murengezi.minecraft.client.gui.fGuiSlot;
 import net.minecraft.client.AnvilConverterException;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
@@ -31,12 +31,7 @@ public class WorldSelectionScreen extends Screen {
 
     private final Screen previousScreen;
 
-    private static final int SELECT = 0;
-    private static final int CREATE = 1;
-    private static final int RENAME = 2;
-    private static final int DELETE = 3;
-    private static final int RECREATE = 4;
-    private static final int CANCEL = 5;
+    private static final int SELECT = 0, CREATE = 1, RENAME = 2, DELETE = 3, RECREATE = 4, CANCEL = 5;
 
     private String worldString, conversationString;
     private List<SaveFormatComparator> worldList;
@@ -205,7 +200,7 @@ public class WorldSelectionScreen extends Screen {
         return name;
     }
 
-    class WorldSlot extends fGuiSlot {
+    class WorldSlot extends GuiSlot {
 
         public WorldSlot() {
             super(WorldSelectionScreen.this.width, WorldSelectionScreen.this.height, 32, WorldSelectionScreen.this.height - 64, 36);

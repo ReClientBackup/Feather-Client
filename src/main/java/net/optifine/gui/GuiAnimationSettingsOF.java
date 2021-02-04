@@ -25,10 +25,8 @@ public class GuiAnimationSettingsOF extends Screen
      * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
      * window resizes, the buttonList is cleared beforehand.
      */
-    public void initGui()
-    {
-        this.title = I18n.format("of.options.animationsTitle", new Object[0]);
-        this.buttonList.clear();
+    public void initGui() {
+        this.title = I18n.format("of.options.animationsTitle");
 
         for (int i = 0; i < enumOptions.length; ++i)
         {
@@ -60,7 +58,7 @@ public class GuiAnimationSettingsOF extends Screen
         {
             if (guibutton.getId() < 200 && guibutton instanceof GuiOptionButton)
             {
-                this.settings.setOptionValue(((GuiOptionButton)guibutton).returnEnumOptions(), 1);
+                this.settings.setOptionValue(((GuiOptionButton)guibutton).getOptions(), 1);
                 guibutton.displayString = this.settings.getKeyBinding(GameSettings.Options.getEnumOptions(guibutton.getId()));
             }
 

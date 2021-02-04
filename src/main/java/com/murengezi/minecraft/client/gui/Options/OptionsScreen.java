@@ -20,15 +20,7 @@ public class OptionsScreen extends Screen {
     private final Screen previousScreen;
     private final GameSettings gameSettings;
 
-    private static final int SOUNDS = 0;
-    private static final int SKINCUSTOMISATION = 1;
-    private static final int VIDEO = 2;
-    private static final int CONTROLS = 3;
-    private static final int LANGUAGE = 4;
-    private static final int CHAT = 5;
-    private static final int RESOURCEPACK = 6;
-    private static final int SNOOPER = 7;
-    private static final int DONE = 8;
+    private static final int SOUNDS = 0, SKINCUSTOMISATION = 1, VIDEO = 2, CONTROLS = 3, LANGUAGE = 4, CHAT = 5, RESOURCEPACK = 6, SNOOPER = 7, DONE = 8;
 
     public OptionsScreen(Screen previousScreen, GameSettings gameSettings) {
         this.previousScreen = previousScreen;
@@ -59,35 +51,28 @@ public class OptionsScreen extends Screen {
         switch (button.getId()) {
             case SOUNDS:
                 saveSettings();
-                changeScreen(new SoundsOptionsScreen(this, gameSettings));
+                changeScreen(new SoundsOptionsScreen(this));
                 break;
             case SKINCUSTOMISATION:
-                saveSettings();
                 changeScreen(new SkinOptionsScreen(this));
                 break;
             case VIDEO:
-                saveSettings();
-                changeScreen(new GuiVideoSettings(this, gameSettings));
+                changeScreen(new GuiVideoSettings(this));
                 break;
             case CONTROLS:
-                saveSettings();
-                changeScreen(new ControlsScreen(this, gameSettings));
+                changeScreen(new ControlsScreen(this));
                 break;
             case LANGUAGE:
-                saveSettings();
-                changeScreen(new LanguageScreen(this, gameSettings, getMc().getLanguageManager()));
+                changeScreen(new LanguageScreen(this));
                 break;
             case CHAT:
-                saveSettings();
-                changeScreen(new ChatOptionsScreen(this, gameSettings));
+                changeScreen(new ChatOptionsScreen(this));
                 break;
             case RESOURCEPACK:
-                saveSettings();
                 changeScreen(new ResourcePacksScreen(this));
                 break;
             case SNOOPER:
-                saveSettings();
-                changeScreen(new SnooperScreen(this, gameSettings));
+                changeScreen(new SnooperScreen(this));
                 break;
             case DONE:
                 saveSettings();

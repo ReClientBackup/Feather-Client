@@ -79,8 +79,8 @@ public class GuiInventory extends InventoryEffectRenderer
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    protected void drawGuiContainerBackgroundLayer(int mouseX, int mouseY, float partialTicks) {
+        GlStateManager.colorAllMax();
         getMc().getTextureManager().bindTexture(inventoryBackground);
         int left = this.guiLeft;
         int top = this.guiTop;
@@ -93,7 +93,7 @@ public class GuiInventory extends InventoryEffectRenderer
      */
     public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, EntityLivingBase ent)
     {
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.colorAllMax();
         GlStateManager.enableDepth();
         GlStateManager.enableColorMaterial();
         GlStateManager.pushMatrix();

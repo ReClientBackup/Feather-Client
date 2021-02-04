@@ -178,10 +178,10 @@ public class ItemRenderer
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         GL11.glNormal3f(0.0F, 0.0F, -1.0F);
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(-7.0D, 135.0D, 0.0D).tex(0.0D, 1.0D).func_181675_d();
-        worldrenderer.pos(135.0D, 135.0D, 0.0D).tex(1.0D, 1.0D).func_181675_d();
-        worldrenderer.pos(135.0D, -7.0D, 0.0D).tex(1.0D, 0.0D).func_181675_d();
-        worldrenderer.pos(-7.0D, -7.0D, 0.0D).tex(0.0D, 0.0D).func_181675_d();
+        worldrenderer.pos(-7.0D, 135.0D, 0.0D).tex(0.0D, 1.0D).endVertex();
+        worldrenderer.pos(135.0D, 135.0D, 0.0D).tex(1.0D, 1.0D).endVertex();
+        worldrenderer.pos(135.0D, -7.0D, 0.0D).tex(1.0D, 0.0D).endVertex();
+        worldrenderer.pos(-7.0D, -7.0D, 0.0D).tex(0.0D, 0.0D).endVertex();
         tessellator.draw();
         MapData mapdata = Items.filled_map.getMapData(this.itemToRender, this.mc.theWorld);
 
@@ -426,13 +426,13 @@ public class ItemRenderer
         float f8 = p_178108_2_.getMinV();
         float f9 = p_178108_2_.getMaxV();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(-1.0D, -1.0D, -0.5D).tex(f7, f9).func_181675_d();
-        worldrenderer.pos(1.0D, -1.0D, -0.5D).tex(f6, f9).func_181675_d();
-        worldrenderer.pos(1.0D, 1.0D, -0.5D).tex(f6, f8).func_181675_d();
-        worldrenderer.pos(-1.0D, 1.0D, -0.5D).tex(f7, f8).func_181675_d();
+        worldrenderer.pos(-1.0D, -1.0D, -0.5D).tex(f7, f9).endVertex();
+        worldrenderer.pos(1.0D, -1.0D, -0.5D).tex(f6, f9).endVertex();
+        worldrenderer.pos(1.0D, 1.0D, -0.5D).tex(f6, f8).endVertex();
+        worldrenderer.pos(-1.0D, 1.0D, -0.5D).tex(f7, f8).endVertex();
         tessellator.draw();
         GlStateManager.popMatrix();
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
     }
 
     /**
@@ -467,15 +467,15 @@ public class ItemRenderer
             GlStateManager.rotate((float)(i * 2 - 1) * 10.0F, 0.0F, 1.0F, 0.0F);
             worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
             worldrenderer.setSprite(textureatlassprite);
-            worldrenderer.pos(f5, f7, f9).tex(f2, f4).func_181675_d();
-            worldrenderer.pos(f6, f7, f9).tex(f1, f4).func_181675_d();
-            worldrenderer.pos(f6, f8, f9).tex(f1, f3).func_181675_d();
-            worldrenderer.pos(f5, f8, f9).tex(f2, f3).func_181675_d();
+            worldrenderer.pos(f5, f7, f9).tex(f2, f4).endVertex();
+            worldrenderer.pos(f6, f7, f9).tex(f1, f4).endVertex();
+            worldrenderer.pos(f6, f8, f9).tex(f1, f3).endVertex();
+            worldrenderer.pos(f5, f8, f9).tex(f2, f3).endVertex();
             tessellator.draw();
             GlStateManager.popMatrix();
         }
 
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         GlStateManager.disableBlend();
         GlStateManager.depthMask(true);
         GlStateManager.depthFunc(515);

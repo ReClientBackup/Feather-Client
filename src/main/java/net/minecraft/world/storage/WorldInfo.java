@@ -1,7 +1,7 @@
 package net.minecraft.world.storage;
 
 import java.util.concurrent.Callable;
-import net.minecraft.crash.CrashReportCategory;
+import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Properties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiEnchantment;
-import net.minecraft.client.gui.GuiHopper;
+import com.murengezi.minecraft.client.gui.InGame.GuiHopper;
 import net.minecraft.client.gui.GuiMerchant;
 import net.minecraft.client.gui.GuiRepair;
 import com.murengezi.minecraft.client.gui.Screen;

@@ -136,9 +136,9 @@ public class GuiMerchant extends GuiContainer
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    protected void drawGuiContainerBackgroundLayer(int mouseX, int mouseY, float partialTicks)
     {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         getMc().getTextureManager().bindTexture(MERCHANT_GUI_TEXTURE);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
@@ -159,7 +159,7 @@ public class GuiMerchant extends GuiContainer
             if (merchantrecipe.isRecipeDisabled())
             {
                 getMc().getTextureManager().bindTexture(MERCHANT_GUI_TEXTURE);
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.colorAllMax();
                 GlStateManager.disableLighting();
                 this.drawTexturedModalRect(this.guiLeft + 83, this.guiTop + 21, 212, 0, 28, 21);
                 this.drawTexturedModalRect(this.guiLeft + 83, this.guiTop + 51, 212, 0, 28, 21);
@@ -249,7 +249,7 @@ public class GuiMerchant extends GuiContainer
             if (this.isVisible())
             {
                 mc.getTextureManager().bindTexture(GuiMerchant.MERCHANT_GUI_TEXTURE);
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.colorAllMax();
                 boolean flag = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.getWidth() && mouseY < this.getY() + this.getHeight();
                 int i = 0;
                 int j = 176;

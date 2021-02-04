@@ -56,7 +56,7 @@ public class RenderEntityItem extends Render<EntityItem>
                 GlStateManager.translate(f6, f4, f5);
             }
 
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             return i;
         }
     }

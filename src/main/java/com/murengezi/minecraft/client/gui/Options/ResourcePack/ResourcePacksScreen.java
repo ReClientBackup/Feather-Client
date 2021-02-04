@@ -32,8 +32,7 @@ public class ResourcePacksScreen extends Screen {
 	private ResourcePackSelectedList selectedResourcePacksList;
 	private boolean changed;
 
-	private static final int FOLDER = 0;
-	private static final int DONE = 1;
+	private static final int FOLDER = 0, DONE = 1;
 
 	public ResourcePacksScreen(Screen previousScreen) {
 		this.previousScreen = previousScreen;

@@ -47,7 +47,7 @@ public class GuiRepair extends GuiContainer implements ICrafting
         this.nameField = new GuiTextField(0, i + 62, j + 24, 103, 12);
         this.nameField.setTextColor(-1);
         this.nameField.setDisabledTextColour(-1);
-        this.nameField.setEnableBackgroundDrawing(false);
+        this.nameField.setDrawBackground(false);
         this.nameField.setMaxStringLength(30);
         this.inventorySlots.removeCraftingFromCrafters(this);
         this.inventorySlots.onCraftGuiOpened(this);
@@ -169,9 +169,9 @@ public class GuiRepair extends GuiContainer implements ICrafting
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    protected void drawGuiContainerBackgroundLayer(int mouseX, int mouseY, float partialTicks)
     {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         getMc().getTextureManager().bindTexture(anvilResource);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;

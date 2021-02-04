@@ -6,6 +6,8 @@ import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.resources.LanguageManager;
+import net.minecraft.client.settings.GameSettings;
 
 /**
  * @author Tobias Sjöblom
@@ -29,11 +31,13 @@ public class MinecraftUtils {
         return getMc().fontRendererObj;
     }
 
-    public static ScaledResolution getSr() {
-        return new ScaledResolution();
+    public static GameSettings getGs() {
+        return getMc().gameSettings;
     }
 
-    private static boolean canSprint = true;
+    public static LanguageManager getLm() {
+        return getMc().getLanguageManager();
+    }
 
     public static boolean canPlayerSprint() {
         return !getPlayer().isSprinting()

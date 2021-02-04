@@ -1,6 +1,8 @@
 package com.murengezi.minecraft.client.gui;
 
-public abstract class GuiListExtended extends fGuiSlot {
+import net.minecraft.client.gui.GuiSlot;
+
+public abstract class GuiListExtended extends GuiSlot {
 
     public GuiListExtended(int width, int height, int top, int bottom, int slotHeight) {
         super(width, height, top, bottom, slotHeight);

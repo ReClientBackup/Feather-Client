@@ -105,7 +105,7 @@ public class RenderMinecart<T extends EntityMinecart> extends Render<T>
             GlStateManager.translate(-0.5F, (float)(j - 8) / 16.0F, 0.5F);
             this.func_180560_a(entity, partialTicks, iblockstate);
             GlStateManager.popMatrix();
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             this.bindEntityTexture(entity);
         }
 

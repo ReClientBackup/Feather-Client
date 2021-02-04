@@ -89,7 +89,7 @@ public class MainMenuScreen extends Screen {
         getFr().drawStringWithShadow(playerName, 21, 6, 0xffffffff);
 
         GlStateManager.pushMatrix();
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.colorAllMax();
         getMc().getTextureManager().bindTexture(new ResourceLocation("feather/sign-in.png"));
         drawModalRectWithCustomSizedTexture(20 + 3 + getFr().getStringWidth(playerName), 6, 0, 0, 8, 8, 8, 8);
         GlStateManager.popMatrix();

@@ -2,9 +2,9 @@ package com.murengezi.minecraft.client.gui.Options;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
-import com.murengezi.minecraft.client.gui.fGuiSlot;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -22,7 +22,6 @@ import java.util.TreeMap;
 public class SnooperScreen extends Screen {
 
     private final Screen previousScreen;
-    private final GameSettings gameSettings;
 
     /** Reference to the GameSettings object. */
     private final java.util.List<String> clientSnooper = new ArrayList<>();
@@ -30,12 +29,10 @@ public class SnooperScreen extends Screen {
     private List<String> description;
     private SnooperSlot snooperSlot;
 
-    private static final int SNOOPER = 0;
-    private static final int DONE = 1;
+    private static final int SNOOPER = 0, DONE = 1;
 
-    public SnooperScreen(Screen previousScreen, GameSettings gameSettings) {
+    public SnooperScreen(Screen previousScreen) {
         this.previousScreen = previousScreen;
-        this.gameSettings = gameSettings;
     }
 
     @Override
@@ -44,7 +41,7 @@ public class SnooperScreen extends Screen {
         description = new ArrayList<>(getFr().listFormattedStringToWidth(format, this.width - 30));
         this.clientSnooper.clear();
         this.serverSnooper.clear();
-        addButton(new GuiButton(SNOOPER, this.width / 2 - 152, this.height - 30, 150, 20, this.gameSettings.getKeyBinding(GameSettings.Options.SNOOPER_ENABLED)));
+        addButton(new GuiButton(SNOOPER, this.width / 2 - 152, this.height - 30, 150, 20, getGs().getKeyBinding(GameSettings.Options.SNOOPER_ENABLED)));
         addButton(new GuiButton(DONE, this.width / 2 + 2, this.height - 30, 150, 20, I18n.format("gui.done")));
         boolean multiplayer = getMc().getIntegratedServer() != null && getMc().getIntegratedServer().getPlayerUsageSnooper() != null;
 
@@ -75,8 +72,8 @@ public class SnooperScreen extends Screen {
         if (button.isEnabled()) {
             switch (button.getId()) {
                 case SNOOPER:
-                    this.gameSettings.setOptionValue(GameSettings.Options.SNOOPER_ENABLED, 1);
-                    getButton(SNOOPER).displayString = this.gameSettings.getKeyBinding(GameSettings.Options.SNOOPER_ENABLED);
+                    getGs().setOptionValue(GameSettings.Options.SNOOPER_ENABLED, 1);
+                    getButton(SNOOPER).displayString = getGs().getKeyBinding(GameSettings.Options.SNOOPER_ENABLED);
                     break;
                 case DONE:
                     saveSettings();
@@ -108,7 +105,7 @@ public class SnooperScreen extends Screen {
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
-    class SnooperSlot extends fGuiSlot {
+    class SnooperSlot extends GuiSlot {
 
         public SnooperSlot() {
             super(SnooperScreen.this.width, SnooperScreen.this.height, 80, SnooperScreen.this.height - 40, SnooperScreen.getFr().FONT_HEIGHT + 1);

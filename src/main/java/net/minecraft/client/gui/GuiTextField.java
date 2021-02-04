@@ -11,78 +11,37 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.MathHelper;
 
-public class GuiTextField extends GUI
-{
+public class GuiTextField extends GUI {
+
     private final int id;
-    public int xPosition;
-    public int yPosition;
-
-    /** The width of this text field. */
-    private final int width;
-    private final int height;
-
-    /** Has the current text being edited on the textbox. */
+    public int x, y;
+    private final int width, height;
     private String text = "";
     private int maxStringLength = 32;
     private int cursorCounter;
-    private boolean enableBackgroundDrawing = true;
+    private boolean drawBackground = true, canLoseFocus = true, focused, enabled = true;
+    private int lineScrollOffset, cursorPosition, selectionEnd, enabledColor = 14737632, disabledColor = 7368816;
 
-    /**
-     * if true the textbox can lose focus by clicking elsewhere on the screen
-     */
-    private boolean canLoseFocus = true;
-
-    /**
-     * If this value is true along with isEnabled, keyTyped will process the keys.
-     */
-    private boolean isFocused;
-
-    /**
-     * If this value is true along with isFocused, keyTyped will process the keys.
-     */
-    private boolean isEnabled = true;
-
-    /**
-     * The current character index that should be used as start of the rendered text.
-     */
-    private int lineScrollOffset;
-    private int cursorPosition;
-
-    /** other selection position, maybe the same as the cursor */
-    private int selectionEnd;
-    private int enabledColor = 14737632;
-    private int disabledColor = 7368816;
-
-    /** True if this textbox is visible */
     private boolean visible = true;
     private GuiPageButtonList.GuiResponder field_175210_x;
     private Predicate<String> field_175209_y = Predicates.alwaysTrue();
 
-    public GuiTextField(int componentId, int x, int y, int par5Width, int par6Height)
-    {
+    public GuiTextField(int componentId, int x, int y, int width, int height) {
         this.id = componentId;
-        this.xPosition = x;
-        this.yPosition = y;
-        this.width = par5Width;
-        this.height = par6Height;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
 
-    public void func_175207_a(GuiPageButtonList.GuiResponder p_175207_1_)
-    {
+    public void func_175207_a(GuiPageButtonList.GuiResponder p_175207_1_) {
         this.field_175210_x = p_175207_1_;
     }
 
-    /**
-     * Increments the cursor counter
-     */
-    public void updateCursorCounter()
-    {
+    public void updateCursorCounter() {
         ++this.cursorCounter;
     }
 
-    /**
-     * Sets the text of the textbox
-     */
     public void setText(String text) {
         if (this.field_175209_y.apply(text)) {
             if (text.length() > this.maxStringLength) {
@@ -95,19 +54,11 @@ public class GuiTextField extends GUI
         }
     }
 
-    /**
-     * Returns the contents of the textbox
-     */
-    public String getText()
-    {
+    public String getText() {
         return this.text;
     }
 
-    /**
-     * returns the text between the cursor and selectionEnd
-     */
-    public String getSelectedText()
-    {
+    public String getSelectedText() {
         int i = this.cursorPosition < this.selectionEnd ? this.cursorPosition : this.selectionEnd;
         int j = this.cursorPosition < this.selectionEnd ? this.selectionEnd : this.cursorPosition;
         return this.text.substring(i, j);
@@ -118,109 +69,76 @@ public class GuiTextField extends GUI
         this.field_175209_y = p_175205_1_;
     }
 
-    /**
-     * replaces selected text, or inserts text at the position on the cursor
-     */
-    public void writeText(String p_146191_1_)
-    {
+    public void writeText(String text) {
         String s = "";
-        String s1 = ChatAllowedCharacters.filterAllowedCharacters(p_146191_1_);
-        int i = this.cursorPosition < this.selectionEnd ? this.cursorPosition : this.selectionEnd;
-        int j = this.cursorPosition < this.selectionEnd ? this.selectionEnd : this.cursorPosition;
+        String s1 = ChatAllowedCharacters.filterAllowedCharacters(text);
+        int i = Math.min(this.cursorPosition, this.selectionEnd);
+        int j = Math.max(this.cursorPosition, this.selectionEnd);
         int k = this.maxStringLength - this.text.length() - (i - j);
-        int l = 0;
+        int l;
 
-        if (this.text.length() > 0)
-        {
+        if (this.text.length() > 0) {
             s = s + this.text.substring(0, i);
         }
 
-        if (k < s1.length())
-        {
+        if (k < s1.length()) {
             s = s + s1.substring(0, k);
             l = k;
-        }
-        else
-        {
+        } else {
             s = s + s1;
             l = s1.length();
         }
 
-        if (this.text.length() > 0 && j < this.text.length())
-        {
+        if (this.text.length() > 0 && j < this.text.length()) {
             s = s + this.text.substring(j);
         }
 
-        if (this.field_175209_y.apply(s))
-        {
+        if (this.field_175209_y.apply(s)) {
             this.text = s;
             this.moveCursorBy(i - this.selectionEnd + l);
 
-            if (this.field_175210_x != null)
-            {
+            if (this.field_175210_x != null) {
                 this.field_175210_x.func_175319_a(this.id, this.text);
             }
         }
     }
 
-    /**
-     * Deletes the specified number of words starting at the cursor position. Negative numbers will delete words left of
-     * the cursor.
-     */
-    public void deleteWords(int p_146177_1_)
-    {
-        if (this.text.length() != 0)
-        {
-            if (this.selectionEnd != this.cursorPosition)
-            {
+    public void deleteWords(int position) {
+        if (this.text.length() != 0) {
+            if (this.selectionEnd != this.cursorPosition) {
                 this.writeText("");
-            }
-            else
-            {
-                this.deleteFromCursor(this.getNthWordFromCursor(p_146177_1_) - this.cursorPosition);
+            } else {
+                this.deleteFromCursor(this.getNthWordFromCursor(position) - this.cursorPosition);
             }
         }
     }
 
-    /**
-     * delete the selected text, otherwsie deletes characters from either side of the cursor. params: delete num
-     */
-    public void deleteFromCursor(int p_146175_1_)
-    {
-        if (this.text.length() != 0)
-        {
-            if (this.selectionEnd != this.cursorPosition)
-            {
+    public void deleteFromCursor(int position) {
+        if (this.text.length() != 0) {
+            if (this.selectionEnd != this.cursorPosition) {
                 this.writeText("");
-            }
-            else
-            {
-                boolean flag = p_146175_1_ < 0;
-                int i = flag ? this.cursorPosition + p_146175_1_ : this.cursorPosition;
-                int j = flag ? this.cursorPosition : this.cursorPosition + p_146175_1_;
+            } else {
+                boolean flag = position < 0;
+                int i = flag ? this.cursorPosition + position : this.cursorPosition;
+                int j = flag ? this.cursorPosition : this.cursorPosition + position;
                 String s = "";
 
-                if (i >= 0)
-                {
+                if (i >= 0) {
                     s = this.text.substring(0, i);
                 }
 
-                if (j < this.text.length())
-                {
+                if (j < this.text.length()) {
                     s = s + this.text.substring(j);
                 }
 
-                if (this.field_175209_y.apply(s))
-                {
+                if (this.field_175209_y.apply(s)) {
                     this.text = s;
 
-                    if (flag)
-                    {
-                        this.moveCursorBy(p_146175_1_);
+                    if (flag) {
+                        this.moveCursorBy(position);
                     }
 
-                    if (this.field_175210_x != null)
-                    {
+                    if (this.field_175210_x != null) {
                         this.field_175210_x.func_175319_a(this.id, this.text);
                     }
                 }
@@ -233,56 +151,37 @@ public class GuiTextField extends GUI
         return this.id;
     }
 
-    /**
-     * see @getNthNextWordFromPos() params: N, position
-     */
-    public int getNthWordFromCursor(int p_146187_1_)
-    {
-        return this.getNthWordFromPos(p_146187_1_, this.getCursorPosition());
+    public int getNthWordFromCursor(int position) {
+        return this.getNthWordFromPos(position, this.getCursorPosition());
     }
 
-    /**
-     * gets the position of the nth word. N may be negative, then it looks backwards. params: N, position
-     */
-    public int getNthWordFromPos(int p_146183_1_, int p_146183_2_)
-    {
-        return this.func_146197_a(p_146183_1_, p_146183_2_, true);
+    public int getNthWordFromPos(int position, int cursorPosition) {
+        return this.func_146197_a(position, cursorPosition, true);
     }
 
-    public int func_146197_a(int p_146197_1_, int p_146197_2_, boolean p_146197_3_)
-    {
-        int i = p_146197_2_;
-        boolean flag = p_146197_1_ < 0;
-        int j = Math.abs(p_146197_1_);
+    public int func_146197_a(int position, int cursorPosition, boolean p_146197_3_) {
+        int i = cursorPosition;
+        boolean flag = position < 0;
+        int j = Math.abs(position);
 
-        for (int k = 0; k < j; ++k)
-        {
-            if (!flag)
-            {
+        for (int k = 0; k < j; ++k) {
+            if (!flag) {
                 int l = this.text.length();
                 i = this.text.indexOf(32, i);
 
-                if (i == -1)
-                {
+                if (i == -1) {
                     i = l;
-                }
-                else
-                {
-                    while (p_146197_3_ && i < l && this.text.charAt(i) == 32)
-                    {
+                } else {
+                    while (p_146197_3_ && i < l && this.text.charAt(i) == 32) {
                         ++i;
                     }
                 }
-            }
-            else
-            {
-                while (p_146197_3_ && i > 0 && this.text.charAt(i - 1) == 32)
-                {
+            } else {
+                while (p_146197_3_ && i > 0 && this.text.charAt(i - 1) == 32) {
                     --i;
                 }
 
-                while (i > 0 && this.text.charAt(i - 1) != 32)
-                {
+                while (i > 0 && this.text.charAt(i - 1) != 32) {
                     --i;
                 }
             }
@@ -291,46 +190,27 @@ public class GuiTextField extends GUI
         return i;
     }
 
-    /**
-     * Moves the text cursor by a specified number of characters and clears the selection
-     */
-    public void moveCursorBy(int p_146182_1_)
-    {
+    public void moveCursorBy(int p_146182_1_) {
         this.setCursorPosition(this.selectionEnd + p_146182_1_);
     }
 
-    /**
-     * sets the position of the cursor to the provided index
-     */
-    public void setCursorPosition(int p_146190_1_)
-    {
-        this.cursorPosition = p_146190_1_;
+    public void setCursorPosition(int cursorPosition) {
+        this.cursorPosition = cursorPosition;
         int i = this.text.length();
         this.cursorPosition = MathHelper.clamp_int(this.cursorPosition, 0, i);
         this.setSelectionPos(this.cursorPosition);
     }
 
-    /**
-     * sets the cursors position to the beginning
-     */
-    public void setCursorPositionZero()
-    {
+    public void setCursorPositionZero() {
         this.setCursorPosition(0);
     }
 
-    /**
-     * sets the cursors position to after the text
-     */
-    public void setCursorPositionEnd()
-    {
+    public void setCursorPositionEnd() {
         this.setCursorPosition(this.text.length());
     }
 
-    /**
-     * Call this method from your GuiScreen to process the keys into the textbox
-     */
     public boolean textBoxKeyTyped(char typedChar, int keyCode) {
-        if (!this.isFocused) {
+        if (!this.focused) {
             return false;
         } else if (Screen.isKeyComboCtrlA(keyCode)) {
             this.setCursorPositionEnd();
@@ -340,7 +220,7 @@ public class GuiTextField extends GUI
             Screen.setClipboardString(this.getSelectedText());
             return true;
         } else if (Screen.isKeyComboCtrlV(keyCode)) {
-            if (this.isEnabled) {
+            if (this.enabled) {
                 this.writeText(Screen.getClipboardString());
             }
 
@@ -348,7 +228,7 @@ public class GuiTextField extends GUI
         } else if (Screen.isKeyComboCtrlX(keyCode)) {
             Screen.setClipboardString(this.getSelectedText());
 
-            if (this.isEnabled) {
+            if (this.enabled) {
                 this.writeText("");
             }
 
@@ -357,24 +237,20 @@ public class GuiTextField extends GUI
             switch (keyCode) {
                 case 14:
                     if (Screen.isCtrlKeyDown()) {
-                        if (this.isEnabled) {
+                        if (this.enabled) {
                             this.deleteWords(-1);
                         }
-                    } else if (this.isEnabled) {
+                    } else if (this.enabled) {
                         this.deleteFromCursor(-1);
                     }
-
                     return true;
-
                 case 199:
                     if (Screen.isShiftKeyDown()) {
                         this.setSelectionPos(0);
                     } else {
                         this.setCursorPositionZero();
                     }
-
                     return true;
-
                 case 203:
                     if (Screen.isShiftKeyDown()) {
                         if (Screen.isCtrlKeyDown()) {
@@ -387,9 +263,7 @@ public class GuiTextField extends GUI
                     } else {
                         this.moveCursorBy(-1);
                     }
-
                     return true;
-
                 case 205:
                     if (Screen.isShiftKeyDown()) {
                         if (Screen.isCtrlKeyDown()) {
@@ -402,35 +276,28 @@ public class GuiTextField extends GUI
                     } else {
                         this.moveCursorBy(1);
                     }
-
                     return true;
-
                 case 207:
                     if (Screen.isShiftKeyDown()) {
                         this.setSelectionPos(this.text.length());
                     } else {
                         this.setCursorPositionEnd();
                     }
-
                     return true;
-
                 case 211:
                     if (Screen.isCtrlKeyDown()) {
-                        if (this.isEnabled) {
+                        if (this.enabled) {
                             this.deleteWords(1);
                         }
-                    } else if (this.isEnabled) {
+                    } else if (this.enabled) {
                         this.deleteFromCursor(1);
                     }
-
                     return true;
-
                 default:
                     if (ChatAllowedCharacters.isAllowedCharacter(typedChar)) {
-                        if (this.isEnabled) {
+                        if (this.enabled) {
                             this.writeText(Character.toString(typedChar));
                         }
-
                         return true;
                     } else {
                         return false;
@@ -439,20 +306,17 @@ public class GuiTextField extends GUI
         }
     }
 
-    /**
-     * Args: x, y, buttonClicked
-     */
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        boolean flag = mouseX >= this.xPosition && mouseX < this.xPosition + this.width && mouseY >= this.yPosition && mouseY < this.yPosition + this.height;
+        boolean isMouseOn = mouseX >= this.x && mouseX < this.x + this.width && mouseY >= this.y && mouseY < this.y + this.height;
 
         if (this.canLoseFocus) {
-            this.setFocused(flag);
+            this.setFocused(isMouseOn);
         }
 
-        if (this.isFocused && flag && mouseButton == 0) {
-            int i = mouseX - this.xPosition;
+        if (this.focused && isMouseOn && mouseButton == 0) {
+            int i = mouseX - this.x;
 
-            if (this.enableBackgroundDrawing) {
+            if (this.drawBackground) {
                 i -= 4;
             }
 
@@ -461,72 +325,55 @@ public class GuiTextField extends GUI
         }
     }
 
-    /**
-     * Draws the textbox
-     */
-    public void drawTextBox()
-    {
-        if (this.getVisible())
-        {
-            if (this.getEnableBackgroundDrawing())
-            {
-                drawRect(this.xPosition - 1, this.yPosition - 1, this.xPosition + this.width + 1, this.yPosition + this.height + 1, -6250336);
-                drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, -16777216);
+    public void drawTextBox() {
+        if (this.getVisible()) {
+            if (this.getDrawBackground()) {
+                drawRect(this.x - 1, this.y - 1, this.x + this.width + 1, this.y + this.height + 1, -6250336);
+                drawRect(this.x, this.y, this.x + this.width, this.y + this.height, -16777216);
             }
 
-            int i = this.isEnabled ? this.enabledColor : this.disabledColor;
+            int color = this.enabled ? this.enabledColor : this.disabledColor;
             int j = this.cursorPosition - this.lineScrollOffset;
             int k = this.selectionEnd - this.lineScrollOffset;
             String s = getFr().trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth());
             boolean flag = j >= 0 && j <= s.length();
-            boolean flag1 = this.isFocused && this.cursorCounter / 6 % 2 == 0 && flag;
-            int l = this.enableBackgroundDrawing ? this.xPosition + 4 : this.xPosition;
-            int i1 = this.enableBackgroundDrawing ? this.yPosition + (this.height - 8) / 2 : this.yPosition;
+            boolean flag1 = this.focused && this.cursorCounter / 6 % 2 == 0 && flag;
+            int l = this.drawBackground ? this.x + 4 : this.x;
+            int i1 = this.drawBackground ? this.y + (this.height - 8) / 2 : this.y;
             int j1 = l;
 
-            if (k > s.length())
-            {
+            if (k > s.length()) {
                 k = s.length();
             }
 
-            if (s.length() > 0)
-            {
+            if (s.length() > 0) {
                 String s1 = flag ? s.substring(0, j) : s;
-                j1 = getFr().drawStringWithShadow(s1, (float)l, (float)i1, i);
+                j1 = getFr().drawStringWithShadow(s1, (float)l, (float)i1, color);
             }
 
             boolean flag2 = this.cursorPosition < this.text.length() || this.text.length() >= this.getMaxStringLength();
             int k1 = j1;
 
-            if (!flag)
-            {
+            if (!flag) {
                 k1 = j > 0 ? l + this.width : l;
-            }
-            else if (flag2)
-            {
+            } else if (flag2) {
                 k1 = j1 - 1;
                 --j1;
             }
 
-            if (s.length() > 0 && flag && j < s.length())
-            {
-                j1 = getFr().drawStringWithShadow(s.substring(j), (float)j1, (float)i1, i);
+            if (s.length() > 0 && flag && j < s.length()) {
+                j1 = getFr().drawStringWithShadow(s.substring(j), (float)j1, (float)i1, color);
             }
 
-            if (flag1)
-            {
-                if (flag2)
-                {
+            if (flag1) {
+                if (flag2) {
                     GUI.drawRect(k1, i1 - 1, k1 + 1, i1 + 1 + getFr().FONT_HEIGHT, -3092272);
-                }
-                else
-                {
-                    getFr().drawStringWithShadow("_", (float)k1, (float)i1, i);
+                } else {
+                    getFr().drawStringWithShadow("_", (float)k1, (float)i1, color);
                 }
             }
 
-            if (k != j)
-            {
+            if (k != j) {
                 int l1 = l + getFr().getStringWidth(s.substring(0, k));
                 this.drawCursorVertical(k1, i1 - 1, l1 - 1, i1 + 1 + getFr().FONT_HEIGHT);
             }
@@ -536,8 +383,7 @@ public class GuiTextField extends GUI
     /**
      * draws the vertical line cursor in the textbox
      */
-    private void drawCursorVertical(int p_146188_1_, int p_146188_2_, int p_146188_3_, int p_146188_4_)
-    {
+    private void drawCursorVertical(int p_146188_1_, int p_146188_2_, int p_146188_3_, int p_146188_4_) {
         if (p_146188_1_ < p_146188_3_)
         {
             int i = p_146188_1_;
@@ -552,14 +398,14 @@ public class GuiTextField extends GUI
             p_146188_4_ = j;
         }
 
-        if (p_146188_3_ > this.xPosition + this.width)
+        if (p_146188_3_ > this.x + this.width)
         {
-            p_146188_3_ = this.xPosition + this.width;
+            p_146188_3_ = this.x + this.width;
         }
 
-        if (p_146188_1_ > this.xPosition + this.width)
+        if (p_146188_1_ > this.x + this.width)
         {
-            p_146188_1_ = this.xPosition + this.width;
+            p_146188_1_ = this.x + this.width;
         }
 
         Tessellator tessellator = Tessellator.getInstance();
@@ -569,17 +415,16 @@ public class GuiTextField extends GUI
         GlStateManager.enableColorLogic();
         GlStateManager.colorLogicOp(5387);
         worldrenderer.begin(7, DefaultVertexFormats.POSITION);
-        worldrenderer.pos(p_146188_1_, p_146188_4_, 0.0D).func_181675_d();
-        worldrenderer.pos(p_146188_3_, p_146188_4_, 0.0D).func_181675_d();
-        worldrenderer.pos(p_146188_3_, p_146188_2_, 0.0D).func_181675_d();
-        worldrenderer.pos(p_146188_1_, p_146188_2_, 0.0D).func_181675_d();
+        worldrenderer.pos(p_146188_1_, p_146188_4_, 0.0D).endVertex();
+        worldrenderer.pos(p_146188_3_, p_146188_4_, 0.0D).endVertex();
+        worldrenderer.pos(p_146188_3_, p_146188_2_, 0.0D).endVertex();
+        worldrenderer.pos(p_146188_1_, p_146188_2_, 0.0D).endVertex();
         tessellator.draw();
         GlStateManager.disableColorLogic();
         GlStateManager.enableTexture2D();
     }
 
-    public void setMaxStringLength(int length)
-    {
+    public void setMaxStringLength(int length) {
         this.maxStringLength = length;
 
         if (this.text.length() > length) {
@@ -587,115 +432,69 @@ public class GuiTextField extends GUI
         }
     }
 
-    /**
-     * returns the maximum number of character that can be contained in this textbox
-     */
-    public int getMaxStringLength()
-    {
+    public int getMaxStringLength() {
         return this.maxStringLength;
     }
 
-    /**
-     * returns the current position of the cursor
-     */
-    public int getCursorPosition()
-    {
+    public int getCursorPosition() {
         return this.cursorPosition;
     }
 
-    /**
-     * get enable drawing background and outline
-     */
-    public boolean getEnableBackgroundDrawing()
-    {
-        return this.enableBackgroundDrawing;
+    public boolean getDrawBackground() {
+        return this.drawBackground;
     }
 
-    /**
-     * enable drawing background and outline
-     */
-    public void setEnableBackgroundDrawing(boolean p_146185_1_)
-    {
-        this.enableBackgroundDrawing = p_146185_1_;
+    public void setDrawBackground(boolean drawBackground) {
+        this.drawBackground = drawBackground;
     }
 
-    /**
-     * Sets the text colour for this textbox (disabled text will not use this colour)
-     */
-    public void setTextColor(int p_146193_1_)
-    {
-        this.enabledColor = p_146193_1_;
+    public void setTextColor(int color) {
+        this.enabledColor = color;
     }
 
-    public void setDisabledTextColour(int p_146204_1_)
-    {
-        this.disabledColor = p_146204_1_;
+    public void setDisabledTextColour(int color) {
+        this.disabledColor = color;
     }
 
-    /**
-     * Sets focus to this gui element
-     */
-    public void setFocused(boolean focused)
-    {
-        if (focused && !this.isFocused) {
+    public void setFocused(boolean focused) {
+        if (focused && !this.focused) {
             this.cursorCounter = 0;
         }
 
-        this.isFocused = focused;
+        this.focused = focused;
     }
 
-    /**
-     * Getter for the focused field
-     */
-    public boolean isFocused()
-    {
-        return this.isFocused;
+    public boolean isFocused() {
+        return this.focused;
     }
 
-    public void setEnabled(boolean p_146184_1_)
-    {
-        this.isEnabled = p_146184_1_;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-    /**
-     * the side of the selection that is not the cursor, may be the same as the cursor
-     */
-    public int getSelectionEnd()
-    {
+    public int getSelectionEnd() {
         return this.selectionEnd;
     }
 
-    /**
-     * returns the width of the textbox depending on if background drawing is enabled
-     */
-    public int getWidth()
-    {
-        return this.getEnableBackgroundDrawing() ? this.width - 8 : this.width;
+    public int getWidth() {
+        return this.getDrawBackground() ? this.width - 8 : this.width;
     }
 
-    /**
-     * Sets the position of the selection anchor (i.e. position the selection was started at)
-     */
-    public void setSelectionPos(int p_146199_1_)
-    {
+    public void setSelectionPos(int pos) {
         int i = this.text.length();
 
-        if (p_146199_1_ > i)
-        {
-            p_146199_1_ = i;
+        if (pos > i) {
+            pos = i;
         }
 
-        if (p_146199_1_ < 0)
-        {
-            p_146199_1_ = 0;
+        if (pos < 0) {
+            pos = 0;
         }
 
-        this.selectionEnd = p_146199_1_;
+        this.selectionEnd = pos;
 
-        if (getFr() != null)
-        {
-            if (this.lineScrollOffset > i)
-            {
+        if (getFr() != null) {
+            if (this.lineScrollOffset > i) {
                 this.lineScrollOffset = i;
             }
 
@@ -703,45 +502,29 @@ public class GuiTextField extends GUI
             String s = getFr().trimStringToWidth(this.text.substring(this.lineScrollOffset), j);
             int k = s.length() + this.lineScrollOffset;
 
-            if (p_146199_1_ == this.lineScrollOffset)
-            {
+            if (pos == this.lineScrollOffset) {
                 this.lineScrollOffset -= getFr().trimStringToWidth(this.text, j, true).length();
             }
 
-            if (p_146199_1_ > k)
-            {
-                this.lineScrollOffset += p_146199_1_ - k;
-            }
-            else if (p_146199_1_ <= this.lineScrollOffset)
-            {
-                this.lineScrollOffset -= this.lineScrollOffset - p_146199_1_;
+            if (pos > k) {
+                this.lineScrollOffset += pos - k;
+            } else if (pos <= this.lineScrollOffset) {
+                this.lineScrollOffset -= this.lineScrollOffset - pos;
             }
 
             this.lineScrollOffset = MathHelper.clamp_int(this.lineScrollOffset, 0, i);
         }
     }
 
-    /**
-     * if true the textbox can lose focus by clicking elsewhere on the screen
-     */
-    public void setCanLoseFocus(boolean p_146205_1_)
-    {
-        this.canLoseFocus = p_146205_1_;
+    public void setCanLoseFocus(boolean canLoseFocus) {
+        this.canLoseFocus = canLoseFocus;
     }
 
-    /**
-     * returns true if this textbox is visible
-     */
-    public boolean getVisible()
-    {
+    public boolean getVisible() {
         return this.visible;
     }
 
-    /**
-     * Sets whether or not this textbox is visible
-     */
-    public void setVisible(boolean p_146189_1_)
-    {
-        this.visible = p_146189_1_;
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }

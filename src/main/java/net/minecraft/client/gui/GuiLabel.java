@@ -4,37 +4,33 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 import com.murengezi.minecraft.client.gui.GUI;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 
-public class GuiLabel extends GUI
-{
-    protected int field_146167_a = 200;
-    protected int field_146161_f = 20;
+public class GuiLabel extends GUI {
+
+    protected int field_146167_a;
+    protected int field_146161_f;
     public int field_146162_g;
     public int field_146174_h;
     private List<String> field_146173_k;
     public int field_175204_i;
     private boolean centered;
     public boolean visible = true;
-    private boolean labelBgEnabled;
-    private int field_146168_n;
-    private int field_146169_o;
-    private int field_146166_p;
-    private int field_146165_q;
-    private FontRenderer fontRenderer;
+    private final boolean labelBgEnabled;
+    private final int field_146168_n;
+    private final int field_146169_o;
+    private final int field_146166_p;
+    private final int field_146165_q;
     private int field_146163_s;
 
-    public GuiLabel(FontRenderer fontRendererObj, int p_i45540_2_, int p_i45540_3_, int p_i45540_4_, int p_i45540_5_, int p_i45540_6_, int p_i45540_7_)
-    {
-        this.fontRenderer = fontRendererObj;
+    public GuiLabel(int p_i45540_2_, int p_i45540_3_, int p_i45540_4_, int p_i45540_5_, int p_i45540_6_, int p_i45540_7_) {
         this.field_175204_i = p_i45540_2_;
         this.field_146162_g = p_i45540_3_;
         this.field_146174_h = p_i45540_4_;
         this.field_146167_a = p_i45540_5_;
         this.field_146161_f = p_i45540_6_;
-        this.field_146173_k = Lists.<String>newArrayList();
+        this.field_146173_k = Lists.newArrayList();
         this.centered = false;
         this.labelBgEnabled = false;
         this.field_146168_n = p_i45540_7_;
@@ -46,49 +42,44 @@ public class GuiLabel extends GUI
 
     public void func_175202_a(String p_175202_1_)
     {
-        this.field_146173_k.add(I18n.format(p_175202_1_, new Object[0]));
+        this.field_146173_k.add(I18n.format(p_175202_1_));
     }
 
-    /**
-     * Sets the Label to be centered
-     */
-    public GuiLabel setCentered()
-    {
+    public GuiLabel setCentered() {
         this.centered = true;
         return this;
     }
 
-    public void drawLabel(int mouseX, int mouseY) {
+    public void drawLabel() {
         if (this.visible) {
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-            this.drawLabelBackground(getMc(), mouseX, mouseY);
+            this.drawLabelBackground();
             int i = this.field_146174_h + this.field_146161_f / 2 + this.field_146163_s / 2;
             int j = i - this.field_146173_k.size() * 10 / 2;
 
             for (int k = 0; k < this.field_146173_k.size(); ++k) {
                 if (this.centered) {
-                    this.drawCenteredString(this.fontRenderer, this.field_146173_k.get(k), this.field_146162_g + this.field_146167_a / 2, j + k * 10, this.field_146168_n);
+                    getFr().drawCenteredString(this.field_146173_k.get(k), this.field_146162_g + this.field_146167_a / 2, j + k * 10, this.field_146168_n);
                 } else {
-                    this.drawString(this.fontRenderer, this.field_146173_k.get(k), this.field_146162_g, j + k * 10, this.field_146168_n);
+                    getFr().drawString(this.field_146173_k.get(k), this.field_146162_g, j + k * 10, this.field_146168_n);
                 }
             }
         }
     }
 
-    protected void drawLabelBackground(Minecraft mcIn, int p_146160_2_, int p_146160_3_)
-    {
-        if (this.labelBgEnabled)
-        {
-            int i = this.field_146167_a + this.field_146163_s * 2;
-            int j = this.field_146161_f + this.field_146163_s * 2;
-            int k = this.field_146162_g - this.field_146163_s;
-            int l = this.field_146174_h - this.field_146163_s;
-            drawRect(k, l, k + i, l + j, this.field_146169_o);
-            this.drawHorizontalLine(k, k + i, l, this.field_146166_p);
-            this.drawHorizontalLine(k, k + i, l + j, this.field_146165_q);
-            this.drawVerticalLine(k, l, l + j, this.field_146166_p);
-            this.drawVerticalLine(k + i, l, l + j, this.field_146165_q);
+    protected void drawLabelBackground() {
+        if (this.labelBgEnabled) {
+            int width = this.field_146167_a + this.field_146163_s * 2;
+            int height = this.field_146161_f + this.field_146163_s * 2;
+            int x = this.field_146162_g - this.field_146163_s;
+            int y = this.field_146174_h - this.field_146163_s;
+            drawRect(x, y, x + width, y + height, this.field_146169_o);
+            drawBox(x, y, x + width, y + height, this.field_146166_p);
+            /*this.drawHorizontalLine(x, x + width, y, this.field_146166_p);
+            this.drawHorizontalLine(x, x + width, y + height, this.field_146165_q);
+            this.drawVerticalLine(x, y, y + height, this.field_146166_p);
+            this.drawVerticalLine(x + width, y, y + height, this.field_146165_q);*/
         }
     }
 }

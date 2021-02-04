@@ -32,7 +32,7 @@ public class PlayerItemsLayer implements LayerRenderer
             if (entityLiving instanceof AbstractClientPlayer)
             {
                 AbstractClientPlayer abstractclientplayer = (AbstractClientPlayer)entityLiving;
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.colorAllMax();
                 GlStateManager.disableRescaleNormal();
                 GlStateManager.enableCull();
                 ModelBiped modelbiped = this.renderPlayer.getMainModel();

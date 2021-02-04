@@ -607,10 +607,10 @@ public class FontRenderer implements IResourceManagerReloadListener
             WorldRenderer worldrenderer = tessellator.getWorldRenderer();
             GlStateManager.disableTexture2D();
             worldrenderer.begin(7, DefaultVertexFormats.POSITION);
-            worldrenderer.pos(this.posX, this.posY + (float)(this.FONT_HEIGHT / 2), 0.0D).func_181675_d();
-            worldrenderer.pos(this.posX + p_doDraw_1_, this.posY + (float)(this.FONT_HEIGHT / 2), 0.0D).func_181675_d();
-            worldrenderer.pos(this.posX + p_doDraw_1_, this.posY + (float)(this.FONT_HEIGHT / 2) - 1.0F, 0.0D).func_181675_d();
-            worldrenderer.pos(this.posX, this.posY + (float)(this.FONT_HEIGHT / 2) - 1.0F, 0.0D).func_181675_d();
+            worldrenderer.pos(this.posX, this.posY + (float)(this.FONT_HEIGHT / 2), 0.0D).endVertex();
+            worldrenderer.pos(this.posX + p_doDraw_1_, this.posY + (float)(this.FONT_HEIGHT / 2), 0.0D).endVertex();
+            worldrenderer.pos(this.posX + p_doDraw_1_, this.posY + (float)(this.FONT_HEIGHT / 2) - 1.0F, 0.0D).endVertex();
+            worldrenderer.pos(this.posX, this.posY + (float)(this.FONT_HEIGHT / 2) - 1.0F, 0.0D).endVertex();
             tessellator.draw();
             GlStateManager.enableTexture2D();
         }
@@ -622,10 +622,10 @@ public class FontRenderer implements IResourceManagerReloadListener
             GlStateManager.disableTexture2D();
             worldrenderer1.begin(7, DefaultVertexFormats.POSITION);
             int i = this.underlineStyle ? -1 : 0;
-            worldrenderer1.pos(this.posX + (float)i, this.posY + (float)this.FONT_HEIGHT, 0.0D).func_181675_d();
-            worldrenderer1.pos(this.posX + p_doDraw_1_, this.posY + (float)this.FONT_HEIGHT, 0.0D).func_181675_d();
-            worldrenderer1.pos(this.posX + p_doDraw_1_, this.posY + (float)this.FONT_HEIGHT - 1.0F, 0.0D).func_181675_d();
-            worldrenderer1.pos(this.posX + (float)i, this.posY + (float)this.FONT_HEIGHT - 1.0F, 0.0D).func_181675_d();
+            worldrenderer1.pos(this.posX + (float)i, this.posY + (float)this.FONT_HEIGHT, 0.0D).endVertex();
+            worldrenderer1.pos(this.posX + p_doDraw_1_, this.posY + (float)this.FONT_HEIGHT, 0.0D).endVertex();
+            worldrenderer1.pos(this.posX + p_doDraw_1_, this.posY + (float)this.FONT_HEIGHT - 1.0F, 0.0D).endVertex();
+            worldrenderer1.pos(this.posX + (float)i, this.posY + (float)this.FONT_HEIGHT - 1.0F, 0.0D).endVertex();
             tessellator1.draw();
             GlStateManager.enableTexture2D();
         }

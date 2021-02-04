@@ -612,6 +612,10 @@ public class GlStateManager
         }
     }
 
+    public static void colorAllMax() {
+        color(1.0f, 1.0f, 1.0f);
+    }
+
     public static void color(float colorRed, float colorGreen, float colorBlue)
     {
         color(colorRed, colorGreen, colorBlue, 1.0F);

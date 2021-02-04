@@ -118,7 +118,7 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer<TileEntit
 
             if (destroyStage < 0)
             {
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.colorAllMax();
             }
 
             GlStateManager.translate((float)x, (float)y + 1.0F, (float)z + 1.0F);
@@ -186,7 +186,7 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer<TileEntit
             modelchest.renderAll();
             GlStateManager.disableRescaleNormal();
             GlStateManager.popMatrix();
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
 
             if (destroyStage >= 0)
             {

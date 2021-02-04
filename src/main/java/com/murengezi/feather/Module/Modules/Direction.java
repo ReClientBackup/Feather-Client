@@ -33,7 +33,7 @@ public class Direction extends Adjustable {
         getFr().drawCenteredString((getPlayer().getHorizontalFacing() == EnumFacing.EAST ? "" : "§7") + "E§r", getX() + getWidth() - 6, getY() + (getHeight() / 2) - 4.0f, color);
 
         GlStateManager.pushMatrix();
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.colorAllMax();
         GlStateManager.translate(getX() + getWidth() / 2f, getY() + getHeight() / 2f, 0);
         GlStateManager.rotate(getPlayer().rotationYaw - 180, 0, 0, 1);
         ResourceLocation mapIcons = new ResourceLocation("textures/map/map_icons.png");

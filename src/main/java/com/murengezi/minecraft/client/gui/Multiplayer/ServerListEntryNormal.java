@@ -122,7 +122,7 @@ public class ServerListEntryNormal implements GuiListExtended.IGuiListEntry {
             s1 = "Pinging...";
         }
 
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         this.mc.getTextureManager().bindTexture(GUI.icons);
         GUI.drawModalRectWithCustomSizedTexture(x + listWidth - 15, y, (float)(k * 10), (float)(176 + l * 8), 10, 8, 256.0F, 256.0F);
 
@@ -150,7 +150,7 @@ public class ServerListEntryNormal implements GuiListExtended.IGuiListEntry {
         if (this.mc.gameSettings.touchscreen || isSelected) {
             this.mc.getTextureManager().bindTexture(SERVER_SELECTION_BUTTONS);
             GUI.drawRect(x, y, x + 32, y + 32, -1601138544);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             int k1 = mouseX - x;
             int l1 = mouseY - y;
 

@@ -22,7 +22,7 @@ public class GuiButtonDownloadShaders extends GuiButton
             super.drawButton(mouseX, mouseY);
             ResourceLocation resourcelocation = new ResourceLocation("optifine/textures/icons.png");
             mc.getTextureManager().bindTexture(resourcelocation);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             this.drawTexturedModalRect(this.getX() + 3, this.getY() + 2, 0, 0, 16, 16);
         }
     }

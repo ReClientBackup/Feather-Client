@@ -27,6 +27,7 @@ public class ModuleManager {
         load(new FPS());
         load(new Scoreboard());
         load(new PotionEffects());
+        load(new Perspective());
 
         EventManager.register(this);
     }

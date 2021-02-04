@@ -127,7 +127,7 @@ public class GuiEditSign extends Screen
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         getFr().drawCenteredString(I18n.format("sign.edit"), this.width / 2, 40, 16777215);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         GlStateManager.pushMatrix();
         GlStateManager.translate((float)(this.width / 2), 0.0F, 50.0F);
         float f = 93.75F;
