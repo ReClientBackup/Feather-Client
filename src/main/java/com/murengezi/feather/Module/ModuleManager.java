@@ -23,7 +23,7 @@ public class ModuleManager {
         load(new MouseCircle());
         load(new Blur());
         load(new Keystrokes());
-        //load(new BetterHat());
+        load(new BetterHat());
         load(new FPS());
         load(new Scoreboard());
         load(new PotionEffects());

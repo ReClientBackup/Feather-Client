@@ -200,7 +200,7 @@ public class Scoreboard {
     }
 
     public void removeTeam(ScorePlayerTeam team) {
-        if (this.teams.containsKey(team.getRegisteredName())) {
+        if (team != null) {
             this.teams.remove(team.getRegisteredName());
 
             for (String s : team.getMembershipCollection()) {

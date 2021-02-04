@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.GlStateManager;
 @ModuleInfo(name = "BetterHat", description = "", version = "unknown", enabled = true)
 public class BetterHat extends Module {
 
-
     private void initModel(ModelRendererUV model, float size) {
         ModelBoxUV modelboxuv = null;
         float f = 1.135F;
