@@ -15,8 +15,8 @@ import java.net.URL;
  */
 public class ImageDownloadThread extends Thread {
 
-    private String location;
-    private String url;
+    private final String location;
+    private final String url;
 
     public ImageDownloadThread(String location, String url) {
         this.location = location;

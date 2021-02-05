@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 
 public class BlockNewLog extends BlockLog
 {
-    public static final PropertyEnum<BlockPlanks.EnumType> VARIANT = PropertyEnum.<BlockPlanks.EnumType>create("variant", BlockPlanks.EnumType.class, new Predicate<BlockPlanks.EnumType>()
+    public static final PropertyEnum<BlockPlanks.EnumType> VARIANT = PropertyEnum.create("variant", BlockPlanks.EnumType.class, new Predicate<BlockPlanks.EnumType>()
     {
         public boolean apply(BlockPlanks.EnumType p_apply_1_)
         {
@@ -120,7 +120,7 @@ public class BlockNewLog extends BlockLog
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {VARIANT, LOG_AXIS});
+        return new BlockState(this, VARIANT, LOG_AXIS);
     }
 
     protected ItemStack createStackedBlock(IBlockState state)

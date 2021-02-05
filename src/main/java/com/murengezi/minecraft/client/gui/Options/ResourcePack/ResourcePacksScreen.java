@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class ResourcePacksScreen extends Screen {
 
-	private Screen previousScreen;
+	private final Screen previousScreen;
 	private List<ResourcePackListEntry> availableResourcePacks;
 	private List<ResourcePackListEntry> selectedResourcePacks;
 	private ResourcePackAvailableList availableResourcePacksList;

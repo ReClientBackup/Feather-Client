@@ -33,7 +33,7 @@ public abstract class AbstractResourcePack implements IResourcePack
 
     private static String locationToName(ResourceLocation location)
     {
-        return String.format("%s/%s/%s", new Object[] {"assets", location.getResourceDomain(), location.getResourcePath()});
+        return String.format("%s/%s/%s", "assets", location.getResourceDomain(), location.getResourcePath());
     }
 
     protected static String getRelativeName(File p_110595_0_, File p_110595_1_)
@@ -57,7 +57,7 @@ public abstract class AbstractResourcePack implements IResourcePack
 
     protected void logNameNotLowercase(String p_110594_1_)
     {
-        resourceLog.warn("ResourcePack: ignored non-lowercase namespace: {} in {}", new Object[] {p_110594_1_, this.resourcePackFile});
+        resourceLog.warn("ResourcePack: ignored non-lowercase namespace: {} in {}", p_110594_1_, this.resourcePackFile);
     }
 
     public <T extends IMetadataSection> T getPackMetadata(IMetadataSerializer p_135058_1_, String p_135058_2_) throws IOException

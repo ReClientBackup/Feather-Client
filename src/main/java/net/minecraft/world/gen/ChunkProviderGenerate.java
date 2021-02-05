@@ -28,11 +28,11 @@ import net.minecraft.world.gen.structure.StructureOceanMonument;
 public class ChunkProviderGenerate implements IChunkProvider
 {
     /** RNG. */
-    private Random rand;
-    private NoiseGeneratorOctaves field_147431_j;
-    private NoiseGeneratorOctaves field_147432_k;
-    private NoiseGeneratorOctaves field_147429_l;
-    private NoiseGeneratorPerlin field_147430_m;
+    private final Random rand;
+    private final NoiseGeneratorOctaves field_147431_j;
+    private final NoiseGeneratorOctaves field_147432_k;
+    private final NoiseGeneratorOctaves field_147429_l;
+    private final NoiseGeneratorPerlin field_147430_m;
 
     /** A NoiseGeneratorOctaves used in generating terrain */
     public NoiseGeneratorOctaves noiseGen5;
@@ -42,31 +42,31 @@ public class ChunkProviderGenerate implements IChunkProvider
     public NoiseGeneratorOctaves mobSpawnerNoise;
 
     /** Reference to the World object. */
-    private World worldObj;
+    private final World worldObj;
 
     /** are map structures going to be generated (e.g. strongholds) */
     private final boolean mapFeaturesEnabled;
-    private WorldType field_177475_o;
+    private final WorldType field_177475_o;
     private final double[] field_147434_q;
     private final float[] parabolicField;
     private ChunkProviderSettings settings;
     private Block field_177476_s = Blocks.water;
     private double[] stoneNoise = new double[256];
-    private MapGenBase caveGenerator = new MapGenCaves();
+    private final MapGenBase caveGenerator = new MapGenCaves();
 
     /** Holds Stronghold Generator */
-    private MapGenStronghold strongholdGenerator = new MapGenStronghold();
+    private final MapGenStronghold strongholdGenerator = new MapGenStronghold();
 
     /** Holds Village Generator */
-    private MapGenVillage villageGenerator = new MapGenVillage();
+    private final MapGenVillage villageGenerator = new MapGenVillage();
 
     /** Holds Mineshaft Generator */
-    private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
-    private MapGenScatteredFeature scatteredFeatureGenerator = new MapGenScatteredFeature();
+    private final MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
+    private final MapGenScatteredFeature scatteredFeatureGenerator = new MapGenScatteredFeature();
 
     /** Holds ravine generator */
-    private MapGenBase ravineGenerator = new MapGenRavine();
-    private StructureOceanMonument oceanMonumentGenerator = new StructureOceanMonument();
+    private final MapGenBase ravineGenerator = new MapGenRavine();
+    private final StructureOceanMonument oceanMonumentGenerator = new StructureOceanMonument();
 
     /** The biomes that are used to generate the chunk */
     private BiomeGenBase[] biomesForGeneration;

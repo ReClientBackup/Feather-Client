@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public class BlockNewLeaf extends BlockLeaves
 {
-    public static final PropertyEnum<BlockPlanks.EnumType> VARIANT = PropertyEnum.<BlockPlanks.EnumType>create("variant", BlockPlanks.EnumType.class, new Predicate<BlockPlanks.EnumType>()
+    public static final PropertyEnum<BlockPlanks.EnumType> VARIANT = PropertyEnum.create("variant", BlockPlanks.EnumType.class, new Predicate<BlockPlanks.EnumType>()
     {
         public boolean apply(BlockPlanks.EnumType p_apply_1_)
         {
@@ -104,7 +104,7 @@ public class BlockNewLeaf extends BlockLeaves
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {VARIANT, CHECK_DECAY, DECAYABLE});
+        return new BlockState(this, VARIANT, CHECK_DECAY, DECAYABLE);
     }
 
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)

@@ -74,8 +74,8 @@ public class NetworkSystem
 
     /** True if this NetworkSystem has never had his endpoints terminated */
     public volatile boolean isAlive;
-    private final List<ChannelFuture> endpoints = Collections.<ChannelFuture>synchronizedList(Lists.<ChannelFuture>newArrayList());
-    private final List<NetworkManager> networkManagers = Collections.<NetworkManager>synchronizedList(Lists.<NetworkManager>newArrayList());
+    private final List<ChannelFuture> endpoints = Collections.synchronizedList(Lists.newArrayList());
+    private final List<NetworkManager> networkManagers = Collections.synchronizedList(Lists.newArrayList());
 
     public NetworkSystem(MinecraftServer server)
     {
@@ -116,7 +116,6 @@ public class NetworkSystem
                     }
                     catch (ChannelException var3)
                     {
-                        ;
                     }
 
                     p_initChannel_1_.pipeline().addLast("timeout", new ReadTimeoutHandler(30)).addLast("legacy_query", new PingResponseHandler(NetworkSystem.this)).addLast("splitter", new MessageDeserializer2()).addLast("decoder", new MessageDeserializer(EnumPacketDirection.SERVERBOUND)).addLast("prepender", new MessageSerializer2()).addLast("encoder", new MessageSerializer(EnumPacketDirection.CLIENTBOUND));
@@ -225,7 +224,7 @@ public class NetworkSystem
                                 {
                                     networkmanager.closeChannel(chatcomponenttext);
                                 }
-                            }, new GenericFutureListener[0]);
+                            });
                             networkmanager.disableAutoRead();
                         }
                     }

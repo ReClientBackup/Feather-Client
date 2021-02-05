@@ -1201,7 +1201,7 @@ public class CustomItemProperties
             {
                 Object object = Reflector.ModelLoader_VanillaLoader_INSTANCE.getValue();
                 checkNull(object, "vanillaLoader is null");
-                Object object1 = Reflector.call(object, Reflector.ModelLoader_VanillaLoader_loadModel, new Object[] {modelresourcelocation});
+                Object object1 = Reflector.call(object, Reflector.ModelLoader_VanillaLoader_loadModel, modelresourcelocation);
                 checkNull(object1, "iModel is null");
                 Map map = (Map)Reflector.getFieldValue(modelBakery, Reflector.ModelLoader_stateModels);
                 checkNull(map, "stateModels is null");

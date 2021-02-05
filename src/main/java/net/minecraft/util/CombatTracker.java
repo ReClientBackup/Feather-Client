@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 
 public class CombatTracker
 {
-    private final List<CombatEntry> combatEntries = Lists.<CombatEntry>newArrayList();
+    private final List<CombatEntry> combatEntries = Lists.newArrayList();
 
     /** The entity tracked. */
     private final EntityLivingBase fighter;
@@ -75,7 +75,7 @@ public class CombatTracker
     {
         if (this.combatEntries.size() == 0)
         {
-            return new ChatComponentTranslation("death.attack.generic", new Object[] {this.fighter.getDisplayName()});
+            return new ChatComponentTranslation("death.attack.generic", this.fighter.getDisplayName());
         }
         else
         {
@@ -98,11 +98,11 @@ public class CombatTracker
 
                         if (itemstack1 != null && itemstack1.hasDisplayName())
                         {
-                            ichatcomponent = new ChatComponentTranslation("death.fell.assist.item", new Object[] {this.fighter.getDisplayName(), ichatcomponent2, itemstack1.getChatComponent()});
+                            ichatcomponent = new ChatComponentTranslation("death.fell.assist.item", this.fighter.getDisplayName(), ichatcomponent2, itemstack1.getChatComponent());
                         }
                         else
                         {
-                            ichatcomponent = new ChatComponentTranslation("death.fell.assist", new Object[] {this.fighter.getDisplayName(), ichatcomponent2});
+                            ichatcomponent = new ChatComponentTranslation("death.fell.assist", this.fighter.getDisplayName(), ichatcomponent2);
                         }
                     }
                     else if (ichatcomponent1 != null)
@@ -111,21 +111,21 @@ public class CombatTracker
 
                         if (itemstack != null && itemstack.hasDisplayName())
                         {
-                            ichatcomponent = new ChatComponentTranslation("death.fell.finish.item", new Object[] {this.fighter.getDisplayName(), ichatcomponent1, itemstack.getChatComponent()});
+                            ichatcomponent = new ChatComponentTranslation("death.fell.finish.item", this.fighter.getDisplayName(), ichatcomponent1, itemstack.getChatComponent());
                         }
                         else
                         {
-                            ichatcomponent = new ChatComponentTranslation("death.fell.finish", new Object[] {this.fighter.getDisplayName(), ichatcomponent1});
+                            ichatcomponent = new ChatComponentTranslation("death.fell.finish", this.fighter.getDisplayName(), ichatcomponent1);
                         }
                     }
                     else
                     {
-                        ichatcomponent = new ChatComponentTranslation("death.fell.killer", new Object[] {this.fighter.getDisplayName()});
+                        ichatcomponent = new ChatComponentTranslation("death.fell.killer", this.fighter.getDisplayName());
                     }
                 }
                 else
                 {
-                    ichatcomponent = new ChatComponentTranslation("death.fell.accident." + this.func_94548_b(combatentry), new Object[] {this.fighter.getDisplayName()});
+                    ichatcomponent = new ChatComponentTranslation("death.fell.accident." + this.func_94548_b(combatentry), this.fighter.getDisplayName());
                 }
             }
             else

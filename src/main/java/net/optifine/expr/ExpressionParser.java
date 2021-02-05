@@ -7,7 +7,7 @@ import java.util.*;
 
 public class ExpressionParser
 {
-    private IExpressionResolver expressionResolver;
+    private final IExpressionResolver expressionResolver;
 
     public ExpressionParser(IExpressionResolver expressionResolver)
     {

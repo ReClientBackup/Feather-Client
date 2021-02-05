@@ -28,8 +28,8 @@ public class ModelBoxUV extends ModelBox
     /** Z vertex coordinate of upper box corner */
     public final float posZ2;
     public String boxName;
-    private boolean mirror;
-    private PositionTextureVertex[] vertexPositions;
+    private final boolean mirror;
+    private final PositionTextureVertex[] vertexPositions;
     private QuadData[] quadDataList;
     private TexturedQuad[] quadList;
     private static final int[][] vectorIndex = new int[][] {{5, 1, 2, 6}, {0, 4, 7, 3}, {5, 4, 0, 1}, {2, 3, 7, 6}, {1, 0, 3, 2}, {4, 5, 6, 7}};

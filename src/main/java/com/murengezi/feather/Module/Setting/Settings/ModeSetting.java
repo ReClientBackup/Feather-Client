@@ -13,7 +13,7 @@ import java.util.List;
 public class ModeSetting extends Setting {
 
     private String value;
-    private List<String> modes;
+    private final List<String> modes;
 
     public ModeSetting(String name, Module parent, List<String> modes, String mode) {
         super(name, parent, SettingType.MODE);

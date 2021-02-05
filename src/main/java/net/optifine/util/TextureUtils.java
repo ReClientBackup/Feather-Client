@@ -120,7 +120,7 @@ public class TextureUtils
     public static TextureAtlasSprite iconClock;
     public static final String SPRITE_PREFIX_BLOCKS = "minecraft:blocks/";
     public static final String SPRITE_PREFIX_ITEMS = "minecraft:items/";
-    private static IntBuffer staticBuffer = GLAllocation.createDirectIntBuffer(256);
+    private static final IntBuffer staticBuffer = GLAllocation.createDirectIntBuffer(256);
 
     public static void update()
     {
@@ -177,7 +177,6 @@ public class TextureUtils
 
         for (i = 1; i < val; i *= 2)
         {
-            ;
         }
 
         return i;
@@ -435,7 +434,6 @@ public class TextureUtils
 
             for (i = size / sizeGrid * sizeGrid; i < size; i += sizeGrid)
             {
-                ;
             }
 
             return i;
@@ -454,7 +452,6 @@ public class TextureUtils
 
             for (i = sizeMin / size * size; i < sizeMin; i += size)
             {
-                ;
             }
 
             return i;

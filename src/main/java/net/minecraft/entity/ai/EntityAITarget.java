@@ -27,7 +27,7 @@ public abstract class EntityAITarget extends EntityAIBase
     /**
      * When true, only entities that can be reached with minimal effort will be targetted.
      */
-    private boolean nearbyOnly;
+    private final boolean nearbyOnly;
 
     /**
      * When nearbyOnly is true: 0 -> No target, but OK to search; 1 -> Nearby target found; 2 -> Target too far.
@@ -221,10 +221,7 @@ public abstract class EntityAITarget extends EntityAIBase
                     this.targetSearchStatus = this.canEasilyReach(target) ? 1 : 2;
                 }
 
-                if (this.targetSearchStatus == 2)
-                {
-                    return false;
-                }
+                return this.targetSearchStatus != 2;
             }
 
             return true;

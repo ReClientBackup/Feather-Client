@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class EntityDiggingFX extends EntityFX
 {
-    private IBlockState field_174847_a;
+    private final IBlockState field_174847_a;
     private BlockPos field_181019_az;
 
     protected EntityDiggingFX(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, IBlockState state)

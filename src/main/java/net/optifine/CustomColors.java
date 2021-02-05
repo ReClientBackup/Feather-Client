@@ -63,13 +63,13 @@ public class CustomColors
     private static CustomColormap[] colorsBlockColormaps = null;
     private static CustomColormap[][] blockColormaps = null;
     private static CustomColormap skyColors = null;
-    private static CustomColorFader skyColorFader = new CustomColorFader();
+    private static final CustomColorFader skyColorFader = new CustomColorFader();
     private static CustomColormap fogColors = null;
-    private static CustomColorFader fogColorFader = new CustomColorFader();
+    private static final CustomColorFader fogColorFader = new CustomColorFader();
     private static CustomColormap underwaterColors = null;
-    private static CustomColorFader underwaterColorFader = new CustomColorFader();
+    private static final CustomColorFader underwaterColorFader = new CustomColorFader();
     private static CustomColormap underlavaColors = null;
-    private static CustomColorFader underlavaColorFader = new CustomColorFader();
+    private static final CustomColorFader underlavaColorFader = new CustomColorFader();
     private static LightMapPack[] lightMapPacks = null;
     private static int lightmapMinDimensionId = 0;
     private static CustomColormap redstoneColors = null;
@@ -151,7 +151,7 @@ public class CustomColors
         public int getColor(IBlockState blockState, IBlockAccess blockAccess, BlockPos blockPos)
         {
             BiomeGenBase biomegenbase = CustomColors.getColorBiome(blockAccess, blockPos);
-            return CustomColors.waterColors != null ? CustomColors.waterColors.getColor(biomegenbase, blockPos) : (Reflector.ForgeBiome_getWaterColorMultiplier.exists() ? Reflector.callInt(biomegenbase, Reflector.ForgeBiome_getWaterColorMultiplier, new Object[0]) : biomegenbase.waterColorMultiplier);
+            return CustomColors.waterColors != null ? CustomColors.waterColors.getColor(biomegenbase, blockPos) : (Reflector.ForgeBiome_getWaterColorMultiplier.exists() ? Reflector.callInt(biomegenbase, Reflector.ForgeBiome_getWaterColorMultiplier) : biomegenbase.waterColorMultiplier);
         }
         public boolean isColorConstant()
         {
@@ -264,7 +264,7 @@ public class CustomColors
                 }
                 else
                 {
-                    List<String> list = Arrays.<String>asList(validValues);
+                    List<String> list = Arrays.asList(validValues);
 
                     if (!list.contains(s))
                     {
@@ -1305,7 +1305,7 @@ public class CustomColors
             if (j >= 0 && j < lightMapPacks.length)
             {
                 LightMapPack lightmappack = lightMapPacks[j];
-                return lightmappack == null ? false : lightmappack.updateLightmap(world, torchFlickerX, lmColors, nightvision, partialTicks);
+                return lightmappack != null && lightmappack.updateLightmap(world, torchFlickerX, lmColors, nightvision, partialTicks);
             }
             else
             {

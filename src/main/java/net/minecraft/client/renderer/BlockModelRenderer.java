@@ -765,7 +765,7 @@ public class BlockModelRenderer
         }
     }
 
-    public static enum EnumNeighborInfo
+    public enum EnumNeighborInfo
     {
         DOWN(new EnumFacing[]{EnumFacing.WEST, EnumFacing.EAST, EnumFacing.NORTH, EnumFacing.SOUTH}, 0.5F, false, new BlockModelRenderer.Orientation[0], new BlockModelRenderer.Orientation[0], new BlockModelRenderer.Orientation[0], new BlockModelRenderer.Orientation[0]),
         UP(new EnumFacing[]{EnumFacing.EAST, EnumFacing.WEST, EnumFacing.NORTH, EnumFacing.SOUTH}, 1.0F, false, new BlockModelRenderer.Orientation[0], new BlockModelRenderer.Orientation[0], new BlockModelRenderer.Orientation[0], new BlockModelRenderer.Orientation[0]),
@@ -783,7 +783,7 @@ public class BlockModelRenderer
         protected final BlockModelRenderer.Orientation[] field_178285_m;
         private static final BlockModelRenderer.EnumNeighborInfo[] field_178282_n = new BlockModelRenderer.EnumNeighborInfo[6];
 
-        private EnumNeighborInfo(EnumFacing[] p_i46236_3_, float p_i46236_4_, boolean p_i46236_5_, BlockModelRenderer.Orientation[] p_i46236_6_, BlockModelRenderer.Orientation[] p_i46236_7_, BlockModelRenderer.Orientation[] p_i46236_8_, BlockModelRenderer.Orientation[] p_i46236_9_)
+        EnumNeighborInfo(EnumFacing[] p_i46236_3_, float p_i46236_4_, boolean p_i46236_5_, BlockModelRenderer.Orientation[] p_i46236_6_, BlockModelRenderer.Orientation[] p_i46236_7_, BlockModelRenderer.Orientation[] p_i46236_8_, BlockModelRenderer.Orientation[] p_i46236_9_)
         {
             this.field_178276_g = p_i46236_3_;
             this.field_178288_h = p_i46236_4_;
@@ -809,7 +809,7 @@ public class BlockModelRenderer
         }
     }
 
-    public static enum Orientation
+    public enum Orientation
     {
         DOWN(EnumFacing.DOWN, false),
         UP(EnumFacing.UP, false),
@@ -826,13 +826,13 @@ public class BlockModelRenderer
 
         protected final int field_178229_m;
 
-        private Orientation(EnumFacing p_i46233_3_, boolean p_i46233_4_)
+        Orientation(EnumFacing p_i46233_3_, boolean p_i46233_4_)
         {
             this.field_178229_m = p_i46233_3_.getIndex() + (p_i46233_4_ ? EnumFacing.values().length : 0);
         }
     }
 
-    static enum VertexTranslations
+    enum VertexTranslations
     {
         DOWN(0, 1, 2, 3),
         UP(2, 3, 0, 1),
@@ -847,7 +847,7 @@ public class BlockModelRenderer
         private final int field_178198_j;
         private static final BlockModelRenderer.VertexTranslations[] field_178199_k = new BlockModelRenderer.VertexTranslations[6];
 
-        private VertexTranslations(int p_i46234_3_, int p_i46234_4_, int p_i46234_5_, int p_i46234_6_)
+        VertexTranslations(int p_i46234_3_, int p_i46234_4_, int p_i46234_5_, int p_i46234_6_)
         {
             this.field_178191_g = p_i46234_3_;
             this.field_178200_h = p_i46234_4_;

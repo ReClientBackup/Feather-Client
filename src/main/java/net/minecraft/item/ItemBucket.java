@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class ItemBucket extends Item
 {
     /** field for checking if the bucket has been filled. */
-    private Block isFull;
+    private final Block isFull;
 
     public ItemBucket(Block containedBlock)
     {
@@ -146,7 +146,7 @@ public class ItemBucket extends Item
 
                     for (int l = 0; l < 8; ++l)
                     {
-                        worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)i + Math.random(), (double)j + Math.random(), (double)k + Math.random(), 0.0D, 0.0D, 0.0D, new int[0]);
+                        worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double)i + Math.random(), (double)j + Math.random(), (double)k + Math.random(), 0.0D, 0.0D, 0.0D);
                     }
                 }
                 else

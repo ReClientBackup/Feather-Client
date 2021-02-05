@@ -7,6 +7,7 @@ import java.io.CharArrayWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -729,7 +730,7 @@ public class ShaderPackParser
             }
             else
             {
-                InputStreamReader inputstreamreader = new InputStreamReader(inputstream, "ASCII");
+                InputStreamReader inputstreamreader = new InputStreamReader(inputstream, StandardCharsets.US_ASCII);
                 BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
                 bufferedreader = resolveIncludes(bufferedreader, filePath, shaderPack, fileIndex, listFiles, includeLevel);
                 CharArrayWriter chararraywriter = new CharArrayWriter();
@@ -1136,6 +1137,6 @@ public class ShaderPackParser
         map.put("CONSTANT_ALPHA", 32771);
         map.put("ONE_MINUS_CONSTANT_ALPHA", 32772);
         map.put("SRC_ALPHA_SATURATE", 776);
-        return Collections.<String, Integer>unmodifiableMap(map);
+        return Collections.unmodifiableMap(map);
     }
 }

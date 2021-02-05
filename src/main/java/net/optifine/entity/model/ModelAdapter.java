@@ -8,9 +8,9 @@ import java.util.List;
 
 public abstract class ModelAdapter
 {
-    private Class entityClass;
-    private String name;
-    private float shadowSize;
+    private final Class entityClass;
+    private final String name;
+    private final float shadowSize;
     private String[] aliases;
 
     public ModelAdapter(Class entityClass, String name, float shadowSize)

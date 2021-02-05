@@ -13,7 +13,7 @@ import net.minecraft.util.IStringSerializable;
 
 public class BlockRedSandstone extends Block
 {
-    public static final PropertyEnum<BlockRedSandstone.EnumType> TYPE = PropertyEnum.<BlockRedSandstone.EnumType>create("type", BlockRedSandstone.EnumType.class);
+    public static final PropertyEnum<BlockRedSandstone.EnumType> TYPE = PropertyEnum.create("type", BlockRedSandstone.EnumType.class);
 
     public BlockRedSandstone()
     {
@@ -60,10 +60,10 @@ public class BlockRedSandstone extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {TYPE});
+        return new BlockState(this, TYPE);
     }
 
-    public static enum EnumType implements IStringSerializable
+    public enum EnumType implements IStringSerializable
     {
         DEFAULT(0, "red_sandstone", "default"),
         CHISELED(1, "chiseled_red_sandstone", "chiseled"),
@@ -74,7 +74,7 @@ public class BlockRedSandstone extends Block
         private final String name;
         private final String unlocalizedName;
 
-        private EnumType(int meta, String name, String unlocalizedName)
+        EnumType(int meta, String name, String unlocalizedName)
         {
             this.meta = meta;
             this.name = name;

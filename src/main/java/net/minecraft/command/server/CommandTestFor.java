@@ -51,7 +51,7 @@ public class CommandTestFor extends CommandBase
     {
         if (args.length < 1)
         {
-            throw new WrongUsageException("commands.testfor.usage", new Object[0]);
+            throw new WrongUsageException("commands.testfor.usage");
         }
         else
         {
@@ -66,7 +66,7 @@ public class CommandTestFor extends CommandBase
                 }
                 catch (NBTException nbtexception)
                 {
-                    throw new CommandException("commands.testfor.tagError", new Object[] {nbtexception.getMessage()});
+                    throw new CommandException("commands.testfor.tagError", nbtexception.getMessage());
                 }
             }
 
@@ -77,11 +77,11 @@ public class CommandTestFor extends CommandBase
 
                 if (!NBTUtil.func_181123_a(nbttagcompound, nbttagcompound1, true))
                 {
-                    throw new CommandException("commands.testfor.failure", new Object[] {entity.getCommandSenderName()});
+                    throw new CommandException("commands.testfor.failure", entity.getCommandSenderName());
                 }
             }
 
-            notifyOperators(sender, this, "commands.testfor.success", new Object[] {entity.getCommandSenderName()});
+            notifyOperators(sender, this, "commands.testfor.success", entity.getCommandSenderName());
         }
     }
 

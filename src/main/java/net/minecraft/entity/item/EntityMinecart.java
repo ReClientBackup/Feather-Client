@@ -1127,14 +1127,14 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         }
         else
         {
-            ChatComponentTranslation chatcomponenttranslation = new ChatComponentTranslation(this.getCommandSenderName(), new Object[0]);
+            ChatComponentTranslation chatcomponenttranslation = new ChatComponentTranslation(this.getCommandSenderName());
             chatcomponenttranslation.getChatStyle().setChatHoverEvent(this.getHoverEvent());
             chatcomponenttranslation.getChatStyle().setInsertion(this.getUniqueID().toString());
             return chatcomponenttranslation;
         }
     }
 
-    public static enum EnumMinecartType
+    public enum EnumMinecartType
     {
         RIDEABLE(0, "MinecartRideable"),
         CHEST(1, "MinecartChest"),
@@ -1144,11 +1144,11 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         HOPPER(5, "MinecartHopper"),
         COMMAND_BLOCK(6, "MinecartCommandBlock");
 
-        private static final Map<Integer, EntityMinecart.EnumMinecartType> ID_LOOKUP = Maps.<Integer, EntityMinecart.EnumMinecartType>newHashMap();
+        private static final Map<Integer, EntityMinecart.EnumMinecartType> ID_LOOKUP = Maps.newHashMap();
         private final int networkID;
         private final String name;
 
-        private EnumMinecartType(int networkID, String name)
+        EnumMinecartType(int networkID, String name)
         {
             this.networkID = networkID;
             this.name = name;

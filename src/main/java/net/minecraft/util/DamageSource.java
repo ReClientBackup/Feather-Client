@@ -213,7 +213,7 @@ public class DamageSource
         EntityLivingBase entitylivingbase = p_151519_1_.func_94060_bK();
         String s = "death.attack." + this.damageType;
         String s1 = s + ".player";
-        return entitylivingbase != null && StatCollector.canTranslate(s1) ? new ChatComponentTranslation(s1, new Object[] {p_151519_1_.getDisplayName(), entitylivingbase.getDisplayName()}): new ChatComponentTranslation(s, new Object[] {p_151519_1_.getDisplayName()});
+        return entitylivingbase != null && StatCollector.canTranslate(s1) ? new ChatComponentTranslation(s1, p_151519_1_.getDisplayName(), entitylivingbase.getDisplayName()): new ChatComponentTranslation(s, p_151519_1_.getDisplayName());
     }
 
     /**

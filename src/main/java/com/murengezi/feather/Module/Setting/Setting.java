@@ -8,9 +8,9 @@ import com.murengezi.feather.Module.Module;
  */
 public class Setting {
 
-    private String name;
-    private Module parent;
-    private SettingType type;
+    private final String name;
+    private final Module parent;
+    private final SettingType type;
 
     public Setting(String name, Module parent, SettingType type) {
         this.name = name;

@@ -349,12 +349,7 @@ public class BlockPistonBase extends Block
 
                     if (blockIn.getMobilityFlag() == 1)
                     {
-                        if (!allowDestroy)
-                        {
-                            return false;
-                        }
-
-                        return true;
+                        return allowDestroy;
                     }
                 }
                 else if (worldIn.getBlockState(pos).getValue(EXTENDED).booleanValue())
@@ -485,6 +480,6 @@ public class BlockPistonBase extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING, EXTENDED});
+        return new BlockState(this, FACING, EXTENDED);
     }
 }

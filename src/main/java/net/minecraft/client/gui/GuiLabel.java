@@ -13,7 +13,7 @@ public class GuiLabel extends GUI {
     protected int field_146161_f;
     public int field_146162_g;
     public int field_146174_h;
-    private List<String> field_146173_k;
+    private final List<String> field_146173_k;
     public int field_175204_i;
     private boolean centered;
     public boolean visible = true;
@@ -22,7 +22,7 @@ public class GuiLabel extends GUI {
     private final int field_146169_o;
     private final int field_146166_p;
     private final int field_146165_q;
-    private int field_146163_s;
+    private final int field_146163_s;
 
     public GuiLabel(int p_i45540_2_, int p_i45540_3_, int p_i45540_4_, int p_i45540_5_, int p_i45540_6_, int p_i45540_7_) {
         this.field_175204_i = p_i45540_2_;

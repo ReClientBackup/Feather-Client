@@ -37,13 +37,13 @@ public class EffectRenderer
 
     /** Reference to the World object. */
     protected World worldObj;
-    private List<EntityFX>[][] fxLayers = new List[4][];
-    private List<EntityParticleEmitter> particleEmitters = Lists.<EntityParticleEmitter>newArrayList();
-    private TextureManager renderer;
+    private final List<EntityFX>[][] fxLayers = new List[4][];
+    private final List<EntityParticleEmitter> particleEmitters = Lists.newArrayList();
+    private final TextureManager renderer;
 
     /** RNG. */
-    private Random rand = new Random();
-    private Map<Integer, IParticleFactory> particleTypes = Maps.<Integer, IParticleFactory>newHashMap();
+    private final Random rand = new Random();
+    private final Map<Integer, IParticleFactory> particleTypes = Maps.newHashMap();
 
     public EffectRenderer(World worldIn, TextureManager rendererIn)
     {
@@ -167,7 +167,7 @@ public class EffectRenderer
             this.updateEffectLayer(i);
         }
 
-        List<EntityParticleEmitter> list = Lists.<EntityParticleEmitter>newArrayList();
+        List<EntityParticleEmitter> list = Lists.newArrayList();
 
         for (EntityParticleEmitter entityparticleemitter : this.particleEmitters)
         {
@@ -398,7 +398,7 @@ public class EffectRenderer
         if (Reflector.ForgeBlock_addDestroyEffects.exists() && Reflector.ForgeBlock_isAir.exists())
         {
             Block block = state.getBlock();
-            flag = !Reflector.callBoolean(block, Reflector.ForgeBlock_isAir, new Object[] {this.worldObj, pos}) && !Reflector.callBoolean(block, Reflector.ForgeBlock_addDestroyEffects, new Object[] {this.worldObj, pos, this});
+            flag = !Reflector.callBoolean(block, Reflector.ForgeBlock_isAir, this.worldObj, pos) && !Reflector.callBoolean(block, Reflector.ForgeBlock_addDestroyEffects, this.worldObj, pos, this);
         }
         else
         {
@@ -524,7 +524,7 @@ public class EffectRenderer
 
         if (iblockstate != null)
         {
-            boolean flag = Reflector.callBoolean(iblockstate.getBlock(), Reflector.ForgeBlock_addHitEffects, new Object[] {this.worldObj, p_addBlockHitEffects_2_, this});
+            boolean flag = Reflector.callBoolean(iblockstate.getBlock(), Reflector.ForgeBlock_addHitEffects, this.worldObj, p_addBlockHitEffects_2_, this);
 
             if (iblockstate != null && !flag)
             {

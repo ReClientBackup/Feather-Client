@@ -40,7 +40,7 @@ public class BlockEndPortal extends BlockContainer
 
     public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
     {
-        return side == EnumFacing.DOWN ? super.shouldSideBeRendered(worldIn, pos, side) : false;
+        return side == EnumFacing.DOWN && super.shouldSideBeRendered(worldIn, pos, side);
     }
 
     /**
@@ -92,7 +92,7 @@ public class BlockEndPortal extends BlockContainer
         double d3 = 0.0D;
         double d4 = 0.0D;
         double d5 = 0.0D;
-        worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5, new int[0]);
+        worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
     }
 
     /**

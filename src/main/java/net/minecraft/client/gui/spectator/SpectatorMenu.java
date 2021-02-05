@@ -34,7 +34,7 @@ public class SpectatorMenu
         }
     };
     private final ISpectatorMenuRecipient field_178651_f;
-    private final List<SpectatorDetails> field_178652_g = Lists.<SpectatorDetails>newArrayList();
+    private final List<SpectatorDetails> field_178652_g = Lists.newArrayList();
     private ISpectatorMenuView field_178659_h = new BaseSpectatorGroup();
     private int field_178660_i = -1;
     private int field_178658_j;
@@ -52,7 +52,7 @@ public class SpectatorMenu
 
     public List<ISpectatorMenuObject> func_178642_a()
     {
-        List<ISpectatorMenuObject> list = Lists.<ISpectatorMenuObject>newArrayList();
+        List<ISpectatorMenuObject> list = Lists.newArrayList();
 
         for (int i = 0; i <= 8; ++i)
         {

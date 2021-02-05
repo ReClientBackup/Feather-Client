@@ -9,8 +9,10 @@ import java.util.Random;
 public class Particle extends MinecraftUtils {
 
     private static final Random random = new Random();
-    private Vector2f velocity, pos;
-    private float size, alpha;
+    private Vector2f velocity;
+	private final Vector2f pos;
+    private float size;
+	private final float alpha;
     private int width, height;
 
 

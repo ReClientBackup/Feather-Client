@@ -10,7 +10,7 @@ import me.superblaubeere27.particle.ParticleSystem;
  */
 public class ParticleManager extends MinecraftUtils {
 
-    private ParticleSystem particleSystem;
+    private final ParticleSystem particleSystem;
 
     public ParticleManager() {
         particleSystem = new ParticleSystem(300);

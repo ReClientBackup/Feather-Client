@@ -77,7 +77,7 @@ public class ReflectorRaw
         try
         {
             Field[] afield = cls.getDeclaredFields();
-            List<Field> list = Arrays.<Field>asList(afield);
+            List<Field> list = Arrays.asList(afield);
             int i = list.indexOf(field);
 
             if (i < 0)
@@ -164,13 +164,13 @@ public class ReflectorRaw
     public static boolean setFieldValue(Object obj, Class cls, Class fieldType, Object value)
     {
         ReflectorField reflectorfield = getReflectorField(cls, fieldType);
-        return reflectorfield == null ? false : (!reflectorfield.exists() ? false : Reflector.setFieldValue(obj, reflectorfield, value));
+        return reflectorfield != null && (reflectorfield.exists() && Reflector.setFieldValue(obj, reflectorfield, value));
     }
 
     public static boolean setFieldValue(Object obj, Class cls, Class fieldType, int index, Object value)
     {
         ReflectorField reflectorfield = getReflectorField(cls, fieldType, index);
-        return reflectorfield == null ? false : (!reflectorfield.exists() ? false : Reflector.setFieldValue(obj, reflectorfield, value));
+        return reflectorfield != null && (reflectorfield.exists() && Reflector.setFieldValue(obj, reflectorfield, value));
     }
 
     public static ReflectorField getReflectorField(Class cls, Class fieldType)

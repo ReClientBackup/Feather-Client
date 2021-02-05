@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class CustomModelRegistry
 {
-    private static Map<String, ModelAdapter> mapModelAdapters = makeMapModelAdapters();
+    private static final Map<String, ModelAdapter> mapModelAdapters = makeMapModelAdapters();
 
     private static Map<String, ModelAdapter> makeMapModelAdapters()
     {

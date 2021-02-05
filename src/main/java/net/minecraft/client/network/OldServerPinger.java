@@ -46,7 +46,7 @@ public class OldServerPinger
 {
     private static final Splitter PING_RESPONSE_SPLITTER = Splitter.on('\u0000').limit(6);
     private static final Logger logger = LogManager.getLogger();
-    private final List<NetworkManager> pingDestinations = Collections.<NetworkManager>synchronizedList(Lists.<NetworkManager>newArrayList());
+    private final List<NetworkManager> pingDestinations = Collections.synchronizedList(Lists.newArrayList());
 
     public void ping(final ServerData server) throws UnknownHostException
     {
@@ -162,8 +162,8 @@ public class OldServerPinger
             {
                 if (!this.field_147403_d)
                 {
-                    OldServerPinger.logger.error("Can\'t ping " + server.serverIP + ": " + reason.getUnformattedText());
-                    server.serverMOTD = EnumChatFormatting.DARK_RED + "Can\'t connect to server.";
+                    OldServerPinger.logger.error("Can't ping " + server.serverIP + ": " + reason.getUnformattedText());
+                    server.serverMOTD = EnumChatFormatting.DARK_RED + "Can't connect to server.";
                     server.populationInfo = "";
                     OldServerPinger.this.tryCompatibilityPing(server);
                 }
@@ -194,10 +194,9 @@ public class OldServerPinger
                 }
                 catch (ChannelException var3)
                 {
-                    ;
                 }
 
-                p_initChannel_1_.pipeline().addLast(new ChannelHandler[] {new SimpleChannelInboundHandler<ByteBuf>()
+                p_initChannel_1_.pipeline().addLast(new SimpleChannelInboundHandler<ByteBuf>()
                     {
                         public void channelActive(ChannelHandlerContext p_channelActive_1_) throws Exception
                         {
@@ -264,8 +263,7 @@ public class OldServerPinger
                         {
                             p_exceptionCaught_1_.close();
                         }
-                    }
-                });
+                    });
             }
         }).channel(NioSocketChannel.class).connect(serveraddress.getIP(), serveraddress.getPort());
     }

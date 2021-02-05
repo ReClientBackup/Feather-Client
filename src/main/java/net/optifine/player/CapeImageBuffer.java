@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 public class CapeImageBuffer extends ImageBufferDownload
 {
     private AbstractClientPlayer player;
-    private ResourceLocation resourceLocation;
+    private final ResourceLocation resourceLocation;
 
     public CapeImageBuffer(AbstractClientPlayer player, ResourceLocation resourceLocation)
     {

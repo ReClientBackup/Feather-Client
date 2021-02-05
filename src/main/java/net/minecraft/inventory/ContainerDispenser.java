@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerDispenser extends Container
 {
-    private IInventory dispenserInventory;
+    private final IInventory dispenserInventory;
 
     public ContainerDispenser(IInventory playerInventory, IInventory dispenserInventoryIn)
     {

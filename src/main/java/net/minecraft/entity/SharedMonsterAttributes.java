@@ -92,7 +92,7 @@ public class SharedMonsterAttributes
             }
             else
             {
-                logger.warn("Ignoring unknown attribute \'" + nbttagcompound.getString("Name") + "\'");
+                logger.warn("Ignoring unknown attribute '" + nbttagcompound.getString("Name") + "'");
             }
         }
     }

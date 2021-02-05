@@ -42,7 +42,7 @@ public class FaceBakery
 
         if (Reflector.ForgeHooksClient_fillNormal.exists())
         {
-            Reflector.call(Reflector.ForgeHooksClient_fillNormal, new Object[] {aint, enumfacing});
+            Reflector.call(Reflector.ForgeHooksClient_fillNormal, aint, enumfacing);
         }
 
         return new BakedQuad(aint, p_makeBakedQuad_3_.tintIndex, enumfacing);
@@ -209,7 +209,7 @@ public class FaceBakery
         {
             if (Reflector.ForgeHooksClient_transform.exists())
             {
-                Reflector.call(Reflector.ForgeHooksClient_transform, new Object[] {p_rotateVertex_1_, p_rotateVertex_4_.getMatrix()});
+                Reflector.call(Reflector.ForgeHooksClient_transform, p_rotateVertex_1_, p_rotateVertex_4_.getMatrix());
             }
             else
             {

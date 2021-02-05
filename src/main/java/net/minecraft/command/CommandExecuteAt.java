@@ -48,7 +48,7 @@ public class CommandExecuteAt extends CommandBase
     {
         if (args.length < 5)
         {
-            throw new WrongUsageException("commands.execute.usage", new Object[0]);
+            throw new WrongUsageException("commands.execute.usage");
         }
         else
         {
@@ -72,7 +72,7 @@ public class CommandExecuteAt extends CommandBase
 
                 if (iblockstate.getBlock() != block || k >= 0 && iblockstate.getBlock().getMetaFromState(iblockstate) != k)
                 {
-                    throw new CommandException("commands.execute.failed", new Object[] {"detect", entity.getCommandSenderName()});
+                    throw new CommandException("commands.execute.failed", "detect", entity.getCommandSenderName());
                 }
 
                 i = 10;
@@ -131,12 +131,12 @@ public class CommandExecuteAt extends CommandBase
 
                 if (j < 1)
                 {
-                    throw new CommandException("commands.execute.allInvocationsFailed", new Object[] {s});
+                    throw new CommandException("commands.execute.allInvocationsFailed", s);
                 }
             }
             catch (Throwable var23)
             {
-                throw new CommandException("commands.execute.failed", new Object[] {s, entity.getCommandSenderName()});
+                throw new CommandException("commands.execute.failed", s, entity.getCommandSenderName());
             }
         }
     }

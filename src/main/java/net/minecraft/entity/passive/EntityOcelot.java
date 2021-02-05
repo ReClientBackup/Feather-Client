@@ -37,7 +37,7 @@ public class EntityOcelot extends EntityTameable
     /**
      * The tempt AI task for this mob, used to prevent taming while it is fleeing.
      */
-    private EntityAITempt aiTempt;
+    private final EntityAITempt aiTempt;
 
     public EntityOcelot(World worldIn)
     {
@@ -287,7 +287,7 @@ public class EntityOcelot extends EntityTameable
         else
         {
             EntityOcelot entityocelot = (EntityOcelot)otherAnimal;
-            return !entityocelot.isTamed() ? false : this.isInLove() && entityocelot.isInLove();
+            return entityocelot.isTamed() && this.isInLove() && entityocelot.isInLove();
         }
     }
 
@@ -325,10 +325,7 @@ public class EntityOcelot extends EntityTameable
 
             Block block = this.worldObj.getBlockState(blockpos.down()).getBlock();
 
-            if (block == Blocks.grass || block.getMaterial() == Material.leaves)
-            {
-                return true;
-            }
+            return block == Blocks.grass || block.getMaterial() == Material.leaves;
         }
 
         return false;

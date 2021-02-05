@@ -15,8 +15,8 @@ import java.util.List;
 public class DisconnectedScreen extends Screen {
 
     private final Screen previousScreen;
-    private String reason;
-    private IChatComponent message;
+    private final String reason;
+    private final IChatComponent message;
     private List<String> multilineMessage;
     private int messageHeight;
 

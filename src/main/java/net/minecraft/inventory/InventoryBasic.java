@@ -11,8 +11,8 @@ import net.minecraft.util.IChatComponent;
 public class InventoryBasic implements IInventory
 {
     private String inventoryTitle;
-    private int slotsCount;
-    private ItemStack[] inventoryContents;
+    private final int slotsCount;
+    private final ItemStack[] inventoryContents;
     private List<IInvBasic> field_70480_d;
     private boolean hasCustomName;
 
@@ -33,7 +33,7 @@ public class InventoryBasic implements IInventory
     {
         if (this.field_70480_d == null)
         {
-            this.field_70480_d = Lists.<IInvBasic>newArrayList();
+            this.field_70480_d = Lists.newArrayList();
         }
 
         this.field_70480_d.add(p_110134_1_);
@@ -204,7 +204,7 @@ public class InventoryBasic implements IInventory
      */
     public IChatComponent getDisplayName()
     {
-        return this.hasCustomName() ? new ChatComponentText(this.getCommandSenderName()) : new ChatComponentTranslation(this.getCommandSenderName(), new Object[0]);
+        return this.hasCustomName() ? new ChatComponentText(this.getCommandSenderName()) : new ChatComponentTranslation(this.getCommandSenderName());
     }
 
     /**

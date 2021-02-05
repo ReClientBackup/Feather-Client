@@ -24,7 +24,7 @@ public class GuiBeacon extends GuiContainer
 {
     private static final Logger logger = LogManager.getLogger();
     private static final ResourceLocation beaconGuiTextures = new ResourceLocation("textures/gui/container/beacon.png");
-    private IInventory tileBeacon;
+    private final IInventory tileBeacon;
     private GuiBeacon.ConfirmButton beaconConfirmButton;
     private boolean buttonsNotDrawn;
 
@@ -174,8 +174,8 @@ public class GuiBeacon extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
         RenderHelper.disableStandardItemLighting();
-        getFr().drawCenteredString(I18n.format("tile.beacon.primary", new Object[0]), 62, 10, 14737632);
-        getFr().drawCenteredString(I18n.format("tile.beacon.secondary", new Object[0]), 169, 10, 14737632);
+        getFr().drawCenteredString(I18n.format("tile.beacon.primary"), 62, 10, 14737632);
+        getFr().drawCenteredString(I18n.format("tile.beacon.secondary"), 169, 10, 14737632);
 
         for (GuiButton guibutton : this.buttonList)
         {
@@ -276,7 +276,7 @@ public class GuiBeacon extends GuiContainer
 
         public void drawButtonForegroundLayer(int mouseX, int mouseY)
         {
-            GuiBeacon.this.drawCreativeTabHoveringText(I18n.format("gui.cancel", new Object[0]), mouseX, mouseY);
+            GuiBeacon.this.drawCreativeTabHoveringText(I18n.format("gui.cancel"), mouseX, mouseY);
         }
     }
 
@@ -289,7 +289,7 @@ public class GuiBeacon extends GuiContainer
 
         public void drawButtonForegroundLayer(int mouseX, int mouseY)
         {
-            GuiBeacon.this.drawCreativeTabHoveringText(I18n.format("gui.done", new Object[0]), mouseX, mouseY);
+            GuiBeacon.this.drawCreativeTabHoveringText(I18n.format("gui.done"), mouseX, mouseY);
         }
     }
 

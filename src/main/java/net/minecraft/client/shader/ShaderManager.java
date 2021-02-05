@@ -30,12 +30,12 @@ public class ShaderManager
     private static ShaderManager staticShaderManager = null;
     private static int currentProgram = -1;
     private static boolean field_148000_e = true;
-    private final Map<String, Object> shaderSamplers = Maps.<String, Object>newHashMap();
-    private final List<String> samplerNames = Lists.<String>newArrayList();
-    private final List<Integer> shaderSamplerLocations = Lists.<Integer>newArrayList();
-    private final List<ShaderUniform> shaderUniforms = Lists.<ShaderUniform>newArrayList();
-    private final List<Integer> shaderUniformLocations = Lists.<Integer>newArrayList();
-    private final Map<String, ShaderUniform> mappedShaderUniforms = Maps.<String, ShaderUniform>newHashMap();
+    private final Map<String, Object> shaderSamplers = Maps.newHashMap();
+    private final List<String> samplerNames = Lists.newArrayList();
+    private final List<Integer> shaderSamplerLocations = Lists.newArrayList();
+    private final List<ShaderUniform> shaderUniforms = Lists.newArrayList();
+    private final List<Integer> shaderUniformLocations = Lists.newArrayList();
+    private final Map<String, ShaderUniform> mappedShaderUniforms = Maps.newHashMap();
     private final int program;
     private final String programFilename;
     private final boolean useFaceCulling;
@@ -46,7 +46,7 @@ public class ShaderManager
     private final ShaderLoader vertexShaderLoader;
     private final ShaderLoader fragmentShaderLoader;
 
-    public ShaderManager(IResourceManager resourceManager, String programName) throws JsonException, IOException
+    public ShaderManager(IResourceManager resourceManager, String programName) throws IOException
     {
         JsonParser jsonparser = new JsonParser();
         ResourceLocation resourcelocation = new ResourceLocation("shaders/program/" + programName + ".json");
@@ -87,8 +87,8 @@ public class ShaderManager
             if (jsonarray1 != null)
             {
                 int j = 0;
-                this.attribLocations = Lists.<Integer>newArrayListWithCapacity(jsonarray1.size());
-                this.attributes = Lists.<String>newArrayListWithCapacity(jsonarray1.size());
+                this.attribLocations = Lists.newArrayListWithCapacity(jsonarray1.size());
+                this.attributes = Lists.newArrayListWithCapacity(jsonarray1.size());
 
                 for (JsonElement jsonelement1 : jsonarray1)
                 {
@@ -332,10 +332,7 @@ public class ShaderManager
      */
     public void addSamplerTexture(String p_147992_1_, Object p_147992_2_)
     {
-        if (this.shaderSamplers.containsKey(p_147992_1_))
-        {
-            this.shaderSamplers.remove(p_147992_1_);
-        }
+        this.shaderSamplers.remove(p_147992_1_);
 
         this.shaderSamplers.put(p_147992_1_, p_147992_2_);
         this.markDirty();

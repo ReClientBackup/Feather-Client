@@ -137,7 +137,7 @@ public class EntitySlime extends EntityLiving implements IMob
                 EnumParticleTypes enumparticletypes = this.getParticleType();
                 double d0 = this.posX + (double)f2;
                 double d1 = this.posZ + (double)f3;
-                world.spawnParticle(enumparticletypes, d0, this.getEntityBoundingBox().minY, d1, 0.0D, 0.0D, 0.0D, new int[0]);
+                world.spawnParticle(enumparticletypes, d0, this.getEntityBoundingBox().minY, d1, 0.0D, 0.0D, 0.0D);
             }
 
             if (this.makesSoundOnLand())
@@ -400,7 +400,7 @@ public class EntitySlime extends EntityLiving implements IMob
 
     static class AISlimeAttack extends EntityAIBase
     {
-        private EntitySlime slime;
+        private final EntitySlime slime;
         private int field_179465_b;
 
         public AISlimeAttack(EntitySlime p_i45824_1_)
@@ -412,7 +412,7 @@ public class EntitySlime extends EntityLiving implements IMob
         public boolean shouldExecute()
         {
             EntityLivingBase entitylivingbase = this.slime.getAttackTarget();
-            return entitylivingbase == null ? false : (!entitylivingbase.isEntityAlive() ? false : !(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer)entitylivingbase).capabilities.disableDamage);
+            return entitylivingbase != null && (entitylivingbase.isEntityAlive() && (!(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer) entitylivingbase).capabilities.disableDamage));
         }
 
         public void startExecuting()
@@ -424,7 +424,7 @@ public class EntitySlime extends EntityLiving implements IMob
         public boolean continueExecuting()
         {
             EntityLivingBase entitylivingbase = this.slime.getAttackTarget();
-            return entitylivingbase == null ? false : (!entitylivingbase.isEntityAlive() ? false : (entitylivingbase instanceof EntityPlayer && ((EntityPlayer)entitylivingbase).capabilities.disableDamage ? false : --this.field_179465_b > 0));
+            return entitylivingbase != null && (entitylivingbase.isEntityAlive() && ((!(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer) entitylivingbase).capabilities.disableDamage) && --this.field_179465_b > 0));
         }
 
         public void updateTask()
@@ -436,7 +436,7 @@ public class EntitySlime extends EntityLiving implements IMob
 
     static class AISlimeFaceRandom extends EntityAIBase
     {
-        private EntitySlime slime;
+        private final EntitySlime slime;
         private float field_179459_b;
         private int field_179460_c;
 
@@ -465,7 +465,7 @@ public class EntitySlime extends EntityLiving implements IMob
 
     static class AISlimeFloat extends EntityAIBase
     {
-        private EntitySlime slime;
+        private final EntitySlime slime;
 
         public AISlimeFloat(EntitySlime p_i45823_1_)
         {
@@ -492,7 +492,7 @@ public class EntitySlime extends EntityLiving implements IMob
 
     static class AISlimeHop extends EntityAIBase
     {
-        private EntitySlime slime;
+        private final EntitySlime slime;
 
         public AISlimeHop(EntitySlime p_i45822_1_)
         {
@@ -515,7 +515,7 @@ public class EntitySlime extends EntityLiving implements IMob
     {
         private float field_179922_g;
         private int field_179924_h;
-        private EntitySlime slime;
+        private final EntitySlime slime;
         private boolean field_179923_j;
 
         public SlimeMoveHelper(EntitySlime p_i45821_1_)

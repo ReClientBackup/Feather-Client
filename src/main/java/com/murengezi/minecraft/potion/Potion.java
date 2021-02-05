@@ -85,7 +85,7 @@ public class Potion {
 
 	/** The Id of a Potion object. */
 	public final int id;
-	private final Map<IAttribute, AttributeModifier> attributeModifierMap = Maps.<IAttribute, AttributeModifier>newHashMap();
+	private final Map<IAttribute, AttributeModifier> attributeModifierMap = Maps.newHashMap();
 
 	/**
 	 * This field indicated if the effect is 'bad' - negative - for the entity.
@@ -231,17 +231,17 @@ public class Potion {
 		if (this.id == regeneration.id)
 		{
 			int k = 50 >> p_76397_2_;
-			return k > 0 ? p_76397_1_ % k == 0 : true;
+			return k <= 0 || p_76397_1_ % k == 0;
 		}
 		else if (this.id == poison.id)
 		{
 			int j = 25 >> p_76397_2_;
-			return j > 0 ? p_76397_1_ % j == 0 : true;
+			return j <= 0 || p_76397_1_ % j == 0;
 		}
 		else if (this.id == wither.id)
 		{
 			int i = 40 >> p_76397_2_;
-			return i > 0 ? p_76397_1_ % i == 0 : true;
+			return i <= 0 || p_76397_1_ % i == 0;
 		}
 		else
 		{

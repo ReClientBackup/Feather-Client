@@ -153,17 +153,11 @@ public class ConnectedTextures
 
             if (d0 < 0.4D)
             {
-                if (iblockstate.getValue(BlockPane.WEST).booleanValue())
-                {
-                    return true;
-                }
+	            return iblockstate.getValue(BlockPane.WEST).booleanValue();
             }
             else if (d0 > 0.6D)
             {
-                if (iblockstate.getValue(BlockPane.EAST).booleanValue())
-                {
-                    return true;
-                }
+	            return iblockstate.getValue(BlockPane.EAST).booleanValue();
             }
             else
             {
@@ -171,10 +165,7 @@ public class ConnectedTextures
 
                 if (d1 < 0.4D)
                 {
-                    if (iblockstate.getValue(BlockPane.NORTH).booleanValue())
-                    {
-                        return true;
-                    }
+	                return iblockstate.getValue(BlockPane.NORTH).booleanValue();
                 }
                 else
                 {
@@ -183,10 +174,7 @@ public class ConnectedTextures
                         return true;
                     }
 
-                    if (iblockstate.getValue(BlockPane.SOUTH).booleanValue())
-                    {
-                        return true;
-                    }
+	                return iblockstate.getValue(BlockPane.SOUTH).booleanValue();
                 }
             }
         }
@@ -1726,7 +1714,7 @@ public class ConnectedTextures
             }
 
             IBlockState iblockstate1 = iblockaccess.getBlockState(blockPos.offset(getFacing(side)));
-            return iblockstate1.getBlock().isOpaqueCube() ? false : (side == 1 && iblockstate1.getBlock() == Blocks.snow_layer ? false : !isNeighbour(cp, iblockaccess, blockState, blockPos, iblockstate, side, icon, metadata));
+            return !iblockstate1.getBlock().isOpaqueCube() && ((side != 1 || iblockstate1.getBlock() != Blocks.snow_layer) && !isNeighbour(cp, iblockaccess, blockState, blockPos, iblockstate, side, icon, metadata));
         }
     }
 
@@ -1739,7 +1727,7 @@ public class ConnectedTextures
         else
         {
             Block block = state.getBlock();
-            return block instanceof BlockGlass ? true : block instanceof BlockStainedGlass;
+            return block instanceof BlockGlass || block instanceof BlockStainedGlass;
         }
     }
 
@@ -1774,7 +1762,7 @@ public class ConnectedTextures
             }
 
             IBlockState iblockstate1 = iblockaccess.getBlockState(blockPos.offset(getFacing(side)));
-            return iblockstate1.getBlock().isOpaqueCube() ? false : side != 1 || iblockstate1.getBlock() != Blocks.snow_layer;
+            return !iblockstate1.getBlock().isOpaqueCube() && (side != 1 || iblockstate1.getBlock() != Blocks.snow_layer);
         }
     }
 
@@ -1808,7 +1796,7 @@ public class ConnectedTextures
         }
         else if (cp.connect == 3)
         {
-            return neighbourState == null ? false : (neighbourState == AIR_DEFAULT_STATE ? false : neighbourState.getBlock().getMaterial() == blockState.getBlock().getMaterial());
+            return neighbourState != null && (neighbourState != AIR_DEFAULT_STATE && neighbourState.getBlock().getMaterial() == blockState.getBlock().getMaterial());
         }
         else if (!(neighbourState instanceof BlockStateBase))
         {

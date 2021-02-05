@@ -36,7 +36,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 {
     /** The location of the creative inventory tabs texture */
     private static final ResourceLocation creativeInventoryTabs = new ResourceLocation("textures/gui/container/creative_inventory/tabs.png");
-    private static InventoryBasic field_147060_v = new InventoryBasic("tmp", true, 45);
+    private static final InventoryBasic field_147060_v = new InventoryBasic("tmp", true, 45);
 
     /** Currently selected creative inventory tab index. */
     private static int selectedTabIndex = CreativeTabs.tabBlock.getTabIndex();
@@ -396,7 +396,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         if (creativetabs.drawInForegroundOfTab())
         {
             GlStateManager.disableBlend();
-            getFr().drawString(I18n.format(creativetabs.getTranslatedTabLabel(), new Object[0]), 8, 6, 4210752);
+            getFr().drawString(I18n.format(creativetabs.getTranslatedTabLabel()), 8, 6, 4210752);
         }
     }
 
@@ -470,7 +470,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
                 this.field_147063_B = guicontainercreative$containercreative.inventorySlots;
             }
 
-            guicontainercreative$containercreative.inventorySlots = Lists.<Slot>newArrayList();
+            guicontainercreative$containercreative.inventorySlots = Lists.newArrayList();
 
             for (int j = 0; j < container.inventorySlots.size(); ++j)
             {
@@ -611,7 +611,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 
         if (this.field_147064_C != null && selectedTabIndex == CreativeTabs.tabInventory.getTabIndex() && this.isPointInRegion(this.field_147064_C.xDisplayPosition, this.field_147064_C.yDisplayPosition, 16, 16, mouseX, mouseY))
         {
-            this.drawCreativeTabHoveringText(I18n.format("inventory.binSlot", new Object[0]), mouseX, mouseY);
+            this.drawCreativeTabHoveringText(I18n.format("inventory.binSlot"), mouseX, mouseY);
         }
 
         GlStateManager.colorAllMax();
@@ -646,7 +646,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 
             if (creativetabs != null)
             {
-                list.add(1, "" + EnumChatFormatting.BOLD + EnumChatFormatting.BLUE + I18n.format(creativetabs.getTranslatedTabLabel(), new Object[0]));
+                list.add(1, "" + EnumChatFormatting.BOLD + EnumChatFormatting.BLUE + I18n.format(creativetabs.getTranslatedTabLabel()));
             }
 
             for (int i = 0; i < list.size(); ++i)
@@ -767,7 +767,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 
         if (this.isPointInRegion(j + 3, k + 3, 23, 27, p_147052_2_, p_147052_3_))
         {
-            this.drawCreativeTabHoveringText(I18n.format(p_147052_1_.getTranslatedTabLabel(), new Object[0]), p_147052_2_, p_147052_3_);
+            this.drawCreativeTabHoveringText(I18n.format(p_147052_1_.getTranslatedTabLabel()), p_147052_2_, p_147052_3_);
             return true;
         }
         else
@@ -850,7 +850,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 
     static class ContainerCreative extends Container
     {
-        public List<ItemStack> itemList = Lists.<ItemStack>newArrayList();
+        public List<ItemStack> itemList = Lists.newArrayList();
 
         public ContainerCreative(EntityPlayer p_i1086_1_)
         {

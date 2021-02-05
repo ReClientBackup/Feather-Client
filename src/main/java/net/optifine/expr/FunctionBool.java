@@ -2,8 +2,8 @@ package net.optifine.expr;
 
 public class FunctionBool implements IExpressionBool
 {
-    private FunctionType type;
-    private IExpression[] arguments;
+    private final FunctionType type;
+    private final IExpression[] arguments;
 
     public FunctionBool(FunctionType type, IExpression[] arguments)
     {

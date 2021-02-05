@@ -16,10 +16,10 @@ import net.optifine.util.IteratorCache;
 public class ClassInheritanceMultiMap<T> extends AbstractSet<T>
 {
     private static final Set < Class<? >> field_181158_a = Collections. < Class<? >> newSetFromMap(new ConcurrentHashMap());
-    private final Map < Class<?>, List<T >> map = Maps. < Class<?>, List<T >> newHashMap();
-    private final Set < Class<? >> knownKeys = Sets. < Class<? >> newIdentityHashSet();
+    private final Map < Class<?>, List<T >> map = Maps.newHashMap();
+    private final Set < Class<? >> knownKeys = Sets.newIdentityHashSet();
     private final Class<T> baseClass;
-    private final List<T> field_181745_e = Lists.<T>newArrayList();
+    private final List<T> field_181745_e = Lists.newArrayList();
     public boolean empty;
 
     public ClassInheritanceMultiMap(Class<T> baseClassIn)
@@ -67,7 +67,7 @@ public class ClassInheritanceMultiMap<T> extends AbstractSet<T>
         }
         else
         {
-            throw new IllegalArgumentException("Don\'t know how to search for " + p_181157_1_);
+            throw new IllegalArgumentException("Don't know how to search for " + p_181157_1_);
         }
     }
 
@@ -138,7 +138,7 @@ public class ClassInheritanceMultiMap<T> extends AbstractSet<T>
 
                 if (list == null)
                 {
-                    return Iterators.<S>emptyIterator();
+                    return Iterators.emptyIterator();
                 }
                 else
                 {

@@ -20,7 +20,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderPlayer extends RendererLivingEntity<AbstractClientPlayer> {
     /** this field is used to indicate the 3-pixel wide arms */
-    private boolean smallArms;
+    private final boolean smallArms;
 
     public RenderPlayer(RenderManager renderManager)
     {

@@ -83,7 +83,7 @@ public class BlockSnow extends Block
     {
         IBlockState iblockstate = worldIn.getBlockState(pos.down());
         Block block = iblockstate.getBlock();
-        return block != Blocks.ice && block != Blocks.packed_ice ? (block.getMaterial() == Material.leaves ? true : (block == this && iblockstate.getValue(LAYERS).intValue() >= 7 ? true : block.isOpaqueCube() && block.blockMaterial.blocksMovement())) : false;
+        return block != Blocks.ice && block != Blocks.packed_ice && (block.getMaterial() == Material.leaves || (block == this && iblockstate.getValue(LAYERS).intValue() >= 7 || block.isOpaqueCube() && block.blockMaterial.blocksMovement()));
     }
 
     /**
@@ -144,7 +144,7 @@ public class BlockSnow extends Block
 
     public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
     {
-        return side == EnumFacing.UP ? true : super.shouldSideBeRendered(worldIn, pos, side);
+        return side == EnumFacing.UP || super.shouldSideBeRendered(worldIn, pos, side);
     }
 
     /**
@@ -173,6 +173,6 @@ public class BlockSnow extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {LAYERS});
+        return new BlockState(this, LAYERS);
     }
 }

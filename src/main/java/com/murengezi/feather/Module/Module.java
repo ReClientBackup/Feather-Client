@@ -25,7 +25,7 @@ public class Module extends MinecraftUtils {
     private int keyBind = getClass().getAnnotation(ModuleInfo.class).keyBind();
     private boolean enabled = getClass().getAnnotation(ModuleInfo.class).enabled();
 
-    private List<Setting> settings;
+    private final List<Setting> settings;
 
     public Module() {
         if (isEnabled()) {

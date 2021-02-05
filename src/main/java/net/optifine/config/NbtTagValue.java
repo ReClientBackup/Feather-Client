@@ -79,7 +79,7 @@ public class NbtTagValue
 
     public boolean matches(NBTTagCompound nbt)
     {
-        return this.negative ? !this.matchesCompound(nbt) : this.matchesCompound(nbt);
+        return this.negative != this.matchesCompound(nbt);
     }
 
     public boolean matchesCompound(NBTTagCompound nbt)
@@ -115,14 +115,7 @@ public class NbtTagValue
                 {
                     return false;
                 }
-                else if (this.matchesBase(nbtbase))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                else return this.matchesBase(nbtbase);
             }
         }
     }

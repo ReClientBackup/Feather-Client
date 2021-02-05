@@ -9,8 +9,8 @@ import com.murengezi.feather.Module.Module;
  */
 public class ModuleDisableEvent implements Event {
 
-    private Module module;
-    private boolean save;
+    private final Module module;
+    private final boolean save;
 
     public ModuleDisableEvent(Module module, boolean save) {
         this.module = module;

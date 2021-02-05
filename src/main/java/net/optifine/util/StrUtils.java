@@ -157,7 +157,7 @@ public class StrUtils
             }
             else
             {
-                String s = str.substring(str.length() - mask.length(), str.length());
+                String s = str.substring(str.length() - mask.length());
                 return equalsMaskSingle(s, mask, wildCharSingle);
             }
         }
@@ -302,7 +302,7 @@ public class StrUtils
                     }
                 }
 
-                list.add(str.substring(i, str.length()));
+                list.add(str.substring(i));
                 return (String[]) list.toArray(new String[list.size()]);
             }
         }
@@ -342,7 +342,7 @@ public class StrUtils
 
     public static boolean isEmpty(String string)
     {
-        return string == null ? true : string.trim().length() <= 0;
+        return string == null || string.trim().length() <= 0;
     }
 
     public static String stringInc(String str)
@@ -449,7 +449,7 @@ public class StrUtils
 
     public static boolean equals(Object a, Object b)
     {
-        return a == b ? true : (a != null && a.equals(b) ? true : b != null && b.equals(a));
+        return a == b || (a != null && a.equals(b) || b != null && b.equals(a));
     }
 
     public static boolean startsWith(String str, String[] prefixes)

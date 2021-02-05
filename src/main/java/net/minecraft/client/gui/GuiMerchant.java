@@ -30,7 +30,7 @@ public class GuiMerchant extends GuiContainer
     private static final ResourceLocation MERCHANT_GUI_TEXTURE = new ResourceLocation("textures/gui/container/villager.png");
 
     /** The current IMerchant instance in use for this specific merchant. */
-    private IMerchant merchant;
+    private final IMerchant merchant;
 
     /** The button which proceeds to the next available merchant recipe. */
     private GuiMerchant.MerchantButton nextButton;
@@ -44,7 +44,7 @@ public class GuiMerchant extends GuiContainer
     private int selectedMerchantRecipe;
 
     /** The chat component utilized by this GuiMerchant instance. */
-    private IChatComponent chatComponent;
+    private final IChatComponent chatComponent;
 
     public GuiMerchant(InventoryPlayer p_i45500_1_, IMerchant p_i45500_2_, World worldIn)
     {
@@ -219,7 +219,7 @@ public class GuiMerchant extends GuiContainer
             }
             else if (merchantrecipe.isRecipeDisabled() && (this.isPointInRegion(83, 21, 28, 21, mouseX, mouseY) || this.isPointInRegion(83, 51, 28, 21, mouseX, mouseY)))
             {
-                this.drawCreativeTabHoveringText(I18n.format("merchant.deprecated", new Object[0]), mouseX, mouseY);
+                this.drawCreativeTabHoveringText(I18n.format("merchant.deprecated"), mouseX, mouseY);
             }
 
             GlStateManager.popMatrix();

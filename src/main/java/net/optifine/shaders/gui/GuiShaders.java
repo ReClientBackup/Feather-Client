@@ -22,14 +22,14 @@ public class GuiShaders extends Screen
 {
     protected Screen parentGui;
     protected String screenTitle = "Shaders";
-    private TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderEnumShaderOptions());
+    private final TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderEnumShaderOptions());
     private int updateTimer = -1;
     private GuiSlotShaders shaderList;
     private boolean saved = false;
-    private static float[] QUALITY_MULTIPLIERS = new float[] {0.5F, 0.70710677F, 1.0F, 1.4142135F, 2.0F};
-    private static String[] QUALITY_MULTIPLIER_NAMES = new String[] {"0.5x", "0.7x", "1x", "1.5x", "2x"};
-    private static float[] HAND_DEPTH_VALUES = new float[] {0.0625F, 0.125F, 0.25F};
-    private static String[] HAND_DEPTH_NAMES = new String[] {"0.5x", "1x", "2x"};
+    private static final float[] QUALITY_MULTIPLIERS = new float[] {0.5F, 0.70710677F, 1.0F, 1.4142135F, 2.0F};
+    private static final String[] QUALITY_MULTIPLIER_NAMES = new String[] {"0.5x", "0.7x", "1x", "1.5x", "2x"};
+    private static final float[] HAND_DEPTH_VALUES = new float[] {0.0625F, 0.125F, 0.25F};
+    private static final String[] HAND_DEPTH_NAMES = new String[] {"0.5x", "1x", "2x"};
     public static final int EnumOS_UNKNOWN = 0;
     public static final int EnumOS_WINDOWS = 1;
     public static final int EnumOS_OSX = 2;
@@ -47,7 +47,7 @@ public class GuiShaders extends Screen
      */
     public void initGui()
     {
-        this.screenTitle = I18n.format("of.options.shadersTitle", new Object[0]);
+        this.screenTitle = I18n.format("of.options.shadersTitle");
 
         if (Shaders.shadersConfig == null)
         {
@@ -75,7 +75,7 @@ public class GuiShaders extends Screen
         int i2 = this.height - 25;
         this.buttonList.add(new GuiButton(201, l1, i2, k1 - 22 + 1, j, Lang.get("of.options.shaders.shadersFolder")));
         this.buttonList.add(new GuiButtonDownloadShaders(210, l1 + k1 - 22 - 1, i2));
-        this.buttonList.add(new GuiButton(202, j1 / 4 * 3 - k1 / 2, this.height - 25, k1, j, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiButton(202, j1 / 4 * 3 - k1 / 2, this.height - 25, k1, j, I18n.format("gui.done")));
         this.buttonList.add(new GuiButton(203, k, this.height - 25, i, j, Lang.get("of.options.shaders.shaderOptions")));
         this.updateButtons();
     }
@@ -276,7 +276,7 @@ public class GuiShaders extends Screen
                         switch (getOSType())
                         {
                             case 1:
-                                String s = String.format("cmd.exe /C start \"Open file\" \"%s\"", new Object[] {Shaders.shaderPacksDir.getAbsolutePath()});
+                                String s = String.format("cmd.exe /C start \"Open file\" \"%s\"", Shaders.shaderPacksDir.getAbsolutePath());
 
                                 try
                                 {
@@ -306,8 +306,8 @@ public class GuiShaders extends Screen
                         try
                         {
                             Class oclass1 = Class.forName("java.awt.Desktop");
-                            Object object1 = oclass1.getMethod("getDesktop", new Class[0]).invoke(null, new Object[0]);
-                            oclass1.getMethod("browse", new Class[] {URI.class}).invoke(object1, new Object[] {(new File(getMc().mcDataDir, "shaderpacks")).toURI()});
+                            Object object1 = oclass1.getMethod("getDesktop").invoke(null);
+                            oclass1.getMethod("browse", URI.class).invoke(object1, (new File(getMc().mcDataDir, "shaderpacks")).toURI());
                         }
                         catch (Throwable throwable1)
                         {

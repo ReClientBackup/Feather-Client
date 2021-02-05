@@ -33,7 +33,7 @@ public class ModelRendererUV extends ModelRenderer
     public List<ModelBox> cubeList;
     public List<ModelRenderer> childModels;
     public final String boxName;
-    private ModelBase baseModel;
+    private final ModelBase baseModel;
     public float offsetX;
     public float offsetY;
     public float offsetZ;
@@ -44,7 +44,7 @@ public class ModelRendererUV extends ModelRenderer
         this.textureWidth = 64.0F;
         this.textureHeight = 32.0F;
         this.showModel = true;
-        this.cubeList = Lists.<ModelBox>newArrayList();
+        this.cubeList = Lists.newArrayList();
         this.baseModel = model;
         model.boxList.add(this);
         this.boxName = boxNameIn;
@@ -53,7 +53,7 @@ public class ModelRendererUV extends ModelRenderer
 
     public ModelRendererUV(ModelBase model)
     {
-        this(model, (String)null);
+        this(model, null);
     }
 
     public ModelRendererUV(ModelBase model, int texOffX, int texOffY)
@@ -69,7 +69,7 @@ public class ModelRendererUV extends ModelRenderer
     {
         if (this.childModels == null)
         {
-            this.childModels = Lists.<ModelRenderer>newArrayList();
+            this.childModels = Lists.newArrayList();
         }
 
         this.childModels.add(renderer);

@@ -45,7 +45,7 @@ public class IMetadataSerializer
         }
         else if (!p_110503_2_.get(p_110503_1_).isJsonObject())
         {
-            throw new IllegalArgumentException("Invalid metadata for \'" + p_110503_1_ + "\' - expected object, found " + p_110503_2_.get(p_110503_1_));
+            throw new IllegalArgumentException("Invalid metadata for '" + p_110503_1_ + "' - expected object, found " + p_110503_2_.get(p_110503_1_));
         }
         else
         {
@@ -53,7 +53,7 @@ public class IMetadataSerializer
 
             if (registration == null)
             {
-                throw new IllegalArgumentException("Don\'t know how to handle metadata section \'" + p_110503_1_ + "\'");
+                throw new IllegalArgumentException("Don't know how to handle metadata section '" + p_110503_1_ + "'");
             }
             else
             {

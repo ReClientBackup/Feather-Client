@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 public class EntityDropParticleFX extends EntityFX
 {
     /** the material type for dropped items/blocks */
-    private Material materialType;
+    private final Material materialType;
 
     /** The height of the current bob */
     private int bobTimer;
@@ -107,7 +107,7 @@ public class EntityDropParticleFX extends EntityFX
             if (this.materialType == Material.water)
             {
                 this.setDead();
-                this.worldObj.spawnParticle(EnumParticleTypes.WATER_SPLASH, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D, new int[0]);
+                this.worldObj.spawnParticle(EnumParticleTypes.WATER_SPLASH, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
             }
             else
             {

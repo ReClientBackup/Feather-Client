@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public class BlockLever extends Block
 {
-    public static final PropertyEnum<BlockLever.EnumOrientation> FACING = PropertyEnum.<BlockLever.EnumOrientation>create("facing", BlockLever.EnumOrientation.class);
+    public static final PropertyEnum<BlockLever.EnumOrientation> FACING = PropertyEnum.create("facing", BlockLever.EnumOrientation.class);
     public static final PropertyBool POWERED = PropertyBool.create("powered");
 
     protected BlockLever()
@@ -267,10 +267,10 @@ public class BlockLever extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING, POWERED});
+        return new BlockState(this, FACING, POWERED);
     }
 
-    public static enum EnumOrientation implements IStringSerializable
+    public enum EnumOrientation implements IStringSerializable
     {
         DOWN_X(0, "down_x", EnumFacing.DOWN),
         EAST(1, "east", EnumFacing.EAST),
@@ -286,7 +286,7 @@ public class BlockLever extends Block
         private final String name;
         private final EnumFacing facing;
 
-        private EnumOrientation(int meta, String name, EnumFacing facing)
+        EnumOrientation(int meta, String name, EnumFacing facing)
         {
             this.meta = meta;
             this.name = name;

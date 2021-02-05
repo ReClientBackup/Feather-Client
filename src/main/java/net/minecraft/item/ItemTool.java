@@ -12,11 +12,11 @@ import net.minecraft.world.World;
 
 public class ItemTool extends Item
 {
-    private Set<Block> effectiveBlocks;
+    private final Set<Block> effectiveBlocks;
     protected float efficiencyOnProperMaterial = 4.0F;
 
     /** Damage versus entities. */
-    private float damageVsEntity;
+    private final float damageVsEntity;
 
     /** The material this tool is made from. */
     protected Item.ToolMaterial toolMaterial;
@@ -100,7 +100,7 @@ public class ItemTool extends Item
      */
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
-        return this.toolMaterial.getRepairItem() == repair.getItem() ? true : super.getIsRepairable(toRepair, repair);
+        return this.toolMaterial.getRepairItem() == repair.getItem() || super.getIsRepairable(toRepair, repair);
     }
 
     public Multimap<String, AttributeModifier> getItemAttributeModifiers()

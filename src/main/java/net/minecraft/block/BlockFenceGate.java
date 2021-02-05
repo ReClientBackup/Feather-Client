@@ -46,7 +46,7 @@ public class BlockFenceGate extends BlockDirectional
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        return worldIn.getBlockState(pos.down()).getBlock().getMaterial().isSolid() ? super.canPlaceBlockAt(worldIn, pos) : false;
+        return worldIn.getBlockState(pos.down()).getBlock().getMaterial().isSolid() && super.canPlaceBlockAt(worldIn, pos);
     }
 
     public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
@@ -192,6 +192,6 @@ public class BlockFenceGate extends BlockDirectional
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING, OPEN, POWERED, IN_WALL});
+        return new BlockState(this, FACING, OPEN, POWERED, IN_WALL);
     }
 }

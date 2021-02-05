@@ -14,12 +14,12 @@ import net.minecraft.util.IntHashMap;
 
 public class GuiPageButtonList extends GuiListExtended
 {
-    private final List<GuiPageButtonList.GuiEntry> field_178074_u = Lists.<GuiPageButtonList.GuiEntry>newArrayList();
+    private final List<GuiPageButtonList.GuiEntry> field_178074_u = Lists.newArrayList();
     private final IntHashMap<GUI> field_178073_v = new IntHashMap();
-    private final List<GuiTextField> field_178072_w = Lists.<GuiTextField>newArrayList();
+    private final List<GuiTextField> field_178072_w = Lists.newArrayList();
     private final GuiPageButtonList.GuiListEntry[][] field_178078_x;
     private int field_178077_y;
-    private GuiPageButtonList.GuiResponder field_178076_z;
+    private final GuiPageButtonList.GuiResponder field_178076_z;
     private GUI field_178075_A;
 
     public GuiPageButtonList(int widthIn, int heightIn, int topIn, int bottomIn, int slotHeightIn, GuiPageButtonList.GuiResponder p_i45536_7_, GuiPageButtonList.GuiListEntry[]... p_i45536_8_)

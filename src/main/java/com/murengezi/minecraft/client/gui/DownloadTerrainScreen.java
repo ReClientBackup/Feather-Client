@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class DownloadTerrainScreen extends Screen {
 
-	private NetHandlerPlayClient netHandlerPlayClient;
+	private final NetHandlerPlayClient netHandlerPlayClient;
 	private int progress;
 
 

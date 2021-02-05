@@ -53,7 +53,7 @@ public class EntitySheep extends EntityAnimal
      * tick.
      */
     private int sheepTimer;
-    private EntityAIEatGrass entityAIEatGrass = new EntityAIEatGrass(this);
+    private final EntityAIEatGrass entityAIEatGrass = new EntityAIEatGrass(this);
 
     public static float[] func_175513_a(EnumDyeColor dyeColor)
     {

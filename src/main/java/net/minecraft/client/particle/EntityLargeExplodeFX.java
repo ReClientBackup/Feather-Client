@@ -17,11 +17,11 @@ public class EntityLargeExplodeFX extends EntityFX
     private static final ResourceLocation EXPLOSION_TEXTURE = new ResourceLocation("textures/entity/explosion.png");
     private static final VertexFormat field_181549_az = (new VertexFormat()).func_181721_a(DefaultVertexFormats.POSITION_3F).func_181721_a(DefaultVertexFormats.TEX_2F).func_181721_a(DefaultVertexFormats.COLOR_4UB).func_181721_a(DefaultVertexFormats.TEX_2S).func_181721_a(DefaultVertexFormats.NORMAL_3B).func_181721_a(DefaultVertexFormats.PADDING_1B);
     private int field_70581_a;
-    private int field_70584_aq;
+    private final int field_70584_aq;
 
     /** The Rendering Engine. */
-    private TextureManager theRenderEngine;
-    private float field_70582_as;
+    private final TextureManager theRenderEngine;
+    private final float field_70582_as;
 
     protected EntityLargeExplodeFX(TextureManager renderEngine, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double p_i1213_9_, double p_i1213_11_, double p_i1213_13_)
     {

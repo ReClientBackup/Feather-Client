@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public class BlockSilverfish extends Block
 {
-    public static final PropertyEnum<BlockSilverfish.EnumType> VARIANT = PropertyEnum.<BlockSilverfish.EnumType>create("variant", BlockSilverfish.EnumType.class);
+    public static final PropertyEnum<BlockSilverfish.EnumType> VARIANT = PropertyEnum.create("variant", BlockSilverfish.EnumType.class);
 
     public BlockSilverfish()
     {
@@ -118,10 +118,10 @@ public class BlockSilverfish extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {VARIANT});
+        return new BlockState(this, VARIANT);
     }
 
-    public static enum EnumType implements IStringSerializable
+    public enum EnumType implements IStringSerializable
     {
         STONE(0, "stone")
         {
@@ -171,12 +171,12 @@ public class BlockSilverfish extends Block
         private final String name;
         private final String unlocalizedName;
 
-        private EnumType(int meta, String name)
+        EnumType(int meta, String name)
         {
             this(meta, name, name);
         }
 
-        private EnumType(int meta, String name, String unlocalizedName)
+        EnumType(int meta, String name, String unlocalizedName)
         {
             this.meta = meta;
             this.name = name;

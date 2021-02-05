@@ -2,6 +2,8 @@ package net.minecraft.client.gui.achievement;
 
 import java.io.IOException;
 import java.util.Random;
+
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.gui.GuiButton;
@@ -43,7 +45,7 @@ public class GuiAchievements extends Screen implements IProgressMeter
     protected double field_146565_w;
     protected double field_146573_x;
     private int field_146554_D;
-    private StatFileWriter statFileWriter;
+    private final StatFileWriter statFileWriter;
     private boolean loadingAchievements = true;
 
     public GuiAchievements(Screen parentScreenIn, StatFileWriter statFileWriterIn)
@@ -64,7 +66,7 @@ public class GuiAchievements extends Screen implements IProgressMeter
     {
         getMc().getNetHandler().addToSendQueue(new C16PacketClientStatus(C16PacketClientStatus.EnumState.REQUEST_STATS));
         this.buttonList.clear();
-        this.buttonList.add(new GuiOptionButton(1, this.width / 2 + 24, this.height / 2 + 74, 80, 20, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiOptionButton(1, this.width / 2 + 24, this.height / 2 + 74, 80, 20, I18n.format("gui.done")));
     }
 
     /**
@@ -106,7 +108,7 @@ public class GuiAchievements extends Screen implements IProgressMeter
         if (this.loadingAchievements)
         {
             this.drawDefaultBackground();
-            this.drawCenteredString(getFr(), I18n.format("multiplayer.downloadingStats", new Object[0]), this.width / 2, this.height / 2, 16777215);
+            this.drawCenteredString(getFr(), I18n.format("multiplayer.downloadingStats"), this.width / 2, this.height / 2, 16777215);
             this.drawCenteredString(getFr(), lanSearchStates[(int)(Minecraft.getSystemTime() / 150L % (long)lanSearchStates.length)], this.width / 2, this.height / 2 + getFr().FONT_HEIGHT * 2, 16777215);
         }
         else
@@ -235,7 +237,7 @@ public class GuiAchievements extends Screen implements IProgressMeter
     {
         int i = (this.width - this.field_146555_f) / 2;
         int j = (this.height - this.field_146557_g) / 2;
-        getFr().drawString(I18n.format("gui.achievements", new Object[0]), i + 15, j + 5, 4210752);
+        getFr().drawString(I18n.format("gui.achievements"), i + 15, j + 5, 4210752);
     }
 
     protected void drawAchievementScreen(int p_146552_1_, int p_146552_2_, float p_146552_3_)
@@ -372,8 +374,8 @@ public class GuiAchievements extends Screen implements IProgressMeter
                         l4 = -16711936;
                     }
 
-                    this.drawHorizontalLine(k5, j6, l5, l4);
-                    this.drawVerticalLine(j6, l5, k6, l4);
+                    drawHorizontalLine(k5, j6, l5, l4);
+                    drawVerticalLine(j6, l5, k6, l4);
 
                     if (k5 > j6)
                     {
@@ -517,14 +519,14 @@ public class GuiAchievements extends Screen implements IProgressMeter
 
                 if (this.statFileWriter.hasAchievementUnlocked(achievement))
                 {
-                    getFr().drawStringWithShadow(I18n.format("achievement.taken", new Object[0]), (float)i7, (float)(k7 + i9 + 4), -7302913);
+                    getFr().drawStringWithShadow(I18n.format("achievement.taken"), (float)i7, (float)(k7 + i9 + 4), -7302913);
                 }
             }
             else if (i8 == 3)
             {
-                s = I18n.format("achievement.unknown", new Object[0]);
+                s = I18n.format("achievement.unknown");
                 int k8 = Math.max(getFr().getStringWidth(s), 120);
-                String s2 = (new ChatComponentTranslation("achievement.requires", new Object[] {achievement.parentAchievement.getStatName()})).getUnformattedText();
+                String s2 = (new ChatComponentTranslation("achievement.requires", achievement.parentAchievement.getStatName())).getUnformattedText();
                 int i5 = getFr().splitStringWidth(s2, k8);
                 this.drawGradientRect(i7 - 3, k7 - 3, i7 + k8 + 3, k7 + i5 + 12 + 3, -1073741824, -1073741824);
                 getFr().drawSplitString(s2, i7, k7 + 12, k8, -9416624);
@@ -532,7 +534,7 @@ public class GuiAchievements extends Screen implements IProgressMeter
             else if (i8 < 3)
             {
                 int l8 = Math.max(getFr().getStringWidth(s), 120);
-                String s3 = (new ChatComponentTranslation("achievement.requires", new Object[] {achievement.parentAchievement.getStatName()})).getUnformattedText();
+                String s3 = (new ChatComponentTranslation("achievement.requires", achievement.parentAchievement.getStatName())).getUnformattedText();
                 int j9 = getFr().splitStringWidth(s3, l8);
                 this.drawGradientRect(i7 - 3, k7 - 3, i7 + l8 + 3, k7 + j9 + 12 + 3, -1073741824, -1073741824);
                 getFr().drawSplitString(s3, i7, k7 + 12, l8, -9416624);

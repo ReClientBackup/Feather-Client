@@ -41,7 +41,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
     private final Minecraft mc = Minecraft.getMinecraft();
     private final ModelResourceLocation itemFrameModel = new ModelResourceLocation("item_frame", "normal");
     private final ModelResourceLocation mapModel = new ModelResourceLocation("item_frame", "map");
-    private RenderItem itemRenderer;
+    private final RenderItem itemRenderer;
     private static double itemRenderDistanceSq = 4096.0D;
 
     public RenderItemFrame(RenderManager renderManagerIn, RenderItem itemRendererIn)
@@ -136,7 +136,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
 
             GlStateManager.rotate((float)i * 360.0F / 8.0F, 0.0F, 0.0F, 1.0F);
 
-            if (!Reflector.postForgeBusEvent(Reflector.RenderItemInFrameEvent_Constructor, new Object[] {itemFrame, this}))
+            if (!Reflector.postForgeBusEvent(Reflector.RenderItemInFrameEvent_Constructor, itemFrame, this))
             {
                 if (item instanceof ItemMap)
                 {
@@ -269,10 +269,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
                 Entity entity = this.mc.getRenderViewEntity();
                 double d0 = p_isRenderItem_1_.getDistanceSq(entity.posX, entity.posY, entity.posZ);
 
-                if (d0 > itemRenderDistanceSq)
-                {
-                    return false;
-                }
+                return !(d0 > itemRenderDistanceSq);
             }
 
             return true;

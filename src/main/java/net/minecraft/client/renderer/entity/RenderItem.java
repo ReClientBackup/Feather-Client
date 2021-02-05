@@ -319,7 +319,7 @@ public class RenderItem implements IResourceManagerReloadListener
 
     public boolean shouldRenderItemIn3D(ItemStack stack) {
         IBakedModel ibakedmodel = this.itemModelMesher.getItemModel(stack);
-        return ibakedmodel == null ? false : ibakedmodel.isGui3d();
+        return ibakedmodel != null && ibakedmodel.isGui3d();
     }
 
     private void preTransform(ItemStack stack) {
@@ -552,7 +552,7 @@ public class RenderItem implements IResourceManagerReloadListener
 
                 if (Reflector.ForgeItem_getDurabilityForDisplay.exists())
                 {
-                    double d0 = Reflector.callDouble(stack.getItem(), Reflector.ForgeItem_getDurabilityForDisplay, new Object[] {stack});
+                    double d0 = Reflector.callDouble(stack.getItem(), Reflector.ForgeItem_getDurabilityForDisplay, stack);
                     j1 = (int)Math.round(13.0D - d0 * 13.0D);
                     i = (int)Math.round(255.0D - d0 * 255.0D);
                 }
@@ -1151,7 +1151,7 @@ public class RenderItem implements IResourceManagerReloadListener
 
         if (Reflector.ModelLoader_onRegisterItems.exists())
         {
-            Reflector.call(Reflector.ModelLoader_onRegisterItems, new Object[] {this.itemModelMesher});
+            Reflector.call(Reflector.ModelLoader_onRegisterItems, this.itemModelMesher);
         }
     }
 

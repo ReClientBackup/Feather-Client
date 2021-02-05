@@ -43,14 +43,14 @@ import net.optifine.reflect.Reflector;
 public class WorldClient extends World
 {
     /** The packets that need to be sent to the server. */
-    private NetHandlerPlayClient sendQueue;
+    private final NetHandlerPlayClient sendQueue;
 
     /** The ChunkProviderClient instance */
     private ChunkProviderClient clientChunkProvider;
-    private final Set<Entity> entityList = Sets.<Entity>newHashSet();
-    private final Set<Entity> entitySpawnQueue = Sets.<Entity>newHashSet();
+    private final Set<Entity> entityList = Sets.newHashSet();
+    private final Set<Entity> entitySpawnQueue = Sets.newHashSet();
     private final Minecraft mc = Minecraft.getMinecraft();
-    private final Set<ChunkCoordIntPair> previousActiveChunkSet = Sets.<ChunkCoordIntPair>newHashSet();
+    private final Set<ChunkCoordIntPair> previousActiveChunkSet = Sets.newHashSet();
     private boolean playerUpdate = false;
 
     public WorldClient(NetHandlerPlayClient netHandlerPlayClient, WorldSettings worldSettings, int dimension, EnumDifficulty enumDifficulty, Profiler profiler) {
@@ -63,7 +63,7 @@ public class WorldClient extends World
         this.mapStorage = new SaveDataMemoryStorage();
         this.calculateInitialSkylight();
         this.calculateInitialWeather();
-        Reflector.postForgeBusEvent(Reflector.WorldEvent_Load_Constructor, new Object[] {this});
+        Reflector.postForgeBusEvent(Reflector.WorldEvent_Load_Constructor, this);
 
         if (this.mc.playerController != null && this.mc.playerController.getClass() == PlayerControllerMP.class)
         {
@@ -205,10 +205,7 @@ public class WorldClient extends World
     {
         super.onEntityAdded(entityIn);
 
-        if (this.entitySpawnQueue.contains(entityIn))
-        {
-            this.entitySpawnQueue.remove(entityIn);
-        }
+        this.entitySpawnQueue.remove(entityIn);
     }
 
     protected void onEntityRemoved(Entity entityIn)
@@ -322,7 +319,7 @@ public class WorldClient extends World
 
             if (flag && iblockstate.getBlock() == Blocks.barrier)
             {
-                this.spawnParticle(EnumParticleTypes.BARRIER, (float)k + 0.5F, (float)l + 0.5F, (float)i1 + 0.5F, 0.0D, 0.0D, 0.0D, new int[0]);
+                this.spawnParticle(EnumParticleTypes.BARRIER, (float)k + 0.5F, (float)l + 0.5F, (float)i1 + 0.5F, 0.0D, 0.0D, 0.0D);
             }
         }
     }

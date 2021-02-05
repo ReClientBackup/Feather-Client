@@ -19,7 +19,7 @@ public class LoadingScreenRenderer implements IProgressUpdate
     private String message = "";
 
     /** A reference to the Minecraft object. */
-    private Minecraft mc;
+    private final Minecraft mc;
 
     /**
      * The text currently displayed (i.e. the argument to the last call to printText or displayString)
@@ -29,8 +29,8 @@ public class LoadingScreenRenderer implements IProgressUpdate
     /** The system's time represented in milliseconds. */
     private long systemTime = Minecraft.getSystemTime();
     private boolean field_73724_e;
-    private ScaledResolution scaledResolution;
-    private Framebuffer framebuffer;
+    private final ScaledResolution scaledResolution;
+    private final Framebuffer framebuffer;
 
     public LoadingScreenRenderer(Minecraft mcIn)
     {
@@ -164,11 +164,11 @@ public class LoadingScreenRenderer implements IProgressUpdate
 
                 if (Reflector.FMLClientHandler_handleLoadingScreen.exists())
                 {
-                    Object object = Reflector.call(Reflector.FMLClientHandler_instance, new Object[0]);
+                    Object object = Reflector.call(Reflector.FMLClientHandler_instance);
 
                     if (object != null)
                     {
-                        flag = !Reflector.callBoolean(object, Reflector.FMLClientHandler_handleLoadingScreen, new Object[] {scaledresolution});
+                        flag = !Reflector.callBoolean(object, Reflector.FMLClientHandler_handleLoadingScreen, scaledresolution);
                     }
                 }
 
@@ -235,7 +235,6 @@ public class LoadingScreenRenderer implements IProgressUpdate
                 }
                 catch (Exception var16)
                 {
-                    ;
                 }
             }
         }

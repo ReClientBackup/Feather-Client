@@ -23,12 +23,12 @@ public class DataWatcher
 
     /** When isBlank is true the DataWatcher is not watching any objects */
     private boolean isBlank = true;
-    private static final Map < Class<?>, Integer > dataTypes = Maps. < Class<?>, Integer > newHashMap();
-    private final Map<Integer, DataWatcher.WatchableObject> watchedObjects = Maps.<Integer, DataWatcher.WatchableObject>newHashMap();
+    private static final Map < Class<?>, Integer > dataTypes = Maps.newHashMap();
+    private final Map<Integer, DataWatcher.WatchableObject> watchedObjects = Maps.newHashMap();
 
     /** true if one or more object was changed */
     private boolean objectChanged;
-    private ReadWriteLock lock = new ReentrantReadWriteLock();
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
     public BiomeGenBase spawnBiome = BiomeGenBase.plains;
     public BlockPos spawnPosition = BlockPos.ORIGIN;
 
@@ -206,7 +206,7 @@ public class DataWatcher
 
                     if (list == null)
                     {
-                        list = Lists.<DataWatcher.WatchableObject>newArrayList();
+                        list = Lists.newArrayList();
                     }
 
                     list.add(datawatcher$watchableobject);
@@ -242,7 +242,7 @@ public class DataWatcher
         {
             if (list == null)
             {
-                list = Lists.<DataWatcher.WatchableObject>newArrayList();
+                list = Lists.newArrayList();
             }
 
             list.add(datawatcher$watchableobject);
@@ -311,7 +311,7 @@ public class DataWatcher
         {
             if (list == null)
             {
-                list = Lists.<DataWatcher.WatchableObject>newArrayList();
+                list = Lists.newArrayList();
             }
 
             int j = (i & 224) >> 5;

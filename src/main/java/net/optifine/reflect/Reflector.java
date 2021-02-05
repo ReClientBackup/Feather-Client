@@ -843,7 +843,7 @@ public class Reflector {
     public static boolean postForgeBusEvent(ReflectorConstructor constr, Object... params)
     {
         Object object = newInstance(constr, params);
-        return object == null ? false : postForgeBusEvent(object);
+        return object != null && postForgeBusEvent(object);
     }
 
     public static boolean postForgeBusEvent(Object event)
@@ -862,7 +862,7 @@ public class Reflector {
             }
             else
             {
-                Object object1 = call(object, EventBus_post, new Object[] {event});
+                Object object1 = call(object, EventBus_post, event);
 
                 if (!(object1 instanceof Boolean))
                 {

@@ -46,13 +46,13 @@ public class CommandKill extends CommandBase
         {
             EntityPlayer entityplayer = getCommandSenderAsPlayer(sender);
             entityplayer.onKillCommand();
-            notifyOperators(sender, this, "commands.kill.successful", new Object[] {entityplayer.getDisplayName()});
+            notifyOperators(sender, this, "commands.kill.successful", entityplayer.getDisplayName());
         }
         else
         {
             Entity entity = func_175768_b(sender, args[0]);
             entity.onKillCommand();
-            notifyOperators(sender, this, "commands.kill.successful", new Object[] {entity.getDisplayName()});
+            notifyOperators(sender, this, "commands.kill.successful", entity.getDisplayName());
         }
     }
 

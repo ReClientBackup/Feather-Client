@@ -77,7 +77,7 @@ public class CommandBanIp extends CommandBase
 
                 if (entityplayermp == null)
                 {
-                    throw new PlayerNotFoundException("commands.banip.invalid", new Object[0]);
+                    throw new PlayerNotFoundException("commands.banip.invalid");
                 }
 
                 this.func_147210_a(sender, entityplayermp.getPlayerIP(), ichatcomponent == null ? null : ichatcomponent.getUnformattedText());
@@ -85,7 +85,7 @@ public class CommandBanIp extends CommandBase
         }
         else
         {
-            throw new WrongUsageException("commands.banip.usage", new Object[0]);
+            throw new WrongUsageException("commands.banip.usage");
         }
     }
 
@@ -110,11 +110,11 @@ public class CommandBanIp extends CommandBase
 
         if (list.isEmpty())
         {
-            notifyOperators(p_147210_1_, this, "commands.banip.success", new Object[] {p_147210_2_});
+            notifyOperators(p_147210_1_, this, "commands.banip.success", p_147210_2_);
         }
         else
         {
-            notifyOperators(p_147210_1_, this, "commands.banip.success.players", new Object[] {p_147210_2_, joinNiceString(astring)});
+            notifyOperators(p_147210_1_, this, "commands.banip.success.players", p_147210_2_, joinNiceString(astring));
         }
     }
 }

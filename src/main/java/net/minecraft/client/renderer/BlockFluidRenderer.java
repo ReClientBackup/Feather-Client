@@ -18,8 +18,8 @@ import net.optifine.shaders.SVertexBuilder;
 
 public class BlockFluidRenderer
 {
-    private TextureAtlasSprite[] atlasSpritesLava = new TextureAtlasSprite[2];
-    private TextureAtlasSprite[] atlasSpritesWater = new TextureAtlasSprite[2];
+    private final TextureAtlasSprite[] atlasSpritesLava = new TextureAtlasSprite[2];
+    private final TextureAtlasSprite[] atlasSpritesWater = new TextureAtlasSprite[2];
 
     public BlockFluidRenderer()
     {

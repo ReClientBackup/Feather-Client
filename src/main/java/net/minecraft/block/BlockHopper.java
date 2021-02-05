@@ -250,6 +250,6 @@ public class BlockHopper extends BlockContainer
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING, ENABLED});
+        return new BlockState(this, FACING, ENABLED);
     }
 }

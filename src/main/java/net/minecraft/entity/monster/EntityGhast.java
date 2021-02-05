@@ -203,7 +203,7 @@ public class EntityGhast extends EntityFlying implements IMob
 
     static class AIFireballAttack extends EntityAIBase
     {
-        private EntityGhast parentEntity;
+        private final EntityGhast parentEntity;
         public int attackTimer;
 
         public AIFireballAttack(EntityGhast p_i45837_1_)
@@ -269,7 +269,7 @@ public class EntityGhast extends EntityFlying implements IMob
 
     static class AILookAround extends EntityAIBase
     {
-        private EntityGhast parentEntity;
+        private final EntityGhast parentEntity;
 
         public AILookAround(EntityGhast p_i45839_1_)
         {
@@ -305,7 +305,7 @@ public class EntityGhast extends EntityFlying implements IMob
 
     static class AIRandomFly extends EntityAIBase
     {
-        private EntityGhast parentEntity;
+        private final EntityGhast parentEntity;
 
         public AIRandomFly(EntityGhast p_i45836_1_)
         {
@@ -348,7 +348,7 @@ public class EntityGhast extends EntityFlying implements IMob
 
     static class GhastMoveHelper extends EntityMoveHelper
     {
-        private EntityGhast parentEntity;
+        private final EntityGhast parentEntity;
         private int courseChangeCooldown;
 
         public GhastMoveHelper(EntityGhast p_i45838_1_)

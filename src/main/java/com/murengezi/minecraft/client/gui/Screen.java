@@ -220,7 +220,7 @@ public abstract class Screen extends GUI implements YesNoCallback {
                         NBTTagCompound tagFromJson = JsonToNBT.getTagFromJson(hoverevent.getValue().getUnformattedText());
 
                         if (tagFromJson != null) {
-                            List<String> list1 = Lists.<String>newArrayList();
+                            List<String> list1 = Lists.newArrayList();
                             list1.add(tagFromJson.getString("name"));
 
                             if (tagFromJson.hasKey("type", 8)) {
@@ -245,7 +245,7 @@ public abstract class Screen extends GUI implements YesNoCallback {
 
                 if (statbase != null) {
                     IChatComponent chatComponent = statbase.getStatName();
-                    IChatComponent chatComponentTranslation = new ChatComponentTranslation("stats.tooltip.type." + (statbase.isAchievement() ? "achievement" : "statistic"), new Object[0]);
+                    IChatComponent chatComponentTranslation = new ChatComponentTranslation("stats.tooltip.type." + (statbase.isAchievement() ? "achievement" : "statistic"));
                     chatComponentTranslation.getChatStyle().setItalic(Boolean.TRUE);
                     String s1 = statbase instanceof Achievement ? ((Achievement)statbase).getDescription() : null;
                     List<String> list = Lists.newArrayList(chatComponent.getFormattedText(), chatComponentTranslation.getFormattedText());

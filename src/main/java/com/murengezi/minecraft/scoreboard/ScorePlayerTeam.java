@@ -9,7 +9,7 @@ public class ScorePlayerTeam extends Team {
 
     private final Scoreboard scoreboard;
     private final String registeredName;
-    private final Set<String> membershipSet = Sets.<String>newHashSet();
+    private final Set<String> membershipSet = Sets.newHashSet();
     private String teamName, namePrefix = "", colorSuffix = "";
     private boolean allowFriendlyFire = true, canSeeFriendlyInvisibles = true;
     private Team.EnumVisible nameTagVisibility = Team.EnumVisible.ALWAYS, deathMessageVisibility = Team.EnumVisible.ALWAYS;

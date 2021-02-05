@@ -38,7 +38,6 @@ public class BlockCactus extends Block
 
             for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
             {
-                ;
             }
 
             if (i < 3)
@@ -87,7 +86,7 @@ public class BlockCactus extends Block
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        return super.canPlaceBlockAt(worldIn, pos) ? this.canBlockStay(worldIn, pos) : false;
+        return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos);
     }
 
     /**
@@ -146,6 +145,6 @@ public class BlockCactus extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {AGE});
+        return new BlockState(this, AGE);
     }
 }

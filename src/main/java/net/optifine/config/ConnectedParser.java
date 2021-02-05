@@ -196,7 +196,7 @@ public class ConnectedParser
         else
         {
             String s = parts[1];
-            return s.length() < 1 ? false : (this.startsWithDigit(s) ? false : !s.contains("="));
+            return s.length() >= 1 && (!this.startsWithDigit(s) && !s.contains("="));
         }
     }
 
@@ -360,7 +360,6 @@ public class ConnectedParser
                         }
                         catch (IllegalArgumentException var18)
                         {
-                            ;
                         }
                     }
 

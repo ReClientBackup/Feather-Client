@@ -12,8 +12,8 @@ import java.util.List;
 
 public class TooltipManager
 {
-    private Screen guiScreen;
-    private TooltipProvider tooltipProvider;
+    private final Screen guiScreen;
+    private final TooltipProvider tooltipProvider;
     private int lastMouseX = 0;
     private int lastMouseY = 0;
     private long mouseStillTime = 0L;

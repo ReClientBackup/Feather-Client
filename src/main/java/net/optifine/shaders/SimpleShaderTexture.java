@@ -27,7 +27,7 @@ import org.apache.commons.io.IOUtils;
 
 public class SimpleShaderTexture extends AbstractTexture
 {
-    private String texturePath;
+    private final String texturePath;
     private static final IMetadataSerializer METADATA_SERIALIZER = makeMetadataSerializer();
 
     public SimpleShaderTexture(String texturePath)

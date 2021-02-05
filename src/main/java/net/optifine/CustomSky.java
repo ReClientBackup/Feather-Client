@@ -172,7 +172,7 @@ public class CustomSky
             if (i >= 0 && i < worldSkyLayers.length)
             {
                 CustomSkyLayer[] acustomskylayer = worldSkyLayers[i];
-                return acustomskylayer == null ? false : acustomskylayer.length > 0;
+                return acustomskylayer != null && acustomskylayer.length > 0;
             }
             else
             {

@@ -10,7 +10,7 @@ public class TileEntityEnchantmentTableRenderer extends TileEntitySpecialRendere
 {
     /** The texture for the book above the enchantment table. */
     private static final ResourceLocation TEXTURE_BOOK = new ResourceLocation("textures/entity/enchanting_table_book.png");
-    private ModelBook field_147541_c = new ModelBook();
+    private final ModelBook field_147541_c = new ModelBook();
 
     public void renderTileEntityAt(TileEntityEnchantmentTable te, double x, double y, double z, float partialTicks, int destroyStage)
     {
@@ -22,7 +22,6 @@ public class TileEntityEnchantmentTableRenderer extends TileEntitySpecialRendere
 
         for (f1 = te.bookRotation - te.bookRotationPrev; f1 >= (float)Math.PI; f1 -= ((float)Math.PI * 2F))
         {
-            ;
         }
 
         while (f1 < -(float)Math.PI)

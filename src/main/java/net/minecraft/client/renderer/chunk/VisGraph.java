@@ -67,7 +67,7 @@ public class VisGraph
 
     private Set<EnumFacing> func_178604_a(int p_178604_1_)
     {
-        Set<EnumFacing> set = EnumSet.<EnumFacing>noneOf(EnumFacing.class);
+        Set<EnumFacing> set = EnumSet.noneOf(EnumFacing.class);
         Queue<Integer> queue = new ArrayDeque(384);
         queue.add(IntegerCache.func_181756_a(p_178604_1_));
         this.field_178612_d.set(p_178604_1_, true);

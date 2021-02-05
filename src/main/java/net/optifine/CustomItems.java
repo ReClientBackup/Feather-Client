@@ -47,9 +47,9 @@ public class CustomItems
     private static CustomItemProperties[][] itemProperties = null;
     private static CustomItemProperties[][] enchantmentProperties = null;
     private static Map mapPotionIds = null;
-    private static ItemModelGenerator itemModelGenerator = new ItemModelGenerator();
+    private static final ItemModelGenerator itemModelGenerator = new ItemModelGenerator();
     private static boolean useGlint = true;
-    private static boolean renderOffHand = false;
+    private static final boolean renderOffHand = false;
     public static final int MASK_POTION_SPLASH = 16384;
     public static final int MASK_POTION_NAME = 63;
     public static final int MASK_POTION_EXTENDED = 64;
@@ -799,10 +799,7 @@ public class CustomItems
                     return false;
                 }
 
-                if (cip.hand == 2 && !renderOffHand)
-                {
-                    return false;
-                }
+	            return cip.hand != 2 || renderOffHand;
             }
 
             return true;

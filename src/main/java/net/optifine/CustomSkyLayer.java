@@ -86,7 +86,7 @@ public class CustomSkyLayer
 
     private List<String> parseWeatherList(String str)
     {
-        List<String> list = Arrays.<String>asList(new String[] {"clear", "rain", "thunder"});
+        List<String> list = Arrays.asList("clear", "rain", "thunder");
         List<String> list1 = new ArrayList();
         String[] astring = Config.tokenize(str, " ");
 
@@ -156,11 +156,11 @@ public class CustomSkyLayer
         {
             return defVal;
         }
-        else if (str.toLowerCase().equals("true"))
+        else if (str.equalsIgnoreCase("true"))
         {
             return true;
         }
-        else if (str.toLowerCase().equals("false"))
+        else if (str.equalsIgnoreCase("false"))
         {
             return false;
         }
@@ -505,16 +505,12 @@ public class CustomSkyLayer
 
                 for (j = i - (long)this.startFadeIn; j < 0L; j += 24000 * this.daysLoop)
                 {
-                    ;
                 }
 
                 int k = (int)(j / 24000L);
                 int l = k % this.daysLoop;
 
-                if (!this.days.isInRange(l))
-                {
-                    return false;
-                }
+	            return this.days.isInRange(l);
             }
 
             return true;

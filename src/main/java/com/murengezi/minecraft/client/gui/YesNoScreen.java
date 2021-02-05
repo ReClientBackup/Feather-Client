@@ -16,7 +16,7 @@ public class YesNoScreen extends Screen {
 
     private final YesNoCallback parentScreen;
     private final String messageLine1, messageLine2, yesButtonText, noButtonText;
-    private List<String> lines = new ArrayList<>();
+    private final List<String> lines = new ArrayList<>();
     private final int parentButtonClickedId;
 
     private static final int YES = 0;

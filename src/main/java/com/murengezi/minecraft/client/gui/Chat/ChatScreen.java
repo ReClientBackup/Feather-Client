@@ -23,7 +23,7 @@ public class ChatScreen extends Screen {
     private boolean playerNamesFound;
     private boolean waitingOnAutocomplete;
     private int autocompleteIndex;
-    private List<String> foundPlayerNames = Lists.newArrayList();
+    private final List<String> foundPlayerNames = Lists.newArrayList();
     protected GuiTextField inputField;
     private final String defaultInputFieldText;
 

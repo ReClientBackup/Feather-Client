@@ -21,9 +21,9 @@ public class LanServerDetector {
     private static final AtomicInteger field_148551_a = new AtomicInteger(0);
 
     public static class LanServer {
-        private String lanServerMotd;
-        private String lanServerIpPort;
-        private String lanServerUUID;
+        private final String lanServerMotd;
+        private final String lanServerIpPort;
+        private final String lanServerUUID;
         private long timeLastSeen;
 
         public LanServer(String motd, String address, String uuid) {
@@ -51,7 +51,7 @@ public class LanServerDetector {
     }
 
     public static class LanServerList {
-        private List<LanServerDetector.LanServer> listOfLanServers = Lists.newArrayList();
+        private final List<LanServerDetector.LanServer> listOfLanServers = Lists.newArrayList();
         boolean wasUpdated;
 
         public synchronized boolean getWasUpdated() {

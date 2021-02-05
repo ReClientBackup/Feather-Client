@@ -16,7 +16,7 @@ import net.minecraft.world.WorldSettings;
 public class S38PacketPlayerListItem implements Packet<INetHandlerPlayClient>
 {
     private S38PacketPlayerListItem.Action action;
-    private final List<S38PacketPlayerListItem.AddPlayerData> players = Lists.<S38PacketPlayerListItem.AddPlayerData>newArrayList();
+    private final List<S38PacketPlayerListItem.AddPlayerData> players = Lists.newArrayList();
 
     public S38PacketPlayerListItem()
     {
@@ -219,13 +219,13 @@ public class S38PacketPlayerListItem implements Packet<INetHandlerPlayClient>
         return Objects.toStringHelper(this).add("action", this.action).add("entries", this.players).toString();
     }
 
-    public static enum Action
+    public enum Action
     {
         ADD_PLAYER,
         UPDATE_GAME_MODE,
         UPDATE_LATENCY,
         UPDATE_DISPLAY_NAME,
-        REMOVE_PLAYER;
+        REMOVE_PLAYER
     }
 
     public class AddPlayerData

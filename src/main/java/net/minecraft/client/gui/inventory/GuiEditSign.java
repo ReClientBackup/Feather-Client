@@ -18,7 +18,7 @@ import org.lwjgl.input.Keyboard;
 public class GuiEditSign extends Screen
 {
     /** Reference to the sign object. */
-    private TileEntitySign tileSign;
+    private final TileEntitySign tileSign;
 
     /** Counts the number of screen updates. */
     private int updateCounter;
@@ -42,7 +42,7 @@ public class GuiEditSign extends Screen
     {
         this.buttonList.clear();
         Keyboard.enableRepeatEvents(true);
-        this.buttonList.add(this.doneBtn = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(this.doneBtn = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, I18n.format("gui.done")));
         this.tileSign.setEditable(false);
     }
 

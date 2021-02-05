@@ -24,8 +24,8 @@ public class StringTranslate
     private static final Splitter equalSignSplitter = Splitter.on('=').limit(2);
 
     /** Is the private singleton instance of StringTranslate. */
-    private static StringTranslate instance = new StringTranslate();
-    private final Map<String, String> languageList = Maps.<String, String>newHashMap();
+    private static final StringTranslate instance = new StringTranslate();
+    private final Map<String, String> languageList = Maps.newHashMap();
 
     /**
      * The time, in milliseconds since epoch, that this instance was last updated
@@ -57,7 +57,6 @@ public class StringTranslate
         }
         catch (IOException var7)
         {
-            ;
         }
     }
 

@@ -11,13 +11,13 @@ import net.minecraft.entity.Entity;
  */
 public class RenderModelBipedEvent extends EventCancellable {
 
-    private ModelRenderer bipedHead;
-    private ModelRenderer bipedHeadwear;
-    private ModelRenderer bipedBody;
-    private ModelRenderer bipedRightArm;
-    private ModelRenderer bipedLeftArm;
-    private ModelRenderer bipedRightLeg;
-    private ModelRenderer bipedLeftLeg;
+    private final ModelRenderer bipedHead;
+    private final ModelRenderer bipedHeadwear;
+    private final ModelRenderer bipedBody;
+    private final ModelRenderer bipedRightArm;
+    private final ModelRenderer bipedLeftArm;
+    private final ModelRenderer bipedRightLeg;
+    private final ModelRenderer bipedLeftLeg;
     private ModelRenderer modifiedBipedHead;
     private ModelRenderer modifiedBipedHeadwear;
     private ModelRenderer modifiedBipedBody;
@@ -26,14 +26,14 @@ public class RenderModelBipedEvent extends EventCancellable {
     private ModelRenderer modifiedBipedRightLeg;
     private ModelRenderer modifiedBipedLeftLeg;
     private ModelBiped modelBiped;
-    private float var1;
-    private float var2;
-    private float var3;
-    private float var4;
-    private float var5;
-    private Entity entity;
+    private final float var1;
+    private final float var2;
+    private final float var3;
+    private final float var4;
+    private final float var5;
+    private final Entity entity;
     private boolean cancelled;
-    private float scale;
+    private final float scale;
 
     public RenderModelBipedEvent(ModelRenderer bipedHead, ModelRenderer bipedHeadwear, ModelRenderer bipedBody, ModelRenderer bipedRightArm, ModelRenderer bipedLeftArm, ModelRenderer bipedRightLeg, ModelRenderer bipedLeftLeg, float scale, Entity entityIn, float var1, float var2, float var3, float var4, float var5, ModelBiped modelBiped) {
         this.bipedHead = bipedHead;

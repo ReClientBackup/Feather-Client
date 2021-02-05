@@ -85,12 +85,12 @@ public class BlockPressurePlate extends BlockBasePressurePlate
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {POWERED});
+        return new BlockState(this, POWERED);
     }
 
-    public static enum Sensitivity
+    public enum Sensitivity
     {
         EVERYTHING,
-        MOBS;
+        MOBS
     }
 }

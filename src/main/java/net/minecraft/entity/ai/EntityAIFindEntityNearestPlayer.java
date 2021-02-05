@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 public class EntityAIFindEntityNearestPlayer extends EntityAIBase
 {
     private static final Logger field_179436_a = LogManager.getLogger();
-    private EntityLiving field_179434_b;
+    private final EntityLiving field_179434_b;
     private final Predicate<Entity> field_179435_c;
     private final EntityAINearestAttackableTarget.Sorter field_179432_d;
     private EntityLivingBase field_179433_e;
@@ -65,7 +65,7 @@ public class EntityAIFindEntityNearestPlayer extends EntityAIBase
                         d0 *= 0.7F * f;
                     }
 
-                    return (double)p_apply_1_.getDistanceToEntity(EntityAIFindEntityNearestPlayer.this.field_179434_b) > d0 ? false : EntityAITarget.isSuitableTarget(EntityAIFindEntityNearestPlayer.this.field_179434_b, (EntityLivingBase)p_apply_1_, false, true);
+                    return !((double) p_apply_1_.getDistanceToEntity(EntityAIFindEntityNearestPlayer.this.field_179434_b) > d0) && EntityAITarget.isSuitableTarget(EntityAIFindEntityNearestPlayer.this.field_179434_b, (EntityLivingBase) p_apply_1_, false, true);
                 }
             }
         };
@@ -78,7 +78,7 @@ public class EntityAIFindEntityNearestPlayer extends EntityAIBase
     public boolean shouldExecute()
     {
         double d0 = this.func_179431_f();
-        List<EntityPlayer> list = this.field_179434_b.worldObj.<EntityPlayer>getEntitiesWithinAABB(EntityPlayer.class, this.field_179434_b.getEntityBoundingBox().expand(d0, 4.0D, d0), this.field_179435_c);
+        List<EntityPlayer> list = this.field_179434_b.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.field_179434_b.getEntityBoundingBox().expand(d0, 4.0D, d0), this.field_179435_c);
         Collections.sort(list, this.field_179432_d);
 
         if (list.isEmpty())
@@ -123,7 +123,7 @@ public class EntityAIFindEntityNearestPlayer extends EntityAIBase
             else
             {
                 double d0 = this.func_179431_f();
-                return this.field_179434_b.getDistanceSqToEntity(entitylivingbase) > d0 * d0 ? false : !(entitylivingbase instanceof EntityPlayerMP) || !((EntityPlayerMP)entitylivingbase).theItemInWorldManager.isCreative();
+                return !(this.field_179434_b.getDistanceSqToEntity(entitylivingbase) > d0 * d0) && (!(entitylivingbase instanceof EntityPlayerMP) || !((EntityPlayerMP) entitylivingbase).theItemInWorldManager.isCreative());
             }
         }
     }

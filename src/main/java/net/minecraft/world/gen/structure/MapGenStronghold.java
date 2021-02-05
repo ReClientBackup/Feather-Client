@@ -13,7 +13,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class MapGenStronghold extends MapGenStructure
 {
-    private List<BiomeGenBase> field_151546_e;
+    private final List<BiomeGenBase> field_151546_e;
 
     /**
      * is spawned false and set true once the defined BiomeGenBases were compared with the present ones
@@ -28,7 +28,7 @@ public class MapGenStronghold extends MapGenStructure
         this.structureCoords = new ChunkCoordIntPair[3];
         this.field_82671_h = 32.0D;
         this.field_82672_i = 3;
-        this.field_151546_e = Lists.<BiomeGenBase>newArrayList();
+        this.field_151546_e = Lists.newArrayList();
 
         for (BiomeGenBase biomegenbase : BiomeGenBase.getBiomeGenArray())
         {
@@ -113,7 +113,7 @@ public class MapGenStronghold extends MapGenStructure
 
     protected List<BlockPos> getCoordList()
     {
-        List<BlockPos> list = Lists.<BlockPos>newArrayList();
+        List<BlockPos> list = Lists.newArrayList();
 
         for (ChunkCoordIntPair chunkcoordintpair : this.structureCoords)
         {
@@ -132,7 +132,6 @@ public class MapGenStronghold extends MapGenStructure
 
         for (mapgenstronghold$start = new MapGenStronghold.Start(this.worldObj, this.rand, chunkX, chunkZ); mapgenstronghold$start.getComponents().isEmpty() || ((StructureStrongholdPieces.Stairs2)mapgenstronghold$start.getComponents().get(0)).strongholdPortalRoom == null; mapgenstronghold$start = new MapGenStronghold.Start(this.worldObj, this.rand, chunkX, chunkZ))
         {
-            ;
         }
 
         return mapgenstronghold$start;

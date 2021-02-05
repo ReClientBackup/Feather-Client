@@ -104,7 +104,7 @@ public class BlockCake extends Block
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        return super.canPlaceBlockAt(worldIn, pos) ? this.canBlockStay(worldIn, pos) : false;
+        return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos);
     }
 
     /**
@@ -172,7 +172,7 @@ public class BlockCake extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {BITES});
+        return new BlockState(this, BITES);
     }
 
     public int getComparatorInputOverride(World worldIn, BlockPos pos)

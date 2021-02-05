@@ -230,7 +230,7 @@ public class Keystrokes extends Adjustable {
 		@Override
 		public void render(float x, float y) {
 			super.render(x, y);
-			getFr().drawCenteredString(letter, x + (float)(getWidth() / 2) - 0.5f, (float)((y + getHeight() / 2) - (getFr().FONT_HEIGHT / 2)) + 0.5f, getTextColor());
+			getFr().drawCenteredString(letter, x + (float)(getWidth() / 2) - 0.5f, ((y + getHeight() / 2) - (getFr().FONT_HEIGHT / 2)) + 0.5f, getTextColor());
 		}
 
 		public int getKeyCode() {
@@ -242,7 +242,7 @@ public class Keystrokes extends Adjustable {
 
 		private final String display;
 		private final int mouseButton;
-		private List<Long> clicks = new ArrayList<>();
+		private final List<Long> clicks = new ArrayList<>();
 
 
 		public MouseKey(String display, int mouseButton) {
@@ -254,10 +254,10 @@ public class Keystrokes extends Adjustable {
 		@Override
 		public void render(float x, float y) {
 			super.render(x, y);
-			getFr().drawCenteredString(display, x + (float)(getWidth() / 2) - 0.5f, (float)((y + getHeight() / 2) - (getFr().FONT_HEIGHT / 2)) - 2f, getTextColor());
+			getFr().drawCenteredString(display, x + (float)(getWidth() / 2) - 0.5f, (y + getHeight() / 2) - (getFr().FONT_HEIGHT / 2) - 2f, getTextColor());
 			GlStateManager.pushMatrix();
 			GlStateManager.scale(0.5f, 0.5f, 0.5f);
-			getFr().drawCenteredString(getClicks() + " CPS", (x + (float)(getWidth() / 2) - 0.5f) * 2, ((float)((y + getHeight() / 2) - (getFr().FONT_HEIGHT / 2)) + 7.5f) * 2, getTextColor());
+			getFr().drawCenteredString(getClicks() + " CPS", (x + (float)(getWidth() / 2) - 0.5f) * 2, (((y + getHeight() / 2) - (getFr().FONT_HEIGHT / 2)) + 7.5f) * 2, getTextColor());
 			GlStateManager.popMatrix();
 		}
 

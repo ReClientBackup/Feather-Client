@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class ItemReed extends Item
 {
-    private Block block;
+    private final Block block;
 
     public ItemReed(Block block)
     {

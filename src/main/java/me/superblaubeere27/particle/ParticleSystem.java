@@ -9,7 +9,7 @@ public class ParticleSystem {
     private static final float SPEED = 0.0025f;
     private static final float MIN_DISTANCE = 50.0F;
 
-    private List<Particle> particleList = new ArrayList<>();
+    private final List<Particle> particleList = new ArrayList<>();
 
     public ParticleSystem(int initAmount) {
         addParticles(initAmount);

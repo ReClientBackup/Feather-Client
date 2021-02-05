@@ -430,7 +430,7 @@ public class ConnectedTexturesCompact
         data[j + 2] = Float.floatToRawIntBits(f4);
     }
 
-    private static enum Dir
+    private enum Dir
     {
         UP,
         UP_RIGHT,

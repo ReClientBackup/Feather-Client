@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 public class ResourceIndex
 {
     private static final Logger logger = LogManager.getLogger();
-    private final Map<String, File> resourceMap = Maps.<String, File>newHashMap();
+    private final Map<String, File> resourceMap = Maps.newHashMap();
 
     public ResourceIndex(File p_i1047_1_, String p_i1047_2_)
     {
@@ -56,7 +56,7 @@ public class ResourceIndex
             }
             catch (FileNotFoundException var21)
             {
-                logger.error("Can\'t find the resource index file: " + file2);
+                logger.error("Can't find the resource index file: " + file2);
             }
             finally
             {

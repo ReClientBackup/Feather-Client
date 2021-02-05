@@ -23,7 +23,7 @@ public class RenderHelper {
 
     private static WorldRenderer wr;
 
-    private static float DEG2RAD = 0.017453277F;
+    private static final float DEG2RAD = 0.017453277F;
 
     private static int r, g, b, a;
 

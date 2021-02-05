@@ -409,10 +409,7 @@ public class CustomGuiProperties
                 tileentitybeacon.writeToNBT(nbttagcompound);
                 int i = nbttagcompound.getInteger("Levels");
 
-                if (!this.levels.isInRange(i))
-                {
-                    return false;
-                }
+	            return this.levels.isInRange(i);
             }
 
             return true;
@@ -455,7 +452,7 @@ public class CustomGuiProperties
 
     private boolean matchesChest(boolean isLarge, boolean isTrapped, boolean isChristmas, boolean isEnder)
     {
-        return this.large != null && this.large.booleanValue() != isLarge ? false : (this.trapped != null && this.trapped.booleanValue() != isTrapped ? false : (this.christmas != null && this.christmas.booleanValue() != isChristmas ? false : this.ender == null || this.ender.booleanValue() == isEnder));
+        return (this.large == null || this.large.booleanValue() == isLarge) && ((this.trapped == null || this.trapped.booleanValue() == isTrapped) && ((this.christmas == null || this.christmas.booleanValue() == isChristmas) && (this.ender == null || this.ender.booleanValue() == isEnder)));
     }
 
     private boolean matchesDispenser(BlockPos pos, IBlockAccess blockAccess)
@@ -474,10 +471,7 @@ public class CustomGuiProperties
             {
                 CustomGuiProperties.EnumVariant customguiproperties$enumvariant = this.getDispenserVariant(tileentitydispenser);
 
-                if (!Config.equalsOne(customguiproperties$enumvariant, this.variants))
-                {
-                    return false;
-                }
+	            return Config.equalsOne(customguiproperties$enumvariant, this.variants);
             }
 
             return true;
@@ -554,10 +548,7 @@ public class CustomGuiProperties
                     }
                 }
 
-                if (!flag)
-                {
-                    return false;
-                }
+	            return flag;
             }
 
             return true;
@@ -578,10 +569,7 @@ public class CustomGuiProperties
             {
                 CustomGuiProperties.EnumVariant customguiproperties$enumvariant = this.getHorseVariant(entityhorse);
 
-                if (!Config.equalsOne(customguiproperties$enumvariant, this.variants))
-                {
-                    return false;
-                }
+	            return Config.equalsOne(customguiproperties$enumvariant, this.variants);
             }
 
             return true;
@@ -624,7 +612,7 @@ public class CustomGuiProperties
         return "name: " + this.fileName + ", container: " + this.container + ", textures: " + this.textureLocations;
     }
 
-    public static enum EnumContainer
+    public enum EnumContainer
     {
         ANVIL,
         BEACON,
@@ -644,13 +632,13 @@ public class CustomGuiProperties
         public static final CustomGuiProperties.EnumContainer[] VALUES = values();
     }
 
-    private static enum EnumVariant
+    private enum EnumVariant
     {
         HORSE,
         DONKEY,
         MULE,
         LLAMA,
         DISPENSER,
-        DROPPER;
+        DROPPER
     }
 }

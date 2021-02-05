@@ -22,8 +22,8 @@ public class StructureOceanMonument extends MapGenStructure
 {
     private int field_175800_f;
     private int field_175801_g;
-    public static final List<BiomeGenBase> field_175802_d = Arrays.<BiomeGenBase>asList(new BiomeGenBase[] {BiomeGenBase.ocean, BiomeGenBase.deepOcean, BiomeGenBase.river, BiomeGenBase.frozenOcean, BiomeGenBase.frozenRiver});
-    private static final List<BiomeGenBase.SpawnListEntry> field_175803_h = Lists.<BiomeGenBase.SpawnListEntry>newArrayList();
+    public static final List<BiomeGenBase> field_175802_d = Arrays.asList(BiomeGenBase.ocean, BiomeGenBase.deepOcean, BiomeGenBase.river, BiomeGenBase.frozenOcean, BiomeGenBase.frozenRiver);
+    private static final List<BiomeGenBase.SpawnListEntry> field_175803_h = Lists.newArrayList();
 
     public StructureOceanMonument()
     {
@@ -85,10 +85,7 @@ public class StructureOceanMonument extends MapGenStructure
 
             boolean flag = this.worldObj.getWorldChunkManager().areBiomesViable(i * 16 + 8, j * 16 + 8, 29, field_175802_d);
 
-            if (flag)
-            {
-                return true;
-            }
+            return flag;
         }
 
         return false;
@@ -111,7 +108,7 @@ public class StructureOceanMonument extends MapGenStructure
 
     public static class StartMonument extends StructureStart
     {
-        private Set<ChunkCoordIntPair> field_175791_c = Sets.<ChunkCoordIntPair>newHashSet();
+        private final Set<ChunkCoordIntPair> field_175791_c = Sets.newHashSet();
         private boolean field_175790_d;
 
         public StartMonument()
@@ -153,7 +150,7 @@ public class StructureOceanMonument extends MapGenStructure
 
         public boolean func_175788_a(ChunkCoordIntPair pair)
         {
-            return this.field_175791_c.contains(pair) ? false : super.func_175788_a(pair);
+            return !this.field_175791_c.contains(pair) && super.func_175788_a(pair);
         }
 
         public void func_175787_b(ChunkCoordIntPair pair)

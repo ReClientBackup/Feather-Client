@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 
 public class BlockColored extends Block
 {
-    public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.<EnumDyeColor>create("color", EnumDyeColor.class);
+    public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
     public BlockColored(Material materialIn)
     {
@@ -69,6 +69,6 @@ public class BlockColored extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {COLOR});
+        return new BlockState(this, COLOR);
     }
 }

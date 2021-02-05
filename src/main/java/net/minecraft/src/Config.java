@@ -15,6 +15,7 @@ import java.lang.reflect.Array;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -95,7 +96,7 @@ public class Config
     public static boolean fancyFogAvailable = false;
     public static boolean occlusionAvailable = false;
     private static GameSettings gameSettings = null;
-    private static Minecraft minecraft = Minecraft.getMinecraft();
+    private static final Minecraft minecraft = Minecraft.getMinecraft();
     private static boolean initialized = false;
     private static Thread minecraftThread = null;
     private static DisplayMode desktopDisplayMode = null;
@@ -127,7 +128,7 @@ public class Config
         if (isDynamicLights())
         {
             stringbuffer.append("DL: ");
-            stringbuffer.append(String.valueOf(DynamicLights.getCount()));
+            stringbuffer.append(DynamicLights.getCount());
             stringbuffer.append(", ");
         }
 
@@ -534,7 +535,7 @@ public class Config
 
     public static boolean isFogFancy()
     {
-        return !isFancyFogAvailable() ? false : gameSettings.ofFogType == 2;
+        return isFancyFogAvailable() && gameSettings.ofFogType == 2;
     }
 
     public static boolean isFogFast()
@@ -612,7 +613,7 @@ public class Config
 
     public static boolean isCloudsOff()
     {
-        return gameSettings.ofClouds != 0 ? gameSettings.ofClouds == 3 : (isShaders() && !Shaders.shaderPackClouds.isDefault() ? Shaders.shaderPackClouds.isOff() : (texturePackClouds != 0 ? texturePackClouds == 3 : false));
+        return gameSettings.ofClouds != 0 ? gameSettings.ofClouds == 3 : (isShaders() && !Shaders.shaderPackClouds.isDefault() ? Shaders.shaderPackClouds.isOff() : (texturePackClouds != 0 && texturePackClouds == 3));
     }
 
     public static void updateTexturePackClouds()
@@ -661,7 +662,6 @@ public class Config
             }
             catch (Exception var4)
             {
-                ;
             }
         }
     }
@@ -820,7 +820,7 @@ public class Config
                     stringbuffer.append(p_listToString_1_);
                 }
 
-                stringbuffer.append(String.valueOf(object));
+                stringbuffer.append(object);
             }
 
             return stringbuffer.toString();
@@ -851,7 +851,7 @@ public class Config
                     stringbuffer.append(p_arrayToString_1_);
                 }
 
-                stringbuffer.append(String.valueOf(object));
+                stringbuffer.append(object);
             }
 
             return stringbuffer.toString();
@@ -882,7 +882,7 @@ public class Config
                     stringbuffer.append(p_arrayToString_1_);
                 }
 
-                stringbuffer.append(String.valueOf(j));
+                stringbuffer.append(j);
             }
 
             return stringbuffer.toString();
@@ -913,7 +913,7 @@ public class Config
                     stringbuffer.append(p_arrayToString_1_);
                 }
 
-                stringbuffer.append(String.valueOf(f));
+                stringbuffer.append(f);
             }
 
             return stringbuffer.toString();
@@ -1121,17 +1121,17 @@ public class Config
 
     public static boolean isSunTexture()
     {
-        return !isSunMoonEnabled() ? false : !isShaders() || Shaders.isSun();
+        return isSunMoonEnabled() && (!isShaders() || Shaders.isSun());
     }
 
     public static boolean isMoonTexture()
     {
-        return !isSunMoonEnabled() ? false : !isShaders() || Shaders.isMoon();
+        return isSunMoonEnabled() && (!isShaders() || Shaders.isMoon());
     }
 
     public static boolean isVignetteEnabled()
     {
-        return isShaders() && !Shaders.isVignette() ? false : (gameSettings.ofVignette == 0 ? gameSettings.fancyGraphics : gameSettings.ofVignette == 2);
+        return (!isShaders() || Shaders.isVignette()) && (gameSettings.ofVignette == 0 ? gameSettings.fancyGraphics : gameSettings.ofVignette == 2);
     }
 
     public static boolean isStarsEnabled()
@@ -1198,7 +1198,7 @@ public class Config
 
     public static boolean isMultiTexture()
     {
-        return getAnisotropicFilterLevel() > 1 ? true : getAntialiasingLevel() > 0;
+        return getAnisotropicFilterLevel() > 1 || getAntialiasingLevel() > 0;
     }
 
     public static boolean between(int p_between_0_, int p_between_1_, int p_between_2_)
@@ -1514,12 +1514,12 @@ public class Config
         if (i != 0 && GlErrors.isEnabled(i))
         {
             String s = getGlErrorString(i);
-            String s1 = String.format("OpenGL error: %s (%s), at: %s", new Object[] {Integer.valueOf(i), s, p_checkGlError_0_});
+            String s1 = String.format("OpenGL error: %s (%s), at: %s", Integer.valueOf(i), s, p_checkGlError_0_);
             error(s1);
 
             if (isShowGlErrors() && TimedEvent.isActive("ShowGlError", 10000L))
             {
-                String s2 = I18n.format("of.message.openglError", new Object[] {Integer.valueOf(i), s});
+                String s2 = I18n.format("of.message.openglError", Integer.valueOf(i), s);
                 minecraft.inGameScreen.getChatGUI().printChatMessage(new ChatComponentText(s2));
             }
         }
@@ -1594,7 +1594,7 @@ public class Config
     public static String[] readLines(InputStream p_readLines_0_) throws IOException
     {
         List list = new ArrayList();
-        InputStreamReader inputstreamreader = new InputStreamReader(p_readLines_0_, "ASCII");
+        InputStreamReader inputstreamreader = new InputStreamReader(p_readLines_0_, StandardCharsets.US_ASCII);
         BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
 
         while (true)
@@ -1814,7 +1814,7 @@ public class Config
 
     public static boolean equals(Object p_equals_0_, Object p_equals_1_)
     {
-        return p_equals_0_ == p_equals_1_ ? true : (p_equals_0_ == null ? false : p_equals_0_.equals(p_equals_1_));
+        return p_equals_0_ == p_equals_1_ || (p_equals_0_ != null && p_equals_0_.equals(p_equals_1_));
     }
 
     public static boolean equalsOne(Object p_equalsOne_0_, Object[] p_equalsOne_1_)
@@ -2327,7 +2327,7 @@ public class Config
     public static void writeFile(File p_writeFile_0_, String p_writeFile_1_) throws IOException
     {
         FileOutputStream fileoutputstream = new FileOutputStream(p_writeFile_0_);
-        byte[] abyte = p_writeFile_1_.getBytes("ASCII");
+        byte[] abyte = p_writeFile_1_.getBytes(StandardCharsets.US_ASCII);
         fileoutputstream.write(abyte);
         fileoutputstream.close();
     }
@@ -2349,7 +2349,7 @@ public class Config
 
     public static boolean isDynamicHandLight()
     {
-        return !isDynamicLights() ? false : (isShaders() ? Shaders.isDynamicHandLight() : true);
+        return isDynamicLights() && (!isShaders() || Shaders.isDynamicHandLight());
     }
 
     public static boolean isCustomEntityModels()
@@ -2444,7 +2444,7 @@ public class Config
                     stringbuffer.append(p_arrayToString_1_);
                 }
 
-                stringbuffer.append(String.valueOf(flag));
+                stringbuffer.append(flag);
             }
 
             return stringbuffer.toString();
@@ -2453,7 +2453,7 @@ public class Config
 
     public static boolean isIntegratedServerRunning()
     {
-        return minecraft.getIntegratedServer() == null ? false : minecraft.isIntegratedServerRunning();
+        return minecraft.getIntegratedServer() != null && minecraft.isIntegratedServerRunning();
     }
 
     public static IntBuffer createDirectIntBuffer(int p_createDirectIntBuffer_0_)
@@ -2501,6 +2501,6 @@ public class Config
 
     public static boolean isQuadsToTriangles()
     {
-        return !isShaders() ? false : !Shaders.canRenderQuads();
+        return isShaders() && !Shaders.canRenderQuads();
     }
 }
