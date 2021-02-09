@@ -141,7 +141,7 @@ public class Keystrokes extends Adjustable {
 		private final int width, height;
 		private int textColor, boxColor;
 		private boolean pressed;
-		private long lastPress;
+		private long lastPress = System.currentTimeMillis() * 2;
 
 		public Key(KeyType keyType) {
 			this.keyType = keyType;

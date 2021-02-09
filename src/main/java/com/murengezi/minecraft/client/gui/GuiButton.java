@@ -4,7 +4,6 @@ import com.murengezi.feather.Feather;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
@@ -22,7 +21,7 @@ public class GuiButton extends GUI {
 
 
     public int boxColorRed = 0, boxColorGreen = 0, boxColorBlue = 0;
-    private long lastHover;
+    private long lastHover = System.currentTimeMillis() * 2;
 
     public GuiButton(int buttonId, int x, int y, String buttonText) {
         this(buttonId, x, y, 200, 20, buttonText);
