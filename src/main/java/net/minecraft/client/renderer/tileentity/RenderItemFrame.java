@@ -112,7 +112,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
 
             if (!Config.zoomMode)
             {
-                Entity entity = this.mc.thePlayer;
+                Entity entity = this.mc.player;
                 double d0 = itemFrame.getDistanceSq(entity.posX, entity.posY, entity.posZ);
 
                 if (d0 > 4096.0D)
@@ -198,7 +198,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
                     }
                 }
             }
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.popMatrix();
         }
     }
@@ -243,7 +243,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
                     GlStateManager.enableTexture2D();
                     GlStateManager.depthMask(true);
                     fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, 0, 553648127);
-                    GlStateManager.enableLighting();
+                    GlStateManager.enableLightning();
                     GlStateManager.disableBlend();
                     GlStateManager.colorAllMax();
                     GlStateManager.popMatrix();

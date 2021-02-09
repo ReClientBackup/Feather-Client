@@ -1,5 +1,8 @@
 package net.optifine.player;
 
+import java.util.Map;
+import java.util.Set;
+
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
@@ -8,65 +11,50 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.src.Config;
 
-import java.util.Map;
-import java.util.Set;
+public class PlayerItemsLayer implements LayerRenderer {
+   private RenderPlayer renderPlayer = null;
 
-public class PlayerItemsLayer implements LayerRenderer
-{
-    private RenderPlayer renderPlayer = null;
+   public PlayerItemsLayer(RenderPlayer renderPlayer) {
+      this.renderPlayer = renderPlayer;
+   }
 
-    public PlayerItemsLayer(RenderPlayer renderPlayer)
-    {
-        this.renderPlayer = renderPlayer;
-    }
+   public void doRenderLayer(EntityLivingBase entityLiving, float limbSwing, float limbSwingAmount, float partialTicks, float ticksExisted, float headYaw, float rotationPitch, float scale) {
+      this.renderEquippedItems(entityLiving, scale, partialTicks);
+   }
 
-    public void doRenderLayer(EntityLivingBase entityLiving, float limbSwing, float limbSwingAmount, float partialTicks, float ticksExisted, float headYaw, float rotationPitch, float scale)
-    {
-        this.renderEquippedItems(entityLiving, scale, partialTicks);
-    }
+   protected void renderEquippedItems(EntityLivingBase entityLiving, float scale, float partialTicks) {
+      if(Config.isShowCapes()) {
+         if(entityLiving instanceof AbstractClientPlayer) {
+            AbstractClientPlayer abstractclientplayer = (AbstractClientPlayer)entityLiving;
+            GlStateManager.colorAllMax();
+            GlStateManager.disableRescaleNormal();
+            GlStateManager.enableCull();
+            ModelBiped modelbiped = this.renderPlayer.getMainModel();
+            PlayerConfigurations.renderPlayerItems(modelbiped, abstractclientplayer, scale, partialTicks);
+            GlStateManager.disableCull();
+         }
+      }
+   }
 
-    protected void renderEquippedItems(EntityLivingBase entityLiving, float scale, float partialTicks)
-    {
-        if (Config.isShowCapes())
-        {
-            if (entityLiving instanceof AbstractClientPlayer)
-            {
-                AbstractClientPlayer abstractclientplayer = (AbstractClientPlayer)entityLiving;
-                GlStateManager.colorAllMax();
-                GlStateManager.disableRescaleNormal();
-                GlStateManager.enableCull();
-                ModelBiped modelbiped = this.renderPlayer.getMainModel();
-                PlayerConfigurations.renderPlayerItems(modelbiped, abstractclientplayer, scale, partialTicks);
-                GlStateManager.disableCull();
-            }
-        }
-    }
+   public boolean shouldCombineTextures() {
+      return false;
+   }
 
-    public boolean shouldCombineTextures()
-    {
-        return false;
-    }
+   public static void register(Map renderPlayerMap) {
+      Set set = renderPlayerMap.keySet();
+      boolean flag = false;
 
-    public static void register(Map renderPlayerMap)
-    {
-        Set set = renderPlayerMap.keySet();
-        boolean flag = false;
+      for(Object object : set) {
+         Object object1 = renderPlayerMap.get(object);
+         if(object1 instanceof RenderPlayer) {
+            RenderPlayer renderplayer = (RenderPlayer)object1;
+            renderplayer.addLayer(new PlayerItemsLayer(renderplayer));
+            flag = true;
+         }
+      }
 
-        for (Object object : set)
-        {
-            Object object1 = renderPlayerMap.get(object);
-
-            if (object1 instanceof RenderPlayer)
-            {
-                RenderPlayer renderplayer = (RenderPlayer)object1;
-                renderplayer.addLayer(new PlayerItemsLayer(renderplayer));
-                flag = true;
-            }
-        }
-
-        if (!flag)
-        {
-            Config.warn("PlayerItemsLayer not registered");
-        }
-    }
+      if(!flag) {
+         Config.warn("PlayerItemsLayer not registered");
+      }
+   }
 }

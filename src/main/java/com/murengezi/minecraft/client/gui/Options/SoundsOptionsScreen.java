@@ -8,7 +8,6 @@ import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
@@ -61,7 +60,7 @@ public class SoundsOptionsScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 60);
+        drawWorldBackground(mouseX, mouseY, 60);
         drawRect(this.width / 2 - 160, this.height / 6 + 15, this.width / 2 + 160, this.height / 6 + 193, Integer.MIN_VALUE);
         drawCenteredString(getFr(), EnumChatFormatting.UNDERLINE + I18n.format("options.sounds.title"), this.width / 2, this.height / 6 + 20, 0xffffffff);
         super.drawScreen(mouseX, mouseY, partialTicks);

@@ -20,11 +20,11 @@ public class TextureClock extends TextureAtlasSprite
             Minecraft minecraft = Minecraft.getMinecraft();
             double d0 = 0.0D;
 
-            if (minecraft.theWorld != null && minecraft.thePlayer != null)
+            if (minecraft.world != null && minecraft.player != null)
             {
-                d0 = minecraft.theWorld.getCelestialAngle(1.0F);
+                d0 = minecraft.world.getCelestialAngle(1.0F);
 
-                if (!minecraft.theWorld.provider.isSurfaceWorld())
+                if (!minecraft.world.provider.isSurfaceWorld())
                 {
                     d0 = Math.random();
                 }
@@ -54,7 +54,7 @@ public class TextureClock extends TextureAtlasSprite
             if (i != this.frameCounter)
             {
                 this.frameCounter = i;
-                TextureUtil.uploadTextureMipmap(this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
+                TextureUtil.uploadTextureMipMap(this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
             }
         }
     }

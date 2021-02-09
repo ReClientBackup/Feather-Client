@@ -69,7 +69,7 @@ public class LanguageScreen extends Screen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		drawDefaultBackground(mouseX, mouseY, 60);
+		drawWorldBackground(mouseX, mouseY, 60);
 
 		GlStateManager.pushMatrix();
 		scissorBox(languageSlots.getLeft(), languageSlots.getTop(), languageSlots.getRight(), languageSlots.getBottom(), new ScaledResolution());

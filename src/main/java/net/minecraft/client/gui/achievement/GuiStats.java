@@ -152,7 +152,7 @@ public class GuiStats extends Screen implements IProgressMeter
     {
         if (this.doesGuiPauseGame)
         {
-            this.drawDefaultBackground();
+            this.drawWorldBackground();
             this.drawCenteredString(getFr(), I18n.format("multiplayer.downloadingStats"), this.width / 2, this.height / 2, 16777215);
             this.drawCenteredString(getFr(), lanSearchStates[(int)(Minecraft.getSystemTime() / 150L % (long)lanSearchStates.length)], this.width / 2, this.height / 2 + getFr().FONT_HEIGHT * 2, 16777215);
         }
@@ -248,7 +248,7 @@ public class GuiStats extends Screen implements IProgressMeter
 
         protected void drawBackground()
         {
-            GuiStats.this.drawDefaultBackground();
+            GuiStats.this.drawWorldBackground();
         }
 
         protected void drawListHeader(int p_148129_1_, int p_148129_2_, Tessellator p_148129_3_)
@@ -612,7 +612,7 @@ public class GuiStats extends Screen implements IProgressMeter
 
         protected void drawBackground()
         {
-            GuiStats.this.drawDefaultBackground();
+            GuiStats.this.drawWorldBackground();
         }
 
         protected void drawSlot(int entryID, int x, int y, int p_180791_4_, int mouseXIn, int mouseYIn)
@@ -794,7 +794,7 @@ public class GuiStats extends Screen implements IProgressMeter
 
         protected void drawBackground()
         {
-            GuiStats.this.drawDefaultBackground();
+            GuiStats.this.drawWorldBackground();
         }
 
         protected void drawSlot(int entryID, int x, int y, int p_180791_4_, int mouseXIn, int mouseYIn)

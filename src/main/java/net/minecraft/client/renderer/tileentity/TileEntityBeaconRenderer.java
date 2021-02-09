@@ -119,7 +119,7 @@ public class TileEntityBeaconRenderer extends TileEntitySpecialRenderer<TileEnti
                     worldrenderer.pos(x + 0.2D, y + (double)i, z + 0.2D).tex(0.0D, d12).color(f1, f2, f3, 0.125F).endVertex();
                     worldrenderer.pos(x + 0.2D, y + (double)k, z + 0.2D).tex(0.0D, d13).color(f1, f2, f3, 0.125F).endVertex();
                     tessellator.draw();
-                    GlStateManager.enableLighting();
+                    GlStateManager.enableLightning();
                     GlStateManager.enableTexture2D();
                     GlStateManager.depthMask(true);
                     i = k;

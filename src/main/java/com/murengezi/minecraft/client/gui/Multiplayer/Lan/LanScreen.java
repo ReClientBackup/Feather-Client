@@ -112,7 +112,7 @@ public class LanScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 60);
+        drawWorldBackground(mouseX, mouseY, 60);
         scissorBox(lanSelectionList.getLeft(), lanSelectionList.getTop(), lanSelectionList.getRight(), lanSelectionList.getBottom(), new ScaledResolution());
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
         this.lanSelectionList.drawScreen(mouseX, mouseY, partialTicks);

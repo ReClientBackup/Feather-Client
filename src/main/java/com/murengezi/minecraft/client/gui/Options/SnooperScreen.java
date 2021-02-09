@@ -86,7 +86,7 @@ public class SnooperScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 60);
+        drawWorldBackground(mouseX, mouseY, 60);
 
         GlStateManager.pushMatrix();
         scissorBox(snooperSlot.getLeft(), snooperSlot.getTop(), snooperSlot.getRight(), snooperSlot.getBottom(), new ScaledResolution());

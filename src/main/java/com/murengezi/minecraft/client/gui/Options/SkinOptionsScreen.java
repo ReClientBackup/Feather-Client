@@ -60,7 +60,7 @@ public class SkinOptionsScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 60);
+        drawWorldBackground(mouseX, mouseY, 60);
 
         drawRect(this.width / 2 - 160, this.height / 6 + 15, this.width / 2 + 160, this.height / 6 + 169, Integer.MIN_VALUE);
         getFr().drawCenteredString(EnumChatFormatting.UNDERLINE + I18n.format("options.skinCustomisation.title"), this.width / 2, this.height / 6 + 20, 0xffffff);

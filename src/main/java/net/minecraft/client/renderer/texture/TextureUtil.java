@@ -115,7 +115,7 @@ public class TextureUtil
         return (int)((double)f4 * 255.0D);
     }
 
-    public static void uploadTextureMipmap(int[][] p_147955_0_, int p_147955_1_, int p_147955_2_, int p_147955_3_, int p_147955_4_, boolean p_147955_5_, boolean p_147955_6_)
+    public static void uploadTextureMipMap(int[][] p_147955_0_, int p_147955_1_, int p_147955_2_, int p_147955_3_, int p_147955_4_, boolean p_147955_5_, boolean p_147955_6_)
     {
         for (int i = 0; i < p_147955_0_.length; ++i)
         {

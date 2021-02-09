@@ -514,7 +514,7 @@ public class ModelBakery
 
     protected IBakedModel bakeModel(ModelBlock p_bakeModel_1_, ITransformation p_bakeModel_2_, boolean p_bakeModel_3_)
     {
-        TextureAtlasSprite textureatlassprite = this.sprites.get(new ResourceLocation(p_bakeModel_1_.resolveTextureName("particle")));
+        TextureAtlasSprite textureatlassprite = this.sprites.get(new ResourceLocation(p_bakeModel_1_.resolveTextureItem("particle")));
         SimpleBakedModel.Builder simplebakedmodel$builder = (new SimpleBakedModel.Builder(p_bakeModel_1_)).setTexture(textureatlassprite);
 
         for (BlockPart blockpart : p_bakeModel_1_.getElements())
@@ -522,7 +522,7 @@ public class ModelBakery
             for (EnumFacing enumfacing : blockpart.mapFaces.keySet())
             {
                 BlockPartFace blockpartface = blockpart.mapFaces.get(enumfacing);
-                TextureAtlasSprite textureatlassprite1 = this.sprites.get(new ResourceLocation(p_bakeModel_1_.resolveTextureName(blockpartface.texture)));
+                TextureAtlasSprite textureatlassprite1 = this.sprites.get(new ResourceLocation(p_bakeModel_1_.resolveTextureItem(blockpartface.texture)));
                 boolean flag = true;
 
                 if (Reflector.ForgeHooksClient.exists())
@@ -647,12 +647,12 @@ public class ModelBakery
         {
             for (BlockPartFace blockpartface : blockpart.mapFaces.values())
             {
-                ResourceLocation resourcelocation = new ResourceLocation(p_177585_1_.resolveTextureName(blockpartface.texture));
+                ResourceLocation resourcelocation = new ResourceLocation(p_177585_1_.resolveTextureItem(blockpartface.texture));
                 set.add(resourcelocation);
             }
         }
 
-        set.add(new ResourceLocation(p_177585_1_.resolveTextureName("particle")));
+        set.add(new ResourceLocation(p_177585_1_.resolveTextureItem("particle")));
         return set;
     }
 
@@ -686,13 +686,13 @@ public class ModelBakery
 
             if (modelblock != null)
             {
-                set.add(new ResourceLocation(modelblock.resolveTextureName("particle")));
+                set.add(new ResourceLocation(modelblock.resolveTextureItem("particle")));
 
                 if (this.hasItemModel(modelblock))
                 {
                     for (String s : ItemModelGenerator.LAYERS)
                     {
-                        ResourceLocation resourcelocation2 = new ResourceLocation(modelblock.resolveTextureName(s));
+                        ResourceLocation resourcelocation2 = new ResourceLocation(modelblock.resolveTextureItem(s));
 
                         if (modelblock.getRootModel() == MODEL_COMPASS && !TextureMap.LOCATION_MISSING_TEXTURE.equals(resourcelocation2))
                         {
@@ -712,7 +712,7 @@ public class ModelBakery
                     {
                         for (BlockPartFace blockpartface : blockpart.mapFaces.values())
                         {
-                            ResourceLocation resourcelocation1 = new ResourceLocation(modelblock.resolveTextureName(blockpartface.texture));
+                            ResourceLocation resourcelocation1 = new ResourceLocation(modelblock.resolveTextureItem(blockpartface.texture));
                             set.add(resourcelocation1);
                         }
                     }

@@ -61,7 +61,7 @@ public class RenderTNTPrimed extends Render<EntityTNTPrimed>
             GlStateManager.disablePolygonOffset();
             GlStateManager.colorAllMax();
             GlStateManager.disableBlend();
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.enableTexture2D();
         }
 

@@ -3,7 +3,6 @@ package net.minecraft.block;
 import java.util.List;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -22,7 +21,7 @@ public class BlockStainedGlassPane extends BlockPane
     public BlockStainedGlassPane()
     {
         super(Material.glass, false);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(COLOR, EnumDyeColor.WHITE));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(COLOR, EnumDyeColor.WHITE));
         this.setCreativeTab(CreativeTabs.tabDecorations);
     }
 
@@ -77,7 +76,7 @@ public class BlockStainedGlassPane extends BlockPane
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, NORTH, EAST, WEST, SOUTH, COLOR);
+        return new BlockState(this, NORTH, EAST, WEST, NORTH, COLOR);
     }
 
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)

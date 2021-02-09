@@ -70,7 +70,7 @@ public class GuiAchievement extends GUI
 
     public void updateAchievementWindow()
     {
-        if (this.theAchievement != null && this.notificationTime != 0L && Minecraft.getMinecraft().thePlayer != null)
+        if (this.theAchievement != null && this.notificationTime != 0L && Minecraft.getMinecraft().player != null)
         {
             double d0 = (double)(Minecraft.getSystemTime() - this.notificationTime) / 3000.0D;
 
@@ -129,7 +129,7 @@ public class GuiAchievement extends GUI
             GlStateManager.disableLighting();
             GlStateManager.enableRescaleNormal();
             GlStateManager.enableColorMaterial();
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             this.renderItem.renderItemAndEffectIntoGUI(this.theAchievement.theItemStack, i + 8, j + 8);
             GlStateManager.disableLighting();
             GlStateManager.depthMask(true);

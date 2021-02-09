@@ -120,7 +120,7 @@ public class CommandBlockScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 60);
+        drawWorldBackground(mouseX, mouseY, 60);
         getFr().drawCenteredString(I18n.format("advMode.setCommand"), this.width / 2, 20, 16777215);
         getFr().drawString(I18n.format("advMode.command"), this.width / 2 - 150, 37, 10526880);
         this.commandTextField.drawTextBox();

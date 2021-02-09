@@ -185,7 +185,7 @@ public class ResourcePacksScreen extends Screen {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 
-		this.drawDefaultBackground(mouseX, mouseY, 60);
+		this.drawWorldBackground(mouseX, mouseY, 60);
 
 		scissorBox(availableResourcePacksList.getLeft(), availableResourcePacksList.getTop(), availableResourcePacksList.getRight(), availableResourcePacksList.getBottom(), new ScaledResolution());
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);

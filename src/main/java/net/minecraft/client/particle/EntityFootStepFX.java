@@ -59,7 +59,7 @@ public class EntityFootStepFX extends EntityFX
         worldRendererIn.pos(f3 - 0.125F, f4, f5 - 0.125F).tex(0.0D, 0.0D).color(f6, f6, f6, f1).endVertex();
         Tessellator.getInstance().draw();
         GlStateManager.disableBlend();
-        GlStateManager.enableLighting();
+        GlStateManager.enableLightning();
     }
 
     /**

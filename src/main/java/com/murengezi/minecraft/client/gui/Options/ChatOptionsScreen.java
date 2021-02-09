@@ -74,7 +74,7 @@ public class ChatOptionsScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 60);
+        drawWorldBackground(mouseX, mouseY, 60);
         drawRect(this.width / 2 - 160, this.height / 6 + 15, this.width / 2 + 160, this.height / 6 + 193, Integer.MIN_VALUE);
         drawCenteredString(getFr(), EnumChatFormatting.UNDERLINE + I18n.format("options.chat.title"), this.width / 2, this.height / 6 + 20, 0xffffffff);
         super.drawScreen(mouseX, mouseY, partialTicks);

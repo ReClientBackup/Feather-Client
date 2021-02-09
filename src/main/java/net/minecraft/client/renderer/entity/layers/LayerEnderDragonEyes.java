@@ -30,7 +30,7 @@ public class LayerEnderDragonEyes implements LayerRenderer<EntityDragon>
         int j = i % 65536;
         int k = i / 65536;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
-        GlStateManager.enableLighting();
+        GlStateManager.enableLightning();
         GlStateManager.colorAllMax();
 
         if (Config.isShaders())

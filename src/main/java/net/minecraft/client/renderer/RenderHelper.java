@@ -27,7 +27,7 @@ public class RenderHelper
      */
     public static void enableStandardItemLighting()
     {
-        GlStateManager.enableLighting();
+        GlStateManager.enableLightning();
         GlStateManager.enableLight(0);
         GlStateManager.enableLight(1);
         GlStateManager.enableColorMaterial();

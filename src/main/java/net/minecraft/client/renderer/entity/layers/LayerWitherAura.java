@@ -42,7 +42,7 @@ public class LayerWitherAura implements LayerRenderer<EntityWither>
             GlStateManager.matrixMode(5890);
             GlStateManager.loadIdentity();
             GlStateManager.matrixMode(5888);
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.disableBlend();
         }
     }

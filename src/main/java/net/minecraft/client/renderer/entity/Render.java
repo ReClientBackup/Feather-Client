@@ -186,7 +186,7 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
         }
 
         GlStateManager.popMatrix();
-        GlStateManager.enableLighting();
+        GlStateManager.enableLightning();
     }
 
     /**
@@ -411,7 +411,7 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
                 Gui.drawModalRectWithCustomSizedTexture(-j - 6, i, 0, 0, 5, 6, 5, 6);
             }*/
             fontrenderer.drawString(str, -j, i, -1);
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.disableBlend();
             GlStateManager.colorAllMax();
             GlStateManager.popMatrix();

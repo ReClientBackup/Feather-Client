@@ -93,7 +93,7 @@ public class GlStateManager
         }
     }
 
-    public static void enableLighting()
+    public static void enableLightning()
     {
         lightingState.setEnabled();
     }

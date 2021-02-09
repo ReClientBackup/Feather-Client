@@ -170,7 +170,7 @@ public abstract class RenderLiving<T extends EntityLiving> extends RendererLivin
                     Shaders.endLeash();
                 }
 
-                GlStateManager.enableLighting();
+                GlStateManager.enableLightning();
                 GlStateManager.enableTexture2D();
                 GlStateManager.enableCull();
             }

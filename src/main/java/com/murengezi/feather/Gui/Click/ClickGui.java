@@ -9,7 +9,6 @@ import com.murengezi.feather.Gui.Click.Frames.ThemesFrame;
 import com.murengezi.feather.Gui.Click.Items.ModuleSettingsItem;
 import com.murengezi.feather.Gui.Click.Items.ModuleStateItem;
 import com.murengezi.feather.Gui.Click.Items.ThemeItem;
-import com.murengezi.feather.Module.Adjustable;
 import com.murengezi.feather.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
@@ -17,7 +16,6 @@ import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Tobias Sjöblom

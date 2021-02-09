@@ -106,7 +106,7 @@ public abstract class Screen extends GUI implements YesNoCallback {
     }
 
     protected void renderToolTip(ItemStack stack, int x, int y) {
-        List<String> list = stack.getTooltip(getMc().thePlayer, getMc().gameSettings.advancedItemTooltips);
+        List<String> list = stack.getTooltip(getMc().player, getMc().gameSettings.advancedItemTooltips);
 
         for (int i = 0; i < list.size(); ++i) {
             if (i == 0) {
@@ -183,7 +183,7 @@ public abstract class Screen extends GUI implements YesNoCallback {
 
             this.zLevel = 0.0F;
             this.itemRender.zLevel = 0.0F;
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.enableDepth();
             RenderHelper.enableStandardItemLighting();
             GlStateManager.enableRescaleNormal();
@@ -328,7 +328,7 @@ public abstract class Screen extends GUI implements YesNoCallback {
             getMc().inGameScreen.getChatGUI().addToSentMessages(msg);
         }
 
-        getMc().thePlayer.sendChatMessage(msg);
+        getMc().player.sendChatMessage(msg);
     }
 
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
@@ -430,12 +430,12 @@ public abstract class Screen extends GUI implements YesNoCallback {
 
     public void onGuiClosed() {}
 
-    public void drawDefaultBackground() {
+    public void drawWorldBackground() {
         this.drawWorldBackground(0);
     }
 
     public void drawWorldBackground(int tint) {
-        if (getMc().theWorld != null) {
+        if (getMc().world != null) {
             this.drawGradientRect(0, 0, this.width, this.height, -1072689136, -804253680);
         } else {
             this.drawBackground(tint);
@@ -517,7 +517,7 @@ public abstract class Screen extends GUI implements YesNoCallback {
         this.setWorldAndResolution(width, height);
     }
 
-    public void drawDefaultBackground(int mouseX, int mouseY, int delta) {
+    public void drawWorldBackground(int mouseX, int mouseY, int delta) {
         if (getWorld() == null) {
             drawGradientRect(0, 0, this.width, this.height, Feather.getThemeManager().getActiveTheme().getColor().getRGB(), 0xff333333);
             Feather.getParticleManager().render(mouseX, mouseY);

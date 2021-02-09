@@ -108,7 +108,7 @@ public class AddServerScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground(mouseX, mouseY, 60);
+        this.drawWorldBackground(mouseX, mouseY, 60);
         getFr().drawCenteredString(I18n.format("addServer.title"), this.width / 2, 17, 16777215);
         getFr().drawString(I18n.format("addServer.enterName"), this.width / 2 - 100, 53, 10526880);
         getFr().drawString(I18n.format("addServer.enterIp"), this.width / 2 - 100, 94, 10526880);

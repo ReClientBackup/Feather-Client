@@ -44,7 +44,7 @@ public class GuiMemoryErrorScreen extends Screen
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground();
+        this.drawWorldBackground();
         getFr().drawCenteredString("Out of memory!", this.width / 2, this.height / 4 - 60 + 20, 16777215);
         getFr().drawString("Minecraft has run out of memory.", this.width / 2 - 140, this.height / 4 - 60 + 60 + 0, 10526880);
         getFr().drawString("This could be caused by a bug in the game or by the", this.width / 2 - 140, this.height / 4 - 60 + 60 + 18, 10526880);

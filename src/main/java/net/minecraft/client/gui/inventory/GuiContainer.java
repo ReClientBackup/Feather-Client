@@ -128,7 +128,7 @@ public abstract class GuiContainer extends Screen {
                 GlStateManager.colorMask(true, true, true, false);
                 this.drawGradientRect(j1, k1, j1 + 16, k1 + 16, -2130706433, -2130706433);
                 GlStateManager.colorMask(true, true, true, true);
-                GlStateManager.enableLighting();
+                GlStateManager.enableLightning();
                 GlStateManager.enableDepth();
             }
         }
@@ -189,7 +189,7 @@ public abstract class GuiContainer extends Screen {
             this.renderToolTip(itemstack1, mouseX, mouseY);
         }
 
-        GlStateManager.enableLighting();
+        GlStateManager.enableLightning();
         GlStateManager.enableDepth();
         RenderHelper.enableStandardItemLighting();
     }
@@ -280,7 +280,7 @@ public abstract class GuiContainer extends Screen {
                 GlStateManager.disableLighting();
                 getMc().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
                 this.drawTexturedModalRect(i, j, textureatlassprite, 16, 16);
-                GlStateManager.enableLighting();
+                GlStateManager.enableLightning();
                 flag1 = true;
             }
         }

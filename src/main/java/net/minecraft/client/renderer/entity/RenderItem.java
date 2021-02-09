@@ -246,7 +246,7 @@ public class RenderItem implements IResourceManagerReloadListener
                 GlStateManager.popMatrix();
                 GlStateManager.matrixMode(5888);
                 GlStateManager.blendFunc(770, 771);
-                GlStateManager.enableLighting();
+                GlStateManager.enableLightning();
                 GlStateManager.depthFunc(515);
                 GlStateManager.depthMask(true);
                 this.textureManager.bindTexture(TextureMap.locationBlocksTexture);
@@ -427,8 +427,8 @@ public class RenderItem implements IResourceManagerReloadListener
         //TODO Bow pulling in inventory
         Minecraft mc = MinecraftUtils.getMc();
         ModelResourceLocation modelresourcelocation = null;
-        if (stack.getItem() == Items.bow && mc.thePlayer.getItemInUse() != null && mc.thePlayer.getItemInUse() == stack) {
-            int i = stack.getMaxItemUseDuration() - mc.thePlayer.getItemInUseCount();
+        if (stack.getItem() == Items.bow && mc.player.getItemInUse() != null && mc.player.getItemInUse() == stack) {
+            int i = stack.getMaxItemUseDuration() - mc.player.getItemInUseCount();
 
             if (i >= 18) {
                 modelresourcelocation = new ModelResourceLocation("bow_pulling_2", "inventory");
@@ -442,7 +442,7 @@ public class RenderItem implements IResourceManagerReloadListener
         }
 
         //TODO Rod cast in inventory
-        if (stack.getItem() == Items.fishing_rod && mc.thePlayer.fishEntity != null && mc.thePlayer.getHeldItem() == stack) {
+        if (stack.getItem() == Items.fishing_rod && mc.player.fishEntity != null && mc.player.getHeldItem() == stack) {
             modelresourcelocation = new ModelResourceLocation("fishing_rod_cast", "inventory");
             ibakedmodel = this.itemModelMesher.getModelManager().getModel(modelresourcelocation);
         }
@@ -487,7 +487,7 @@ public class RenderItem implements IResourceManagerReloadListener
             GlStateManager.scale(40.0F, 40.0F, 40.0F);
             GlStateManager.rotate(210.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
         } else {
             GlStateManager.scale(64.0F, 64.0F, 64.0F);
             GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
@@ -540,7 +540,7 @@ public class RenderItem implements IResourceManagerReloadListener
                 GlStateManager.disableDepth();
                 GlStateManager.disableBlend();
                 fr.drawStringWithShadow(s, (float)(xPosition + 19 - 2 - fr.getStringWidth(s)), (float)(yPosition + 6 + 3), 16777215);
-                GlStateManager.enableLighting();
+                GlStateManager.enableLightning();
                 GlStateManager.enableDepth();
                 GlStateManager.enableBlend();
             }
@@ -586,7 +586,7 @@ public class RenderItem implements IResourceManagerReloadListener
                 GlStateManager.enableBlend();
                 GlStateManager.enableAlpha();
                 GlStateManager.enableTexture2D();
-                GlStateManager.enableLighting();
+                GlStateManager.enableLightning();
                 GlStateManager.enableDepth();
             }
         }

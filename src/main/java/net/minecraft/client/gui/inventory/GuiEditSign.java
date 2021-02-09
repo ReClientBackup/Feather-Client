@@ -125,7 +125,7 @@ public class GuiEditSign extends Screen
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground();
+        this.drawWorldBackground();
         getFr().drawCenteredString(I18n.format("sign.edit"), this.width / 2, 40, 16777215);
         GlStateManager.colorAllMax();
         GlStateManager.pushMatrix();

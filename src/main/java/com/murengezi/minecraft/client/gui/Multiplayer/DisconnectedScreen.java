@@ -48,7 +48,7 @@ public class DisconnectedScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground(mouseX, mouseY, 60);
+        this.drawWorldBackground(mouseX, mouseY, 60);
         getFr().drawCenteredString(this.reason, this.width / 2, this.height / 2 - this.messageHeight / 2 - getFr().FONT_HEIGHT * 2, 11184810);
 
         if (this.multilineMessage != null) {

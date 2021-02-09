@@ -44,7 +44,7 @@ public class RenderTntMinecart extends RenderMinecart<EntityMinecartTNT>
             GlStateManager.popMatrix();
             GlStateManager.colorAllMax();
             GlStateManager.disableBlend();
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.enableTexture2D();
         }
     }

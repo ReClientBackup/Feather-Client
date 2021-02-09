@@ -8,8 +8,6 @@ import com.murengezi.feather.Module.ModuleInfo;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
-import java.util.Properties;
-
 /**
  * @author Tobias Sjöblom
  * Created on 2021-02-03 at 16:46

@@ -1,7 +1,6 @@
 package com.murengezi.minecraft.client.gui.Multiplayer;
 
 import com.murengezi.feather.Feather;
-import com.murengezi.feather.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.multiplayer.ServerAddress;
@@ -127,7 +126,7 @@ public class ConnectingScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground(mouseX, mouseY, 60);
+        this.drawWorldBackground(mouseX, mouseY, 60);
 
 
         getFr().drawCenteredString(I18n.format(getNetworkManager() == null ? "connect.connecting" : "connect.authorizing"), this.width / 2, this.height / 2 - 50, 16777215);

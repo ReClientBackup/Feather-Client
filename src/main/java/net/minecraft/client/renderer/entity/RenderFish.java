@@ -70,7 +70,7 @@ public class RenderFish extends Render<EntityFishHook>
             double d2 = entity.angler.prevPosZ + (entity.angler.posZ - entity.angler.prevPosZ) * (double)partialTicks + vec3.zCoord;
             double d3 = entity.angler.getEyeHeight();
 
-            if (this.renderManager.options != null && this.renderManager.options.thirdPersonView > 0 || entity.angler != Minecraft.getMinecraft().thePlayer)
+            if (this.renderManager.options != null && this.renderManager.options.thirdPersonView > 0 || entity.angler != Minecraft.getMinecraft().player)
             {
                 float f9 = (entity.angler.prevRenderYawOffset + (entity.angler.renderYawOffset - entity.angler.prevRenderYawOffset) * partialTicks) * (float)Math.PI / 180.0F;
                 double d4 = MathHelper.sin(f9);
@@ -101,7 +101,7 @@ public class RenderFish extends Render<EntityFishHook>
             }
 
             tessellator.draw();
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.enableTexture2D();
             super.doRender(entity, x, y, z, entityYaw, partialTicks);
         }

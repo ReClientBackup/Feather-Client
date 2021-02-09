@@ -89,7 +89,7 @@ public class WorldSelectionScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 120);
+        drawWorldBackground(mouseX, mouseY, 120);
 
         GlStateManager.pushMatrix();
         scissorBox(worldSlot.getLeft(), worldSlot.getTop(), worldSlot.getRight(), worldSlot.getBottom(), new ScaledResolution());

@@ -28,7 +28,7 @@ public class ItemModelGenerator
                 break;
             }
 
-            String s1 = blockModel.resolveTextureName(s);
+            String s1 = blockModel.resolveTextureItem(s);
             map.put(s, s1);
             TextureAtlasSprite textureatlassprite = textureMapIn.getAtlasSprite((new ResourceLocation(s1)).toString());
             list.addAll(this.func_178394_a(i, s, textureatlassprite));
@@ -40,7 +40,7 @@ public class ItemModelGenerator
         }
         else
         {
-            map.put("particle", blockModel.isTexturePresent("particle") ? blockModel.resolveTextureName("particle") : map.get("layer0"));
+            map.put("particle", blockModel.isTexturePresent("particle") ? blockModel.resolveTextureItem("particle") : map.get("layer0"));
             return new ModelBlock(list, map, false, false, blockModel.func_181682_g());
         }
     }

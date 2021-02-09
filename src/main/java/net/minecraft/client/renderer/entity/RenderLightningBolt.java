@@ -140,7 +140,7 @@ public class RenderLightningBolt extends Render<EntityLightningBolt>
         }
 
         GlStateManager.disableBlend();
-        GlStateManager.enableLighting();
+        GlStateManager.enableLightning();
         GlStateManager.enableTexture2D();
     }
 

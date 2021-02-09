@@ -37,7 +37,7 @@ public class DownloadTerrainScreen extends Screen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		drawDefaultBackground(mouseX, mouseY, 60);
+		drawWorldBackground(mouseX, mouseY, 60);
 		getFr().drawCenteredString(I18n.format("multiplayer.downloadingTerrain"), this.width / 2, this.height / 2 - 50, 16777215);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}

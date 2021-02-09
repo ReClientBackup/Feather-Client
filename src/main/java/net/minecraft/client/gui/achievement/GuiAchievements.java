@@ -3,7 +3,6 @@ package net.minecraft.client.gui.achievement;
 import java.io.IOException;
 import java.util.Random;
 
-import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.gui.GuiButton;
@@ -107,7 +106,7 @@ public class GuiAchievements extends Screen implements IProgressMeter
     {
         if (this.loadingAchievements)
         {
-            this.drawDefaultBackground();
+            this.drawWorldBackground();
             this.drawCenteredString(getFr(), I18n.format("multiplayer.downloadingStats"), this.width / 2, this.height / 2, 16777215);
             this.drawCenteredString(getFr(), lanSearchStates[(int)(Minecraft.getSystemTime() / 150L % (long)lanSearchStates.length)], this.width / 2, this.height / 2 + getFr().FONT_HEIGHT * 2, 16777215);
         }
@@ -190,12 +189,12 @@ public class GuiAchievements extends Screen implements IProgressMeter
                 this.field_146573_x = field_146560_B - 1;
             }
 
-            this.drawDefaultBackground();
+            this.drawWorldBackground();
             this.drawAchievementScreen(mouseX, mouseY, partialTicks);
             GlStateManager.disableLighting();
             GlStateManager.disableDepth();
             this.drawTitle();
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.enableDepth();
         }
     }
@@ -464,7 +463,7 @@ public class GuiAchievements extends Screen implements IProgressMeter
                     this.itemRender.func_175039_a(false);
                 }
 
-                GlStateManager.enableLighting();
+                GlStateManager.enableLightning();
                 GlStateManager.enableCull();
                 this.itemRender.renderItemAndEffectIntoGUI(achievement2.theItemStack, l6 + 3, j7 + 3);
                 GlStateManager.blendFunc(770, 771);
@@ -551,7 +550,7 @@ public class GuiAchievements extends Screen implements IProgressMeter
         }
 
         GlStateManager.enableDepth();
-        GlStateManager.enableLighting();
+        GlStateManager.enableLightning();
         RenderHelper.disableStandardItemLighting();
     }
 

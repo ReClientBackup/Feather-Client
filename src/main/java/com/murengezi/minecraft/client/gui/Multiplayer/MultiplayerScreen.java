@@ -147,7 +147,7 @@ public class MultiplayerScreen extends Screen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.hoveringText = null;
-        drawDefaultBackground(mouseX, mouseY, 120);
+        drawWorldBackground(mouseX, mouseY, 120);
         scissorBox(serverListSelector.getLeft(), serverListSelector.getTop(), serverListSelector.getRight(), serverListSelector.getBottom(), new ScaledResolution());
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
         this.serverListSelector.drawScreen(mouseX, mouseY, partialTicks);

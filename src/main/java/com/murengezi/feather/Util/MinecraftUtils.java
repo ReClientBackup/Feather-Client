@@ -4,7 +4,6 @@ import com.murengezi.minecraft.potion.Potion;
 import net.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
-import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.client.settings.GameSettings;
@@ -20,11 +19,11 @@ public class MinecraftUtils {
     }
 
     public static EntityPlayerSP getPlayer() {
-        return getMc().thePlayer;
+        return getMc().player;
     }
 
     public static WorldClient getWorld() {
-        return getMc().theWorld;
+        return getMc().world;
     }
 
     public static FontRenderer getFr() {

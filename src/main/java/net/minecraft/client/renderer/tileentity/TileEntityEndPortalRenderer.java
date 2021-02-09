@@ -118,7 +118,7 @@ public class TileEntityEndPortalRenderer extends TileEntitySpecialRenderer<TileE
             GlStateManager.disableTexGenCoord(GlStateManager.TexGen.T);
             GlStateManager.disableTexGenCoord(GlStateManager.TexGen.R);
             GlStateManager.disableTexGenCoord(GlStateManager.TexGen.Q);
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
         }
     }
 

@@ -686,9 +686,9 @@ public class GameSettings
     /**
      * Gets a key binding.
      */
-    public String getKeyBinding(GameSettings.Options p_74297_1_)
+    public String getKeyBinding(GameSettings.Options options)
     {
-        String s = this.getKeyBindingOF(p_74297_1_);
+        String s = this.getKeyBindingOF(options);
 
         if (s != null)
         {
@@ -696,40 +696,40 @@ public class GameSettings
         }
         else
         {
-            String s1 = I18n.format(p_74297_1_.getEnumString()) + ": ";
+            String s1 = I18n.format(options.getEnumString()) + ": ";
 
-            if (p_74297_1_.getEnumFloat())
+            if (options.getEnumFloat())
             {
-                float f1 = this.getOptionFloatValue(p_74297_1_);
-                float f = p_74297_1_.normalizeValue(f1);
-                return p_74297_1_ == GameSettings.Options.MIPMAP_LEVELS && (double)f1 >= 4.0D ? s1 + Lang.get("of.general.max") : (p_74297_1_ == GameSettings.Options.SENSITIVITY ? (f == 0.0F ? s1 + I18n.format("options.sensitivity.min") : (f == 1.0F ? s1 + I18n.format("options.sensitivity.max") : s1 + (int)(f * 200.0F) + "%")) : (p_74297_1_ == GameSettings.Options.FOV ? (f1 == 70.0F ? s1 + I18n.format("options.fov.min") : (f1 == 110.0F ? s1 + I18n.format("options.fov.max") : s1 + (int)f1)) : (p_74297_1_ == GameSettings.Options.FRAMERATE_LIMIT ? (f1 == p_74297_1_.valueMax ? s1 + I18n.format("options.framerateLimit.max") : s1 + (int)f1 + " fps") : (p_74297_1_ == GameSettings.Options.RENDER_CLOUDS ? (f1 == p_74297_1_.valueMin ? s1 + I18n.format("options.cloudHeight.min") : s1 + ((int)f1 + 128)) : (p_74297_1_ == GameSettings.Options.GAMMA ? (f == 0.0F ? s1 + I18n.format("options.gamma.min") : (f == 1.0F ? s1 + I18n.format("options.gamma.max") : s1 + "+" + (int)(f * 100.0F) + "%")) : (p_74297_1_ == GameSettings.Options.SATURATION ? s1 + (int)(f * 400.0F) + "%" : (p_74297_1_ == GameSettings.Options.CHAT_OPACITY ? s1 + (int)(f * 90.0F + 10.0F) + "%" : (p_74297_1_ == GameSettings.Options.CHAT_HEIGHT_UNFOCUSED ? s1 + GuiNewChat.calculateChatboxHeight(f) + "px" : (p_74297_1_ == GameSettings.Options.CHAT_HEIGHT_FOCUSED ? s1 + GuiNewChat.calculateChatboxHeight(f) + "px" : (p_74297_1_ == GameSettings.Options.CHAT_WIDTH ? s1 + GuiNewChat.calculateChatboxWidth(f) + "px" : (p_74297_1_ == GameSettings.Options.RENDER_DISTANCE ? s1 + (int)f1 + " chunks" : (p_74297_1_ == GameSettings.Options.MIPMAP_LEVELS ? (f1 == 0.0F ? s1 + I18n.format("options.off") : s1 + (int)f1) : (f == 0.0F ? s1 + I18n.format("options.off") : s1 + (int)(f * 100.0F) + "%")))))))))))));
+                float f1 = this.getOptionFloatValue(options);
+                float f = options.normalizeValue(f1);
+                return options == GameSettings.Options.MIPMAP_LEVELS && (double)f1 >= 4.0D ? s1 + Lang.get("of.general.max") : (options == GameSettings.Options.SENSITIVITY ? (f == 0.0F ? s1 + I18n.format("options.sensitivity.min") : (f == 1.0F ? s1 + I18n.format("options.sensitivity.max") : s1 + (int)(f * 200.0F) + "%")) : (options == GameSettings.Options.FOV ? (f1 == 70.0F ? s1 + I18n.format("options.fov.min") : (f1 == 110.0F ? s1 + I18n.format("options.fov.max") : s1 + (int)f1)) : (options == GameSettings.Options.FRAMERATE_LIMIT ? (f1 == options.valueMax ? s1 + I18n.format("options.framerateLimit.max") : s1 + (int)f1 + " fps") : (options == GameSettings.Options.RENDER_CLOUDS ? (f1 == options.valueMin ? s1 + I18n.format("options.cloudHeight.min") : s1 + ((int)f1 + 128)) : (options == GameSettings.Options.GAMMA ? (f == 0.0F ? s1 + I18n.format("options.gamma.min") : (f == 1.0F ? s1 + I18n.format("options.gamma.max") : s1 + "+" + (int)(f * 100.0F) + "%")) : (options == GameSettings.Options.SATURATION ? s1 + (int)(f * 400.0F) + "%" : (options == GameSettings.Options.CHAT_OPACITY ? s1 + (int)(f * 90.0F + 10.0F) + "%" : (options == GameSettings.Options.CHAT_HEIGHT_UNFOCUSED ? s1 + GuiNewChat.calculateChatboxHeight(f) + "px" : (options == GameSettings.Options.CHAT_HEIGHT_FOCUSED ? s1 + GuiNewChat.calculateChatboxHeight(f) + "px" : (options == GameSettings.Options.CHAT_WIDTH ? s1 + GuiNewChat.calculateChatboxWidth(f) + "px" : (options == GameSettings.Options.RENDER_DISTANCE ? s1 + (int)f1 + " chunks" : (options == GameSettings.Options.MIPMAP_LEVELS ? (f1 == 0.0F ? s1 + I18n.format("options.off") : s1 + (int)f1) : (f == 0.0F ? s1 + I18n.format("options.off") : s1 + (int)(f * 100.0F) + "%")))))))))))));
             }
-            else if (p_74297_1_.getEnumBoolean())
+            else if (options.getEnumBoolean())
             {
-                boolean flag = this.getOptionOrdinalValue(p_74297_1_);
+                boolean flag = this.getOptionOrdinalValue(options);
                 return flag ? s1 + I18n.format("options.on") : s1 + I18n.format("options.off");
             }
-            else if (p_74297_1_ == GameSettings.Options.GUI_SCALE)
+            else if (options == GameSettings.Options.GUI_SCALE)
             {
                 return this.guiScale >= GUISCALES.length ? s1 + this.guiScale + "x" : s1 + getTranslation(GUISCALES, this.guiScale);
             }
-            else if (p_74297_1_ == GameSettings.Options.CHAT_VISIBILITY)
+            else if (options == GameSettings.Options.CHAT_VISIBILITY)
             {
                 return s1 + I18n.format(this.chatVisibility.getResourceKey());
             }
-            else if (p_74297_1_ == GameSettings.Options.PARTICLES)
+            else if (options == GameSettings.Options.PARTICLES)
             {
                 return s1 + getTranslation(PARTICLES, this.particleSetting);
             }
-            else if (p_74297_1_ == GameSettings.Options.AMBIENT_OCCLUSION)
+            else if (options == GameSettings.Options.AMBIENT_OCCLUSION)
             {
                 return s1 + getTranslation(AMBIENT_OCCLUSIONS, this.ambientOcclusion);
             }
-            else if (p_74297_1_ == GameSettings.Options.RENDER_CLOUDS)
+            else if (options == GameSettings.Options.RENDER_CLOUDS)
             {
                 return s1 + getTranslation(field_181149_aW, this.clouds);
             }
-            else if (p_74297_1_ == GameSettings.Options.GRAPHICS)
+            else if (options == GameSettings.Options.GRAPHICS)
             {
                 if (this.fancyGraphics)
                 {
@@ -1242,7 +1242,7 @@ public class GameSettings
      */
     public void sendSettingsToServer()
     {
-        if (this.mc.thePlayer != null)
+        if (this.mc.player != null)
         {
             int i = 0;
 
@@ -1251,7 +1251,7 @@ public class GameSettings
                 i |= enumplayermodelparts.getPartMask();
             }
 
-            this.mc.thePlayer.sendQueue.addToSendQueue(new C15PacketClientSettings(this.language, this.renderDistanceChunks, this.chatVisibility, this.chatColours, i));
+            this.mc.player.sendQueue.addToSendQueue(new C15PacketClientSettings(this.language, this.renderDistanceChunks, this.chatVisibility, this.chatColours, i));
         }
     }
 
@@ -3081,7 +3081,7 @@ public class GameSettings
             Config.waterOpacityChanged = true;
         }
 
-        ClearWater.updateWaterOpacity(this, this.mc.theWorld);
+        ClearWater.updateWaterOpacity(this, this.mc.world);
     }
 
     public void setAllAnimations(boolean p_setAllAnimations_1_)

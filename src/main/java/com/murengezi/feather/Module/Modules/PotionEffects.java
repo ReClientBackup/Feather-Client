@@ -9,10 +9,8 @@ import com.murengezi.feather.Module.Setting.Settings.BooleanSetting;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.potion.Potion;
 import com.murengezi.minecraft.potion.PotionEffect;
-import com.murengezi.minecraft.potion.PotionHelper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Collection;

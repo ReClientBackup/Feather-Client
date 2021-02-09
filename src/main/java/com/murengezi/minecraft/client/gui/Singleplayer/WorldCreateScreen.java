@@ -348,7 +348,7 @@ public class WorldCreateScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 60);
+        drawWorldBackground(mouseX, mouseY, 60);
         getFr().drawCenteredString(I18n.format("selectWorld.create"), this.width / 2, 20, -1);
 
         if (this.field_146344_y) {

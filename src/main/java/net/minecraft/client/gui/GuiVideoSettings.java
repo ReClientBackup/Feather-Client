@@ -101,7 +101,7 @@ public class GuiVideoSettings extends GuiScreenOF {
 
             if (button.getId() == QUALITY) {
                 saveSettings();
-                changeScreen(new GuiQualitySettingsOF(this, getGs()));
+                changeScreen(new GuiQualitySettingsOF(this));
             }
 
             if (button.getId() == ANIMATIONS) {
@@ -150,9 +150,9 @@ public class GuiVideoSettings extends GuiScreenOF {
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 60);
+        drawWorldBackground(mouseX, mouseY, 60);
         getFr().drawCenteredString(I18n.format("options.videoTitle"), this.width / 2, 15, 16777215);
-        String ofVersion = "OptiFine HD L5 Ultra";
+        String ofVersion = "OptiFine HD M5 Ultra";
         getFr().drawString(ofVersion, 2, this.height - 10, 8421504);
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.tooltipManager.drawTooltips(mouseX, mouseY, this.buttonList);

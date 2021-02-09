@@ -101,20 +101,20 @@ public class ModelBlock
 
     public boolean isTexturePresent(String textureName)
     {
-        return !"missingno".equals(this.resolveTextureName(textureName));
+        return !"missingno".equals(this.resolveTextureItem(textureName));
     }
 
-    public String resolveTextureName(String textureName)
+    public String resolveTextureItem(String textureName)
     {
         if (!this.startsWithHash(textureName))
         {
             textureName = '#' + textureName;
         }
 
-        return this.resolveTextureName(textureName, new ModelBlock.Bookkeep(this));
+        return this.resolveTextureItem(textureName, new ModelBlock.Bookkeep(this));
     }
 
-    private String resolveTextureName(String textureName, ModelBlock.Bookkeep p_178302_2_)
+    private String resolveTextureItem(String textureName, ModelBlock.Bookkeep p_178302_2_)
     {
         if (this.startsWithHash(textureName))
         {
@@ -129,14 +129,14 @@ public class ModelBlock
 
                 if (s == null && this.hasParent())
                 {
-                    s = this.parent.resolveTextureName(textureName, p_178302_2_);
+                    s = this.parent.resolveTextureItem(textureName, p_178302_2_);
                 }
 
                 p_178302_2_.modelExt = this;
 
                 if (s != null && this.startsWithHash(s))
                 {
-                    s = p_178302_2_.model.resolveTextureName(s, p_178302_2_);
+                    s = p_178302_2_.model.resolveTextureItem(s, p_178302_2_);
                 }
 
                 return s != null && !this.startsWithHash(s) ? s : "missingno";

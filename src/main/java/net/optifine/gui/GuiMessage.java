@@ -1,93 +1,68 @@
 package net.optifine.gui;
 
 import com.google.common.collect.Lists;
-import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiOptionButton;
-import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.src.Config;
-
 import java.io.IOException;
 import java.util.List;
 
-public class GuiMessage extends Screen
-{
-    private final Screen parentScreen;
-    private final String messageLine1;
-    private final String messageLine2;
-    private final List listLines2 = Lists.newArrayList();
-    protected String confirmButtonText;
-    private int ticksUntilEnable;
+import com.murengezi.minecraft.client.gui.GuiButton;
+import com.murengezi.minecraft.client.gui.Screen;
+import net.minecraft.client.gui.GuiOptionButton;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.src.Config;
 
-    public GuiMessage(Screen parentScreen, String line1, String line2)
-    {
-        this.parentScreen = parentScreen;
-        this.messageLine1 = line1;
-        this.messageLine2 = line2;
-        this.confirmButtonText = I18n.format("gui.done");
-    }
+public class GuiMessage extends Screen {
+   private Screen parentScreen;
+   private String messageLine1;
+   private String messageLine2;
+   private final List listLines2 = Lists.newArrayList();
+   protected String confirmButtonText;
+   private int ticksUntilEnable;
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
-    public void initGui()
-    {
-        this.buttonList.add(new GuiOptionButton(0, this.width / 2 - 74, this.height / 6 + 96, this.confirmButtonText));
-        this.listLines2.clear();
-        this.listLines2.addAll(getFr().listFormattedStringToWidth(this.messageLine2, this.width - 50));
-    }
+   public GuiMessage(Screen parentScreen, String line1, String line2) {
+      this.parentScreen = parentScreen;
+      this.messageLine1 = line1;
+      this.messageLine2 = line2;
+      this.confirmButtonText = I18n.format("gui.done", new Object[0]);
+   }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
-        Config.getMinecraft().displayGuiScreen(this.parentScreen);
-    }
+   public void initGui() {
+      this.buttonList.add(new GuiOptionButton(0, this.width / 2 - 74, this.height / 6 + 96, this.confirmButtonText));
+      this.listLines2.clear();
+      this.listLines2.addAll(getFr().listFormattedStringToWidth(this.messageLine2, this.width - 50));
+   }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
-        this.drawDefaultBackground();
-        getFr().drawCenteredString(this.messageLine1, this.width / 2, 70, 16777215);
-        int i = 90;
+   protected void actionPerformed(GuiButton button) throws IOException {
+      Config.getMinecraft().displayGuiScreen(this.parentScreen);
+   }
 
-        for (Object e : this.listLines2)
-        {
-            String s = (String) e;
-            getFr().drawCenteredString(s, this.width / 2, i, 16777215);
-            i += getFr().FONT_HEIGHT;
-        }
+   public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+      this.drawWorldBackground();
+      getFr().drawCenteredString(this.messageLine1, this.width / 2, 70, 16777215);
+      int i = 90;
 
-        super.drawScreen(mouseX, mouseY, partialTicks);
-    }
+      for(Object o : this.listLines2) {
+         String s = (String) o;
+         getFr().drawCenteredString(s, this.width / 2, i, 16777215);
+         i += getFr().FONT_HEIGHT;
+      }
 
-    public void setButtonDelay(int ticksUntilEnable)
-    {
-        this.ticksUntilEnable = ticksUntilEnable;
+      super.drawScreen(mouseX, mouseY, partialTicks);
+   }
 
-        for (GuiButton guibutton : this.buttonList)
-        {
-            guibutton.setEnabled(false);
-        }
-    }
+   public void setButtonDelay(int ticksUntilEnable) {
+      this.ticksUntilEnable = ticksUntilEnable;
 
-    /**
-     * Called from the main game loop to update the screen.
-     */
-    public void updateScreen()
-    {
-        super.updateScreen();
+      for(GuiButton guibutton : this.buttonList) {
+         guibutton.setEnabled(false);
+      }
+   }
 
-        if (--this.ticksUntilEnable == 0)
-        {
-            for (GuiButton guibutton : this.buttonList)
-            {
-                guibutton.setEnabled(true);
-            }
-        }
-    }
+   public void updateScreen() {
+      super.updateScreen();
+      if(--this.ticksUntilEnable == 0) {
+         for(GuiButton guibutton : this.buttonList) {
+            guibutton.setEnabled(true);
+         }
+      }
+   }
 }

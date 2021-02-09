@@ -12,7 +12,6 @@ import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 

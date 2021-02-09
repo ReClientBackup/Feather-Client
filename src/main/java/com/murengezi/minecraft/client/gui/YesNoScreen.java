@@ -57,7 +57,7 @@ public class YesNoScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground(mouseX, mouseY, 60);
+        this.drawWorldBackground(mouseX, mouseY, 60);
         getFr().drawCenteredString(this.messageLine1, this.width / 2, 70, 16777215);
         this.lines.forEach(line -> getFr().drawCenteredString(line, this.width / 2, 90 + (this.lines.indexOf(line) * getFr().FONT_HEIGHT), 16777215));
         super.drawScreen(mouseX, mouseY, partialTicks);

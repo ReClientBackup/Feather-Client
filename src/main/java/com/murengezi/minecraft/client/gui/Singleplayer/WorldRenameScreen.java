@@ -84,7 +84,7 @@ public class WorldRenameScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 60);
+        drawWorldBackground(mouseX, mouseY, 60);
 
         getFr().drawCenteredString(I18n.format("selectWorld.renameTitle"), this.width / 2, 20, 0xffffffff);
         getFr().drawString(I18n.format("selectWorld.enterName"), this.width / 2 - 100, 47, 0xffA0A0A0);

@@ -317,7 +317,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
 
     protected void unsetScoreTeamColor()
     {
-        GlStateManager.enableLighting();
+        GlStateManager.enableLightning();
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
         GlStateManager.enableTexture2D();
         GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
@@ -331,7 +331,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
     protected void renderModel(T entitylivingbaseIn, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_)
     {
         boolean flag = !entitylivingbaseIn.isInvisible();
-        boolean flag1 = !flag && !entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer);
+        boolean flag1 = !flag && !entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().player);
 
         if (flag || flag1)
         {
@@ -660,7 +660,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
                         GlStateManager.enableTexture2D();
                         GlStateManager.depthMask(true);
                         fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, 0, 553648127);
-                        GlStateManager.enableLighting();
+                        GlStateManager.enableLightning();
                         GlStateManager.disableBlend();
                         GlStateManager.colorAllMax();
                         GlStateManager.popMatrix();
@@ -679,7 +679,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
 
     protected boolean canRenderName(T entity)
     {
-        EntityPlayerSP entityplayersp = Minecraft.getMinecraft().thePlayer;
+        EntityPlayerSP entityplayersp = Minecraft.getMinecraft().player;
 
         if (entity instanceof EntityPlayer && entity != entityplayersp) {
             Team team = entity.getTeam();

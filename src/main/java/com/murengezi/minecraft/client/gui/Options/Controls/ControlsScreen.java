@@ -104,7 +104,7 @@ public class ControlsScreen extends Screen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		this.drawDefaultBackground(mouseX, mouseY, 60);
+		this.drawWorldBackground(mouseX, mouseY, 60);
 
 		GlStateManager.pushMatrix();
 		scissorBox(keyBindingList.getLeft(), keyBindingList.getTop(), keyBindingList.getRight(), keyBindingList.getBottom(), new ScaledResolution());

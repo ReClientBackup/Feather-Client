@@ -91,7 +91,7 @@ public class ItemRenderer
     }
 
     private void func_178109_a(AbstractClientPlayer clientPlayer) {
-        int i = this.mc.theWorld.getCombinedLight(new BlockPos(clientPlayer.posX, clientPlayer.posY + (double)clientPlayer.getEyeHeight(), clientPlayer.posZ), 0);
+        int i = this.mc.world.getCombinedLight(new BlockPos(clientPlayer.posX, clientPlayer.posY + (double)clientPlayer.getEyeHeight(), clientPlayer.posZ), 0);
 
         if (Config.isDynamicLights()) {
             i = DynamicLights.getCombinedLight(this.mc.getRenderViewEntity(), i);
@@ -122,7 +122,7 @@ public class ItemRenderer
         GlStateManager.rotate(64.0F, 1.0F, 0.0F, 0.0F);
         GlStateManager.rotate(-62.0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.translate(0.25F, -0.85F, 0.75F);
-        renderPlayerIn.renderRightArm(this.mc.thePlayer);
+        renderPlayerIn.renderRightArm(this.mc.player);
         GlStateManager.popMatrix();
     }
 
@@ -132,13 +132,13 @@ public class ItemRenderer
         GlStateManager.rotate(45.0F, 1.0F, 0.0F, 0.0F);
         GlStateManager.rotate(41.0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.translate(-0.3F, -1.1F, 0.45F);
-        renderPlayerIn.renderLeftArm(this.mc.thePlayer);
+        renderPlayerIn.renderLeftArm(this.mc.player);
         GlStateManager.popMatrix();
     }
 
     private void renderPlayerArms(AbstractClientPlayer clientPlayer) {
         this.mc.getTextureManager().bindTexture(clientPlayer.getLocationSkin());
-        Render<AbstractClientPlayer> render = this.renderManager.getEntityRenderObject(this.mc.thePlayer);
+        Render<AbstractClientPlayer> render = this.renderManager.getEntityRenderObject(this.mc.player);
         RenderPlayer renderplayer = (RenderPlayer)render;
 
         if (!clientPlayer.isInvisible()) {
@@ -183,7 +183,7 @@ public class ItemRenderer
         worldrenderer.pos(135.0D, -7.0D, 0.0D).tex(1.0D, 0.0D).endVertex();
         worldrenderer.pos(-7.0D, -7.0D, 0.0D).tex(0.0D, 0.0D).endVertex();
         tessellator.draw();
-        MapData mapdata = Items.filled_map.getMapData(this.itemToRender, this.mc.theWorld);
+        MapData mapdata = Items.filled_map.getMapData(this.itemToRender, this.mc.world);
 
         if (mapdata != null) {
             this.mc.entityRenderer.getMapItemRenderer().renderMap(mapdata, false);
@@ -209,10 +209,10 @@ public class ItemRenderer
         GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
         GlStateManager.scale(1.0F, 1.0F, 1.0F);
         GlStateManager.translate(5.6F, 0.0F, 0.0F);
-        Render<AbstractClientPlayer> render = this.renderManager.getEntityRenderObject(this.mc.thePlayer);
+        Render<AbstractClientPlayer> render = this.renderManager.getEntityRenderObject(this.mc.player);
         GlStateManager.disableCull();
         RenderPlayer renderplayer = (RenderPlayer)render;
-        renderplayer.renderRightArm(this.mc.thePlayer);
+        renderplayer.renderRightArm(this.mc.player);
         GlStateManager.enableCull();
     }
 
@@ -306,7 +306,7 @@ public class ItemRenderer
     public void renderItemInFirstPerson(float partialTicks) {
         if (!Config.isShaders() || !Shaders.isSkipRenderHand()) {
             float f = 1.0F - (this.prevEquippedProgress + (this.equippedProgress - this.prevEquippedProgress) * partialTicks);
-            AbstractClientPlayer abstractclientplayer = this.mc.thePlayer;
+            AbstractClientPlayer abstractclientplayer = this.mc.player;
             float swingProgress = abstractclientplayer.getSwingProgress(partialTicks);
             float f2 = abstractclientplayer.prevRotationPitch + (abstractclientplayer.rotationPitch - abstractclientplayer.prevRotationPitch) * partialTicks;
             float f3 = abstractclientplayer.prevRotationYaw + (abstractclientplayer.rotationYaw - abstractclientplayer.prevRotationYaw) * partialTicks;
@@ -369,11 +369,11 @@ public class ItemRenderer
     {
         GlStateManager.disableAlpha();
 
-        if (this.mc.thePlayer.isEntityInsideOpaqueBlock())
+        if (this.mc.player.isEntityInsideOpaqueBlock())
         {
-            IBlockState iblockstate = this.mc.theWorld.getBlockState(new BlockPos(this.mc.thePlayer));
-            BlockPos blockpos = new BlockPos(this.mc.thePlayer);
-            EntityPlayer entityplayer = this.mc.thePlayer;
+            IBlockState iblockstate = this.mc.world.getBlockState(new BlockPos(this.mc.player));
+            BlockPos blockpos = new BlockPos(this.mc.player);
+            EntityPlayer entityplayer = this.mc.player;
 
             for (int i = 0; i < 8; ++i)
             {
@@ -381,7 +381,7 @@ public class ItemRenderer
                 double d1 = entityplayer.posY + (double)(((float)((i >> 1) % 2) - 0.5F) * 0.1F);
                 double d2 = entityplayer.posZ + (double)(((float)((i >> 2) % 2) - 0.5F) * entityplayer.width * 0.8F);
                 BlockPos blockpos1 = new BlockPos(d0, d1 + (double)entityplayer.getEyeHeight(), d2);
-                IBlockState iblockstate1 = this.mc.theWorld.getBlockState(blockpos1);
+                IBlockState iblockstate1 = this.mc.world.getBlockState(blockpos1);
 
                 if (iblockstate1.getBlock().isVisuallyOpaque())
                 {
@@ -394,14 +394,14 @@ public class ItemRenderer
             {
                 Object object = Reflector.getFieldValue(Reflector.RenderBlockOverlayEvent_OverlayType_BLOCK);
 
-                if (!Reflector.callBoolean(Reflector.ForgeEventFactory_renderBlockOverlay, this.mc.thePlayer, Float.valueOf(partialTicks), object, iblockstate, blockpos))
+                if (!Reflector.callBoolean(Reflector.ForgeEventFactory_renderBlockOverlay, this.mc.player, Float.valueOf(partialTicks), object, iblockstate, blockpos))
                 {
                     this.func_178108_a(partialTicks, this.mc.getBlockRendererDispatcher().getBlockModelShapes().getTexture(iblockstate));
                 }
             }
         }
 
-        if (!this.mc.thePlayer.isSpectator() &&this.mc.thePlayer.isBurning() && !Reflector.callBoolean(Reflector.ForgeEventFactory_renderFireOverlay, this.mc.thePlayer, Float.valueOf(partialTicks))) {
+        if (!this.mc.player.isSpectator() &&this.mc.player.isBurning() && !Reflector.callBoolean(Reflector.ForgeEventFactory_renderFireOverlay, this.mc.player, Float.valueOf(partialTicks))) {
             this.renderFireInFirstPerson(partialTicks);
         }
 
@@ -484,7 +484,7 @@ public class ItemRenderer
     public void updateEquippedItem()
     {
         this.prevEquippedProgress = this.equippedProgress;
-        EntityPlayer entityplayer = this.mc.thePlayer;
+        EntityPlayer entityplayer = this.mc.player;
         ItemStack itemstack = entityplayer.inventory.getCurrentItem();
         boolean flag = false;
 
@@ -534,10 +534,10 @@ public class ItemRenderer
     }
 
     public void attemptSwing() {
-        if (this.mc.thePlayer.getItemInUseCount() > 0) {
+        if (this.mc.player.getItemInUseCount() > 0) {
             boolean mouseDown = (this.mc.gameSettings.keyBindAttack.isKeyDown() && this.mc.gameSettings.keyBindUseItem.isKeyDown());
             if (mouseDown && this.mc.objectMouseOver != null && this.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                this.mc.thePlayer.swingItemOnlyClient();
+                this.mc.player.swingItemOnlyClient();
             }
         }
     }

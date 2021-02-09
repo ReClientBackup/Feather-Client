@@ -1,76 +1,61 @@
 package net.optifine.gui;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.settings.GameSettings;
 import net.optifine.Lang;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+public class TooltipProviderOptions implements TooltipProvider {
 
-public class TooltipProviderOptions implements TooltipProvider
-{
-    public Rectangle getTooltipBounds(Screen guiScreen, int x, int y)
-    {
-        int i = guiScreen.width / 2 - 150;
-        int j = guiScreen.height / 6 - 7;
+   public Rectangle getTooltipBounds(Screen guiScreen, int x, int y) {
+      int i = guiScreen.width / 2 - 150;
+      int j = guiScreen.height / 6 - 7;
+      if(y <= j + 98) {
+         j += 105;
+      }
 
-        if (y <= j + 98)
-        {
-            j += 105;
-        }
+      int k = i + 150 + 150;
+      int l = j + 84 + 10;
+      return new Rectangle(i, j, k - i, l - j);
+   }
 
-        int k = i + 150 + 150;
-        int l = j + 84 + 10;
-        return new Rectangle(i, j, k - i, l - j);
-    }
+   public boolean isRenderBorder() {
+      return false;
+   }
 
-    public boolean isRenderBorder()
-    {
-        return false;
-    }
+   public String[] getTooltipLines(GuiButton btn, int width) {
+      if(!(btn instanceof IOptionControl)) {
+         return null;
+      } else {
+         IOptionControl ioptioncontrol = (IOptionControl)btn;
+         GameSettings.Options gamesettings$options = ioptioncontrol.getOption();
+         String[] astring = getTooltipLines(gamesettings$options.getEnumString());
+         return astring;
+      }
+   }
 
-    public String[] getTooltipLines(GuiButton btn, int width)
-    {
-        if (!(btn instanceof IOptionControl))
-        {
-            return null;
-        }
-        else
-        {
-            IOptionControl ioptioncontrol = (IOptionControl)btn;
-            GameSettings.Options gamesettings$options = ioptioncontrol.getOption();
-            String[] astring = getTooltipLines(gamesettings$options.getEnumString());
-            return astring;
-        }
-    }
+   public static String[] getTooltipLines(String key) {
+      List<String> list = new ArrayList();
 
-    public static String[] getTooltipLines(String key)
-    {
-        List<String> list = new ArrayList();
+      for(int i = 0; i < 10; ++i) {
+         String s = key + ".tooltip." + (i + 1);
+         String s1 = Lang.get(s, (String)null);
+         if(s1 == null) {
+            break;
+         }
 
-        for (int i = 0; i < 10; ++i)
-        {
-            String s = key + ".tooltip." + (i + 1);
-            String s1 = Lang.get(s, null);
+         list.add(s1);
+      }
 
-            if (s1 == null)
-            {
-                break;
-            }
-
-            list.add(s1);
-        }
-
-        if (list.size() <= 0)
-        {
-            return null;
-        }
-        else
-        {
-            String[] astring = list.toArray(new String[list.size()]);
-            return astring;
-        }
-    }
+      if(list.size() <= 0) {
+         return null;
+      } else {
+         String[] astring = (String[])((String[])list.toArray(new String[list.size()]));
+         return astring;
+      }
+   }
 }

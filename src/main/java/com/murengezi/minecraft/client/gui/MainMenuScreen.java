@@ -68,7 +68,7 @@ public class MainMenuScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 240);
+        drawWorldBackground(mouseX, mouseY, 240);
 
         drawRect(width / 2 - 105, this.height / 4 + 43, this.width / 2 + 105, this.height / 4 + 157, Integer.MIN_VALUE);
         GlStateManager.color(1.0f, 1.0f, 1.0f);

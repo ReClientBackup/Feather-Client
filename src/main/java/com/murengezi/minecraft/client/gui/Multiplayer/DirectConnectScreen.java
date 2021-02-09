@@ -88,7 +88,7 @@ public class DirectConnectScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 60);
+        drawWorldBackground(mouseX, mouseY, 60);
         getFr().drawCenteredString(I18n.format("selectServer.direct"), this.width / 2, 20, 16777215);
         getFr().drawString(I18n.format("addServer.enterIp"), this.width / 2 - 100, 100, 10526880);
         this.guiTextField.drawTextBox();

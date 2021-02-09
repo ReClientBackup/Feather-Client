@@ -78,7 +78,7 @@ public class InGameMenuScreen extends Screen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground(mouseX, mouseY, 120);
+        drawWorldBackground(mouseX, mouseY, 120);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

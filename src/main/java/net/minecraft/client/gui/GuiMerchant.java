@@ -189,7 +189,7 @@ public class GuiMerchant extends GuiContainer
             GlStateManager.disableLighting();
             GlStateManager.enableRescaleNormal();
             GlStateManager.enableColorMaterial();
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             this.itemRender.zLevel = 100.0F;
             this.itemRender.renderItemAndEffectIntoGUI(itemstack, i + 36, j + 24);
             this.itemRender.renderItemOverlays(getFr(), itemstack, i + 36, j + 24);
@@ -223,7 +223,7 @@ public class GuiMerchant extends GuiContainer
             }
 
             GlStateManager.popMatrix();
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.enableDepth();
             RenderHelper.enableStandardItemLighting();
         }

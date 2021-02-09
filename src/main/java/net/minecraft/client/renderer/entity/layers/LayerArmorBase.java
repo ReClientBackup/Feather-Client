@@ -190,7 +190,7 @@ public abstract class LayerArmorBase<T extends ModelBase> implements LayerRender
             GlStateManager.matrixMode(5890);
             GlStateManager.loadIdentity();
             GlStateManager.matrixMode(5888);
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.depthMask(true);
             GlStateManager.depthFunc(515);
             GlStateManager.disableBlend();

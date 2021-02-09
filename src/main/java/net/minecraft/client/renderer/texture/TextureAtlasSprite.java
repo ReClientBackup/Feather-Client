@@ -261,7 +261,7 @@ public class TextureAtlasSprite
 
                 if (i != k && k >= 0 && k < this.framesTextureData.size())
                 {
-                    TextureUtil.uploadTextureMipmap(this.framesTextureData.get(k), this.width, this.height, this.originX, this.originY, flag, flag1);
+                    TextureUtil.uploadTextureMipMap(this.framesTextureData.get(k), this.width, this.height, this.originX, this.originY, flag, flag1);
                 }
             }
             else if (this.animationMetadata.isInterpolate())
@@ -314,7 +314,7 @@ public class TextureAtlasSprite
                 }
             }
 
-            TextureUtil.uploadTextureMipmap(this.interpolatedFrameData, this.width, this.height, this.originX, this.originY, false, false);
+            TextureUtil.uploadTextureMipMap(this.interpolatedFrameData, this.width, this.height, this.originX, this.originY, false, false);
         }
     }
 
