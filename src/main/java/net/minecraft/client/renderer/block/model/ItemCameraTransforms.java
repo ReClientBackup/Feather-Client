@@ -42,12 +42,12 @@ public class ItemCameraTransforms
         this.field_181700_p = p_i46443_1_.field_181700_p;
     }
 
-    public ItemCameraTransforms(ItemTransformVec3f p_i46444_1_, ItemTransformVec3f p_i46444_2_, ItemTransformVec3f p_i46444_3_, ItemTransformVec3f p_i46444_4_, ItemTransformVec3f p_i46444_5_, ItemTransformVec3f p_i46444_6_)
+    public ItemCameraTransforms(ItemTransformVec3f thirdPerson, ItemTransformVec3f firstPerson, ItemTransformVec3f head, ItemTransformVec3f gui, ItemTransformVec3f p_i46444_5_, ItemTransformVec3f p_i46444_6_)
     {
-        this.thirdPerson = p_i46444_1_;
-        this.firstPerson = p_i46444_2_;
-        this.head = p_i46444_3_;
-        this.gui = p_i46444_4_;
+        this.thirdPerson = thirdPerson;
+        this.firstPerson = firstPerson;
+        this.head = head;
+        this.gui = gui;
         this.field_181699_o = p_i46444_5_;
         this.field_181700_p = p_i46444_6_;
     }

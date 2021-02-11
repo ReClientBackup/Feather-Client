@@ -47,7 +47,7 @@ public class ModelBlockDefinition
 
     public ModelBlockDefinition.Variants getVariants(String p_178330_1_)
     {
-        ModelBlockDefinition.Variants modelblockdefinition$variants = this.mapVariants.get(p_178330_1_);
+        ModelBlockDefinition.Variants modelblockdefinition$variants = (ModelBlockDefinition.Variants)this.mapVariants.get(p_178330_1_);
 
         if (modelblockdefinition$variants == null)
         {

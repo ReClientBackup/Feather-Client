@@ -397,17 +397,17 @@ public abstract class Screen extends GUI implements YesNoCallback {
         int k = Mouse.getEventButton();
 
         if (Mouse.getEventButtonState()) {
-            if (getMc().gameSettings.touchscreen && this.touchValue++ > 0) {
+            /*if (getMc().gameSettings.touchscreen && this.touchValue++ > 0) {
                 return;
-            }
+            }*/
 
             this.eventButton = k;
             this.lastMouseEvent = Minecraft.getSystemTime();
             this.mouseClicked(i, j, this.eventButton);
         } else if (k != -1) {
-            if (getMc().gameSettings.touchscreen && --this.touchValue > 0) {
+            /*if (getMc().gameSettings.touchscreen && --this.touchValue > 0) {
                 return;
-            }
+            }*/
 
             this.eventButton = -1;
             this.mouseReleased(i, j, k);

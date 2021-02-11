@@ -24,7 +24,7 @@ public class EntityDiggingFX extends EntityFX
         this.particleScale /= 2.0F;
     }
 
-    public EntityDiggingFX func_174846_a(BlockPos pos)
+    public EntityDiggingFX setBlockPos(BlockPos pos)
     {
         this.field_181019_az = pos;
 

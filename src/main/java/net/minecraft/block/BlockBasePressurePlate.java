@@ -77,7 +77,7 @@ public abstract class BlockBasePressurePlate extends Block
         return true;
     }
 
-    public boolean func_181623_g()
+    public boolean canSpawnInBlock()
     {
         return true;
     }

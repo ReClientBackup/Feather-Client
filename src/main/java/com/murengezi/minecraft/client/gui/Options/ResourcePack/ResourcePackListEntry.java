@@ -44,7 +44,7 @@ public abstract class ResourcePackListEntry extends MinecraftUtils implements Gu
 		String s = this.getName();
 		String s1 = this.getDescription();
 
-		if ((getMc().gameSettings.touchscreen || isSelected) && this.func_148310_d()) {
+		if ((/*getMc().gameSettings.touchscreen || */isSelected) && this.func_148310_d()) {
 			getMc().getTextureManager().bindTexture(RESOURCE_PACKS_TEXTURE);
 			GUI.drawRect(x, y, x + 32, y + 32, -1601138544);
 			GlStateManager.colorAllMax();

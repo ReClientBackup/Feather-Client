@@ -376,15 +376,15 @@ public abstract class GuiContainer extends Screen {
                 l = -999;
             }
 
-            if (getMc().gameSettings.touchscreen && flag1 && getPlayer().inventory.getItemStack() == null)
+            /*if (getMc().gameSettings.touchscreen && flag1 && getPlayer().inventory.getItemStack() == null)
             {
                 changeScreen(null);
                 return;
-            }
+            }*/
 
             if (l != -1)
             {
-                if (getMc().gameSettings.touchscreen)
+                /*if (getMc().gameSettings.touchscreen)
                 {
                     if (slot != null && slot.getHasStack())
                     {
@@ -397,7 +397,7 @@ public abstract class GuiContainer extends Screen {
                         this.clickedSlot = null;
                     }
                 }
-                else if (!this.dragSplitting)
+                else */if (!this.dragSplitting)
                 {
                     if (getPlayer().inventory.getItemStack() == null)
                     {
@@ -462,7 +462,7 @@ public abstract class GuiContainer extends Screen {
         Slot slot = this.getSlotAtPosition(mouseX, mouseY);
         ItemStack itemstack = getPlayer().inventory.getItemStack();
 
-        if (this.clickedSlot != null && getMc().gameSettings.touchscreen)
+        /*if (this.clickedSlot != null && getMc().gameSettings.touchscreen)
         {
             if (clickedMouseButton == 0 || clickedMouseButton == 1)
             {
@@ -496,7 +496,7 @@ public abstract class GuiContainer extends Screen {
                 }
             }
         }
-        else if (this.dragSplitting && slot != null && itemstack != null && itemstack.stackSize > this.dragSplittingSlots.size() && Container.canAddItemToSlot(slot, itemstack, true) && slot.isItemValid(itemstack) && this.inventorySlots.canDragIntoSlot(slot))
+        else*/ if (this.dragSplitting && slot != null && itemstack != null && itemstack.stackSize > this.dragSplittingSlots.size() && Container.canAddItemToSlot(slot, itemstack, true) && slot.isItemValid(itemstack) && this.inventorySlots.canDragIntoSlot(slot))
         {
             this.dragSplittingSlots.add(slot);
             this.updateDragSplitting();
@@ -563,7 +563,7 @@ public abstract class GuiContainer extends Screen {
                 return;
             }
 
-            if (this.clickedSlot != null && getMc().gameSettings.touchscreen)
+            /*if (this.clickedSlot != null && getMc().gameSettings.touchscreen)
             {
                 if (mouseButton == 0 || mouseButton == 1)
                 {
@@ -606,7 +606,7 @@ public abstract class GuiContainer extends Screen {
                     this.clickedSlot = null;
                 }
             }
-            else if (this.dragSplitting && !this.dragSplittingSlots.isEmpty())
+            else */if (this.dragSplitting && !this.dragSplittingSlots.isEmpty())
             {
                 this.handleMouseClick(null, -999, Container.func_94534_d(0, this.dragSplittingLimit), 5);
 

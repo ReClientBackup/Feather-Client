@@ -1742,7 +1742,7 @@ public class ConnectedTextures {
       List l = (List)list.get(id);
       if(l == null) {
          l = new ArrayList();
-         l.set(id, l);
+         list.set(id, l);
       }
 
       l.add(cp);
@@ -1774,7 +1774,7 @@ public class ConnectedTextures {
          }
       }
 
-      String[] astring1 = (String[])((String[])list.toArray(new String[list.size()]));
+      String[] astring1 = (String[]) list.toArray(new String[list.size()]);
       return astring1;
    }
 }

@@ -19,11 +19,11 @@ public class Frustum implements ICamera
         this.clippingHelper = p_i46196_1_;
     }
 
-    public void setPosition(double p_78547_1_, double p_78547_3_, double p_78547_5_)
+    public void setPosition(double x, double y, double z)
     {
-        this.xPosition = p_78547_1_;
-        this.yPosition = p_78547_3_;
-        this.zPosition = p_78547_5_;
+        this.xPosition = x;
+        this.yPosition = y;
+        this.zPosition = z;
     }
 
     /**

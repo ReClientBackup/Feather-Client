@@ -53,7 +53,7 @@ public class BlockSign extends BlockContainer
         return false;
     }
 
-    public boolean func_181623_g()
+    public boolean canSpawnInBlock()
     {
         return true;
     }

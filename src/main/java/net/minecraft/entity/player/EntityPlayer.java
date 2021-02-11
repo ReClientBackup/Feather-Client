@@ -1664,8 +1664,8 @@ public abstract class EntityPlayer extends EntityLivingBase
             }
             else
             {
-                boolean flag = block.func_181623_g();
-                boolean flag1 = worldIn.getBlockState(bedLocation.up()).getBlock().func_181623_g();
+                boolean flag = block.canSpawnInBlock();
+                boolean flag1 = worldIn.getBlockState(bedLocation.up()).getBlock().canSpawnInBlock();
                 return flag && flag1 ? bedLocation : null;
             }
         }

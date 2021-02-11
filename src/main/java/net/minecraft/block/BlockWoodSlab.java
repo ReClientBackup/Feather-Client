@@ -38,7 +38,7 @@ public abstract class BlockWoodSlab extends BlockSlab
      */
     public MapColor getMapColor(IBlockState state)
     {
-        return state.getValue(VARIANT).func_181070_c();
+        return state.getValue(VARIANT).getMapColor();
     }
 
     /**
