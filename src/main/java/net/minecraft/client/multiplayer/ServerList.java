@@ -33,7 +33,7 @@ public class ServerList
         try
         {
             this.servers.clear();
-            NBTTagCompound nbttagcompound = CompressedStreamTools.read(new File(this.mc.mcDataDir, "servers.dat"));
+            NBTTagCompound nbttagcompound = CompressedStreamTools.read(new File(this.mc.dataDir, "servers.dat"));
 
             if (nbttagcompound == null)
             {
@@ -70,7 +70,7 @@ public class ServerList
 
             NBTTagCompound nbttagcompound = new NBTTagCompound();
             nbttagcompound.setTag("servers", nbttaglist);
-            CompressedStreamTools.safeWrite(nbttagcompound, new File(this.mc.mcDataDir, "servers.dat"));
+            CompressedStreamTools.safeWrite(nbttagcompound, new File(this.mc.dataDir, "servers.dat"));
         }
         catch (Exception exception)
         {

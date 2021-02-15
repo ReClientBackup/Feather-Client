@@ -1660,7 +1660,7 @@ public class Config {
         int k = minecraft.renderGlobal.getCountEntitiesRendered();
         int l = minecraft.renderGlobal.getCountTileEntitiesRendered();
         String s1 = "" + i + "/" + getFpsMin() + " fps, C: " + j + ", E: " + k + "+" + l + ", U: " + s;
-        minecraft.fontRendererObj.drawString(s1, 2, 2, -2039584);
+        minecraft.fontRenderer.drawString(s1, 2, 2, -2039584);
     }
 
     public static int getFpsMin() {
@@ -1669,9 +1669,9 @@ public class Config {
         } else {
             mcDebugLast = minecraft.debug;
             FrameTimer frametimer = minecraft.func_181539_aj();
-            long[] along = frametimer.func_181746_c();
-            int i = frametimer.func_181750_b();
-            int j = frametimer.func_181749_a();
+            long[] along = frametimer.getFrames();
+            int i = frametimer.getIndex();
+            int j = frametimer.getLastIndex();
             if(i == j) {
                 return fpsMinLast;
             } else {

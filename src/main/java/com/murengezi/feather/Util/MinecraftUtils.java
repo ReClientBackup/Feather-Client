@@ -27,7 +27,7 @@ public class MinecraftUtils {
     }
 
     public static FontRenderer getFr() {
-        return getMc().fontRendererObj;
+        return getMc().fontRenderer;
     }
 
     public static GameSettings getGs() {

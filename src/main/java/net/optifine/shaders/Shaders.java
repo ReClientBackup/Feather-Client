@@ -1412,7 +1412,7 @@ public class Shaders {
 
    private static void saveOptionProperties(IShaderPack sp, Properties props) throws IOException {
       String s = "shaderpacks/" + sp.getName() + ".txt";
-      File file1 = new File(Minecraft.getMinecraft().mcDataDir, s);
+      File file1 = new File(Minecraft.getMinecraft().dataDir, s);
       if(props.isEmpty()) {
          file1.delete();
       } else {
@@ -1451,7 +1451,7 @@ public class Shaders {
    private static Properties loadOptionProperties(IShaderPack sp) throws IOException {
       Properties properties = new PropertiesOrdered();
       String s = "shaderpacks/" + sp.getName() + ".txt";
-      File file1 = new File(Minecraft.getMinecraft().mcDataDir, s);
+      File file1 = new File(Minecraft.getMinecraft().dataDir, s);
       if(file1.exists() && file1.isFile() && file1.canRead()) {
          FileInputStream fileinputstream = new FileInputStream(file1);
          properties.load((InputStream)fileinputstream);
@@ -4640,7 +4640,7 @@ public class Shaders {
    }
 
    static {
-      shaderPacksDir = new File(Minecraft.getMinecraft().mcDataDir, "shaderpacks");
-      configFile = new File(Minecraft.getMinecraft().mcDataDir, "optionsshaders.txt");
+      shaderPacksDir = new File(Minecraft.getMinecraft().dataDir, "shaderpacks");
+      configFile = new File(Minecraft.getMinecraft().dataDir, "optionsshaders.txt");
    }
 }

@@ -17,14 +17,8 @@ public class GuiSpectator extends GUI implements ISpectatorMenuRecipient
 {
     private static final ResourceLocation field_175267_f = new ResourceLocation("textures/gui/widgets.png");
     public static final ResourceLocation field_175269_a = new ResourceLocation("textures/gui/spectator_widgets.png");
-    private final Minecraft field_175268_g;
     private long field_175270_h;
     private SpectatorMenu field_175271_i;
-
-    public GuiSpectator(Minecraft mcIn)
-    {
-        this.field_175268_g = mcIn;
-    }
 
     public void func_175260_a(int p_175260_1_)
     {
@@ -75,7 +69,7 @@ public class GuiSpectator extends GUI implements ISpectatorMenuRecipient
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.color(1.0F, 1.0F, 1.0F, p_175258_2_);
-        this.field_175268_g.getTextureManager().bindTexture(field_175267_f);
+        getMc().getTextureManager().bindTexture(field_175267_f);
         this.drawTexturedModalRect((float)(p_175258_3_ - 91), p_175258_4_, 0, 0, 182, 22);
 
         if (p_175258_5_.func_178681_b() >= 0)
@@ -97,7 +91,7 @@ public class GuiSpectator extends GUI implements ISpectatorMenuRecipient
 
     private void func_175266_a(int p_175266_1_, int p_175266_2_, float p_175266_3_, float p_175266_4_, ISpectatorMenuObject p_175266_5_)
     {
-        this.field_175268_g.getTextureManager().bindTexture(field_175269_a);
+        getMc().getTextureManager().bindTexture(field_175269_a);
 
         if (p_175266_5_ != SpectatorMenu.field_178657_a)
         {
@@ -108,11 +102,11 @@ public class GuiSpectator extends GUI implements ISpectatorMenuRecipient
             GlStateManager.color(f, f, f, p_175266_4_);
             p_175266_5_.func_178663_a(f, i);
             GlStateManager.popMatrix();
-            String s = String.valueOf(GameSettings.getKeyDisplayString(this.field_175268_g.gameSettings.keyBindsHotbar[p_175266_1_].getKeyCode()));
+            String s = String.valueOf(GameSettings.getKeyDisplayString(getMc().gameSettings.keyBindsHotbar[p_175266_1_].getKeyCode()));
 
             if (i > 3 && p_175266_5_.func_178662_A_())
             {
-                this.field_175268_g.fontRendererObj.drawStringWithShadow(s, (float)(p_175266_2_ + 19 - 2 - this.field_175268_g.fontRendererObj.getStringWidth(s)), p_175266_3_ + 6.0F + 3.0F, 16777215 + (i << 24));
+                getFr().drawStringWithShadow(s, (float)(p_175266_2_ + 19 - 2 - getFr().getStringWidth(s)), p_175266_3_ + 6.0F + 3.0F, 16777215 + (i << 24));
             }
         }
     }
@@ -128,12 +122,12 @@ public class GuiSpectator extends GUI implements ISpectatorMenuRecipient
 
             if (s != null)
             {
-                int j = (p_175263_1_.getScaledWidth() - this.field_175268_g.fontRendererObj.getStringWidth(s)) / 2;
+                int j = (p_175263_1_.getScaledWidth() - getFr().getStringWidth(s)) / 2;
                 int k = p_175263_1_.getScaledHeight() - 35;
                 GlStateManager.pushMatrix();
                 GlStateManager.enableBlend();
                 GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-                this.field_175268_g.fontRendererObj.drawStringWithShadow(s, (float)j, (float)k, 16777215 + (i << 24));
+                getFr().drawStringWithShadow(s, (float)j, (float)k, 16777215 + (i << 24));
                 GlStateManager.disableBlend();
                 GlStateManager.popMatrix();
             }

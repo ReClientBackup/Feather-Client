@@ -20,27 +20,21 @@ import org.apache.logging.log4j.Logger;
 public class GuiNewChat extends GUI
 {
     private static final Logger logger = LogManager.getLogger();
-    private final Minecraft mc;
     private final List<String> sentMessages = Lists.newArrayList();
     private final List<ChatLine> chatLines = Lists.newArrayList();
     private final List<ChatLine> field_146253_i = Lists.newArrayList();
     private int scrollPos;
     private boolean isScrolled;
 
-    public GuiNewChat(Minecraft mcIn)
-    {
-        this.mc = mcIn;
-    }
-
     public void drawChat(int updateCounter)
     {
-        if (this.mc.gameSettings.chatVisibility != EntityPlayer.EnumChatVisibility.HIDDEN)
+        if (getMc().gameSettings.chatVisibility != EntityPlayer.EnumChatVisibility.HIDDEN)
         {
             int i = this.getLineCount();
             boolean flag = false;
             int j = 0;
             int k = this.field_146253_i.size();
-            float f = this.mc.gameSettings.chatOpacity * 0.9F + 0.1F;
+            float f = getMc().gameSettings.chatOpacity * 0.9F + 0.1F;
 
             if (k > 0)
             {
@@ -87,7 +81,7 @@ public class GuiNewChat extends GUI
                                 drawRect(i2, j2 - 9, i2 + l + 4, j2, l1 / 2 << 24);
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
-                                this.mc.fontRendererObj.drawStringWithShadow(s, (float)i2, (float)(j2 - 8), 16777215 + (l1 << 24));
+                                getFr().drawStringWithShadow(s, (float)i2, (float)(j2 - 8), 16777215 + (l1 << 24));
                                 GlStateManager.disableAlpha();
                                 GlStateManager.disableBlend();
                             }
@@ -97,7 +91,7 @@ public class GuiNewChat extends GUI
 
                 if (flag)
                 {
-                    int k2 = this.mc.fontRendererObj.FONT_HEIGHT;
+                    int k2 = getFr().FONT_HEIGHT;
                     GlStateManager.translate(-3.0F, 0.0F, 0.0F);
                     int l2 = k * k2 + k;
                     int i3 = j * k2 + j;
@@ -138,7 +132,7 @@ public class GuiNewChat extends GUI
      */
     public void printChatMessageWithOptionalDeletion(IChatComponent p_146234_1_, int p_146234_2_)
     {
-        this.setChatLine(p_146234_1_, p_146234_2_, this.mc.inGameScreen.getUpdateCounter(), false);
+        this.setChatLine(p_146234_1_, p_146234_2_, getMc().inGameScreen.getUpdateCounter(), false);
         logger.info("[CHAT] " + p_146234_1_.getUnformattedText());
     }
 
@@ -150,7 +144,7 @@ public class GuiNewChat extends GUI
         }
 
         int i = MathHelper.floor_float((float)this.getChatWidth() / this.getChatScale());
-        List<IChatComponent> list = GuiUtilRenderComponents.func_178908_a(p_146237_1_, i, this.mc.fontRendererObj, false, false);
+        List<IChatComponent> list = GuiUtilRenderComponents.func_178908_a(p_146237_1_, i, getFr(), false, false);
         boolean flag = this.getChatOpen();
 
         for (IChatComponent ichatcomponent : list)
@@ -260,9 +254,9 @@ public class GuiNewChat extends GUI
             {
                 int l = Math.min(this.getLineCount(), this.field_146253_i.size());
 
-                if (j <= MathHelper.floor_float((float)this.getChatWidth() / this.getChatScale()) && k < this.mc.fontRendererObj.FONT_HEIGHT * l + l)
+                if (j <= MathHelper.floor_float((float)this.getChatWidth() / this.getChatScale()) && k < getFr().FONT_HEIGHT * l + l)
                 {
-                    int i1 = k / this.mc.fontRendererObj.FONT_HEIGHT + this.scrollPos;
+                    int i1 = k / getFr().FONT_HEIGHT + this.scrollPos;
 
                     if (i1 >= 0 && i1 < this.field_146253_i.size())
                     {
@@ -273,7 +267,7 @@ public class GuiNewChat extends GUI
                         {
                             if (ichatcomponent instanceof ChatComponentText)
                             {
-                                j1 += this.mc.fontRendererObj.getStringWidth(GuiUtilRenderComponents.func_178909_a(((ChatComponentText)ichatcomponent).getChatComponentText_TextValue(), false));
+                                j1 += getFr().getStringWidth(GuiUtilRenderComponents.func_178909_a(((ChatComponentText)ichatcomponent).getChatComponentText_TextValue(), false));
 
                                 if (j1 > j)
                                 {
@@ -302,7 +296,7 @@ public class GuiNewChat extends GUI
      */
     public boolean getChatOpen()
     {
-        return this.mc.currentScreen instanceof ChatScreen;
+        return getMc().currentScreen instanceof ChatScreen;
     }
 
     /**
@@ -338,12 +332,12 @@ public class GuiNewChat extends GUI
 
     public int getChatWidth()
     {
-        return calculateChatboxWidth(this.mc.gameSettings.chatWidth);
+        return calculateChatboxWidth(getMc().gameSettings.chatWidth);
     }
 
     public int getChatHeight()
     {
-        return calculateChatboxHeight(this.getChatOpen() ? this.mc.gameSettings.chatHeightFocused : this.mc.gameSettings.chatHeightUnfocused);
+        return calculateChatboxHeight(this.getChatOpen() ? getMc().gameSettings.chatHeightFocused : getMc().gameSettings.chatHeightUnfocused);
     }
 
     /**
@@ -351,7 +345,7 @@ public class GuiNewChat extends GUI
      */
     public float getChatScale()
     {
-        return this.mc.gameSettings.chatScale;
+        return getMc().gameSettings.chatScale;
     }
 
     public static int calculateChatboxWidth(float p_146233_0_)

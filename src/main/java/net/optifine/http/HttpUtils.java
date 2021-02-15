@@ -114,7 +114,7 @@ public class HttpUtils {
          try {
             boolean flag = Config.parseBoolean(System.getProperty("player.models.local"), false);
             if(flag) {
-               File file1 = Minecraft.getMinecraft().mcDataDir;
+               File file1 = Minecraft.getMinecraft().dataDir;
                File file2 = new File(file1, "playermodels");
                playerItemsUrl = file2.toURI().toURL().toExternalForm();
             }

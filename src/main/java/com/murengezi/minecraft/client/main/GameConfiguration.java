@@ -42,13 +42,13 @@ public class GameConfiguration {
 
 	public static class FolderInformation {
 
-		public final File mcDataDir;
+		public final File dataDir;
 		public final File resourcePacksDir;
 		public final File assetsDir;
 		public final String assetIndex;
 
 		public FolderInformation(File mcDataDir, File resourcePacksDir, File assetsDir, String assetIndex) {
-			this.mcDataDir = mcDataDir;
+			this.dataDir = mcDataDir;
 			this.resourcePacksDir = resourcePacksDir;
 			this.assetsDir = assetsDir;
 			this.assetIndex = assetIndex;

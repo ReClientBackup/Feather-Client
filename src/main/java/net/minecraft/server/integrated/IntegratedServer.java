@@ -54,14 +54,14 @@ public class IntegratedServer extends MinecraftServer
 
     public IntegratedServer(Minecraft mcIn)
     {
-        super(mcIn.getProxy(), new File(mcIn.mcDataDir, USER_CACHE_FILE.getName()));
+        super(mcIn.getProxy(), new File(mcIn.dataDir, USER_CACHE_FILE.getName()));
         this.mc = mcIn;
         this.theWorldSettings = null;
     }
 
     public IntegratedServer(Minecraft mcIn, String folderName, String worldName, WorldSettings settings)
     {
-        super(new File(mcIn.mcDataDir, "saves"), mcIn.getProxy(), new File(mcIn.mcDataDir, USER_CACHE_FILE.getName()));
+        super(new File(mcIn.dataDir, "saves"), mcIn.getProxy(), new File(mcIn.dataDir, USER_CACHE_FILE.getName()));
         this.setServerOwner(mcIn.getSession().getUsername());
         this.setFolderName(folderName);
         this.setWorldName(worldName);
@@ -351,7 +351,7 @@ public class IntegratedServer extends MinecraftServer
 
     public File getDataDirectory()
     {
-        return this.mc.mcDataDir;
+        return this.mc.dataDir;
     }
 
     public boolean isDedicatedServer()

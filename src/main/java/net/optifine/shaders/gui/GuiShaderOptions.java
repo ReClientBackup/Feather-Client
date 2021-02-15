@@ -95,7 +95,7 @@ public class GuiShaderOptions extends GuiScreenOF {
       if(so instanceof ShaderOptionScreen) {
          return s + "...";
       } else {
-         FontRenderer fontrenderer = Config.getMinecraft().fontRendererObj;
+         FontRenderer fontrenderer = Config.getMinecraft().fontRenderer;
 
          for(int i = fontrenderer.getStringWidth(": " + Lang.getOff()) + 5; fontrenderer.getStringWidth(s) + i >= btnWidth && s.length() > 0; s = s.substring(0, s.length() - 1)) {
             ;

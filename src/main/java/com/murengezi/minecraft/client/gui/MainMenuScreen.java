@@ -81,7 +81,7 @@ public class MainMenuScreen extends Screen {
         drawModalRectWithCustomSizedTexture(x + 88, 67, 0, 0, 98, 14, 128, 16);
 
         String playerName = getMc().getSession().getUsername();
-        drawRect(0, 0, 20 + 3 + getMc().fontRendererObj.getStringWidth(playerName) + 8 + 3, 20, Integer.MIN_VALUE);
+        drawRect(0, 0, 20 + 3 + getMc().fontRenderer.getStringWidth(playerName) + 8 + 3, 20, Integer.MIN_VALUE);
         boolean premium = !getMc().getSession().getToken().equals("") && !getMc().getSession().getToken().equals("0");
         String uuid = premium ? getMc().getSession().getPlayerID() : "606e2ff0ed7748429d6ce1d3321c7838";
         String url = "https://crafatar.com/avatars/" + uuid + "?size=8.png";

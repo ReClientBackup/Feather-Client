@@ -92,7 +92,7 @@ public class GuiWinGame extends Screen
                         s3 = line.substring(j + s1.length());
                     }
 
-                    this.lines.addAll(getMc().fontRendererObj.listFormattedStringToWidth(line, i));
+                    this.lines.addAll(getMc().fontRenderer.listFormattedStringToWidth(line, i));
                     this.lines.add("");
                 }
 

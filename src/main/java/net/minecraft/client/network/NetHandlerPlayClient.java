@@ -1661,7 +1661,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         if (s.startsWith("level://"))
         {
             String s2 = s.substring("level://".length());
-            File file1 = new File(this.gameController.mcDataDir, "saves");
+            File file1 = new File(this.gameController.dataDir, "saves");
             File file2 = new File(file1, s2);
 
             if (file2.isFile())

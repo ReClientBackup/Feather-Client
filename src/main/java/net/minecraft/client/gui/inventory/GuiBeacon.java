@@ -222,11 +222,11 @@ public class GuiBeacon extends GuiContainer
             this.field_146143_q = p_i1077_6_;
         }
 
-        public void drawButton(Minecraft mc, int mouseX, int mouseY)
+        public void drawButton(int mouseX, int mouseY)
         {
             if (this.isVisible())
             {
-                mc.getTextureManager().bindTexture(GuiBeacon.beaconGuiTextures);
+                getMc().getTextureManager().bindTexture(GuiBeacon.beaconGuiTextures);
                 GlStateManager.colorAllMax();
                 this.setHovered(mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.getWidth() && mouseY < this.getY() + this.getHeight());
                 int i = 219;
@@ -249,7 +249,7 @@ public class GuiBeacon extends GuiContainer
 
                 if (!GuiBeacon.beaconGuiTextures.equals(this.field_146145_o))
                 {
-                    mc.getTextureManager().bindTexture(this.field_146145_o);
+                    getMc().getTextureManager().bindTexture(this.field_146145_o);
                 }
 
                 this.drawTexturedModalRect(this.getX() + 2, this.getY() + 2, this.field_146144_p, this.field_146143_q, 18, 18);

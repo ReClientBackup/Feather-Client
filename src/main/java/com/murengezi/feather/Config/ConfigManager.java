@@ -18,7 +18,7 @@ import java.io.*;
  */
 public class ConfigManager extends MinecraftUtils {
 
-	public static final File directory = new File(getMc().mcDataDir + File.separator + "Feather");
+	public static final File directory = new File(getMc().dataDir + File.separator + "Feather");
 
 	public ConfigManager() {
 		if (!getDirectory().exists()) {

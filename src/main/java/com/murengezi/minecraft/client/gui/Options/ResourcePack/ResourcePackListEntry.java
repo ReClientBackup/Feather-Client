@@ -110,19 +110,19 @@ public abstract class ResourcePackListEntry extends MinecraftUtils implements Gu
 			}
 		}
 
-		int i1 = getMc().fontRendererObj.getStringWidth(s);
+		int i1 = getMc().fontRenderer.getStringWidth(s);
 
 		if (i1 > 157)
 		{
-			s = getMc().fontRendererObj.trimStringToWidth(s, 157 - getMc().fontRendererObj.getStringWidth("...")) + "...";
+			s = getMc().fontRenderer.trimStringToWidth(s, 157 - getMc().fontRenderer.getStringWidth("...")) + "...";
 		}
 
-		getMc().fontRendererObj.drawStringWithShadow(s, (float)(x + 32 + 2), (float)(y + 1), 16777215);
-		List<String> list = getMc().fontRendererObj.listFormattedStringToWidth(s1, 157);
+		getMc().fontRenderer.drawStringWithShadow(s, (float)(x + 32 + 2), (float)(y + 1), 16777215);
+		List<String> list = getMc().fontRenderer.listFormattedStringToWidth(s1, 157);
 
 		for (int l = 0; l < 2 && l < list.size(); ++l)
 		{
-			getMc().fontRendererObj.drawStringWithShadow(list.get(l), (float)(x + 32 + 2), (float)(y + 12 + 10 * l), 8421504);
+			getMc().fontRenderer.drawStringWithShadow(list.get(l), (float)(x + 32 + 2), (float)(y + 12 + 10 * l), 8421504);
 		}
 	}
 

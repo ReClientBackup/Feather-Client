@@ -132,7 +132,7 @@ public class RenderHelper {
     }
 
     public static FontRenderer getFontRenderer() {
-        return (Minecraft.getMinecraft()).fontRendererObj;
+        return (Minecraft.getMinecraft()).fontRenderer;
     }
 
     public static void prepare() {

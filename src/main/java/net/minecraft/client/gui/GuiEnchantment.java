@@ -190,7 +190,7 @@ public class GuiEnchantment extends GuiContainer
             else
             {
                 String s1 = "" + l1;
-                FontRenderer galacticFontRenderer = getMc().standardGalacticFontRenderer;
+                FontRenderer galacticFontRenderer = getMc().galacticFontRenderer;
                 int i2 = 6839882;
 
                 if ((k < l + 1 || getPlayer().experienceLevel < l1) && !getPlayer().capabilities.isCreativeMode)
