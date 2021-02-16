@@ -20,8 +20,8 @@ public class MathUtilsTest {
       switch(oper) {
       case SIN:
       case COS:
-         d0 = (double)(-MathHelper.PI);
-         d1 = (double)MathHelper.PI;
+         d0 = -MathHelper.PI;
+         d1 = MathHelper.PI;
          break;
       case ASIN:
       case ACOS:
@@ -67,10 +67,10 @@ public class MathUtilsTest {
       System.out.println(str);
    }
 
-   private static enum OPER {
+   private enum OPER {
       SIN,
       COS,
       ASIN,
-      ACOS;
+      ACOS
    }
 }

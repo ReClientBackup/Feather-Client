@@ -96,7 +96,7 @@ public class Property {
          return false;
       } else {
          String s = props.getProperty(this.propertyName);
-         return s == null?false:this.setPropertyValue(s);
+         return s != null && this.setPropertyValue(s);
       }
    }
 
@@ -107,6 +107,6 @@ public class Property {
    }
 
    public String toString() {
-      return "" + this.propertyName + "=" + this.getPropertyValue() + " [" + Config.arrayToString((Object[])this.propertyValues) + "], value: " + this.value;
+      return "" + this.propertyName + "=" + this.getPropertyValue() + " [" + Config.arrayToString(this.propertyValues) + "], value: " + this.value;
    }
 }

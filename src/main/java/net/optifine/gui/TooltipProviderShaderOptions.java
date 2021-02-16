@@ -38,7 +38,7 @@ public class TooltipProviderShaderOptions extends TooltipProviderOptions {
 
       String s3 = null;
       if(so.getPaths() != null && gamesettings.advancedItemTooltips) {
-         s3 = "\u00a78" + Lang.get("of.general.from") + ": " + Config.arrayToString((Object[])so.getPaths());
+         s3 = "\u00a78" + Lang.get("of.general.from") + ": " + Config.arrayToString(so.getPaths());
       }
 
       String s4 = null;
@@ -49,7 +49,7 @@ public class TooltipProviderShaderOptions extends TooltipProviderOptions {
 
       List<String> list = new ArrayList();
       list.add(s);
-      list.addAll(Arrays.<String>asList(astring));
+      list.addAll(Arrays.asList(astring));
       if(s2 != null) {
          list.add(s2);
       }

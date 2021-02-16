@@ -26,7 +26,7 @@ public class ModelAdapterWither extends ModelAdapter {
          ModelWither modelwither = (ModelWither)model;
          String s = "body";
          if(modelPart.startsWith(s)) {
-            ModelRenderer[] amodelrenderer1 = (ModelRenderer[])((ModelRenderer[])Reflector.getFieldValue(modelwither, Reflector.ModelWither_bodyParts));
+            ModelRenderer[] amodelrenderer1 = (ModelRenderer[]) Reflector.getFieldValue(modelwither, Reflector.ModelWither_bodyParts);
             if(amodelrenderer1 == null) {
                return null;
             } else {
@@ -38,7 +38,7 @@ public class ModelAdapterWither extends ModelAdapter {
          } else {
             String s1 = "head";
             if(modelPart.startsWith(s1)) {
-               ModelRenderer[] amodelrenderer = (ModelRenderer[])((ModelRenderer[])Reflector.getFieldValue(modelwither, Reflector.ModelWither_heads));
+               ModelRenderer[] amodelrenderer = (ModelRenderer[]) Reflector.getFieldValue(modelwither, Reflector.ModelWither_heads);
                if(amodelrenderer == null) {
                   return null;
                } else {

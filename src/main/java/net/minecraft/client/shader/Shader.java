@@ -11,8 +11,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.IResourceManager;
 import org.lwjgl.util.vector.Matrix4f;
 
-public class Shader
-{
+public class Shader {
+
     private final ShaderManager manager;
     public final Framebuffer framebufferIn;
     public final Framebuffer framebufferOut;
@@ -22,28 +22,24 @@ public class Shader
     private final List<Integer> listAuxHeights = Lists.newArrayList();
     private Matrix4f projectionMatrix;
 
-    public Shader(IResourceManager p_i45089_1_, String p_i45089_2_, Framebuffer p_i45089_3_, Framebuffer p_i45089_4_) throws IOException
-    {
-        this.manager = new ShaderManager(p_i45089_1_, p_i45089_2_);
-        this.framebufferIn = p_i45089_3_;
-        this.framebufferOut = p_i45089_4_;
+    public Shader(IResourceManager resourceManager, String programName, Framebuffer framebufferIn, Framebuffer framebufferOut) throws IOException {
+        this.manager = new ShaderManager(resourceManager, programName);
+        this.framebufferIn = framebufferIn;
+        this.framebufferOut = framebufferOut;
     }
 
-    public void deleteShader()
-    {
+    public void deleteShader() {
         this.manager.deleteShader();
     }
 
-    public void addAuxFramebuffer(String p_148041_1_, Object p_148041_2_, int p_148041_3_, int p_148041_4_)
-    {
-        this.listAuxNames.add(this.listAuxNames.size(), p_148041_1_);
-        this.listAuxFramebuffers.add(this.listAuxFramebuffers.size(), p_148041_2_);
-        this.listAuxWidths.add(this.listAuxWidths.size(), Integer.valueOf(p_148041_3_));
-        this.listAuxHeights.add(this.listAuxHeights.size(), Integer.valueOf(p_148041_4_));
+    public void addAuxFramebuffer(String auxName, Object auxFramebufferIn, int width, int height) {
+        this.listAuxNames.add(this.listAuxNames.size(), auxName);
+        this.listAuxFramebuffers.add(this.listAuxFramebuffers.size(), auxFramebufferIn);
+        this.listAuxWidths.add(this.listAuxWidths.size(), width);
+        this.listAuxHeights.add(this.listAuxHeights.size(), height);
     }
 
-    private void preLoadShader()
-    {
+    private void preLoadShader() {
         GlStateManager.colorAllMax();
         GlStateManager.disableBlend();
         GlStateManager.disableDepth();
@@ -55,13 +51,11 @@ public class Shader
         GlStateManager.bindTexture(0);
     }
 
-    public void setProjectionMatrix(Matrix4f p_148045_1_)
-    {
-        this.projectionMatrix = p_148045_1_;
+    public void setProjectionMatrix(Matrix4f projectionMatrix) {
+        this.projectionMatrix = projectionMatrix;
     }
 
-    public void loadShader(float p_148042_1_)
-    {
+    public void loadShader(float partialTicks) {
         this.preLoadShader();
         this.framebufferIn.unbindFramebuffer();
         float f = (float)this.framebufferOut.framebufferTextureWidth;
@@ -69,16 +63,15 @@ public class Shader
         GlStateManager.viewport(0, 0, (int)f, (int)f1);
         this.manager.addSamplerTexture("DiffuseSampler", this.framebufferIn);
 
-        for (int i = 0; i < this.listAuxFramebuffers.size(); ++i)
-        {
+        for (int i = 0; i < this.listAuxFramebuffers.size(); ++i) {
             this.manager.addSamplerTexture(this.listAuxNames.get(i), this.listAuxFramebuffers.get(i));
-            this.manager.getShaderUniformOrDefault("AuxSize" + i).set((float) this.listAuxWidths.get(i).intValue(), (float) this.listAuxHeights.get(i).intValue());
+            this.manager.getShaderUniformOrDefault("AuxSize" + i).set((float) this.listAuxWidths.get(i), (float) this.listAuxHeights.get(i));
         }
 
         this.manager.getShaderUniformOrDefault("ProjMat").set(this.projectionMatrix);
         this.manager.getShaderUniformOrDefault("InSize").set((float)this.framebufferIn.framebufferTextureWidth, (float)this.framebufferIn.framebufferTextureHeight);
         this.manager.getShaderUniformOrDefault("OutSize").set(f, f1);
-        this.manager.getShaderUniformOrDefault("Time").set(p_148042_1_);
+        this.manager.getShaderUniformOrDefault("Time").set(partialTicks);
         Minecraft minecraft = Minecraft.getMinecraft();
         this.manager.getShaderUniformOrDefault("ScreenSize").set((float)minecraft.displayWidth, (float)minecraft.displayHeight);
         this.manager.useShader();
@@ -100,17 +93,14 @@ public class Shader
         this.framebufferOut.unbindFramebuffer();
         this.framebufferIn.unbindFramebufferTexture();
 
-        for (Object object : this.listAuxFramebuffers)
-        {
-            if (object instanceof Framebuffer)
-            {
+        for (Object object : this.listAuxFramebuffers) {
+            if (object instanceof Framebuffer) {
                 ((Framebuffer)object).unbindFramebufferTexture();
             }
         }
     }
 
-    public ShaderManager getShaderManager()
-    {
+    public ShaderManager getShaderManager() {
         return this.manager;
     }
 }

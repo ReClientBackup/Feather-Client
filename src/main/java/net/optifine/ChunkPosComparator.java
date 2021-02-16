@@ -5,10 +5,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
 
 public class ChunkPosComparator implements Comparator<ChunkCoordIntPair> {
-   private int chunkPosX;
-   private int chunkPosZ;
-   private double yawRad;
-   private double pitchNorm;
+   private final int chunkPosX;
+   private final int chunkPosZ;
+   private final double yawRad;
+   private final double pitchNorm;
 
    public ChunkPosComparator(int chunkPosX, int chunkPosZ, double yawRad, double pitchRad) {
       this.chunkPosX = chunkPosX;
@@ -27,7 +27,7 @@ public class ChunkPosComparator implements Comparator<ChunkCoordIntPair> {
       int i = cp.chunkXPos - this.chunkPosX;
       int j = cp.chunkZPos - this.chunkPosZ;
       int k = i * i + j * j;
-      double d0 = MathHelper.func_181159_b((double)j, (double)i);
+      double d0 = MathHelper.func_181159_b(j, i);
       double d1 = Math.abs(d0 - this.yawRad);
       if(d1 > Math.PI) {
          d1 = (Math.PI * 2D) - d1;

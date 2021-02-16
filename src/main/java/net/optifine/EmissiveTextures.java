@@ -57,7 +57,7 @@ public class EmissiveTextures {
                resourcelocation = LOCATION_EMPTY;
             }
 
-            ITextureObject itextureobject = (ITextureObject)mapTextures.get(resourcelocation);
+            ITextureObject itextureobject = mapTextures.get(resourcelocation);
             if(itextureobject == null) {
                itextureobject = new SimpleTexture(resourcelocation);
                TextureManager texturemanager = Config.getTextureManager();
@@ -130,7 +130,7 @@ public class EmissiveTextures {
    }
 
    public static boolean isEmissive(ResourceLocation loc) {
-      return suffixEmissivePng == null?false:loc.getResourcePath().endsWith(suffixEmissivePng);
+      return suffixEmissivePng != null && loc.getResourcePath().endsWith(suffixEmissivePng);
    }
 
    public static void loadTexture(ResourceLocation loc, SimpleTexture tex) {

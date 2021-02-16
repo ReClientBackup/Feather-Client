@@ -92,7 +92,6 @@ public class ChunkVisibility {
                      }
                   }
                } catch (ConcurrentModificationException var21) {
-                  ;
                }
 
                ClassInheritanceMultiMap<Entity>[] classinheritancemultimap = chunk1.getEntityLists();
@@ -142,7 +141,7 @@ public class ChunkVisibility {
             }
          }
 
-         EnumFacing[] aenumfacing1 = (EnumFacing[])list.toArray(new EnumFacing[list.size()]);
+         EnumFacing[] aenumfacing1 = list.toArray(new EnumFacing[list.size()]);
          aenumfacing[j] = aenumfacing1;
       }
 

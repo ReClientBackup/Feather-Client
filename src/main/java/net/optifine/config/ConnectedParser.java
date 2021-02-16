@@ -81,7 +81,7 @@ public class ConnectedParser {
             }
          }
 
-         MatchBlock[] amatchblock1 = (MatchBlock[])((MatchBlock[])list.toArray(new MatchBlock[list.size()]));
+         MatchBlock[] amatchblock1 = (MatchBlock[]) list.toArray(new MatchBlock[list.size()]);
          return amatchblock1;
       }
    }
@@ -120,7 +120,7 @@ public class ConnectedParser {
             }
 
             String s1 = astring[i];
-            String[] astring1 = (String[])Arrays.copyOfRange(astring, i + 1, astring.length);
+            String[] astring1 = Arrays.copyOfRange(astring, i + 1, astring.length);
             Block[] ablock = this.parseBlockPart(s, s1);
             if(ablock == null) {
                return null;
@@ -153,7 +153,7 @@ public class ConnectedParser {
          return false;
       } else {
          String s = parts[1];
-         return s.length() < 1?false:(this.startsWithDigit(s)?false:!s.contains("="));
+         return s.length() >= 1 && (!this.startsWithDigit(s) && !s.contains("="));
       }
    }
 
@@ -232,7 +232,7 @@ public class ConnectedParser {
                      return null;
                   }
 
-                  List<Comparable> list = (List)map.get(s2);
+                  List<Comparable> list = map.get(s2);
                   if(list == null) {
                      list = new ArrayList();
                      map.put(iproperty, list);
@@ -267,7 +267,6 @@ public class ConnectedParser {
                         list1.add(Integer.valueOf(l));
                      }
                   } catch (IllegalArgumentException var18) {
-                     ;
                   }
                }
 
@@ -277,7 +276,7 @@ public class ConnectedParser {
                   int[] aint1 = new int[list1.size()];
 
                   for(int i1 = 0; i1 < aint1.length; ++i1) {
-                     aint1[i1] = ((Integer)list1.get(i1)).intValue();
+                     aint1[i1] = list1.get(i1).intValue();
                   }
 
                   return aint1;
@@ -333,12 +332,12 @@ public class ConnectedParser {
    }
 
    public static Comparable parseValue(String str, Class cls) {
-      return (Comparable)(cls == String.class?str:(cls == Boolean.class?Boolean.valueOf(str):(cls == Float.class?Float.valueOf(str):(cls == Double.class?Double.valueOf(str):(cls == Integer.class?Integer.valueOf(str):(cls == Long.class?Long.valueOf(str):null))))));
+      return cls == String.class?str:(cls == Boolean.class?Boolean.valueOf(str):(cls == Float.class?Float.valueOf(str):(cls == Double.class?Double.valueOf(str):(cls == Integer.class?Integer.valueOf(str):(cls == Long.class?Long.valueOf(str):null)))));
    }
 
    public boolean matchState(IBlockState bs, Map<IProperty, List<Comparable>> mapPropValues) {
       for(IProperty iproperty : mapPropValues.keySet()) {
-         List<Comparable> list = (List)mapPropValues.get(iproperty);
+         List<Comparable> list = mapPropValues.get(iproperty);
          Comparable comparable = bs.getValue(iproperty);
          if(comparable == null) {
             return false;
@@ -460,7 +459,7 @@ public class ConnectedParser {
          int[] aint = new int[list.size()];
 
          for(int j1 = 0; j1 < aint.length; ++j1) {
-            aint[j1] = ((Integer)list.get(j1)).intValue();
+            aint[j1] = list.get(j1).intValue();
          }
 
          return aint;
@@ -665,7 +664,7 @@ public class ConnectedParser {
 
    public <T> T parseObject(String str, T[] objs, INameGetter nameGetter, String property) {
       if(str == null) {
-         return (T)null;
+         return null;
       } else {
          String s = str.toLowerCase().trim();
 
@@ -678,7 +677,7 @@ public class ConnectedParser {
          }
 
          this.warn("Invalid " + property + ": " + str);
-         return (T)null;
+         return null;
       }
    }
 
@@ -705,19 +704,19 @@ public class ConnectedParser {
    }
 
    public Enum parseEnum(String str, Enum[] enums, String property) {
-      return (Enum)this.parseObject(str, enums, NAME_GETTER_ENUM, property);
+      return this.parseObject(str, enums, NAME_GETTER_ENUM, property);
    }
 
    public Enum[] parseEnums(String str, Enum[] enums, String property, Enum[] errValue) {
-      return (Enum[])this.parseObjects(str, enums, NAME_GETTER_ENUM, property, errValue);
+      return this.parseObjects(str, enums, NAME_GETTER_ENUM, property, errValue);
    }
 
    public EnumDyeColor[] parseDyeColors(String str, String property, EnumDyeColor[] errValue) {
-      return (EnumDyeColor[])this.parseObjects(str, EnumDyeColor.values(), NAME_GETTER_DYE_COLOR, property, errValue);
+      return this.parseObjects(str, EnumDyeColor.values(), NAME_GETTER_DYE_COLOR, property, errValue);
    }
 
    public Weather[] parseWeather(String str, String property, Weather[] errValue) {
-      return (Weather[])this.parseObjects(str, Weather.values(), NAME_GETTER_ENUM, property, errValue);
+      return this.parseObjects(str, Weather.values(), NAME_GETTER_ENUM, property, errValue);
    }
 
    public NbtTagValue parseNbtTagValue(String path, String value) {
@@ -745,7 +744,7 @@ public class ConnectedParser {
          if(list.isEmpty()) {
             return null;
          } else {
-            VillagerProfession[] avillagerprofession = (VillagerProfession[])((VillagerProfession[])list.toArray(new VillagerProfession[list.size()]));
+            VillagerProfession[] avillagerprofession = list.toArray(new VillagerProfession[list.size()]);
             return avillagerprofession;
          }
       }
@@ -799,7 +798,7 @@ public class ConnectedParser {
          set.add(Integer.valueOf(j));
       }
 
-      Integer[] ainteger = (Integer[])((Integer[])set.toArray(new Integer[set.size()]));
+      Integer[] ainteger = set.toArray(new Integer[set.size()]);
       int[] aint = new int[ainteger.length];
 
       for(int k = 0; k < aint.length; ++k) {
@@ -895,7 +894,7 @@ public class ConnectedParser {
          }
       }
 
-      Integer[] ainteger = (Integer[])((Integer[])set.toArray(new Integer[set.size()]));
+      Integer[] ainteger = set.toArray(new Integer[set.size()]);
       int[] aint = Config.toPrimitive(ainteger);
       return aint;
    }
@@ -915,7 +914,7 @@ public class ConnectedParser {
          }
       }
 
-      Integer[] ainteger = (Integer[])((Integer[])set.toArray(new Integer[set.size()]));
+      Integer[] ainteger = set.toArray(new Integer[set.size()]);
       int[] aint = Config.toPrimitive(ainteger);
       return aint;
    }

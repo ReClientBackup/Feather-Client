@@ -17,7 +17,7 @@ import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.util.JsonException;
+import net.minecraft.client.util.JSONException;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.IOUtils;
@@ -75,8 +75,8 @@ public class ShaderGroup
                     }
                     catch (Exception exception1)
                     {
-                        JsonException jsonexception1 = JsonException.func_151379_a(exception1);
-                        jsonexception1.func_151380_a("targets[" + i + "]");
+                        JSONException jsonexception1 = JSONException.forException(exception1);
+                        jsonexception1.prependJsonKey("targets[" + i + "]");
                         throw jsonexception1;
                     }
 
@@ -97,8 +97,8 @@ public class ShaderGroup
                     }
                     catch (Exception exception)
                     {
-                        JsonException jsonexception2 = JsonException.func_151379_a(exception);
-                        jsonexception2.func_151380_a("passes[" + j + "]");
+                        JSONException jsonexception2 = JSONException.forException(exception);
+                        jsonexception2.prependJsonKey("passes[" + j + "]");
                         throw jsonexception2;
                     }
 
@@ -108,8 +108,8 @@ public class ShaderGroup
         }
         catch (Exception exception2)
         {
-            JsonException jsonexception = JsonException.func_151379_a(exception2);
-            jsonexception.func_151381_b(p_152765_2_.getResourcePath());
+            JSONException jsonexception = JSONException.forException(exception2);
+            jsonexception.setFilenameAndFlush(p_152765_2_.getResourcePath());
             throw jsonexception;
         }
         finally
@@ -118,7 +118,7 @@ public class ShaderGroup
         }
     }
 
-    private void initTarget(JsonElement p_148027_1_) throws JsonException
+    private void initTarget(JsonElement p_148027_1_) throws JSONException
     {
         if (JsonUtils.isString(p_148027_1_))
         {
@@ -133,7 +133,7 @@ public class ShaderGroup
 
             if (this.mapFramebuffers.containsKey(s))
             {
-                throw new JsonException(s + " is already defined");
+                throw new JSONException(s + " is already defined");
             }
 
             this.addFramebuffer(s, i, j);
@@ -151,11 +151,11 @@ public class ShaderGroup
 
         if (framebuffer == null)
         {
-            throw new JsonException("Input target '" + s1 + "' does not exist");
+            throw new JSONException("Input target '" + s1 + "' does not exist");
         }
         else if (framebuffer1 == null)
         {
-            throw new JsonException("Output target '" + s2 + "' does not exist");
+            throw new JSONException("Output target '" + s2 + "' does not exist");
         }
         else
         {
@@ -185,7 +185,7 @@ public class ShaderGroup
                             }
                             catch (FileNotFoundException var24)
                             {
-                                throw new JsonException("Render target or texture '" + s3 + "' does not exist");
+                                throw new JSONException("Render target or texture '" + s3 + "' does not exist");
                             }
 
                             p_152764_1_.bindTexture(resourcelocation);
@@ -214,8 +214,8 @@ public class ShaderGroup
                     }
                     catch (Exception exception1)
                     {
-                        JsonException jsonexception = JsonException.func_151379_a(exception1);
-                        jsonexception.func_151380_a("auxtargets[" + i + "]");
+                        JSONException jsonexception = JSONException.forException(exception1);
+                        jsonexception.prependJsonKey("auxtargets[" + i + "]");
                         throw jsonexception;
                     }
 
@@ -237,8 +237,8 @@ public class ShaderGroup
                     }
                     catch (Exception exception)
                     {
-                        JsonException jsonexception1 = JsonException.func_151379_a(exception);
-                        jsonexception1.func_151380_a("uniforms[" + l + "]");
+                        JSONException jsonexception1 = JSONException.forException(exception);
+                        jsonexception1.prependJsonKey("uniforms[" + l + "]");
                         throw jsonexception1;
                     }
 
@@ -248,7 +248,7 @@ public class ShaderGroup
         }
     }
 
-    private void initUniform(JsonElement p_148028_1_) throws JsonException
+    private void initUniform(JsonElement p_148028_1_) throws JSONException
     {
         JsonObject jsonobject = JsonUtils.getJsonObject(p_148028_1_, "uniform");
         String s = JsonUtils.getString(jsonobject, "name");
@@ -256,7 +256,7 @@ public class ShaderGroup
 
         if (shaderuniform == null)
         {
-            throw new JsonException("Uniform '" + s + "' does not exist");
+            throw new JSONException("Uniform '" + s + "' does not exist");
         }
         else
         {
@@ -271,8 +271,8 @@ public class ShaderGroup
                 }
                 catch (Exception exception)
                 {
-                    JsonException jsonexception = JsonException.func_151379_a(exception);
-                    jsonexception.func_151380_a("values[" + i + "]");
+                    JSONException jsonexception = JSONException.forException(exception);
+                    jsonexception.prependJsonKey("values[" + i + "]");
                     throw jsonexception;
                 }
 

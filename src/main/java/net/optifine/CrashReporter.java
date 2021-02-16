@@ -1,5 +1,6 @@
 package net.optifine;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class CrashReporter {
 
          String s = "http://optifine.net/crashReport";
          String s1 = makeReport(crashReport);
-         byte[] abyte = s1.getBytes("ASCII");
+         byte[] abyte = s1.getBytes(StandardCharsets.US_ASCII);
          IFileUploadListener ifileuploadlistener = new IFileUploadListener() {
             public void fileUploadFinished(String url, byte[] content, Throwable exception) {
             }

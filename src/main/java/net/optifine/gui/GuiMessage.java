@@ -11,9 +11,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.src.Config;
 
 public class GuiMessage extends Screen {
-   private Screen parentScreen;
-   private String messageLine1;
-   private String messageLine2;
+   private final Screen parentScreen;
+   private final String messageLine1;
+   private final String messageLine2;
    private final List listLines2 = Lists.newArrayList();
    protected String confirmButtonText;
    private int ticksUntilEnable;
@@ -22,7 +22,7 @@ public class GuiMessage extends Screen {
       this.parentScreen = parentScreen;
       this.messageLine1 = line1;
       this.messageLine2 = line2;
-      this.confirmButtonText = I18n.format("gui.done", new Object[0]);
+      this.confirmButtonText = I18n.format("gui.done");
    }
 
    public void initGui() {

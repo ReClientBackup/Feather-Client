@@ -27,7 +27,7 @@ import net.minecraft.client.resources.data.TextureMetadataSectionSerializer;
 import org.apache.commons.io.IOUtils;
 
 public class SimpleShaderTexture extends AbstractTexture {
-   private String texturePath;
+   private final String texturePath;
    private static final IMetadataSerializer METADATA_SERIALIZER = makeMetadataSerializer();
 
    public SimpleShaderTexture(String texturePath) {
@@ -60,8 +60,8 @@ public class SimpleShaderTexture extends AbstractTexture {
 
          TextureMetadataSection texturemetadatasection1;
          try {
-            JsonObject jsonobject = (new JsonParser()).parse((Reader)bufferedreader).getAsJsonObject();
-            TextureMetadataSection texturemetadatasection = (TextureMetadataSection)imetadataserializer.parseMetadataSection(s1, jsonobject);
+            JsonObject jsonobject = (new JsonParser()).parse(bufferedreader).getAsJsonObject();
+            TextureMetadataSection texturemetadatasection = imetadataserializer.parseMetadataSection(s1, jsonobject);
             if(texturemetadatasection == null) {
                return def;
             }
@@ -72,7 +72,7 @@ public class SimpleShaderTexture extends AbstractTexture {
             SMCLog.warning("" + runtimeexception.getClass().getName() + ": " + runtimeexception.getMessage());
             return def;
          } finally {
-            IOUtils.closeQuietly((Reader)bufferedreader);
+            IOUtils.closeQuietly(bufferedreader);
             IOUtils.closeQuietly(inputstream);
          }
 

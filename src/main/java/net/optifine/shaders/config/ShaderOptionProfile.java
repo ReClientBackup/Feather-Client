@@ -13,7 +13,7 @@ public class ShaderOptionProfile extends ShaderOption {
    private static final String VALUE_CUSTOM = "<custom>";
 
    public ShaderOptionProfile(ShaderProfile[] profiles, ShaderOption[] options) {
-      super("<profile>", "", detectProfileName(profiles, options), getProfileNames(profiles), detectProfileName(profiles, options, true), (String)null);
+      super("<profile>", "", detectProfileName(profiles, options), getProfileNames(profiles), detectProfileName(profiles, options, true), null);
       this.profiles = profiles;
       this.options = options;
    }
@@ -86,7 +86,7 @@ public class ShaderOptionProfile extends ShaderOption {
    }
 
    public String getDescriptionText() {
-      String s = Shaders.translate("profile.comment", (String)null);
+      String s = Shaders.translate("profile.comment", null);
       if(s != null) {
          return s;
       } else {
@@ -95,7 +95,7 @@ public class ShaderOptionProfile extends ShaderOption {
          for(int i = 0; i < this.profiles.length; ++i) {
             String s1 = this.profiles[i].getName();
             if(s1 != null) {
-               String s2 = Shaders.translate("profile." + s1 + ".comment", (String)null);
+               String s2 = Shaders.translate("profile." + s1 + ".comment", null);
                if(s2 != null) {
                   stringbuffer.append(s2);
                   if(!s2.endsWith(". ")) {
@@ -127,7 +127,7 @@ public class ShaderOptionProfile extends ShaderOption {
       }
 
       list.add("<custom>");
-      String[] astring = (String[])((String[])list.toArray(new String[list.size()]));
+      String[] astring = list.toArray(new String[list.size()]);
       return astring;
    }
 }

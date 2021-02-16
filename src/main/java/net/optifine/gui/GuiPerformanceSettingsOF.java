@@ -7,11 +7,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
 public class GuiPerformanceSettingsOF extends Screen {
-   private Screen prevScreen;
+   private final Screen prevScreen;
    protected String title;
-   private GameSettings settings;
-   private static GameSettings.Options[] enumOptions = new GameSettings.Options[]{GameSettings.Options.SMOOTH_FPS, GameSettings.Options.SMOOTH_WORLD, GameSettings.Options.FAST_RENDER, GameSettings.Options.FAST_MATH, GameSettings.Options.CHUNK_UPDATES, GameSettings.Options.CHUNK_UPDATES_DYNAMIC, GameSettings.Options.RENDER_REGIONS, GameSettings.Options.LAZY_CHUNK_LOADING, GameSettings.Options.SMART_ANIMATIONS};
-   private TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderOptions());
+   private final GameSettings settings;
+   private static final GameSettings.Options[] enumOptions = new GameSettings.Options[]{GameSettings.Options.SMOOTH_FPS, GameSettings.Options.SMOOTH_WORLD, GameSettings.Options.FAST_RENDER, GameSettings.Options.FAST_MATH, GameSettings.Options.CHUNK_UPDATES, GameSettings.Options.CHUNK_UPDATES_DYNAMIC, GameSettings.Options.RENDER_REGIONS, GameSettings.Options.LAZY_CHUNK_LOADING, GameSettings.Options.SMART_ANIMATIONS};
+   private final TooltipManager tooltipManager = new TooltipManager(this, new TooltipProviderOptions());
 
    public GuiPerformanceSettingsOF(Screen guiscreen, GameSettings gamesettings) {
       this.prevScreen = guiscreen;
@@ -34,7 +34,7 @@ public class GuiPerformanceSettingsOF extends Screen {
          }
       }
 
-      addButton(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168 + 11, I18n.format("gui.done", new Object[0])));
+      addButton(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168 + 11, I18n.format("gui.done")));
    }
 
    protected void actionPerformed(GuiButton guibutton) {

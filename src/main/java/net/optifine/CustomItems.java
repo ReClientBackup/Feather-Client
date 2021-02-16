@@ -46,9 +46,9 @@ public class CustomItems {
    private static CustomItemProperties[][] itemProperties = null;
    private static CustomItemProperties[][] enchantmentProperties = null;
    private static Map mapPotionIds = null;
-   private static ItemModelGenerator itemModelGenerator = new ItemModelGenerator();
+   private static final ItemModelGenerator itemModelGenerator = new ItemModelGenerator();
    private static boolean useGlint = true;
-   private static boolean renderOffHand = false;
+   private static final boolean renderOffHand = false;
    public static final int MASK_POTION_SPLASH = 16384;
    public static final int MASK_POTION_NAME = 63;
    public static final int MASK_POTION_EXTENDED = 64;
@@ -64,8 +64,8 @@ public class CustomItems {
    private static final String TYPE_POTION_LINGER = "linger";
 
    public static void update() {
-      itemProperties = (CustomItemProperties[][])null;
-      enchantmentProperties = (CustomItemProperties[][])null;
+      itemProperties = null;
+      enchantmentProperties = null;
       useGlint = true;
       if(Config.isCustomItems()) {
          readCitProperties("mcpatcher/cit.properties");
@@ -269,7 +269,7 @@ public class CustomItems {
          properties.put("items", "" + itemId);
          return properties;
       } else {
-         int[] aint = (int[])((int[])getMapPotionIds().get(name));
+         int[] aint = (int[]) getMapPotionIds().get(name);
          if(aint == null) {
             Config.warn("Potion not found for image: " + path);
             return null;
@@ -400,7 +400,7 @@ public class CustomItems {
       for(int i = 0; i < list.size(); ++i) {
          List subList = (List)list.get(i);
          if(subList != null) {
-            CustomItemProperties[] acustomitemproperties1 = (CustomItemProperties[])((CustomItemProperties[])subList.toArray(new CustomItemProperties[subList.size()]));
+            CustomItemProperties[] acustomitemproperties1 = (CustomItemProperties[]) subList.toArray(new CustomItemProperties[subList.size()]);
             Arrays.sort(acustomitemproperties1, new CustomItemsComparator());
             acustomitemproperties[i] = acustomitemproperties1;
          }
@@ -521,7 +521,7 @@ public class CustomItems {
             if(acustomitemproperties != null) {
                for(int j = 0; j < acustomitemproperties.length; ++j) {
                   CustomItemProperties customitemproperties = acustomitemproperties[j];
-                  if(customitemproperties.type == type && matchesProperties(customitemproperties, itemStack, (int[][])null)) {
+                  if(customitemproperties.type == type && matchesProperties(customitemproperties, itemStack, null)) {
                      return customitemproperties;
                   }
                }
@@ -610,9 +610,7 @@ public class CustomItems {
                return false;
             }
 
-            if(cip.hand == 2 && !renderOffHand) {
-               return false;
-            }
+            return cip.hand != 2 || renderOffHand;
          }
 
          return true;

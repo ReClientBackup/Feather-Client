@@ -29,7 +29,7 @@ public class ModelAdapterSquid extends ModelAdapter {
          } else {
             String s = "tentacle";
             if(modelPart.startsWith(s)) {
-               ModelRenderer[] amodelrenderer = (ModelRenderer[])((ModelRenderer[])Reflector.getFieldValue(modelsquid, Reflector.ModelSquid_tentacles));
+               ModelRenderer[] amodelrenderer = (ModelRenderer[]) Reflector.getFieldValue(modelsquid, Reflector.ModelSquid_tentacles);
                if(amodelrenderer == null) {
                   return null;
                } else {

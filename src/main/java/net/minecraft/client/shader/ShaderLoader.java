@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 import java.util.Map;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.util.JsonException;
+import net.minecraft.client.util.JSONException;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -68,8 +68,8 @@ public class ShaderLoader
             if (OpenGlHelper.glGetShaderi(i, OpenGlHelper.GL_COMPILE_STATUS) == 0)
             {
                 String s = StringUtils.trim(OpenGlHelper.glGetShaderInfoLog(i, 32768));
-                JsonException jsonexception = new JsonException("Couldn't compile " + type.getShaderName() + " program: " + s);
-                jsonexception.func_151381_b(resourcelocation.getResourcePath());
+                JSONException jsonexception = new JSONException("Couldn't compile " + type.getShaderName() + " program: " + s);
+                jsonexception.setFilenameAndFlush(resourcelocation.getResourcePath());
                 throw jsonexception;
             }
 

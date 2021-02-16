@@ -6,7 +6,7 @@ import net.optifine.expr.IExpression;
 import net.optifine.expr.IExpressionResolver;
 
 public class ShaderOptionResolver implements IExpressionResolver {
-   private Map<String, ExpressionShaderOptionSwitch> mapOptions = new HashMap();
+   private final Map<String, ExpressionShaderOptionSwitch> mapOptions = new HashMap();
 
    public ShaderOptionResolver(ShaderOption[] options) {
       for(int i = 0; i < options.length; ++i) {
@@ -20,7 +20,7 @@ public class ShaderOptionResolver implements IExpressionResolver {
    }
 
    public IExpression getExpression(String name) {
-      ExpressionShaderOptionSwitch expressionshaderoptionswitch = (ExpressionShaderOptionSwitch)this.mapOptions.get(name);
+      ExpressionShaderOptionSwitch expressionshaderoptionswitch = this.mapOptions.get(name);
       return expressionshaderoptionswitch;
    }
 }

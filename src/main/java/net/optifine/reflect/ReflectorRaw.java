@@ -46,7 +46,7 @@ public class ReflectorRaw {
             }
          }
 
-         Field[] afield = (Field[])((Field[])list.toArray(new Field[list.size()]));
+         Field[] afield = (Field[]) list.toArray(new Field[list.size()]);
          return afield;
       } catch (Exception var5) {
          return null;
@@ -56,13 +56,13 @@ public class ReflectorRaw {
    public static Field[] getFieldsAfter(Class cls, Field field, Class fieldType) {
       try {
          Field[] afield = cls.getDeclaredFields();
-         List<Field> list = Arrays.<Field>asList(afield);
+         List<Field> list = Arrays.asList(afield);
          int i = list.indexOf(field);
          if(i < 0) {
             return new Field[0];
          } else {
             List<Field> list1 = list.subList(i + 1, list.size());
-            Field[] afield1 = (Field[])((Field[])list1.toArray(new Field[list1.size()]));
+            Field[] afield1 = list1.toArray(new Field[list1.size()]);
             return getFields(afield1, fieldType);
          }
       } catch (Exception var8) {
@@ -90,7 +90,7 @@ public class ReflectorRaw {
             }
          }
 
-         Field[] afield = (Field[])((Field[])list.toArray(new Field[list.size()]));
+         Field[] afield = list.toArray(new Field[list.size()]);
          return afield;
       } catch (Exception var9) {
          return null;
@@ -119,12 +119,12 @@ public class ReflectorRaw {
 
    public static boolean setFieldValue(Object obj, Class cls, Class fieldType, Object value) {
       ReflectorField reflectorfield = getReflectorField(cls, fieldType);
-      return reflectorfield == null?false:(!reflectorfield.exists()?false:Reflector.setFieldValue(obj, reflectorfield, value));
+      return reflectorfield != null && (reflectorfield.exists() && Reflector.setFieldValue(obj, reflectorfield, value));
    }
 
    public static boolean setFieldValue(Object obj, Class cls, Class fieldType, int index, Object value) {
       ReflectorField reflectorfield = getReflectorField(cls, fieldType, index);
-      return reflectorfield == null?false:(!reflectorfield.exists()?false:Reflector.setFieldValue(obj, reflectorfield, value));
+      return reflectorfield != null && (reflectorfield.exists() && Reflector.setFieldValue(obj, reflectorfield, value));
    }
 
    public static ReflectorField getReflectorField(Class cls, Class fieldType) {

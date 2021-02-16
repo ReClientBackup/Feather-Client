@@ -16,9 +16,9 @@ public class Mipmaps {
    private final int height;
    private final int[] data;
    private final boolean direct;
-   private int[][] mipmapDatas;
+   private final int[][] mipmapDatas;
    private IntBuffer[] mipmapBuffers;
-   private Dimension[] mipmapDimensions;
+   private final Dimension[] mipmapDimensions;
 
    public Mipmaps(String iconName, int width, int height, int[] data, boolean direct) {
       this.iconName = iconName;
@@ -45,7 +45,7 @@ public class Mipmaps {
             k /= 2;
             l /= 2;
             if(k <= 0 && l <= 0) {
-               Dimension[] adimension = (Dimension[])((Dimension[])list.toArray(new Dimension[list.size()]));
+               Dimension[] adimension = (Dimension[]) list.toArray(new Dimension[list.size()]);
                return adimension;
             }
 
@@ -168,15 +168,4 @@ public class Mipmaps {
       }
    }
 
-   public static void allocateMipmapTextures(int width, int height, String name) {
-      Dimension[] adimension = makeMipmapDimensions(width, height, name);
-
-      for(int i = 0; i < adimension.length; ++i) {
-         Dimension dimension = adimension[i];
-         int j = dimension.width;
-         int k = dimension.height;
-         int l = i + 1;
-         GL11.glTexImage2D(GL11.GL_TEXTURE_2D, l, GL11.GL_RGBA, j, k, 0, GL12.GL_BGRA, GL12.GL_UNSIGNED_INT_8_8_8_8_REV, (IntBuffer)((IntBuffer)null));
-      }
-   }
 }

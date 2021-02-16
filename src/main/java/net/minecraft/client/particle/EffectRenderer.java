@@ -45,10 +45,10 @@ public class EffectRenderer
     private final Random rand = new Random();
     private final Map<Integer, IParticleFactory> particleTypes = Maps.newHashMap();
 
-    public EffectRenderer(World worldIn, TextureManager rendererIn)
+    public EffectRenderer(World world, TextureManager renderer)
     {
-        this.worldObj = worldIn;
-        this.renderer = rendererIn;
+        this.worldObj = world;
+        this.renderer = renderer;
 
         for (int i = 0; i < 4; ++i)
         {

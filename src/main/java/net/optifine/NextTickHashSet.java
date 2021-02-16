@@ -13,7 +13,7 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.NextTickListEntry;
 
 public class NextTickHashSet extends TreeSet {
-   private LongHashMap longHashMap = new LongHashMap();
+   private final LongHashMap longHashMap = new LongHashMap();
    private int minX = Integer.MIN_VALUE;
    private int minZ = Integer.MIN_VALUE;
    private int maxX = Integer.MIN_VALUE;
@@ -32,7 +32,7 @@ public class NextTickHashSet extends TreeSet {
       } else {
          NextTickListEntry nextticklistentry = (NextTickListEntry)obj;
          Set set = this.getSubSet(nextticklistentry, false);
-         return set == null?false:set.contains(nextticklistentry);
+         return set != null && set.contains(nextticklistentry);
       }
    }
 

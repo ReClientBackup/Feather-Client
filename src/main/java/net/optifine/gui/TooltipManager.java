@@ -12,8 +12,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 
 public class TooltipManager {
-   private Screen guiScreen;
-   private TooltipProvider tooltipProvider;
+   private final Screen guiScreen;
+   private final TooltipProvider tooltipProvider;
    private int lastMouseX = 0;
    private int lastMouseY = 0;
    private long mouseStillTime = 0L;
@@ -33,7 +33,7 @@ public class TooltipManager {
                String[] astring = this.tooltipProvider.getTooltipLines(guibutton, rectangle.width);
                if(astring != null) {
                   if(astring.length > 8) {
-                     astring = (String[])Arrays.copyOf(astring, 8);
+                     astring = Arrays.copyOf(astring, 8);
                      astring[astring.length - 1] = astring[astring.length - 1] + " ...";
                   }
 
