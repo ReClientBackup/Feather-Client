@@ -52,7 +52,7 @@ public class CommandTeleport extends CommandBase
     {
         if (args.length < 1)
         {
-            throw new WrongUsageException("commands.tp.usage", new Object[0]);
+            throw new WrongUsageException("commands.tp.usage");
         }
         else
         {
@@ -73,7 +73,7 @@ public class CommandTeleport extends CommandBase
             {
                 if (args.length < i + 3)
                 {
-                    throw new WrongUsageException("commands.tp.usage", new Object[0]);
+                    throw new WrongUsageException("commands.tp.usage");
                 }
                 else if (entity.worldObj != null)
                 {
@@ -86,7 +86,7 @@ public class CommandTeleport extends CommandBase
 
                     if (entity instanceof EntityPlayerMP)
                     {
-                        Set<S08PacketPlayerPosLook.EnumFlags> set = EnumSet.<S08PacketPlayerPosLook.EnumFlags>noneOf(S08PacketPlayerPosLook.EnumFlags.class);
+                        Set<S08PacketPlayerPosLook.EnumFlags> set = EnumSet.noneOf(S08PacketPlayerPosLook.EnumFlags.class);
 
                         if (commandbase$coordinatearg.func_179630_c())
                         {
@@ -152,7 +152,7 @@ public class CommandTeleport extends CommandBase
                         entity.setRotationYawHead(f2);
                     }
 
-                    notifyOperators(sender, this, "commands.tp.success.coordinates", new Object[] {entity.getCommandSenderName(), Double.valueOf(commandbase$coordinatearg.func_179628_a()), Double.valueOf(commandbase$coordinatearg1.func_179628_a()), Double.valueOf(commandbase$coordinatearg2.func_179628_a())});
+                    notifyOperators(sender, this, "commands.tp.success.coordinates", entity.getCommandSenderName(), Double.valueOf(commandbase$coordinatearg.func_179628_a()), Double.valueOf(commandbase$coordinatearg1.func_179628_a()), Double.valueOf(commandbase$coordinatearg2.func_179628_a()));
                 }
             }
             else
@@ -161,7 +161,7 @@ public class CommandTeleport extends CommandBase
 
                 if (entity1.worldObj != entity.worldObj)
                 {
-                    throw new CommandException("commands.tp.notSameDimension", new Object[0]);
+                    throw new CommandException("commands.tp.notSameDimension");
                 }
                 else
                 {
@@ -176,7 +176,7 @@ public class CommandTeleport extends CommandBase
                         entity.setLocationAndAngles(entity1.posX, entity1.posY, entity1.posZ, entity1.rotationYaw, entity1.rotationPitch);
                     }
 
-                    notifyOperators(sender, this, "commands.tp.success", new Object[] {entity.getCommandSenderName(), entity1.getCommandSenderName()});
+                    notifyOperators(sender, this, "commands.tp.success", entity.getCommandSenderName(), entity1.getCommandSenderName());
                 }
             }
         }

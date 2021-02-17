@@ -2,8 +2,8 @@ package net.minecraft.client.gui.spectator;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.network.play.client.C18PacketSpectate;
 import net.minecraft.util.ChatComponentText;
@@ -36,8 +36,8 @@ public class PlayerMenuObject implements ISpectatorMenuObject
     {
         Minecraft.getMinecraft().getTextureManager().bindTexture(this.resourceLocation);
         GlStateManager.color(1.0F, 1.0F, 1.0F, (float)alpha / 255.0F);
-        Gui.drawScaledCustomSizeModalRect(2, 2, 8.0F, 8.0F, 8, 8, 12, 12, 64.0F, 64.0F);
-        Gui.drawScaledCustomSizeModalRect(2, 2, 40.0F, 8.0F, 8, 8, 12, 12, 64.0F, 64.0F);
+        GUI.drawScaledCustomSizeModalRect(2, 2, 8.0F, 8.0F, 8, 8, 12, 12, 64.0F, 64.0F);
+        GUI.drawScaledCustomSizeModalRect(2, 2, 40.0F, 8.0F, 8, 8, 12, 12, 64.0F, 64.0F);
     }
 
     public boolean func_178662_A_()

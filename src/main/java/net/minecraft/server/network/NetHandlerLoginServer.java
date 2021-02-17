@@ -44,7 +44,7 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable
     /** How long has player been trying to login into the server. */
     private int connectionTimer;
     private GameProfile loginGameProfile;
-    private String serverId = "";
+    private final String serverId = "";
     private SecretKey secretKey;
     private EntityPlayerMP field_181025_l;
 
@@ -122,7 +122,7 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable
                     {
                         NetHandlerLoginServer.this.networkManager.setCompressionTreshold(NetHandlerLoginServer.this.server.getNetworkCompressionTreshold());
                     }
-                }, new GenericFutureListener[0]);
+                });
             }
 
             this.networkManager.sendPacket(new S02PacketLoginSuccess(this.loginGameProfile));
@@ -153,10 +153,10 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable
         return this.loginGameProfile != null ? this.loginGameProfile.toString() + " (" + this.networkManager.getRemoteAddress().toString() + ")" : String.valueOf(this.networkManager.getRemoteAddress());
     }
 
-    public void processLoginStart(C00PacketLoginStart packetIn)
+    public void processLoginStart(C00PacketLoginStart packet)
     {
-        Validate.validState(this.currentLoginState == NetHandlerLoginServer.LoginState.HELLO, "Unexpected hello packet", new Object[0]);
-        this.loginGameProfile = packetIn.getProfile();
+        Validate.validState(this.currentLoginState == NetHandlerLoginServer.LoginState.HELLO, "Unexpected hello packet");
+        this.loginGameProfile = packet.getProfile();
 
         if (this.server.isServerInOnlineMode() && !this.networkManager.isLocalChannel())
         {
@@ -169,18 +169,18 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable
         }
     }
 
-    public void processEncryptionResponse(C01PacketEncryptionResponse packetIn)
+    public void processEncryptionResponse(C01PacketEncryptionResponse packet)
     {
-        Validate.validState(this.currentLoginState == NetHandlerLoginServer.LoginState.KEY, "Unexpected key packet", new Object[0]);
+        Validate.validState(this.currentLoginState == NetHandlerLoginServer.LoginState.KEY, "Unexpected key packet");
         PrivateKey privatekey = this.server.getKeyPair().getPrivate();
 
-        if (!Arrays.equals(this.verifyToken, packetIn.getVerifyToken(privatekey)))
+        if (!Arrays.equals(this.verifyToken, packet.getVerifyToken(privatekey)))
         {
             throw new IllegalStateException("Invalid nonce!");
         }
         else
         {
-            this.secretKey = packetIn.getSecretKey(privatekey);
+            this.secretKey = packet.getSecretKey(privatekey);
             this.currentLoginState = NetHandlerLoginServer.LoginState.AUTHENTICATING;
             this.networkManager.enableEncryption(this.secretKey);
             (new Thread("User Authenticator #" + AUTHENTICATOR_THREAD_ID.incrementAndGet())
@@ -208,7 +208,7 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable
                         else
                         {
                             NetHandlerLoginServer.this.closeConnection("Failed to verify username!");
-                            NetHandlerLoginServer.logger.error("Username \'" + NetHandlerLoginServer.this.loginGameProfile.getName() + "\' tried to join with an invalid session");
+                            NetHandlerLoginServer.logger.error("Username '" + NetHandlerLoginServer.this.loginGameProfile.getName() + "' tried to join with an invalid session");
                         }
                     }
                     catch (AuthenticationUnavailableException var3)
@@ -222,7 +222,7 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable
                         else
                         {
                             NetHandlerLoginServer.this.closeConnection("Authentication servers are down. Please try again later, sorry!");
-                            NetHandlerLoginServer.logger.error("Couldn\'t verify username because servers are unavailable");
+                            NetHandlerLoginServer.logger.error("Couldn't verify username because servers are unavailable");
                         }
                     }
                 }
@@ -236,13 +236,13 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable
         return new GameProfile(uuid, original.getName());
     }
 
-    static enum LoginState
+    enum LoginState
     {
         HELLO,
         KEY,
         AUTHENTICATING,
         READY_TO_ACCEPT,
         DELAY_ACCEPT,
-        ACCEPTED;
+        ACCEPTED
     }
 }

@@ -15,8 +15,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.util.JsonBlendingMode;
-import net.minecraft.client.util.JsonException;
+import net.minecraft.client.util.JSONBlendingMode;
+import net.minecraft.client.util.JSONException;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.IOUtils;
@@ -30,23 +30,23 @@ public class ShaderManager
     private static ShaderManager staticShaderManager = null;
     private static int currentProgram = -1;
     private static boolean field_148000_e = true;
-    private final Map<String, Object> shaderSamplers = Maps.<String, Object>newHashMap();
-    private final List<String> samplerNames = Lists.<String>newArrayList();
-    private final List<Integer> shaderSamplerLocations = Lists.<Integer>newArrayList();
-    private final List<ShaderUniform> shaderUniforms = Lists.<ShaderUniform>newArrayList();
-    private final List<Integer> shaderUniformLocations = Lists.<Integer>newArrayList();
-    private final Map<String, ShaderUniform> mappedShaderUniforms = Maps.<String, ShaderUniform>newHashMap();
+    private final Map<String, Object> shaderSamplers = Maps.newHashMap();
+    private final List<String> samplerNames = Lists.newArrayList();
+    private final List<Integer> shaderSamplerLocations = Lists.newArrayList();
+    private final List<ShaderUniform> shaderUniforms = Lists.newArrayList();
+    private final List<Integer> shaderUniformLocations = Lists.newArrayList();
+    private final Map<String, ShaderUniform> mappedShaderUniforms = Maps.newHashMap();
     private final int program;
     private final String programFilename;
     private final boolean useFaceCulling;
     private boolean isDirty;
-    private final JsonBlendingMode field_148016_p;
+    private final JSONBlendingMode field_148016_p;
     private final List<Integer> attribLocations;
     private final List<String> attributes;
     private final ShaderLoader vertexShaderLoader;
     private final ShaderLoader fragmentShaderLoader;
 
-    public ShaderManager(IResourceManager resourceManager, String programName) throws JsonException, IOException
+    public ShaderManager(IResourceManager resourceManager, String programName) throws IOException
     {
         JsonParser jsonparser = new JsonParser();
         ResourceLocation resourcelocation = new ResourceLocation("shaders/program/" + programName + ".json");
@@ -73,8 +73,8 @@ public class ShaderManager
                     }
                     catch (Exception exception2)
                     {
-                        JsonException jsonexception1 = JsonException.func_151379_a(exception2);
-                        jsonexception1.func_151380_a("samplers[" + i + "]");
+                        JSONException jsonexception1 = JSONException.forException(exception2);
+                        jsonexception1.prependJsonKey("samplers[" + i + "]");
                         throw jsonexception1;
                     }
 
@@ -87,8 +87,8 @@ public class ShaderManager
             if (jsonarray1 != null)
             {
                 int j = 0;
-                this.attribLocations = Lists.<Integer>newArrayListWithCapacity(jsonarray1.size());
-                this.attributes = Lists.<String>newArrayListWithCapacity(jsonarray1.size());
+                this.attribLocations = Lists.newArrayListWithCapacity(jsonarray1.size());
+                this.attributes = Lists.newArrayListWithCapacity(jsonarray1.size());
 
                 for (JsonElement jsonelement1 : jsonarray1)
                 {
@@ -98,8 +98,8 @@ public class ShaderManager
                     }
                     catch (Exception exception1)
                     {
-                        JsonException jsonexception2 = JsonException.func_151379_a(exception1);
-                        jsonexception2.func_151380_a("attributes[" + j + "]");
+                        JSONException jsonexception2 = JSONException.forException(exception1);
+                        jsonexception2.prependJsonKey("attributes[" + j + "]");
                         throw jsonexception2;
                     }
 
@@ -126,8 +126,8 @@ public class ShaderManager
                     }
                     catch (Exception exception)
                     {
-                        JsonException jsonexception3 = JsonException.func_151379_a(exception);
-                        jsonexception3.func_151380_a("uniforms[" + k + "]");
+                        JSONException jsonexception3 = JSONException.forException(exception);
+                        jsonexception3.prependJsonKey("uniforms[" + k + "]");
                         throw jsonexception3;
                     }
 
@@ -135,7 +135,7 @@ public class ShaderManager
                 }
             }
 
-            this.field_148016_p = JsonBlendingMode.func_148110_a(JsonUtils.getJsonObject(jsonobject, "blend", null));
+            this.field_148016_p = JSONBlendingMode.getBlendingMode(JsonUtils.getJsonObject(jsonobject, "blend", null));
             this.useFaceCulling = JsonUtils.getBoolean(jsonobject, "cull", true);
             this.vertexShaderLoader = ShaderLoader.loadShader(resourceManager, ShaderLoader.ShaderType.VERTEX, s);
             this.fragmentShaderLoader = ShaderLoader.loadShader(resourceManager, ShaderLoader.ShaderType.FRAGMENT, s1);
@@ -148,14 +148,14 @@ public class ShaderManager
                 for (String s2 : this.attributes)
                 {
                     int l = OpenGlHelper.glGetAttribLocation(this.program, s2);
-                    this.attribLocations.add(Integer.valueOf(l));
+                    this.attribLocations.add(l);
                 }
             }
         }
         catch (Exception exception3)
         {
-            JsonException jsonexception = JsonException.func_151379_a(exception3);
-            jsonexception.func_151381_b(resourcelocation.getResourcePath());
+            JSONException jsonexception = JSONException.forException(exception3);
+            jsonexception.setFilenameAndFlush(resourcelocation.getResourcePath());
             throw jsonexception;
         }
         finally
@@ -192,7 +192,7 @@ public class ShaderManager
     {
         this.isDirty = false;
         staticShaderManager = this;
-        this.field_148016_p.func_148109_a();
+        this.field_148016_p.apply();
 
         if (this.program != currentProgram)
         {
@@ -228,7 +228,7 @@ public class ShaderManager
                 }
                 else if (object instanceof Integer)
                 {
-                    j = ((Integer)object).intValue();
+                    j = (Integer) object;
                 }
 
                 if (j != -1)
@@ -255,7 +255,7 @@ public class ShaderManager
      */
     public ShaderUniform getShaderUniform(String key)
     {
-        return this.mappedShaderUniforms.containsKey(key) ? this.mappedShaderUniforms.get(key) : null;
+        return this.mappedShaderUniforms.getOrDefault(key, null);
     }
 
     /**
@@ -263,7 +263,7 @@ public class ShaderManager
      */
     public ShaderUniform getShaderUniformOrDefault(String p_147984_1_)
     {
-        return this.mappedShaderUniforms.containsKey(p_147984_1_) ? this.mappedShaderUniforms.get(p_147984_1_) : defaultShaderUniform;
+        return this.mappedShaderUniforms.getOrDefault(p_147984_1_, defaultShaderUniform);
     }
 
     /**
@@ -287,7 +287,7 @@ public class ShaderManager
             }
             else
             {
-                this.shaderSamplerLocations.add(Integer.valueOf(k));
+                this.shaderSamplerLocations.add(k);
             }
 
             ++i;
@@ -304,27 +304,21 @@ public class ShaderManager
             }
             else
             {
-                this.shaderUniformLocations.add(Integer.valueOf(l));
+                this.shaderUniformLocations.add(l);
                 shaderuniform.setUniformLocation(l);
                 this.mappedShaderUniforms.put(s1, shaderuniform);
             }
         }
     }
 
-    private void parseSampler(JsonElement p_147996_1_) throws JsonException
-    {
+    private void parseSampler(JsonElement p_147996_1_) {
         JsonObject jsonobject = JsonUtils.getJsonObject(p_147996_1_, "sampler");
         String s = JsonUtils.getString(jsonobject, "name");
 
-        if (!JsonUtils.isString(jsonobject, "file"))
-        {
+        if (!JsonUtils.isString(jsonobject, "file")) {
             this.shaderSamplers.put(s, null);
-            this.samplerNames.add(s);
         }
-        else
-        {
-            this.samplerNames.add(s);
-        }
+        this.samplerNames.add(s);
     }
 
     /**
@@ -332,16 +326,13 @@ public class ShaderManager
      */
     public void addSamplerTexture(String p_147992_1_, Object p_147992_2_)
     {
-        if (this.shaderSamplers.containsKey(p_147992_1_))
-        {
-            this.shaderSamplers.remove(p_147992_1_);
-        }
+        this.shaderSamplers.remove(p_147992_1_);
 
         this.shaderSamplers.put(p_147992_1_, p_147992_2_);
         this.markDirty();
     }
 
-    private void parseUniform(JsonElement p_147987_1_) throws JsonException
+    private void parseUniform(JsonElement p_147987_1_) throws JSONException
     {
         JsonObject jsonobject = JsonUtils.getJsonObject(p_147987_1_, "uniform");
         String s = JsonUtils.getString(jsonobject, "name");
@@ -352,7 +343,7 @@ public class ShaderManager
 
         if (jsonarray.size() != j && jsonarray.size() > 1)
         {
-            throw new JsonException("Invalid amount of values specified (expected " + j + ", found " + jsonarray.size() + ")");
+            throw new JSONException("Invalid amount of values specified (expected " + j + ", found " + jsonarray.size() + ")");
         }
         else
         {
@@ -366,8 +357,8 @@ public class ShaderManager
                 }
                 catch (Exception exception)
                 {
-                    JsonException jsonexception = JsonException.func_151379_a(exception);
-                    jsonexception.func_151380_a("values[" + k + "]");
+                    JSONException jsonexception = JSONException.forException(exception);
+                    jsonexception.prependJsonKey("values[" + k + "]");
                     throw jsonexception;
                 }
 

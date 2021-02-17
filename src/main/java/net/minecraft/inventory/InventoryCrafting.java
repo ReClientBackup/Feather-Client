@@ -76,7 +76,7 @@ public class InventoryCrafting implements IInventory
      */
     public IChatComponent getDisplayName()
     {
-        return this.hasCustomName() ? new ChatComponentText(this.getCommandSenderName()) : new ChatComponentTranslation(this.getCommandSenderName(), new Object[0]);
+        return this.hasCustomName() ? new ChatComponentText(this.getCommandSenderName()) : new ChatComponentTranslation(this.getCommandSenderName());
     }
 
     /**

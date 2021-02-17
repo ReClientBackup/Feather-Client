@@ -9,8 +9,8 @@ import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.client.resources.model.WeightedBakedModel;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
+import com.murengezi.minecraft.crash.CrashReport;
+import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ReportedException;
@@ -19,7 +19,7 @@ import net.minecraft.world.WorldType;
 
 public class BlockRendererDispatcher implements IResourceManagerReloadListener
 {
-    private BlockModelShapes blockModelShapes;
+    private final BlockModelShapes blockModelShapes;
     private final GameSettings gameSettings;
     private final BlockModelRenderer blockModelRenderer = new BlockModelRenderer();
     private final ChestRenderer chestRenderer = new ChestRenderer();
@@ -117,7 +117,6 @@ public class BlockRendererDispatcher implements IResourceManagerReloadListener
             }
             catch (Exception var6)
             {
-                ;
             }
         }
 
@@ -163,7 +162,7 @@ public class BlockRendererDispatcher implements IResourceManagerReloadListener
         else
         {
             int i = p_175021_1_.getRenderType();
-            return i == 3 ? false : i == 2;
+            return i != 3 && i == 2;
         }
     }
 

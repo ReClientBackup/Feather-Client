@@ -29,7 +29,7 @@ public class ModelBlock
     private final List<BlockPart> elements;
     private final boolean gui3d;
     private final boolean ambientOcclusion;
-    private ItemCameraTransforms cameraTransforms;
+    private final ItemCameraTransforms cameraTransforms;
     public String name;
     protected final Map<String, String> textures;
     protected ModelBlock parent;
@@ -52,7 +52,7 @@ public class ModelBlock
 
     protected ModelBlock(ResourceLocation p_i46226_1_, Map<String, String> p_i46226_2_, boolean p_i46226_3_, boolean p_i46226_4_, ItemCameraTransforms p_i46226_5_)
     {
-        this(p_i46226_1_, Collections.<BlockPart>emptyList(), p_i46226_2_, p_i46226_3_, p_i46226_4_, p_i46226_5_);
+        this(p_i46226_1_, Collections.emptyList(), p_i46226_2_, p_i46226_3_, p_i46226_4_, p_i46226_5_);
     }
 
     private ModelBlock(ResourceLocation parentLocationIn, List<BlockPart> elementsIn, Map<String, String> texturesIn, boolean ambientOcclusionIn, boolean gui3dIn, ItemCameraTransforms cameraTransformsIn)
@@ -101,20 +101,20 @@ public class ModelBlock
 
     public boolean isTexturePresent(String textureName)
     {
-        return !"missingno".equals(this.resolveTextureName(textureName));
+        return !"missingno".equals(this.resolveTextureItem(textureName));
     }
 
-    public String resolveTextureName(String textureName)
+    public String resolveTextureItem(String textureName)
     {
         if (!this.startsWithHash(textureName))
         {
             textureName = '#' + textureName;
         }
 
-        return this.resolveTextureName(textureName, new ModelBlock.Bookkeep(this));
+        return this.resolveTextureItem(textureName, new ModelBlock.Bookkeep(this));
     }
 
-    private String resolveTextureName(String textureName, ModelBlock.Bookkeep p_178302_2_)
+    private String resolveTextureItem(String textureName, ModelBlock.Bookkeep p_178302_2_)
     {
         if (this.startsWithHash(textureName))
         {
@@ -129,14 +129,14 @@ public class ModelBlock
 
                 if (s == null && this.hasParent())
                 {
-                    s = this.parent.resolveTextureName(textureName, p_178302_2_);
+                    s = this.parent.resolveTextureItem(textureName, p_178302_2_);
                 }
 
                 p_178302_2_.modelExt = this;
 
                 if (s != null && this.startsWithHash(s))
                 {
-                    s = p_178302_2_.model.resolveTextureName(s, p_178302_2_);
+                    s = p_178302_2_.model.resolveTextureItem(s, p_178302_2_);
                 }
 
                 return s != null && !this.startsWithHash(s) ? s : "missingno";
@@ -196,7 +196,6 @@ public class ModelBlock
             }
             catch (NullPointerException var5)
             {
-                ;
             }
         }
     }
@@ -248,7 +247,7 @@ public class ModelBlock
 
         private Map<String, String> getTextures(JsonObject p_178329_1_)
         {
-            Map<String, String> map = Maps.<String, String>newHashMap();
+            Map<String, String> map = Maps.newHashMap();
 
             if (p_178329_1_.has("textures"))
             {
@@ -275,7 +274,7 @@ public class ModelBlock
 
         protected List<BlockPart> getModelElements(JsonDeserializationContext p_178325_1_, JsonObject p_178325_2_)
         {
-            List<BlockPart> list = Lists.<BlockPart>newArrayList();
+            List<BlockPart> list = Lists.newArrayList();
 
             if (p_178325_2_.has("elements"))
             {

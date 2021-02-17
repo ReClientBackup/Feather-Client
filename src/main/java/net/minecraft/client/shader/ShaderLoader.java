@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 import java.util.Map;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.util.JsonException;
+import net.minecraft.client.util.JSONException;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +17,7 @@ public class ShaderLoader
 {
     private final ShaderLoader.ShaderType shaderType;
     private final String shaderFilename;
-    private int shader;
+    private final int shader;
     private int shaderAttachCount = 0;
 
     private ShaderLoader(ShaderLoader.ShaderType type, int shaderId, String filename)
@@ -68,8 +68,8 @@ public class ShaderLoader
             if (OpenGlHelper.glGetShaderi(i, OpenGlHelper.GL_COMPILE_STATUS) == 0)
             {
                 String s = StringUtils.trim(OpenGlHelper.glGetShaderInfoLog(i, 32768));
-                JsonException jsonexception = new JsonException("Couldn\'t compile " + type.getShaderName() + " program: " + s);
-                jsonexception.func_151381_b(resourcelocation.getResourcePath());
+                JSONException jsonexception = new JSONException("Couldn't compile " + type.getShaderName() + " program: " + s);
+                jsonexception.setFilenameAndFlush(resourcelocation.getResourcePath());
                 throw jsonexception;
             }
 
@@ -96,7 +96,7 @@ public class ShaderLoader
         return abyte;
     }
 
-    public static enum ShaderType
+    public enum ShaderType
     {
         VERTEX("vertex", ".vsh", OpenGlHelper.GL_VERTEX_SHADER),
         FRAGMENT("fragment", ".fsh", OpenGlHelper.GL_FRAGMENT_SHADER);
@@ -104,9 +104,9 @@ public class ShaderLoader
         private final String shaderName;
         private final String shaderExtension;
         private final int shaderMode;
-        private final Map<String, ShaderLoader> loadedShaders = Maps.<String, ShaderLoader>newHashMap();
+        private final Map<String, ShaderLoader> loadedShaders = Maps.newHashMap();
 
-        private ShaderType(String p_i45090_3_, String p_i45090_4_, int p_i45090_5_)
+        ShaderType(String p_i45090_3_, String p_i45090_4_, int p_i45090_5_)
         {
             this.shaderName = p_i45090_3_;
             this.shaderExtension = p_i45090_4_;

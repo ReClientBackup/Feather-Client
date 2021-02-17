@@ -2,7 +2,6 @@ package net.minecraft.block;
 
 import java.util.Random;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
@@ -71,7 +70,7 @@ public class BlockBanner extends BlockContainer
         return false;
     }
 
-    public boolean func_181623_g()
+    public boolean canSpawnInBlock()
     {
         return true;
     }
@@ -221,7 +220,7 @@ public class BlockBanner extends BlockContainer
 
         protected BlockState createBlockState()
         {
-            return new BlockState(this, new IProperty[] {FACING});
+            return new BlockState(this, FACING);
         }
     }
 
@@ -255,7 +254,7 @@ public class BlockBanner extends BlockContainer
 
         protected BlockState createBlockState()
         {
-            return new BlockState(this, new IProperty[] {ROTATION});
+            return new BlockState(this, ROTATION);
         }
     }
 }

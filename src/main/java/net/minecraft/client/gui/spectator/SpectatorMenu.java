@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import java.util.List;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.client.gui.GuiSpectator;
 import net.minecraft.client.gui.spectator.categories.SpectatorDetails;
 import net.minecraft.util.ChatComponentText;
@@ -34,7 +34,7 @@ public class SpectatorMenu
         }
     };
     private final ISpectatorMenuRecipient field_178651_f;
-    private final List<SpectatorDetails> field_178652_g = Lists.<SpectatorDetails>newArrayList();
+    private final List<SpectatorDetails> field_178652_g = Lists.newArrayList();
     private ISpectatorMenuView field_178659_h = new BaseSpectatorGroup();
     private int field_178660_i = -1;
     private int field_178658_j;
@@ -52,7 +52,7 @@ public class SpectatorMenu
 
     public List<ISpectatorMenuObject> func_178642_a()
     {
-        List<ISpectatorMenuObject> list = Lists.<ISpectatorMenuObject>newArrayList();
+        List<ISpectatorMenuObject> list = Lists.newArrayList();
 
         for (int i = 0; i <= 8; ++i)
         {
@@ -131,7 +131,7 @@ public class SpectatorMenu
         public void func_178663_a(float p_178663_1_, int alpha)
         {
             Minecraft.getMinecraft().getTextureManager().bindTexture(GuiSpectator.field_175269_a);
-            Gui.drawModalRectWithCustomSizedTexture(0, 0, 128.0F, 0.0F, 16, 16, 256.0F, 256.0F);
+            GUI.drawModalRectWithCustomSizedTexture(0, 0, 128.0F, 0.0F, 16, 16, 256.0F, 256.0F);
         }
 
         public boolean func_178662_A_()
@@ -167,11 +167,11 @@ public class SpectatorMenu
 
             if (this.field_178666_a < 0)
             {
-                Gui.drawModalRectWithCustomSizedTexture(0, 0, 144.0F, 0.0F, 16, 16, 256.0F, 256.0F);
+                GUI.drawModalRectWithCustomSizedTexture(0, 0, 144.0F, 0.0F, 16, 16, 256.0F, 256.0F);
             }
             else
             {
-                Gui.drawModalRectWithCustomSizedTexture(0, 0, 160.0F, 0.0F, 16, 16, 256.0F, 256.0F);
+                GUI.drawModalRectWithCustomSizedTexture(0, 0, 160.0F, 0.0F, 16, 16, 256.0F, 256.0F);
             }
         }
 

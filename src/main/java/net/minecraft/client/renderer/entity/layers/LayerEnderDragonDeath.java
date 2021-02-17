@@ -47,11 +47,11 @@ public class LayerEnderDragonDeath implements LayerRenderer<EntityDragon>
                 float f2 = random.nextFloat() * 20.0F + 5.0F + f1 * 10.0F;
                 float f3 = random.nextFloat() * 2.0F + 1.0F + f1 * 2.0F;
                 worldrenderer.begin(6, DefaultVertexFormats.POSITION_COLOR);
-                worldrenderer.pos(0.0D, 0.0D, 0.0D).color(255, 255, 255, (int)(255.0F * (1.0F - f1))).func_181675_d();
-                worldrenderer.pos(-0.866D * (double)f3, f2, -0.5F * f3).color(255, 0, 255, 0).func_181675_d();
-                worldrenderer.pos(0.866D * (double)f3, f2, -0.5F * f3).color(255, 0, 255, 0).func_181675_d();
-                worldrenderer.pos(0.0D, f2, 1.0F * f3).color(255, 0, 255, 0).func_181675_d();
-                worldrenderer.pos(-0.866D * (double)f3, f2, -0.5F * f3).color(255, 0, 255, 0).func_181675_d();
+                worldrenderer.pos(0.0D, 0.0D, 0.0D).color(255, 255, 255, (int)(255.0F * (1.0F - f1))).endVertex();
+                worldrenderer.pos(-0.866D * (double)f3, f2, -0.5F * f3).color(255, 0, 255, 0).endVertex();
+                worldrenderer.pos(0.866D * (double)f3, f2, -0.5F * f3).color(255, 0, 255, 0).endVertex();
+                worldrenderer.pos(0.0D, f2, 1.0F * f3).color(255, 0, 255, 0).endVertex();
+                worldrenderer.pos(-0.866D * (double)f3, f2, -0.5F * f3).color(255, 0, 255, 0).endVertex();
                 tessellator.draw();
             }
 
@@ -60,7 +60,7 @@ public class LayerEnderDragonDeath implements LayerRenderer<EntityDragon>
             GlStateManager.disableCull();
             GlStateManager.disableBlend();
             GlStateManager.shadeModel(7424);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             GlStateManager.enableTexture2D();
             GlStateManager.enableAlpha();
             RenderHelper.enableStandardItemLighting();

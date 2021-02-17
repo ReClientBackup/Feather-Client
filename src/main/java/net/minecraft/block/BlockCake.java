@@ -2,7 +2,6 @@ package net.minecraft.block;
 
 import java.util.Random;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -104,7 +103,7 @@ public class BlockCake extends Block
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        return super.canPlaceBlockAt(worldIn, pos) ? this.canBlockStay(worldIn, pos) : false;
+        return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos);
     }
 
     /**
@@ -172,7 +171,7 @@ public class BlockCake extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {BITES});
+        return new BlockState(this, BITES);
     }
 
     public int getComparatorInputOverride(World worldIn, BlockPos pos)

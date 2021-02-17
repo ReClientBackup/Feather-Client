@@ -1,9 +1,8 @@
 package net.minecraft.client.renderer.entity;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockDoublePlant;
@@ -44,8 +43,8 @@ import net.minecraft.client.resources.IResourceManagerReloadListener;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
+import com.murengezi.minecraft.crash.CrashReport;
+import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -55,7 +54,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
@@ -180,7 +179,7 @@ public class RenderItem implements IResourceManagerReloadListener
             {
                 GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
                 GlStateManager.translate(-0.5F, -0.5F, -0.5F);
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.colorAllMax();
                 GlStateManager.enableRescaleNormal();
                 TileEntityItemStackRenderer.instance.renderByItem(stack);
             }
@@ -217,20 +216,16 @@ public class RenderItem implements IResourceManagerReloadListener
         }
     }
 
-    private void renderEffect(IBakedModel model)
-    {
-        if (!Config.isCustomItems() || CustomItems.isUseGlint())
-        {
-            if (!Config.isShaders() || !Shaders.isShadowPass)
-            {
+    private void renderEffect(IBakedModel model) {
+        if (!Config.isCustomItems() || CustomItems.isUseGlint()) {
+            if (!Config.isShaders() || !Shaders.isShadowPass) {
                 GlStateManager.depthMask(false);
                 GlStateManager.depthFunc(514);
                 GlStateManager.disableLighting();
                 GlStateManager.blendFunc(768, 1);
                 this.textureManager.bindTexture(RES_ITEM_GLINT);
 
-                if (Config.isShaders() && !this.renderItemGui)
-                {
+                if (Config.isShaders() && !this.renderItemGui) {
                     ShadersRender.renderEnchantedGlintBegin();
                 }
 
@@ -251,85 +246,67 @@ public class RenderItem implements IResourceManagerReloadListener
                 GlStateManager.popMatrix();
                 GlStateManager.matrixMode(5888);
                 GlStateManager.blendFunc(770, 771);
-                GlStateManager.enableLighting();
+                GlStateManager.enableLightning();
                 GlStateManager.depthFunc(515);
                 GlStateManager.depthMask(true);
                 this.textureManager.bindTexture(TextureMap.locationBlocksTexture);
 
-                if (Config.isShaders() && !this.renderItemGui)
-                {
+                if (Config.isShaders() && !this.renderItemGui) {
                     ShadersRender.renderEnchantedGlintEnd();
                 }
             }
         }
     }
 
-    private void putQuadNormal(WorldRenderer renderer, BakedQuad quad)
-    {
+    private void putQuadNormal(WorldRenderer renderer, BakedQuad quad) {
         Vec3i vec3i = quad.getFace().getDirectionVec();
         renderer.putNormal((float)vec3i.getX(), (float)vec3i.getY(), (float)vec3i.getZ());
     }
 
-    private void renderQuad(WorldRenderer renderer, BakedQuad quad, int color)
-    {
-        if (this.renderModelEmissive)
-        {
-            if (quad.getQuadEmissive() == null)
-            {
+    private void renderQuad(WorldRenderer renderer, BakedQuad quad, int color) {
+        if (this.renderModelEmissive) {
+            if (quad.getQuadEmissive() == null) {
                 return;
             }
 
             quad = quad.getQuadEmissive();
-        }
-        else if (quad.getQuadEmissive() != null)
-        {
+        } else if (quad.getQuadEmissive() != null) {
             this.renderModelHasEmissive = true;
         }
 
-        if (renderer.isMultiTexture())
-        {
+        if (renderer.isMultiTexture()) {
             renderer.addVertexData(quad.getVertexDataSingle());
-        }
-        else
-        {
+        } else {
             renderer.addVertexData(quad.getVertexData());
         }
 
         renderer.putSprite(quad.getSprite());
 
-        if (Reflector.IColoredBakedQuad.exists() && Reflector.IColoredBakedQuad.isInstance(quad))
-        {
+        if (Reflector.IColoredBakedQuad.exists() && Reflector.IColoredBakedQuad.isInstance(quad)) {
             forgeHooksClient_putQuadColor(renderer, quad, color);
-        }
-        else
-        {
+        } else {
             renderer.putColor4(color);
         }
 
         this.putQuadNormal(renderer, quad);
     }
 
-    private void renderQuads(WorldRenderer renderer, List<BakedQuad> quads, int color, ItemStack stack)
-    {
+    private void renderQuads(WorldRenderer renderer, List<BakedQuad> quads, int color, ItemStack stack) {
         boolean flag = color == -1 && stack != null;
         int i = 0;
 
-        for (int j = quads.size(); i < j; ++i)
-        {
+        for (int j = quads.size(); i < j; ++i) {
             BakedQuad bakedquad = quads.get(i);
             int k = color;
 
-            if (flag && bakedquad.hasTintIndex())
-            {
+            if (flag && bakedquad.hasTintIndex()) {
                 k = stack.getItem().getColorFromItemStack(stack, bakedquad.getTintIndex());
 
-                if (Config.isCustomColors())
-                {
+                if (Config.isCustomColors()) {
                     k = CustomColors.getColorFromItemStack(stack, bakedquad.getTintIndex(), k);
                 }
 
-                if (EntityRenderer.anaglyphEnable)
-                {
+                if (EntityRenderer.anaglyphEnable) {
                     k = TextureUtil.anaglyphColor(k);
                 }
 
@@ -340,34 +317,28 @@ public class RenderItem implements IResourceManagerReloadListener
         }
     }
 
-    public boolean shouldRenderItemIn3D(ItemStack stack)
-    {
+    public boolean shouldRenderItemIn3D(ItemStack stack) {
         IBakedModel ibakedmodel = this.itemModelMesher.getItemModel(stack);
-        return ibakedmodel == null ? false : ibakedmodel.isGui3d();
+        return ibakedmodel != null && ibakedmodel.isGui3d();
     }
 
-    private void preTransform(ItemStack stack)
-    {
+    private void preTransform(ItemStack stack) {
         IBakedModel ibakedmodel = this.itemModelMesher.getItemModel(stack);
         Item item = stack.getItem();
 
-        if (item != null)
-        {
+        if (item != null) {
             boolean flag = ibakedmodel.isGui3d();
 
-            if (!flag)
-            {
+            if (!flag) {
                 GlStateManager.scale(2.0F, 2.0F, 2.0F);
             }
 
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
         }
     }
 
-    public void func_181564_a(ItemStack p_181564_1_, ItemCameraTransforms.TransformType p_181564_2_)
-    {
-        if (p_181564_1_ != null)
-        {
+    public void func_181564_a(ItemStack p_181564_1_, ItemCameraTransforms.TransformType p_181564_2_) {
+        if (p_181564_1_ != null) {
             IBakedModel ibakedmodel = this.itemModelMesher.getItemModel(p_181564_1_);
             this.renderItemModelTransform(p_181564_1_, ibakedmodel, p_181564_2_);
         }
@@ -456,8 +427,8 @@ public class RenderItem implements IResourceManagerReloadListener
         //TODO Bow pulling in inventory
         Minecraft mc = MinecraftUtils.getMc();
         ModelResourceLocation modelresourcelocation = null;
-        if (stack.getItem() == Items.bow && mc.thePlayer.getItemInUse() != null && mc.thePlayer.getItemInUse() == stack) {
-            int i = stack.getMaxItemUseDuration() - mc.thePlayer.getItemInUseCount();
+        if (stack.getItem() == Items.bow && mc.player.getItemInUse() != null && mc.player.getItemInUse() == stack) {
+            int i = stack.getMaxItemUseDuration() - mc.player.getItemInUseCount();
 
             if (i >= 18) {
                 modelresourcelocation = new ModelResourceLocation("bow_pulling_2", "inventory");
@@ -471,7 +442,7 @@ public class RenderItem implements IResourceManagerReloadListener
         }
 
         //TODO Rod cast in inventory
-        if (stack.getItem() == Items.fishing_rod && mc.thePlayer.fishEntity != null && mc.thePlayer.getHeldItem() == stack) {
+        if (stack.getItem() == Items.fishing_rod && mc.player.fishEntity != null && mc.player.getHeldItem() == stack) {
             modelresourcelocation = new ModelResourceLocation("fishing_rod_cast", "inventory");
             ibakedmodel = this.itemModelMesher.getModelManager().getModel(modelresourcelocation);
         }
@@ -484,7 +455,7 @@ public class RenderItem implements IResourceManagerReloadListener
         GlStateManager.alphaFunc(516, 0.1F);
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(770, 771);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         this.setupGuiTransform(x, y, ibakedmodel.isGui3d());
 
         if (Reflector.ForgeHooksClient_handleCameraTransforms.exists())
@@ -506,22 +477,18 @@ public class RenderItem implements IResourceManagerReloadListener
         this.renderItemGui = false;
     }
 
-    private void setupGuiTransform(int xPosition, int yPosition, boolean isGui3d)
-    {
+    private void setupGuiTransform(int xPosition, int yPosition, boolean isGui3d) {
         GlStateManager.translate((float)xPosition, (float)yPosition, 100.0F + this.zLevel);
         GlStateManager.translate(8.0F, 8.0F, 0.0F);
         GlStateManager.scale(1.0F, 1.0F, -1.0F);
         GlStateManager.scale(0.5F, 0.5F, 0.5F);
 
-        if (isGui3d)
-        {
+        if (isGui3d) {
             GlStateManager.scale(40.0F, 40.0F, 40.0F);
             GlStateManager.rotate(210.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
-            GlStateManager.enableLighting();
-        }
-        else
-        {
+            GlStateManager.enableLightning();
+        } else {
             GlStateManager.scale(64.0F, 64.0F, 64.0F);
             GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.disableLighting();
@@ -537,26 +504,10 @@ public class RenderItem implements IResourceManagerReloadListener
             } catch (Throwable throwable) {
                 CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Rendering item");
                 CrashReportCategory crashreportcategory = crashreport.makeCategory("Item being rendered");
-                crashreportcategory.addCrashSectionCallable("Item Type", new Callable<String>() {
-                    public String call() throws Exception {
-                        return String.valueOf(stack.getItem());
-                    }
-                });
-                crashreportcategory.addCrashSectionCallable("Item Aux", new Callable<String>() {
-                    public String call() throws Exception {
-                        return String.valueOf(stack.getMetadata());
-                    }
-                });
-                crashreportcategory.addCrashSectionCallable("Item NBT", new Callable<String>() {
-                    public String call() throws Exception {
-                        return String.valueOf(stack.getTagCompound());
-                    }
-                });
-                crashreportcategory.addCrashSectionCallable("Item Foil", new Callable<String>() {
-                    public String call() throws Exception {
-                        return String.valueOf(stack.hasEffect());
-                    }
-                });
+                crashreportcategory.addCrashSectionCallable("Item Type", () -> String.valueOf(stack.getItem()));
+                crashreportcategory.addCrashSectionCallable("Item Aux", () -> String.valueOf(stack.getMetadata()));
+                crashreportcategory.addCrashSectionCallable("Item NBT", () -> String.valueOf(stack.getTagCompound()));
+                crashreportcategory.addCrashSectionCallable("Item Foil", () -> String.valueOf(stack.hasEffect()));
                 throw new ReportedException(crashreport);
             }
 
@@ -589,7 +540,7 @@ public class RenderItem implements IResourceManagerReloadListener
                 GlStateManager.disableDepth();
                 GlStateManager.disableBlend();
                 fr.drawStringWithShadow(s, (float)(xPosition + 19 - 2 - fr.getStringWidth(s)), (float)(yPosition + 6 + 3), 16777215);
-                GlStateManager.enableLighting();
+                GlStateManager.enableLightning();
                 GlStateManager.enableDepth();
                 GlStateManager.enableBlend();
             }
@@ -601,7 +552,7 @@ public class RenderItem implements IResourceManagerReloadListener
 
                 if (Reflector.ForgeItem_getDurabilityForDisplay.exists())
                 {
-                    double d0 = Reflector.callDouble(stack.getItem(), Reflector.ForgeItem_getDurabilityForDisplay, new Object[] {stack});
+                    double d0 = Reflector.callDouble(stack.getItem(), Reflector.ForgeItem_getDurabilityForDisplay, stack);
                     j1 = (int)Math.round(13.0D - d0 * 13.0D);
                     i = (int)Math.round(255.0D - d0 * 255.0D);
                 }
@@ -627,7 +578,7 @@ public class RenderItem implements IResourceManagerReloadListener
                     {
                         j = i1 >> 16 & 255;
                         k = i1 >> 8 & 255;
-                        l = i1 >> 0 & 255;
+                        l = i1 & 255;
                     }
                 }
 
@@ -635,7 +586,7 @@ public class RenderItem implements IResourceManagerReloadListener
                 GlStateManager.enableBlend();
                 GlStateManager.enableAlpha();
                 GlStateManager.enableTexture2D();
-                GlStateManager.enableLighting();
+                GlStateManager.enableLightning();
                 GlStateManager.enableDepth();
             }
         }
@@ -644,10 +595,10 @@ public class RenderItem implements IResourceManagerReloadListener
     private void func_181565_a(WorldRenderer p_181565_1_, int p_181565_2_, int p_181565_3_, int p_181565_4_, int p_181565_5_, int p_181565_6_, int p_181565_7_, int p_181565_8_, int p_181565_9_)
     {
         p_181565_1_.begin(7, DefaultVertexFormats.POSITION_COLOR);
-        p_181565_1_.pos(p_181565_2_ + 0, p_181565_3_ + 0, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).func_181675_d();
-        p_181565_1_.pos(p_181565_2_ + 0, p_181565_3_ + p_181565_5_, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).func_181675_d();
-        p_181565_1_.pos(p_181565_2_ + p_181565_4_, p_181565_3_ + p_181565_5_, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).func_181675_d();
-        p_181565_1_.pos(p_181565_2_ + p_181565_4_, p_181565_3_ + 0, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).func_181675_d();
+        p_181565_1_.pos(p_181565_2_ + 0, p_181565_3_ + 0, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
+        p_181565_1_.pos(p_181565_2_ + 0, p_181565_3_ + p_181565_5_, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
+        p_181565_1_.pos(p_181565_2_ + p_181565_4_, p_181565_3_ + p_181565_5_, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
+        p_181565_1_.pos(p_181565_2_ + p_181565_4_, p_181565_3_ + 0, 0.0D).color(p_181565_6_, p_181565_7_, p_181565_8_, p_181565_9_).endVertex();
         Tessellator.getInstance().draw();
     }
 
@@ -1200,7 +1151,7 @@ public class RenderItem implements IResourceManagerReloadListener
 
         if (Reflector.ModelLoader_onRegisterItems.exists())
         {
-            Reflector.call(Reflector.ModelLoader_onRegisterItems, new Object[] {this.itemModelMesher});
+            Reflector.call(Reflector.ModelLoader_onRegisterItems, this.itemModelMesher);
         }
     }
 

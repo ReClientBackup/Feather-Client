@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class RConConsoleSource implements ICommandSender
 {
     private static final RConConsoleSource field_70010_a = new RConConsoleSource();
-    private StringBuffer field_70009_b = new StringBuffer();
+    private final StringBuffer field_70009_b = new StringBuffer();
 
     /**
      * Gets the name of this command sender (usually username, but possibly "Rcon")

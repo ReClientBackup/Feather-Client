@@ -9,7 +9,7 @@ import net.minecraft.client.model.ModelSign;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ResourceLocation;
@@ -124,7 +124,7 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer<TileEntity
         }
 
         GlStateManager.depthMask(true);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         GlStateManager.popMatrix();
 
         if (destroyStage >= 0)
@@ -148,10 +148,7 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer<TileEntity
                 Entity entity = Config.getMinecraft().getRenderViewEntity();
                 double d0 = p_isRenderText_0_.getDistanceSq(entity.posX, entity.posY, entity.posZ);
 
-                if (d0 > textRenderDistanceSq)
-                {
-                    return false;
-                }
+	            return !(d0 > textRenderDistanceSq);
             }
 
             return true;

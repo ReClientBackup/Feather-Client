@@ -1,11 +1,7 @@
 package net.minecraft.client.model;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 public class ModelPlayer extends ModelBiped {
 
@@ -14,9 +10,9 @@ public class ModelPlayer extends ModelBiped {
     public ModelRenderer bipedLeftLegwear;
     public ModelRenderer bipedRightLegwear;
     public ModelRenderer bipedBodyWear;
-    private ModelRenderer bipedCape;
-    private ModelRenderer bipedDeadmau5Head;
-    private boolean smallArms;
+    private final ModelRenderer bipedCape;
+    private final ModelRenderer bipedDeadmau5Head;
+    private final boolean smallArms;
 
     public ModelPlayer(float p_i46304_1_, boolean p_i46304_2_) {
         super(p_i46304_1_, 0.0F, 64, 64);

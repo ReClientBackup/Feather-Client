@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
@@ -29,7 +28,7 @@ import net.minecraft.world.World;
 public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITileEntityProvider
 {
     public static final PropertyBool POWERED = PropertyBool.create("powered");
-    public static final PropertyEnum<BlockRedstoneComparator.Mode> MODE = PropertyEnum.<BlockRedstoneComparator.Mode>create("mode", BlockRedstoneComparator.Mode.class);
+    public static final PropertyEnum<BlockRedstoneComparator.Mode> MODE = PropertyEnum.create("mode", BlockRedstoneComparator.Mode.class);
 
     public BlockRedstoneComparator(boolean powered)
     {
@@ -116,7 +115,7 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         else
         {
             int j = this.getPowerOnSides(worldIn, pos, state);
-            return j == 0 ? true : i >= j;
+            return j == 0 || i >= j;
         }
     }
 
@@ -156,7 +155,7 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
 
     private EntityItemFrame findItemFrame(World worldIn, final EnumFacing facing, BlockPos pos)
     {
-        List<EntityItemFrame> list = worldIn.<EntityItemFrame>getEntitiesWithinAABB(EntityItemFrame.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1), new Predicate<Entity>()
+        List<EntityItemFrame> list = worldIn.getEntitiesWithinAABB(EntityItemFrame.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1), new Predicate<Entity>()
         {
             public boolean apply(Entity p_apply_1_)
             {
@@ -265,7 +264,7 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
     {
         super.onBlockEventReceived(worldIn, pos, state, eventID, eventParam);
         TileEntity tileentity = worldIn.getTileEntity(pos);
-        return tileentity == null ? false : tileentity.receiveClientEvent(eventID, eventParam);
+        return tileentity != null && tileentity.receiveClientEvent(eventID, eventParam);
     }
 
     /**
@@ -307,7 +306,7 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING, MODE, POWERED});
+        return new BlockState(this, FACING, MODE, POWERED);
     }
 
     /**
@@ -319,14 +318,14 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(POWERED, Boolean.valueOf(false)).withProperty(MODE, BlockRedstoneComparator.Mode.COMPARE);
     }
 
-    public static enum Mode implements IStringSerializable
+    public enum Mode implements IStringSerializable
     {
         COMPARE("compare"),
         SUBTRACT("subtract");
 
         private final String name;
 
-        private Mode(String name)
+        Mode(String name)
         {
             this.name = name;
         }

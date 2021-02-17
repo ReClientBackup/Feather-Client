@@ -18,9 +18,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class TileEntityBannerRenderer extends TileEntitySpecialRenderer<TileEntityBanner>
 {
-    private static final Map<String, TileEntityBannerRenderer.TimedBannerTexture> DESIGNS = Maps.<String, TileEntityBannerRenderer.TimedBannerTexture>newHashMap();
+    private static final Map<String, TileEntityBannerRenderer.TimedBannerTexture> DESIGNS = Maps.newHashMap();
     private static final ResourceLocation BANNERTEXTURES = new ResourceLocation("textures/entity/banner_base.png");
-    private ModelBanner bannerModel = new ModelBanner();
+    private final ModelBanner bannerModel = new ModelBanner();
 
     public void renderTileEntityAt(TileEntityBanner te, double x, double y, double z, float partialTicks, int destroyStage)
     {
@@ -78,7 +78,7 @@ public class TileEntityBannerRenderer extends TileEntitySpecialRenderer<TileEnti
             GlStateManager.popMatrix();
         }
 
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         GlStateManager.popMatrix();
     }
 
@@ -121,7 +121,7 @@ public class TileEntityBannerRenderer extends TileEntitySpecialRenderer<TileEnti
 
                 List<TileEntityBanner.EnumBannerPattern> list1 = bannerObj.getPatternList();
                 List<EnumDyeColor> list = bannerObj.getColorList();
-                List<String> list2 = Lists.<String>newArrayList();
+                List<String> list2 = Lists.newArrayList();
 
                 for (TileEntityBanner.EnumBannerPattern tileentitybanner$enumbannerpattern : list1)
                 {

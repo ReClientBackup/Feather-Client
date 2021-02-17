@@ -66,7 +66,7 @@ public class RegionFile
             }
 
             int k1 = (int)this.dataFile.length() / 4096;
-            this.sectorFree = Lists.<Boolean>newArrayListWithCapacity(k1);
+            this.sectorFree = Lists.newArrayListWithCapacity(k1);
 
             for (int j = 0; j < k1; ++j)
             {
@@ -375,8 +375,8 @@ public class RegionFile
 
     class ChunkBuffer extends ByteArrayOutputStream
     {
-        private int chunkX;
-        private int chunkZ;
+        private final int chunkX;
+        private final int chunkZ;
 
         public ChunkBuffer(int x, int z)
         {

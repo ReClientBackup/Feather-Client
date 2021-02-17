@@ -46,7 +46,7 @@ public class CommandBlockData extends CommandBase
     {
         if (args.length < 4)
         {
-            throw new WrongUsageException("commands.blockdata.usage", new Object[0]);
+            throw new WrongUsageException("commands.blockdata.usage");
         }
         else
         {
@@ -56,7 +56,7 @@ public class CommandBlockData extends CommandBase
 
             if (!world.isBlockLoaded(blockpos))
             {
-                throw new CommandException("commands.blockdata.outOfWorld", new Object[0]);
+                throw new CommandException("commands.blockdata.outOfWorld");
             }
             else
             {
@@ -64,7 +64,7 @@ public class CommandBlockData extends CommandBase
 
                 if (tileentity == null)
                 {
-                    throw new CommandException("commands.blockdata.notValid", new Object[0]);
+                    throw new CommandException("commands.blockdata.notValid");
                 }
                 else
                 {
@@ -79,7 +79,7 @@ public class CommandBlockData extends CommandBase
                     }
                     catch (NBTException nbtexception)
                     {
-                        throw new CommandException("commands.blockdata.tagError", new Object[] {nbtexception.getMessage()});
+                        throw new CommandException("commands.blockdata.tagError", nbtexception.getMessage());
                     }
 
                     nbttagcompound.merge(nbttagcompound2);
@@ -89,7 +89,7 @@ public class CommandBlockData extends CommandBase
 
                     if (nbttagcompound.equals(nbttagcompound1))
                     {
-                        throw new CommandException("commands.blockdata.failed", new Object[] {nbttagcompound.toString()});
+                        throw new CommandException("commands.blockdata.failed", nbttagcompound.toString());
                     }
                     else
                     {
@@ -97,7 +97,7 @@ public class CommandBlockData extends CommandBase
                         tileentity.markDirty();
                         world.markBlockForUpdate(blockpos);
                         sender.setCommandStat(CommandResultStats.Type.AFFECTED_BLOCKS, 1);
-                        notifyOperators(sender, this, "commands.blockdata.success", new Object[] {nbttagcompound.toString()});
+                        notifyOperators(sender, this, "commands.blockdata.success", nbttagcompound.toString());
                     }
                 }
             }

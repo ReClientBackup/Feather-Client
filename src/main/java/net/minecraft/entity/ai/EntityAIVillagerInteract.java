@@ -12,7 +12,7 @@ public class EntityAIVillagerInteract extends EntityAIWatchClosest2
 {
     /** The delay before the villager throws an itemstack (in ticks) */
     private int interactionDelay;
-    private EntityVillager villager;
+    private final EntityVillager villager;
 
     public EntityAIVillagerInteract(EntityVillager villagerIn)
     {

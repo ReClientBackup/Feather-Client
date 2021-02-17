@@ -2,9 +2,9 @@ package net.minecraft.command;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.Vec3;
@@ -198,7 +198,7 @@ public class CommandResultStats
         }
     }
 
-    public static enum Type
+    public enum Type
     {
         SUCCESS_COUNT(0, "SuccessCount"),
         AFFECTED_BLOCKS(1, "AffectedBlocks"),
@@ -209,7 +209,7 @@ public class CommandResultStats
         final int typeID;
         final String typeName;
 
-        private Type(int id, String name)
+        Type(int id, String name)
         {
             this.typeID = id;
             this.typeName = name;

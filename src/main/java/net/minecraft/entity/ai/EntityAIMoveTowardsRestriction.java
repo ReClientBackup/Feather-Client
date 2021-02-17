@@ -6,11 +6,11 @@ import net.minecraft.util.Vec3;
 
 public class EntityAIMoveTowardsRestriction extends EntityAIBase
 {
-    private EntityCreature theEntity;
+    private final EntityCreature theEntity;
     private double movePosX;
     private double movePosY;
     private double movePosZ;
-    private double movementSpeed;
+    private final double movementSpeed;
 
     public EntityAIMoveTowardsRestriction(EntityCreature creatureIn, double speedIn)
     {

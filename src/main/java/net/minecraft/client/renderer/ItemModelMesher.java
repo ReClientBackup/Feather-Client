@@ -9,16 +9,16 @@ import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.Config;
-import net.minecraft.client.model.ISmartItemModel;
+import net.optifine.config.Config;
+import net.minecraftforge.client.model.ISmartItemModel;
 import net.optifine.CustomItems;
 import net.optifine.reflect.Reflector;
 
 public class ItemModelMesher
 {
-    private final Map<Integer, ModelResourceLocation> simpleShapes = Maps.<Integer, ModelResourceLocation>newHashMap();
-    private final Map<Integer, IBakedModel> simpleShapesCache = Maps.<Integer, IBakedModel>newHashMap();
-    private final Map<Item, ItemMeshDefinition> shapers = Maps.<Item, ItemMeshDefinition>newHashMap();
+    private final Map<Integer, ModelResourceLocation> simpleShapes = Maps.newHashMap();
+    private final Map<Integer, IBakedModel> simpleShapesCache = Maps.newHashMap();
+    private final Map<Item, ItemMeshDefinition> shapers = Maps.newHashMap();
     private final ModelManager modelManager;
 
     public ItemModelMesher(ModelManager modelManager)

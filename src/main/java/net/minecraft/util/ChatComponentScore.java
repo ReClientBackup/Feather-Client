@@ -1,8 +1,8 @@
 package net.minecraft.util;
 
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
 import net.minecraft.server.MinecraftServer;
 
 public class ChatComponentScore extends ChatComponentStyle
@@ -55,7 +55,7 @@ public class ChatComponentScore extends ChatComponentStyle
             if (scoreboard.entityHasObjective(this.name, scoreobjective))
             {
                 Score score = scoreboard.getValueFromObjective(this.name, scoreobjective);
-                this.setValue(String.format("%d", new Object[] {Integer.valueOf(score.getScorePoints())}));
+                this.setValue(String.format("%d", Integer.valueOf(score.getScorePoints())));
             }
             else
             {
@@ -102,6 +102,6 @@ public class ChatComponentScore extends ChatComponentStyle
 
     public String toString()
     {
-        return "ScoreComponent{name=\'" + this.name + '\'' + "objective=\'" + this.objective + '\'' + ", siblings=" + this.siblings + ", style=" + this.getChatStyle() + '}';
+        return "ScoreComponent{name='" + this.name + '\'' + "objective='" + this.objective + '\'' + ", siblings=" + this.siblings + ", style=" + this.getChatStyle() + '}';
     }
 }

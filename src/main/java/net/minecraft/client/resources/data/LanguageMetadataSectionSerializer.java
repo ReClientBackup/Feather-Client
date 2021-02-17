@@ -16,7 +16,7 @@ public class LanguageMetadataSectionSerializer extends BaseMetadataSectionSerial
     public LanguageMetadataSection deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_) throws JsonParseException
     {
         JsonObject jsonobject = p_deserialize_1_.getAsJsonObject();
-        Set<Language> set = Sets.<Language>newHashSet();
+        Set<Language> set = Sets.newHashSet();
 
         for (Entry<String, JsonElement> entry : jsonobject.entrySet())
         {
@@ -28,17 +28,17 @@ public class LanguageMetadataSectionSerializer extends BaseMetadataSectionSerial
 
             if (s1.isEmpty())
             {
-                throw new JsonParseException("Invalid language->\'" + s + "\'->region: empty value");
+                throw new JsonParseException("Invalid language->'" + s + "'->region: empty value");
             }
 
             if (s2.isEmpty())
             {
-                throw new JsonParseException("Invalid language->\'" + s + "\'->name: empty value");
+                throw new JsonParseException("Invalid language->'" + s + "'->name: empty value");
             }
 
             if (!set.add(new Language(s, s1, s2, flag)))
             {
-                throw new JsonParseException("Duplicate language->\'" + s + "\' defined");
+                throw new JsonParseException("Duplicate language->'" + s + "' defined");
             }
         }
 

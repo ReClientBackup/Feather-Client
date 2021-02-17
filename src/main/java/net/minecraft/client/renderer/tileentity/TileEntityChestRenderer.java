@@ -17,8 +17,8 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer<TileEntit
     private static final ResourceLocation textureTrapped = new ResourceLocation("textures/entity/chest/trapped.png");
     private static final ResourceLocation textureChristmas = new ResourceLocation("textures/entity/chest/christmas.png");
     private static final ResourceLocation textureNormal = new ResourceLocation("textures/entity/chest/normal.png");
-    private ModelChest simpleChest = new ModelChest();
-    private ModelChest largeChest = new ModelLargeChest();
+    private final ModelChest simpleChest = new ModelChest();
+    private final ModelChest largeChest = new ModelLargeChest();
     private boolean isChristams;
 
     public TileEntityChestRenderer()
@@ -118,7 +118,7 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer<TileEntit
 
             if (destroyStage < 0)
             {
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.colorAllMax();
             }
 
             GlStateManager.translate((float)x, (float)y + 1.0F, (float)z + 1.0F);
@@ -186,7 +186,7 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer<TileEntit
             modelchest.renderAll();
             GlStateManager.disableRescaleNormal();
             GlStateManager.popMatrix();
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
 
             if (destroyStage >= 0)
             {

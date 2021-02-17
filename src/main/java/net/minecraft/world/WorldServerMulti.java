@@ -1,6 +1,6 @@
 package net.minecraft.world;
 
-import net.minecraft.profiler.Profiler;
+import com.murengezi.minecraft.profiler.Profiler;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.village.VillageCollection;
 import net.minecraft.world.border.IBorderListener;
@@ -10,7 +10,7 @@ import net.minecraft.world.storage.ISaveHandler;
 
 public class WorldServerMulti extends WorldServer
 {
-    private WorldServer delegate;
+    private final WorldServer delegate;
 
     public WorldServerMulti(MinecraftServer server, ISaveHandler saveHandlerIn, int dimensionId, WorldServer delegate, Profiler profilerIn)
     {

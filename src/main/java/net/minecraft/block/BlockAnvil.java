@@ -2,12 +2,11 @@ package net.minecraft.block;
 
 import java.util.List;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
@@ -148,7 +147,7 @@ public class BlockAnvil extends BlockFalling
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING, DAMAGE});
+        return new BlockState(this, FACING, DAMAGE);
     }
 
     public static class Anvil implements IInteractionObject
@@ -174,7 +173,7 @@ public class BlockAnvil extends BlockFalling
 
         public IChatComponent getDisplayName()
         {
-            return new ChatComponentTranslation(Blocks.anvil.getUnlocalizedName() + ".name", new Object[0]);
+            return new ChatComponentTranslation(Blocks.anvil.getUnlocalizedName() + ".name");
         }
 
         public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)

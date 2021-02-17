@@ -98,7 +98,6 @@ public class EntityFireworkRocket extends Entity
 
         for (this.rotationPitch = (float)(MathHelper.func_181159_b(this.motionY, f) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
         {
-            ;
         }
 
         while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
@@ -128,7 +127,7 @@ public class EntityFireworkRocket extends Entity
 
         if (this.worldObj.isRemote && this.fireworkAge % 2 < 2)
         {
-            this.worldObj.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, this.posX, this.posY - 0.3D, this.posZ, this.rand.nextGaussian() * 0.05D, -this.motionY * 0.5D, this.rand.nextGaussian() * 0.05D, new int[0]);
+            this.worldObj.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, this.posX, this.posY - 0.3D, this.posZ, this.rand.nextGaussian() * 0.05D, -this.motionY * 0.5D, this.rand.nextGaussian() * 0.05D);
         }
 
         if (!this.worldObj.isRemote && this.fireworkAge > this.lifetime)

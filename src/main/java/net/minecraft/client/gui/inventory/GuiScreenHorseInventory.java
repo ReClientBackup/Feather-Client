@@ -12,13 +12,13 @@ public class GuiScreenHorseInventory extends GuiContainer
     private static final ResourceLocation horseGuiTextures = new ResourceLocation("textures/gui/container/horse.png");
 
     /** The player inventory bound to this GUI. */
-    private IInventory playerInventory;
+    private final IInventory playerInventory;
 
     /** The horse inventory bound to this GUI. */
-    private IInventory horseInventory;
+    private final IInventory horseInventory;
 
     /** The EntityHorse whose inventory is currently being accessed. */
-    private EntityHorse horseEntity;
+    private final EntityHorse horseEntity;
 
     /** The mouse x-position recorded during the last rendered frame. */
     private float mousePosx;
@@ -28,7 +28,7 @@ public class GuiScreenHorseInventory extends GuiContainer
 
     public GuiScreenHorseInventory(IInventory playerInv, IInventory horseInv, EntityHorse horse)
     {
-        super(new ContainerHorseInventory(playerInv, horseInv, horse, Minecraft.getMinecraft().thePlayer));
+        super(new ContainerHorseInventory(playerInv, horseInv, horse, Minecraft.getMinecraft().player));
         this.playerInventory = playerInv;
         this.horseInventory = horseInv;
         this.horseEntity = horse;
@@ -40,17 +40,17 @@ public class GuiScreenHorseInventory extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
-        this.fontRendererObj.drawString(this.horseInventory.getDisplayName().getUnformattedText(), 8, 6, 4210752);
-        this.fontRendererObj.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+        getFr().drawString(this.horseInventory.getDisplayName().getUnformattedText(), 8, 6, 4210752);
+        getFr().drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    protected void drawGuiContainerBackgroundLayer(int mouseX, int mouseY, float partialTicks)
     {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(horseGuiTextures);
+        GlStateManager.colorAllMax();
+        getMc().getTextureManager().bindTexture(horseGuiTextures);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);

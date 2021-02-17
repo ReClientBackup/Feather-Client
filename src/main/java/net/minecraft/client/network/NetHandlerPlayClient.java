@@ -4,10 +4,12 @@ import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.mojang.authlib.GameProfile;
-import com.murengezi.minecraft.client.Gui.MainMenuScreen;
-import com.murengezi.minecraft.client.Gui.Multiplayer.DisconnectedScreen;
-import com.murengezi.minecraft.client.Gui.Multiplayer.MultiplayerScreen;
-import com.murengezi.minecraft.client.Gui.YesNoScreen;
+import com.murengezi.minecraft.client.gui.DownloadTerrainScreen;
+import com.murengezi.minecraft.client.gui.MainMenuScreen;
+import com.murengezi.minecraft.client.gui.Multiplayer.DisconnectedScreen;
+import com.murengezi.minecraft.client.gui.Multiplayer.MultiplayerScreen;
+import com.murengezi.minecraft.client.gui.YesNoScreen;
+import com.murengezi.minecraft.potion.PotionEffect;
 import io.netty.buffer.Unpooled;
 import java.io.File;
 import java.io.IOException;
@@ -21,14 +23,12 @@ import net.minecraft.block.Block;
 import net.minecraft.client.ClientBrandRetriever;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.GuardianSound;
-import net.minecraft.client.entity.EntityOtherPlayerMP;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiDownloadTerrain;
+import com.murengezi.minecraft.client.entity.EntityOtherPlayerMP;
+import com.murengezi.minecraft.client.entity.EntityPlayerSP;
+import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
 import net.minecraft.client.gui.GuiMerchant;
-import net.minecraft.client.gui.GuiScreen;
+import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiScreenBook;
-import net.minecraft.client.gui.GuiScreenDemo;
 import net.minecraft.client.gui.GuiWinGame;
 import net.minecraft.client.gui.IProgressMeter;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
@@ -41,7 +41,7 @@ import net.minecraft.client.player.inventory.ContainerLocalMenu;
 import net.minecraft.client.player.inventory.LocalBlockIntercommunication;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.creativetab.CreativeTabs;
+import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLeashKnot;
@@ -169,13 +169,12 @@ import net.minecraft.network.play.server.S46PacketSetCompressionLevel;
 import net.minecraft.network.play.server.S47PacketPlayerListHeaderFooter;
 import net.minecraft.network.play.server.S48PacketResourcePackSend;
 import net.minecraft.network.play.server.S49PacketUpdateEntityNBT;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.scoreboard.IScoreObjectiveCriteria;
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.ScorePlayerTeam;
-import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.Team;
+import com.murengezi.minecraft.scoreboard.IScoreObjectiveCriteria;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.Team;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatBase;
@@ -220,7 +219,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
      * Seems to be either null (integrated server) or an instance of either GuiMultiplayer (when connecting to a server)
      * or GuiScreenReamlsTOS (when connecting to MCO server)
      */
-    private final GuiScreen guiScreenServer;
+    private final Screen guiScreenServer;
 
     /**
      * Reference to the Minecraft instance, which many handler methods operate on
@@ -237,7 +236,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
      * reset upon respawning
      */
     private boolean doneLoadingTerrain;
-    private final Map<UUID, NetworkPlayerInfo> playerInfoMap = Maps.<UUID, NetworkPlayerInfo>newHashMap();
+    private final Map<UUID, NetworkPlayerInfo> playerInfoMap = Maps.newHashMap();
     public int currentServerMaxPlayers = 20;
     private boolean field_147308_k = false;
 
@@ -247,7 +246,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
      */
     private final Random avRandomizer = new Random();
 
-    public NetHandlerPlayClient(Minecraft mc, GuiScreen guiScreen, NetworkManager networkManager, GameProfile gameProfile) {
+    public NetHandlerPlayClient(Minecraft mc, Screen guiScreen, NetworkManager networkManager, GameProfile gameProfile) {
         this.gameController = mc;
         this.guiScreenServer = guiScreen;
         this.netManager = networkManager;
@@ -273,11 +272,11 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         this.clientWorldController = new WorldClient(this, new WorldSettings(0L, packetIn.getGameType(), false, packetIn.isHardcoreMode(), packetIn.getWorldType()), packetIn.getDimension(), packetIn.getDifficulty(), this.gameController.mcProfiler);
         this.gameController.gameSettings.difficulty = packetIn.getDifficulty();
         this.gameController.loadWorld(this.clientWorldController);
-        this.gameController.thePlayer.dimension = packetIn.getDimension();
-        this.gameController.displayGuiScreen(new GuiDownloadTerrain(this));
-        this.gameController.thePlayer.setEntityId(packetIn.getEntityId());
+        this.gameController.player.dimension = packetIn.getDimension();
+        this.gameController.displayGuiScreen(new DownloadTerrainScreen(this));
+        this.gameController.player.setEntityId(packetIn.getEntityId());
         this.currentServerMaxPlayers = packetIn.getMaxPlayers();
-        this.gameController.thePlayer.setReducedDebug(packetIn.isReducedDebugInfo());
+        this.gameController.player.setReducedDebug(packetIn.isReducedDebugInfo());
         this.gameController.playerController.setGameType(packetIn.getGameType());
         this.gameController.gameSettings.sendSettingsToServer();
         this.netManager.sendPacket(new C17PacketCustomPayload("MC|Brand", (new PacketBuffer(Unpooled.buffer())).writeString(ClientBrandRetriever.getClientModName())));
@@ -527,7 +526,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         double d2 = (double)packetIn.getZ() / 32.0D;
         float f = (float)(packetIn.getYaw() * 360) / 256.0F;
         float f1 = (float)(packetIn.getPitch() * 360) / 256.0F;
-        EntityOtherPlayerMP entityotherplayermp = new EntityOtherPlayerMP(this.gameController.theWorld, this.getPlayerInfo(packetIn.getPlayer()).getGameProfile());
+        EntityOtherPlayerMP entityotherplayermp = new EntityOtherPlayerMP(this.gameController.world, this.getPlayerInfo(packetIn.getPlayer()).getGameProfile());
         entityotherplayermp.prevPosX = entityotherplayermp.lastTickPosX = entityotherplayermp.serverPosX = packetIn.getX();
         entityotherplayermp.prevPosY = entityotherplayermp.lastTickPosY = entityotherplayermp.serverPosY = packetIn.getY();
         entityotherplayermp.prevPosZ = entityotherplayermp.lastTickPosZ = entityotherplayermp.serverPosZ = packetIn.getZ();
@@ -571,12 +570,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             float f = (float)(packetIn.getYaw() * 360) / 256.0F;
             float f1 = (float)(packetIn.getPitch() * 360) / 256.0F;
 
-            if (Math.abs(entity.posX - d0) < 0.03125D && Math.abs(entity.posY - d1) < 0.015625D && Math.abs(entity.posZ - d2) < 0.03125D)
-            {
+            if (Math.abs(entity.posX - d0) < 0.03125D && Math.abs(entity.posY - d1) < 0.015625D && Math.abs(entity.posZ - d2) < 0.03125D) {
                 entity.setPositionAndRotation2(entity.posX, entity.posY, entity.posZ, f, f1, 3, true);
-            }
-            else
-            {
+            } else {
                 entity.setPositionAndRotation2(d0, d1, d2, f, f1, 3, true);
             }
 
@@ -593,7 +589,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
         if (packetIn.getHeldItemHotbarIndex() >= 0 && packetIn.getHeldItemHotbarIndex() < InventoryPlayer.getHotbarSize())
         {
-            this.gameController.thePlayer.inventory.currentItem = packetIn.getHeldItemHotbarIndex();
+            this.gameController.player.inventory.currentItem = packetIn.getHeldItemHotbarIndex();
         }
     }
 
@@ -661,7 +657,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handlePlayerPosLook(S08PacketPlayerPosLook packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        EntityPlayer entityplayer = this.gameController.thePlayer;
+        EntityPlayer entityplayer = this.gameController.player;
         double d0 = packetIn.getX();
         double d1 = packetIn.getY();
         double d2 = packetIn.getZ();
@@ -710,9 +706,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
         if (!this.doneLoadingTerrain)
         {
-            this.gameController.thePlayer.prevPosX = this.gameController.thePlayer.posX;
-            this.gameController.thePlayer.prevPosY = this.gameController.thePlayer.posY;
-            this.gameController.thePlayer.prevPosZ = this.gameController.thePlayer.posZ;
+            this.gameController.player.prevPosX = this.gameController.player.posX;
+            this.gameController.player.prevPosY = this.gameController.player.posY;
+            this.gameController.player.prevPosZ = this.gameController.player.posZ;
             this.doneLoadingTerrain = true;
             this.gameController.displayGuiScreen(null);
         }
@@ -805,7 +801,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
         if (entitylivingbase == null)
         {
-            entitylivingbase = this.gameController.thePlayer;
+            entitylivingbase = this.gameController.player;
         }
 
         if (entity != null)
@@ -899,7 +895,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         double d2 = (double)packetIn.getZ() / 32.0D;
         float f = (float)(packetIn.getYaw() * 360) / 256.0F;
         float f1 = (float)(packetIn.getPitch() * 360) / 256.0F;
-        EntityLivingBase entitylivingbase = (EntityLivingBase)EntityList.createEntityByID(packetIn.getEntityType(), this.gameController.theWorld);
+        EntityLivingBase entitylivingbase = (EntityLivingBase)EntityList.createEntityByID(packetIn.getEntityType(), this.gameController.world);
         entitylivingbase.serverPosX = packetIn.getX();
         entitylivingbase.serverPosY = packetIn.getY();
         entitylivingbase.serverPosZ = packetIn.getZ();
@@ -933,15 +929,15 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleTimeUpdate(S03PacketTimeUpdate packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        this.gameController.theWorld.setTotalWorldTime(packetIn.getTotalWorldTime());
-        this.gameController.theWorld.setWorldTime(packetIn.getWorldTime());
+        this.gameController.world.setTotalWorldTime(packetIn.getTotalWorldTime());
+        this.gameController.world.setWorldTime(packetIn.getWorldTime());
     }
 
     public void handleSpawnPosition(S05PacketSpawnPosition packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        this.gameController.thePlayer.setSpawnPoint(packetIn.getSpawnPos(), true);
-        this.gameController.theWorld.getWorldInfo().setSpawn(packetIn.getSpawnPos());
+        this.gameController.player.setSpawnPoint(packetIn.getSpawnPos(), true);
+        this.gameController.world.getWorldInfo().setSpawn(packetIn.getSpawnPos());
     }
 
     public void handleEntityAttach(S1BPacketEntityAttach packetIn)
@@ -954,9 +950,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         {
             boolean flag = false;
 
-            if (packetIn.getEntityId() == this.gameController.thePlayer.getEntityId())
+            if (packetIn.getEntityId() == this.gameController.player.getEntityId())
             {
-                entity = this.gameController.thePlayer;
+                entity = this.gameController.player;
 
                 if (entity1 instanceof EntityBoat)
                 {
@@ -980,7 +976,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             if (flag)
             {
                 GameSettings gamesettings = this.gameController.gameSettings;
-                this.gameController.inGameScreen.setRecordPlaying(I18n.format("mount.onboard", new Object[] {GameSettings.getKeyDisplayString(gamesettings.keyBindSneak.getKeyCode())}), false);
+                this.gameController.inGameScreen.setRecordPlaying(I18n.format("mount.onboard", GameSettings.getKeyDisplayString(gamesettings.keyBindSneak.getKeyCode())), false);
             }
         }
         else if (packetIn.getLeash() == 1 && entity instanceof EntityLiving)
@@ -1023,30 +1019,30 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleUpdateHealth(S06PacketUpdateHealth packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        this.gameController.thePlayer.setPlayerSPHealth(packetIn.getHealth());
-        this.gameController.thePlayer.getFoodStats().setFoodLevel(packetIn.getFoodLevel());
-        this.gameController.thePlayer.getFoodStats().setFoodSaturationLevel(packetIn.getSaturationLevel());
+        this.gameController.player.setPlayerSPHealth(packetIn.getHealth());
+        this.gameController.player.getFoodStats().setFoodLevel(packetIn.getFoodLevel());
+        this.gameController.player.getFoodStats().setFoodSaturationLevel(packetIn.getSaturationLevel());
     }
 
     public void handleSetExperience(S1FPacketSetExperience packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        this.gameController.thePlayer.setXPStats(packetIn.func_149397_c(), packetIn.getTotalExperience(), packetIn.getLevel());
+        this.gameController.player.setXPStats(packetIn.func_149397_c(), packetIn.getTotalExperience(), packetIn.getLevel());
     }
 
     public void handleRespawn(S07PacketRespawn packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
 
-        if (packetIn.getDimensionID() != this.gameController.thePlayer.dimension)
+        if (packetIn.getDimensionID() != this.gameController.player.dimension)
         {
             this.doneLoadingTerrain = false;
             Scoreboard scoreboard = this.clientWorldController.getScoreboard();
-            this.clientWorldController = new WorldClient(this, new WorldSettings(0L, packetIn.getGameType(), false, this.gameController.theWorld.getWorldInfo().isHardcoreModeEnabled(), packetIn.getWorldType()), packetIn.getDimensionID(), packetIn.getDifficulty(), this.gameController.mcProfiler);
+            this.clientWorldController = new WorldClient(this, new WorldSettings(0L, packetIn.getGameType(), false, this.gameController.world.getWorldInfo().isHardcoreModeEnabled(), packetIn.getWorldType()), packetIn.getDimensionID(), packetIn.getDifficulty(), this.gameController.mcProfiler);
             this.clientWorldController.setWorldScoreboard(scoreboard);
             this.gameController.loadWorld(this.clientWorldController);
-            this.gameController.thePlayer.dimension = packetIn.getDimensionID();
-            this.gameController.displayGuiScreen(new GuiDownloadTerrain(this));
+            this.gameController.player.dimension = packetIn.getDimensionID();
+            this.gameController.displayGuiScreen(new DownloadTerrainScreen(this));
         }
 
         this.gameController.setDimensionAndSpawnPlayer(packetIn.getDimensionID());
@@ -1059,11 +1055,11 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleExplosion(S27PacketExplosion packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        Explosion explosion = new Explosion(this.gameController.theWorld, null, packetIn.getX(), packetIn.getY(), packetIn.getZ(), packetIn.getStrength(), packetIn.getAffectedBlockPositions());
+        Explosion explosion = new Explosion(this.gameController.world, null, packetIn.getX(), packetIn.getY(), packetIn.getZ(), packetIn.getStrength(), packetIn.getAffectedBlockPositions());
         explosion.doExplosionB(true);
-        this.gameController.thePlayer.motionX += packetIn.func_149149_c();
-        this.gameController.thePlayer.motionY += packetIn.func_149144_d();
-        this.gameController.thePlayer.motionZ += packetIn.func_149147_e();
+        this.gameController.player.motionX += packetIn.func_149149_c();
+        this.gameController.player.motionY += packetIn.func_149144_d();
+        this.gameController.player.motionZ += packetIn.func_149147_e();
     }
 
     /**
@@ -1073,7 +1069,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleOpenWindow(S2DPacketOpenWindow packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        EntityPlayerSP entityplayersp = this.gameController.thePlayer;
+        EntityPlayerSP entityplayersp = this.gameController.player;
 
         if ("minecraft:container".equals(packetIn.getGuiId()))
         {
@@ -1114,7 +1110,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleSetSlot(S2FPacketSetSlot packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        EntityPlayer entityplayer = this.gameController.thePlayer;
+        EntityPlayer entityplayer = this.gameController.player;
 
         if (packetIn.func_149175_c() == -1)
         {
@@ -1156,7 +1152,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
         Container container = null;
-        EntityPlayer entityplayer = this.gameController.thePlayer;
+        EntityPlayer entityplayer = this.gameController.player;
 
         if (packetIn.getWindowId() == 0)
         {
@@ -1179,7 +1175,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleWindowItems(S30PacketWindowItems packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        EntityPlayer entityplayer = this.gameController.thePlayer;
+        EntityPlayer entityplayer = this.gameController.player;
 
         if (packetIn.func_148911_c() == 0)
         {
@@ -1206,7 +1202,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             tileentity.setPos(packetIn.getSignPosition());
         }
 
-        this.gameController.thePlayer.openEditSign((TileEntitySign)tileentity);
+        this.gameController.player.openEditSign((TileEntitySign)tileentity);
     }
 
     /**
@@ -1217,9 +1213,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
         boolean flag = false;
 
-        if (this.gameController.theWorld.isBlockLoaded(packetIn.getPos()))
+        if (this.gameController.world.isBlockLoaded(packetIn.getPos()))
         {
-            TileEntity tileentity = this.gameController.theWorld.getTileEntity(packetIn.getPos());
+            TileEntity tileentity = this.gameController.world.getTileEntity(packetIn.getPos());
 
             if (tileentity instanceof TileEntitySign)
             {
@@ -1235,9 +1231,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             }
         }
 
-        if (!flag && this.gameController.thePlayer != null)
+        if (!flag && this.gameController.player != null)
         {
-            this.gameController.thePlayer.addChatMessage(new ChatComponentText("Unable to locate sign at " + packetIn.getPos().getX() + ", " + packetIn.getPos().getY() + ", " + packetIn.getPos().getZ()));
+            this.gameController.player.addChatMessage(new ChatComponentText("Unable to locate sign at " + packetIn.getPos().getX() + ", " + packetIn.getPos().getY() + ", " + packetIn.getPos().getZ()));
         }
     }
 
@@ -1249,9 +1245,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
 
-        if (this.gameController.theWorld.isBlockLoaded(packetIn.getPos()))
+        if (this.gameController.world.isBlockLoaded(packetIn.getPos()))
         {
-            TileEntity tileentity = this.gameController.theWorld.getTileEntity(packetIn.getPos());
+            TileEntity tileentity = this.gameController.world.getTileEntity(packetIn.getPos());
             int i = packetIn.getTileEntityType();
 
             if (i == 1 && tileentity instanceof TileEntityMobSpawner || i == 2 && tileentity instanceof TileEntityCommandBlock || i == 3 && tileentity instanceof TileEntityBeacon || i == 4 && tileentity instanceof TileEntitySkull || i == 5 && tileentity instanceof TileEntityFlowerPot || i == 6 && tileentity instanceof TileEntityBanner)
@@ -1267,7 +1263,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleWindowProperty(S31PacketWindowProperty packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        EntityPlayer entityplayer = this.gameController.thePlayer;
+        EntityPlayer entityplayer = this.gameController.player;
 
         if (entityplayer.openContainer != null && entityplayer.openContainer.windowId == packetIn.getWindowId())
         {
@@ -1292,7 +1288,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleCloseWindow(S2EPacketCloseWindow packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        this.gameController.thePlayer.closeScreenAndDropStack();
+        this.gameController.player.closeScreenAndDropStack();
     }
 
     /**
@@ -1303,7 +1299,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleBlockAction(S24PacketBlockAction packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        this.gameController.theWorld.addBlockEvent(packetIn.getBlockPosition(), packetIn.getBlockType(), packetIn.getData1(), packetIn.getData2());
+        this.gameController.world.addBlockEvent(packetIn.getBlockPosition(), packetIn.getBlockType(), packetIn.getData1(), packetIn.getData2());
     }
 
     /**
@@ -1312,7 +1308,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleBlockBreakAnim(S25PacketBlockBreakAnim packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        this.gameController.theWorld.sendBlockBreakProgress(packetIn.getBreakerId(), packetIn.getPosition(), packetIn.getProgress());
+        this.gameController.world.sendBlockBreakProgress(packetIn.getBreakerId(), packetIn.getPosition(), packetIn.getProgress());
     }
 
     public void handleMapChunkBulk(S26PacketMapChunkBulk packetIn)
@@ -1339,14 +1335,14 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleChangeGameState(S2BPacketChangeGameState packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        EntityPlayer entityplayer = this.gameController.thePlayer;
+        EntityPlayer entityplayer = this.gameController.player;
         int i = packetIn.getGameState();
         float f = packetIn.func_149137_d();
         int j = MathHelper.floor_float(f + 0.5F);
 
         if (i >= 0 && i < S2BPacketChangeGameState.MESSAGE_NAMES.length && S2BPacketChangeGameState.MESSAGE_NAMES[i] != null)
         {
-            entityplayer.addChatComponentMessage(new ChatComponentTranslation(S2BPacketChangeGameState.MESSAGE_NAMES[i], new Object[0]));
+            entityplayer.addChatComponentMessage(new ChatComponentTranslation(S2BPacketChangeGameState.MESSAGE_NAMES[i]));
         }
 
         if (i == 1)
@@ -1367,27 +1363,6 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         {
             this.gameController.displayGuiScreen(new GuiWinGame());
         }
-        else if (i == 5)
-        {
-            GameSettings gamesettings = this.gameController.gameSettings;
-
-            if (f == 0.0F)
-            {
-                this.gameController.displayGuiScreen(new GuiScreenDemo());
-            }
-            else if (f == 101.0F)
-            {
-                this.gameController.inGameScreen.getChatGUI().printChatMessage(new ChatComponentTranslation("demo.help.movement", new Object[] {GameSettings.getKeyDisplayString(gamesettings.keyBindForward.getKeyCode()), GameSettings.getKeyDisplayString(gamesettings.keyBindLeft.getKeyCode()), GameSettings.getKeyDisplayString(gamesettings.keyBindBack.getKeyCode()), GameSettings.getKeyDisplayString(gamesettings.keyBindRight.getKeyCode())}));
-            }
-            else if (f == 102.0F)
-            {
-                this.gameController.inGameScreen.getChatGUI().printChatMessage(new ChatComponentTranslation("demo.help.jump", new Object[] {GameSettings.getKeyDisplayString(gamesettings.keyBindJump.getKeyCode())}));
-            }
-            else if (f == 103.0F)
-            {
-                this.gameController.inGameScreen.getChatGUI().printChatMessage(new ChatComponentTranslation("demo.help.inventory", new Object[] {GameSettings.getKeyDisplayString(gamesettings.keyBindInventory.getKeyCode())}));
-            }
-        }
         else if (i == 6)
         {
             this.clientWorldController.playSound(entityplayer.posX, entityplayer.posY + (double)entityplayer.getEyeHeight(), entityplayer.posZ, "random.successful_hit", 0.18F, 0.45F, false);
@@ -1402,7 +1377,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         }
         else if (i == 10)
         {
-            this.clientWorldController.spawnParticle(EnumParticleTypes.MOB_APPEARANCE, entityplayer.posX, entityplayer.posY, entityplayer.posZ, 0.0D, 0.0D, 0.0D, new int[0]);
+            this.clientWorldController.spawnParticle(EnumParticleTypes.MOB_APPEARANCE, entityplayer.posX, entityplayer.posY, entityplayer.posZ, 0.0D, 0.0D, 0.0D);
             this.clientWorldController.playSound(entityplayer.posX, entityplayer.posY, entityplayer.posZ, "mob.guardian.curse", 1.0F, 1.0F, false);
         }
     }
@@ -1414,7 +1389,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleMaps(S34PacketMaps packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        MapData mapdata = ItemMap.loadMapData(packetIn.getMapId(), this.gameController.theWorld);
+        MapData mapdata = ItemMap.loadMapData(packetIn.getMapId(), this.gameController.world);
         packetIn.setMapdataTo(mapdata);
         this.gameController.entityRenderer.getMapItemRenderer().updateMapTexture(mapdata);
     }
@@ -1425,11 +1400,11 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
         if (packetIn.isSoundServerwide())
         {
-            this.gameController.theWorld.playBroadcastSound(packetIn.getSoundType(), packetIn.getSoundPos(), packetIn.getSoundData());
+            this.gameController.world.playBroadcastSound(packetIn.getSoundType(), packetIn.getSoundPos(), packetIn.getSoundData());
         }
         else
         {
-            this.gameController.theWorld.playAuxSFX(packetIn.getSoundType(), packetIn.getSoundPos(), packetIn.getSoundData());
+            this.gameController.world.playAuxSFX(packetIn.getSoundType(), packetIn.getSoundPos(), packetIn.getSoundData());
         }
     }
 
@@ -1448,7 +1423,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
             if (statbase.isAchievement() && i > 0)
             {
-                if (this.field_147308_k && this.gameController.thePlayer.getStatFileWriter().readStat(statbase) == 0)
+                if (this.field_147308_k && this.gameController.player.getStatFileWriter().readStat(statbase) == 0)
                 {
                     Achievement achievement = (Achievement)statbase;
                     this.gameController.guiAchievement.displayAchievement(achievement);
@@ -1463,7 +1438,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
                 flag = true;
             }
 
-            this.gameController.thePlayer.getStatFileWriter().unlockAchievement(this.gameController.thePlayer, statbase, i);
+            this.gameController.player.getStatFileWriter().unlockAchievement(this.gameController.player, statbase, i);
         }
 
         if (!this.field_147308_k && !flag && this.gameController.gameSettings.showInventoryAchievementHint)
@@ -1486,14 +1461,14 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
         if (entity instanceof EntityLivingBase)
         {
-            PotionEffect potioneffect = new PotionEffect(packetIn.getEffectId(), packetIn.getDuration(), packetIn.getAmplifier(), false, packetIn.func_179707_f());
-            potioneffect.setPotionDurationMax(packetIn.func_149429_c());
-            ((EntityLivingBase)entity).addPotionEffect(potioneffect);
+            PotionEffect effect = new PotionEffect(packetIn.getEffectId(), packetIn.getDuration(), packetIn.getAmplifier(), false, packetIn.func_179707_f());
+            effect.setPotionDurationMax(packetIn.func_149429_c());
+            ((EntityLivingBase)entity).addPotionEffect(effect);
         }
     }
 
     /**
-     * TODO Feather
+     * TODO Chocolate
      * @param packetIn
      */
 
@@ -1520,8 +1495,8 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleServerDifficulty(S41PacketServerDifficulty packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        this.gameController.theWorld.getWorldInfo().setDifficulty(packetIn.getDifficulty());
-        this.gameController.theWorld.getWorldInfo().setDifficultyLocked(packetIn.isDifficultyLocked());
+        this.gameController.world.getWorldInfo().setDifficulty(packetIn.getDifficulty());
+        this.gameController.world.getWorldInfo().setDifficultyLocked(packetIn.isDifficultyLocked());
     }
 
     public void handleCamera(S43PacketCamera packetIn)
@@ -1648,7 +1623,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handlePlayerAbilities(S39PacketPlayerAbilities packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        EntityPlayer entityplayer = this.gameController.thePlayer;
+        EntityPlayer entityplayer = this.gameController.player;
         entityplayer.capabilities.isFlying = packetIn.isFlying();
         entityplayer.capabilities.isCreativeMode = packetIn.isCreativeMode();
         entityplayer.capabilities.disableDamage = packetIn.isInvulnerable();
@@ -1665,9 +1640,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
         String[] astring = packetIn.func_149630_c();
 
-        if (this.gameController.currentScreen instanceof GuiChat)
+        if (this.gameController.currentScreen instanceof ChatScreen)
         {
-            GuiChat guichat = (GuiChat)this.gameController.currentScreen;
+            ChatScreen guichat = (ChatScreen)this.gameController.currentScreen;
             guichat.onAutocompleteResponse(astring);
         }
     }
@@ -1675,7 +1650,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleSoundEffect(S29PacketSoundEffect packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-        this.gameController.theWorld.playSound(packetIn.getX(), packetIn.getY(), packetIn.getZ(), packetIn.getSoundName(), packetIn.getVolume(), packetIn.getPitch(), false);
+        this.gameController.world.playSound(packetIn.getX(), packetIn.getY(), packetIn.getZ(), packetIn.getSoundName(), packetIn.getVolume(), packetIn.getPitch(), false);
     }
 
     public void handleResourcePack(S48PacketResourcePackSend packetIn)
@@ -1686,7 +1661,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         if (s.startsWith("level://"))
         {
             String s2 = s.substring("level://".length());
-            File file1 = new File(this.gameController.mcDataDir, "saves");
+            File file1 = new File(this.gameController.dataDir, "saves");
             File file2 = new File(file1, s2);
 
             if (file2.isFile())
@@ -1771,7 +1746,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
                             ServerList.func_147414_b(NetHandlerPlayClient.this.gameController.getCurrentServerData());
                             NetHandlerPlayClient.this.gameController.displayGuiScreen(null);
-                        }, I18n.format("multiplayer.texturePrompt.line1", new Object[0]), I18n.format("multiplayer.texturePrompt.line2", new Object[0]), 0));
+                        }, I18n.format("multiplayer.texturePrompt.line1"), I18n.format("multiplayer.texturePrompt.line2"), 0));
                     }
                 });
             }
@@ -1806,9 +1781,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             try
             {
                 int i = packetbuffer.readInt();
-                GuiScreen guiscreen = this.gameController.currentScreen;
+                Screen guiscreen = this.gameController.currentScreen;
 
-                if (guiscreen != null && guiscreen instanceof GuiMerchant && i == this.gameController.thePlayer.openContainer.windowId)
+                if (guiscreen != null && guiscreen instanceof GuiMerchant && i == this.gameController.player.openContainer.windowId)
                 {
                     IMerchant imerchant = ((GuiMerchant)guiscreen).getMerchant();
                     MerchantRecipeList merchantrecipelist = MerchantRecipeList.readFromBuf(packetbuffer);
@@ -1817,7 +1792,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             }
             catch (IOException ioexception)
             {
-                logger.error("Couldn\'t load trade info", ioexception);
+                logger.error("Couldn't load trade info", ioexception);
             }
             finally
             {
@@ -1826,15 +1801,15 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         }
         else if ("MC|Brand".equals(packetIn.getChannelName()))
         {
-            this.gameController.thePlayer.setClientBrand(packetIn.getBufferData().readStringFromBuffer(32767));
+            this.gameController.player.setClientBrand(packetIn.getBufferData().readStringFromBuffer(32767));
         }
         else if ("MC|BOpen".equals(packetIn.getChannelName()))
         {
-            ItemStack itemstack = this.gameController.thePlayer.getCurrentEquippedItem();
+            ItemStack itemstack = this.gameController.player.getCurrentEquippedItem();
 
             if (itemstack != null && itemstack.getItem() == Items.written_book)
             {
-                this.gameController.displayGuiScreen(new GuiScreenBook(this.gameController.thePlayer, itemstack, false));
+                this.gameController.displayGuiScreen(new GuiScreenBook(this.gameController.player, itemstack, false));
             }
         }
     }
@@ -1920,54 +1895,44 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
      * Updates a team managed by the scoreboard: Create/Remove the team registration, Register/Remove the player-team-
      * memberships, Set team displayname/prefix/suffix and/or whether friendly fire is enabled
      */
-    public void handleTeams(S3EPacketTeams packetIn)
+    public void handleTeams(S3EPacketTeams packet)
     {
-        PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
+        PacketThreadUtil.checkThreadAndEnqueue(packet, this, this.gameController);
         Scoreboard scoreboard = this.clientWorldController.getScoreboard();
         ScorePlayerTeam scoreplayerteam;
 
-        if (packetIn.func_149307_h() == 0)
-        {
-            scoreplayerteam = scoreboard.createTeam(packetIn.func_149312_c());
-        }
-        else
-        {
-            scoreplayerteam = scoreboard.getTeam(packetIn.func_149312_c());
+        if (packet.func_149307_h() == 0) {
+            scoreplayerteam = scoreboard.createTeam(packet.func_149312_c());
+        } else {
+            scoreplayerteam = scoreboard.getTeam(packet.func_149312_c());
         }
 
-        if (packetIn.func_149307_h() == 0 || packetIn.func_149307_h() == 2)
-        {
-            scoreplayerteam.setTeamName(packetIn.func_149306_d());
-            scoreplayerteam.setNamePrefix(packetIn.func_149311_e());
-            scoreplayerteam.setNameSuffix(packetIn.func_149309_f());
-            scoreplayerteam.setChatFormat(EnumChatFormatting.func_175744_a(packetIn.func_179813_h()));
-            scoreplayerteam.func_98298_a(packetIn.func_149308_i());
-            Team.EnumVisible team$enumvisible = Team.EnumVisible.func_178824_a(packetIn.func_179814_i());
+        if (packet.func_149307_h() == 0 || packet.func_149307_h() == 2) {
+            scoreplayerteam.setTeamName(packet.func_149306_d());
+            scoreplayerteam.setNamePrefix(packet.func_149311_e());
+            scoreplayerteam.setNameSuffix(packet.func_149309_f());
+            scoreplayerteam.setChatFormat(EnumChatFormatting.func_175744_a(packet.func_179813_h()));
+            scoreplayerteam.func_98298_a(packet.func_149308_i());
+            Team.EnumVisible visible = Team.EnumVisible.func_178824_a(packet.func_179814_i());
 
-            if (team$enumvisible != null)
-            {
-                scoreplayerteam.setNameTagVisibility(team$enumvisible);
+            if (visible != null) {
+                scoreplayerteam.setNameTagVisibility(visible);
             }
         }
 
-        if (packetIn.func_149307_h() == 0 || packetIn.func_149307_h() == 3)
-        {
-            for (String s : packetIn.func_149310_g())
-            {
-                scoreboard.addPlayerToTeam(s, packetIn.func_149312_c());
+        if (packet.func_149307_h() == 0 || packet.func_149307_h() == 3) {
+            for (String s : packet.func_149310_g()) {
+                scoreboard.addPlayerToTeam(s, packet.func_149312_c());
             }
         }
 
-        if (packetIn.func_149307_h() == 4)
-        {
-            for (String s1 : packetIn.func_149310_g())
-            {
+        if (packet.func_149307_h() == 4) {
+            for (String s1 : packet.func_149310_g()) {
                 scoreboard.removePlayerFromTeam(s1, scoreplayerteam);
             }
         }
 
-        if (packetIn.func_149307_h() == 1)
-        {
+        if (packet.func_149307_h() == 1) {
             scoreboard.removeTeam(scoreplayerteam);
         }
     }

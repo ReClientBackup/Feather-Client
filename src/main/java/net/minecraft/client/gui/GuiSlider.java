@@ -1,6 +1,6 @@
 package net.minecraft.client.gui;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -9,11 +9,11 @@ public class GuiSlider extends GuiButton
 {
     private float sliderPosition = 1.0F;
     public boolean isMouseDown;
-    private String name;
+    private final String name;
     private final float min;
     private final float max;
     private final GuiPageButtonList.GuiResponder responder;
-    private GuiSlider.FormatHelper formatHelper;
+    private final GuiSlider.FormatHelper formatHelper;
 
     public GuiSlider(GuiPageButtonList.GuiResponder guiResponder, int idIn, int x, int y, String name, float min, float max, float defaultValue, GuiSlider.FormatHelper formatter)
     {
@@ -50,7 +50,7 @@ public class GuiSlider extends GuiButton
 
     private String getDisplayString()
     {
-        return this.formatHelper == null ? I18n.format(this.name, new Object[0]) + ": " + this.func_175220_c() : this.formatHelper.getText(this.getId(), I18n.format(this.name, new Object[0]), this.func_175220_c());
+        return this.formatHelper == null ? I18n.format(this.name) + ": " + this.func_175220_c() : this.formatHelper.getText(this.getId(), I18n.format(this.name), this.func_175220_c());
     }
 
     /**
@@ -87,7 +87,7 @@ public class GuiSlider extends GuiButton
                 this.responder.onTick(this.getId(), this.func_175220_c());
             }
 
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             this.drawTexturedModalRect(this.getX() + (int)(this.sliderPosition * (float)(this.getWidth() - 8)), this.getY(), 0, 66, 4, 20);
             this.drawTexturedModalRect(this.getX() + (int)(this.sliderPosition * (float)(this.getWidth() - 8)) + 4, this.getY(), 196, 66, 4, 20);
         }

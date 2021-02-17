@@ -60,7 +60,7 @@ public class Achievement extends StatBase
 
     public Achievement(String p_i45302_1_, String p_i45302_2_, int column, int row, ItemStack p_i45302_5_, Achievement parent)
     {
-        super(p_i45302_1_, new ChatComponentTranslation("achievement." + p_i45302_2_, new Object[0]));
+        super(p_i45302_1_, new ChatComponentTranslation("achievement." + p_i45302_2_));
         this.theItemStack = p_i45302_5_;
         this.achievementDescription = "achievement." + p_i45302_2_ + ".desc";
         this.displayColumn = column;

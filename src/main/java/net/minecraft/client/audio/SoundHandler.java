@@ -83,7 +83,6 @@ public class SoundHandler implements IResourceManagerReloadListener, ITickable
             }
             catch (IOException var11)
             {
-                ;
             }
         }
     }
@@ -117,7 +116,7 @@ public class SoundHandler implements IResourceManagerReloadListener, ITickable
         {
             if (!flag)
             {
-                logger.debug("Replaced sound event location {}", new Object[] {location});
+                logger.debug("Replaced sound event location {}", location);
             }
 
             soundeventaccessorcomposite = new SoundEventAccessorComposite(location, 1.0D, 1.0D, sounds.getSoundCategory());
@@ -143,7 +142,7 @@ public class SoundHandler implements IResourceManagerReloadListener, ITickable
                     }
                     catch (FileNotFoundException var18)
                     {
-                        logger.warn("File {} does not exist, cannot add it to event {}", new Object[] {resourcelocation1, location});
+                        logger.warn("File {} does not exist, cannot add it to event {}", resourcelocation1, location);
                         continue;
                     }
                     catch (IOException ioexception)
@@ -258,7 +257,7 @@ public class SoundHandler implements IResourceManagerReloadListener, ITickable
      */
     public SoundEventAccessorComposite getRandomSoundFromCategories(SoundCategory... categories)
     {
-        List<SoundEventAccessorComposite> list = Lists.<SoundEventAccessorComposite>newArrayList();
+        List<SoundEventAccessorComposite> list = Lists.newArrayList();
 
         for (ResourceLocation resourcelocation : this.sndRegistry.getKeys())
         {

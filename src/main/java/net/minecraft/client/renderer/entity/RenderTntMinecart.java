@@ -42,9 +42,9 @@ public class RenderTntMinecart extends RenderMinecart<EntityMinecartTNT>
             GlStateManager.pushMatrix();
             blockrendererdispatcher.renderBlockBrightness(Blocks.tnt.getDefaultState(), 1.0F);
             GlStateManager.popMatrix();
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             GlStateManager.disableBlend();
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.enableTexture2D();
         }
     }

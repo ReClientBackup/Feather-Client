@@ -6,7 +6,7 @@
 
     <groupId>com.murengezi</groupId>
     <artifactId>1.8.10</artifactId>
-    <version>1.0-1.8.8</version>
+    <version>1.0</version>
     <build>
         <resources>
             <resource>
@@ -35,7 +35,7 @@
                     <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
                     <skipPoms>true</skipPoms>
                     <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                    <generateGitPropertiesFilename>src/main/resources/feather.properties</generateGitPropertiesFilename>
+                    <generateGitPropertiesFilename>src/main/resources/chocolate.properties</generateGitPropertiesFilename>
                     <failOnNoGitDirectory>false</failOnNoGitDirectory>
                     <abbrevLength>7</abbrevLength>
                     <skip>false</skip>

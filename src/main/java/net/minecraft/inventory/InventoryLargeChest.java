@@ -12,13 +12,13 @@ import net.minecraft.world.LockCode;
 public class InventoryLargeChest implements ILockableContainer
 {
     /** Name of the chest. */
-    private String name;
+    private final String name;
 
     /** Inventory object corresponding to double chest upper part */
-    private ILockableContainer upperChest;
+    private final ILockableContainer upperChest;
 
     /** Inventory object corresponding to double chest lower part */
-    private ILockableContainer lowerChest;
+    private final ILockableContainer lowerChest;
 
     public InventoryLargeChest(String nameIn, ILockableContainer upperChestIn, ILockableContainer lowerChestIn)
     {
@@ -84,7 +84,7 @@ public class InventoryLargeChest implements ILockableContainer
      */
     public IChatComponent getDisplayName()
     {
-        return this.hasCustomName() ? new ChatComponentText(this.getCommandSenderName()) : new ChatComponentTranslation(this.getCommandSenderName(), new Object[0]);
+        return this.hasCustomName() ? new ChatComponentText(this.getCommandSenderName()) : new ChatComponentTranslation(this.getCommandSenderName());
     }
 
     /**

@@ -62,7 +62,7 @@ public class PreYggdrasilConverter
             }
             else if (!minecraftserver.isSinglePlayer() && minecraftserver.isServerInOnlineMode())
             {
-                final List<GameProfile> list = Lists.<GameProfile>newArrayList();
+                final List<GameProfile> list = Lists.newArrayList();
                 ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback()
                 {
                     public void onProfileLookupSucceeded(GameProfile p_onProfileLookupSucceeded_1_)
@@ -75,7 +75,7 @@ public class PreYggdrasilConverter
                         PreYggdrasilConverter.LOGGER.warn("Could not lookup user whitelist entry for " + p_onProfileLookupFailed_1_.getName(), p_onProfileLookupFailed_2_);
                     }
                 };
-                lookupNames(minecraftserver, Lists.newArrayList(new String[] {p_152719_0_}), profilelookupcallback);
+                lookupNames(minecraftserver, Lists.newArrayList(p_152719_0_), profilelookupcallback);
                 return list.size() > 0 && list.get(0).getId() != null ? list.get(0).getId().toString() : "";
             }
             else

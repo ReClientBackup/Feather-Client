@@ -17,10 +17,10 @@ import net.minecraft.world.WorldSavedData;
 
 public class MapStorage
 {
-    private ISaveHandler saveHandler;
-    protected Map<String, WorldSavedData> loadedDataMap = Maps.<String, WorldSavedData>newHashMap();
-    private List<WorldSavedData> loadedDataList = Lists.<WorldSavedData>newArrayList();
-    private Map<String, Short> idCounts = Maps.<String, Short>newHashMap();
+    private final ISaveHandler saveHandler;
+    protected Map<String, WorldSavedData> loadedDataMap = Maps.newHashMap();
+    private final List<WorldSavedData> loadedDataList = Lists.newArrayList();
+    private final Map<String, Short> idCounts = Maps.newHashMap();
 
     public MapStorage(ISaveHandler saveHandlerIn)
     {
@@ -52,7 +52,7 @@ public class MapStorage
                     {
                         try
                         {
-                            worldsaveddata = clazz.getConstructor(new Class[] {String.class}).newInstance(new Object[] {dataIdentifier});
+                            worldsaveddata = clazz.getConstructor(new Class[] {String.class}).newInstance(dataIdentifier);
                         }
                         catch (Exception exception)
                         {

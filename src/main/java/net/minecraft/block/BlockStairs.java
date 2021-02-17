@@ -4,12 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,8 +27,8 @@ import net.minecraft.world.World;
 public class BlockStairs extends Block
 {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-    public static final PropertyEnum<BlockStairs.EnumHalf> HALF = PropertyEnum.<BlockStairs.EnumHalf>create("half", BlockStairs.EnumHalf.class);
-    public static final PropertyEnum<BlockStairs.EnumShape> SHAPE = PropertyEnum.<BlockStairs.EnumShape>create("shape", BlockStairs.EnumShape.class);
+    public static final PropertyEnum<BlockStairs.EnumHalf> HALF = PropertyEnum.create("half", BlockStairs.EnumHalf.class);
+    public static final PropertyEnum<BlockStairs.EnumShape> SHAPE = PropertyEnum.create("shape", BlockStairs.EnumShape.class);
     private static final int[][] field_150150_a = new int[][] {{4, 5}, {5, 7}, {6, 7}, {4, 6}, {0, 1}, {1, 3}, {2, 3}, {0, 2}};
     private final Block modelBlock;
     private final IBlockState modelState;
@@ -795,17 +794,17 @@ public class BlockStairs extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING, HALF, SHAPE});
+        return new BlockState(this, FACING, HALF, SHAPE);
     }
 
-    public static enum EnumHalf implements IStringSerializable
+    public enum EnumHalf implements IStringSerializable
     {
         TOP("top"),
         BOTTOM("bottom");
 
         private final String name;
 
-        private EnumHalf(String name)
+        EnumHalf(String name)
         {
             this.name = name;
         }
@@ -821,7 +820,7 @@ public class BlockStairs extends Block
         }
     }
 
-    public static enum EnumShape implements IStringSerializable
+    public enum EnumShape implements IStringSerializable
     {
         STRAIGHT("straight"),
         INNER_LEFT("inner_left"),
@@ -831,7 +830,7 @@ public class BlockStairs extends Block
 
         private final String name;
 
-        private EnumShape(String name)
+        EnumShape(String name)
         {
             this.name = name;
         }

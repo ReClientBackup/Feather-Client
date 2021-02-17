@@ -6,19 +6,19 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.world.World;
 import net.optifine.shaders.Program;
 import net.optifine.shaders.Shaders;
 
 public class EntityPickupFX extends EntityFX
 {
-    private Entity field_174840_a;
-    private Entity field_174843_ax;
+    private final Entity field_174840_a;
+    private final Entity field_174843_ax;
     private int age;
-    private int maxAge;
-    private float field_174841_aA;
-    private RenderManager field_174842_aB = Minecraft.getMinecraft().getRenderManager();
+    private final int maxAge;
+    private final float field_174841_aA;
+    private final RenderManager field_174842_aB = Minecraft.getMinecraft().getRenderManager();
 
     public EntityPickupFX(World worldIn, Entity p_i1233_2_, Entity p_i1233_3_, float p_i1233_4_)
     {
@@ -59,7 +59,7 @@ public class EntityPickupFX extends EntityFX
         int j = i % 65536;
         int k = i / 65536;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         d6 = d6 - interpPosX;
         d7 = d7 - interpPosY;
         d8 = d8 - interpPosZ;

@@ -14,7 +14,7 @@ public class VertexFormat
     /** The next available offset in this vertex format */
     private int nextOffset;
     private int colorElementOffset;
-    private List<Integer> elementOffsetsById;
+    private final List<Integer> elementOffsetsById;
     private int normalElementOffset;
 
     public VertexFormat(VertexFormat vertexFormatIn)
@@ -31,11 +31,11 @@ public class VertexFormat
 
     public VertexFormat()
     {
-        this.elements = Lists.<VertexFormatElement>newArrayList();
-        this.offsets = Lists.<Integer>newArrayList();
+        this.elements = Lists.newArrayList();
+        this.offsets = Lists.newArrayList();
         this.nextOffset = 0;
         this.colorElementOffset = -1;
-        this.elementOffsetsById = Lists.<Integer>newArrayList();
+        this.elementOffsetsById = Lists.newArrayList();
         this.normalElementOffset = -1;
     }
 
@@ -184,7 +184,7 @@ public class VertexFormat
         else if (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass())
         {
             VertexFormat vertexformat = (VertexFormat)p_equals_1_;
-            return this.nextOffset != vertexformat.nextOffset ? false : (!this.elements.equals(vertexformat.elements) ? false : this.offsets.equals(vertexformat.offsets));
+            return this.nextOffset == vertexformat.nextOffset && (this.elements.equals(vertexformat.elements) && this.offsets.equals(vertexformat.offsets));
         }
         else
         {

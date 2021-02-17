@@ -3,7 +3,6 @@ package net.minecraft.block;
 import com.google.common.base.Predicate;
 import java.util.Random;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
@@ -200,7 +199,7 @@ public class BlockStem extends BlockBush implements IGrowable
     public Item getItem(World worldIn, BlockPos pos)
     {
         Item item = this.getSeedItem();
-        return item != null ? item : null;
+        return item;
     }
 
     /**
@@ -239,6 +238,6 @@ public class BlockStem extends BlockBush implements IGrowable
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {AGE, FACING});
+        return new BlockState(this, AGE, FACING);
     }
 }

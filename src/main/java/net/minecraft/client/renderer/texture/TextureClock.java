@@ -20,11 +20,11 @@ public class TextureClock extends TextureAtlasSprite
             Minecraft minecraft = Minecraft.getMinecraft();
             double d0 = 0.0D;
 
-            if (minecraft.theWorld != null && minecraft.thePlayer != null)
+            if (minecraft.world != null && minecraft.player != null)
             {
-                d0 = minecraft.theWorld.getCelestialAngle(1.0F);
+                d0 = minecraft.world.getCelestialAngle(1.0F);
 
-                if (!minecraft.theWorld.provider.isSurfaceWorld())
+                if (!minecraft.world.provider.isSurfaceWorld())
                 {
                     d0 = Math.random();
                 }
@@ -34,7 +34,6 @@ public class TextureClock extends TextureAtlasSprite
 
             for (d1 = d0 - this.field_94239_h; d1 < -0.5D; ++d1)
             {
-                ;
             }
 
             while (d1 >= 0.5D)
@@ -50,13 +49,12 @@ public class TextureClock extends TextureAtlasSprite
 
             for (i = (int)((this.field_94239_h + 1.0D) * (double)this.framesTextureData.size()) % this.framesTextureData.size(); i < 0; i = (i + this.framesTextureData.size()) % this.framesTextureData.size())
             {
-                ;
             }
 
             if (i != this.frameCounter)
             {
                 this.frameCounter = i;
-                TextureUtil.uploadTextureMipmap(this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
+                TextureUtil.uploadTextureMipMap(this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
             }
         }
     }

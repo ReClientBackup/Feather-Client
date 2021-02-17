@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 import java.util.List;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.reflect.Reflector;
 import net.optifine.shaders.SVertexBuilder;
 import org.lwjgl.opengl.GL11;
@@ -35,7 +35,7 @@ public class WorldVertexBufferUploader
 
                 if (flag)
                 {
-                    Reflector.callVoid(vertexformatelement$enumusage, Reflector.ForgeVertexFormatElementEnumUseage_preDraw, new Object[] {vertexformat, Integer.valueOf(j), Integer.valueOf(i), bytebuffer});
+                    Reflector.callVoid(vertexformatelement$enumusage, Reflector.ForgeVertexFormatElementEnumUseage_preDraw, vertexformat, Integer.valueOf(j), Integer.valueOf(i), bytebuffer);
                 }
                 else
                 {
@@ -91,7 +91,7 @@ public class WorldVertexBufferUploader
 
                 if (flag1)
                 {
-                    Reflector.callVoid(vertexformatelement$enumusage1, Reflector.ForgeVertexFormatElementEnumUseage_postDraw, new Object[] {vertexformat, Integer.valueOf(j1), Integer.valueOf(i), bytebuffer});
+                    Reflector.callVoid(vertexformatelement$enumusage1, Reflector.ForgeVertexFormatElementEnumUseage_postDraw, vertexformat, Integer.valueOf(j1), Integer.valueOf(i), bytebuffer);
                 }
                 else
                 {

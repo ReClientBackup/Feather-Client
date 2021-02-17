@@ -4,7 +4,7 @@ import java.util.Random;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -77,7 +77,7 @@ public abstract class BlockBasePressurePlate extends Block
         return true;
     }
 
-    public boolean func_181623_g()
+    public boolean canSpawnInBlock()
     {
         return true;
     }

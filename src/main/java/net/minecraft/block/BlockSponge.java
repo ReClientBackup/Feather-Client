@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -74,8 +73,8 @@ public class BlockSponge extends Block
 
     private boolean absorb(World worldIn, BlockPos pos)
     {
-        Queue<Tuple<BlockPos, Integer>> queue = Lists.<Tuple<BlockPos, Integer>>newLinkedList();
-        ArrayList<BlockPos> arraylist = Lists.<BlockPos>newArrayList();
+        Queue<Tuple<BlockPos, Integer>> queue = Lists.newLinkedList();
+        ArrayList<BlockPos> arraylist = Lists.newArrayList();
         queue.add(new Tuple(pos, Integer.valueOf(0)));
         int i = 0;
 
@@ -143,7 +142,7 @@ public class BlockSponge extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {WET});
+        return new BlockState(this, WET);
     }
 
     public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
@@ -196,7 +195,7 @@ public class BlockSponge extends Block
                     }
                 }
 
-                worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
+                worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
             }
         }
     }

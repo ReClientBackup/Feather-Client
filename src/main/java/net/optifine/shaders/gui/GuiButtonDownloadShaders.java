@@ -1,29 +1,22 @@
 package net.optifine.shaders.gui;
 
-import net.minecraft.client.Minecraft;
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiButtonDownloadShaders extends GuiButton
-{
-    public GuiButtonDownloadShaders(int buttonID, int xPos, int yPos)
-    {
-        super(buttonID, xPos, yPos, 22, 20, "");
-    }
+public class GuiButtonDownloadShaders extends GuiButton {
+   public GuiButtonDownloadShaders(int buttonID, int xPos, int yPos) {
+      super(buttonID, xPos, yPos, 22, 20, "");
+   }
 
-    /**
-     * Draws this button to the screen.
-     */
-    public void drawButton(Minecraft mc, int mouseX, int mouseY)
-    {
-        if (this.isVisible())
-        {
-            super.drawButton(mc, mouseX, mouseY);
-            ResourceLocation resourcelocation = new ResourceLocation("optifine/textures/icons.png");
-            mc.getTextureManager().bindTexture(resourcelocation);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            this.drawTexturedModalRect(this.getX() + 3, this.getY() + 2, 0, 0, 16, 16);
-        }
-    }
+   @Override
+   public void drawButton(int mouseX, int mouseY) {
+      if(this.isVisible()) {
+         super.drawButton(mouseX, mouseY);
+         ResourceLocation resourcelocation = new ResourceLocation("optifine/textures/icons.png");
+         getMc().getTextureManager().bindTexture(resourcelocation);
+         GlStateManager.colorAllMax();
+         this.drawTexturedModalRect(this.getX() + 3, this.getY() + 2, 0, 0, 16, 16);
+      }
+   }
 }

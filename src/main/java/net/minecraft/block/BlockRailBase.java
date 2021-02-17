@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -184,7 +184,7 @@ public abstract class BlockRailBase extends Block
 
     public abstract IProperty<BlockRailBase.EnumRailDirection> getShapeProperty();
 
-    public static enum EnumRailDirection implements IStringSerializable
+    public enum EnumRailDirection implements IStringSerializable
     {
         NORTH_SOUTH(0, "north_south"),
         EAST_WEST(1, "east_west"),
@@ -201,7 +201,7 @@ public abstract class BlockRailBase extends Block
         private final int meta;
         private final String name;
 
-        private EnumRailDirection(int meta, String name)
+        EnumRailDirection(int meta, String name)
         {
             this.meta = meta;
             this.name = name;
@@ -252,7 +252,7 @@ public abstract class BlockRailBase extends Block
         private final BlockRailBase block;
         private IBlockState state;
         private final boolean isPowered;
-        private final List<BlockPos> field_150657_g = Lists.<BlockPos>newArrayList();
+        private final List<BlockPos> field_150657_g = Lists.newArrayList();
 
         public Rail(World worldIn, BlockPos pos, IBlockState state)
         {

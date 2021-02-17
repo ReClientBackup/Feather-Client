@@ -31,7 +31,7 @@ public class VisGraph
 
     private static int getIndex(int x, int y, int z)
     {
-        return x << 0 | y << 8 | z << 4;
+        return x | y << 8 | z << 4;
     }
 
     public SetVisibility computeVisibility()
@@ -67,14 +67,14 @@ public class VisGraph
 
     private Set<EnumFacing> func_178604_a(int p_178604_1_)
     {
-        Set<EnumFacing> set = EnumSet.<EnumFacing>noneOf(EnumFacing.class);
+        Set<EnumFacing> set = EnumSet.noneOf(EnumFacing.class);
         Queue<Integer> queue = new ArrayDeque(384);
         queue.add(IntegerCache.func_181756_a(p_178604_1_));
         this.field_178612_d.set(p_178604_1_, true);
 
         while (!queue.isEmpty())
         {
-            int i = queue.poll().intValue();
+            int i = queue.poll();
             this.func_178610_a(i, set);
 
             for (EnumFacing enumfacing : EnumFacing.VALUES)
@@ -94,7 +94,7 @@ public class VisGraph
 
     private void func_178610_a(int p_178610_1_, Set<EnumFacing> p_178610_2_)
     {
-        int i = p_178610_1_ >> 0 & 15;
+        int i = p_178610_1_ & 15;
 
         if (i == 0)
         {
@@ -165,7 +165,7 @@ public class VisGraph
                 return p_178603_1_ + field_178614_b;
 
             case WEST:
-                if ((p_178603_1_ >> 0 & 15) == 0)
+                if ((p_178603_1_ & 15) == 0)
                 {
                     return -1;
                 }
@@ -173,7 +173,7 @@ public class VisGraph
                 return p_178603_1_ - field_178616_a;
 
             case EAST:
-                if ((p_178603_1_ >> 0 & 15) == 15)
+                if ((p_178603_1_ & 15) == 15)
                 {
                     return -1;
                 }
@@ -185,20 +185,13 @@ public class VisGraph
         }
     }
 
-    static
-    {
-        int i = 0;
-        int j = 15;
+    static {
         int k = 0;
 
-        for (int l = 0; l < 16; ++l)
-        {
-            for (int i1 = 0; i1 < 16; ++i1)
-            {
-                for (int j1 = 0; j1 < 16; ++j1)
-                {
-                    if (l == 0 || l == 15 || i1 == 0 || i1 == 15 || j1 == 0 || j1 == 15)
-                    {
+        for (int l = 0; l < 16; ++l) {
+            for (int i1 = 0; i1 < 16; ++i1) {
+                for (int j1 = 0; j1 < 16; ++j1) {
+                    if (l == 0 || l == 15 || i1 == 0 || i1 == 15 || j1 == 0 || j1 == 15) {
                         field_178613_e[k++] = getIndex(l, i1, j1);
                     }
                 }

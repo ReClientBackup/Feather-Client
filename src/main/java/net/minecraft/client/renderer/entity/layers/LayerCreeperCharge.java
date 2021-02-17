@@ -39,7 +39,7 @@ public class LayerCreeperCharge implements LayerRenderer<EntityCreeper>
             GlStateManager.matrixMode(5890);
             GlStateManager.loadIdentity();
             GlStateManager.matrixMode(5888);
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
             GlStateManager.disableBlend();
             GlStateManager.depthMask(flag);
         }

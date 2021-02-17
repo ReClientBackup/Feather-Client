@@ -1,6 +1,6 @@
 package net.minecraft.client.gui;
 
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.settings.GameSettings;
@@ -10,7 +10,7 @@ public class GuiOptionSlider extends GuiButton
 {
     private float sliderValue;
     public boolean dragging;
-    private GameSettings.Options options;
+    private final GameSettings.Options options;
     private final float field_146132_r;
     private final float field_146131_s;
 
@@ -58,7 +58,7 @@ public class GuiOptionSlider extends GuiButton
             }
 
             mc.getTextureManager().bindTexture(buttonTextures);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             this.drawTexturedModalRect(this.getX() + (int)(this.sliderValue * (float)(this.getWidth() - 8)), this.getY(), 0, 66, 4, 20);
             this.drawTexturedModalRect(this.getX() + (int)(this.sliderValue * (float)(this.getWidth() - 8)) + 4, this.getY(), 196, 66, 4, 20);
         }

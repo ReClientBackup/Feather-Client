@@ -1,12 +1,12 @@
 package net.minecraft.enchantment;
 
+import com.murengezi.minecraft.potion.Potion;
+import com.murengezi.minecraft.potion.PotionEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 
 public class EnchantmentDamage extends Enchantment
@@ -103,7 +103,7 @@ public class EnchantmentDamage extends Enchantment
      */
     public boolean canApply(ItemStack stack)
     {
-        return stack.getItem() instanceof ItemAxe ? true : super.canApply(stack);
+        return stack.getItem() instanceof ItemAxe || super.canApply(stack);
     }
 
     /**

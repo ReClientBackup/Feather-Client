@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.CustomColors;
@@ -47,7 +47,7 @@ public class RenderXPOrb extends Render<EntityXPOrb>
         int k = j % 65536;
         int l = j / 65536;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)k / 1.0F, (float)l / 1.0F);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.colorAllMax();
         float f7 = 255.0F;
         float f8 = ((float)entity.xpColor + partialTicks) / 2.0F;
 
@@ -78,14 +78,14 @@ public class RenderXPOrb extends Render<EntityXPOrb>
             {
                 k1 = j2 >> 16 & 255;
                 l1 = j2 >> 8 & 255;
-                i2 = j2 >> 0 & 255;
+                i2 = j2 & 255;
             }
         }
 
-        worldrenderer.pos(0.0F - f5, 0.0F - f6, 0.0D).tex(f, f3).color(k1, l1, i2, 128).normal(0.0F, 1.0F, 0.0F).func_181675_d();
-        worldrenderer.pos(f4 - f5, 0.0F - f6, 0.0D).tex(f1, f3).color(k1, l1, i2, 128).normal(0.0F, 1.0F, 0.0F).func_181675_d();
-        worldrenderer.pos(f4 - f5, 1.0F - f6, 0.0D).tex(f1, f2).color(k1, l1, i2, 128).normal(0.0F, 1.0F, 0.0F).func_181675_d();
-        worldrenderer.pos(0.0F - f5, 1.0F - f6, 0.0D).tex(f, f2).color(k1, l1, i2, 128).normal(0.0F, 1.0F, 0.0F).func_181675_d();
+        worldrenderer.pos(0.0F - f5, 0.0F - f6, 0.0D).tex(f, f3).color(k1, l1, i2, 128).normal(0.0F, 1.0F, 0.0F).endVertex();
+        worldrenderer.pos(f4 - f5, 0.0F - f6, 0.0D).tex(f1, f3).color(k1, l1, i2, 128).normal(0.0F, 1.0F, 0.0F).endVertex();
+        worldrenderer.pos(f4 - f5, 1.0F - f6, 0.0D).tex(f1, f2).color(k1, l1, i2, 128).normal(0.0F, 1.0F, 0.0F).endVertex();
+        worldrenderer.pos(0.0F - f5, 1.0F - f6, 0.0D).tex(f, f2).color(k1, l1, i2, 128).normal(0.0F, 1.0F, 0.0F).endVertex();
         tessellator.draw();
         GlStateManager.disableBlend();
         GlStateManager.disableRescaleNormal();

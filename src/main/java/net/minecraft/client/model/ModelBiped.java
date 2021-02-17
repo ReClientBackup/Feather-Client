@@ -1,8 +1,7 @@
 package net.minecraft.client.model;
 
 import com.darkmagician6.eventapi.EventManager;
-import com.darkmagician6.eventapi.events.Event;
-import com.murengezi.feather.Event.RenderModelBipedEvent;
+import com.murengezi.chocolate.Event.RenderModelBipedEvent;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;

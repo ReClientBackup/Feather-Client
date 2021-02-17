@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.CancellationException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RegionRenderCacheBuilder;
-import net.minecraft.crash.CrashReport;
+import com.murengezi.minecraft.crash.CrashReport;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumWorldBlockLayer;
 import org.apache.logging.log4j.LogManager;
@@ -141,13 +141,7 @@ public class ChunkRenderWorker implements Runnable
             }
 
             final ListenableFuture<List<Object>> listenablefuture = Futures.allAsList(lvt_8_1_);
-            generator.addFinishRunnable(new Runnable()
-            {
-                public void run()
-                {
-                    listenablefuture.cancel(false);
-                }
-            });
+            generator.addFinishRunnable(() -> listenablefuture.cancel(false));
             Futures.addCallback(listenablefuture, new FutureCallback<List<Object>>()
             {
                 public void onSuccess(List<Object> p_onSuccess_1_)

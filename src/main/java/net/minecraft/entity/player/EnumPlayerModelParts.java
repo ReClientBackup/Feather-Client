@@ -18,12 +18,12 @@ public enum EnumPlayerModelParts
     private final String partName;
     private final IChatComponent chatComponent;
 
-    private EnumPlayerModelParts(int partId, String partName)
+    EnumPlayerModelParts(int partId, String partName)
     {
         this.partId = partId;
         this.partMask = 1 << partId;
         this.partName = partName;
-        this.chatComponent = new ChatComponentTranslation("options.modelPart." + partName, new Object[0]);
+        this.chatComponent = new ChatComponentTranslation("options.modelPart." + partName);
     }
 
     public int getPartMask()

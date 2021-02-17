@@ -69,8 +69,8 @@ public class SimpleBakedModel implements IBakedModel
         private final List<List<BakedQuad>> builderFaceQuads;
         private final boolean builderAmbientOcclusion;
         private TextureAtlasSprite builderTexture;
-        private boolean builderGui3d;
-        private ItemCameraTransforms builderCameraTransforms;
+        private final boolean builderGui3d;
+        private final ItemCameraTransforms builderCameraTransforms;
 
         public Builder(ModelBlock p_i46074_1_)
         {
@@ -108,12 +108,12 @@ public class SimpleBakedModel implements IBakedModel
 
         private Builder(boolean p_i46076_1_, boolean p_i46076_2_, ItemCameraTransforms p_i46076_3_)
         {
-            this.builderGeneralQuads = Lists.<BakedQuad>newArrayList();
-            this.builderFaceQuads = Lists.<List<BakedQuad>>newArrayListWithCapacity(6);
+            this.builderGeneralQuads = Lists.newArrayList();
+            this.builderFaceQuads = Lists.newArrayListWithCapacity(6);
 
             for (EnumFacing enumfacing : EnumFacing.values())
             {
-                this.builderFaceQuads.add(Lists.<BakedQuad>newArrayList());
+                this.builderFaceQuads.add(Lists.newArrayList());
             }
 
             this.builderAmbientOcclusion = p_i46076_1_;

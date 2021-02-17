@@ -1,7 +1,7 @@
 package net.minecraft.client.renderer.vertex;
 
 import java.lang.reflect.Field;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.reflect.ReflectorClass;
 import net.optifine.reflect.ReflectorField;
 import net.optifine.shaders.SVertexFormat;

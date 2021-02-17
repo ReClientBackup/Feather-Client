@@ -16,7 +16,7 @@ public class ServerList
 
     /** The Minecraft instance. */
     private final Minecraft mc;
-    private final List<ServerData> servers = Lists.<ServerData>newArrayList();
+    private final List<ServerData> servers = Lists.newArrayList();
 
     public ServerList(Minecraft mcIn)
     {
@@ -33,7 +33,7 @@ public class ServerList
         try
         {
             this.servers.clear();
-            NBTTagCompound nbttagcompound = CompressedStreamTools.read(new File(this.mc.mcDataDir, "servers.dat"));
+            NBTTagCompound nbttagcompound = CompressedStreamTools.read(new File(this.mc.dataDir, "servers.dat"));
 
             if (nbttagcompound == null)
             {
@@ -49,7 +49,7 @@ public class ServerList
         }
         catch (Exception exception)
         {
-            logger.error("Couldn\'t load server list", exception);
+            logger.error("Couldn't load server list", exception);
         }
     }
 
@@ -70,11 +70,11 @@ public class ServerList
 
             NBTTagCompound nbttagcompound = new NBTTagCompound();
             nbttagcompound.setTag("servers", nbttaglist);
-            CompressedStreamTools.safeWrite(nbttagcompound, new File(this.mc.mcDataDir, "servers.dat"));
+            CompressedStreamTools.safeWrite(nbttagcompound, new File(this.mc.dataDir, "servers.dat"));
         }
         catch (Exception exception)
         {
-            logger.error("Couldn\'t save server list", exception);
+            logger.error("Couldn't save server list", exception);
         }
     }
 

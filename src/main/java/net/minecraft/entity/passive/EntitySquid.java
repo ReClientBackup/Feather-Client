@@ -254,7 +254,7 @@ public class EntitySquid extends EntityWaterMob
 
     static class AIMoveRandom extends EntityAIBase
     {
-        private EntitySquid squid;
+        private final EntitySquid squid;
 
         public AIMoveRandom(EntitySquid p_i45859_1_)
         {

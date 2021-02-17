@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityLavaFX extends EntityFX
 {
-    private float lavaParticleScale;
+    private final float lavaParticleScale;
 
     protected EntityLavaFX(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn)
     {
@@ -73,7 +73,7 @@ public class EntityLavaFX extends EntityFX
 
         if (this.rand.nextFloat() > f)
         {
-            this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, this.motionX, this.motionY, this.motionZ, new int[0]);
+            this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, this.motionX, this.motionY, this.motionZ);
         }
 
         this.motionY -= 0.03D;

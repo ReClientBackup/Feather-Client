@@ -1,9 +1,10 @@
 package net.minecraft.client.gui.inventory;
 
+import com.murengezi.minecraft.potion.Potion;
 import io.netty.buffer.Unpooled;
 import java.io.IOException;
 import net.minecraft.client.Minecraft;
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
@@ -14,7 +15,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C17PacketCustomPayload;
-import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -24,7 +24,7 @@ public class GuiBeacon extends GuiContainer
 {
     private static final Logger logger = LogManager.getLogger();
     private static final ResourceLocation beaconGuiTextures = new ResourceLocation("textures/gui/container/beacon.png");
-    private IInventory tileBeacon;
+    private final IInventory tileBeacon;
     private GuiBeacon.ConfirmButton beaconConfirmButton;
     private boolean buttonsNotDrawn;
 
@@ -131,7 +131,7 @@ public class GuiBeacon extends GuiContainer
     {
         if (button.getId() == -2)
         {
-            this.mc.displayGuiScreen(null);
+            changeScreen(null);
         }
         else if (button.getId() == -1)
         {
@@ -139,8 +139,8 @@ public class GuiBeacon extends GuiContainer
             PacketBuffer packetbuffer = new PacketBuffer(Unpooled.buffer());
             packetbuffer.writeInt(this.tileBeacon.getField(1));
             packetbuffer.writeInt(this.tileBeacon.getField(2));
-            this.mc.getNetHandler().addToSendQueue(new C17PacketCustomPayload(s, packetbuffer));
-            this.mc.displayGuiScreen(null);
+            getMc().getNetHandler().addToSendQueue(new C17PacketCustomPayload(s, packetbuffer));
+            changeScreen(null);
         }
         else if (button instanceof GuiBeacon.PowerButton)
         {
@@ -174,8 +174,8 @@ public class GuiBeacon extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
         RenderHelper.disableStandardItemLighting();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("tile.beacon.primary", new Object[0]), 62, 10, 14737632);
-        this.drawCenteredString(this.fontRendererObj, I18n.format("tile.beacon.secondary", new Object[0]), 169, 10, 14737632);
+        getFr().drawCenteredString(I18n.format("tile.beacon.primary"), 62, 10, 14737632);
+        getFr().drawCenteredString(I18n.format("tile.beacon.secondary"), 169, 10, 14737632);
 
         for (GuiButton guibutton : this.buttonList)
         {
@@ -192,10 +192,10 @@ public class GuiBeacon extends GuiContainer
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    protected void drawGuiContainerBackgroundLayer(int mouseX, int mouseY, float partialTicks)
     {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(beaconGuiTextures);
+        GlStateManager.colorAllMax();
+        getMc().getTextureManager().bindTexture(beaconGuiTextures);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
@@ -222,12 +222,12 @@ public class GuiBeacon extends GuiContainer
             this.field_146143_q = p_i1077_6_;
         }
 
-        public void drawButton(Minecraft mc, int mouseX, int mouseY)
+        public void drawButton(int mouseX, int mouseY)
         {
             if (this.isVisible())
             {
-                mc.getTextureManager().bindTexture(GuiBeacon.beaconGuiTextures);
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                getMc().getTextureManager().bindTexture(GuiBeacon.beaconGuiTextures);
+                GlStateManager.colorAllMax();
                 this.setHovered(mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.getWidth() && mouseY < this.getY() + this.getHeight());
                 int i = 219;
                 int j = 0;
@@ -249,7 +249,7 @@ public class GuiBeacon extends GuiContainer
 
                 if (!GuiBeacon.beaconGuiTextures.equals(this.field_146145_o))
                 {
-                    mc.getTextureManager().bindTexture(this.field_146145_o);
+                    getMc().getTextureManager().bindTexture(this.field_146145_o);
                 }
 
                 this.drawTexturedModalRect(this.getX() + 2, this.getY() + 2, this.field_146144_p, this.field_146143_q, 18, 18);
@@ -276,7 +276,7 @@ public class GuiBeacon extends GuiContainer
 
         public void drawButtonForegroundLayer(int mouseX, int mouseY)
         {
-            GuiBeacon.this.drawCreativeTabHoveringText(I18n.format("gui.cancel", new Object[0]), mouseX, mouseY);
+            GuiBeacon.this.drawCreativeTabHoveringText(I18n.format("gui.cancel"), mouseX, mouseY);
         }
     }
 
@@ -289,7 +289,7 @@ public class GuiBeacon extends GuiContainer
 
         public void drawButtonForegroundLayer(int mouseX, int mouseY)
         {
-            GuiBeacon.this.drawCreativeTabHoveringText(I18n.format("gui.done", new Object[0]), mouseX, mouseY);
+            GuiBeacon.this.drawCreativeTabHoveringText(I18n.format("gui.done"), mouseX, mouseY);
         }
     }
 
@@ -307,7 +307,7 @@ public class GuiBeacon extends GuiContainer
 
         public void drawButtonForegroundLayer(int mouseX, int mouseY)
         {
-            String s = I18n.format(Potion.potionTypes[this.field_146149_p].getName(), new Object[0]);
+            String s = I18n.format(Potion.potionTypes[this.field_146149_p].getName());
 
             if (this.field_146148_q >= 3 && this.field_146149_p != Potion.regeneration.id)
             {

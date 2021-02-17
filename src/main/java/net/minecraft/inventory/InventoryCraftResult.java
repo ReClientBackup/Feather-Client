@@ -9,7 +9,7 @@ import net.minecraft.util.IChatComponent;
 public class InventoryCraftResult implements IInventory
 {
     /** A list of one item containing the result of the crafting formula */
-    private ItemStack[] stackResult = new ItemStack[1];
+    private final ItemStack[] stackResult = new ItemStack[1];
 
     /**
      * Returns the number of slots in the inventory.
@@ -50,7 +50,7 @@ public class InventoryCraftResult implements IInventory
      */
     public IChatComponent getDisplayName()
     {
-        return this.hasCustomName() ? new ChatComponentText(this.getCommandSenderName()) : new ChatComponentTranslation(this.getCommandSenderName(), new Object[0]);
+        return this.hasCustomName() ? new ChatComponentText(this.getCommandSenderName()) : new ChatComponentTranslation(this.getCommandSenderName());
     }
 
     /**

@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -48,6 +47,6 @@ public class BlockStandingSign extends BlockSign
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {ROTATION});
+        return new BlockState(this, ROTATION);
     }
 }

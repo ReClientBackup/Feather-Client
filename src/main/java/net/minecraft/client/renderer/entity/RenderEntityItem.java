@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderEntityItem extends Render<EntityItem>
 {
     private final RenderItem itemRenderer;
-    private Random field_177079_e = new Random();
+    private final Random field_177079_e = new Random();
 
     public RenderEntityItem(RenderManager renderManagerIn, RenderItem p_i46167_2_)
     {
@@ -56,7 +56,7 @@ public class RenderEntityItem extends Render<EntityItem>
                 GlStateManager.translate(f6, f4, f5);
             }
 
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.colorAllMax();
             return i;
         }
     }

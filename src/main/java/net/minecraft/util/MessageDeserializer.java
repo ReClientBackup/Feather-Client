@@ -26,7 +26,7 @@ public class MessageDeserializer extends ByteToMessageDecoder
         this.direction = direction;
     }
 
-    protected void decode(ChannelHandlerContext p_decode_1_, ByteBuf p_decode_2_, List<Object> p_decode_3_) throws IOException, InstantiationException, IllegalAccessException, Exception
+    protected void decode(ChannelHandlerContext p_decode_1_, ByteBuf p_decode_2_, List<Object> p_decode_3_) throws Exception
     {
         if (p_decode_2_.readableBytes() != 0)
         {
@@ -52,7 +52,7 @@ public class MessageDeserializer extends ByteToMessageDecoder
 
                     if (logger.isDebugEnabled())
                     {
-                        logger.debug(RECEIVED_PACKET_MARKER, " IN: [{}:{}] {}", new Object[] {p_decode_1_.channel().attr(NetworkManager.attrKeyConnectionState).get(), Integer.valueOf(i), packet.getClass().getName()});
+                        logger.debug(RECEIVED_PACKET_MARKER, " IN: [{}:{}] {}", p_decode_1_.channel().attr(NetworkManager.attrKeyConnectionState).get(), Integer.valueOf(i), packet.getClass().getName());
                     }
                 }
             }

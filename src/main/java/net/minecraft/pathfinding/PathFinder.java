@@ -8,11 +8,11 @@ import net.minecraft.world.pathfinder.NodeProcessor;
 public class PathFinder
 {
     /** The path being generated */
-    private Path path = new Path();
+    private final Path path = new Path();
 
     /** Selection of path points to add to the path */
-    private PathPoint[] pathOptions = new PathPoint[32];
-    private NodeProcessor nodeProcessor;
+    private final PathPoint[] pathOptions = new PathPoint[32];
+    private final NodeProcessor nodeProcessor;
 
     public PathFinder(NodeProcessor nodeProcessorIn)
     {

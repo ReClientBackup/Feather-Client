@@ -8,8 +8,8 @@ public class NoiseGeneratorOctaves extends NoiseGenerator
     /**
      * Collection of noise generation functions.  Output is combined to produce different octaves of noise.
      */
-    private NoiseGeneratorImproved[] generatorCollection;
-    private int octaves;
+    private final NoiseGeneratorImproved[] generatorCollection;
+    private final int octaves;
 
     public NoiseGeneratorOctaves(Random p_i2111_1_, int p_i2111_2_)
     {

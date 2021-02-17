@@ -1,8 +1,8 @@
 package net.minecraft.item;
 
-import net.minecraft.creativetab.CreativeTabs;
+import com.murengezi.minecraft.potion.PotionEffect;
+import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 

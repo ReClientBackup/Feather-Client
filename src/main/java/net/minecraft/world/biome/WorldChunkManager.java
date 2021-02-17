@@ -3,8 +3,8 @@ package net.minecraft.world.biome;
 import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
+import com.murengezi.minecraft.crash.CrashReport;
+import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ReportedException;
 import net.minecraft.world.World;
@@ -20,15 +20,15 @@ public class WorldChunkManager
     private GenLayer biomeIndexLayer;
 
     /** The biome list. */
-    private BiomeCache biomeCache;
-    private List<BiomeGenBase> biomesToSpawnIn;
+    private final BiomeCache biomeCache;
+    private final List<BiomeGenBase> biomesToSpawnIn;
     private String field_180301_f;
 
     protected WorldChunkManager()
     {
         this.biomeCache = new BiomeCache(this);
         this.field_180301_f = "";
-        this.biomesToSpawnIn = Lists.<BiomeGenBase>newArrayList();
+        this.biomesToSpawnIn = Lists.newArrayList();
         this.biomesToSpawnIn.add(BiomeGenBase.forest);
         this.biomesToSpawnIn.add(BiomeGenBase.plains);
         this.biomesToSpawnIn.add(BiomeGenBase.taiga);

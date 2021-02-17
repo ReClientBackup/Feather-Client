@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3i;
@@ -17,11 +17,11 @@ public class RegionRenderCache extends ChunkCache
 {
     private static final IBlockState DEFAULT_STATE = Blocks.air.getDefaultState();
     private final BlockPos position;
-    private int[] combinedLights;
-    private IBlockState[] blockStates;
-    private static ArrayDeque<int[]> cacheLights = new ArrayDeque();
-    private static ArrayDeque<IBlockState[]> cacheStates = new ArrayDeque();
-    private static int maxCacheSize = Config.limit(Runtime.getRuntime().availableProcessors(), 1, 32);
+    private final int[] combinedLights;
+    private final IBlockState[] blockStates;
+    private static final ArrayDeque<int[]> cacheLights = new ArrayDeque();
+    private static final ArrayDeque<IBlockState[]> cacheStates = new ArrayDeque();
+    private static final int maxCacheSize = Config.limit(Runtime.getRuntime().availableProcessors(), 1, 32);
 
     public RegionRenderCache(World worldIn, BlockPos posFromIn, BlockPos posToIn, int subIn)
     {

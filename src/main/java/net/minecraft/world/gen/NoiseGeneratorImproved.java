@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class NoiseGeneratorImproved extends NoiseGenerator
 {
-    private int[] permutations;
+    private final int[] permutations;
     public double xCoord;
     public double yCoord;
     public double zCoord;
@@ -28,7 +28,6 @@ public class NoiseGeneratorImproved extends NoiseGenerator
 
         for (int i = 0; i < 256; this.permutations[i] = i++)
         {
-            ;
         }
 
         for (int l = 0; l < 256; ++l)

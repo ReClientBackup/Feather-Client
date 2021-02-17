@@ -55,7 +55,7 @@ public class CommandTestForBlock extends CommandBase
     {
         if (args.length < 4)
         {
-            throw new WrongUsageException("commands.testforblock.usage", new Object[0]);
+            throw new WrongUsageException("commands.testforblock.usage");
         }
         else
         {
@@ -65,7 +65,7 @@ public class CommandTestForBlock extends CommandBase
 
             if (block == null)
             {
-                throw new NumberInvalidException("commands.setblock.notFound", new Object[] {args[3]});
+                throw new NumberInvalidException("commands.setblock.notFound", args[3]);
             }
             else
             {
@@ -80,7 +80,7 @@ public class CommandTestForBlock extends CommandBase
 
                 if (!world.isBlockLoaded(blockpos))
                 {
-                    throw new CommandException("commands.testforblock.outOfWorld", new Object[0]);
+                    throw new CommandException("commands.testforblock.outOfWorld");
                 }
                 else
                 {
@@ -98,7 +98,7 @@ public class CommandTestForBlock extends CommandBase
                         }
                         catch (NBTException nbtexception)
                         {
-                            throw new CommandException("commands.setblock.tagError", new Object[] {nbtexception.getMessage()});
+                            throw new CommandException("commands.setblock.tagError", nbtexception.getMessage());
                         }
                     }
 
@@ -107,7 +107,7 @@ public class CommandTestForBlock extends CommandBase
 
                     if (block1 != block)
                     {
-                        throw new CommandException("commands.testforblock.failed.tile", new Object[] {Integer.valueOf(blockpos.getX()), Integer.valueOf(blockpos.getY()), Integer.valueOf(blockpos.getZ()), block1.getLocalizedName(), block.getLocalizedName()});
+                        throw new CommandException("commands.testforblock.failed.tile", Integer.valueOf(blockpos.getX()), Integer.valueOf(blockpos.getY()), Integer.valueOf(blockpos.getZ()), block1.getLocalizedName(), block.getLocalizedName());
                     }
                     else
                     {
@@ -117,7 +117,7 @@ public class CommandTestForBlock extends CommandBase
 
                             if (j != i)
                             {
-                                throw new CommandException("commands.testforblock.failed.data", new Object[] {Integer.valueOf(blockpos.getX()), Integer.valueOf(blockpos.getY()), Integer.valueOf(blockpos.getZ()), Integer.valueOf(j), Integer.valueOf(i)});
+                                throw new CommandException("commands.testforblock.failed.data", Integer.valueOf(blockpos.getX()), Integer.valueOf(blockpos.getY()), Integer.valueOf(blockpos.getZ()), Integer.valueOf(j), Integer.valueOf(i));
                             }
                         }
 
@@ -127,7 +127,7 @@ public class CommandTestForBlock extends CommandBase
 
                             if (tileentity == null)
                             {
-                                throw new CommandException("commands.testforblock.failed.tileEntity", new Object[] {Integer.valueOf(blockpos.getX()), Integer.valueOf(blockpos.getY()), Integer.valueOf(blockpos.getZ())});
+                                throw new CommandException("commands.testforblock.failed.tileEntity", Integer.valueOf(blockpos.getX()), Integer.valueOf(blockpos.getY()), Integer.valueOf(blockpos.getZ()));
                             }
 
                             NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -135,12 +135,12 @@ public class CommandTestForBlock extends CommandBase
 
                             if (!NBTUtil.func_181123_a(nbttagcompound, nbttagcompound1, true))
                             {
-                                throw new CommandException("commands.testforblock.failed.nbt", new Object[] {Integer.valueOf(blockpos.getX()), Integer.valueOf(blockpos.getY()), Integer.valueOf(blockpos.getZ())});
+                                throw new CommandException("commands.testforblock.failed.nbt", Integer.valueOf(blockpos.getX()), Integer.valueOf(blockpos.getY()), Integer.valueOf(blockpos.getZ()));
                             }
                         }
 
                         sender.setCommandStat(CommandResultStats.Type.AFFECTED_BLOCKS, 1);
-                        notifyOperators(sender, this, "commands.testforblock.success", new Object[] {Integer.valueOf(blockpos.getX()), Integer.valueOf(blockpos.getY()), Integer.valueOf(blockpos.getZ())});
+                        notifyOperators(sender, this, "commands.testforblock.success", Integer.valueOf(blockpos.getX()), Integer.valueOf(blockpos.getY()), Integer.valueOf(blockpos.getZ()));
                     }
                 }
             }

@@ -48,14 +48,12 @@ public class DefaultResourcePack implements IResourcePack
         }
     }
 
-    public InputStream getInputStreamAssets(ResourceLocation location) throws IOException, FileNotFoundException
-    {
+    public InputStream getInputStreamAssets(ResourceLocation location) throws IOException {
         File file1 = this.mapAssets.get(location.toString());
         return file1 != null && file1.isFile() ? new FileInputStream(file1) : null;
     }
 
-    private InputStream getResourceStream(ResourceLocation location)
-    {
+    public InputStream getResourceStream(ResourceLocation location) {
         String s = "/assets/" + location.getResourceDomain() + "/" + location.getResourcePath();
         InputStream inputstream = ReflectorForge.getOptiFineResourceStream(s);
         return inputstream != null ? inputstream : DefaultResourcePack.class.getResourceAsStream(s);

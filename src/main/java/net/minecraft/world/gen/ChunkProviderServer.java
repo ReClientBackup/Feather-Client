@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
+import com.murengezi.minecraft.crash.CrashReport;
+import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
@@ -28,25 +28,25 @@ import org.apache.logging.log4j.Logger;
 public class ChunkProviderServer implements IChunkProvider
 {
     private static final Logger logger = LogManager.getLogger();
-    private Set<Long> droppedChunksSet = Collections.<Long>newSetFromMap(new ConcurrentHashMap());
+    private final Set<Long> droppedChunksSet = Collections.<Long>newSetFromMap(new ConcurrentHashMap());
 
     /** a dummy chunk, returned in place of an actual chunk. */
-    private Chunk dummyChunk;
+    private final Chunk dummyChunk;
 
     /**
      * chunk generator object. Calls to load nonexistent chunks are forwarded to this object.
      */
-    private IChunkProvider serverChunkGenerator;
-    private IChunkLoader chunkLoader;
+    private final IChunkProvider serverChunkGenerator;
+    private final IChunkLoader chunkLoader;
 
     /**
      * if set, this flag forces a request to load a chunk to load the chunk rather than defaulting to the dummy if
      * possible
      */
     public boolean chunkLoadOverride = true;
-    private LongHashMap<Chunk> id2ChunkMap = new LongHashMap();
-    private List<Chunk> loadedChunks = Lists.<Chunk>newArrayList();
-    private WorldServer worldObj;
+    private final LongHashMap<Chunk> id2ChunkMap = new LongHashMap();
+    private final List<Chunk> loadedChunks = Lists.newArrayList();
+    private final WorldServer worldObj;
 
     public ChunkProviderServer(WorldServer p_i1520_1_, IChunkLoader p_i1520_2_, IChunkProvider p_i1520_3_)
     {
@@ -124,7 +124,7 @@ public class ChunkProviderServer implements IChunkProvider
                     {
                         CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Exception generating new chunk");
                         CrashReportCategory crashreportcategory = crashreport.makeCategory("Chunk to be generated");
-                        crashreportcategory.addCrashSection("Location", String.format("%d,%d", new Object[] {Integer.valueOf(p_73158_1_), Integer.valueOf(p_73158_2_)}));
+                        crashreportcategory.addCrashSection("Location", String.format("%d,%d", Integer.valueOf(p_73158_1_), Integer.valueOf(p_73158_2_)));
                         crashreportcategory.addCrashSection("Position hash", Long.valueOf(i));
                         crashreportcategory.addCrashSection("Generator", this.serverChunkGenerator.makeString());
                         throw new ReportedException(crashreport);
@@ -177,7 +177,7 @@ public class ChunkProviderServer implements IChunkProvider
             }
             catch (Exception exception)
             {
-                logger.error("Couldn\'t load chunk", exception);
+                logger.error("Couldn't load chunk", exception);
                 return null;
             }
         }
@@ -193,7 +193,7 @@ public class ChunkProviderServer implements IChunkProvider
             }
             catch (Exception exception)
             {
-                logger.error("Couldn\'t save entities", exception);
+                logger.error("Couldn't save entities", exception);
             }
         }
     }
@@ -209,11 +209,11 @@ public class ChunkProviderServer implements IChunkProvider
             }
             catch (IOException ioexception)
             {
-                logger.error("Couldn\'t save chunk", ioexception);
+                logger.error("Couldn't save chunk", ioexception);
             }
             catch (MinecraftException minecraftexception)
             {
-                logger.error("Couldn\'t save chunk; already in use by another instance of Minecraft?", minecraftexception);
+                logger.error("Couldn't save chunk; already in use by another instance of Minecraft?", minecraftexception);
             }
         }
     }

@@ -32,7 +32,7 @@ public class UserListOps extends UserList<GameProfile, UserListOpsEntry>
     public boolean func_183026_b(GameProfile p_183026_1_)
     {
         UserListOpsEntry userlistopsentry = this.getEntry(p_183026_1_);
-        return userlistopsentry != null ? userlistopsentry.func_183024_b() : false;
+        return userlistopsentry != null && userlistopsentry.func_183024_b();
     }
 
     /**

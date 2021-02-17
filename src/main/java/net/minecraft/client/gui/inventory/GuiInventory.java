@@ -2,7 +2,7 @@ package net.minecraft.client.gui.inventory;
 
 import java.io.IOException;
 import net.minecraft.client.Minecraft;
-import com.murengezi.minecraft.client.Gui.GuiButton;
+import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.client.gui.achievement.GuiStats;
 import net.minecraft.client.renderer.GlStateManager;
@@ -33,9 +33,9 @@ public class GuiInventory extends InventoryEffectRenderer
      */
     public void updateScreen()
     {
-        if (this.mc.playerController.isInCreativeMode())
+        if (getMc().playerController.isInCreativeMode())
         {
-            this.mc.displayGuiScreen(new GuiContainerCreative(this.mc.thePlayer));
+            changeScreen(new GuiContainerCreative(getPlayer()));
         }
 
         this.updateActivePotionEffects();
@@ -49,9 +49,9 @@ public class GuiInventory extends InventoryEffectRenderer
     {
         this.buttonList.clear();
 
-        if (this.mc.playerController.isInCreativeMode())
+        if (getMc().playerController.isInCreativeMode())
         {
-            this.mc.displayGuiScreen(new GuiContainerCreative(this.mc.thePlayer));
+            changeScreen(new GuiContainerCreative(getPlayer()));
         }
         else
         {
@@ -62,9 +62,8 @@ public class GuiInventory extends InventoryEffectRenderer
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items). Args : mouseX, mouseY
      */
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-    {
-        this.fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 86, 16, 4210752);
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        getFr().drawString(I18n.format("container.crafting"), 86, 16, 4210752);
     }
 
     /**
@@ -80,14 +79,13 @@ public class GuiInventory extends InventoryEffectRenderer
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-    {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(inventoryBackground);
-        int i = this.guiLeft;
-        int j = this.guiTop;
-        this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
-        drawEntityOnScreen(i + 51, j + 75, 30, (float)(i + 51) - this.oldMouseX, (float)(j + 75 - 50) - this.oldMouseY, this.mc.thePlayer);
+    protected void drawGuiContainerBackgroundLayer(int mouseX, int mouseY, float partialTicks) {
+        GlStateManager.colorAllMax();
+        getMc().getTextureManager().bindTexture(inventoryBackground);
+        int left = this.guiLeft;
+        int top = this.guiTop;
+        this.drawTexturedModalRect(left, top, 0, 0, this.xSize, this.ySize);
+        drawEntityOnScreen(left + 51, top + 75, 30, (float)(left + 51) - this.oldMouseX, (float)(top + 75 - 50) - this.oldMouseY, getPlayer());
     }
 
     /**
@@ -95,6 +93,8 @@ public class GuiInventory extends InventoryEffectRenderer
      */
     public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, EntityLivingBase ent)
     {
+        GlStateManager.colorAllMax();
+        GlStateManager.enableDepth();
         GlStateManager.enableColorMaterial();
         GlStateManager.pushMatrix();
         GlStateManager.translate((float)posX, (float)posY, 50.0F);
@@ -131,6 +131,7 @@ public class GuiInventory extends InventoryEffectRenderer
         GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
         GlStateManager.disableTexture2D();
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+        GlStateManager.enableDepth();
     }
 
     /**
@@ -140,12 +141,12 @@ public class GuiInventory extends InventoryEffectRenderer
     {
         if (button.getId() == 0)
         {
-            this.mc.displayGuiScreen(new GuiAchievements(this, this.mc.thePlayer.getStatFileWriter()));
+            changeScreen(new GuiAchievements(this, getPlayer().getStatFileWriter()));
         }
 
         if (button.getId() == 1)
         {
-            this.mc.displayGuiScreen(new GuiStats(this, this.mc.thePlayer.getStatFileWriter()));
+            changeScreen(new GuiStats(this, getPlayer().getStatFileWriter()));
         }
     }
 }

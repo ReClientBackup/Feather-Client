@@ -2,13 +2,12 @@ package net.minecraft.block;
 
 import java.util.List;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockPistonStructureHelper;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -349,12 +348,7 @@ public class BlockPistonBase extends Block
 
                     if (blockIn.getMobilityFlag() == 1)
                     {
-                        if (!allowDestroy)
-                        {
-                            return false;
-                        }
-
-                        return true;
+                        return allowDestroy;
                     }
                 }
                 else if (worldIn.getBlockState(pos).getValue(EXTENDED).booleanValue())
@@ -485,6 +479,6 @@ public class BlockPistonBase extends Block
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING, EXTENDED});
+        return new BlockState(this, FACING, EXTENDED);
     }
 }

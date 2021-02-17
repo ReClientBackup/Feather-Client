@@ -2,7 +2,7 @@ package net.minecraft.client.shader;
 
 import java.io.IOException;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.util.JsonException;
+import net.minecraft.client.util.JSONException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,13 +28,13 @@ public class ShaderLinkHelper
         OpenGlHelper.glDeleteProgram(p_148077_1_.getProgram());
     }
 
-    public int createProgram() throws JsonException
+    public int createProgram() throws JSONException
     {
         int i = OpenGlHelper.glCreateProgram();
 
         if (i <= 0)
         {
-            throw new JsonException("Could not create shader program (returned program ID " + i + ")");
+            throw new JSONException("Could not create shader program (returned program ID " + i + ")");
         }
         else
         {

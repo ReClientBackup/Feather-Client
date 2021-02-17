@@ -4,10 +4,10 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.scoreboard.IScoreObjectiveCriteria;
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.Scoreboard;
+import com.murengezi.minecraft.scoreboard.IScoreObjectiveCriteria;
+import com.murengezi.minecraft.scoreboard.Score;
+import com.murengezi.minecraft.scoreboard.ScoreObjective;
+import com.murengezi.minecraft.scoreboard.Scoreboard;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 
@@ -49,7 +49,7 @@ public class CommandTrigger extends CommandBase
     {
         if (args.length < 3)
         {
-            throw new WrongUsageException("commands.trigger.usage", new Object[0]);
+            throw new WrongUsageException("commands.trigger.usage");
         }
         else
         {
@@ -65,7 +65,7 @@ public class CommandTrigger extends CommandBase
 
                 if (!(entity instanceof EntityPlayerMP))
                 {
-                    throw new CommandException("commands.trigger.invalidPlayer", new Object[0]);
+                    throw new CommandException("commands.trigger.invalidPlayer");
                 }
 
                 entityplayermp = (EntityPlayerMP)entity;
@@ -80,7 +80,7 @@ public class CommandTrigger extends CommandBase
 
                 if (!scoreboard.entityHasObjective(entityplayermp.getCommandSenderName(), scoreobjective))
                 {
-                    throw new CommandException("commands.trigger.invalidObjective", new Object[] {args[0]});
+                    throw new CommandException("commands.trigger.invalidObjective", args[0]);
                 }
                 else
                 {
@@ -88,7 +88,7 @@ public class CommandTrigger extends CommandBase
 
                     if (score.isLocked())
                     {
-                        throw new CommandException("commands.trigger.disabled", new Object[] {args[0]});
+                        throw new CommandException("commands.trigger.disabled", args[0]);
                     }
                     else
                     {
@@ -100,24 +100,24 @@ public class CommandTrigger extends CommandBase
                         {
                             if (!"add".equals(args[1]))
                             {
-                                throw new CommandException("commands.trigger.invalidMode", new Object[] {args[1]});
+                                throw new CommandException("commands.trigger.invalidMode", args[1]);
                             }
 
-                            score.increseScore(i);
+                            score.increaseScore(i);
                         }
 
                         score.setLocked(true);
 
                         if (entityplayermp.theItemInWorldManager.isCreative())
                         {
-                            notifyOperators(sender, this, "commands.trigger.success", new Object[] {args[0], args[1], args[2]});
+                            notifyOperators(sender, this, "commands.trigger.success", args[0], args[1], args[2]);
                         }
                     }
                 }
             }
             else
             {
-                throw new CommandException("commands.trigger.invalidObjective", new Object[] {args[0]});
+                throw new CommandException("commands.trigger.invalidObjective", args[0]);
             }
         }
     }
@@ -127,7 +127,7 @@ public class CommandTrigger extends CommandBase
         if (args.length == 1)
         {
             Scoreboard scoreboard = MinecraftServer.getServer().worldServerForDimension(0).getScoreboard();
-            List<String> list = Lists.<String>newArrayList();
+            List<String> list = Lists.newArrayList();
 
             for (ScoreObjective scoreobjective : scoreboard.getScoreObjectives())
             {
@@ -141,7 +141,7 @@ public class CommandTrigger extends CommandBase
         }
         else
         {
-            return args.length == 2 ? getListOfStringsMatchingLastWord(args, new String[] {"add", "set"}): null;
+            return args.length == 2 ? getListOfStringsMatchingLastWord(args, "add", "set"): null;
         }
     }
 }

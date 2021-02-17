@@ -25,7 +25,7 @@ public class TileEntityEnchantmentTable extends TileEntity implements ITickable,
     public float bookRotation;
     public float bookRotationPrev;
     public float field_145924_q;
-    private static Random rand = new Random();
+    private static final Random rand = new Random();
     private String customName;
 
     public void writeToNBT(NBTTagCompound compound)
@@ -109,7 +109,6 @@ public class TileEntityEnchantmentTable extends TileEntity implements ITickable,
 
         for (f2 = this.field_145924_q - this.bookRotation; f2 >= (float)Math.PI; f2 -= ((float)Math.PI * 2F))
         {
-            ;
         }
 
         while (f2 < -(float)Math.PI)
@@ -154,7 +153,7 @@ public class TileEntityEnchantmentTable extends TileEntity implements ITickable,
      */
     public IChatComponent getDisplayName()
     {
-        return this.hasCustomName() ? new ChatComponentText(this.getCommandSenderName()) : new ChatComponentTranslation(this.getCommandSenderName(), new Object[0]);
+        return this.hasCustomName() ? new ChatComponentText(this.getCommandSenderName()) : new ChatComponentTranslation(this.getCommandSenderName());
     }
 
     public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)

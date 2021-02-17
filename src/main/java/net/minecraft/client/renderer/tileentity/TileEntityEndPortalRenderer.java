@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.tileentity.TileEntityEndPortal;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.shaders.ShadersRender;
@@ -103,10 +103,10 @@ public class TileEntityEndPortalRenderer extends TileEntitySpecialRenderer<TileE
                     f11 = f12 = f13 = 1.0F * f6;
                 }
 
-                worldrenderer.pos(x, y + (double)f3, z).color(f11, f12, f13, 1.0F).func_181675_d();
-                worldrenderer.pos(x, y + (double)f3, z + 1.0D).color(f11, f12, f13, 1.0F).func_181675_d();
-                worldrenderer.pos(x + 1.0D, y + (double)f3, z + 1.0D).color(f11, f12, f13, 1.0F).func_181675_d();
-                worldrenderer.pos(x + 1.0D, y + (double)f3, z).color(f11, f12, f13, 1.0F).func_181675_d();
+                worldrenderer.pos(x, y + (double)f3, z).color(f11, f12, f13, 1.0F).endVertex();
+                worldrenderer.pos(x, y + (double)f3, z + 1.0D).color(f11, f12, f13, 1.0F).endVertex();
+                worldrenderer.pos(x + 1.0D, y + (double)f3, z + 1.0D).color(f11, f12, f13, 1.0F).endVertex();
+                worldrenderer.pos(x + 1.0D, y + (double)f3, z).color(f11, f12, f13, 1.0F).endVertex();
                 tessellator.draw();
                 GlStateManager.popMatrix();
                 GlStateManager.matrixMode(5888);
@@ -118,7 +118,7 @@ public class TileEntityEndPortalRenderer extends TileEntitySpecialRenderer<TileE
             GlStateManager.disableTexGenCoord(GlStateManager.TexGen.T);
             GlStateManager.disableTexGenCoord(GlStateManager.TexGen.R);
             GlStateManager.disableTexGenCoord(GlStateManager.TexGen.Q);
-            GlStateManager.enableLighting();
+            GlStateManager.enableLightning();
         }
     }
 

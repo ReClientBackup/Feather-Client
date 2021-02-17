@@ -30,8 +30,8 @@ import net.optifine.reflect.ReflectorForge;
 public final class SpawnerAnimals
 {
     private static final int MOB_COUNT_DIV = (int)Math.pow(17.0D, 2.0D);
-    private final Set<ChunkCoordIntPair> eligibleChunksForSpawning = Sets.<ChunkCoordIntPair>newHashSet();
-    private Map<Class, EntityLiving> mapSampleEntitiesByClass = new HashMap();
+    private final Set<ChunkCoordIntPair> eligibleChunksForSpawning = Sets.newHashSet();
+    private final Map<Class, EntityLiving> mapSampleEntitiesByClass = new HashMap();
     private int lastPlayerChunkX = Integer.MAX_VALUE;
     private int lastPlayerChunkZ = Integer.MAX_VALUE;
     private int countChunkPos;
@@ -113,7 +113,7 @@ public final class SpawnerAnimals
             {
                 if ((!enumcreaturetype.getPeacefulCreature() || spawnPeacefulMobs) && (enumcreaturetype.getPeacefulCreature() || spawnHostileMobs) && (!enumcreaturetype.getAnimal() || p_77192_4_))
                 {
-                    int k4 = Reflector.ForgeWorld_countEntities.exists() ? Reflector.callInt(p_77192_1_, Reflector.ForgeWorld_countEntities, new Object[] {enumcreaturetype, Boolean.valueOf(true)}): p_77192_1_.countEntities(enumcreaturetype.getCreatureClass());
+                    int k4 = Reflector.ForgeWorld_countEntities.exists() ? Reflector.callInt(p_77192_1_, Reflector.ForgeWorld_countEntities, enumcreaturetype, Boolean.valueOf(true)): p_77192_1_.countEntities(enumcreaturetype.getCreatureClass());
                     int l4 = enumcreaturetype.getMaxNumberOfCreature() * this.countChunkPos / MOB_COUNT_DIV;
 
                     if (k4 <= l4)
@@ -181,7 +181,7 @@ public final class SpawnerAnimals
 
                                                     if (entityliving == null)
                                                     {
-                                                        entityliving = biomegenbase$spawnlistentry.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {p_77192_1_});
+                                                        entityliving = biomegenbase$spawnlistentry.entityClass.getConstructor(new Class[] {World.class}).newInstance(p_77192_1_);
                                                         this.mapSampleEntitiesByClass.put(biomegenbase$spawnlistentry.entityClass, entityliving);
                                                     }
                                                 }
@@ -209,7 +209,7 @@ public final class SpawnerAnimals
                                                         p_77192_1_.spawnEntityInWorld(entityliving);
                                                     }
 
-                                                    int i4 = Reflector.ForgeEventFactory_getMaxSpawnPackSize.exists() ? Reflector.callInt(Reflector.ForgeEventFactory_getMaxSpawnPackSize, new Object[] {entityliving}): entityliving.getMaxSpawnedInChunk();
+                                                    int i4 = Reflector.ForgeEventFactory_getMaxSpawnPackSize.exists() ? Reflector.callInt(Reflector.ForgeEventFactory_getMaxSpawnPackSize, entityliving): entityliving.getMaxSpawnedInChunk();
 
                                                     if (j2 >= i4)
                                                     {
@@ -275,7 +275,7 @@ public final class SpawnerAnimals
             {
                 BlockPos blockpos = pos.down();
                 IBlockState iblockstate = worldIn.getBlockState(blockpos);
-                boolean flag = Reflector.ForgeBlock_canCreatureSpawn.exists() ? Reflector.callBoolean(iblockstate.getBlock(), Reflector.ForgeBlock_canCreatureSpawn, new Object[] {worldIn, blockpos, p_180267_0_}): World.doesBlockHaveSolidTopSurface(worldIn, blockpos);
+                boolean flag = Reflector.ForgeBlock_canCreatureSpawn.exists() ? Reflector.callBoolean(iblockstate.getBlock(), Reflector.ForgeBlock_canCreatureSpawn, worldIn, blockpos, p_180267_0_): World.doesBlockHaveSolidTopSurface(worldIn, blockpos);
 
                 if (!flag)
                 {
@@ -324,7 +324,7 @@ public final class SpawnerAnimals
 
                             try
                             {
-                                entityliving = biomegenbase$spawnlistentry.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {worldIn});
+                                entityliving = biomegenbase$spawnlistentry.entityClass.getConstructor(new Class[] {World.class}).newInstance(worldIn);
                             }
                             catch (Exception exception1)
                             {
@@ -334,7 +334,7 @@ public final class SpawnerAnimals
 
                             if (Reflector.ForgeEventFactory_canEntitySpawn.exists())
                             {
-                                Object object = Reflector.call(Reflector.ForgeEventFactory_canEntitySpawn, new Object[] {entityliving, worldIn, Float.valueOf((float)j + 0.5F), Integer.valueOf(blockpos.getY()), Float.valueOf((float)k + 0.5F)});
+                                Object object = Reflector.call(Reflector.ForgeEventFactory_canEntitySpawn, entityliving, worldIn, Float.valueOf((float)j + 0.5F), Integer.valueOf(blockpos.getY()), Float.valueOf((float)k + 0.5F));
 
                                 if (object == ReflectorForge.EVENT_RESULT_DENY)
                                 {
