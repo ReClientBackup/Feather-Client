@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class HttpPipelineConnection {
    private String host;

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class EntityUtils {
    private static final Map<Class, Integer> mapIdByClass = new HashMap();

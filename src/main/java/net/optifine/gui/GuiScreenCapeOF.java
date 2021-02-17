@@ -8,7 +8,7 @@ import java.util.Random;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.Lang;
 
 public class GuiScreenCapeOF extends GuiScreenOF {

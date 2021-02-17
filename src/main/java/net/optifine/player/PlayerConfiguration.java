@@ -2,7 +2,7 @@ package net.optifine.player;
 
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class PlayerConfiguration {
    private PlayerItemModel[] playerItemModels = new PlayerItemModel[0];

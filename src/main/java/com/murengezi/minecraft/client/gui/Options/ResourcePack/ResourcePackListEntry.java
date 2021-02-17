@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui.Options.ResourcePack;
 
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.GuiListExtended;
 import com.murengezi.minecraft.client.gui.YesNoScreen;
 import com.murengezi.minecraft.client.gui.GUI;

@@ -12,7 +12,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.nbt.NBTTagString;
-import net.minecraft.src.Config;
 import net.optifine.util.StrUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 

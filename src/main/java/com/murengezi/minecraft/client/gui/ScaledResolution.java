@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui;
 
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MathHelper;
 

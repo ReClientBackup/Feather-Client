@@ -21,7 +21,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
 import com.murengezi.minecraft.scoreboard.Team;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.optifine.EmissiveTextures;

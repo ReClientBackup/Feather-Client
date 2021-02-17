@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IResourcePack;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;

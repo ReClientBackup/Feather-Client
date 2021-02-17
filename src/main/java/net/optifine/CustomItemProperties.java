@@ -29,7 +29,7 @@ import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.config.IParserInt;

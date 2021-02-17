@@ -7,15 +7,14 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.NetHandlerLoginServer;
 import net.minecraft.util.IChatComponent;
 
-public class NetHandlerHandshakeMemory implements INetHandlerHandshakeServer
-{
-    private final MinecraftServer mcServer;
+public class NetHandlerHandshakeMemory implements INetHandlerHandshakeServer {
+
+    private final MinecraftServer server;
     private final NetworkManager networkManager;
 
-    public NetHandlerHandshakeMemory(MinecraftServer p_i45287_1_, NetworkManager p_i45287_2_)
-    {
-        this.mcServer = p_i45287_1_;
-        this.networkManager = p_i45287_2_;
+    public NetHandlerHandshakeMemory(MinecraftServer server, NetworkManager networkManager) {
+        this.server = server;
+        this.networkManager = networkManager;
     }
 
     /**
@@ -23,16 +22,13 @@ public class NetHandlerHandshakeMemory implements INetHandlerHandshakeServer
      * NetworkManager's protocol will be reconfigured according to the specified intention, although a login-intention
      * must pass a versioncheck or receive a disconnect otherwise
      */
-    public void processHandshake(C00Handshake packetIn)
-    {
-        this.networkManager.setConnectionState(packetIn.getRequestedState());
-        this.networkManager.setNetHandler(new NetHandlerLoginServer(this.mcServer, this.networkManager));
+    public void processHandshake(C00Handshake packet) {
+        this.networkManager.setConnectionState(packet.getRequestedState());
+        this.networkManager.setNetHandler(new NetHandlerLoginServer(this.server, this.networkManager));
     }
 
     /**
      * Invoked when disconnecting, the parameter is a ChatComponent describing the reason for termination
      */
-    public void onDisconnect(IChatComponent reason)
-    {
-    }
+    public void onDisconnect(IChatComponent reason) {}
 }

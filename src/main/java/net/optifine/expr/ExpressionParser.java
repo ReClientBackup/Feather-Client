@@ -8,7 +8,7 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class ExpressionParser {
    private final IExpressionResolver expressionResolver;

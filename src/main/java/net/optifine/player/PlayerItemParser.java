@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.entity.model.CustomEntityModelParser;

@@ -1,6 +1,6 @@
 package net.optifine.util;
 
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.tileentity.TileEntityBrewingStand;

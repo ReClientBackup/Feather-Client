@@ -5,7 +5,7 @@ import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.MathHelper;
 import net.optifine.Lang;
 import net.optifine.gui.GuiScreenOF;

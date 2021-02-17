@@ -2,7 +2,7 @@ package net.optifine.player;
 
 import java.awt.image.BufferedImage;
 
-import com.murengezi.feather.Util.CapeUtils;
+import com.murengezi.chocolate.Util.CapeUtils;
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ImageBufferDownload;
 import net.minecraft.util.ResourceLocation;

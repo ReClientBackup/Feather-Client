@@ -17,7 +17,7 @@ import net.minecraft.network.PacketThreadUtil;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import com.murengezi.minecraft.profiler.PlayerUsageSnooper;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.CryptManager;
 import net.minecraft.util.HttpUtil;

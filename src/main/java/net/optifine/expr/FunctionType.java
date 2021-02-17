@@ -3,7 +3,7 @@ package net.optifine.expr;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.optifine.shaders.uniform.Smoother;

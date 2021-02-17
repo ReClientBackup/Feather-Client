@@ -2,7 +2,7 @@ package net.minecraft.client.renderer.entity;
 
 import java.util.List;
 
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockDoublePlant;
@@ -54,7 +54,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;

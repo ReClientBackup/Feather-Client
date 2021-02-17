@@ -17,7 +17,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.*;
 import net.minecraft.world.storage.MapData;
 import net.optifine.DynamicLights;

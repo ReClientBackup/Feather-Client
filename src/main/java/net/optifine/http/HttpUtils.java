@@ -11,7 +11,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class HttpUtils {
    private static String playerItemsUrl = null;

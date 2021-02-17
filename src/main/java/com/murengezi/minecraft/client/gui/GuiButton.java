@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui;
 
-import com.murengezi.feather.Feather;
+import com.murengezi.chocolate.Chocolate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
@@ -47,7 +47,7 @@ public class GuiButton extends GUI {
                 this.lastHover = System.currentTimeMillis();
             }
 
-            Color color = Feather.getThemeManager().getActiveTheme().getColor();
+            Color color = Chocolate.getThemeManager().getActiveTheme().getColor();
 
             if (isHovered()) {
                 boxColorRed = Math.min(color.getRed(), (int)((System.currentTimeMillis() - this.lastHover)));

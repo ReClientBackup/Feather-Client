@@ -1,9 +1,9 @@
 package com.murengezi.minecraft.client.gui.InGame;
 
 import com.darkmagician6.eventapi.EventManager;
-import com.murengezi.feather.Event.RenderCrosshairEvent;
-import com.murengezi.feather.Event.RenderOverlayEvent;
-import com.murengezi.feather.Event.RenderScoreboardEvent;
+import com.murengezi.chocolate.Event.RenderCrosshairEvent;
+import com.murengezi.chocolate.Event.RenderOverlayEvent;
+import com.murengezi.chocolate.Event.RenderScoreboardEvent;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.potion.Potion;
@@ -32,7 +32,7 @@ import net.minecraft.item.ItemStack;
 import com.murengezi.minecraft.scoreboard.ScoreObjective;
 import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
 import com.murengezi.minecraft.scoreboard.Scoreboard;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.*;
 import net.minecraft.world.border.WorldBorder;
 import net.optifine.CustomColors;

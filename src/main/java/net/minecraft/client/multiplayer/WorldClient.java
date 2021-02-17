@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import com.murengezi.minecraft.profiler.Profiler;
 import com.murengezi.minecraft.scoreboard.Scoreboard;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumParticleTypes;

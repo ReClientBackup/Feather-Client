@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.expr.ExpressionParser;
 import net.optifine.expr.ExpressionType;
 import net.optifine.expr.IExpression;

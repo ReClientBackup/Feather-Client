@@ -29,7 +29,7 @@ import net.minecraft.network.play.server.S1BPacketEntityAttach;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateGround;
 import com.murengezi.minecraft.scoreboard.Team;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;

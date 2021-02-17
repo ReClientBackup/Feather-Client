@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui;
 
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -32,7 +32,7 @@ public class GUI extends MinecraftUtils {
     }
 
     /**
-     * TODO Feather
+     * TODO Chocolate
      * TODO WorldRenderer deobfuscation
      */
     public static void drawRect(float left, float top, float right, float bottom, int color) {
@@ -149,7 +149,7 @@ public class GUI extends MinecraftUtils {
     }
 
     /**
-     * TODO Feather
+     * TODO Chocolate
      */
     public static void drawModalRectWithCustomSizedTexture(float x, float y, float u, float v, int width, int height, float textureWidth, float textureHeight) {
         float f = 1.0F / textureWidth;

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.gui.GuiNewChat;
 import com.murengezi.minecraft.client.gui.Screen;
@@ -31,7 +31,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.network.play.client.C15PacketClientSettings;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.optifine.ClearWater;

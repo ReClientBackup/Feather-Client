@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.CustomItems;
 import net.optifine.reflect.Reflector;

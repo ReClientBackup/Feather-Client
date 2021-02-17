@@ -3,7 +3,7 @@ package net.optifine.util;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class NativeMemory {
    private static final LongSupplier bufferAllocatedSupplier = makeLongSupplier(new String[][]{{"sun.misc.SharedSecrets", "getJavaNioAccess", "getDirectBufferPool", "getMemoryUsed"}, {"jdk.internal.misc.SharedSecrets", "getJavaNioAccess", "getDirectBufferPool", "getMemoryUsed"}});

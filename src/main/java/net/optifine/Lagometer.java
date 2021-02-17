@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.util.MemoryMonitor;
 import org.lwjgl.opengl.GL11;
 

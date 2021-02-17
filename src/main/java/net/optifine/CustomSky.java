@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Properties;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.optifine.render.Blender;

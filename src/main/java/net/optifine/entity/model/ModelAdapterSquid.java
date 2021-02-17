@@ -7,7 +7,7 @@ import net.minecraft.client.model.ModelSquid;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSquid;
 import net.minecraft.entity.passive.EntitySquid;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.reflect.Reflector;
 
 public class ModelAdapterSquid extends ModelAdapter {

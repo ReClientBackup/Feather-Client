@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import com.murengezi.feather.Feather;
+import com.murengezi.chocolate.Chocolate;
 import com.murengezi.minecraft.client.gui.Singleplayer.YesNoCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiLabel;
@@ -519,9 +519,9 @@ public abstract class Screen extends GUI implements YesNoCallback {
 
     public void drawWorldBackground(int mouseX, int mouseY, int delta) {
         if (getWorld() == null) {
-            drawGradientRect(0, 0, this.width, this.height, Feather.getThemeManager().getActiveTheme().getColor().getRGB(), 0xff333333);
-            Feather.getParticleManager().render(mouseX, mouseY);
-            Feather.getParticleManager().tick(delta);
+            drawGradientRect(0, 0, this.width, this.height, Chocolate.getThemeManager().getActiveTheme().getColor().getRGB(), 0xff333333);
+            Chocolate.getParticleManager().render(mouseX, mouseY);
+            Chocolate.getParticleManager().tick(delta);
         }
     }
 

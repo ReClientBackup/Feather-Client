@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.config.ConnectedParser;
 import net.optifine.reflect.Reflector;

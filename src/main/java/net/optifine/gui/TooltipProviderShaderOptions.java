@@ -7,7 +7,7 @@ import java.util.List;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.Lang;
 import net.optifine.shaders.config.ShaderOption;
 import net.optifine.shaders.gui.GuiButtonShaderOption;

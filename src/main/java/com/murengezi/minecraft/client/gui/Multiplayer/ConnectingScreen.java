@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui.Multiplayer;
 
-import com.murengezi.feather.Feather;
+import com.murengezi.chocolate.Chocolate;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.multiplayer.ServerAddress;
@@ -69,7 +69,7 @@ public class ConnectingScreen extends Screen {
     }
 
     private void connect(String ip, int port) {
-        Feather.getLogger().log(Level.INFO, "Connecting to " + ip + ", " + port);
+        Chocolate.getLogger().log(Level.INFO, "Connecting to " + ip + ", " + port);
         new Thread("Server Connector #" + CONNECTION_ID.incrementAndGet()) {
 
             @Override
@@ -92,13 +92,13 @@ public class ConnectingScreen extends Screen {
                         return;
                     }
 
-                    Feather.getLogger().error("Could not connect to server.", e);
+                    Chocolate.getLogger().error("Could not connect to server.", e);
                     changeScreen(new DisconnectedScreen(previousScreen, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", "Unknown host")));
                 } catch (Exception e) {
                     if (isCancelled()) {
                         return;
                     }
-                    Feather.getLogger().error("Could not connect to server.", e);
+                    Chocolate.getLogger().error("Could not connect to server.", e);
                     String msg = e.toString();
 
                     if (inetAddress != null) {

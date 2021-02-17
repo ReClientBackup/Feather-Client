@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.shaders.ShadersTex;
 import org.apache.logging.log4j.LogManager;

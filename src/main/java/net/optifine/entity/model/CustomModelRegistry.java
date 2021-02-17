@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class CustomModelRegistry {
    private static final Map<String, ModelAdapter> mapModelAdapters = makeMapModelAdapters();

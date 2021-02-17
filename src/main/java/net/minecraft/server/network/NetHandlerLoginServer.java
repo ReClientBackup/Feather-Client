@@ -153,10 +153,10 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable
         return this.loginGameProfile != null ? this.loginGameProfile.toString() + " (" + this.networkManager.getRemoteAddress().toString() + ")" : String.valueOf(this.networkManager.getRemoteAddress());
     }
 
-    public void processLoginStart(C00PacketLoginStart packetIn)
+    public void processLoginStart(C00PacketLoginStart packet)
     {
         Validate.validState(this.currentLoginState == NetHandlerLoginServer.LoginState.HELLO, "Unexpected hello packet");
-        this.loginGameProfile = packetIn.getProfile();
+        this.loginGameProfile = packet.getProfile();
 
         if (this.server.isServerInOnlineMode() && !this.networkManager.isLocalChannel())
         {
@@ -169,18 +169,18 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable
         }
     }
 
-    public void processEncryptionResponse(C01PacketEncryptionResponse packetIn)
+    public void processEncryptionResponse(C01PacketEncryptionResponse packet)
     {
         Validate.validState(this.currentLoginState == NetHandlerLoginServer.LoginState.KEY, "Unexpected key packet");
         PrivateKey privatekey = this.server.getKeyPair().getPrivate();
 
-        if (!Arrays.equals(this.verifyToken, packetIn.getVerifyToken(privatekey)))
+        if (!Arrays.equals(this.verifyToken, packet.getVerifyToken(privatekey)))
         {
             throw new IllegalStateException("Invalid nonce!");
         }
         else
         {
-            this.secretKey = packetIn.getSecretKey(privatekey);
+            this.secretKey = packet.getSecretKey(privatekey);
             this.currentLoginState = NetHandlerLoginServer.LoginState.AUTHENTICATING;
             this.networkManager.enableEncryption(this.secretKey);
             (new Thread("User Authenticator #" + AUTHENTICATOR_THREAD_ID.incrementAndGet())

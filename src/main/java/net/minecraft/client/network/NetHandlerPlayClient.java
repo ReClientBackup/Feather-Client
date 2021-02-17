@@ -1468,7 +1468,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     }
 
     /**
-     * TODO Feather
+     * TODO Chocolate
      * @param packetIn
      */
 

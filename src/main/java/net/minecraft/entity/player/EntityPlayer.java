@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-import com.murengezi.feather.Event.EntityHitEvent;
+import com.murengezi.chocolate.Event.EntityHitEvent;
 import com.murengezi.minecraft.potion.Potion;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class FieldLocatorActionKeyF3 implements IFieldLocator {
    public Field getField() {

@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.scoreboard;
 
-import com.murengezi.feather.Feather;
+import com.murengezi.chocolate.Chocolate;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
@@ -154,7 +154,7 @@ public class ScoreboardSaveData extends WorldSavedData {
 
     public void writeToNBT(NBTTagCompound tagCompound) {
         if (this.scoreboard == null) {
-            Feather.getLogger().warn("Tried to save scoreboard without having a scoreboard...");
+            Chocolate.getLogger().warn("Tried to save scoreboard without having a scoreboard...");
         } else {
             tagCompound.setTag("Objectives", this.objectivesToNbt());
             tagCompound.setTag("PlayerScores", this.scoresToNbt());

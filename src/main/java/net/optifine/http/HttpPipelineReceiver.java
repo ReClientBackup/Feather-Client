@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class HttpPipelineReceiver extends Thread {
    private HttpPipelineConnection httpPipelineConnection = null;

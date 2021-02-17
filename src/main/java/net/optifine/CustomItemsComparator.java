@@ -1,7 +1,7 @@
 package net.optifine;
 
 import java.util.Comparator;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class CustomItemsComparator implements Comparator {
    public int compare(Object o1, Object o2) {

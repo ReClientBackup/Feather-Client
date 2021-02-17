@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui.Multiplayer.Lan;
 
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.GuiListExtended;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

@@ -30,7 +30,7 @@ public class NetHandlerStatusServer implements INetHandlerStatusServer
     {
     }
 
-    public void processServerQuery(C00PacketServerQuery packetIn)
+    public void processServerQuery(C00PacketServerQuery packet)
     {
         if (this.field_183008_d)
         {
@@ -43,9 +43,9 @@ public class NetHandlerStatusServer implements INetHandlerStatusServer
         }
     }
 
-    public void processPing(C01PacketPing packetIn)
+    public void processPing(C01PacketPing packet)
     {
-        this.networkManager.sendPacket(new S01PacketPong(packetIn.getClientTime()));
+        this.networkManager.sendPacket(new S01PacketPong(packet.getClientTime()));
         this.networkManager.closeChannel(field_183007_a);
     }
 }

@@ -1,6 +1,6 @@
 package net.minecraft.client.gui;
 
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Options.ResourcePack.ResourcePackList;

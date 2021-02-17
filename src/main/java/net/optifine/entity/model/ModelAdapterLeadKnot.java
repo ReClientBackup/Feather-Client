@@ -7,7 +7,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderLeashKnot;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLeashKnot;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.reflect.Reflector;
 
 public class ModelAdapterLeadKnot extends ModelAdapter {

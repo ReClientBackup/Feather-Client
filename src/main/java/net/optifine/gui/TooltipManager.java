@@ -4,12 +4,10 @@ import java.awt.Rectangle;
 import java.util.Arrays;
 import java.util.List;
 
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 
 public class TooltipManager {
    private final Screen guiScreen;

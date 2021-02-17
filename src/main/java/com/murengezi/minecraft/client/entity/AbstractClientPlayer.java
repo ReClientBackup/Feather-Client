@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.entity;
 
 import com.mojang.authlib.GameProfile;
-import com.murengezi.feather.Util.CapeUtils;
+import com.murengezi.chocolate.Util.CapeUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.ImageBufferDownload;
@@ -13,7 +13,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.Vec3;

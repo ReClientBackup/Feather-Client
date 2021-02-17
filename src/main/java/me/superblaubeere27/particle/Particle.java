@@ -1,6 +1,6 @@
 package me.superblaubeere27.particle;
 
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import me.superblaubeere27.util.MathUtil;
 import org.lwjgl.util.vector.Vector2f;
 

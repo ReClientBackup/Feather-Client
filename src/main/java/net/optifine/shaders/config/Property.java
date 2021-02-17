@@ -1,7 +1,7 @@
 package net.optifine.shaders.config;
 
 import java.util.Properties;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class Property {

@@ -6,7 +6,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityEnderChestRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.tileentity.TileEntityEnderChest;
 import net.optifine.reflect.Reflector;
 

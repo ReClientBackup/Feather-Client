@@ -3,7 +3,7 @@ package net.minecraft.client.renderer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.SmartAnimations;
 import net.optifine.render.GlAlphaState;
 import net.optifine.render.GlBlendState;

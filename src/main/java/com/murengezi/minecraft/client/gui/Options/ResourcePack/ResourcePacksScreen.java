@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.gui.Options.ResourcePack;
 
 import com.google.common.collect.Lists;
-import com.murengezi.feather.Feather;
+import com.murengezi.chocolate.Chocolate;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiOptionButton;
@@ -105,11 +105,11 @@ public class ResourcePacksScreen extends Screen {
 
 					if (Util.getOSType() == Util.EnumOS.OSX) {
 						try {
-							Feather.getLogger().info(s);
+							Chocolate.getLogger().info(s);
 							Runtime.getRuntime().exec(new String[] {"/usr/bin/open", s});
 							return;
 						} catch (IOException ioexception1) {
-							Feather.getLogger().error("Couldn't open file", ioexception1);
+							Chocolate.getLogger().error("Couldn't open file", ioexception1);
 						}
 					} else if (Util.getOSType() == Util.EnumOS.WINDOWS) {
 						String s1 = String.format("cmd.exe /C start \"Open file\" \"%s\"", s);
@@ -119,7 +119,7 @@ public class ResourcePacksScreen extends Screen {
 							return;
 						} catch (IOException ioException)
 						{
-							Feather.getLogger().error("Couldn't open file", ioException);
+							Chocolate.getLogger().error("Couldn't open file", ioException);
 						}
 					}
 
@@ -130,12 +130,12 @@ public class ResourcePacksScreen extends Screen {
 						Object object = clazz.getMethod("getDesktop").invoke(null);
 						clazz.getMethod("browse", URI.class).invoke(object, file1.toURI());
 					} catch (Throwable throwable) {
-						Feather.getLogger().error("Couldn't open link", throwable);
+						Chocolate.getLogger().error("Couldn't open link", throwable);
 						flag = true;
 					}
 
 					if (flag) {
-						Feather.getLogger().info("Opening via system class!");
+						Chocolate.getLogger().info("Opening via system class!");
 						Sys.openURL("file://" + s);
 					}
 					break;

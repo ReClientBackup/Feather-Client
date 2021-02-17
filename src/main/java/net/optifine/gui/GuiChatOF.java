@@ -2,7 +2,7 @@ package net.optifine.gui;
 
 import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
 import net.minecraft.client.gui.GuiVideoSettings;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.shaders.Shaders;
 
 public class GuiChatOF extends ChatScreen {

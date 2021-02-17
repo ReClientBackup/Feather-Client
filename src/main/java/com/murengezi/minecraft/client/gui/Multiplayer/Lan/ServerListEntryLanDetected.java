@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.gui.Multiplayer.Lan;
 
-import com.murengezi.feather.Feather;
-import com.murengezi.feather.Util.MinecraftUtils;
+import com.murengezi.chocolate.Chocolate;
+import com.murengezi.chocolate.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.GuiListExtended;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -30,7 +30,7 @@ public class ServerListEntryLanDetected extends MinecraftUtils implements GuiLis
 
 
         String url = "https://crafatar.com/avatars/" + this.lanServer.getLanServerUUID() + "?size=8.png";
-        Feather.getImageManager().drawImageFromUrl(FilenameUtils.getBaseName(url), url, x, y, 32, 32);
+        Chocolate.getImageManager().drawImageFromUrl(FilenameUtils.getBaseName(url), url, x, y, 32, 32);
     }
 
     /**

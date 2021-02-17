@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.entity;
 
 import com.darkmagician6.eventapi.EventManager;
-import com.murengezi.feather.Event.PlayerUpdateEvent;
+import com.murengezi.chocolate.Event.PlayerUpdateEvent;
 import com.murengezi.minecraft.potion.Potion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
@@ -97,7 +97,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ))) {
             super.onUpdate();
 
-            //TODO Feather
+            //TODO Chocolate
             PlayerUpdateEvent playerUpdateEvent = new PlayerUpdateEvent();
             EventManager.call(playerUpdateEvent);
 

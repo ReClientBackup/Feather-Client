@@ -35,8 +35,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
-import com.murengezi.feather.Event.*;
-import com.murengezi.feather.Feather;
+import com.murengezi.chocolate.Event.*;
+import com.murengezi.chocolate.Chocolate;
 import com.murengezi.minecraft.client.gui.InGame.InGameMenuScreen;
 import com.murengezi.minecraft.client.gui.InGame.InGameScreen;
 import com.murengezi.minecraft.client.gui.MainMenuScreen;
@@ -510,8 +510,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         this.checkGLError("Post startup");
         this.inGameScreen = new InGameScreen();
 
-        //TODO Feather Start
-        Feather.start();
+        //TODO Chocolate Start
+        Chocolate.start();
 
         if (this.serverName != null) {
             this.displayGuiScreen(new ConnectingScreen(new MainMenuScreen(), this.serverName, this.serverPort));
@@ -548,7 +548,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 
     private void createDisplay() throws LWJGLException {
         Display.setResizable(true);
-        Display.setTitle("Feather (?-?/?)");
+        Display.setTitle("Chocolate (?-?/?)");
 
         try {
             Display.create((new PixelFormat()).withDepthBits(24));
@@ -593,8 +593,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
             InputStream icon32 = null;
 
             try {
-                icon16 = this.mcDefaultResourcePack.getInputStreamAssets(new ResourceLocation("icons/icon_16x16.png"));
-                icon32 = this.mcDefaultResourcePack.getInputStreamAssets(new ResourceLocation("icons/icon_32x32.png"));
+                icon16 = this.mcDefaultResourcePack.getResourceStream(new ResourceLocation("chocolate/logo_16x16.png"));
+                icon32 = this.mcDefaultResourcePack.getResourceStream(new ResourceLocation("chocolate/logo_32x32.png"));
 
                 if (icon16 != null && icon32 != null) {
                     Display.setIcon(new ByteBuffer[] {this.readImageToBuffer(icon16), this.readImageToBuffer(icon32)});

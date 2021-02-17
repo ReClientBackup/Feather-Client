@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui;
 
-import com.murengezi.feather.Feather;
+import com.murengezi.chocolate.Chocolate;
 import com.murengezi.minecraft.client.gui.BrowseServers.BrowseScreen;
 import com.murengezi.minecraft.client.gui.Multiplayer.MultiplayerScreen;
 import com.murengezi.minecraft.client.gui.Options.OptionsScreen;
@@ -85,7 +85,7 @@ public class MainMenuScreen extends Screen {
         boolean premium = !getMc().getSession().getToken().equals("") && !getMc().getSession().getToken().equals("0");
         String uuid = premium ? getMc().getSession().getPlayerID() : "606e2ff0ed7748429d6ce1d3321c7838";
         String url = "https://crafatar.com/avatars/" + uuid + "?size=8.png";
-        Feather.getImageManager().drawImageFromUrl(FilenameUtils.getBaseName(url), url, 2, 2, 16, 16);
+        Chocolate.getImageManager().drawImageFromUrl(FilenameUtils.getBaseName(url), url, 2, 2, 16, 16);
         getFr().drawStringWithShadow(playerName, 21, 6, 0xffffffff);
 
         GlStateManager.pushMatrix();
@@ -94,7 +94,7 @@ public class MainMenuScreen extends Screen {
         drawModalRectWithCustomSizedTexture(20 + 3 + getFr().getStringWidth(playerName), 6, 0, 0, 8, 8, 8, 8);
         GlStateManager.popMatrix();
 
-        getFr().drawStringWithShadow(EnumChatFormatting.BOLD + "\"" + EnumChatFormatting.RESET + Feather.getThemeManager().getActiveTheme().getName() + EnumChatFormatting.BOLD + "\"" + EnumChatFormatting.RESET + " by " + Feather.getThemeManager().getActiveTheme().getAuthor(), 2, this.height - 10, 0xffffffff);
+        getFr().drawStringWithShadow(EnumChatFormatting.BOLD + "\"" + EnumChatFormatting.RESET + Chocolate.getThemeManager().getActiveTheme().getName() + EnumChatFormatting.BOLD + "\"" + EnumChatFormatting.RESET + " by " + Chocolate.getThemeManager().getActiveTheme().getAuthor(), 2, this.height - 10, 0xffffffff);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

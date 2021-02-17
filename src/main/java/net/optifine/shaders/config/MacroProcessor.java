@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.shaders.Shaders;
 
 public class MacroProcessor {

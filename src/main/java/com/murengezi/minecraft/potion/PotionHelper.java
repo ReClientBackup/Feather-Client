@@ -2,7 +2,7 @@ package com.murengezi.minecraft.potion;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.minecraft.util.IntegerCache;
 import net.optifine.CustomColors;
 

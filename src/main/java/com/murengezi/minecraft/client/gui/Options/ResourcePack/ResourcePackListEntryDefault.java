@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.gui.Options.ResourcePack;
 
 import com.google.gson.JsonParseException;
-import com.murengezi.feather.Feather;
+import com.murengezi.chocolate.Chocolate;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResourcePack;
@@ -50,7 +50,7 @@ public class ResourcePackListEntryDefault extends ResourcePackListEntry {
 				return packmetadatasection.getPackDescription().getFormattedText();
 			}
 		} catch (JsonParseException | IOException exception) {
-			Feather.getLogger().error("Couldn't load metadata info", exception);
+			Chocolate.getLogger().error("Couldn't load metadata info", exception);
 		}
 
 		return EnumChatFormatting.RED + "Missing " + "pack.mcmeta" + " :(";

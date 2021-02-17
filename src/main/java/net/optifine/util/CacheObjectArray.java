@@ -3,7 +3,7 @@ package net.optifine.util;
 import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 
 public class CacheObjectArray {
    private static final ArrayDeque<int[]> arrays = new ArrayDeque();

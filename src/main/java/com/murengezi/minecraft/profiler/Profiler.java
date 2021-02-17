@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.src.Config;
+import net.optifine.config.Config;
 import net.optifine.Lagometer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
