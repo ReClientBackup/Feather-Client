@@ -74,9 +74,9 @@ public class ChunkProviderHell implements IChunkProvider
     double[] noiseData4;
     double[] noiseData5;
 
-    public ChunkProviderHell(World worldIn, boolean p_i45637_2_, long p_i45637_3_)
+    public ChunkProviderHell(World world, boolean p_i45637_2_, long p_i45637_3_)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
         this.field_177466_i = p_i45637_2_;
         this.hellRNG = new Random(p_i45637_3_);
         this.netherNoiseGen1 = new NoiseGeneratorOctaves(this.hellRNG, 16);
@@ -86,7 +86,7 @@ public class ChunkProviderHell implements IChunkProvider
         this.netherrackExculsivityNoiseGen = new NoiseGeneratorOctaves(this.hellRNG, 4);
         this.netherNoiseGen6 = new NoiseGeneratorOctaves(this.hellRNG, 10);
         this.netherNoiseGen7 = new NoiseGeneratorOctaves(this.hellRNG, 16);
-        worldIn.func_181544_b(63);
+        world.func_181544_b(63);
     }
 
     public void func_180515_a(int p_180515_1_, int p_180515_2_, ChunkPrimer p_180515_3_)
@@ -499,7 +499,7 @@ public class ChunkProviderHell implements IChunkProvider
         return biomegenbase.getSpawnableList(creatureType);
     }
 
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position)
+    public BlockPos getStrongholdGen(World world, String structureName, BlockPos position)
     {
         return null;
     }

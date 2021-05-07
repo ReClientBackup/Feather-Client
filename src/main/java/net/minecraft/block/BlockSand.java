@@ -31,11 +31,11 @@ public class BlockSand extends BlockFalling
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
         for (BlockSand.EnumType blocksand$enumtype : BlockSand.EnumType.values())
         {
-            list.add(new ItemStack(itemIn, 1, blocksand$enumtype.getMetadata()));
+            list.add(new ItemStack(item, 1, blocksand$enumtype.getMetadata()));
         }
     }
 

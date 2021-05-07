@@ -45,9 +45,9 @@ public class EntityEnderman extends EntityMob
     private static final Set<Block> carriableBlocks = Sets.newIdentityHashSet();
     private boolean isAggressive;
 
-    public EntityEnderman(World worldIn)
+    public EntityEnderman(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.6F, 2.9F);
         this.stepHeight = 1.0F;
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -571,9 +571,9 @@ public class EntityEnderman extends EntityMob
             }
         }
 
-        private boolean func_179474_a(World worldIn, BlockPos p_179474_2_, Block p_179474_3_, Block p_179474_4_, Block p_179474_5_)
+        private boolean func_179474_a(World world, BlockPos p_179474_2_, Block p_179474_3_, Block p_179474_4_, Block p_179474_5_)
         {
-            return p_179474_3_.canPlaceBlockAt(worldIn, p_179474_2_) && (p_179474_4_.getMaterial() == Material.air && (p_179474_5_.getMaterial() != Material.air && p_179474_5_.isFullCube()));
+            return p_179474_3_.canPlaceBlockAt(world, p_179474_2_) && (p_179474_4_.getMaterial() == Material.air && (p_179474_5_.getMaterial() != Material.air && p_179474_5_.isFullCube()));
         }
     }
 

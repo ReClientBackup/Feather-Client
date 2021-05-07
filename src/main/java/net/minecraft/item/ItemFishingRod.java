@@ -35,25 +35,25 @@ public class ItemFishingRod extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
-        if (playerIn.fishEntity != null)
+        if (player.fishEntity != null)
         {
-            int i = playerIn.fishEntity.handleHookRetraction();
-            itemStackIn.damageItem(i, playerIn);
-            playerIn.swingItem();
+            int i = player.fishEntity.handleHookRetraction();
+            itemStackIn.damageItem(i, player);
+            player.swingItem();
         }
         else
         {
-            worldIn.playSoundAtEntity(playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-            if (!worldIn.isRemote)
+            if (!world.isRemote)
             {
-                worldIn.spawnEntityInWorld(new EntityFishHook(worldIn, playerIn));
+                world.spawnEntityInWorld(new EntityFishHook(world, player));
             }
 
-            playerIn.swingItem();
-            playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+            player.swingItem();
+            player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
         }
 
         return itemStackIn;

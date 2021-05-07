@@ -27,7 +27,7 @@ public class ItemArmorStand extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (side == EnumFacing.DOWN)
         {
@@ -35,18 +35,18 @@ public class ItemArmorStand extends Item
         }
         else
         {
-            boolean flag = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
+            boolean flag = world.getBlockState(pos).getBlock().isReplaceable(world, pos);
             BlockPos blockpos = flag ? pos : pos.offset(side);
 
-            if (!playerIn.canPlayerEdit(blockpos, side, stack))
+            if (!player.canPlayerEdit(blockpos, side, stack))
             {
                 return false;
             }
             else
             {
                 BlockPos blockpos1 = blockpos.up();
-                boolean flag1 = !worldIn.isAirBlock(blockpos) && !worldIn.getBlockState(blockpos).getBlock().isReplaceable(worldIn, blockpos);
-                flag1 = flag1 | (!worldIn.isAirBlock(blockpos1) && !worldIn.getBlockState(blockpos1).getBlock().isReplaceable(worldIn, blockpos1));
+                boolean flag1 = !world.isAirBlock(blockpos) && !world.getBlockState(blockpos).getBlock().isReplaceable(world, blockpos);
+                flag1 = flag1 | (!world.isAirBlock(blockpos1) && !world.getBlockState(blockpos1).getBlock().isReplaceable(world, blockpos1));
 
                 if (flag1)
                 {
@@ -57,7 +57,7 @@ public class ItemArmorStand extends Item
                     double d0 = blockpos.getX();
                     double d1 = blockpos.getY();
                     double d2 = blockpos.getZ();
-                    List<Entity> list = worldIn.getEntitiesWithinAABBExcludingEntity(null, AxisAlignedBB.fromBounds(d0, d1, d2, d0 + 1.0D, d1 + 2.0D, d2 + 1.0D));
+                    List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(null, AxisAlignedBB.fromBounds(d0, d1, d2, d0 + 1.0D, d1 + 2.0D, d2 + 1.0D));
 
                     if (list.size() > 0)
                     {
@@ -65,14 +65,14 @@ public class ItemArmorStand extends Item
                     }
                     else
                     {
-                        if (!worldIn.isRemote)
+                        if (!world.isRemote)
                         {
-                            worldIn.setBlockToAir(blockpos);
-                            worldIn.setBlockToAir(blockpos1);
-                            EntityArmorStand entityarmorstand = new EntityArmorStand(worldIn, d0 + 0.5D, d1, d2 + 0.5D);
-                            float f = (float)MathHelper.floor_float((MathHelper.wrapAngleTo180_float(playerIn.rotationYaw - 180.0F) + 22.5F) / 45.0F) * 45.0F;
+                            world.setBlockToAir(blockpos);
+                            world.setBlockToAir(blockpos1);
+                            EntityArmorStand entityarmorstand = new EntityArmorStand(world, d0 + 0.5D, d1, d2 + 0.5D);
+                            float f = (float)MathHelper.floor_float((MathHelper.wrapAngleTo180_float(player.rotationYaw - 180.0F) + 22.5F) / 45.0F) * 45.0F;
                             entityarmorstand.setLocationAndAngles(d0 + 0.5D, d1, d2 + 0.5D, f, 0.0F);
-                            this.applyRandomRotations(entityarmorstand, worldIn.rand);
+                            this.applyRandomRotations(entityarmorstand, world.rand);
                             NBTTagCompound nbttagcompound = stack.getTagCompound();
 
                             if (nbttagcompound != null && nbttagcompound.hasKey("EntityTag", 10))
@@ -83,7 +83,7 @@ public class ItemArmorStand extends Item
                                 entityarmorstand.readFromNBT(nbttagcompound1);
                             }
 
-                            worldIn.spawnEntityInWorld(entityarmorstand);
+                            world.spawnEntityInWorld(entityarmorstand);
                         }
 
                         --stack.stackSize;

@@ -42,9 +42,9 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob
      */
     private int witchAttackTimer;
 
-    public EntityWitch(World worldIn)
+    public EntityWitch(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.6F, 1.95F);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIArrowAttack(this, 1.0D, 60, 10.0F));

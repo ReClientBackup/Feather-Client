@@ -36,16 +36,16 @@ public class ItemCarrotOnAStick extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
-        if (playerIn.isRiding() && playerIn.ridingEntity instanceof EntityPig)
+        if (player.isRiding() && player.ridingEntity instanceof EntityPig)
         {
-            EntityPig entitypig = (EntityPig)playerIn.ridingEntity;
+            EntityPig entitypig = (EntityPig)player.ridingEntity;
 
             if (entitypig.getAIControlledByPlayer().isControlledByPlayer() && itemStackIn.getMaxDamage() - itemStackIn.getMetadata() >= 7)
             {
                 entitypig.getAIControlledByPlayer().boostSpeed();
-                itemStackIn.damageItem(7, playerIn);
+                itemStackIn.damageItem(7, player);
 
                 if (itemStackIn.stackSize == 0)
                 {
@@ -56,7 +56,7 @@ public class ItemCarrotOnAStick extends Item
             }
         }
 
-        playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+        player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
         return itemStackIn;
     }
 }

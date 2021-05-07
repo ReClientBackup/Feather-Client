@@ -94,11 +94,11 @@ public class TileEntityRendererDispatcher
         return tileEntityIn != null && !tileEntityIn.isInvalid() ? this.getSpecialRendererByClass(tileEntityIn.getClass()) : null;
     }
 
-    public void cacheActiveRenderInfo(World worldIn, TextureManager textureManagerIn, FontRenderer fontrendererIn, Entity entityIn, float partialTicks)
+    public void cacheActiveRenderInfo(World world, TextureManager textureManagerIn, FontRenderer fontrendererIn, Entity entityIn, float partialTicks)
     {
-        if (this.worldObj != worldIn)
+        if (this.worldObj != world)
         {
-            this.setWorld(worldIn);
+            this.setWorld(world);
         }
 
         this.renderEngine = textureManagerIn;
@@ -199,9 +199,9 @@ public class TileEntityRendererDispatcher
         }
     }
 
-    public void setWorld(World worldIn)
+    public void setWorld(World world)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
     }
 
     public FontRenderer getFontRenderer()

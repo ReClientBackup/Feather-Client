@@ -335,11 +335,11 @@ public abstract class MobSpawnerBaseLogic
         }
     }
 
-    public Entity func_180612_a(World worldIn)
+    public Entity func_180612_a(World world)
     {
         if (this.cachedEntity == null)
         {
-            Entity entity = EntityList.createEntityByName(this.getEntityNameToSpawn(), worldIn);
+            Entity entity = EntityList.createEntityByName(this.getEntityNameToSpawn(), world);
 
             if (entity != null)
             {

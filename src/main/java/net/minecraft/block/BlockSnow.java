@@ -34,12 +34,12 @@ public class BlockSnow extends Block
         this.setBlockBoundsForItemRender();
     }
 
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
+    public boolean isPassable(IBlockAccess world, BlockPos pos)
     {
-        return worldIn.getBlockState(pos).getValue(LAYERS).intValue() < 5;
+        return world.getBlockState(pos).getValue(LAYERS).intValue() < 5;
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
     {
         int i = state.getValue(LAYERS).intValue() - 1;
         float f = 0.125F;
@@ -67,9 +67,9 @@ public class BlockSnow extends Block
         this.getBoundsForLayers(0);
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         this.getBoundsForLayers(iblockstate.getValue(LAYERS).intValue());
     }
 
@@ -78,9 +78,9 @@ public class BlockSnow extends Block
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, (float)p_150154_1_ / 8.0F, 1.0F);
     }
 
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+    public boolean canPlaceBlockAt(World world, BlockPos pos)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos.down());
+        IBlockState iblockstate = world.getBlockState(pos.down());
         Block block = iblockstate.getBlock();
         return block != Blocks.ice && block != Blocks.packed_ice && (block.getMaterial() == Material.leaves || (block == this && iblockstate.getValue(LAYERS).intValue() >= 7 || block.isOpaqueCube() && block.blockMaterial.blocksMovement()));
     }
@@ -88,17 +88,17 @@ public class BlockSnow extends Block
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        this.checkAndDropBlock(worldIn, pos, state);
+        this.checkAndDropBlock(world, pos, state);
     }
 
-    private boolean checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)
+    private boolean checkAndDropBlock(World world, BlockPos pos, IBlockState state)
     {
-        if (!this.canPlaceBlockAt(worldIn, pos))
+        if (!this.canPlaceBlockAt(world, pos))
         {
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-            worldIn.setBlockToAir(pos);
+            this.dropBlockAsItem(world, pos, state, 0);
+            world.setBlockToAir(pos);
             return false;
         }
         else
@@ -107,10 +107,10 @@ public class BlockSnow extends Block
         }
     }
 
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
     {
-        spawnAsEntity(worldIn, pos, new ItemStack(Items.snowball, state.getValue(LAYERS).intValue() + 1, 0));
-        worldIn.setBlockToAir(pos);
+        spawnAsEntity(world, pos, new ItemStack(Items.snowball, state.getValue(LAYERS).intValue() + 1, 0));
+        world.setBlockToAir(pos);
         player.triggerAchievement(StatList.mineBlockStatArray[Block.getIdFromBlock(this)]);
     }
 
@@ -132,18 +132,18 @@ public class BlockSnow extends Block
         return 0;
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11)
+        if (world.getLightFor(EnumSkyBlock.BLOCK, pos) > 11)
         {
-            this.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
-            worldIn.setBlockToAir(pos);
+            this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+            world.setBlockToAir(pos);
         }
     }
 
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
     {
-        return side == EnumFacing.UP || super.shouldSideBeRendered(worldIn, pos, side);
+        return side == EnumFacing.UP || super.shouldSideBeRendered(world, pos, side);
     }
 
     /**
@@ -157,9 +157,9 @@ public class BlockSnow extends Block
     /**
      * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
      */
-    public boolean isReplaceable(World worldIn, BlockPos pos)
+    public boolean isReplaceable(World world, BlockPos pos)
     {
-        return worldIn.getBlockState(pos).getValue(LAYERS).intValue() == 1;
+        return world.getBlockState(pos).getValue(LAYERS).intValue() == 1;
     }
 
     /**

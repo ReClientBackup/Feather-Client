@@ -15,15 +15,15 @@ import net.minecraft.world.World;
 
 public class EntityWitherSkull extends EntityFireball
 {
-    public EntityWitherSkull(World worldIn)
+    public EntityWitherSkull(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.3125F, 0.3125F);
     }
 
-    public EntityWitherSkull(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
+    public EntityWitherSkull(World world, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
     {
-        super(worldIn, shooter, accelX, accelY, accelZ);
+        super(world, shooter, accelX, accelY, accelZ);
         this.setSize(0.3125F, 0.3125F);
     }
 
@@ -35,9 +35,9 @@ public class EntityWitherSkull extends EntityFireball
         return this.isInvulnerable() ? 0.73F : super.getMotionFactor();
     }
 
-    public EntityWitherSkull(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ)
+    public EntityWitherSkull(World world, double x, double y, double z, double accelX, double accelY, double accelZ)
     {
-        super(worldIn, x, y, z, accelX, accelY, accelZ);
+        super(world, x, y, z, accelX, accelY, accelZ);
         this.setSize(0.3125F, 0.3125F);
     }
 
@@ -52,9 +52,9 @@ public class EntityWitherSkull extends EntityFireball
     /**
      * Explosion resistance of a block relative to this entity
      */
-    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn)
+    public float getExplosionResistance(Explosion explosionIn, World world, BlockPos pos, IBlockState blockStateIn)
     {
-        float f = super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn);
+        float f = super.getExplosionResistance(explosionIn, world, pos, blockStateIn);
         Block block = blockStateIn.getBlock();
 
         if (this.isInvulnerable() && EntityWither.func_181033_a(block))

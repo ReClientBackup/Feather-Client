@@ -53,15 +53,15 @@ public class ModelResourceLocation extends ResourceLocation
         return this.variant;
     }
 
-    public boolean equals(Object p_equals_1_)
+    public boolean equals(Object obj)
     {
-        if (this == p_equals_1_)
+        if (this == obj)
         {
             return true;
         }
-        else if (p_equals_1_ instanceof ModelResourceLocation && super.equals(p_equals_1_))
+        else if (obj instanceof ModelResourceLocation && super.equals(obj))
         {
-            ModelResourceLocation modelresourcelocation = (ModelResourceLocation)p_equals_1_;
+            ModelResourceLocation modelresourcelocation = (ModelResourceLocation) obj;
             return this.variant.equals(modelresourcelocation.variant);
         }
         else

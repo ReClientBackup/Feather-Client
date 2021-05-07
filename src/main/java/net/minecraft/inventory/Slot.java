@@ -62,7 +62,7 @@ public class Slot
     {
     }
 
-    public void onPickupFromSlot(EntityPlayer playerIn, ItemStack stack)
+    public void onPickupFromSlot(EntityPlayer player, ItemStack stack)
     {
         this.onSlotChanged();
     }
@@ -147,7 +147,7 @@ public class Slot
     /**
      * Return whether this slot's stack can be taken from this slot.
      */
-    public boolean canTakeStack(EntityPlayer playerIn)
+    public boolean canTakeStack(EntityPlayer player)
     {
         return true;
     }

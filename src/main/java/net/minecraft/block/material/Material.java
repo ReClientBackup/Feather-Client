@@ -1,7 +1,7 @@
 package net.minecraft.block.material;
 
-public class Material
-{
+public class Material {
+
     public static final Material air = new MaterialTransparent(MapColor.airColor);
     public static final Material grass = new Material(MapColor.grassColor);
     public static final Material ground = new Material(MapColor.dirtColor);
@@ -36,10 +36,8 @@ public class Material
     public static final Material dragonEgg = (new Material(MapColor.foliageColor)).setNoPushMobility();
     public static final Material portal = (new MaterialPortal(MapColor.airColor)).setImmovableMobility();
     public static final Material cake = (new Material(MapColor.airColor)).setNoPushMobility();
-    public static final Material web = (new Material(MapColor.clothColor)
-    {
-        public boolean blocksMovement()
-        {
+    public static final Material web = (new Material(MapColor.clothColor) {
+        public boolean blocksMovement() {
             return false;
         }
     }).setRequiresTool().setNoPushMobility();
@@ -75,48 +73,42 @@ public class Material
     private int mobilityFlag;
     private boolean isAdventureModeExempt;
 
-    public Material(MapColor color)
-    {
+    public Material(MapColor color) {
         this.materialMapColor = color;
     }
 
     /**
      * Returns if blocks of these materials are liquids.
      */
-    public boolean isLiquid()
-    {
+    public boolean isLiquid() {
         return false;
     }
 
     /**
      * Returns true if the block is a considered solid. This is true by default.
      */
-    public boolean isSolid()
-    {
+    public boolean isSolid() {
         return true;
     }
 
     /**
      * Will prevent grass from growing on dirt underneath and kill any grass below it if it returns true
      */
-    public boolean blocksLight()
-    {
+    public boolean blocksLight() {
         return true;
     }
 
     /**
      * Returns if this material is considered solid or not
      */
-    public boolean blocksMovement()
-    {
+    public boolean blocksMovement() {
         return true;
     }
 
     /**
      * Marks the material as translucent
      */
-    private Material setTranslucent()
-    {
+    private Material setTranslucent() {
         this.isTranslucent = true;
         return this;
     }
@@ -124,8 +116,7 @@ public class Material
     /**
      * Makes blocks with this material require the correct tool to be harvested.
      */
-    protected Material setRequiresTool()
-    {
+    protected Material setRequiresTool() {
         this.requiresNoTool = false;
         return this;
     }
@@ -133,8 +124,7 @@ public class Material
     /**
      * Set the canBurn bool to True and return the current object.
      */
-    protected Material setBurning()
-    {
+    protected Material setBurning() {
         this.canBurn = true;
         return this;
     }
@@ -142,16 +132,14 @@ public class Material
     /**
      * Returns if the block can burn or not.
      */
-    public boolean getCanBurn()
-    {
+    public boolean getCanBurn() {
         return this.canBurn;
     }
 
     /**
      * Sets {@link #replaceable} to true.
      */
-    public Material setReplaceable()
-    {
+    public Material setReplaceable() {
         this.replaceable = true;
         return this;
     }
@@ -159,24 +147,21 @@ public class Material
     /**
      * Returns whether the material can be replaced by other blocks when placed - eg snow, vines and tall grass.
      */
-    public boolean isReplaceable()
-    {
+    public boolean isReplaceable() {
         return this.replaceable;
     }
 
     /**
      * Indicate if the material is opaque
      */
-    public boolean isOpaque()
-    {
+    public boolean isOpaque() {
         return !this.isTranslucent && this.blocksMovement();
     }
 
     /**
      * Returns true if the material can be harvested without a tool (or with the wrong tool)
      */
-    public boolean isToolNotRequired()
-    {
+    public boolean isToolNotRequired() {
         return this.requiresNoTool;
     }
 
@@ -184,16 +169,14 @@ public class Material
      * Returns the mobility information of the material, 0 = free, 1 = can't push but can move over, 2 = total
      * immobility and stop pistons.
      */
-    public int getMaterialMobility()
-    {
+    public int getMaterialMobility() {
         return this.mobilityFlag;
     }
 
     /**
      * This type of material can't be pushed, but pistons can move over it.
      */
-    protected Material setNoPushMobility()
-    {
+    protected Material setNoPushMobility() {
         this.mobilityFlag = 1;
         return this;
     }
@@ -201,17 +184,12 @@ public class Material
     /**
      * This type of material can't be pushed, and pistons are blocked to move.
      */
-    protected Material setImmovableMobility()
-    {
+    protected Material setImmovableMobility() {
         this.mobilityFlag = 2;
         return this;
     }
 
-    /**
-     * @see #isAdventureModeExempt()
-     */
-    protected Material setAdventureModeExempt()
-    {
+    protected Material setAdventureModeExempt() {
         this.isAdventureModeExempt = true;
         return this;
     }
@@ -219,8 +197,8 @@ public class Material
     /**
      * Retrieves the color index of the block. This is is the same color used by vanilla maps to represent this block.
      */
-    public MapColor getMaterialMapColor()
-    {
+    public MapColor getMaterialMapColor() {
         return this.materialMapColor;
     }
+
 }

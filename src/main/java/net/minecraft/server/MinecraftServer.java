@@ -1360,7 +1360,7 @@ public abstract class MinecraftServer implements Runnable, ICommandSender, IThre
         return 16;
     }
 
-    public boolean isBlockProtected(World worldIn, BlockPos pos, EntityPlayer playerIn)
+    public boolean isBlockProtected(World world, BlockPos pos, EntityPlayer player)
     {
         return false;
     }

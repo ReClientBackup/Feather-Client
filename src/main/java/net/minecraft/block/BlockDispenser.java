@@ -44,24 +44,24 @@ public class BlockDispenser extends BlockContainer
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World worldIn)
+    public int tickRate(World world)
     {
         return 4;
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        super.onBlockAdded(worldIn, pos, state);
-        this.setDefaultDirection(worldIn, pos, state);
+        super.onBlockAdded(world, pos, state);
+        this.setDefaultDirection(world, pos, state);
     }
 
-    private void setDefaultDirection(World worldIn, BlockPos pos, IBlockState state)
+    private void setDefaultDirection(World world, BlockPos pos, IBlockState state)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
             EnumFacing enumfacing = state.getValue(FACING);
-            boolean flag = worldIn.getBlockState(pos.north()).getBlock().isFullBlock();
-            boolean flag1 = worldIn.getBlockState(pos.south()).getBlock().isFullBlock();
+            boolean flag = world.getBlockState(pos.north()).getBlock().isFullBlock();
+            boolean flag1 = world.getBlockState(pos.south()).getBlock().isFullBlock();
 
             if (enumfacing == EnumFacing.NORTH && flag && !flag1)
             {
@@ -73,8 +73,8 @@ public class BlockDispenser extends BlockContainer
             }
             else
             {
-                boolean flag2 = worldIn.getBlockState(pos.west()).getBlock().isFullBlock();
-                boolean flag3 = worldIn.getBlockState(pos.east()).getBlock().isFullBlock();
+                boolean flag2 = world.getBlockState(pos.west()).getBlock().isFullBlock();
+                boolean flag3 = world.getBlockState(pos.east()).getBlock().isFullBlock();
 
                 if (enumfacing == EnumFacing.WEST && flag2 && !flag3)
                 {
@@ -86,31 +86,31 @@ public class BlockDispenser extends BlockContainer
                 }
             }
 
-            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing).withProperty(TRIGGERED, Boolean.valueOf(false)), 2);
+            world.setBlockState(pos, state.withProperty(FACING, enumfacing).withProperty(TRIGGERED, Boolean.valueOf(false)), 2);
         }
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (worldIn.isRemote)
+        if (world.isRemote)
         {
             return true;
         }
         else
         {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = world.getTileEntity(pos);
 
             if (tileentity instanceof TileEntityDispenser)
             {
-                playerIn.displayGUIChest((TileEntityDispenser)tileentity);
+                player.displayGUIChest((TileEntityDispenser)tileentity);
 
                 if (tileentity instanceof TileEntityDropper)
                 {
-                    playerIn.triggerAchievement(StatList.field_181731_O);
+                    player.triggerAchievement(StatList.field_181731_O);
                 }
                 else
                 {
-                    playerIn.triggerAchievement(StatList.field_181733_Q);
+                    player.triggerAchievement(StatList.field_181733_Q);
                 }
             }
 
@@ -118,9 +118,9 @@ public class BlockDispenser extends BlockContainer
         }
     }
 
-    protected void dispense(World worldIn, BlockPos pos)
+    protected void dispense(World world, BlockPos pos)
     {
-        BlockSourceImpl blocksourceimpl = new BlockSourceImpl(worldIn, pos);
+        BlockSourceImpl blocksourceimpl = new BlockSourceImpl(world, pos);
         TileEntityDispenser tileentitydispenser = blocksourceimpl.getBlockTileEntity();
 
         if (tileentitydispenser != null)
@@ -129,7 +129,7 @@ public class BlockDispenser extends BlockContainer
 
             if (i < 0)
             {
-                worldIn.playAuxSFX(1001, pos, 0);
+                world.playAuxSFX(1001, pos, 0);
             }
             else
             {
@@ -153,34 +153,34 @@ public class BlockDispenser extends BlockContainer
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        boolean flag = worldIn.isBlockPowered(pos) || worldIn.isBlockPowered(pos.up());
+        boolean flag = world.isBlockPowered(pos) || world.isBlockPowered(pos.up());
         boolean flag1 = state.getValue(TRIGGERED).booleanValue();
 
         if (flag && !flag1)
         {
-            worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
-            worldIn.setBlockState(pos, state.withProperty(TRIGGERED, Boolean.valueOf(true)), 4);
+            world.scheduleUpdate(pos, this, this.tickRate(world));
+            world.setBlockState(pos, state.withProperty(TRIGGERED, Boolean.valueOf(true)), 4);
         }
         else if (!flag && flag1)
         {
-            worldIn.setBlockState(pos, state.withProperty(TRIGGERED, Boolean.valueOf(false)), 4);
+            world.setBlockState(pos, state.withProperty(TRIGGERED, Boolean.valueOf(false)), 4);
         }
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            this.dispense(worldIn, pos);
+            this.dispense(world, pos);
         }
     }
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World worldIn, int meta)
+    public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileEntityDispenser();
     }
@@ -189,21 +189,21 @@ public class BlockDispenser extends BlockContainer
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
-        return this.getDefaultState().withProperty(FACING, BlockPistonBase.getFacingFromEntity(worldIn, pos, placer)).withProperty(TRIGGERED, Boolean.valueOf(false));
+        return this.getDefaultState().withProperty(FACING, BlockPistonBase.getFacingFromEntity(world, pos, placer)).withProperty(TRIGGERED, Boolean.valueOf(false));
     }
 
     /**
      * Called by ItemBlocks after a block is set in the world, to allow post-place logic
      */
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
-        worldIn.setBlockState(pos, state.withProperty(FACING, BlockPistonBase.getFacingFromEntity(worldIn, pos, placer)), 2);
+        world.setBlockState(pos, state.withProperty(FACING, BlockPistonBase.getFacingFromEntity(world, pos, placer)), 2);
 
         if (stack.hasDisplayName())
         {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = world.getTileEntity(pos);
 
             if (tileentity instanceof TileEntityDispenser)
             {
@@ -212,17 +212,17 @@ public class BlockDispenser extends BlockContainer
         }
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
     {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        TileEntity tileentity = world.getTileEntity(pos);
 
         if (tileentity instanceof TileEntityDispenser)
         {
-            InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityDispenser)tileentity);
-            worldIn.updateComparatorOutputLevel(pos, this);
+            InventoryHelper.dropInventoryItems(world, pos, (TileEntityDispenser)tileentity);
+            world.updateComparatorOutputLevel(pos, this);
         }
 
-        super.breakBlock(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
     }
 
     /**
@@ -250,9 +250,9 @@ public class BlockDispenser extends BlockContainer
         return true;
     }
 
-    public int getComparatorInputOverride(World worldIn, BlockPos pos)
+    public int getComparatorInputOverride(World world, BlockPos pos)
     {
-        return Container.calcRedstone(worldIn.getTileEntity(pos));
+        return Container.calcRedstone(world.getTileEntity(pos));
     }
 
     /**

@@ -23,9 +23,9 @@ import net.minecraft.world.World;
 
 public class EntitySnowman extends EntityGolem implements IRangedAttackMob
 {
-    public EntitySnowman(World worldIn)
+    public EntitySnowman(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.7F, 1.9F);
         ((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAIArrowAttack(this, 1.25D, 20, 10.0F));

@@ -39,9 +39,9 @@ public class InventoryPlayer implements IInventory
      */
     public boolean inventoryChanged;
 
-    public InventoryPlayer(EntityPlayer playerIn)
+    public InventoryPlayer(EntityPlayer player)
     {
-        this.player = playerIn;
+        this.player = player;
     }
 
     /**

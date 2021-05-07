@@ -39,19 +39,19 @@ public abstract class BlockContainer extends Block implements ITileEntityProvide
         return -1;
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
     {
-        super.breakBlock(worldIn, pos, state);
-        worldIn.removeTileEntity(pos);
+        super.breakBlock(world, pos, state);
+        world.removeTileEntity(pos);
     }
 
     /**
      * Called on both Client and Server when World#addBlockEvent is called
      */
-    public boolean onBlockEventReceived(World worldIn, BlockPos pos, IBlockState state, int eventID, int eventParam)
+    public boolean onBlockEventReceived(World world, BlockPos pos, IBlockState state, int eventID, int eventParam)
     {
-        super.onBlockEventReceived(worldIn, pos, state, eventID, eventParam);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        super.onBlockEventReceived(world, pos, state, eventID, eventParam);
+        TileEntity tileentity = world.getTileEntity(pos);
         return tileentity != null && tileentity.receiveClientEvent(eventID, eventParam);
     }
 }

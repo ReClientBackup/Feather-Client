@@ -37,15 +37,15 @@ public class ContainerChest extends Container
         }
     }
 
-    public boolean canInteractWith(EntityPlayer playerIn)
+    public boolean canInteractWith(EntityPlayer player)
     {
-        return this.lowerChestInventory.isUseableByPlayer(playerIn);
+        return this.lowerChestInventory.isUseableByPlayer(player);
     }
 
     /**
      * Take a stack from the specified inventory slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    public ItemStack transferStackInSlot(EntityPlayer player, int index)
     {
         ItemStack itemstack = null;
         Slot slot = this.inventorySlots.get(index);
@@ -83,10 +83,10 @@ public class ContainerChest extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer playerIn)
+    public void onContainerClosed(EntityPlayer player)
     {
-        super.onContainerClosed(playerIn);
-        this.lowerChestInventory.closeInventory(playerIn);
+        super.onContainerClosed(player);
+        this.lowerChestInventory.closeInventory(player);
     }
 
     /**

@@ -48,15 +48,15 @@ public class BlockEndPortalFrame extends Block
      *  
      * @param collidingEntity the Entity colliding with this Block
      */
-    public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
+    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
     {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.8125F, 1.0F);
-        super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+        super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
 
-        if (worldIn.getBlockState(pos).getValue(EYE).booleanValue())
+        if (world.getBlockState(pos).getValue(EYE).booleanValue())
         {
             this.setBlockBounds(0.3125F, 0.8125F, 0.3125F, 0.6875F, 1.0F, 0.6875F);
-            super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+            super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
         }
 
         this.setBlockBoundsForItemRender();
@@ -76,7 +76,7 @@ public class BlockEndPortalFrame extends Block
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(EYE, Boolean.valueOf(false));
     }
@@ -86,9 +86,9 @@ public class BlockEndPortalFrame extends Block
         return true;
     }
 
-    public int getComparatorInputOverride(World worldIn, BlockPos pos)
+    public int getComparatorInputOverride(World world, BlockPos pos)
     {
-        return worldIn.getBlockState(pos).getValue(EYE).booleanValue() ? 15 : 0;
+        return world.getBlockState(pos).getValue(EYE).booleanValue() ? 15 : 0;
     }
 
     /**

@@ -28,7 +28,7 @@ public class BiomeGenSnow extends BiomeGenBase
         this.spawnableCreatureList.clear();
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
         if (this.field_150615_aC)
         {
@@ -36,18 +36,18 @@ public class BiomeGenSnow extends BiomeGenBase
             {
                 int j = rand.nextInt(16) + 8;
                 int k = rand.nextInt(16) + 8;
-                this.field_150616_aD.generate(worldIn, rand, worldIn.getHeight(pos.add(j, 0, k)));
+                this.field_150616_aD.generate(world, rand, world.getHeight(pos.add(j, 0, k)));
             }
 
             for (int l = 0; l < 2; ++l)
             {
                 int i1 = rand.nextInt(16) + 8;
                 int j1 = rand.nextInt(16) + 8;
-                this.field_150617_aE.generate(worldIn, rand, worldIn.getHeight(pos.add(i1, 0, j1)));
+                this.field_150617_aE.generate(world, rand, world.getHeight(pos.add(i1, 0, j1)));
             }
         }
 
-        super.decorate(worldIn, rand, pos);
+        super.decorate(world, rand, pos);
     }
 
     public WorldGenAbstractTree genBigTreeChance(Random rand)

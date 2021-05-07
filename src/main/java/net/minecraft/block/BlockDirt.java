@@ -40,11 +40,11 @@ public class BlockDirt extends Block
      * Get the actual Block state of this Block at the given position. This applies properties not visible in the
      * metadata, such as fence connections.
      */
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
     {
         if (state.getValue(VARIANT) == BlockDirt.DirtType.PODZOL)
         {
-            Block block = worldIn.getBlockState(pos.up()).getBlock();
+            Block block = world.getBlockState(pos.up()).getBlock();
             state = state.withProperty(SNOWY, Boolean.valueOf(block == Blocks.snow || block == Blocks.snow_layer));
         }
 
@@ -54,16 +54,16 @@ public class BlockDirt extends Block
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
         list.add(new ItemStack(this, 1, BlockDirt.DirtType.DIRT.getMetadata()));
         list.add(new ItemStack(this, 1, BlockDirt.DirtType.COARSE_DIRT.getMetadata()));
         list.add(new ItemStack(this, 1, BlockDirt.DirtType.PODZOL.getMetadata()));
     }
 
-    public int getDamageValue(World worldIn, BlockPos pos)
+    public int getDamageValue(World world, BlockPos pos)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         return iblockstate.getBlock() != this ? 0 : iblockstate.getValue(VARIANT).getMetadata();
     }
 

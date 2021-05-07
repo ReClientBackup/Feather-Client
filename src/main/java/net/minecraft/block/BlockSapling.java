@@ -45,32 +45,32 @@ public class BlockSapling extends BlockBush implements IGrowable
         return StatCollector.translateToLocal(this.getUnlocalizedName() + "." + BlockPlanks.EnumType.OAK.getUnlocalizedName() + ".name");
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            super.updateTick(worldIn, pos, state, rand);
+            super.updateTick(world, pos, state, rand);
 
-            if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0)
+            if (world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0)
             {
-                this.grow(worldIn, pos, state, rand);
+                this.grow(world, pos, state, rand);
             }
         }
     }
 
-    public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void grow(World world, BlockPos pos, IBlockState state, Random rand)
     {
         if (state.getValue(STAGE).intValue() == 0)
         {
-            worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
+            world.setBlockState(pos, state.cycleProperty(STAGE), 4);
         }
         else
         {
-            this.generateTree(worldIn, pos, state, rand);
+            this.generateTree(world, pos, state, rand);
         }
     }
 
-    public void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void generateTree(World world, BlockPos pos, IBlockState state, Random rand)
     {
         WorldGenerator worldgenerator = rand.nextInt(10) == 0 ? new WorldGenBigTree(true) : new WorldGenTrees(true);
         int i = 0;
@@ -85,7 +85,7 @@ public class BlockSapling extends BlockBush implements IGrowable
                 {
                     for (j = 0; j >= -1; --j)
                     {
-                        if (this.func_181624_a(worldIn, pos, i, j, BlockPlanks.EnumType.SPRUCE))
+                        if (this.func_181624_a(world, pos, i, j, BlockPlanks.EnumType.SPRUCE))
                         {
                             worldgenerator = new WorldGenMegaPineTree(false, rand.nextBoolean());
                             flag = true;
@@ -116,7 +116,7 @@ public class BlockSapling extends BlockBush implements IGrowable
                 {
                     for (j = 0; j >= -1; --j)
                     {
-                        if (this.func_181624_a(worldIn, pos, i, j, BlockPlanks.EnumType.JUNGLE))
+                        if (this.func_181624_a(world, pos, i, j, BlockPlanks.EnumType.JUNGLE))
                         {
                             worldgenerator = new WorldGenMegaJungle(true, 10, 20, iblockstate, iblockstate1);
                             flag = true;
@@ -144,7 +144,7 @@ public class BlockSapling extends BlockBush implements IGrowable
                 {
                     for (j = 0; j >= -1; --j)
                     {
-                        if (this.func_181624_a(worldIn, pos, i, j, BlockPlanks.EnumType.DARK_OAK))
+                        if (this.func_181624_a(world, pos, i, j, BlockPlanks.EnumType.DARK_OAK))
                         {
                             worldgenerator = new WorldGenCanopyTree(true);
                             flag = true;
@@ -165,28 +165,28 @@ public class BlockSapling extends BlockBush implements IGrowable
 
         if (flag)
         {
-            worldIn.setBlockState(pos.add(i, 0, j), iblockstate2, 4);
-            worldIn.setBlockState(pos.add(i + 1, 0, j), iblockstate2, 4);
-            worldIn.setBlockState(pos.add(i, 0, j + 1), iblockstate2, 4);
-            worldIn.setBlockState(pos.add(i + 1, 0, j + 1), iblockstate2, 4);
+            world.setBlockState(pos.add(i, 0, j), iblockstate2, 4);
+            world.setBlockState(pos.add(i + 1, 0, j), iblockstate2, 4);
+            world.setBlockState(pos.add(i, 0, j + 1), iblockstate2, 4);
+            world.setBlockState(pos.add(i + 1, 0, j + 1), iblockstate2, 4);
         }
         else
         {
-            worldIn.setBlockState(pos, iblockstate2, 4);
+            world.setBlockState(pos, iblockstate2, 4);
         }
 
-        if (!worldgenerator.generate(worldIn, rand, pos.add(i, 0, j)))
+        if (!worldgenerator.generate(world, rand, pos.add(i, 0, j)))
         {
             if (flag)
             {
-                worldIn.setBlockState(pos.add(i, 0, j), state, 4);
-                worldIn.setBlockState(pos.add(i + 1, 0, j), state, 4);
-                worldIn.setBlockState(pos.add(i, 0, j + 1), state, 4);
-                worldIn.setBlockState(pos.add(i + 1, 0, j + 1), state, 4);
+                world.setBlockState(pos.add(i, 0, j), state, 4);
+                world.setBlockState(pos.add(i + 1, 0, j), state, 4);
+                world.setBlockState(pos.add(i, 0, j + 1), state, 4);
+                world.setBlockState(pos.add(i + 1, 0, j + 1), state, 4);
             }
             else
             {
-                worldIn.setBlockState(pos, state, 4);
+                world.setBlockState(pos, state, 4);
             }
         }
     }
@@ -199,9 +199,9 @@ public class BlockSapling extends BlockBush implements IGrowable
     /**
      * Check whether the given BlockPos has a Sapling of the given type
      */
-    public boolean isTypeAt(World worldIn, BlockPos pos, BlockPlanks.EnumType type)
+    public boolean isTypeAt(World world, BlockPos pos, BlockPlanks.EnumType type)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         return iblockstate.getBlock() == this && iblockstate.getValue(TYPE) == type;
     }
 
@@ -217,30 +217,30 @@ public class BlockSapling extends BlockBush implements IGrowable
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
         for (BlockPlanks.EnumType blockplanks$enumtype : BlockPlanks.EnumType.values())
         {
-            list.add(new ItemStack(itemIn, 1, blockplanks$enumtype.getMetadata()));
+            list.add(new ItemStack(item, 1, blockplanks$enumtype.getMetadata()));
         }
     }
 
     /**
      * Whether this IGrowable can grow
      */
-    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+    public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
     {
         return true;
     }
 
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+    public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state)
     {
-        return (double)worldIn.rand.nextFloat() < 0.45D;
+        return (double)world.rand.nextFloat() < 0.45D;
     }
 
-    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+    public void grow(World world, Random rand, BlockPos pos, IBlockState state)
     {
-        this.grow(worldIn, pos, state, rand);
+        this.grow(world, pos, state, rand);
     }
 
     /**

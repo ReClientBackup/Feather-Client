@@ -39,9 +39,9 @@ public class EntitySquid extends EntityWaterMob
     private float randomMotionVecY;
     private float randomMotionVecZ;
 
-    public EntitySquid(World worldIn)
+    public EntitySquid(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.95F, 0.95F);
         this.rand.setSeed(1 + this.getEntityId());
         this.rotationVelocity = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;

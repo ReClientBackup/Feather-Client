@@ -1,7 +1,6 @@
 package net.minecraft.client.model;
 
 import com.darkmagician6.eventapi.EventManager;
-import com.murengezi.chocolate.Event.RenderModelBipedEvent;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
@@ -105,22 +104,13 @@ public class ModelBiped extends ModelBase
                 GlStateManager.translate(0.0F, 0.2F, 0.0F);
             }
 
-
-            RenderModelBipedEvent renderModelBipedEvent = new RenderModelBipedEvent(this.bipedHead, this.bipedHeadwear, this.bipedBody, this.bipedRightArm, this.bipedLeftArm, this.bipedRightLeg, this.bipedLeftLeg, scale, entityIn, p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, this);
-            EventManager.call(renderModelBipedEvent);
-
             this.bipedHead.render(scale);
             this.bipedBody.render(scale);
             this.bipedRightArm.render(scale);
             this.bipedLeftArm.render(scale);
             this.bipedRightLeg.render(scale);
             this.bipedLeftLeg.render(scale);
-
-            if (renderModelBipedEvent.getModifiedBipedHeadwear() != null) {
-                this.bipedHeadwear = renderModelBipedEvent.getModifiedBipedHeadwear();
-            } else {
-                this.bipedHeadwear.render(scale);
-            }
+            this.bipedHeadwear.render(scale);
         }
 
         GlStateManager.popMatrix();

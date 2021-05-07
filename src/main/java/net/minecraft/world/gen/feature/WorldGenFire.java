@@ -7,15 +7,15 @@ import net.minecraft.world.World;
 
 public class WorldGenFire extends WorldGenerator
 {
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         for (int i = 0; i < 64; ++i)
         {
             BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-            if (worldIn.isAirBlock(blockpos) && worldIn.getBlockState(blockpos.down()).getBlock() == Blocks.netherrack)
+            if (world.isAirBlock(blockpos) && world.getBlockState(blockpos.down()).getBlock() == Blocks.netherrack)
             {
-                worldIn.setBlockState(blockpos, Blocks.fire.getDefaultState(), 2);
+                world.setBlockState(blockpos, Blocks.fire.getDefaultState(), 2);
             }
         }
 

@@ -53,11 +53,11 @@ public class ItemTool extends Item
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, Block blockIn, BlockPos pos, EntityLivingBase playerIn)
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block blockIn, BlockPos pos, EntityLivingBase player)
     {
-        if ((double)blockIn.getBlockHardness(worldIn, pos) != 0.0D)
+        if ((double)blockIn.getBlockHardness() != 0.0D)
         {
-            stack.damageItem(1, playerIn);
+            stack.damageItem(1, player);
         }
 
         return true;

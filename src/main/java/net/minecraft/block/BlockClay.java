@@ -7,10 +7,9 @@ import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
-public class BlockClay extends Block
-{
-    public BlockClay()
-    {
+public class BlockClay extends Block {
+
+    public BlockClay() {
         super(Material.clay);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
@@ -20,16 +19,15 @@ public class BlockClay extends Block
      *  
      * @param fortune the level of the Fortune enchantment on the player's tool
      */
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.clay_ball;
     }
 
     /**
      * Returns the quantity of items to drop on block destruction.
      */
-    public int quantityDropped(Random random)
-    {
+    public int quantityDropped(Random random) {
         return 4;
     }
+
 }

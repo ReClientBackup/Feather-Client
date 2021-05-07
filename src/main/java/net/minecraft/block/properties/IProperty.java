@@ -2,8 +2,8 @@ package net.minecraft.block.properties;
 
 import java.util.Collection;
 
-public interface IProperty<T extends Comparable<T>>
-{
+public interface IProperty<T extends Comparable<T>> {
+
     String getName();
 
     Collection<T> getAllowedValues();
@@ -14,4 +14,5 @@ public interface IProperty<T extends Comparable<T>>
      * Get the name for the given value.
      */
     String getName(T value);
+
 }

@@ -48,30 +48,30 @@ public class BlockSponge extends Block
         return state.getValue(WET).booleanValue() ? 1 : 0;
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        this.tryAbsorb(worldIn, pos, state);
+        this.tryAbsorb(world, pos, state);
     }
 
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        this.tryAbsorb(worldIn, pos, state);
-        super.onNeighborBlockChange(worldIn, pos, state, neighborBlock);
+        this.tryAbsorb(world, pos, state);
+        super.onNeighborBlockChange(world, pos, state, neighborBlock);
     }
 
-    protected void tryAbsorb(World worldIn, BlockPos pos, IBlockState state)
+    protected void tryAbsorb(World world, BlockPos pos, IBlockState state)
     {
-        if (!state.getValue(WET).booleanValue() && this.absorb(worldIn, pos))
+        if (!state.getValue(WET).booleanValue() && this.absorb(world, pos))
         {
-            worldIn.setBlockState(pos, state.withProperty(WET, Boolean.valueOf(true)), 2);
-            worldIn.playAuxSFX(2001, pos, Block.getIdFromBlock(Blocks.water));
+            world.setBlockState(pos, state.withProperty(WET, Boolean.valueOf(true)), 2);
+            world.playAuxSFX(2001, pos, Block.getIdFromBlock(Blocks.water));
         }
     }
 
-    private boolean absorb(World worldIn, BlockPos pos)
+    private boolean absorb(World world, BlockPos pos)
     {
         Queue<Tuple<BlockPos, Integer>> queue = Lists.newLinkedList();
         ArrayList<BlockPos> arraylist = Lists.newArrayList();
@@ -88,9 +88,9 @@ public class BlockSponge extends Block
             {
                 BlockPos blockpos1 = blockpos.offset(enumfacing);
 
-                if (worldIn.getBlockState(blockpos1).getBlock().getMaterial() == Material.water)
+                if (world.getBlockState(blockpos1).getBlock().getMaterial() == Material.water)
                 {
-                    worldIn.setBlockState(blockpos1, Blocks.air.getDefaultState(), 2);
+                    world.setBlockState(blockpos1, Blocks.air.getDefaultState(), 2);
                     arraylist.add(blockpos1);
                     ++i;
 
@@ -109,7 +109,7 @@ public class BlockSponge extends Block
 
         for (BlockPos blockpos2 : arraylist)
         {
-            worldIn.notifyNeighborsOfStateChange(blockpos2, Blocks.air);
+            world.notifyNeighborsOfStateChange(blockpos2, Blocks.air);
         }
 
         return i > 0;
@@ -118,10 +118,10 @@ public class BlockSponge extends Block
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
-        list.add(new ItemStack(itemIn, 1, 0));
-        list.add(new ItemStack(itemIn, 1, 1));
+        list.add(new ItemStack(item, 1, 0));
+        list.add(new ItemStack(item, 1, 1));
     }
 
     /**
@@ -145,13 +145,13 @@ public class BlockSponge extends Block
         return new BlockState(this, WET);
     }
 
-    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
         if (state.getValue(WET).booleanValue())
         {
             EnumFacing enumfacing = EnumFacing.random(rand);
 
-            if (enumfacing != EnumFacing.UP && !World.doesBlockHaveSolidTopSurface(worldIn, pos.offset(enumfacing)))
+            if (enumfacing != EnumFacing.UP && !World.doesBlockHaveSolidTopSurface(world, pos.offset(enumfacing)))
             {
                 double d0 = pos.getX();
                 double d1 = pos.getY();
@@ -195,7 +195,7 @@ public class BlockSponge extends Block
                     }
                 }
 
-                worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+                world.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
             }
         }
     }

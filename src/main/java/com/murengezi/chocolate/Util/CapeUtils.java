@@ -25,7 +25,7 @@ public class CapeUtils extends MinecraftUtils{
 		String name = player.getNameClear();
 		String uuid = player.getUniqueID().toString();
 
-		if (name != null && !name.isEmpty() && !name.contains("\u0000") && PATTERN_USERNAME.matcher(name).matches()) {
+		/*if (name != null && !name.isEmpty() && !name.contains("\u0000") && PATTERN_USERNAME.matcher(name).matches()) {
 			String murengeziCape = MurengeziAPI.getPlayerCape(uuid);
 			String url = murengeziCape != null ? murengeziCape : "http://s.optifine.net/capes/" + name + ".png";
 			ResourceLocation resourcelocation = new ResourceLocation("chocolate", "capes/" + name);
@@ -47,7 +47,7 @@ public class CapeUtils extends MinecraftUtils{
 			ThreadDownloadImageData threadDownloadImageData = new ThreadDownloadImageData(null, url, null, capeImageBuffer);
 			threadDownloadImageData.pipeline = true;
 			textureManager.loadTexture(resourcelocation, threadDownloadImageData);
-		}
+		}*/
 	}
 
 	public static BufferedImage parseCape(BufferedImage image) {
@@ -79,6 +79,6 @@ public class CapeUtils extends MinecraftUtils{
 		}
 
 		player.setCapeLocation(null);
-		downloadCape(player);
+		//downloadCape(player);
 	}
 }

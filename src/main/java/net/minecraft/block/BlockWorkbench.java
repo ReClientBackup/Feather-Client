@@ -24,16 +24,16 @@ public class BlockWorkbench extends Block
         this.setCreativeTab(CreativeTabs.tabDecorations);
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (worldIn.isRemote)
+        if (world.isRemote)
         {
             return true;
         }
         else
         {
-            playerIn.displayGui(new BlockWorkbench.InterfaceCraftingTable(worldIn, pos));
-            playerIn.triggerAchievement(StatList.field_181742_Z);
+            player.displayGui(new BlockWorkbench.InterfaceCraftingTable(world, pos));
+            player.triggerAchievement(StatList.field_181742_Z);
             return true;
         }
     }
@@ -43,9 +43,9 @@ public class BlockWorkbench extends Block
         private final World world;
         private final BlockPos position;
 
-        public InterfaceCraftingTable(World worldIn, BlockPos pos)
+        public InterfaceCraftingTable(World world, BlockPos pos)
         {
-            this.world = worldIn;
+            this.world = world;
             this.position = pos;
         }
 
@@ -64,7 +64,7 @@ public class BlockWorkbench extends Block
             return new ChatComponentTranslation(Blocks.crafting_table.getUnlocalizedName() + ".name");
         }
 
-        public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+        public Container createContainer(InventoryPlayer playerInventory, EntityPlayer player)
         {
             return new ContainerWorkbench(playerInventory, this.world, this.position);
         }

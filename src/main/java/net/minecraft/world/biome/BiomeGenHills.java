@@ -36,9 +36,9 @@ public class BiomeGenHills extends BiomeGenBase
         return rand.nextInt(3) > 0 ? this.field_150634_aD : super.genBigTreeChance(rand);
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
-        super.decorate(worldIn, rand, pos);
+        super.decorate(world, rand, pos);
         int i = 3 + rand.nextInt(6);
 
         for (int j = 0; j < i; ++j)
@@ -48,9 +48,9 @@ public class BiomeGenHills extends BiomeGenBase
             int i1 = rand.nextInt(16);
             BlockPos blockpos = pos.add(k, l, i1);
 
-            if (worldIn.getBlockState(blockpos).getBlock() == Blocks.stone)
+            if (world.getBlockState(blockpos).getBlock() == Blocks.stone)
             {
-                worldIn.setBlockState(blockpos, Blocks.emerald_ore.getDefaultState(), 2);
+                world.setBlockState(blockpos, Blocks.emerald_ore.getDefaultState(), 2);
             }
         }
 
@@ -59,11 +59,11 @@ public class BiomeGenHills extends BiomeGenBase
             int j1 = rand.nextInt(16);
             int k1 = rand.nextInt(64);
             int l1 = rand.nextInt(16);
-            this.theWorldGenerator.generate(worldIn, rand, pos.add(j1, k1, l1));
+            this.theWorldGenerator.generate(world, rand, pos.add(j1, k1, l1));
         }
     }
 
-    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
+    public void genTerrainBlocks(World world, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
     {
         this.topBlock = Blocks.grass.getDefaultState();
         this.fillerBlock = Blocks.dirt.getDefaultState();
@@ -79,7 +79,7 @@ public class BiomeGenHills extends BiomeGenBase
             this.fillerBlock = Blocks.stone.getDefaultState();
         }
 
-        this.generateBiomeTerrain(worldIn, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
+        this.generateBiomeTerrain(world, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
     }
 
     /**

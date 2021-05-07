@@ -33,9 +33,9 @@ public class EntityBoat extends Entity
     private double velocityY;
     private double velocityZ;
 
-    public EntityBoat(World worldIn)
+    public EntityBoat(World world)
     {
-        super(worldIn);
+        super(world);
         this.isBoatEmpty = true;
         this.speedMultiplier = 0.07D;
         this.preventEntitySpawning = true;
@@ -83,9 +83,9 @@ public class EntityBoat extends Entity
         return true;
     }
 
-    public EntityBoat(World worldIn, double p_i1705_2_, double p_i1705_4_, double p_i1705_6_)
+    public EntityBoat(World world, double p_i1705_2_, double p_i1705_4_, double p_i1705_6_)
     {
-        this(worldIn);
+        this(world);
         this.setPosition(p_i1705_2_, p_i1705_4_, p_i1705_6_);
         this.motionX = 0.0D;
         this.motionY = 0.0D;
@@ -511,9 +511,9 @@ public class EntityBoat extends Entity
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer playerIn)
+    public boolean interactFirst(EntityPlayer player)
     {
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != playerIn)
+        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != player)
         {
             return true;
         }
@@ -521,7 +521,7 @@ public class EntityBoat extends Entity
         {
             if (!this.worldObj.isRemote)
             {
-                playerIn.mountEntity(this);
+                player.mountEntity(this);
             }
 
             return true;

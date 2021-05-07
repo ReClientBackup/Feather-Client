@@ -26,9 +26,9 @@ public class EntityGhast extends EntityFlying implements IMob
     /** The explosion radius of spawned fireballs. */
     private int explosionStrength = 1;
 
-    public EntityGhast(World worldIn)
+    public EntityGhast(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(4.0F, 4.0F);
         this.isImmuneToFire = true;
         this.experienceValue = 5;

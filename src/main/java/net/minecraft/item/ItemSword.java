@@ -63,11 +63,11 @@ public class ItemSword extends Item
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, Block blockIn, BlockPos pos, EntityLivingBase playerIn)
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block blockIn, BlockPos pos, EntityLivingBase player)
     {
-        if ((double)blockIn.getBlockHardness(worldIn, pos) != 0.0D)
+        if ((double)blockIn.getBlockHardness() != 0.0D)
         {
-            stack.damageItem(2, playerIn);
+            stack.damageItem(2, player);
         }
 
         return true;
@@ -100,9 +100,9 @@ public class ItemSword extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
-        playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
+        player.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
         return itemStackIn;
     }
 

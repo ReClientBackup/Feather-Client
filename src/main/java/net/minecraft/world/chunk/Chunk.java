@@ -104,7 +104,7 @@ public class Chunk
     private int queuedLightChecks;
     private final ConcurrentLinkedQueue<BlockPos> tileEntityPosQueue;
 
-    public Chunk(World worldIn, int x, int z)
+    public Chunk(World world, int x, int z)
     {
         this.storageArrays = new ExtendedBlockStorage[16];
         this.blockBiomeArray = new byte[256];
@@ -114,7 +114,7 @@ public class Chunk
         this.queuedLightChecks = 4096;
         this.tileEntityPosQueue = Queues.newConcurrentLinkedQueue();
         this.entityLists = (ClassInheritanceMultiMap[])(new ClassInheritanceMultiMap[16]);
-        this.worldObj = worldIn;
+        this.worldObj = world;
         this.xPosition = x;
         this.zPosition = z;
         this.heightMap = new int[256];
@@ -128,11 +128,11 @@ public class Chunk
         Arrays.fill(this.blockBiomeArray, (byte) - 1);
     }
 
-    public Chunk(World worldIn, ChunkPrimer primer, int x, int z)
+    public Chunk(World world, ChunkPrimer primer, int x, int z)
     {
-        this(worldIn, x, z);
+        this(world, x, z);
         int i = 256;
-        boolean flag = !worldIn.provider.getHasNoSky();
+        boolean flag = !world.provider.getHasNoSky();
 
         for (int j = 0; j < 16; ++j)
         {

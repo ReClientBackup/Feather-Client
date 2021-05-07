@@ -80,9 +80,9 @@ public class ContainerPlayer extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer playerIn)
+    public void onContainerClosed(EntityPlayer player)
     {
-        super.onContainerClosed(playerIn);
+        super.onContainerClosed(player);
 
         for (int i = 0; i < 4; ++i)
         {
@@ -90,14 +90,14 @@ public class ContainerPlayer extends Container
 
             if (itemstack != null)
             {
-                playerIn.dropPlayerItemWithRandomChoice(itemstack, false);
+                player.dropPlayerItemWithRandomChoice(itemstack);
             }
         }
 
         this.craftResult.setInventorySlotContents(0, null);
     }
 
-    public boolean canInteractWith(EntityPlayer playerIn)
+    public boolean canInteractWith(EntityPlayer player)
     {
         return true;
     }
@@ -105,7 +105,7 @@ public class ContainerPlayer extends Container
     /**
      * Take a stack from the specified inventory slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    public ItemStack transferStackInSlot(EntityPlayer player, int index)
     {
         ItemStack itemstack = null;
         Slot slot = this.inventorySlots.get(index);
@@ -180,7 +180,7 @@ public class ContainerPlayer extends Container
                 return null;
             }
 
-            slot.onPickupFromSlot(playerIn, itemstack1);
+            slot.onPickupFromSlot(player, itemstack1);
         }
 
         return itemstack;

@@ -22,15 +22,15 @@ public class IntegratedPlayerList extends ServerConfigurationManager
     /**
      * also stores the NBTTags if this is an intergratedPlayerList
      */
-    protected void writePlayerData(EntityPlayerMP playerIn)
+    protected void writePlayerData(EntityPlayerMP player)
     {
-        if (playerIn.getCommandSenderName().equals(this.getServerInstance().getServerOwner()))
+        if (player.getCommandSenderName().equals(this.getServerInstance().getServerOwner()))
         {
             this.hostPlayerData = new NBTTagCompound();
-            playerIn.writeToNBT(this.hostPlayerData);
+            player.writeToNBT(this.hostPlayerData);
         }
 
-        super.writePlayerData(playerIn);
+        super.writePlayerData(player);
     }
 
     /**

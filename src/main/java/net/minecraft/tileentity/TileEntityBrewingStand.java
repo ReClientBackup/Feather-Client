@@ -413,7 +413,7 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
         return "minecraft:brewing_stand";
     }
 
-    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer player)
     {
         return new ContainerBrewingStand(playerInventory, this);
     }

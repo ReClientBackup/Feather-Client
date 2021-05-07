@@ -57,7 +57,7 @@ public class BiomeGenPlains extends BiomeGenBase
         }
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
         double d0 = GRASS_COLOR_NOISE.func_151601_a((double)(pos.getX() + 8) / 200.0D, (double)(pos.getZ() + 8) / 200.0D);
 
@@ -76,8 +76,8 @@ public class BiomeGenPlains extends BiomeGenBase
             {
                 int j = rand.nextInt(16) + 8;
                 int k = rand.nextInt(16) + 8;
-                int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
-                DOUBLE_PLANT_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
+                int l = rand.nextInt(world.getHeight(pos.add(j, 0, k)).getY() + 32);
+                DOUBLE_PLANT_GENERATOR.generate(world, rand, pos.add(j, l, k));
             }
         }
 
@@ -89,12 +89,12 @@ public class BiomeGenPlains extends BiomeGenBase
             {
                 int j1 = rand.nextInt(16) + 8;
                 int k1 = rand.nextInt(16) + 8;
-                int l1 = rand.nextInt(worldIn.getHeight(pos.add(j1, 0, k1)).getY() + 32);
-                DOUBLE_PLANT_GENERATOR.generate(worldIn, rand, pos.add(j1, l1, k1));
+                int l1 = rand.nextInt(world.getHeight(pos.add(j1, 0, k1)).getY() + 32);
+                DOUBLE_PLANT_GENERATOR.generate(world, rand, pos.add(j1, l1, k1));
             }
         }
 
-        super.decorate(worldIn, rand, pos);
+        super.decorate(world, rand, pos);
     }
 
     protected BiomeGenBase createMutatedBiome(int p_180277_1_)

@@ -80,9 +80,9 @@ public class RenderChunk
     private final RenderGlobal.ContainerLocalRenderInformation renderInfo = new RenderGlobal.ContainerLocalRenderInformation(this, null, 0);
     public AabbFrame boundingBoxParent;
 
-    public RenderChunk(World worldIn, RenderGlobal renderGlobalIn, BlockPos blockPosIn, int indexIn)
+    public RenderChunk(World world, RenderGlobal renderGlobalIn, BlockPos blockPosIn, int indexIn)
     {
-        this.world = worldIn;
+        this.world = world;
         this.renderGlobal = renderGlobalIn;
         this.index = indexIn;
 

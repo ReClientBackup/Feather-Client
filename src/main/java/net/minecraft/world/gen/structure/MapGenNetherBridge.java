@@ -52,7 +52,7 @@ public class MapGenNetherBridge extends MapGenStructure
         {
         }
 
-        public Start(World worldIn, Random p_i2040_2_, int p_i2040_3_, int p_i2040_4_)
+        public Start(World world, Random p_i2040_2_, int p_i2040_3_, int p_i2040_4_)
         {
             super(p_i2040_3_, p_i2040_4_);
             StructureNetherBridgePieces.Start structurenetherbridgepieces$start = new StructureNetherBridgePieces.Start(p_i2040_2_, (p_i2040_3_ << 4) + 2, (p_i2040_4_ << 4) + 2);
@@ -68,7 +68,7 @@ public class MapGenNetherBridge extends MapGenStructure
             }
 
             this.updateBoundingBox();
-            this.setRandomHeight(worldIn, p_i2040_2_, 48, 70);
+            this.setRandomHeight(world, p_i2040_2_, 48, 70);
         }
     }
 }

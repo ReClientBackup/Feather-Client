@@ -17,9 +17,9 @@ public class RecipesMapExtending extends ShapedRecipes
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    public boolean matches(InventoryCrafting inv, World worldIn)
+    public boolean matches(InventoryCrafting inv, World world)
     {
-        if (!super.matches(inv, worldIn))
+        if (!super.matches(inv, world))
         {
             return false;
         }
@@ -43,7 +43,7 @@ public class RecipesMapExtending extends ShapedRecipes
             }
             else
             {
-                MapData mapdata = Items.filled_map.getMapData(itemstack, worldIn);
+                MapData mapdata = Items.filled_map.getMapData(itemstack, world);
                 return mapdata != null && mapdata.scale < 4;
             }
         }

@@ -20,30 +20,30 @@ public class EntityPotion extends EntityThrowable
      */
     private ItemStack potionDamage;
 
-    public EntityPotion(World worldIn)
+    public EntityPotion(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityPotion(World worldIn, EntityLivingBase throwerIn, int meta)
+    public EntityPotion(World world, EntityLivingBase throwerIn, int meta)
     {
-        this(worldIn, throwerIn, new ItemStack(Items.potionitem, 1, meta));
+        this(world, throwerIn, new ItemStack(Items.potionitem, 1, meta));
     }
 
-    public EntityPotion(World worldIn, EntityLivingBase throwerIn, ItemStack potionDamageIn)
+    public EntityPotion(World world, EntityLivingBase throwerIn, ItemStack potionDamageIn)
     {
-        super(worldIn, throwerIn);
+        super(world, throwerIn);
         this.potionDamage = potionDamageIn;
     }
 
-    public EntityPotion(World worldIn, double x, double y, double z, int p_i1791_8_)
+    public EntityPotion(World world, double x, double y, double z, int p_i1791_8_)
     {
-        this(worldIn, x, y, z, new ItemStack(Items.potionitem, 1, p_i1791_8_));
+        this(world, x, y, z, new ItemStack(Items.potionitem, 1, p_i1791_8_));
     }
 
-    public EntityPotion(World worldIn, double x, double y, double z, ItemStack potionDamageIn)
+    public EntityPotion(World world, double x, double y, double z, ItemStack potionDamageIn)
     {
-        super(worldIn, x, y, z);
+        super(world, x, y, z);
         this.potionDamage = potionDamageIn;
     }
 

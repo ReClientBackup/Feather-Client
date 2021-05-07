@@ -11,6 +11,7 @@ import net.optifine.config.Config;
 import net.optifine.reflect.Reflector;
 
 public class ModelAdapterWither extends ModelAdapter {
+
    public ModelAdapterWither() {
       super(EntityWither.class, "wither", 0.5F);
    }

@@ -57,9 +57,9 @@ public class EntityWither extends EntityMob implements IBossDisplayData, IRanged
         }
     };
 
-    public EntityWither(World worldIn)
+    public EntityWither(World world)
     {
-        super(worldIn);
+        super(world);
         this.setHealth(this.getMaxHealth());
         this.setSize(0.9F, 3.5F);
         this.isImmuneToFire = true;
@@ -595,7 +595,7 @@ public class EntityWither extends EntityMob implements IBossDisplayData, IRanged
     /**
      * adds a PotionEffect to the entity
      */
-    public void addPotionEffect(PotionEffect potioneffectIn)
+    public void addPotionEffect(PotionEffect effect)
     {
     }
 
@@ -665,7 +665,7 @@ public class EntityWither extends EntityMob implements IBossDisplayData, IRanged
     /**
      * Called when a player mounts an entity. e.g. mounts a pig, mounts a boat.
      */
-    public void mountEntity(Entity entityIn)
+    public void mountEntity(Entity entity)
     {
         this.ridingEntity = null;
     }

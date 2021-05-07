@@ -27,8 +27,8 @@ public class GuiMerchant extends GuiContainer {
     private int selectedMerchantRecipe;
     private final IChatComponent chatComponent;
 
-    public GuiMerchant(InventoryPlayer inventoryPlayer, IMerchant merchant, World worldIn) {
-        super(new ContainerMerchant(inventoryPlayer, merchant, worldIn));
+    public GuiMerchant(InventoryPlayer inventoryPlayer, IMerchant merchant, World world) {
+        super(new ContainerMerchant(inventoryPlayer, merchant, world));
         this.merchant = merchant;
         this.chatComponent = merchant.getDisplayName();
     }

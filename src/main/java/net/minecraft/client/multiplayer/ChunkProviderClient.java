@@ -30,10 +30,10 @@ public class ChunkProviderClient implements IChunkProvider
     /** Reference to the World object. */
     private final World worldObj;
 
-    public ChunkProviderClient(World worldIn)
+    public ChunkProviderClient(World world)
     {
-        this.blankChunk = new EmptyChunk(worldIn, 0, 0);
-        this.worldObj = worldIn;
+        this.blankChunk = new EmptyChunk(world, 0, 0);
+        this.worldObj = world;
     }
 
     /**
@@ -153,7 +153,7 @@ public class ChunkProviderClient implements IChunkProvider
         return null;
     }
 
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position)
+    public BlockPos getStrongholdGen(World world, String structureName, BlockPos position)
     {
         return null;
     }

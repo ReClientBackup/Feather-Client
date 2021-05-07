@@ -7,10 +7,9 @@ import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
-public class BlockBookshelf extends Block
-{
-    public BlockBookshelf()
-    {
+public class BlockBookshelf extends Block {
+
+    public BlockBookshelf() {
         super(Material.wood);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
@@ -18,8 +17,7 @@ public class BlockBookshelf extends Block
     /**
      * Returns the quantity of items to drop on block destruction.
      */
-    public int quantityDropped(Random random)
-    {
+    public int quantityDropped(Random random) {
         return 3;
     }
 
@@ -28,8 +26,7 @@ public class BlockBookshelf extends Block
      *  
      * @param fortune the level of the Fortune enchantment on the player's tool
      */
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.book;
     }
 }

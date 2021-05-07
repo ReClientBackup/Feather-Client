@@ -15,10 +15,10 @@ public class ContainerMerchant extends Container
     /** Instance of World. */
     private final World theWorld;
 
-    public ContainerMerchant(InventoryPlayer playerInventory, IMerchant merchant, World worldIn)
+    public ContainerMerchant(InventoryPlayer playerInventory, IMerchant merchant, World world)
     {
         this.theMerchant = merchant;
-        this.theWorld = worldIn;
+        this.theWorld = world;
         this.merchantInventory = new InventoryMerchant(playerInventory.player, merchant);
         this.addSlotToContainer(new Slot(this.merchantInventory, 0, 36, 53));
         this.addSlotToContainer(new Slot(this.merchantInventory, 1, 62, 53));
@@ -74,15 +74,15 @@ public class ContainerMerchant extends Container
     {
     }
 
-    public boolean canInteractWith(EntityPlayer playerIn)
+    public boolean canInteractWith(EntityPlayer player)
     {
-        return this.theMerchant.getCustomer() == playerIn;
+        return this.theMerchant.getCustomer() == player;
     }
 
     /**
      * Take a stack from the specified inventory slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    public ItemStack transferStackInSlot(EntityPlayer player, int index)
     {
         ItemStack itemstack = null;
         Slot slot = this.inventorySlots.get(index);
@@ -134,7 +134,7 @@ public class ContainerMerchant extends Container
                 return null;
             }
 
-            slot.onPickupFromSlot(playerIn, itemstack1);
+            slot.onPickupFromSlot(player, itemstack1);
         }
 
         return itemstack;
@@ -143,11 +143,11 @@ public class ContainerMerchant extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer playerIn)
+    public void onContainerClosed(EntityPlayer player)
     {
-        super.onContainerClosed(playerIn);
+        super.onContainerClosed(player);
         this.theMerchant.setCustomer(null);
-        super.onContainerClosed(playerIn);
+        super.onContainerClosed(player);
 
         if (!this.theWorld.isRemote)
         {
@@ -155,14 +155,14 @@ public class ContainerMerchant extends Container
 
             if (itemstack != null)
             {
-                playerIn.dropPlayerItemWithRandomChoice(itemstack, false);
+                player.dropPlayerItemWithRandomChoice(itemstack);
             }
 
             itemstack = this.merchantInventory.getStackInSlotOnClosing(1);
 
             if (itemstack != null)
             {
-                playerIn.dropPlayerItemWithRandomChoice(itemstack, false);
+                player.dropPlayerItemWithRandomChoice(itemstack);
             }
         }
     }

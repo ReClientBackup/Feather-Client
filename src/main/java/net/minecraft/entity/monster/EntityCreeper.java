@@ -39,9 +39,9 @@ public class EntityCreeper extends EntityMob
     private int explosionRadius = 3;
     private int field_175494_bm = 0;
 
-    public EntityCreeper(World worldIn)
+    public EntityCreeper(World world)
     {
-        super(worldIn);
+        super(world);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAICreeperSwell(this));
         this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
@@ -202,7 +202,7 @@ public class EntityCreeper extends EntityMob
         }
     }
 
-    public boolean attackEntityAsMob(Entity entityIn)
+    public boolean attackEntityAsMob(Entity entity)
     {
         return true;
     }

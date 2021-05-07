@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.RenderSkeleton;
 import net.minecraft.entity.monster.EntitySkeleton;
 
 public class ModelAdapterSkeleton extends ModelAdapterBiped {
+
    public ModelAdapterSkeleton() {
       super(EntitySkeleton.class, "skeleton", 0.7F);
    }

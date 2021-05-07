@@ -26,20 +26,20 @@ public class ItemEnderEye extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
 
-        if (playerIn.canPlayerEdit(pos.offset(side), side, stack) && iblockstate.getBlock() == Blocks.end_portal_frame && !iblockstate.getValue(BlockEndPortalFrame.EYE).booleanValue())
+        if (player.canPlayerEdit(pos.offset(side), side, stack) && iblockstate.getBlock() == Blocks.end_portal_frame && !iblockstate.getValue(BlockEndPortalFrame.EYE).booleanValue())
         {
-            if (worldIn.isRemote)
+            if (world.isRemote)
             {
                 return true;
             }
             else
             {
-                worldIn.setBlockState(pos, iblockstate.withProperty(BlockEndPortalFrame.EYE, Boolean.valueOf(true)), 2);
-                worldIn.updateComparatorOutputLevel(pos, Blocks.end_portal_frame);
+                world.setBlockState(pos, iblockstate.withProperty(BlockEndPortalFrame.EYE, Boolean.valueOf(true)), 2);
+                world.updateComparatorOutputLevel(pos, Blocks.end_portal_frame);
                 --stack.stackSize;
 
                 for (int i = 0; i < 16; ++i)
@@ -50,7 +50,7 @@ public class ItemEnderEye extends Item
                     double d3 = 0.0D;
                     double d4 = 0.0D;
                     double d5 = 0.0D;
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
+                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
                 }
 
                 EnumFacing enumfacing = iblockstate.getValue(BlockEndPortalFrame.FACING);
@@ -63,7 +63,7 @@ public class ItemEnderEye extends Item
                 for (int k = -2; k <= 2; ++k)
                 {
                     BlockPos blockpos1 = pos.offset(enumfacing1, k);
-                    IBlockState iblockstate1 = worldIn.getBlockState(blockpos1);
+                    IBlockState iblockstate1 = world.getBlockState(blockpos1);
 
                     if (iblockstate1.getBlock() == Blocks.end_portal_frame)
                     {
@@ -90,7 +90,7 @@ public class ItemEnderEye extends Item
                     for (int i1 = l; i1 <= j; ++i1)
                     {
                         BlockPos blockpos2 = blockpos.offset(enumfacing1, i1);
-                        IBlockState iblockstate3 = worldIn.getBlockState(blockpos2);
+                        IBlockState iblockstate3 = world.getBlockState(blockpos2);
 
                         if (iblockstate3.getBlock() != Blocks.end_portal_frame || !iblockstate3.getValue(BlockEndPortalFrame.EYE).booleanValue())
                         {
@@ -106,7 +106,7 @@ public class ItemEnderEye extends Item
                         for (int l1 = 1; l1 <= 3; ++l1)
                         {
                             BlockPos blockpos3 = blockpos.offset(enumfacing, l1);
-                            IBlockState iblockstate2 = worldIn.getBlockState(blockpos3);
+                            IBlockState iblockstate2 = world.getBlockState(blockpos3);
 
                             if (iblockstate2.getBlock() != Blocks.end_portal_frame || !iblockstate2.getValue(BlockEndPortalFrame.EYE).booleanValue())
                             {
@@ -125,7 +125,7 @@ public class ItemEnderEye extends Item
                             for (int i2 = 1; i2 <= 3; ++i2)
                             {
                                 BlockPos blockpos4 = blockpos.offset(enumfacing, i2);
-                                worldIn.setBlockState(blockpos4, Blocks.end_portal.getDefaultState(), 2);
+                                world.setBlockState(blockpos4, Blocks.end_portal.getDefaultState(), 2);
                             }
                         }
                     }
@@ -143,34 +143,34 @@ public class ItemEnderEye extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
-        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(worldIn, playerIn, false);
+        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, player, false);
 
-        if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && worldIn.getBlockState(movingobjectposition.getBlockPos()).getBlock() == Blocks.end_portal_frame)
+        if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && world.getBlockState(movingobjectposition.getBlockPos()).getBlock() == Blocks.end_portal_frame)
         {
             return itemStackIn;
         }
         else
         {
-            if (!worldIn.isRemote)
+            if (!world.isRemote)
             {
-                BlockPos blockpos = worldIn.getStrongholdPos("Stronghold", new BlockPos(playerIn));
+                BlockPos blockpos = world.getStrongholdPos("Stronghold", new BlockPos(player));
 
                 if (blockpos != null)
                 {
-                    EntityEnderEye entityendereye = new EntityEnderEye(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ);
+                    EntityEnderEye entityendereye = new EntityEnderEye(world, player.posX, player.posY, player.posZ);
                     entityendereye.moveTowards(blockpos);
-                    worldIn.spawnEntityInWorld(entityendereye);
-                    worldIn.playSoundAtEntity(playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-                    worldIn.playAuxSFXAtEntity(null, 1002, new BlockPos(playerIn), 0);
+                    world.spawnEntityInWorld(entityendereye);
+                    world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+                    world.playAuxSFXAtEntity(null, 1002, new BlockPos(player), 0);
 
-                    if (!playerIn.capabilities.isCreativeMode)
+                    if (!player.capabilities.isCreativeMode)
                     {
                         --itemStackIn.stackSize;
                     }
 
-                    playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+                    player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
                 }
             }
 

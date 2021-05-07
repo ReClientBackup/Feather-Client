@@ -27,7 +27,7 @@ public class BlockRailPowered extends BlockRailBase
     }
 
     @SuppressWarnings("incomplete-switch")
-    protected boolean func_176566_a(World worldIn, BlockPos pos, IBlockState state, boolean p_176566_4_, int p_176566_5_)
+    protected boolean func_176566_a(World world, BlockPos pos, IBlockState state, boolean p_176566_4_, int p_176566_5_)
     {
         if (p_176566_5_ >= 8)
         {
@@ -127,13 +127,13 @@ public class BlockRailPowered extends BlockRailBase
                     blockrailbase$enumraildirection = BlockRailBase.EnumRailDirection.NORTH_SOUTH;
             }
 
-            return this.func_176567_a(worldIn, new BlockPos(i, j, k), p_176566_4_, p_176566_5_, blockrailbase$enumraildirection) || flag && this.func_176567_a(worldIn, new BlockPos(i, j - 1, k), p_176566_4_, p_176566_5_, blockrailbase$enumraildirection);
+            return this.func_176567_a(world, new BlockPos(i, j, k), p_176566_4_, p_176566_5_, blockrailbase$enumraildirection) || flag && this.func_176567_a(world, new BlockPos(i, j - 1, k), p_176566_4_, p_176566_5_, blockrailbase$enumraildirection);
         }
     }
 
-    protected boolean func_176567_a(World worldIn, BlockPos p_176567_2_, boolean p_176567_3_, int distance, BlockRailBase.EnumRailDirection p_176567_5_)
+    protected boolean func_176567_a(World world, BlockPos p_176567_2_, boolean p_176567_3_, int distance, BlockRailBase.EnumRailDirection p_176567_5_)
     {
-        IBlockState iblockstate = worldIn.getBlockState(p_176567_2_);
+        IBlockState iblockstate = world.getBlockState(p_176567_2_);
 
         if (iblockstate.getBlock() != this)
         {
@@ -142,23 +142,23 @@ public class BlockRailPowered extends BlockRailBase
         else
         {
             BlockRailBase.EnumRailDirection blockrailbase$enumraildirection = iblockstate.getValue(SHAPE);
-            return (p_176567_5_ != EnumRailDirection.EAST_WEST || blockrailbase$enumraildirection != EnumRailDirection.NORTH_SOUTH && blockrailbase$enumraildirection != EnumRailDirection.ASCENDING_NORTH && blockrailbase$enumraildirection != EnumRailDirection.ASCENDING_SOUTH) && ((p_176567_5_ != EnumRailDirection.NORTH_SOUTH || blockrailbase$enumraildirection != EnumRailDirection.EAST_WEST && blockrailbase$enumraildirection != EnumRailDirection.ASCENDING_EAST && blockrailbase$enumraildirection != EnumRailDirection.ASCENDING_WEST) && (iblockstate.getValue(POWERED).booleanValue() && (worldIn.isBlockPowered(p_176567_2_) || this.func_176566_a(worldIn, p_176567_2_, iblockstate, p_176567_3_, distance + 1))));
+            return (p_176567_5_ != EnumRailDirection.EAST_WEST || blockrailbase$enumraildirection != EnumRailDirection.NORTH_SOUTH && blockrailbase$enumraildirection != EnumRailDirection.ASCENDING_NORTH && blockrailbase$enumraildirection != EnumRailDirection.ASCENDING_SOUTH) && ((p_176567_5_ != EnumRailDirection.NORTH_SOUTH || blockrailbase$enumraildirection != EnumRailDirection.EAST_WEST && blockrailbase$enumraildirection != EnumRailDirection.ASCENDING_EAST && blockrailbase$enumraildirection != EnumRailDirection.ASCENDING_WEST) && (iblockstate.getValue(POWERED).booleanValue() && (world.isBlockPowered(p_176567_2_) || this.func_176566_a(world, p_176567_2_, iblockstate, p_176567_3_, distance + 1))));
         }
     }
 
-    protected void onNeighborChangedInternal(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    protected void onNeighborChangedInternal(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         boolean flag = state.getValue(POWERED).booleanValue();
-        boolean flag1 = worldIn.isBlockPowered(pos) || this.func_176566_a(worldIn, pos, state, true, 0) || this.func_176566_a(worldIn, pos, state, false, 0);
+        boolean flag1 = world.isBlockPowered(pos) || this.func_176566_a(world, pos, state, true, 0) || this.func_176566_a(world, pos, state, false, 0);
 
         if (flag1 != flag)
         {
-            worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(flag1)), 3);
-            worldIn.notifyNeighborsOfStateChange(pos.down(), this);
+            world.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(flag1)), 3);
+            world.notifyNeighborsOfStateChange(pos.down(), this);
 
             if (state.getValue(SHAPE).isAscending())
             {
-                worldIn.notifyNeighborsOfStateChange(pos.up(), this);
+                world.notifyNeighborsOfStateChange(pos.up(), this);
             }
         }
     }

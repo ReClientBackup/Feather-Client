@@ -8,9 +8,9 @@ import net.minecraft.world.pathfinder.SwimNodeProcessor;
 
 public class PathNavigateSwimmer extends PathNavigate
 {
-    public PathNavigateSwimmer(EntityLiving entitylivingIn, World worldIn)
+    public PathNavigateSwimmer(EntityLiving entitylivingIn, World world)
     {
-        super(entitylivingIn, worldIn);
+        super(entitylivingIn, world);
     }
 
     protected PathFinder getPathFinder()

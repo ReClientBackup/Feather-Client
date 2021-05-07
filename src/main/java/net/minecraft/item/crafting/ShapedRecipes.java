@@ -53,7 +53,7 @@ public class ShapedRecipes implements IRecipe
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    public boolean matches(InventoryCrafting inv, World worldIn)
+    public boolean matches(InventoryCrafting inv, World world)
     {
         for (int i = 0; i <= 3 - this.recipeWidth; ++i)
         {

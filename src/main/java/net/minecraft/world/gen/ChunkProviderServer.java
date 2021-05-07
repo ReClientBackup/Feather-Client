@@ -354,9 +354,9 @@ public class ChunkProviderServer implements IChunkProvider
         return this.serverChunkGenerator.getPossibleCreatures(creatureType, pos);
     }
 
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position)
+    public BlockPos getStrongholdGen(World world, String structureName, BlockPos position)
     {
-        return this.serverChunkGenerator.getStrongholdGen(worldIn, structureName, position);
+        return this.serverChunkGenerator.getStrongholdGen(world, structureName, position);
     }
 
     public int getLoadedChunkCount()

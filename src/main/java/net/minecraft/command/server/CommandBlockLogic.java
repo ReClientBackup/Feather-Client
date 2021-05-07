@@ -124,9 +124,9 @@ public abstract class CommandBlockLogic implements ICommandSender
         return this.commandStored;
     }
 
-    public void trigger(World worldIn)
+    public void trigger(World world)
     {
-        if (worldIn.isRemote)
+        if (world.isRemote)
         {
             this.successCount = 0;
         }
@@ -239,17 +239,17 @@ public abstract class CommandBlockLogic implements ICommandSender
         return this.trackOutput;
     }
 
-    public boolean tryOpenEditCommandBlock(EntityPlayer playerIn)
+    public boolean tryOpenEditCommandBlock(EntityPlayer player)
     {
-        if (!playerIn.capabilities.isCreativeMode)
+        if (!player.capabilities.isCreativeMode)
         {
             return false;
         }
         else
         {
-            if (playerIn.getEntityWorld().isRemote)
+            if (player.getEntityWorld().isRemote)
             {
-                playerIn.openEditCommandBlock(this);
+                player.openEditCommandBlock(this);
             }
 
             return true;

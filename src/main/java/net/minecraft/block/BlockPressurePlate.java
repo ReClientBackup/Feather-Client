@@ -33,7 +33,7 @@ public class BlockPressurePlate extends BlockBasePressurePlate
         return state.withProperty(POWERED, Boolean.valueOf(strength > 0));
     }
 
-    protected int computeRedstoneStrength(World worldIn, BlockPos pos)
+    protected int computeRedstoneStrength(World world, BlockPos pos)
     {
         AxisAlignedBB axisalignedbb = this.getSensitiveAABB(pos);
         List <? extends Entity > list;
@@ -41,11 +41,11 @@ public class BlockPressurePlate extends BlockBasePressurePlate
         switch (this.sensitivity)
         {
             case EVERYTHING:
-                list = worldIn.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb);
+                list = world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb);
                 break;
 
             case MOBS:
-                list = worldIn.<Entity>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
+                list = world.<Entity>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
                 break;
 
             default:

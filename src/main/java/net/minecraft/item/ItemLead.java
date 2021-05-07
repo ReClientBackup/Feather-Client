@@ -24,19 +24,19 @@ public class ItemLead extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        Block block = worldIn.getBlockState(pos).getBlock();
+        Block block = world.getBlockState(pos).getBlock();
 
         if (block instanceof BlockFence)
         {
-            if (worldIn.isRemote)
+            if (world.isRemote)
             {
                 return true;
             }
             else
             {
-                attachToFence(playerIn, worldIn, pos);
+                attachToFence(player, world, pos);
                 return true;
             }
         }
@@ -46,22 +46,22 @@ public class ItemLead extends Item
         }
     }
 
-    public static boolean attachToFence(EntityPlayer player, World worldIn, BlockPos fence)
+    public static boolean attachToFence(EntityPlayer player, World world, BlockPos fence)
     {
-        EntityLeashKnot entityleashknot = EntityLeashKnot.getKnotForPosition(worldIn, fence);
+        EntityLeashKnot entityleashknot = EntityLeashKnot.getKnotForPosition(world, fence);
         boolean flag = false;
         double d0 = 7.0D;
         int i = fence.getX();
         int j = fence.getY();
         int k = fence.getZ();
 
-        for (EntityLiving entityliving : worldIn.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB((double)i - d0, (double)j - d0, (double)k - d0, (double)i + d0, (double)j + d0, (double)k + d0)))
+        for (EntityLiving entityliving : world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB((double)i - d0, (double)j - d0, (double)k - d0, (double)i + d0, (double)j + d0, (double)k + d0)))
         {
             if (entityliving.getLeashed() && entityliving.getLeashedToEntity() == player)
             {
                 if (entityleashknot == null)
                 {
-                    entityleashknot = EntityLeashKnot.createKnot(worldIn, fence);
+                    entityleashknot = EntityLeashKnot.createKnot(world, fence);
                 }
 
                 entityliving.setLeashedToEntity(entityleashknot, true);

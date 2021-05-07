@@ -19,18 +19,18 @@ public class BlockRedstoneTorch extends BlockTorch
     private static final Map<World, List<BlockRedstoneTorch.Toggle>> toggles = Maps.newHashMap();
     private final boolean isOn;
 
-    private boolean isBurnedOut(World worldIn, BlockPos pos, boolean turnOff)
+    private boolean isBurnedOut(World world, BlockPos pos, boolean turnOff)
     {
-        if (!toggles.containsKey(worldIn))
+        if (!toggles.containsKey(world))
         {
-            toggles.put(worldIn, Lists.newArrayList());
+            toggles.put(world, Lists.newArrayList());
         }
 
-        List<BlockRedstoneTorch.Toggle> list = toggles.get(worldIn);
+        List<BlockRedstoneTorch.Toggle> list = toggles.get(world);
 
         if (turnOff)
         {
-            list.add(new BlockRedstoneTorch.Toggle(pos, worldIn.getTotalWorldTime()));
+            list.add(new BlockRedstoneTorch.Toggle(pos, world.getTotalWorldTime()));
         }
 
         int i = 0;
@@ -63,57 +63,57 @@ public class BlockRedstoneTorch extends BlockTorch
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World worldIn)
+    public int tickRate(World world)
     {
         return 2;
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
         if (this.isOn)
         {
             for (EnumFacing enumfacing : EnumFacing.values())
             {
-                worldIn.notifyNeighborsOfStateChange(pos.offset(enumfacing), this);
+                world.notifyNeighborsOfStateChange(pos.offset(enumfacing), this);
             }
         }
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
     {
         if (this.isOn)
         {
             for (EnumFacing enumfacing : EnumFacing.values())
             {
-                worldIn.notifyNeighborsOfStateChange(pos.offset(enumfacing), this);
+                world.notifyNeighborsOfStateChange(pos.offset(enumfacing), this);
             }
         }
     }
 
-    public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+    public int isProvidingWeakPower(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side)
     {
         return this.isOn && state.getValue(FACING) != side ? 15 : 0;
     }
 
-    private boolean shouldBeOff(World worldIn, BlockPos pos, IBlockState state)
+    private boolean shouldBeOff(World world, BlockPos pos, IBlockState state)
     {
         EnumFacing enumfacing = state.getValue(FACING).getOpposite();
-        return worldIn.isSidePowered(pos.offset(enumfacing), enumfacing);
+        return world.isSidePowered(pos.offset(enumfacing), enumfacing);
     }
 
     /**
      * Called randomly when setTickRandomly is set to true (used by e.g. crops to grow, etc.)
      */
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random random)
     {
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        boolean flag = this.shouldBeOff(worldIn, pos, state);
-        List<BlockRedstoneTorch.Toggle> list = toggles.get(worldIn);
+        boolean flag = this.shouldBeOff(world, pos, state);
+        List<BlockRedstoneTorch.Toggle> list = toggles.get(world);
 
-        while (list != null && !list.isEmpty() && worldIn.getTotalWorldTime() - list.get(0).time > 60L)
+        while (list != null && !list.isEmpty() && world.getTotalWorldTime() - list.get(0).time > 60L)
         {
             list.remove(0);
         }
@@ -122,47 +122,47 @@ public class BlockRedstoneTorch extends BlockTorch
         {
             if (flag)
             {
-                worldIn.setBlockState(pos, Blocks.unlit_redstone_torch.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+                world.setBlockState(pos, Blocks.unlit_redstone_torch.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
 
-                if (this.isBurnedOut(worldIn, pos, true))
+                if (this.isBurnedOut(world, pos, true))
                 {
-                    worldIn.playSoundEffect((float)pos.getX() + 0.5F, (float)pos.getY() + 0.5F, (float)pos.getZ() + 0.5F, "random.fizz", 0.5F, 2.6F + (worldIn.rand.nextFloat() - worldIn.rand.nextFloat()) * 0.8F);
+                    world.playSoundEffect((float)pos.getX() + 0.5F, (float)pos.getY() + 0.5F, (float)pos.getZ() + 0.5F, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 
                     for (int i = 0; i < 5; ++i)
                     {
                         double d0 = (double)pos.getX() + rand.nextDouble() * 0.6D + 0.2D;
                         double d1 = (double)pos.getY() + rand.nextDouble() * 0.6D + 0.2D;
                         double d2 = (double)pos.getZ() + rand.nextDouble() * 0.6D + 0.2D;
-                        worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
                     }
 
-                    worldIn.scheduleUpdate(pos, worldIn.getBlockState(pos).getBlock(), 160);
+                    world.scheduleUpdate(pos, world.getBlockState(pos).getBlock(), 160);
                 }
             }
         }
-        else if (!flag && !this.isBurnedOut(worldIn, pos, false))
+        else if (!flag && !this.isBurnedOut(world, pos, false))
         {
-            worldIn.setBlockState(pos, Blocks.redstone_torch.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+            world.setBlockState(pos, Blocks.redstone_torch.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
         }
     }
 
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        if (!this.onNeighborChangeInternal(worldIn, pos, state))
+        if (!this.onNeighborChangeInternal(world, pos, state))
         {
-            if (this.isOn == this.shouldBeOff(worldIn, pos, state))
+            if (this.isOn == this.shouldBeOff(world, pos, state))
             {
-                worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+                world.scheduleUpdate(pos, this, this.tickRate(world));
             }
         }
     }
 
-    public int isProvidingStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+    public int isProvidingStrongPower(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side)
     {
-        return side == EnumFacing.DOWN ? this.isProvidingWeakPower(worldIn, pos, state, side) : 0;
+        return side == EnumFacing.DOWN ? this.isProvidingWeakPower(world, pos, state, side) : 0;
     }
 
     /**
@@ -183,7 +183,7 @@ public class BlockRedstoneTorch extends BlockTorch
         return true;
     }
 
-    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
         if (this.isOn)
         {
@@ -201,14 +201,14 @@ public class BlockRedstoneTorch extends BlockTorch
                 d2 += 0.27D * (double)enumfacing1.getFrontOffsetZ();
             }
 
-            worldIn.spawnParticle(EnumParticleTypes.REDSTONE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+            world.spawnParticle(EnumParticleTypes.REDSTONE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
     }
 
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return Item.getItemFromBlock(Blocks.redstone_torch);
     }

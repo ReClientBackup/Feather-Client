@@ -48,12 +48,12 @@ public class BlockFence extends Block
      *  
      * @param collidingEntity the Entity colliding with this Block
      */
-    public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
+    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
     {
-        boolean flag = this.canConnectTo(worldIn, pos.north());
-        boolean flag1 = this.canConnectTo(worldIn, pos.south());
-        boolean flag2 = this.canConnectTo(worldIn, pos.west());
-        boolean flag3 = this.canConnectTo(worldIn, pos.east());
+        boolean flag = this.canConnectTo(world, pos.north());
+        boolean flag1 = this.canConnectTo(world, pos.south());
+        boolean flag2 = this.canConnectTo(world, pos.west());
+        boolean flag3 = this.canConnectTo(world, pos.east());
         float f = 0.375F;
         float f1 = 0.625F;
         float f2 = 0.375F;
@@ -72,7 +72,7 @@ public class BlockFence extends Block
         if (flag || flag1)
         {
             this.setBlockBounds(f, 0.0F, f2, f1, 1.5F, f3);
-            super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+            super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
         }
 
         f2 = 0.375F;
@@ -91,7 +91,7 @@ public class BlockFence extends Block
         if (flag2 || flag3 || !flag && !flag1)
         {
             this.setBlockBounds(f, 0.0F, f2, f1, 1.5F, f3);
-            super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+            super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
         }
 
         if (flag)
@@ -107,12 +107,12 @@ public class BlockFence extends Block
         this.setBlockBounds(f, 0.0F, f2, f1, 1.0F, f3);
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
     {
-        boolean flag = this.canConnectTo(worldIn, pos.north());
-        boolean flag1 = this.canConnectTo(worldIn, pos.south());
-        boolean flag2 = this.canConnectTo(worldIn, pos.west());
-        boolean flag3 = this.canConnectTo(worldIn, pos.east());
+        boolean flag = this.canConnectTo(world, pos.north());
+        boolean flag1 = this.canConnectTo(world, pos.south());
+        boolean flag2 = this.canConnectTo(world, pos.west());
+        boolean flag3 = this.canConnectTo(world, pos.east());
         float f = 0.375F;
         float f1 = 0.625F;
         float f2 = 0.375F;
@@ -154,25 +154,25 @@ public class BlockFence extends Block
         return false;
     }
 
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
+    public boolean isPassable(IBlockAccess world, BlockPos pos)
     {
         return false;
     }
 
-    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos)
+    public boolean canConnectTo(IBlockAccess world, BlockPos pos)
     {
-        Block block = worldIn.getBlockState(pos).getBlock();
+        Block block = world.getBlockState(pos).getBlock();
         return block != Blocks.barrier && ((block instanceof BlockFence && block.blockMaterial == this.blockMaterial) || block instanceof BlockFenceGate || (block.blockMaterial.isOpaque() && block.isFullCube() && block.blockMaterial != Material.gourd));
     }
 
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
     {
         return true;
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        return worldIn.isRemote || ItemLead.attachToFence(playerIn, worldIn, pos);
+        return world.isRemote || ItemLead.attachToFence(player, world, pos);
     }
 
     /**
@@ -187,9 +187,9 @@ public class BlockFence extends Block
      * Get the actual Block state of this Block at the given position. This applies properties not visible in the
      * metadata, such as fence connections.
      */
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
     {
-        return state.withProperty(NORTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.north()))).withProperty(EAST, Boolean.valueOf(this.canConnectTo(worldIn, pos.east()))).withProperty(SOUTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.south()))).withProperty(WEST, Boolean.valueOf(this.canConnectTo(worldIn, pos.west())));
+        return state.withProperty(NORTH, Boolean.valueOf(this.canConnectTo(world, pos.north()))).withProperty(EAST, Boolean.valueOf(this.canConnectTo(world, pos.east()))).withProperty(SOUTH, Boolean.valueOf(this.canConnectTo(world, pos.south()))).withProperty(WEST, Boolean.valueOf(this.canConnectTo(world, pos.west())));
     }
 
     protected BlockState createBlockState()

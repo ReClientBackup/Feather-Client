@@ -25,14 +25,14 @@ public class ItemBoat extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
         float f = 1.0F;
-        float f1 = playerIn.prevRotationPitch + (playerIn.rotationPitch - playerIn.prevRotationPitch) * f;
-        float f2 = playerIn.prevRotationYaw + (playerIn.rotationYaw - playerIn.prevRotationYaw) * f;
-        double d0 = playerIn.prevPosX + (playerIn.posX - playerIn.prevPosX) * (double)f;
-        double d1 = playerIn.prevPosY + (playerIn.posY - playerIn.prevPosY) * (double)f + (double)playerIn.getEyeHeight();
-        double d2 = playerIn.prevPosZ + (playerIn.posZ - playerIn.prevPosZ) * (double)f;
+        float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f;
+        float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
+        double d0 = player.prevPosX + (player.posX - player.prevPosX) * (double)f;
+        double d1 = player.prevPosY + (player.posY - player.prevPosY) * (double)f + (double)player.getEyeHeight();
+        double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * (double)f;
         Vec3 vec3 = new Vec3(d0, d1, d2);
         float f3 = MathHelper.cos(-f2 * 0.017453292F - (float)Math.PI);
         float f4 = MathHelper.sin(-f2 * 0.017453292F - (float)Math.PI);
@@ -42,7 +42,7 @@ public class ItemBoat extends Item
         float f8 = f3 * f5;
         double d3 = 5.0D;
         Vec3 vec31 = vec3.addVector((double)f7 * d3, (double)f6 * d3, (double)f8 * d3);
-        MovingObjectPosition movingobjectposition = worldIn.rayTraceBlocks(vec3, vec31, true);
+        MovingObjectPosition movingobjectposition = world.rayTraceBlocks(vec3, vec31, true);
 
         if (movingobjectposition == null)
         {
@@ -50,10 +50,10 @@ public class ItemBoat extends Item
         }
         else
         {
-            Vec3 vec32 = playerIn.getLook(f);
+            Vec3 vec32 = player.getLook(f);
             boolean flag = false;
             float f9 = 1.0F;
-            List<Entity> list = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, playerIn.getEntityBoundingBox().addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3).expand(f9, f9, f9));
+            List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3).expand(f9, f9, f9));
 
             for (int i = 0; i < list.size(); ++i)
             {
@@ -81,30 +81,30 @@ public class ItemBoat extends Item
                 {
                     BlockPos blockpos = movingobjectposition.getBlockPos();
 
-                    if (worldIn.getBlockState(blockpos).getBlock() == Blocks.snow_layer)
+                    if (world.getBlockState(blockpos).getBlock() == Blocks.snow_layer)
                     {
                         blockpos = blockpos.down();
                     }
 
-                    EntityBoat entityboat = new EntityBoat(worldIn, (float)blockpos.getX() + 0.5F, (float)blockpos.getY() + 1.0F, (float)blockpos.getZ() + 0.5F);
-                    entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(playerIn.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
+                    EntityBoat entityboat = new EntityBoat(world, (float)blockpos.getX() + 0.5F, (float)blockpos.getY() + 1.0F, (float)blockpos.getZ() + 0.5F);
+                    entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
-                    if (!worldIn.getCollidingBoundingBoxes(entityboat, entityboat.getEntityBoundingBox().expand(-0.1D, -0.1D, -0.1D)).isEmpty())
+                    if (!world.getCollidingBoundingBoxes(entityboat, entityboat.getEntityBoundingBox().expand(-0.1D, -0.1D, -0.1D)).isEmpty())
                     {
                         return itemStackIn;
                     }
 
-                    if (!worldIn.isRemote)
+                    if (!world.isRemote)
                     {
-                        worldIn.spawnEntityInWorld(entityboat);
+                        world.spawnEntityInWorld(entityboat);
                     }
 
-                    if (!playerIn.capabilities.isCreativeMode)
+                    if (!player.capabilities.isCreativeMode)
                     {
                         --itemStackIn.stackSize;
                     }
 
-                    playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+                    player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
                 }
 
                 return itemStackIn;

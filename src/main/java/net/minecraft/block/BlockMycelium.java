@@ -30,33 +30,33 @@ public class BlockMycelium extends Block
      * Get the actual Block state of this Block at the given position. This applies properties not visible in the
      * metadata, such as fence connections.
      */
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
     {
-        Block block = worldIn.getBlockState(pos.up()).getBlock();
+        Block block = world.getBlockState(pos.up()).getBlock();
         return state.withProperty(SNOWY, Boolean.valueOf(block == Blocks.snow || block == Blocks.snow_layer));
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getBlock().getLightOpacity() > 2)
+            if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getBlock().getLightOpacity() > 2)
             {
-                worldIn.setBlockState(pos, Blocks.dirt.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+                world.setBlockState(pos, Blocks.dirt.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
             }
             else
             {
-                if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
+                if (world.getLightFromNeighbors(pos.up()) >= 9)
                 {
                     for (int i = 0; i < 4; ++i)
                     {
                         BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
-                        IBlockState iblockstate = worldIn.getBlockState(blockpos);
-                        Block block = worldIn.getBlockState(blockpos.up()).getBlock();
+                        IBlockState iblockstate = world.getBlockState(blockpos);
+                        Block block = world.getBlockState(blockpos.up()).getBlock();
 
-                        if (iblockstate.getBlock() == Blocks.dirt && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && block.getLightOpacity() <= 2)
+                        if (iblockstate.getBlock() == Blocks.dirt && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && world.getLightFromNeighbors(blockpos.up()) >= 4 && block.getLightOpacity() <= 2)
                         {
-                            worldIn.setBlockState(blockpos, this.getDefaultState());
+                            world.setBlockState(blockpos, this.getDefaultState());
                         }
                     }
                 }
@@ -64,13 +64,13 @@ public class BlockMycelium extends Block
         }
     }
 
-    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        super.randomDisplayTick(worldIn, pos, state, rand);
+        super.randomDisplayTick(world, pos, state, rand);
 
         if (rand.nextInt(10) == 0)
         {
-            worldIn.spawnParticle(EnumParticleTypes.TOWN_AURA, (float)pos.getX() + rand.nextFloat(), (float)pos.getY() + 1.1F, (float)pos.getZ() + rand.nextFloat(), 0.0D, 0.0D, 0.0D);
+            world.spawnParticle(EnumParticleTypes.TOWN_AURA, (float)pos.getX() + rand.nextFloat(), (float)pos.getY() + 1.1F, (float)pos.getZ() + rand.nextFloat(), 0.0D, 0.0D, 0.0D);
         }
     }
 

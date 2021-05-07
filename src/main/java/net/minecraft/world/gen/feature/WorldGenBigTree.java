@@ -302,9 +302,9 @@ public class WorldGenBigTree extends WorldGenAbstractTree
         this.leafDistanceLimit = 5;
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
-        this.world = worldIn;
+        this.world = world;
         this.basePos = position;
         this.rand = new Random(rand.nextLong());
 

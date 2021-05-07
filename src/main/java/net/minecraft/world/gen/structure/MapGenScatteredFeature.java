@@ -124,10 +124,10 @@ public class MapGenScatteredFeature extends MapGenStructure
         {
         }
 
-        public Start(World worldIn, Random p_i2060_2_, int p_i2060_3_, int p_i2060_4_)
+        public Start(World world, Random p_i2060_2_, int p_i2060_3_, int p_i2060_4_)
         {
             super(p_i2060_3_, p_i2060_4_);
-            BiomeGenBase biomegenbase = worldIn.getBiomeGenForCoords(new BlockPos(p_i2060_3_ * 16 + 8, 0, p_i2060_4_ * 16 + 8));
+            BiomeGenBase biomegenbase = world.getBiomeGenForCoords(new BlockPos(p_i2060_3_ * 16 + 8, 0, p_i2060_4_ * 16 + 8));
 
             if (biomegenbase != BiomeGenBase.jungle && biomegenbase != BiomeGenBase.jungleHills)
             {

@@ -19,14 +19,14 @@ public class EntityItemFrame extends EntityHanging
     /** Chance for this item frame's item to drop from the frame. */
     private float itemDropChance = 1.0F;
 
-    public EntityItemFrame(World worldIn)
+    public EntityItemFrame(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityItemFrame(World worldIn, BlockPos p_i45852_2_, EnumFacing p_i45852_3_)
+    public EntityItemFrame(World world, BlockPos p_i45852_2_, EnumFacing p_i45852_3_)
     {
-        super(worldIn, p_i45852_2_);
+        super(world, p_i45852_2_);
         this.updateFacingWithBoundingBox(p_i45852_3_);
     }
 
@@ -238,19 +238,19 @@ public class EntityItemFrame extends EntityHanging
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer playerIn)
+    public boolean interactFirst(EntityPlayer player)
     {
         if (this.getDisplayedItem() == null)
         {
-            ItemStack itemstack = playerIn.getHeldItem();
+            ItemStack itemstack = player.getHeldItem();
 
             if (itemstack != null && !this.worldObj.isRemote)
             {
                 this.setDisplayedItem(itemstack);
 
-                if (!playerIn.capabilities.isCreativeMode && --itemstack.stackSize <= 0)
+                if (!player.capabilities.isCreativeMode && --itemstack.stackSize <= 0)
                 {
-                    playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, null);
+                    player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                 }
             }
         }

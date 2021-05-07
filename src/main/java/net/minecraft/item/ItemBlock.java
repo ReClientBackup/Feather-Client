@@ -37,12 +37,12 @@ public class ItemBlock extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         Block block = iblockstate.getBlock();
 
-        if (!block.isReplaceable(worldIn, pos))
+        if (!block.isReplaceable(world, pos))
         {
             pos = pos.offset(side);
         }
@@ -51,26 +51,26 @@ public class ItemBlock extends Item
         {
             return false;
         }
-        else if (!playerIn.canPlayerEdit(pos, side, stack))
+        else if (!player.canPlayerEdit(pos, side, stack))
         {
             return false;
         }
-        else if (worldIn.canBlockBePlaced(this.block, pos, false, side, null, stack))
+        else if (world.canBlockBePlaced(this.block, pos, false, side, null))
         {
             int i = this.getMetadata(stack.getMetadata());
-            IBlockState iblockstate1 = this.block.onBlockPlaced(worldIn, pos, side, hitX, hitY, hitZ, i, playerIn);
+            IBlockState iblockstate1 = this.block.onBlockPlaced(world, pos, side, hitX, hitY, hitZ, i, player);
 
-            if (worldIn.setBlockState(pos, iblockstate1, 3))
+            if (world.setBlockState(pos, iblockstate1, 3))
             {
-                iblockstate1 = worldIn.getBlockState(pos);
+                iblockstate1 = world.getBlockState(pos);
 
                 if (iblockstate1.getBlock() == this.block)
                 {
-                    setTileEntityNBT(worldIn, playerIn, pos, stack);
-                    this.block.onBlockPlacedBy(worldIn, pos, iblockstate1, playerIn, stack);
+                    setTileEntityNBT(world, player, pos, stack);
+                    this.block.onBlockPlacedBy(world, pos, iblockstate1, player, stack);
                 }
 
-                worldIn.playSoundEffect((float)pos.getX() + 0.5F, (float)pos.getY() + 0.5F, (float)pos.getZ() + 0.5F, this.block.stepSound.getPlaceSound(), (this.block.stepSound.getVolume() + 1.0F) / 2.0F, this.block.stepSound.getFrequency() * 0.8F);
+                world.playSoundEffect((float)pos.getX() + 0.5F, (float)pos.getY() + 0.5F, (float)pos.getZ() + 0.5F, this.block.stepSound.getPlaceSound(), (this.block.stepSound.getVolume() + 1.0F) / 2.0F, this.block.stepSound.getFrequency() * 0.8F);
                 --stack.stackSize;
             }
 
@@ -82,7 +82,7 @@ public class ItemBlock extends Item
         }
     }
 
-    public static boolean setTileEntityNBT(World worldIn, EntityPlayer pos, BlockPos stack, ItemStack p_179224_3_)
+    public static boolean setTileEntityNBT(World world, EntityPlayer pos, BlockPos stack, ItemStack p_179224_3_)
     {
         MinecraftServer minecraftserver = MinecraftServer.getServer();
 
@@ -94,11 +94,11 @@ public class ItemBlock extends Item
         {
             if (p_179224_3_.hasTagCompound() && p_179224_3_.getTagCompound().hasKey("BlockEntityTag", 10))
             {
-                TileEntity tileentity = worldIn.getTileEntity(stack);
+                TileEntity tileentity = world.getTileEntity(stack);
 
                 if (tileentity != null)
                 {
-                    if (!worldIn.isRemote && tileentity.func_183000_F() && !minecraftserver.getConfigurationManager().canSendCommands(pos.getGameProfile()))
+                    if (!world.isRemote && tileentity.func_183000_F() && !minecraftserver.getConfigurationManager().canSendCommands(pos.getGameProfile()))
                     {
                         return false;
                     }
@@ -125,20 +125,20 @@ public class ItemBlock extends Item
         }
     }
 
-    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack)
+    public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack)
     {
-        Block block = worldIn.getBlockState(pos).getBlock();
+        Block block = world.getBlockState(pos).getBlock();
 
         if (block == Blocks.snow_layer)
         {
             side = EnumFacing.UP;
         }
-        else if (!block.isReplaceable(worldIn, pos))
+        else if (!block.isReplaceable(world, pos))
         {
             pos = pos.offset(side);
         }
 
-        return worldIn.canBlockBePlaced(this.block, pos, false, side, null, stack);
+        return world.canBlockBePlaced(this.block, pos, false, side, null);
     }
 
     /**

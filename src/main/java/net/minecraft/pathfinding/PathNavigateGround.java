@@ -17,9 +17,9 @@ public class PathNavigateGround extends PathNavigate
     protected WalkNodeProcessor nodeProcessor;
     private boolean shouldAvoidSun;
 
-    public PathNavigateGround(EntityLiving entitylivingIn, World worldIn)
+    public PathNavigateGround(EntityLiving entitylivingIn, World world)
     {
-        super(entitylivingIn, worldIn);
+        super(entitylivingIn, world);
     }
 
     protected PathFinder getPathFinder()

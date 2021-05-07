@@ -50,9 +50,9 @@ public class EntityRabbit extends EntityAnimal
     private int carrotTicks = 0;
     private final EntityPlayer field_175543_bt = null;
 
-    public EntityRabbit(World worldIn)
+    public EntityRabbit(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.6F, 0.7F);
         this.jumpHelper = new EntityRabbit.RabbitJumpHelper(this);
         this.moveHelper = new EntityRabbit.RabbitMoveHelper(this);
@@ -318,16 +318,16 @@ public class EntityRabbit extends EntityAnimal
         return "mob.rabbit.death";
     }
 
-    public boolean attackEntityAsMob(Entity entityIn)
+    public boolean attackEntityAsMob(Entity entity)
     {
         if (this.getRabbitType() == 99)
         {
             this.playSound("mob.attack", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            return entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 8.0F);
+            return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 8.0F);
         }
         else
         {
-            return entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
+            return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
         }
     }
 
@@ -611,14 +611,14 @@ public class EntityRabbit extends EntityAnimal
             }
         }
 
-        protected boolean shouldMoveTo(World worldIn, BlockPos pos)
+        protected boolean shouldMoveTo(World world, BlockPos pos)
         {
-            Block block = worldIn.getBlockState(pos).getBlock();
+            Block block = world.getBlockState(pos).getBlock();
 
             if (block == Blocks.farmland)
             {
                 pos = pos.up();
-                IBlockState iblockstate = worldIn.getBlockState(pos);
+                IBlockState iblockstate = world.getBlockState(pos);
                 block = iblockstate.getBlock();
 
                 if (block instanceof BlockCarrot && iblockstate.getValue(BlockCarrot.AGE).intValue() == 7 && this.field_179498_d && !this.field_179499_e)

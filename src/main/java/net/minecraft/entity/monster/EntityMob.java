@@ -14,9 +14,9 @@ import net.minecraft.world.World;
 
 public abstract class EntityMob extends EntityCreature implements IMob
 {
-    public EntityMob(World worldIn)
+    public EntityMob(World world)
     {
-        super(worldIn);
+        super(world);
         this.experienceValue = 5;
     }
 
@@ -101,24 +101,24 @@ public abstract class EntityMob extends EntityCreature implements IMob
         return damageValue > 4 ? "game.hostile.hurt.fall.big" : "game.hostile.hurt.fall.small";
     }
 
-    public boolean attackEntityAsMob(Entity entityIn)
+    public boolean attackEntityAsMob(Entity entity)
     {
         float f = (float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
         int i = 0;
 
-        if (entityIn instanceof EntityLivingBase)
+        if (entity instanceof EntityLivingBase)
         {
-            f += EnchantmentHelper.func_152377_a(this.getHeldItem(), ((EntityLivingBase)entityIn).getCreatureAttribute());
+            f += EnchantmentHelper.func_152377_a(this.getHeldItem(), ((EntityLivingBase) entity).getCreatureAttribute());
             i += EnchantmentHelper.getKnockbackModifier(this);
         }
 
-        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
+        boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), f);
 
         if (flag)
         {
             if (i > 0)
             {
-                entityIn.addVelocity(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F, 0.1D, MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F);
+                entity.addVelocity(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F, 0.1D, MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F);
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }
@@ -127,10 +127,10 @@ public abstract class EntityMob extends EntityCreature implements IMob
 
             if (j > 0)
             {
-                entityIn.setFire(j * 4);
+                entity.setFire(j * 4);
             }
 
-            this.applyEnchantments(this, entityIn);
+            this.applyEnchantments(this, entity);
         }
 
         return flag;

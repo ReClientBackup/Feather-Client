@@ -138,7 +138,7 @@ public class BiomeDecorator
     /** True if decorator should generate surface lava & water */
     public boolean generateLakes = true;
 
-    public void decorate(World worldIn, Random random, BiomeGenBase p_180292_3_, BlockPos p_180292_4_)
+    public void decorate(World world, Random random, BiomeGenBase p_180292_3_, BlockPos p_180292_4_)
     {
         if (this.currentWorld != null)
         {
@@ -146,8 +146,8 @@ public class BiomeDecorator
         }
         else
         {
-            this.currentWorld = worldIn;
-            String s = worldIn.getWorldInfo().getGeneratorOptions();
+            this.currentWorld = world;
+            String s = world.getWorldInfo().getGeneratorOptions();
 
             if (s != null)
             {

@@ -22,9 +22,9 @@ public class ChunkProviderDebug implements IChunkProvider
     private static final int field_181039_c;
     private final World world;
 
-    public ChunkProviderDebug(World worldIn)
+    public ChunkProviderDebug(World world)
     {
-        this.world = worldIn;
+        this.world = world;
     }
 
     /**
@@ -155,7 +155,7 @@ public class ChunkProviderDebug implements IChunkProvider
         return biomegenbase.getSpawnableList(creatureType);
     }
 
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position)
+    public BlockPos getStrongholdGen(World world, String structureName, BlockPos position)
     {
         return null;
     }

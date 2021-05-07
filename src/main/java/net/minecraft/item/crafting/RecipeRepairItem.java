@@ -12,7 +12,7 @@ public class RecipeRepairItem implements IRecipe
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    public boolean matches(InventoryCrafting inv, World worldIn)
+    public boolean matches(InventoryCrafting inv, World world)
     {
         List<ItemStack> list = Lists.newArrayList();
 

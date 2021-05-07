@@ -38,7 +38,7 @@ public class BiomeGenSavanna extends BiomeGenBase
         return biomegenbase;
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
         DOUBLE_PLANT_GENERATOR.setPlantType(BlockDoublePlant.EnumPlantType.GRASS);
 
@@ -46,11 +46,11 @@ public class BiomeGenSavanna extends BiomeGenBase
         {
             int j = rand.nextInt(16) + 8;
             int k = rand.nextInt(16) + 8;
-            int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
-            DOUBLE_PLANT_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
+            int l = rand.nextInt(world.getHeight(pos.add(j, 0, k)).getY() + 32);
+            DOUBLE_PLANT_GENERATOR.generate(world, rand, pos.add(j, l, k));
         }
 
-        super.decorate(worldIn, rand, pos);
+        super.decorate(world, rand, pos);
     }
 
     public static class Mutated extends BiomeGenMutated
@@ -63,7 +63,7 @@ public class BiomeGenSavanna extends BiomeGenBase
             this.theBiomeDecorator.grassPerChunk = 5;
         }
 
-        public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
+        public void genTerrainBlocks(World world, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
         {
             this.topBlock = Blocks.grass.getDefaultState();
             this.fillerBlock = Blocks.dirt.getDefaultState();
@@ -78,12 +78,12 @@ public class BiomeGenSavanna extends BiomeGenBase
                 this.topBlock = Blocks.dirt.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT);
             }
 
-            this.generateBiomeTerrain(worldIn, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
+            this.generateBiomeTerrain(world, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
         }
 
-        public void decorate(World worldIn, Random rand, BlockPos pos)
+        public void decorate(World world, Random rand, BlockPos pos)
         {
-            this.theBiomeDecorator.decorate(worldIn, rand, this, pos);
+            this.theBiomeDecorator.decorate(world, rand, this, pos);
         }
     }
 }

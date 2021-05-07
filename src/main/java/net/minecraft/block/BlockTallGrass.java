@@ -37,15 +37,15 @@ public class BlockTallGrass extends BlockBush implements IGrowable
         return ColorizerGrass.getGrassColor(0.5D, 1.0D);
     }
 
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
+    public boolean canBlockStay(World world, BlockPos pos, IBlockState state)
     {
-        return this.canPlaceBlockOn(worldIn.getBlockState(pos.down()).getBlock());
+        return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
     }
 
     /**
      * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
      */
-    public boolean isReplaceable(World worldIn, BlockPos pos)
+    public boolean isReplaceable(World world, BlockPos pos)
     {
         return true;
     }
@@ -63,9 +63,9 @@ public class BlockTallGrass extends BlockBush implements IGrowable
         }
     }
 
-    public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
+    public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)
     {
-        return worldIn.getBiomeGenForCoords(pos).getGrassColorAtPos(pos);
+        return world.getBiomeGenForCoords(pos).getGrassColorAtPos(pos);
     }
 
     /**
@@ -86,50 +86,50 @@ public class BlockTallGrass extends BlockBush implements IGrowable
         return 1 + random.nextInt(fortune * 2 + 1);
     }
 
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
     {
-        if (!worldIn.isRemote && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.shears)
+        if (!world.isRemote && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.shears)
         {
             player.triggerAchievement(StatList.mineBlockStatArray[Block.getIdFromBlock(this)]);
-            spawnAsEntity(worldIn, pos, new ItemStack(Blocks.tallgrass, 1, state.getValue(TYPE).getMeta()));
+            spawnAsEntity(world, pos, new ItemStack(Blocks.tallgrass, 1, state.getValue(TYPE).getMeta()));
         }
         else
         {
-            super.harvestBlock(worldIn, player, pos, state, te);
+            super.harvestBlock(world, player, pos, state, te);
         }
     }
 
-    public int getDamageValue(World worldIn, BlockPos pos)
+    public int getDamageValue(World world, BlockPos pos)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         return iblockstate.getBlock().getMetaFromState(iblockstate);
     }
 
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
         for (int i = 1; i < 3; ++i)
         {
-            list.add(new ItemStack(itemIn, 1, i));
+            list.add(new ItemStack(item, 1, i));
         }
     }
 
     /**
      * Whether this IGrowable can grow
      */
-    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+    public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
     {
         return state.getValue(TYPE) != BlockTallGrass.EnumType.DEAD_BUSH;
     }
 
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+    public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state)
     {
         return true;
     }
 
-    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+    public void grow(World world, Random rand, BlockPos pos, IBlockState state)
     {
         BlockDoublePlant.EnumPlantType blockdoubleplant$enumplanttype = BlockDoublePlant.EnumPlantType.GRASS;
 
@@ -138,9 +138,9 @@ public class BlockTallGrass extends BlockBush implements IGrowable
             blockdoubleplant$enumplanttype = BlockDoublePlant.EnumPlantType.FERN;
         }
 
-        if (Blocks.double_plant.canPlaceBlockAt(worldIn, pos))
+        if (Blocks.double_plant.canPlaceBlockAt(world, pos))
         {
-            Blocks.double_plant.placeAt(worldIn, pos, blockdoubleplant$enumplanttype, 2);
+            Blocks.double_plant.placeAt(world, pos, blockdoubleplant$enumplanttype, 2);
         }
     }
 

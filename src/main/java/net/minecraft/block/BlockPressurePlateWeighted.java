@@ -27,9 +27,9 @@ public class BlockPressurePlateWeighted extends BlockBasePressurePlate
         this.field_150068_a = p_i46380_2_;
     }
 
-    protected int computeRedstoneStrength(World worldIn, BlockPos pos)
+    protected int computeRedstoneStrength(World world, BlockPos pos)
     {
-        int i = Math.min(worldIn.getEntitiesWithinAABB(Entity.class, this.getSensitiveAABB(pos)).size(), this.field_150068_a);
+        int i = Math.min(world.getEntitiesWithinAABB(Entity.class, this.getSensitiveAABB(pos)).size(), this.field_150068_a);
 
         if (i > 0)
         {
@@ -55,7 +55,7 @@ public class BlockPressurePlateWeighted extends BlockBasePressurePlate
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World worldIn)
+    public int tickRate(World world)
     {
         return 10;
     }

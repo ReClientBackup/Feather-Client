@@ -68,9 +68,9 @@ public class C02PacketUseEntity implements Packet<INetHandlerPlayServer>
         handler.processUseEntity(this);
     }
 
-    public Entity getEntityFromWorld(World worldIn)
+    public Entity getEntityFromWorld(World world)
     {
-        return worldIn.getEntityByID(this.entityId);
+        return world.getEntityByID(this.entityId);
     }
 
     public C02PacketUseEntity.Action getAction()

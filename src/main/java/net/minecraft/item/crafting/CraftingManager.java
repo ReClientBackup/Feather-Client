@@ -316,11 +316,11 @@ public class CraftingManager
     /**
      * Retrieves an ItemStack that has multiple recipes for it.
      */
-    public ItemStack findMatchingRecipe(InventoryCrafting p_82787_1_, World worldIn)
+    public ItemStack findMatchingRecipe(InventoryCrafting p_82787_1_, World world)
     {
         for (IRecipe irecipe : this.recipes)
         {
-            if (irecipe.matches(p_82787_1_, worldIn))
+            if (irecipe.matches(p_82787_1_, world))
             {
                 return irecipe.getCraftingResult(p_82787_1_);
             }
@@ -329,11 +329,11 @@ public class CraftingManager
         return null;
     }
 
-    public ItemStack[] func_180303_b(InventoryCrafting p_180303_1_, World worldIn)
+    public ItemStack[] func_180303_b(InventoryCrafting p_180303_1_, World world)
     {
         for (IRecipe irecipe : this.recipes)
         {
-            if (irecipe.matches(p_180303_1_, worldIn))
+            if (irecipe.matches(p_180303_1_, world))
             {
                 return irecipe.getRemainingItems(p_180303_1_);
             }

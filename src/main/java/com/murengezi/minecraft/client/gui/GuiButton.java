@@ -21,7 +21,7 @@ public class GuiButton extends GUI {
 
 
     public int boxColorRed = 0, boxColorGreen = 0, boxColorBlue = 0;
-    private long lastHover = System.currentTimeMillis() * 2;
+    private long lastHover;
 
     public GuiButton(int buttonId, int x, int y, String buttonText) {
         this(buttonId, x, y, 200, 20, buttonText);
@@ -36,6 +36,7 @@ public class GuiButton extends GUI {
         this.width = widthIn;
         this.height = heightIn;
         this.displayString = buttonText;
+        this.lastHover = 0l;
     }
 
     public void drawButton(int mouseX, int mouseY) {
@@ -58,7 +59,6 @@ public class GuiButton extends GUI {
                 boxColorGreen = Math.max(0, color.getGreen() - (int)((System.currentTimeMillis() - this.lastHover)));
                 boxColorBlue = Math.max(0, color.getBlue() - (int)((System.currentTimeMillis() - this.lastHover)));
             }
-
 
             drawRect(this.x, this.y, this.x + this.width, this.y + this.height, Integer.MIN_VALUE + (boxColorRed << 16) + (boxColorGreen << 8) + boxColorBlue);
             int colorInt = 0xffffff;

@@ -115,20 +115,20 @@ public class StructureOceanMonument extends MapGenStructure
         {
         }
 
-        public StartMonument(World worldIn, Random p_i45607_2_, int p_i45607_3_, int p_i45607_4_)
+        public StartMonument(World world, Random p_i45607_2_, int p_i45607_3_, int p_i45607_4_)
         {
             super(p_i45607_3_, p_i45607_4_);
-            this.func_175789_b(worldIn, p_i45607_2_, p_i45607_3_, p_i45607_4_);
+            this.func_175789_b(world, p_i45607_2_, p_i45607_3_, p_i45607_4_);
         }
 
-        private void func_175789_b(World worldIn, Random p_175789_2_, int p_175789_3_, int p_175789_4_)
+        private void func_175789_b(World world, Random p_175789_2_, int p_175789_3_, int p_175789_4_)
         {
-            p_175789_2_.setSeed(worldIn.getSeed());
+            p_175789_2_.setSeed(world.getSeed());
             long i = p_175789_2_.nextLong();
             long j = p_175789_2_.nextLong();
             long k = (long)p_175789_3_ * i;
             long l = (long)p_175789_4_ * j;
-            p_175789_2_.setSeed(k ^ l ^ worldIn.getSeed());
+            p_175789_2_.setSeed(k ^ l ^ world.getSeed());
             int i1 = p_175789_3_ * 16 + 8 - 29;
             int j1 = p_175789_4_ * 16 + 8 - 29;
             EnumFacing enumfacing = EnumFacing.Plane.HORIZONTAL.random(p_175789_2_);
@@ -137,15 +137,15 @@ public class StructureOceanMonument extends MapGenStructure
             this.field_175790_d = true;
         }
 
-        public void generateStructure(World worldIn, Random rand, StructureBoundingBox structurebb)
+        public void generateStructure(World world, Random rand, StructureBoundingBox structurebb)
         {
             if (!this.field_175790_d)
             {
                 this.components.clear();
-                this.func_175789_b(worldIn, rand, this.getChunkPosX(), this.getChunkPosZ());
+                this.func_175789_b(world, rand, this.getChunkPosX(), this.getChunkPosZ());
             }
 
-            super.generateStructure(worldIn, rand, structurebb);
+            super.generateStructure(world, rand, structurebb);
         }
 
         public boolean func_175788_a(ChunkCoordIntPair pair)

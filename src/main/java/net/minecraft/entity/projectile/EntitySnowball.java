@@ -9,19 +9,19 @@ import net.minecraft.world.World;
 
 public class EntitySnowball extends EntityThrowable
 {
-    public EntitySnowball(World worldIn)
+    public EntitySnowball(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntitySnowball(World worldIn, EntityLivingBase throwerIn)
+    public EntitySnowball(World world, EntityLivingBase throwerIn)
     {
-        super(worldIn, throwerIn);
+        super(world, throwerIn);
     }
 
-    public EntitySnowball(World worldIn, double x, double y, double z)
+    public EntitySnowball(World world, double x, double y, double z)
     {
-        super(worldIn, x, y, z);
+        super(world, x, y, z);
     }
 
     /**

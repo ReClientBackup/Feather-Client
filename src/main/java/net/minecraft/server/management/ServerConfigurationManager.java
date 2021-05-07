@@ -116,16 +116,16 @@ public abstract class ServerConfigurationManager
         this.maxPlayers = 8;
     }
 
-    public void initializeConnectionToPlayer(NetworkManager netManager, EntityPlayerMP playerIn)
+    public void initializeConnectionToPlayer(NetworkManager netManager, EntityPlayerMP player)
     {
-        GameProfile gameprofile = playerIn.getGameProfile();
+        GameProfile gameprofile = player.getGameProfile();
         PlayerProfileCache playerprofilecache = this.mcServer.getPlayerProfileCache();
         GameProfile gameprofile1 = playerprofilecache.getProfileByUUID(gameprofile.getId());
         String s = gameprofile1 == null ? gameprofile.getName() : gameprofile1.getName();
         playerprofilecache.addEntry(gameprofile);
-        NBTTagCompound nbttagcompound = this.readPlayerDataFromFile(playerIn);
-        playerIn.setWorld(this.mcServer.worldServerForDimension(playerIn.dimension));
-        playerIn.theItemInWorldManager.setWorld((WorldServer)playerIn.worldObj);
+        NBTTagCompound nbttagcompound = this.readPlayerDataFromFile(player);
+        player.setWorld(this.mcServer.worldServerForDimension(player.dimension));
+        player.theItemInWorldManager.setWorld((WorldServer)player.worldObj);
         String s1 = "local";
 
         if (netManager.getRemoteAddress() != null)
@@ -133,50 +133,50 @@ public abstract class ServerConfigurationManager
             s1 = netManager.getRemoteAddress().toString();
         }
 
-        logger.info(playerIn.getCommandSenderName() + "[" + s1 + "] logged in with entity id " + playerIn.getEntityId() + " at (" + playerIn.posX + ", " + playerIn.posY + ", " + playerIn.posZ + ")");
-        WorldServer worldserver = this.mcServer.worldServerForDimension(playerIn.dimension);
+        logger.info(player.getCommandSenderName() + "[" + s1 + "] logged in with entity id " + player.getEntityId() + " at (" + player.posX + ", " + player.posY + ", " + player.posZ + ")");
+        WorldServer worldserver = this.mcServer.worldServerForDimension(player.dimension);
         WorldInfo worldinfo = worldserver.getWorldInfo();
         BlockPos blockpos = worldserver.getSpawnPoint();
-        this.setPlayerGameTypeBasedOnOther(playerIn, null, worldserver);
-        NetHandlerPlayServer nethandlerplayserver = new NetHandlerPlayServer(this.mcServer, netManager, playerIn);
-        nethandlerplayserver.sendPacket(new S01PacketJoinGame(playerIn.getEntityId(), playerIn.theItemInWorldManager.getGameType(), worldinfo.isHardcoreModeEnabled(), worldserver.provider.getDimensionId(), worldserver.getDifficulty(), this.getMaxPlayers(), worldinfo.getTerrainType(), worldserver.getGameRules().getGameRuleBooleanValue("reducedDebugInfo")));
+        this.setPlayerGameTypeBasedOnOther(player, null, worldserver);
+        NetHandlerPlayServer nethandlerplayserver = new NetHandlerPlayServer(this.mcServer, netManager, player);
+        nethandlerplayserver.sendPacket(new S01PacketJoinGame(player.getEntityId(), player.theItemInWorldManager.getGameType(), worldinfo.isHardcoreModeEnabled(), worldserver.provider.getDimensionId(), worldserver.getDifficulty(), this.getMaxPlayers(), worldinfo.getTerrainType(), worldserver.getGameRules().getGameRuleBooleanValue("reducedDebugInfo")));
         nethandlerplayserver.sendPacket(new S3FPacketCustomPayload("MC|Brand", (new PacketBuffer(Unpooled.buffer())).writeString(this.getServerInstance().getServerModName())));
         nethandlerplayserver.sendPacket(new S41PacketServerDifficulty(worldinfo.getDifficulty(), worldinfo.isDifficultyLocked()));
         nethandlerplayserver.sendPacket(new S05PacketSpawnPosition(blockpos));
-        nethandlerplayserver.sendPacket(new S39PacketPlayerAbilities(playerIn.capabilities));
-        nethandlerplayserver.sendPacket(new S09PacketHeldItemChange(playerIn.inventory.currentItem));
-        playerIn.getStatFile().func_150877_d();
-        playerIn.getStatFile().sendAchievements(playerIn);
-        this.sendScoreboard((ServerScoreboard)worldserver.getScoreboard(), playerIn);
+        nethandlerplayserver.sendPacket(new S39PacketPlayerAbilities(player.capabilities));
+        nethandlerplayserver.sendPacket(new S09PacketHeldItemChange(player.inventory.currentItem));
+        player.getStatFile().func_150877_d();
+        player.getStatFile().sendAchievements(player);
+        this.sendScoreboard((ServerScoreboard)worldserver.getScoreboard(), player);
         this.mcServer.refreshStatusNextTick();
         ChatComponentTranslation chatcomponenttranslation;
 
-        if (!playerIn.getCommandSenderName().equalsIgnoreCase(s))
+        if (!player.getCommandSenderName().equalsIgnoreCase(s))
         {
-            chatcomponenttranslation = new ChatComponentTranslation("multiplayer.player.joined.renamed", playerIn.getDisplayName(), s);
+            chatcomponenttranslation = new ChatComponentTranslation("multiplayer.player.joined.renamed", player.getDisplayName(), s);
         }
         else
         {
-            chatcomponenttranslation = new ChatComponentTranslation("multiplayer.player.joined", playerIn.getDisplayName());
+            chatcomponenttranslation = new ChatComponentTranslation("multiplayer.player.joined", player.getDisplayName());
         }
 
         chatcomponenttranslation.getChatStyle().setColor(EnumChatFormatting.YELLOW);
         this.sendChatMsg(chatcomponenttranslation);
-        this.playerLoggedIn(playerIn);
-        nethandlerplayserver.setPlayerLocation(playerIn.posX, playerIn.posY, playerIn.posZ, playerIn.rotationYaw, playerIn.rotationPitch);
-        this.updateTimeAndWeatherForPlayer(playerIn, worldserver);
+        this.playerLoggedIn(player);
+        nethandlerplayserver.setPlayerLocation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
+        this.updateTimeAndWeatherForPlayer(player, worldserver);
 
         if (this.mcServer.getResourcePackUrl().length() > 0)
         {
-            playerIn.loadResourcePack(this.mcServer.getResourcePackUrl(), this.mcServer.getResourcePackHash());
+            player.loadResourcePack(this.mcServer.getResourcePackUrl(), this.mcServer.getResourcePackHash());
         }
 
-        for (PotionEffect potioneffect : playerIn.getActivePotionEffects())
+        for (PotionEffect potioneffect : player.getActivePotionEffects())
         {
-            nethandlerplayserver.sendPacket(new S1DPacketEntityEffect(playerIn.getEntityId(), potioneffect));
+            nethandlerplayserver.sendPacket(new S1DPacketEntityEffect(player.getEntityId(), potioneffect));
         }
 
-        playerIn.addSelfToInternalCraftingInventory();
+        player.addSelfToInternalCraftingInventory();
 
         if (nbttagcompound != null && nbttagcompound.hasKey("Riding", 10))
         {
@@ -186,19 +186,19 @@ public abstract class ServerConfigurationManager
             {
                 entity.forceSpawn = true;
                 worldserver.spawnEntityInWorld(entity);
-                playerIn.mountEntity(entity);
+                player.mountEntity(entity);
                 entity.forceSpawn = false;
             }
         }
     }
 
-    protected void sendScoreboard(ServerScoreboard scoreboardIn, EntityPlayerMP playerIn)
+    protected void sendScoreboard(ServerScoreboard scoreboardIn, EntityPlayerMP player)
     {
         Set<ScoreObjective> set = Sets.newHashSet();
 
         for (ScorePlayerTeam scoreplayerteam : scoreboardIn.getTeams())
         {
-            playerIn.playerNetServerHandler.sendPacket(new S3EPacketTeams(scoreplayerteam, 0));
+            player.playerNetServerHandler.sendPacket(new S3EPacketTeams(scoreplayerteam, 0));
         }
 
         for (int i = 0; i < 19; ++i)
@@ -209,7 +209,7 @@ public abstract class ServerConfigurationManager
             {
                 for (Packet packet : scoreboardIn.func_96550_d(scoreobjective))
                 {
-                    playerIn.playerNetServerHandler.sendPacket(packet);
+                    player.playerNetServerHandler.sendPacket(packet);
                 }
 
                 set.add(scoreobjective);
@@ -254,17 +254,17 @@ public abstract class ServerConfigurationManager
         });
     }
 
-    public void preparePlayer(EntityPlayerMP playerIn, WorldServer worldIn)
+    public void preparePlayer(EntityPlayerMP player, WorldServer world)
     {
-        WorldServer worldserver = playerIn.getServerForPlayer();
+        WorldServer worldserver = player.getServerForPlayer();
 
-        if (worldIn != null)
+        if (world != null)
         {
-            worldIn.getPlayerManager().removePlayer(playerIn);
+            world.getPlayerManager().removePlayer(player);
         }
 
-        worldserver.getPlayerManager().addPlayer(playerIn);
-        worldserver.theChunkProviderServer.loadChunk((int)playerIn.posX >> 4, (int)playerIn.posZ >> 4);
+        worldserver.getPlayerManager().addPlayer(player);
+        worldserver.theChunkProviderServer.loadChunk((int)player.posX >> 4, (int)player.posZ >> 4);
     }
 
     public int getEntityViewDistance()
@@ -275,20 +275,20 @@ public abstract class ServerConfigurationManager
     /**
      * called during player login. reads the player information from disk.
      */
-    public NBTTagCompound readPlayerDataFromFile(EntityPlayerMP playerIn)
+    public NBTTagCompound readPlayerDataFromFile(EntityPlayerMP player)
     {
         NBTTagCompound nbttagcompound = this.mcServer.worldServers[0].getWorldInfo().getPlayerNBTTagCompound();
         NBTTagCompound nbttagcompound1;
 
-        if (playerIn.getCommandSenderName().equals(this.mcServer.getServerOwner()) && nbttagcompound != null)
+        if (player.getCommandSenderName().equals(this.mcServer.getServerOwner()) && nbttagcompound != null)
         {
-            playerIn.readFromNBT(nbttagcompound);
+            player.readFromNBT(nbttagcompound);
             nbttagcompound1 = nbttagcompound;
             logger.debug("loading single player");
         }
         else
         {
-            nbttagcompound1 = this.playerNBTManagerObj.readPlayerData(playerIn);
+            nbttagcompound1 = this.playerNBTManagerObj.readPlayerData(player);
         }
 
         return nbttagcompound1;
@@ -297,10 +297,10 @@ public abstract class ServerConfigurationManager
     /**
      * also stores the NBTTags if this is an intergratedPlayerList
      */
-    protected void writePlayerData(EntityPlayerMP playerIn)
+    protected void writePlayerData(EntityPlayerMP player)
     {
-        this.playerNBTManagerObj.writePlayerData(playerIn);
-        StatisticsFile statisticsfile = this.playerStatFiles.get(playerIn.getUniqueID());
+        this.playerNBTManagerObj.writePlayerData(player);
+        StatisticsFile statisticsfile = this.playerStatFiles.get(player.getUniqueID());
 
         if (statisticsfile != null)
         {
@@ -311,58 +311,58 @@ public abstract class ServerConfigurationManager
     /**
      * Called when a player successfully logs in. Reads player data from disk and inserts the player into the world.
      */
-    public void playerLoggedIn(EntityPlayerMP playerIn)
+    public void playerLoggedIn(EntityPlayerMP player)
     {
-        this.playerEntityList.add(playerIn);
-        this.uuidToPlayerMap.put(playerIn.getUniqueID(), playerIn);
-        this.sendPacketToAllPlayers(new S38PacketPlayerListItem(S38PacketPlayerListItem.Action.ADD_PLAYER, playerIn));
-        WorldServer worldserver = this.mcServer.worldServerForDimension(playerIn.dimension);
-        worldserver.spawnEntityInWorld(playerIn);
-        this.preparePlayer(playerIn, null);
+        this.playerEntityList.add(player);
+        this.uuidToPlayerMap.put(player.getUniqueID(), player);
+        this.sendPacketToAllPlayers(new S38PacketPlayerListItem(S38PacketPlayerListItem.Action.ADD_PLAYER, player));
+        WorldServer worldserver = this.mcServer.worldServerForDimension(player.dimension);
+        worldserver.spawnEntityInWorld(player);
+        this.preparePlayer(player, null);
 
         for (int i = 0; i < this.playerEntityList.size(); ++i)
         {
             EntityPlayerMP entityplayermp = this.playerEntityList.get(i);
-            playerIn.playerNetServerHandler.sendPacket(new S38PacketPlayerListItem(S38PacketPlayerListItem.Action.ADD_PLAYER, entityplayermp));
+            player.playerNetServerHandler.sendPacket(new S38PacketPlayerListItem(S38PacketPlayerListItem.Action.ADD_PLAYER, entityplayermp));
         }
     }
 
     /**
      * using player's dimension, update their movement when in a vehicle (e.g. cart, boat)
      */
-    public void serverUpdateMountedMovingPlayer(EntityPlayerMP playerIn)
+    public void serverUpdateMountedMovingPlayer(EntityPlayerMP player)
     {
-        playerIn.getServerForPlayer().getPlayerManager().updateMountedMovingPlayer(playerIn);
+        player.getServerForPlayer().getPlayerManager().updateMountedMovingPlayer(player);
     }
 
     /**
      * Called when a player disconnects from the game. Writes player data to disk and removes them from the world.
      */
-    public void playerLoggedOut(EntityPlayerMP playerIn)
+    public void playerLoggedOut(EntityPlayerMP player)
     {
-        playerIn.triggerAchievement(StatList.leaveGameStat);
-        this.writePlayerData(playerIn);
-        WorldServer worldserver = playerIn.getServerForPlayer();
+        player.triggerAchievement(StatList.leaveGameStat);
+        this.writePlayerData(player);
+        WorldServer worldserver = player.getServerForPlayer();
 
-        if (playerIn.ridingEntity != null)
+        if (player.ridingEntity != null)
         {
-            worldserver.removePlayerEntityDangerously(playerIn.ridingEntity);
+            worldserver.removePlayerEntityDangerously(player.ridingEntity);
             logger.debug("removing player mount");
         }
 
-        worldserver.removeEntity(playerIn);
-        worldserver.getPlayerManager().removePlayer(playerIn);
-        this.playerEntityList.remove(playerIn);
-        UUID uuid = playerIn.getUniqueID();
+        worldserver.removeEntity(player);
+        worldserver.getPlayerManager().removePlayer(player);
+        this.playerEntityList.remove(player);
+        UUID uuid = player.getUniqueID();
         EntityPlayerMP entityplayermp = this.uuidToPlayerMap.get(uuid);
 
-        if (entityplayermp == playerIn)
+        if (entityplayermp == player)
         {
             this.uuidToPlayerMap.remove(uuid);
             this.playerStatFiles.remove(uuid);
         }
 
-        this.sendPacketToAllPlayers(new S38PacketPlayerListItem(S38PacketPlayerListItem.Action.REMOVE_PLAYER, playerIn));
+        this.sendPacketToAllPlayers(new S38PacketPlayerListItem(S38PacketPlayerListItem.Action.REMOVE_PLAYER, player));
     }
 
     /**
@@ -444,31 +444,31 @@ public abstract class ServerConfigurationManager
     /**
      * Called on respawn
      */
-    public EntityPlayerMP recreatePlayerEntity(EntityPlayerMP playerIn, int dimension, boolean conqueredEnd)
+    public EntityPlayerMP recreatePlayerEntity(EntityPlayerMP player, int dimension, boolean conqueredEnd)
     {
-        playerIn.getServerForPlayer().getEntityTracker().removePlayerFromTrackers(playerIn);
-        playerIn.getServerForPlayer().getEntityTracker().untrackEntity(playerIn);
-        playerIn.getServerForPlayer().getPlayerManager().removePlayer(playerIn);
-        this.playerEntityList.remove(playerIn);
-        this.mcServer.worldServerForDimension(playerIn.dimension).removePlayerEntityDangerously(playerIn);
-        BlockPos blockpos = playerIn.getBedLocation();
-        boolean flag = playerIn.isSpawnForced();
-        playerIn.dimension = dimension;
+        player.getServerForPlayer().getEntityTracker().removePlayerFromTrackers(player);
+        player.getServerForPlayer().getEntityTracker().untrackEntity(player);
+        player.getServerForPlayer().getPlayerManager().removePlayer(player);
+        this.playerEntityList.remove(player);
+        this.mcServer.worldServerForDimension(player.dimension).removePlayerEntityDangerously(player);
+        BlockPos blockpos = player.getBedLocation();
+        boolean flag = player.isSpawnForced();
+        player.dimension = dimension;
         ItemInWorldManager iteminworldmanager;
 
-        iteminworldmanager = new ItemInWorldManager(this.mcServer.worldServerForDimension(playerIn.dimension));
+        iteminworldmanager = new ItemInWorldManager(this.mcServer.worldServerForDimension(player.dimension));
 
-        EntityPlayerMP entityplayermp = new EntityPlayerMP(this.mcServer, this.mcServer.worldServerForDimension(playerIn.dimension), playerIn.getGameProfile(), iteminworldmanager);
-        entityplayermp.playerNetServerHandler = playerIn.playerNetServerHandler;
-        entityplayermp.clonePlayer(playerIn, conqueredEnd);
-        entityplayermp.setEntityId(playerIn.getEntityId());
-        entityplayermp.func_174817_o(playerIn);
-        WorldServer worldserver = this.mcServer.worldServerForDimension(playerIn.dimension);
-        this.setPlayerGameTypeBasedOnOther(entityplayermp, playerIn, worldserver);
+        EntityPlayerMP entityplayermp = new EntityPlayerMP(this.mcServer, this.mcServer.worldServerForDimension(player.dimension), player.getGameProfile(), iteminworldmanager);
+        entityplayermp.playerNetServerHandler = player.playerNetServerHandler;
+        entityplayermp.clonePlayer(player, conqueredEnd);
+        entityplayermp.setEntityId(player.getEntityId());
+        entityplayermp.func_174817_o(player);
+        WorldServer worldserver = this.mcServer.worldServerForDimension(player.dimension);
+        this.setPlayerGameTypeBasedOnOther(entityplayermp, player, worldserver);
 
         if (blockpos != null)
         {
-            BlockPos blockpos1 = EntityPlayer.getBedSpawnLocation(this.mcServer.worldServerForDimension(playerIn.dimension), blockpos, flag);
+            BlockPos blockpos1 = EntityPlayer.getBedSpawnLocation(this.mcServer.worldServerForDimension(player.dimension), blockpos, flag);
 
             if (blockpos1 != null)
             {
@@ -506,25 +506,25 @@ public abstract class ServerConfigurationManager
     /**
      * moves provided player from overworld to nether or vice versa
      */
-    public void transferPlayerToDimension(EntityPlayerMP playerIn, int dimension)
+    public void transferPlayerToDimension(EntityPlayerMP player, int dimension)
     {
-        int i = playerIn.dimension;
-        WorldServer worldserver = this.mcServer.worldServerForDimension(playerIn.dimension);
-        playerIn.dimension = dimension;
-        WorldServer worldserver1 = this.mcServer.worldServerForDimension(playerIn.dimension);
-        playerIn.playerNetServerHandler.sendPacket(new S07PacketRespawn(playerIn.dimension, playerIn.worldObj.getDifficulty(), playerIn.worldObj.getWorldInfo().getTerrainType(), playerIn.theItemInWorldManager.getGameType()));
-        worldserver.removePlayerEntityDangerously(playerIn);
-        playerIn.isDead = false;
-        this.transferEntityToWorld(playerIn, i, worldserver, worldserver1);
-        this.preparePlayer(playerIn, worldserver);
-        playerIn.playerNetServerHandler.setPlayerLocation(playerIn.posX, playerIn.posY, playerIn.posZ, playerIn.rotationYaw, playerIn.rotationPitch);
-        playerIn.theItemInWorldManager.setWorld(worldserver1);
-        this.updateTimeAndWeatherForPlayer(playerIn, worldserver1);
-        this.syncPlayerInventory(playerIn);
+        int i = player.dimension;
+        WorldServer worldserver = this.mcServer.worldServerForDimension(player.dimension);
+        player.dimension = dimension;
+        WorldServer worldserver1 = this.mcServer.worldServerForDimension(player.dimension);
+        player.playerNetServerHandler.sendPacket(new S07PacketRespawn(player.dimension, player.worldObj.getDifficulty(), player.worldObj.getWorldInfo().getTerrainType(), player.theItemInWorldManager.getGameType()));
+        worldserver.removePlayerEntityDangerously(player);
+        player.isDead = false;
+        this.transferEntityToWorld(player, i, worldserver, worldserver1);
+        this.preparePlayer(player, worldserver);
+        player.playerNetServerHandler.setPlayerLocation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
+        player.theItemInWorldManager.setWorld(worldserver1);
+        this.updateTimeAndWeatherForPlayer(player, worldserver1);
+        this.syncPlayerInventory(player);
 
-        for (PotionEffect potioneffect : playerIn.getActivePotionEffects())
+        for (PotionEffect potioneffect : player.getActivePotionEffects())
         {
-            playerIn.playerNetServerHandler.sendPacket(new S1DPacketEntityEffect(playerIn.getEntityId(), potioneffect));
+            player.playerNetServerHandler.sendPacket(new S1DPacketEntityEffect(player.getEntityId(), potioneffect));
         }
     }
 
@@ -856,28 +856,28 @@ public abstract class ServerConfigurationManager
     /**
      * Updates the time and weather for the given player to those of the given world
      */
-    public void updateTimeAndWeatherForPlayer(EntityPlayerMP playerIn, WorldServer worldIn)
+    public void updateTimeAndWeatherForPlayer(EntityPlayerMP player, WorldServer world)
     {
         WorldBorder worldborder = this.mcServer.worldServers[0].getWorldBorder();
-        playerIn.playerNetServerHandler.sendPacket(new S44PacketWorldBorder(worldborder, S44PacketWorldBorder.Action.INITIALIZE));
-        playerIn.playerNetServerHandler.sendPacket(new S03PacketTimeUpdate(worldIn.getTotalWorldTime(), worldIn.getWorldTime(), worldIn.getGameRules().getGameRuleBooleanValue("doDaylightCycle")));
+        player.playerNetServerHandler.sendPacket(new S44PacketWorldBorder(worldborder, S44PacketWorldBorder.Action.INITIALIZE));
+        player.playerNetServerHandler.sendPacket(new S03PacketTimeUpdate(world.getTotalWorldTime(), world.getWorldTime(), world.getGameRules().getGameRuleBooleanValue("doDaylightCycle")));
 
-        if (worldIn.isRaining())
+        if (world.isRaining())
         {
-            playerIn.playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(1, 0.0F));
-            playerIn.playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(7, worldIn.getRainStrength(1.0F)));
-            playerIn.playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(8, worldIn.getThunderStrength(1.0F)));
+            player.playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(1, 0.0F));
+            player.playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(7, world.getRainStrength(1.0F)));
+            player.playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(8, world.getThunderStrength(1.0F)));
         }
     }
 
     /**
      * sends the players inventory to himself
      */
-    public void syncPlayerInventory(EntityPlayerMP playerIn)
+    public void syncPlayerInventory(EntityPlayerMP player)
     {
-        playerIn.sendContainerToPlayer(playerIn.inventoryContainer);
-        playerIn.setPlayerHealthUpdated();
-        playerIn.playerNetServerHandler.sendPacket(new S09PacketHeldItemChange(playerIn.inventory.currentItem));
+        player.sendContainerToPlayer(player.inventoryContainer);
+        player.setPlayerHealthUpdated();
+        player.playerNetServerHandler.sendPacket(new S09PacketHeldItemChange(player.inventory.currentItem));
     }
 
     /**
@@ -950,7 +950,7 @@ public abstract class ServerConfigurationManager
         this.gameType = p_152604_1_;
     }
 
-    private void setPlayerGameTypeBasedOnOther(EntityPlayerMP p_72381_1_, EntityPlayerMP p_72381_2_, World worldIn)
+    private void setPlayerGameTypeBasedOnOther(EntityPlayerMP p_72381_1_, EntityPlayerMP p_72381_2_, World world)
     {
         if (p_72381_2_ != null)
         {
@@ -961,7 +961,7 @@ public abstract class ServerConfigurationManager
             p_72381_1_.theItemInWorldManager.setGameType(this.gameType);
         }
 
-        p_72381_1_.theItemInWorldManager.initializeGameType(worldIn.getWorldInfo().getGameType());
+        p_72381_1_.theItemInWorldManager.initializeGameType(world.getWorldInfo().getGameType());
     }
 
     /**
@@ -998,9 +998,9 @@ public abstract class ServerConfigurationManager
         this.sendChatMsgImpl(component, true);
     }
 
-    public StatisticsFile getPlayerStatsFile(EntityPlayer playerIn)
+    public StatisticsFile getPlayerStatsFile(EntityPlayer player)
     {
-        UUID uuid = playerIn.getUniqueID();
+        UUID uuid = player.getUniqueID();
         StatisticsFile statisticsfile = uuid == null ? null : this.playerStatFiles.get(uuid);
 
         if (statisticsfile == null)
@@ -1010,7 +1010,7 @@ public abstract class ServerConfigurationManager
 
             if (!file2.exists())
             {
-                File file3 = new File(file1, playerIn.getCommandSenderName() + ".json");
+                File file3 = new File(file1, player.getCommandSenderName() + ".json");
 
                 if (file3.exists() && file3.isFile())
                 {

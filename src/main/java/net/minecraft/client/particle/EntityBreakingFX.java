@@ -10,14 +10,14 @@ import net.minecraft.world.World;
 
 public class EntityBreakingFX extends EntityFX
 {
-    protected EntityBreakingFX(World worldIn, double posXIn, double posYIn, double posZIn, Item p_i1195_8_)
+    protected EntityBreakingFX(World world, double posXIn, double posYIn, double posZIn, Item p_i1195_8_)
     {
-        this(worldIn, posXIn, posYIn, posZIn, p_i1195_8_, 0);
+        this(world, posXIn, posYIn, posZIn, p_i1195_8_, 0);
     }
 
-    protected EntityBreakingFX(World worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, Item p_i1197_14_, int p_i1197_15_)
+    protected EntityBreakingFX(World world, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, Item p_i1197_14_, int p_i1197_15_)
     {
-        this(worldIn, posXIn, posYIn, posZIn, p_i1197_14_, p_i1197_15_);
+        this(world, posXIn, posYIn, posZIn, p_i1197_14_, p_i1197_15_);
         this.motionX *= 0.10000000149011612D;
         this.motionY *= 0.10000000149011612D;
         this.motionZ *= 0.10000000149011612D;
@@ -26,9 +26,9 @@ public class EntityBreakingFX extends EntityFX
         this.motionZ += zSpeedIn;
     }
 
-    protected EntityBreakingFX(World worldIn, double posXIn, double posYIn, double posZIn, Item p_i1196_8_, int p_i1196_9_)
+    protected EntityBreakingFX(World world, double posXIn, double posYIn, double posZIn, Item p_i1196_8_, int p_i1196_9_)
     {
-        super(worldIn, posXIn, posYIn, posZIn, 0.0D, 0.0D, 0.0D);
+        super(world, posXIn, posYIn, posZIn, 0.0D, 0.0D, 0.0D);
         this.setParticleIcon(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(p_i1196_8_, p_i1196_9_));
         this.particleRed = this.particleGreen = this.particleBlue = 1.0F;
         this.particleGravity = Blocks.snow.blockParticleGravity;
@@ -75,26 +75,26 @@ public class EntityBreakingFX extends EntityFX
 
     public static class Factory implements IParticleFactory
     {
-        public EntityFX getEntityFX(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
+        public EntityFX getEntityFX(int particleID, World world, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
         {
             int i = p_178902_15_.length > 1 ? p_178902_15_[1] : 0;
-            return new EntityBreakingFX(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn, Item.getItemById(p_178902_15_[0]), i);
+            return new EntityBreakingFX(world, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn, Item.getItemById(p_178902_15_[0]), i);
         }
     }
 
     public static class SlimeFactory implements IParticleFactory
     {
-        public EntityFX getEntityFX(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
+        public EntityFX getEntityFX(int particleID, World world, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
         {
-            return new EntityBreakingFX(worldIn, xCoordIn, yCoordIn, zCoordIn, Items.slime_ball);
+            return new EntityBreakingFX(world, xCoordIn, yCoordIn, zCoordIn, Items.slime_ball);
         }
     }
 
     public static class SnowballFactory implements IParticleFactory
     {
-        public EntityFX getEntityFX(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
+        public EntityFX getEntityFX(int particleID, World world, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
         {
-            return new EntityBreakingFX(worldIn, xCoordIn, yCoordIn, zCoordIn, Items.snowball);
+            return new EntityBreakingFX(world, xCoordIn, yCoordIn, zCoordIn, Items.snowball);
         }
     }
 }

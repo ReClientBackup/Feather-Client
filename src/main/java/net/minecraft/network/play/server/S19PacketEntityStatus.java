@@ -48,9 +48,9 @@ public class S19PacketEntityStatus implements Packet<INetHandlerPlayClient>
         handler.handleEntityStatus(this);
     }
 
-    public Entity getEntity(World worldIn)
+    public Entity getEntity(World world)
     {
-        return worldIn.getEntityByID(this.entityId);
+        return world.getEntityByID(this.entityId);
     }
 
     public byte getOpCode()

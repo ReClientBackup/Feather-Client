@@ -110,7 +110,7 @@ public class CommandSpreadPlayers extends CommandBase
         }
     }
 
-    private void func_110669_a(ICommandSender p_110669_1_, List<Entity> p_110669_2_, CommandSpreadPlayers.Position p_110669_3_, double p_110669_4_, double p_110669_6_, World worldIn, boolean p_110669_9_) throws CommandException
+    private void func_110669_a(ICommandSender p_110669_1_, List<Entity> p_110669_2_, CommandSpreadPlayers.Position p_110669_3_, double p_110669_4_, double p_110669_6_, World world, boolean p_110669_9_) throws CommandException
     {
         Random random = new Random();
         double d0 = p_110669_3_.field_111101_a - p_110669_6_;
@@ -118,8 +118,8 @@ public class CommandSpreadPlayers extends CommandBase
         double d2 = p_110669_3_.field_111101_a + p_110669_6_;
         double d3 = p_110669_3_.field_111100_b + p_110669_6_;
         CommandSpreadPlayers.Position[] acommandspreadplayers$position = this.func_110670_a(random, p_110669_9_ ? this.func_110667_a(p_110669_2_) : p_110669_2_.size(), d0, d1, d2, d3);
-        int i = this.func_110668_a(p_110669_3_, p_110669_4_, worldIn, random, d0, d1, d2, d3, acommandspreadplayers$position, p_110669_9_);
-        double d4 = this.func_110671_a(p_110669_2_, worldIn, acommandspreadplayers$position, p_110669_9_);
+        int i = this.func_110668_a(p_110669_3_, p_110669_4_, world, random, d0, d1, d2, d3, acommandspreadplayers$position, p_110669_9_);
+        double d4 = this.func_110671_a(p_110669_2_, world, acommandspreadplayers$position, p_110669_9_);
         notifyOperators(p_110669_1_, this, "commands.spreadplayers.success." + (p_110669_9_ ? "teams" : "players"), Integer.valueOf(acommandspreadplayers$position.length), Double.valueOf(p_110669_3_.field_111101_a), Double.valueOf(p_110669_3_.field_111100_b));
 
         if (acommandspreadplayers$position.length > 1)
@@ -147,7 +147,7 @@ public class CommandSpreadPlayers extends CommandBase
         return set.size();
     }
 
-    private int func_110668_a(CommandSpreadPlayers.Position p_110668_1_, double p_110668_2_, World worldIn, Random p_110668_5_, double p_110668_6_, double p_110668_8_, double p_110668_10_, double p_110668_12_, CommandSpreadPlayers.Position[] p_110668_14_, boolean p_110668_15_) throws CommandException
+    private int func_110668_a(CommandSpreadPlayers.Position p_110668_1_, double p_110668_2_, World world, Random p_110668_5_, double p_110668_6_, double p_110668_8_, double p_110668_10_, double p_110668_12_, CommandSpreadPlayers.Position[] p_110668_14_, boolean p_110668_15_) throws CommandException
     {
         boolean flag = true;
         double d0 = 3.4028234663852886E38D;
@@ -210,7 +210,7 @@ public class CommandSpreadPlayers extends CommandBase
             {
                 for (CommandSpreadPlayers.Position commandspreadplayers$position3 : p_110668_14_)
                 {
-                    if (!commandspreadplayers$position3.func_111098_b(worldIn))
+                    if (!commandspreadplayers$position3.func_111098_b(world))
                     {
                         commandspreadplayers$position3.func_111097_a(p_110668_5_, p_110668_6_, p_110668_8_, p_110668_10_, p_110668_12_);
                         flag = true;
@@ -229,7 +229,7 @@ public class CommandSpreadPlayers extends CommandBase
         }
     }
 
-    private double func_110671_a(List<Entity> p_110671_1_, World worldIn, CommandSpreadPlayers.Position[] p_110671_3_, boolean p_110671_4_)
+    private double func_110671_a(List<Entity> p_110671_1_, World world, CommandSpreadPlayers.Position[] p_110671_3_, boolean p_110671_4_)
     {
         double d0 = 0.0D;
         int i = 0;
@@ -256,7 +256,7 @@ public class CommandSpreadPlayers extends CommandBase
                 commandspreadplayers$position = p_110671_3_[i++];
             }
 
-            entity.setPositionAndUpdate((float)MathHelper.floor_double(commandspreadplayers$position.field_111101_a) + 0.5F, commandspreadplayers$position.func_111092_a(worldIn), (double)MathHelper.floor_double(commandspreadplayers$position.field_111100_b) + 0.5D);
+            entity.setPositionAndUpdate((float)MathHelper.floor_double(commandspreadplayers$position.field_111101_a) + 0.5F, commandspreadplayers$position.func_111092_a(world), (double)MathHelper.floor_double(commandspreadplayers$position.field_111100_b) + 0.5D);
             double d2 = Double.MAX_VALUE;
 
             for (int k = 0; k < p_110671_3_.length; ++k)
@@ -363,7 +363,7 @@ public class CommandSpreadPlayers extends CommandBase
             return flag;
         }
 
-        public int func_111092_a(World worldIn)
+        public int func_111092_a(World world)
         {
             BlockPos blockpos = new BlockPos(this.field_111101_a, 256.0D, this.field_111100_b);
 
@@ -371,7 +371,7 @@ public class CommandSpreadPlayers extends CommandBase
             {
                 blockpos = blockpos.down();
 
-                if (worldIn.getBlockState(blockpos).getBlock().getMaterial() != Material.air)
+                if (world.getBlockState(blockpos).getBlock().getMaterial() != Material.air)
                 {
                     return blockpos.getY() + 1;
                 }
@@ -380,14 +380,14 @@ public class CommandSpreadPlayers extends CommandBase
             return 257;
         }
 
-        public boolean func_111098_b(World worldIn)
+        public boolean func_111098_b(World world)
         {
             BlockPos blockpos = new BlockPos(this.field_111101_a, 256.0D, this.field_111100_b);
 
             while (blockpos.getY() > 0)
             {
                 blockpos = blockpos.down();
-                Material material = worldIn.getBlockState(blockpos).getBlock().getMaterial();
+                Material material = world.getBlockState(blockpos).getBlock().getMaterial();
 
                 if (material != Material.air)
                 {

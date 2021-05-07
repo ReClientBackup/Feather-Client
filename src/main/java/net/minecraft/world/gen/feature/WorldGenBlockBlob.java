@@ -18,7 +18,7 @@ public class WorldGenBlockBlob extends WorldGenerator
         this.field_150544_b = p_i45450_2_;
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         while (true)
         {
@@ -26,12 +26,12 @@ public class WorldGenBlockBlob extends WorldGenerator
             {
                 if (position.getY() > 3)
                 {
-                    if (worldIn.isAirBlock(position.down()))
+                    if (world.isAirBlock(position.down()))
                     {
                         break label0;
                     }
 
-                    Block block = worldIn.getBlockState(position.down()).getBlock();
+                    Block block = world.getBlockState(position.down()).getBlock();
 
                     if (block != Blocks.grass && block != Blocks.dirt && block != Blocks.stone)
                     {
@@ -57,7 +57,7 @@ public class WorldGenBlockBlob extends WorldGenerator
                     {
                         if (blockpos.distanceSq(position) <= (double)(f * f))
                         {
-                            worldIn.setBlockState(blockpos, this.field_150545_a.getDefaultState(), 4);
+                            world.setBlockState(blockpos, this.field_150545_a.getDefaultState(), 4);
                         }
                     }
 

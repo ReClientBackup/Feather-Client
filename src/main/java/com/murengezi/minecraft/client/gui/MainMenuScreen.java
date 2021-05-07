@@ -77,7 +77,7 @@ public class MainMenuScreen extends Screen {
         drawTexturedModalRect(x, 30, 0, 0, 155, 44);
         drawTexturedModalRect(x + 155, 30, 0, 45, 155, 44);
 
-        getMc().getTextureManager().bindTexture(new ResourceLocation("feather/edition.png"));
+        getMc().getTextureManager().bindTexture(new ResourceLocation("chocolate/edition.png"));
         drawModalRectWithCustomSizedTexture(x + 88, 67, 0, 0, 98, 14, 128, 16);
 
         String playerName = getMc().getSession().getUsername();
@@ -87,12 +87,6 @@ public class MainMenuScreen extends Screen {
         String url = "https://crafatar.com/avatars/" + uuid + "?size=8.png";
         Chocolate.getImageManager().drawImageFromUrl(FilenameUtils.getBaseName(url), url, 2, 2, 16, 16);
         getFr().drawStringWithShadow(playerName, 21, 6, 0xffffffff);
-
-        GlStateManager.pushMatrix();
-        GlStateManager.colorAllMax();
-        getMc().getTextureManager().bindTexture(new ResourceLocation("feather/sign-in.png"));
-        drawModalRectWithCustomSizedTexture(20 + 3 + getFr().getStringWidth(playerName), 6, 0, 0, 8, 8, 8, 8);
-        GlStateManager.popMatrix();
 
         getFr().drawStringWithShadow(EnumChatFormatting.BOLD + "\"" + EnumChatFormatting.RESET + Chocolate.getThemeManager().getActiveTheme().getName() + EnumChatFormatting.BOLD + "\"" + EnumChatFormatting.RESET + " by " + Chocolate.getThemeManager().getActiveTheme().getAuthor(), 2, this.height - 10, 0xffffffff);
 

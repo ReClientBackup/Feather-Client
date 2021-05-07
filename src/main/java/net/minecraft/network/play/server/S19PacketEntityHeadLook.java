@@ -48,9 +48,9 @@ public class S19PacketEntityHeadLook implements Packet<INetHandlerPlayClient>
         handler.handleEntityHeadLook(this);
     }
 
-    public Entity getEntity(World worldIn)
+    public Entity getEntity(World world)
     {
-        return worldIn.getEntityByID(this.entityId);
+        return world.getEntityByID(this.entityId);
     }
 
     public byte getYaw()

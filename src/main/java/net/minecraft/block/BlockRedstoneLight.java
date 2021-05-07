@@ -24,17 +24,17 @@ public class BlockRedstoneLight extends Block
         }
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            if (this.isOn && !worldIn.isBlockPowered(pos))
+            if (this.isOn && !world.isBlockPowered(pos))
             {
-                worldIn.setBlockState(pos, Blocks.redstone_lamp.getDefaultState(), 2);
+                world.setBlockState(pos, Blocks.redstone_lamp.getDefaultState(), 2);
             }
-            else if (!this.isOn && worldIn.isBlockPowered(pos))
+            else if (!this.isOn && world.isBlockPowered(pos))
             {
-                worldIn.setBlockState(pos, Blocks.lit_redstone_lamp.getDefaultState(), 2);
+                world.setBlockState(pos, Blocks.lit_redstone_lamp.getDefaultState(), 2);
             }
         }
     }
@@ -42,28 +42,28 @@ public class BlockRedstoneLight extends Block
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            if (this.isOn && !worldIn.isBlockPowered(pos))
+            if (this.isOn && !world.isBlockPowered(pos))
             {
-                worldIn.scheduleUpdate(pos, this, 4);
+                world.scheduleUpdate(pos, this, 4);
             }
-            else if (!this.isOn && worldIn.isBlockPowered(pos))
+            else if (!this.isOn && world.isBlockPowered(pos))
             {
-                worldIn.setBlockState(pos, Blocks.lit_redstone_lamp.getDefaultState(), 2);
+                world.setBlockState(pos, Blocks.lit_redstone_lamp.getDefaultState(), 2);
             }
         }
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            if (this.isOn && !worldIn.isBlockPowered(pos))
+            if (this.isOn && !world.isBlockPowered(pos))
             {
-                worldIn.setBlockState(pos, Blocks.redstone_lamp.getDefaultState(), 2);
+                world.setBlockState(pos, Blocks.redstone_lamp.getDefaultState(), 2);
             }
         }
     }
@@ -81,7 +81,7 @@ public class BlockRedstoneLight extends Block
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return Item.getItemFromBlock(Blocks.redstone_lamp);
     }

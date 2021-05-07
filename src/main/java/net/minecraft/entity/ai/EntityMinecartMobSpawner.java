@@ -27,14 +27,14 @@ public class EntityMinecartMobSpawner extends EntityMinecart
         }
     };
 
-    public EntityMinecartMobSpawner(World worldIn)
+    public EntityMinecartMobSpawner(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityMinecartMobSpawner(World worldIn, double p_i1726_2_, double p_i1726_4_, double p_i1726_6_)
+    public EntityMinecartMobSpawner(World world, double p_i1726_2_, double p_i1726_4_, double p_i1726_6_)
     {
-        super(worldIn, p_i1726_2_, p_i1726_4_, p_i1726_6_);
+        super(world, p_i1726_2_, p_i1726_4_, p_i1726_6_);
     }
 
     public EntityMinecart.EnumMinecartType getMinecartType()

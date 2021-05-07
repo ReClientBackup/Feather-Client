@@ -50,7 +50,7 @@ public class BiomeGenSwamp extends BiomeGenBase
         return BlockFlower.EnumFlowerType.BLUE_ORCHID;
     }
 
-    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
+    public void genTerrainBlocks(World world, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
     {
         double d0 = GRASS_COLOR_NOISE.func_151601_a((double)p_180622_4_ * 0.25D, (double)p_180622_5_ * 0.25D);
 
@@ -78,6 +78,6 @@ public class BiomeGenSwamp extends BiomeGenBase
             }
         }
 
-        this.generateBiomeTerrain(worldIn, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
+        this.generateBiomeTerrain(world, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
     }
 }

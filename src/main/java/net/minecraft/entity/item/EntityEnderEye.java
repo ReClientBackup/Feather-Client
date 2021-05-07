@@ -22,9 +22,9 @@ public class EntityEnderEye extends Entity
     private int despawnTimer;
     private boolean shatterOrDrop;
 
-    public EntityEnderEye(World worldIn)
+    public EntityEnderEye(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.25F, 0.25F);
     }
 
@@ -49,9 +49,9 @@ public class EntityEnderEye extends Entity
         return distance < d0 * d0;
     }
 
-    public EntityEnderEye(World worldIn, double x, double y, double z)
+    public EntityEnderEye(World world, double x, double y, double z)
     {
-        super(worldIn);
+        super(world);
         this.despawnTimer = 0;
         this.setSize(0.25F, 0.25F);
         this.setPosition(x, y, z);

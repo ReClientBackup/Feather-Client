@@ -42,10 +42,10 @@ public class SlotFurnaceOutput extends Slot
         return super.decrStackSize(amount);
     }
 
-    public void onPickupFromSlot(EntityPlayer playerIn, ItemStack stack)
+    public void onPickupFromSlot(EntityPlayer player, ItemStack stack)
     {
         this.onCrafting(stack);
-        super.onPickupFromSlot(playerIn, stack);
+        super.onPickupFromSlot(player, stack);
     }
 
     /**

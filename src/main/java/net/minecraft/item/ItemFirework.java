@@ -19,14 +19,14 @@ public class ItemFirework extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            EntityFireworkRocket entityfireworkrocket = new EntityFireworkRocket(worldIn, (float)pos.getX() + hitX, (float)pos.getY() + hitY, (float)pos.getZ() + hitZ, stack);
-            worldIn.spawnEntityInWorld(entityfireworkrocket);
+            EntityFireworkRocket entityfireworkrocket = new EntityFireworkRocket(world, (float)pos.getX() + hitX, (float)pos.getY() + hitY, (float)pos.getZ() + hitZ, stack);
+            world.spawnEntityInWorld(entityfireworkrocket);
 
-            if (!playerIn.capabilities.isCreativeMode)
+            if (!player.capabilities.isCreativeMode)
             {
                 --stack.stackSize;
             }
@@ -45,7 +45,7 @@ public class ItemFirework extends Item
      * @param tooltip All lines to display in the Item's tooltip. This is a List of Strings.
      * @param advanced Whether the setting "Advanced tooltips" is enabled
      */
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
     {
         if (stack.hasTagCompound())
         {

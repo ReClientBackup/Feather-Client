@@ -28,103 +28,103 @@ public class BlockTNT extends Block
         this.setCreativeTab(CreativeTabs.tabRedstone);
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        super.onBlockAdded(worldIn, pos, state);
+        super.onBlockAdded(world, pos, state);
 
-        if (worldIn.isBlockPowered(pos))
+        if (world.isBlockPowered(pos))
         {
-            this.onBlockDestroyedByPlayer(worldIn, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
-            worldIn.setBlockToAir(pos);
+            this.onBlockDestroyedByPlayer(world, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
+            world.setBlockToAir(pos);
         }
     }
 
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        if (worldIn.isBlockPowered(pos))
+        if (world.isBlockPowered(pos))
         {
-            this.onBlockDestroyedByPlayer(worldIn, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
-            worldIn.setBlockToAir(pos);
+            this.onBlockDestroyedByPlayer(world, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
+            world.setBlockToAir(pos);
         }
     }
 
     /**
      * Called when this Block is destroyed by an Explosion
      */
-    public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn)
+    public void onBlockDestroyedByExplosion(World world, BlockPos pos, Explosion explosionIn)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(worldIn, (float)pos.getX() + 0.5F, pos.getY(), (float)pos.getZ() + 0.5F, explosionIn.getExplosivePlacedBy());
-            entitytntprimed.fuse = worldIn.rand.nextInt(entitytntprimed.fuse / 4) + entitytntprimed.fuse / 8;
-            worldIn.spawnEntityInWorld(entitytntprimed);
+            EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(world, (float)pos.getX() + 0.5F, pos.getY(), (float)pos.getZ() + 0.5F, explosionIn.getExplosivePlacedBy());
+            entitytntprimed.fuse = world.rand.nextInt(entitytntprimed.fuse / 4) + entitytntprimed.fuse / 8;
+            world.spawnEntityInWorld(entitytntprimed);
         }
     }
 
     /**
      * Called when a player destroys this Block
      */
-    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state)
     {
-        this.explode(worldIn, pos, state, null);
+        this.explode(world, pos, state, null);
     }
 
-    public void explode(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase igniter)
+    public void explode(World world, BlockPos pos, IBlockState state, EntityLivingBase igniter)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
             if (state.getValue(EXPLODE).booleanValue())
             {
-                EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(worldIn, (float)pos.getX() + 0.5F, pos.getY(), (float)pos.getZ() + 0.5F, igniter);
-                worldIn.spawnEntityInWorld(entitytntprimed);
-                worldIn.playSoundAtEntity(entitytntprimed, "game.tnt.primed", 1.0F, 1.0F);
+                EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(world, (float)pos.getX() + 0.5F, pos.getY(), (float)pos.getZ() + 0.5F, igniter);
+                world.spawnEntityInWorld(entitytntprimed);
+                world.playSoundAtEntity(entitytntprimed, "game.tnt.primed", 1.0F, 1.0F);
             }
         }
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (playerIn.getCurrentEquippedItem() != null)
+        if (player.getCurrentEquippedItem() != null)
         {
-            Item item = playerIn.getCurrentEquippedItem().getItem();
+            Item item = player.getCurrentEquippedItem().getItem();
 
             if (item == Items.flint_and_steel || item == Items.fire_charge)
             {
-                this.explode(worldIn, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)), playerIn);
-                worldIn.setBlockToAir(pos);
+                this.explode(world, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)), player);
+                world.setBlockToAir(pos);
 
                 if (item == Items.flint_and_steel)
                 {
-                    playerIn.getCurrentEquippedItem().damageItem(1, playerIn);
+                    player.getCurrentEquippedItem().damageItem(1, player);
                 }
-                else if (!playerIn.capabilities.isCreativeMode)
+                else if (!player.capabilities.isCreativeMode)
                 {
-                    --playerIn.getCurrentEquippedItem().stackSize;
+                    --player.getCurrentEquippedItem().stackSize;
                 }
 
                 return true;
             }
         }
 
-        return super.onBlockActivated(worldIn, pos, state, playerIn, side, hitX, hitY, hitZ);
+        return super.onBlockActivated(world, pos, state, player, side, hitX, hitY, hitZ);
     }
 
     /**
      * Called When an Entity Collided with the Block
      */
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entityIn)
     {
-        if (!worldIn.isRemote && entityIn instanceof EntityArrow)
+        if (!world.isRemote && entityIn instanceof EntityArrow)
         {
             EntityArrow entityarrow = (EntityArrow)entityIn;
 
             if (entityarrow.isBurning())
             {
-                this.explode(worldIn, pos, worldIn.getBlockState(pos).withProperty(EXPLODE, Boolean.valueOf(true)), entityarrow.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase)entityarrow.shootingEntity : null);
-                worldIn.setBlockToAir(pos);
+                this.explode(world, pos, world.getBlockState(pos).withProperty(EXPLODE, Boolean.valueOf(true)), entityarrow.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase)entityarrow.shootingEntity : null);
+                world.setBlockToAir(pos);
             }
         }
     }

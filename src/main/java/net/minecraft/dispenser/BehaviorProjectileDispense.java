@@ -35,7 +35,7 @@ public abstract class BehaviorProjectileDispense extends BehaviorDefaultDispense
     /**
      * Return the projectile entity spawned by this dispense behavior.
      */
-    protected abstract IProjectile getProjectileEntity(World worldIn, IPosition position);
+    protected abstract IProjectile getProjectileEntity(World world, IPosition position);
 
     protected float func_82498_a()
     {

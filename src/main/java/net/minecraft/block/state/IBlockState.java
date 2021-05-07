@@ -5,8 +5,8 @@ import java.util.Collection;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 
-public interface IBlockState
-{
+public interface IBlockState {
+
     Collection<IProperty> getPropertyNames();
 
     <T extends Comparable<T>> T getValue(IProperty<T> property);
@@ -18,4 +18,5 @@ public interface IBlockState
     ImmutableMap<IProperty, Comparable> getProperties();
 
     Block getBlock();
+
 }

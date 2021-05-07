@@ -50,14 +50,14 @@ public class EntityMinecartCommandBlock extends EntityMinecart
     /** Cooldown before command block logic runs again in ticks */
     private int activatorRailCooldown = 0;
 
-    public EntityMinecartCommandBlock(World worldIn)
+    public EntityMinecartCommandBlock(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityMinecartCommandBlock(World worldIn, double x, double y, double z)
+    public EntityMinecartCommandBlock(World world, double x, double y, double z)
     {
-        super(worldIn, x, y, z);
+        super(world, x, y, z);
     }
 
     protected void entityInit()
@@ -117,9 +117,9 @@ public class EntityMinecartCommandBlock extends EntityMinecart
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer playerIn)
+    public boolean interactFirst(EntityPlayer player)
     {
-        this.commandBlockLogic.tryOpenEditCommandBlock(playerIn);
+        this.commandBlockLogic.tryOpenEditCommandBlock(player);
         return false;
     }
 

@@ -9,7 +9,7 @@ public interface IRecipe
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    boolean matches(InventoryCrafting inv, World worldIn);
+    boolean matches(InventoryCrafting inv, World world);
 
     /**
      * Returns an Item that is the result of this recipe

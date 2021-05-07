@@ -39,9 +39,9 @@ public class PlayerControllerOF extends PlayerControllerMP {
       return flag;
    }
 
-   public boolean sendUseItem(EntityPlayer player, World worldIn, ItemStack stack) {
+   public boolean sendUseItem(EntityPlayer player, World world, ItemStack stack) {
       this.acting = true;
-      boolean flag = super.sendUseItem(player, worldIn, stack);
+      boolean flag = super.sendUseItem(player, world, stack);
       this.acting = false;
       return flag;
    }

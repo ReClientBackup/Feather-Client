@@ -6,9 +6,9 @@ import net.minecraft.world.World;
 
 public abstract class EntityGolem extends EntityCreature implements IAnimals
 {
-    public EntityGolem(World worldIn)
+    public EntityGolem(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
     public void fall(float distance, float damageMultiplier)

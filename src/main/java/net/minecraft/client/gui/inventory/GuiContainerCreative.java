@@ -96,7 +96,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
             {
                 if (clickedButton == 0)
                 {
-                    getPlayer().dropPlayerItemWithRandomChoice(inventoryplayer1.getItemStack(), true);
+                    getPlayer().dropPlayerItemWithRandomChoice(inventoryplayer1.getItemStack());
                     getMc().playerController.sendPacketDropItem(inventoryplayer1.getItemStack());
                     inventoryplayer1.setItemStack(null);
                 }
@@ -104,7 +104,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
                 if (clickedButton == 1)
                 {
                     ItemStack itemstack5 = inventoryplayer1.getItemStack().splitStack(1);
-                    getPlayer().dropPlayerItemWithRandomChoice(itemstack5, true);
+                    getPlayer().dropPlayerItemWithRandomChoice(itemstack5);
                     getMc().playerController.sendPacketDropItem(itemstack5);
 
                     if (inventoryplayer1.getItemStack().stackSize == 0)
@@ -130,12 +130,12 @@ public class GuiContainerCreative extends InventoryEffectRenderer
             else if (clickType == 4 && slotIn != null && slotIn.getHasStack())
             {
                 ItemStack itemstack = slotIn.decrStackSize(clickedButton == 0 ? 1 : slotIn.getStack().getMaxStackSize());
-                getPlayer().dropPlayerItemWithRandomChoice(itemstack, true);
+                getPlayer().dropPlayerItemWithRandomChoice(itemstack);
                 getMc().playerController.sendPacketDropItem(itemstack);
             }
             else if (clickType == 4 && getPlayer().inventory.getItemStack() != null)
             {
-                getPlayer().dropPlayerItemWithRandomChoice(getPlayer().inventory.getItemStack(), true);
+                getPlayer().dropPlayerItemWithRandomChoice(getPlayer().inventory.getItemStack());
                 getMc().playerController.sendPacketDropItem(getPlayer().inventory.getItemStack());
                 getPlayer().inventory.setItemStack(null);
             }
@@ -182,7 +182,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
                 {
                     ItemStack itemstack3 = itemstack2.copy();
                     itemstack3.stackSize = clickedButton == 0 ? 1 : itemstack3.getMaxStackSize();
-                    getPlayer().dropPlayerItemWithRandomChoice(itemstack3, true);
+                    getPlayer().dropPlayerItemWithRandomChoice(itemstack3);
                     getMc().playerController.sendPacketDropItem(itemstack3);
                 }
 
@@ -872,7 +872,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
             this.scrollTo(0.0F);
         }
 
-        public boolean canInteractWith(EntityPlayer playerIn)
+        public boolean canInteractWith(EntityPlayer player)
         {
             return true;
         }
@@ -910,11 +910,11 @@ public class GuiContainerCreative extends InventoryEffectRenderer
             return this.itemList.size() > 45;
         }
 
-        protected void retrySlotClick(int slotId, int clickedButton, boolean mode, EntityPlayer playerIn)
+        protected void retrySlotClick(int slotId, int clickedButton, boolean mode, EntityPlayer player)
         {
         }
 
-        public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+        public ItemStack transferStackInSlot(EntityPlayer player, int index)
         {
             if (index >= this.inventorySlots.size() - 9 && index < this.inventorySlots.size())
             {
@@ -950,9 +950,9 @@ public class GuiContainerCreative extends InventoryEffectRenderer
             this.slot = p_i46313_2_;
         }
 
-        public void onPickupFromSlot(EntityPlayer playerIn, ItemStack stack)
+        public void onPickupFromSlot(EntityPlayer player, ItemStack stack)
         {
-            this.slot.onPickupFromSlot(playerIn, stack);
+            this.slot.onPickupFromSlot(player, stack);
         }
 
         public boolean isItemValid(ItemStack stack)

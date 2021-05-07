@@ -12,16 +12,16 @@ public class EntityTNTPrimed extends Entity
     public int fuse;
     private EntityLivingBase tntPlacedBy;
 
-    public EntityTNTPrimed(World worldIn)
+    public EntityTNTPrimed(World world)
     {
-        super(worldIn);
+        super(world);
         this.preventEntitySpawning = true;
         this.setSize(0.98F, 0.98F);
     }
 
-    public EntityTNTPrimed(World worldIn, double p_i1730_2_, double p_i1730_4_, double p_i1730_6_, EntityLivingBase p_i1730_8_)
+    public EntityTNTPrimed(World world, double p_i1730_2_, double p_i1730_4_, double p_i1730_6_, EntityLivingBase p_i1730_8_)
     {
-        this(worldIn);
+        this(world);
         this.setPosition(p_i1730_2_, p_i1730_4_, p_i1730_6_);
         float f = (float)(Math.random() * Math.PI * 2.0D);
         this.motionX = -((float)Math.sin(f)) * 0.02F;

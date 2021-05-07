@@ -16,7 +16,7 @@ public class ItemSaddle extends Item
     /**
      * Returns true if the item can be used on the given entity, e.g. shears on sheep.
      */
-    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target)
+    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target)
     {
         if (target instanceof EntityPig)
         {

@@ -7,9 +7,9 @@ import net.minecraft.world.World;
 
 public abstract class EntityWaterMob extends EntityLiving implements IAnimals
 {
-    public EntityWaterMob(World worldIn)
+    public EntityWaterMob(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
     public boolean canBreatheUnderwater()

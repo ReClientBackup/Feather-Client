@@ -54,7 +54,7 @@ public abstract class BlockWoodSlab extends BlockSlab
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return Item.getItemFromBlock(Blocks.wooden_slab);
     }
@@ -80,13 +80,13 @@ public abstract class BlockWoodSlab extends BlockSlab
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
-        if (itemIn != Item.getItemFromBlock(Blocks.double_wooden_slab))
+        if (item != Item.getItemFromBlock(Blocks.double_wooden_slab))
         {
             for (BlockPlanks.EnumType blockplanks$enumtype : BlockPlanks.EnumType.values())
             {
-                list.add(new ItemStack(itemIn, 1, blockplanks$enumtype.getMetadata()));
+                list.add(new ItemStack(item, 1, blockplanks$enumtype.getMetadata()));
             }
         }
     }

@@ -138,14 +138,14 @@ public class EntityAIHarvestFarmland extends EntityAIMoveToBlock
     /**
      * Return true to set given position as destination
      */
-    protected boolean shouldMoveTo(World worldIn, BlockPos pos)
+    protected boolean shouldMoveTo(World world, BlockPos pos)
     {
-        Block block = worldIn.getBlockState(pos).getBlock();
+        Block block = world.getBlockState(pos).getBlock();
 
         if (block == Blocks.farmland)
         {
             pos = pos.up();
-            IBlockState iblockstate = worldIn.getBlockState(pos);
+            IBlockState iblockstate = world.getBlockState(pos);
             block = iblockstate.getBlock();
 
             if (block instanceof BlockCrops && iblockstate.getValue(BlockCrops.AGE).intValue() == 7 && this.field_179503_e && (this.field_179501_f == 0 || this.field_179501_f < 0))

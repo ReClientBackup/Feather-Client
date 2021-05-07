@@ -37,21 +37,21 @@ public class TextureCompass extends TextureAtlasSprite
     /**
      * Updates the compass based on the given x,z coords and camera direction
      */
-    public void updateCompass(World worldIn, double p_94241_2_, double p_94241_4_, double p_94241_6_, boolean p_94241_8_, boolean p_94241_9_)
+    public void updateCompass(World world, double p_94241_2_, double p_94241_4_, double p_94241_6_, boolean p_94241_8_, boolean p_94241_9_)
     {
         if (!this.framesTextureData.isEmpty())
         {
             double d0 = 0.0D;
 
-            if (worldIn != null && !p_94241_8_)
+            if (world != null && !p_94241_8_)
             {
-                BlockPos blockpos = worldIn.getSpawnPoint();
+                BlockPos blockpos = world.getSpawnPoint();
                 double d1 = (double)blockpos.getX() - p_94241_2_;
                 double d2 = (double)blockpos.getZ() - p_94241_4_;
                 p_94241_6_ = p_94241_6_ % 360.0D;
                 d0 = -((p_94241_6_ - 90.0D) * Math.PI / 180.0D - Math.atan2(d2, d1));
 
-                if (!worldIn.provider.isSurfaceWorld())
+                if (!world.provider.isSurfaceWorld())
                 {
                     d0 = Math.random() * Math.PI * 2.0D;
                 }

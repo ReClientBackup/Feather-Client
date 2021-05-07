@@ -35,22 +35,22 @@ public class ItemRecord extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
 
         if (iblockstate.getBlock() == Blocks.jukebox && !iblockstate.getValue(BlockJukebox.HAS_RECORD).booleanValue())
         {
-            if (worldIn.isRemote)
+            if (world.isRemote)
             {
                 return true;
             }
             else
             {
-                ((BlockJukebox)Blocks.jukebox).insertRecord(worldIn, pos, iblockstate, stack);
-                worldIn.playAuxSFXAtEntity(null, 1005, pos, Item.getIdFromItem(this));
+                ((BlockJukebox)Blocks.jukebox).insertRecord(world, pos, iblockstate, stack);
+                world.playAuxSFXAtEntity(null, 1005, pos, Item.getIdFromItem(this));
                 --stack.stackSize;
-                playerIn.triggerAchievement(StatList.field_181740_X);
+                player.triggerAchievement(StatList.field_181740_X);
                 return true;
             }
         }
@@ -66,7 +66,7 @@ public class ItemRecord extends Item
      * @param tooltip All lines to display in the Item's tooltip. This is a List of Strings.
      * @param advanced Whether the setting "Advanced tooltips" is enabled
      */
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
     {
         tooltip.add(this.getRecordNameLocal());
     }

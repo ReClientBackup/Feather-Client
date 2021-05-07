@@ -53,30 +53,30 @@ public class ContainerBeacon extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer playerIn)
+    public void onContainerClosed(EntityPlayer player)
     {
-        super.onContainerClosed(playerIn);
+        super.onContainerClosed(player);
 
-        if (playerIn != null && !playerIn.worldObj.isRemote)
+        if (player != null && !player.worldObj.isRemote)
         {
             ItemStack itemstack = this.beaconSlot.decrStackSize(this.beaconSlot.getSlotStackLimit());
 
             if (itemstack != null)
             {
-                playerIn.dropPlayerItemWithRandomChoice(itemstack, false);
+                player.dropPlayerItemWithRandomChoice(itemstack);
             }
         }
     }
 
-    public boolean canInteractWith(EntityPlayer playerIn)
+    public boolean canInteractWith(EntityPlayer player)
     {
-        return this.tileBeacon.isUseableByPlayer(playerIn);
+        return this.tileBeacon.isUseableByPlayer(player);
     }
 
     /**
      * Take a stack from the specified inventory slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    public ItemStack transferStackInSlot(EntityPlayer player, int index)
     {
         ItemStack itemstack = null;
         Slot slot = this.inventorySlots.get(index);
@@ -135,7 +135,7 @@ public class ContainerBeacon extends Container
                 return null;
             }
 
-            slot.onPickupFromSlot(playerIn, itemstack1);
+            slot.onPickupFromSlot(player, itemstack1);
         }
 
         return itemstack;

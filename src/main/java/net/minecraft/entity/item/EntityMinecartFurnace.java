@@ -20,14 +20,14 @@ public class EntityMinecartFurnace extends EntityMinecart
     public double pushX;
     public double pushZ;
 
-    public EntityMinecartFurnace(World worldIn)
+    public EntityMinecartFurnace(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityMinecartFurnace(World worldIn, double p_i1719_2_, double p_i1719_4_, double p_i1719_6_)
+    public EntityMinecartFurnace(World world, double p_i1719_2_, double p_i1719_4_, double p_i1719_6_)
     {
-        super(worldIn, p_i1719_2_, p_i1719_4_, p_i1719_6_);
+        super(world, p_i1719_2_, p_i1719_4_, p_i1719_6_);
     }
 
     public EntityMinecart.EnumMinecartType getMinecartType()
@@ -138,22 +138,22 @@ public class EntityMinecartFurnace extends EntityMinecart
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer playerIn)
+    public boolean interactFirst(EntityPlayer player)
     {
-        ItemStack itemstack = playerIn.inventory.getCurrentItem();
+        ItemStack itemstack = player.inventory.getCurrentItem();
 
         if (itemstack != null && itemstack.getItem() == Items.coal)
         {
-            if (!playerIn.capabilities.isCreativeMode && --itemstack.stackSize == 0)
+            if (!player.capabilities.isCreativeMode && --itemstack.stackSize == 0)
             {
-                playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, null);
+                player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
             }
 
             this.fuel += 3600;
         }
 
-        this.pushX = this.posX - playerIn.posX;
-        this.pushZ = this.posZ - playerIn.posZ;
+        this.pushX = this.posX - player.posX;
+        this.pushZ = this.posZ - player.posZ;
         return true;
     }
 

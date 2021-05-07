@@ -17,21 +17,21 @@ public class ItemEgg extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
-        if (!playerIn.capabilities.isCreativeMode)
+        if (!player.capabilities.isCreativeMode)
         {
             --itemStackIn.stackSize;
         }
 
-        worldIn.playSoundAtEntity(playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            worldIn.spawnEntityInWorld(new EntityEgg(worldIn, playerIn));
+            world.spawnEntityInWorld(new EntityEgg(world, player));
         }
 
-        playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+        player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
         return itemStackIn;
     }
 }

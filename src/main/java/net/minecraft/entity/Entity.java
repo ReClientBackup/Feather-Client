@@ -251,7 +251,7 @@ public abstract class Entity implements ICommandSender
         this.setDead();
     }
 
-    public Entity(World worldIn)
+    public Entity(World world)
     {
         this.entityId = nextEntityID++;
         this.renderDistanceWeight = 1.0D;
@@ -264,12 +264,12 @@ public abstract class Entity implements ICommandSender
         this.firstUpdate = true;
         this.entityUniqueID = MathHelper.getRandomUuid(this.rand);
         this.cmdResultStats = new CommandResultStats();
-        this.worldObj = worldIn;
+        this.worldObj = world;
         this.setPosition(0.0D, 0.0D, 0.0D);
 
-        if (worldIn != null)
+        if (world != null)
         {
-            this.dimension = worldIn.provider.getDimensionId();
+            this.dimension = world.provider.getDimensionId();
         }
 
         this.dataWatcher = new DataWatcher(this);
@@ -1254,9 +1254,9 @@ public abstract class Entity implements ICommandSender
     /**
      * Sets the reference to the World object.
      */
-    public void setWorld(World worldIn)
+    public void setWorld(World world)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
     }
 
     /**
@@ -1855,7 +1855,7 @@ public abstract class Entity implements ICommandSender
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer playerIn)
+    public boolean interactFirst(EntityPlayer player)
     {
         return false;
     }
@@ -2485,12 +2485,12 @@ public abstract class Entity implements ICommandSender
     /**
      * Explosion resistance of a block relative to this entity
      */
-    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn)
+    public float getExplosionResistance(Explosion explosionIn, World world, BlockPos pos, IBlockState blockStateIn)
     {
         return blockStateIn.getBlock().getExplosionResistance(this);
     }
 
-    public boolean verifyExplosion(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn, float p_174816_5_)
+    public boolean verifyExplosion(Explosion explosionIn, World world, BlockPos pos, IBlockState blockStateIn, float p_174816_5_)
     {
         return true;
     }

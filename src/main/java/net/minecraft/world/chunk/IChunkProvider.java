@@ -52,7 +52,7 @@ public interface IChunkProvider
 
     List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos);
 
-    BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position);
+    BlockPos getStrongholdGen(World world, String structureName, BlockPos position);
 
     int getLoadedChunkCount();
 

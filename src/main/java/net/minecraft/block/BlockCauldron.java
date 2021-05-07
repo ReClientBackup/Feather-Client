@@ -24,14 +24,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockCauldron extends Block
-{
+public class BlockCauldron extends Block {
+
     public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 3);
 
-    public BlockCauldron()
-    {
+    public BlockCauldron() {
         super(Material.iron, MapColor.stoneColor);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, Integer.valueOf(0)));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, 0));
     }
 
     /**
@@ -39,176 +38,137 @@ public class BlockCauldron extends Block
      *  
      * @param collidingEntity the Entity colliding with this Block
      */
-    public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
-    {
+    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.3125F, 1.0F);
-        super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+        super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
         float f = 0.125F;
         this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
-        super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+        super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
-        super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+        super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
         this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-        super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+        super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
         this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
-        super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+        super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
         this.setBlockBoundsForItemRender();
     }
 
     /**
      * Sets the block's bounds for rendering it as an item
      */
-    public void setBlockBoundsForItemRender()
-    {
+    public void setBlockBoundsForItemRender() {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
     /**
      * Used to determine ambient occlusion and culling when rebuilding chunks for render
      */
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
-    public boolean isFullCube()
-    {
+    public boolean isFullCube() {
         return false;
     }
 
     /**
      * Called When an Entity Collided with the Block
      */
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
-    {
-        int i = state.getValue(LEVEL).intValue();
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entityIn) {
+        int i = state.getValue(LEVEL);
         float f = (float)pos.getY() + (6.0F + (float)(3 * i)) / 16.0F;
 
-        if (!worldIn.isRemote && entityIn.isBurning() && i > 0 && entityIn.getEntityBoundingBox().minY <= (double)f)
-        {
+        if (!world.isRemote && entityIn.isBurning() && i > 0 && entityIn.getEntityBoundingBox().minY <= (double)f) {
             entityIn.extinguish();
-            this.setWaterLevel(worldIn, pos, state, i - 1);
+            this.setWaterLevel(world, pos, state, i - 1);
         }
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
-        if (worldIn.isRemote)
-        {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (world.isRemote) {
             return true;
-        }
-        else
-        {
-            ItemStack itemstack = playerIn.inventory.getCurrentItem();
+        } else {
+            ItemStack itemstack = player.inventory.getCurrentItem();
 
-            if (itemstack == null)
-            {
+            if (itemstack == null) {
                 return true;
-            }
-            else
-            {
-                int i = state.getValue(LEVEL).intValue();
+            } else {
+                int i = state.getValue(LEVEL);
                 Item item = itemstack.getItem();
 
-                if (item == Items.water_bucket)
-                {
-                    if (i < 3)
-                    {
-                        if (!playerIn.capabilities.isCreativeMode)
-                        {
-                            playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(Items.bucket));
+                if (item == Items.water_bucket) {
+                    if (i < 3) {
+                        if (!player.capabilities.isCreativeMode) {
+                            player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.bucket));
                         }
 
-                        playerIn.triggerAchievement(StatList.field_181725_I);
-                        this.setWaterLevel(worldIn, pos, state, 3);
+                        player.triggerAchievement(StatList.field_181725_I);
+                        this.setWaterLevel(world, pos, state, 3);
                     }
 
                     return true;
-                }
-                else if (item == Items.glass_bottle)
-                {
-                    if (i > 0)
-                    {
-                        if (!playerIn.capabilities.isCreativeMode)
-                        {
+                } else if (item == Items.glass_bottle) {
+                    if (i > 0) {
+                        if (!player.capabilities.isCreativeMode) {
                             ItemStack itemstack2 = new ItemStack(Items.potionitem, 1, 0);
 
-                            if (!playerIn.inventory.addItemStackToInventory(itemstack2))
-                            {
-                                worldIn.spawnEntityInWorld(new EntityItem(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY() + 1.5D, (double)pos.getZ() + 0.5D, itemstack2));
-                            }
-                            else if (playerIn instanceof EntityPlayerMP)
-                            {
-                                ((EntityPlayerMP)playerIn).sendContainerToPlayer(playerIn.inventoryContainer);
+                            if (!player.inventory.addItemStackToInventory(itemstack2)) {
+                                world.spawnEntityInWorld(new EntityItem(world, (double)pos.getX() + 0.5D, (double)pos.getY() + 1.5D, (double)pos.getZ() + 0.5D, itemstack2));
+                            } else if (player instanceof EntityPlayerMP) {
+                                ((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
                             }
 
-                            playerIn.triggerAchievement(StatList.field_181726_J);
+                            player.triggerAchievement(StatList.field_181726_J);
                             --itemstack.stackSize;
 
-                            if (itemstack.stackSize <= 0)
-                            {
-                                playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, null);
+                            if (itemstack.stackSize <= 0) {
+                                player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                             }
                         }
 
-                        this.setWaterLevel(worldIn, pos, state, i - 1);
+                        this.setWaterLevel(world, pos, state, i - 1);
                     }
 
                     return true;
-                }
-                else
-                {
-                    if (i > 0 && item instanceof ItemArmor)
-                    {
+                } else {
+                    if (i > 0 && item instanceof ItemArmor) {
                         ItemArmor itemarmor = (ItemArmor)item;
 
-                        if (itemarmor.getArmorMaterial() == ItemArmor.ArmorMaterial.LEATHER && itemarmor.hasColor(itemstack))
-                        {
+                        if (itemarmor.getArmorMaterial() == ItemArmor.ArmorMaterial.LEATHER && itemarmor.hasColor(itemstack)) {
                             itemarmor.removeColor(itemstack);
-                            this.setWaterLevel(worldIn, pos, state, i - 1);
-                            playerIn.triggerAchievement(StatList.field_181727_K);
+                            this.setWaterLevel(world, pos, state, i - 1);
+                            player.triggerAchievement(StatList.field_181727_K);
                             return true;
                         }
                     }
 
-                    if (i > 0 && item instanceof ItemBanner && TileEntityBanner.getPatterns(itemstack) > 0)
-                    {
+                    if (i > 0 && item instanceof ItemBanner && TileEntityBanner.getPatterns(itemstack) > 0) {
                         ItemStack itemstack1 = itemstack.copy();
                         itemstack1.stackSize = 1;
                         TileEntityBanner.removeBannerData(itemstack1);
 
-                        if (itemstack.stackSize <= 1 && !playerIn.capabilities.isCreativeMode)
-                        {
-                            playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, itemstack1);
-                        }
-                        else
-                        {
-                            if (!playerIn.inventory.addItemStackToInventory(itemstack1))
-                            {
-                                worldIn.spawnEntityInWorld(new EntityItem(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY() + 1.5D, (double)pos.getZ() + 0.5D, itemstack1));
-                            }
-                            else if (playerIn instanceof EntityPlayerMP)
-                            {
-                                ((EntityPlayerMP)playerIn).sendContainerToPlayer(playerIn.inventoryContainer);
+                        if (itemstack.stackSize <= 1 && !player.capabilities.isCreativeMode) {
+                            player.inventory.setInventorySlotContents(player.inventory.currentItem, itemstack1);
+                        } else {
+                            if (!player.inventory.addItemStackToInventory(itemstack1)) {
+                                world.spawnEntityInWorld(new EntityItem(world, (double)pos.getX() + 0.5D, (double)pos.getY() + 1.5D, (double)pos.getZ() + 0.5D, itemstack1));
+                            } else if (player instanceof EntityPlayerMP) {
+                                ((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
                             }
 
-                            playerIn.triggerAchievement(StatList.field_181728_L);
+                            player.triggerAchievement(StatList.field_181728_L);
 
-                            if (!playerIn.capabilities.isCreativeMode)
-                            {
+                            if (!player.capabilities.isCreativeMode) {
                                 --itemstack.stackSize;
                             }
                         }
 
-                        if (!playerIn.capabilities.isCreativeMode)
-                        {
-                            this.setWaterLevel(worldIn, pos, state, i - 1);
+                        if (!player.capabilities.isCreativeMode) {
+                            this.setWaterLevel(world, pos, state, i - 1);
                         }
 
                         return true;
-                    }
-                    else
-                    {
+                    } else {
                         return false;
                     }
                 }
@@ -216,24 +176,20 @@ public class BlockCauldron extends Block
         }
     }
 
-    public void setWaterLevel(World worldIn, BlockPos pos, IBlockState state, int level)
-    {
-        worldIn.setBlockState(pos, state.withProperty(LEVEL, Integer.valueOf(MathHelper.clamp_int(level, 0, 3))), 2);
-        worldIn.updateComparatorOutputLevel(pos, this);
+    public void setWaterLevel(World world, BlockPos pos, IBlockState state, int level) {
+        world.setBlockState(pos, state.withProperty(LEVEL, MathHelper.clamp_int(level, 0, 3)), 2);
+        world.updateComparatorOutputLevel(pos, this);
     }
 
     /**
      * Called similar to random ticks, but only when it is raining.
      */
-    public void fillWithRain(World worldIn, BlockPos pos)
-    {
-        if (worldIn.rand.nextInt(20) == 1)
-        {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
+    public void fillWithRain(World world, BlockPos pos) {
+        if (world.rand.nextInt(20) == 1) {
+            IBlockState iblockstate = world.getBlockState(pos);
 
-            if (iblockstate.getValue(LEVEL).intValue() < 3)
-            {
-                worldIn.setBlockState(pos, iblockstate.cycleProperty(LEVEL), 2);
+            if (iblockstate.getValue(LEVEL) < 3) {
+                world.setBlockState(pos, iblockstate.cycleProperty(LEVEL), 2);
             }
         }
     }
@@ -243,27 +199,23 @@ public class BlockCauldron extends Block
      *  
      * @param fortune the level of the Fortune enchantment on the player's tool
      */
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.cauldron;
     }
 
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
-    {
+    public Item getItem(World world, BlockPos pos) {
         return Items.cauldron;
     }
 
-    public boolean hasComparatorInputOverride()
-    {
+    public boolean hasComparatorInputOverride() {
         return true;
     }
 
-    public int getComparatorInputOverride(World worldIn, BlockPos pos)
-    {
-        return worldIn.getBlockState(pos).getValue(LEVEL).intValue();
+    public int getComparatorInputOverride(World world, BlockPos pos) {
+        return world.getBlockState(pos).getValue(LEVEL);
     }
 
     /**
@@ -271,7 +223,7 @@ public class BlockCauldron extends Block
      */
     public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(LEVEL, Integer.valueOf(meta));
+        return this.getDefaultState().withProperty(LEVEL, meta);
     }
 
     /**
@@ -279,7 +231,7 @@ public class BlockCauldron extends Block
      */
     public int getMetaFromState(IBlockState state)
     {
-        return state.getValue(LEVEL).intValue();
+        return state.getValue(LEVEL);
     }
 
     protected BlockState createBlockState()

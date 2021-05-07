@@ -32,9 +32,9 @@ public class EntitySlime extends EntityLiving implements IMob
     public float prevSquishFactor;
     private boolean wasOnGround;
 
-    public EntitySlime(World worldIn)
+    public EntitySlime(World world)
     {
-        super(worldIn);
+        super(world);
         this.moveHelper = new EntitySlime.SlimeMoveHelper(this);
         this.tasks.addTask(1, new EntitySlime.AISlimeFloat(this));
         this.tasks.addTask(2, new EntitySlime.AISlimeAttack(this));

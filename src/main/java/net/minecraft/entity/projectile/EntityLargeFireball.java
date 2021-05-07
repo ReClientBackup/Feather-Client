@@ -10,19 +10,19 @@ public class EntityLargeFireball extends EntityFireball
 {
     public int explosionPower = 1;
 
-    public EntityLargeFireball(World worldIn)
+    public EntityLargeFireball(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityLargeFireball(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ)
+    public EntityLargeFireball(World world, double x, double y, double z, double accelX, double accelY, double accelZ)
     {
-        super(worldIn, x, y, z, accelX, accelY, accelZ);
+        super(world, x, y, z, accelX, accelY, accelZ);
     }
 
-    public EntityLargeFireball(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
+    public EntityLargeFireball(World world, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
     {
-        super(worldIn, shooter, accelX, accelY, accelZ);
+        super(world, shooter, accelX, accelY, accelZ);
     }
 
     /**

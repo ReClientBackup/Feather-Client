@@ -20,9 +20,9 @@ public abstract class EntityCreature extends EntityLiving
     private final EntityAIBase aiBase = new EntityAIMoveTowardsRestriction(this, 1.0D);
     private boolean isMovementAITaskSet;
 
-    public EntityCreature(World worldIn)
+    public EntityCreature(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
     public float getBlockPathWeight(BlockPos pos)

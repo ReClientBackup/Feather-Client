@@ -16,14 +16,14 @@ public class EntityPainting extends EntityHanging
 {
     public EntityPainting.EnumArt art;
 
-    public EntityPainting(World worldIn)
+    public EntityPainting(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityPainting(World worldIn, BlockPos pos, EnumFacing facing)
+    public EntityPainting(World world, BlockPos pos, EnumFacing facing)
     {
-        super(worldIn, pos);
+        super(world, pos);
         List<EntityPainting.EnumArt> list = Lists.newArrayList();
 
         for (EntityPainting.EnumArt entitypainting$enumart : EntityPainting.EnumArt.values())
@@ -45,9 +45,9 @@ public class EntityPainting extends EntityHanging
         this.updateFacingWithBoundingBox(facing);
     }
 
-    public EntityPainting(World worldIn, BlockPos pos, EnumFacing facing, String title)
+    public EntityPainting(World world, BlockPos pos, EnumFacing facing, String title)
     {
-        this(worldIn, pos, facing);
+        this(world, pos, facing);
 
         for (EntityPainting.EnumArt entitypainting$enumart : EntityPainting.EnumArt.values())
         {

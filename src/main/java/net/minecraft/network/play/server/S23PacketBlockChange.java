@@ -18,10 +18,10 @@ public class S23PacketBlockChange implements Packet<INetHandlerPlayClient>
     {
     }
 
-    public S23PacketBlockChange(World worldIn, BlockPos blockPositionIn)
+    public S23PacketBlockChange(World world, BlockPos blockPositionIn)
     {
         this.blockPosition = blockPositionIn;
-        this.blockState = worldIn.getBlockState(blockPositionIn);
+        this.blockState = world.getBlockState(blockPositionIn);
     }
 
     /**

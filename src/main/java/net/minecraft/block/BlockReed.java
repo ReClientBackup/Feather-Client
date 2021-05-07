@@ -28,15 +28,15 @@ public class BlockReed extends Block
         this.setTickRandomly(true);
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.reeds || this.checkForDrop(worldIn, pos, state))
+        if (world.getBlockState(pos.down()).getBlock() == Blocks.reeds || this.checkForDrop(world, pos, state))
         {
-            if (worldIn.isAirBlock(pos.up()))
+            if (world.isAirBlock(pos.up()))
             {
                 int i;
 
-                for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
+                for (i = 1; world.getBlockState(pos.down(i)).getBlock() == this; ++i)
                 {
                 }
 
@@ -46,21 +46,21 @@ public class BlockReed extends Block
 
                     if (j == 15)
                     {
-                        worldIn.setBlockState(pos.up(), this.getDefaultState());
-                        worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(0)), 4);
+                        world.setBlockState(pos.up(), this.getDefaultState());
+                        world.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(0)), 4);
                     }
                     else
                     {
-                        worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(j + 1)), 4);
+                        world.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(j + 1)), 4);
                     }
                 }
             }
         }
     }
 
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+    public boolean canPlaceBlockAt(World world, BlockPos pos)
     {
-        Block block = worldIn.getBlockState(pos.down()).getBlock();
+        Block block = world.getBlockState(pos.down()).getBlock();
 
         if (block == this)
         {
@@ -74,7 +74,7 @@ public class BlockReed extends Block
         {
             for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
             {
-                if (worldIn.getBlockState(pos.offset(enumfacing).down()).getBlock().getMaterial() == Material.water)
+                if (world.getBlockState(pos.offset(enumfacing).down()).getBlock().getMaterial() == Material.water)
                 {
                     return true;
                 }
@@ -87,31 +87,31 @@ public class BlockReed extends Block
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        this.checkForDrop(worldIn, pos, state);
+        this.checkForDrop(world, pos, state);
     }
 
-    protected final boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)
+    protected final boolean checkForDrop(World world, BlockPos pos, IBlockState state)
     {
-        if (this.canBlockStay(worldIn, pos))
+        if (this.canBlockStay(world, pos))
         {
             return true;
         }
         else
         {
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-            worldIn.setBlockToAir(pos);
+            this.dropBlockAsItem(world, pos, state, 0);
+            world.setBlockToAir(pos);
             return false;
         }
     }
 
-    public boolean canBlockStay(World worldIn, BlockPos pos)
+    public boolean canBlockStay(World world, BlockPos pos)
     {
-        return this.canPlaceBlockAt(worldIn, pos);
+        return this.canPlaceBlockAt(world, pos);
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
     {
         return null;
     }
@@ -142,14 +142,14 @@ public class BlockReed extends Block
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return Items.reeds;
     }
 
-    public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
+    public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)
     {
-        return worldIn.getBiomeGenForCoords(pos).getGrassColorAtPos(pos);
+        return world.getBiomeGenForCoords(pos).getGrassColorAtPos(pos);
     }
 
     public EnumWorldBlockLayer getBlockLayer()

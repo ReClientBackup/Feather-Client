@@ -56,7 +56,7 @@ public class StatFileWriter
     /**
      * Triggers the logging of an achievement and attempts to announce to server
      */
-    public void unlockAchievement(EntityPlayer playerIn, StatBase statIn, int p_150873_3_)
+    public void unlockAchievement(EntityPlayer player, StatBase statIn, int p_150873_3_)
     {
         TupleIntJsonSerializable tupleintjsonserializable = this.statsData.get(statIn);
 

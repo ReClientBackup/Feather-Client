@@ -47,7 +47,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
     /**
      * Loads the specified(XZ) chunk into the specified world.
      */
-    public Chunk loadChunk(World worldIn, int x, int z) throws IOException
+    public Chunk loadChunk(World world, int x, int z) throws IOException
     {
         ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(x, z);
         NBTTagCompound nbttagcompound = this.chunksToRemove.get(chunkcoordintpair);
@@ -64,7 +64,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
             nbttagcompound = CompressedStreamTools.read(datainputstream);
         }
 
-        return this.checkedReadChunkFromNBT(worldIn, x, z, nbttagcompound);
+        return this.checkedReadChunkFromNBT(world, x, z, nbttagcompound);
     }
 
     /**
@@ -73,7 +73,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
      * @param x Chunk X Coordinate
      * @param z Chunk Z Coordinate
      */
-    protected Chunk checkedReadChunkFromNBT(World worldIn, int x, int z, NBTTagCompound p_75822_4_)
+    protected Chunk checkedReadChunkFromNBT(World world, int x, int z, NBTTagCompound p_75822_4_)
     {
         if (!p_75822_4_.hasKey("Level", 10))
         {
@@ -91,14 +91,14 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
             }
             else
             {
-                Chunk chunk = this.readChunkFromNBT(worldIn, nbttagcompound);
+                Chunk chunk = this.readChunkFromNBT(world, nbttagcompound);
 
                 if (!chunk.isAtLocation(x, z))
                 {
                     logger.error("Chunk file at " + x + "," + z + " is in the wrong location; relocating. (Expected " + x + ", " + z + ", got " + chunk.xPosition + ", " + chunk.zPosition + ")");
                     nbttagcompound.setInteger("xPos", x);
                     nbttagcompound.setInteger("zPos", z);
-                    chunk = this.readChunkFromNBT(worldIn, nbttagcompound);
+                    chunk = this.readChunkFromNBT(world, nbttagcompound);
                 }
 
                 return chunk;
@@ -106,16 +106,16 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         }
     }
 
-    public void saveChunk(World worldIn, Chunk chunkIn) throws MinecraftException, IOException
+    public void saveChunk(World world, Chunk chunkIn) throws MinecraftException, IOException
     {
-        worldIn.checkSessionLock();
+        world.checkSessionLock();
 
         try
         {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
             NBTTagCompound nbttagcompound1 = new NBTTagCompound();
             nbttagcompound.setTag("Level", nbttagcompound1);
-            this.writeChunkToNBT(chunkIn, worldIn, nbttagcompound1);
+            this.writeChunkToNBT(chunkIn, world, nbttagcompound1);
             this.addChunkToPending(chunkIn.getChunkCoordIntPair(), nbttagcompound);
         }
         catch (Exception exception)
@@ -192,7 +192,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
      * Save extra data associated with this Chunk not normally saved during autosave, only during chunk unload.
      * Currently unused.
      */
-    public void saveExtraChunkData(World worldIn, Chunk chunkIn) throws IOException
+    public void saveExtraChunkData(World world, Chunk chunkIn) throws IOException
     {
     }
 
@@ -231,19 +231,19 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
      * Writes the Chunk passed as an argument to the NBTTagCompound also passed, using the World argument to retrieve
      * the Chunk's last update time.
      */
-    private void writeChunkToNBT(Chunk chunkIn, World worldIn, NBTTagCompound p_75820_3_)
+    private void writeChunkToNBT(Chunk chunkIn, World world, NBTTagCompound p_75820_3_)
     {
         p_75820_3_.setByte("V", (byte)1);
         p_75820_3_.setInteger("xPos", chunkIn.xPosition);
         p_75820_3_.setInteger("zPos", chunkIn.zPosition);
-        p_75820_3_.setLong("LastUpdate", worldIn.getTotalWorldTime());
+        p_75820_3_.setLong("LastUpdate", world.getTotalWorldTime());
         p_75820_3_.setIntArray("HeightMap", chunkIn.getHeightMap());
         p_75820_3_.setBoolean("TerrainPopulated", chunkIn.isTerrainPopulated());
         p_75820_3_.setBoolean("LightPopulated", chunkIn.isLightPopulated());
         p_75820_3_.setLong("InhabitedTime", chunkIn.getInhabitedTime());
         ExtendedBlockStorage[] aextendedblockstorage = chunkIn.getBlockStorageArray();
         NBTTagList nbttaglist = new NBTTagList();
-        boolean flag = !worldIn.provider.getHasNoSky();
+        boolean flag = !world.provider.getHasNoSky();
 
         for (ExtendedBlockStorage extendedblockstorage : aextendedblockstorage)
         {
@@ -329,11 +329,11 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         }
 
         p_75820_3_.setTag("TileEntities", nbttaglist2);
-        List<NextTickListEntry> list = worldIn.getPendingBlockUpdates(chunkIn, false);
+        List<NextTickListEntry> list = world.getPendingBlockUpdates(chunkIn, false);
 
         if (list != null)
         {
-            long j1 = worldIn.getTotalWorldTime();
+            long j1 = world.getTotalWorldTime();
             NBTTagList nbttaglist3 = new NBTTagList();
 
             for (NextTickListEntry nextticklistentry : list)
@@ -357,11 +357,11 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
      * Reads the data stored in the passed NBTTagCompound and creates a Chunk with that data in the passed World.
      * Returns the created Chunk.
      */
-    private Chunk readChunkFromNBT(World worldIn, NBTTagCompound p_75823_2_)
+    private Chunk readChunkFromNBT(World world, NBTTagCompound p_75823_2_)
     {
         int i = p_75823_2_.getInteger("xPos");
         int j = p_75823_2_.getInteger("zPos");
-        Chunk chunk = new Chunk(worldIn, i, j);
+        Chunk chunk = new Chunk(world, i, j);
         chunk.setHeightMap(p_75823_2_.getIntArray("HeightMap"));
         chunk.setTerrainPopulated(p_75823_2_.getBoolean("TerrainPopulated"));
         chunk.setLightPopulated(p_75823_2_.getBoolean("LightPopulated"));
@@ -369,7 +369,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         NBTTagList nbttaglist = p_75823_2_.getTagList("Sections", 10);
         int k = 16;
         ExtendedBlockStorage[] aextendedblockstorage = new ExtendedBlockStorage[k];
-        boolean flag = !worldIn.provider.getHasNoSky();
+        boolean flag = !world.provider.getHasNoSky();
 
         for (int l = 0; l < nbttaglist.tagCount(); ++l)
         {
@@ -416,7 +416,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
             for (int k2 = 0; k2 < nbttaglist1.tagCount(); ++k2)
             {
                 NBTTagCompound nbttagcompound1 = nbttaglist1.getCompoundTagAt(k2);
-                Entity entity = EntityList.createEntityFromNBT(nbttagcompound1, worldIn);
+                Entity entity = EntityList.createEntityFromNBT(nbttagcompound1, world);
                 chunk.setHasEntities(true);
 
                 if (entity != null)
@@ -426,7 +426,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
 
                     for (NBTTagCompound nbttagcompound4 = nbttagcompound1; nbttagcompound4.hasKey("Riding", 10); nbttagcompound4 = nbttagcompound4.getCompoundTag("Riding"))
                     {
-                        Entity entity2 = EntityList.createEntityFromNBT(nbttagcompound4.getCompoundTag("Riding"), worldIn);
+                        Entity entity2 = EntityList.createEntityFromNBT(nbttagcompound4.getCompoundTag("Riding"), world);
 
                         if (entity2 != null)
                         {
@@ -476,7 +476,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
                         block = Block.getBlockById(nbttagcompound3.getInteger("i"));
                     }
 
-                    worldIn.scheduleBlockUpdate(new BlockPos(nbttagcompound3.getInteger("x"), nbttagcompound3.getInteger("y"), nbttagcompound3.getInteger("z")), block, nbttagcompound3.getInteger("t"), nbttagcompound3.getInteger("p"));
+                    world.scheduleBlockUpdate(new BlockPos(nbttagcompound3.getInteger("x"), nbttagcompound3.getInteger("y"), nbttagcompound3.getInteger("z")), block, nbttagcompound3.getInteger("t"), nbttagcompound3.getInteger("p"));
                 }
             }
         }

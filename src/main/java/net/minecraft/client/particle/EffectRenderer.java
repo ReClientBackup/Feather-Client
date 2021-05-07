@@ -376,9 +376,9 @@ public class EffectRenderer
         }
     }
 
-    public void clearEffects(World worldIn)
+    public void clearEffects(World world)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
 
         for (int i = 0; i < 4; ++i)
         {

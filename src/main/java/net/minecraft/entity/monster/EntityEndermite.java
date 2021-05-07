@@ -22,9 +22,9 @@ public class EntityEndermite extends EntityMob
     private int lifetime = 0;
     private boolean playerSpawned = false;
 
-    public EntityEndermite(World worldIn)
+    public EntityEndermite(World world)
     {
-        super(worldIn);
+        super(world);
         this.experienceValue = 3;
         this.setSize(0.4F, 0.3F);
         this.tasks.addTask(1, new EntityAISwimming(this));

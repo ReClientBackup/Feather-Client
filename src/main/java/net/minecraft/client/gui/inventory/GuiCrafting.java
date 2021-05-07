@@ -12,14 +12,14 @@ public class GuiCrafting extends GuiContainer
 {
     private static final ResourceLocation craftingTableGuiTextures = new ResourceLocation("textures/gui/container/crafting_table.png");
 
-    public GuiCrafting(InventoryPlayer playerInv, World worldIn)
+    public GuiCrafting(InventoryPlayer playerInv, World world)
     {
-        this(playerInv, worldIn, BlockPos.ORIGIN);
+        this(playerInv, world, BlockPos.ORIGIN);
     }
 
-    public GuiCrafting(InventoryPlayer playerInv, World worldIn, BlockPos blockPosition)
+    public GuiCrafting(InventoryPlayer playerInv, World world, BlockPos blockPosition)
     {
-        super(new ContainerWorkbench(playerInv, worldIn, blockPosition));
+        super(new ContainerWorkbench(playerInv, world, blockPosition));
     }
 
     /**

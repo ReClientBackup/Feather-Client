@@ -11,9 +11,9 @@ public class BlockSourceImpl implements IBlockSource
     private final World worldObj;
     private final BlockPos pos;
 
-    public BlockSourceImpl(World worldIn, BlockPos posIn)
+    public BlockSourceImpl(World world, BlockPos posIn)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
         this.pos = posIn;
     }
 

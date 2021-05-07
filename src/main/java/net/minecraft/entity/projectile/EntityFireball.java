@@ -30,9 +30,9 @@ public abstract class EntityFireball extends Entity
     public double accelerationY;
     public double accelerationZ;
 
-    public EntityFireball(World worldIn)
+    public EntityFireball(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(1.0F, 1.0F);
     }
 
@@ -57,9 +57,9 @@ public abstract class EntityFireball extends Entity
         return distance < d0 * d0;
     }
 
-    public EntityFireball(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ)
+    public EntityFireball(World world, double x, double y, double z, double accelX, double accelY, double accelZ)
     {
-        super(worldIn);
+        super(world);
         this.setSize(1.0F, 1.0F);
         this.setLocationAndAngles(x, y, z, this.rotationYaw, this.rotationPitch);
         this.setPosition(x, y, z);
@@ -69,9 +69,9 @@ public abstract class EntityFireball extends Entity
         this.accelerationZ = accelZ / d0 * 0.1D;
     }
 
-    public EntityFireball(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
+    public EntityFireball(World world, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
     {
-        super(worldIn);
+        super(world);
         this.shootingEntity = shooter;
         this.setSize(1.0F, 1.0F);
         this.setLocationAndAngles(shooter.posX, shooter.posY, shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);

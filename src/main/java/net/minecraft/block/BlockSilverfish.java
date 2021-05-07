@@ -71,31 +71,31 @@ public class BlockSilverfish extends Block
      * @param chance The chance that each Item is actually spawned (1.0 = always, 0.0 = never)
      * @param fortune The player's fortune level
      */
-    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+    public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune)
     {
-        if (!worldIn.isRemote && worldIn.getGameRules().getGameRuleBooleanValue("doTileDrops"))
+        if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops"))
         {
-            EntitySilverfish entitysilverfish = new EntitySilverfish(worldIn);
+            EntitySilverfish entitysilverfish = new EntitySilverfish(world);
             entitysilverfish.setLocationAndAngles((double)pos.getX() + 0.5D, pos.getY(), (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
-            worldIn.spawnEntityInWorld(entitysilverfish);
+            world.spawnEntityInWorld(entitysilverfish);
             entitysilverfish.spawnExplosionParticle();
         }
     }
 
-    public int getDamageValue(World worldIn, BlockPos pos)
+    public int getDamageValue(World world, BlockPos pos)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         return iblockstate.getBlock().getMetaFromState(iblockstate);
     }
 
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
         for (BlockSilverfish.EnumType blocksilverfish$enumtype : BlockSilverfish.EnumType.values())
         {
-            list.add(new ItemStack(itemIn, 1, blocksilverfish$enumtype.getMetadata()));
+            list.add(new ItemStack(item, 1, blocksilverfish$enumtype.getMetadata()));
         }
     }
 

@@ -27,19 +27,19 @@ public class ItemSeeds extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (side != EnumFacing.UP)
         {
             return false;
         }
-        else if (!playerIn.canPlayerEdit(pos.offset(side), side, stack))
+        else if (!player.canPlayerEdit(pos.offset(side), side, stack))
         {
             return false;
         }
-        else if (worldIn.getBlockState(pos).getBlock() == this.soilBlockID && worldIn.isAirBlock(pos.up()))
+        else if (world.getBlockState(pos).getBlock() == this.soilBlockID && world.isAirBlock(pos.up()))
         {
-            worldIn.setBlockState(pos.up(), this.crops.getDefaultState());
+            world.setBlockState(pos.up(), this.crops.getDefaultState());
             --stack.stackSize;
             return true;
         }

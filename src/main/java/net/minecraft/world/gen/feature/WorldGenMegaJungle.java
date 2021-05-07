@@ -16,17 +16,17 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
         super(p_i46448_1_, p_i46448_2_, p_i46448_3_, p_i46448_4_, p_i46448_5_);
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         int i = this.func_150533_a(rand);
 
-        if (!this.func_175929_a(worldIn, rand, position, i))
+        if (!this.func_175929_a(world, rand, position, i))
         {
             return false;
         }
         else
         {
-            this.func_175930_c(worldIn, position.up(i), 2);
+            this.func_175930_c(world, position.up(i), 2);
 
             for (int j = position.getY() + i - 2 - rand.nextInt(4); j > position.getY() + i / 2; j -= 2 + rand.nextInt(4))
             {
@@ -38,7 +38,7 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
                 {
                     k = position.getX() + (int)(1.5F + MathHelper.cos(f) * (float)i1);
                     l = position.getZ() + (int)(1.5F + MathHelper.sin(f) * (float)i1);
-                    this.setBlockAndNotifyAdequately(worldIn, new BlockPos(k, j - 3 + i1 / 2, l), this.woodMetadata);
+                    this.setBlockAndNotifyAdequately(world, new BlockPos(k, j - 3 + i1 / 2, l), this.woodMetadata);
                 }
 
                 int j2 = 1 + rand.nextInt(2);
@@ -47,7 +47,7 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
                 for (int k1 = j - j2; k1 <= j1; ++k1)
                 {
                     int l1 = k1 - j1;
-                    this.func_175928_b(worldIn, new BlockPos(k, k1, l), 1 - l1);
+                    this.func_175928_b(world, new BlockPos(k, k1, l), 1 - l1);
                 }
             }
 
@@ -55,14 +55,14 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
             {
                 BlockPos blockpos = position.up(i2);
 
-                if (this.func_150523_a(worldIn.getBlockState(blockpos).getBlock()))
+                if (this.func_150523_a(world.getBlockState(blockpos).getBlock()))
                 {
-                    this.setBlockAndNotifyAdequately(worldIn, blockpos, this.woodMetadata);
+                    this.setBlockAndNotifyAdequately(world, blockpos, this.woodMetadata);
 
                     if (i2 > 0)
                     {
-                        this.func_181632_a(worldIn, rand, blockpos.west(), BlockVine.EAST);
-                        this.func_181632_a(worldIn, rand, blockpos.north(), BlockVine.SOUTH);
+                        this.func_181632_a(world, rand, blockpos.west(), BlockVine.EAST);
+                        this.func_181632_a(world, rand, blockpos.north(), BlockVine.SOUTH);
                     }
                 }
 
@@ -70,40 +70,40 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
                 {
                     BlockPos blockpos1 = blockpos.east();
 
-                    if (this.func_150523_a(worldIn.getBlockState(blockpos1).getBlock()))
+                    if (this.func_150523_a(world.getBlockState(blockpos1).getBlock()))
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, blockpos1, this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(world, blockpos1, this.woodMetadata);
 
                         if (i2 > 0)
                         {
-                            this.func_181632_a(worldIn, rand, blockpos1.east(), BlockVine.WEST);
-                            this.func_181632_a(worldIn, rand, blockpos1.north(), BlockVine.SOUTH);
+                            this.func_181632_a(world, rand, blockpos1.east(), BlockVine.WEST);
+                            this.func_181632_a(world, rand, blockpos1.north(), BlockVine.SOUTH);
                         }
                     }
 
                     BlockPos blockpos2 = blockpos.south().east();
 
-                    if (this.func_150523_a(worldIn.getBlockState(blockpos2).getBlock()))
+                    if (this.func_150523_a(world.getBlockState(blockpos2).getBlock()))
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, blockpos2, this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(world, blockpos2, this.woodMetadata);
 
                         if (i2 > 0)
                         {
-                            this.func_181632_a(worldIn, rand, blockpos2.east(), BlockVine.WEST);
-                            this.func_181632_a(worldIn, rand, blockpos2.south(), BlockVine.NORTH);
+                            this.func_181632_a(world, rand, blockpos2.east(), BlockVine.WEST);
+                            this.func_181632_a(world, rand, blockpos2.south(), BlockVine.NORTH);
                         }
                     }
 
                     BlockPos blockpos3 = blockpos.south();
 
-                    if (this.func_150523_a(worldIn.getBlockState(blockpos3).getBlock()))
+                    if (this.func_150523_a(world.getBlockState(blockpos3).getBlock()))
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, blockpos3, this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(world, blockpos3, this.woodMetadata);
 
                         if (i2 > 0)
                         {
-                            this.func_181632_a(worldIn, rand, blockpos3.west(), BlockVine.EAST);
-                            this.func_181632_a(worldIn, rand, blockpos3.south(), BlockVine.NORTH);
+                            this.func_181632_a(world, rand, blockpos3.west(), BlockVine.EAST);
+                            this.func_181632_a(world, rand, blockpos3.south(), BlockVine.NORTH);
                         }
                     }
                 }
@@ -121,13 +121,13 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
         }
     }
 
-    private void func_175930_c(World worldIn, BlockPos p_175930_2_, int p_175930_3_)
+    private void func_175930_c(World world, BlockPos p_175930_2_, int p_175930_3_)
     {
         int i = 2;
 
         for (int j = -i; j <= 0; ++j)
         {
-            this.func_175925_a(worldIn, p_175930_2_.up(j), p_175930_3_ + 1 - j);
+            this.func_175925_a(world, p_175930_2_.up(j), p_175930_3_ + 1 - j);
         }
     }
 }

@@ -73,7 +73,7 @@ public class ItemEditableBook extends Item
      * @param tooltip All lines to display in the Item's tooltip. This is a List of Strings.
      * @param advanced Whether the setting "Advanced tooltips" is enabled
      */
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
     {
         if (stack.hasTagCompound())
         {
@@ -92,15 +92,15 @@ public class ItemEditableBook extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            this.resolveContents(itemStackIn, playerIn);
+            this.resolveContents(itemStackIn, player);
         }
 
-        playerIn.displayGUIBook(itemStackIn);
-        playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+        player.displayGUIBook(itemStackIn);
+        player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
         return itemStackIn;
     }
 

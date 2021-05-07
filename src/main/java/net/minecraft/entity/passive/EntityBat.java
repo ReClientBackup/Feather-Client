@@ -15,9 +15,9 @@ public class EntityBat extends EntityAmbientCreature
     /** Coordinates of where the bat spawned. */
     private BlockPos spawnPosition;
 
-    public EntityBat(World worldIn)
+    public EntityBat(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.5F, 0.9F);
         this.setIsBatHanging(true);
     }
@@ -76,7 +76,7 @@ public class EntityBat extends EntityAmbientCreature
         return false;
     }
 
-    protected void collideWithEntity(Entity p_82167_1_)
+    protected void collideWithEntity(Entity entity)
     {
     }
 

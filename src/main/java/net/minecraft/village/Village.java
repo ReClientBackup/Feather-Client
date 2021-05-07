@@ -51,14 +51,14 @@ public class Village
     {
     }
 
-    public Village(World worldIn)
+    public Village(World world)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
     }
 
-    public void setWorld(World worldIn)
+    public void setWorld(World world)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
     }
 
     /**

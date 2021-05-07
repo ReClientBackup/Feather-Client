@@ -23,10 +23,10 @@ public class ViewFrustum
     public RenderChunk[] renderChunks;
     private final Map<ChunkCoordIntPair, VboRegion[]> mapVboRegions = new HashMap();
 
-    public ViewFrustum(World worldIn, int renderDistanceChunks, RenderGlobal p_i46246_3_, IRenderChunkFactory renderChunkFactory)
+    public ViewFrustum(World world, int renderDistanceChunks, RenderGlobal p_i46246_3_, IRenderChunkFactory renderChunkFactory)
     {
         this.renderGlobal = p_i46246_3_;
-        this.world = worldIn;
+        this.world = world;
         this.setCountChunksXYZ(renderDistanceChunks);
         this.createRenderChunks(renderChunkFactory);
     }

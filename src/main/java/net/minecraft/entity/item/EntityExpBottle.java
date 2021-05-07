@@ -8,19 +8,19 @@ import net.minecraft.world.World;
 
 public class EntityExpBottle extends EntityThrowable
 {
-    public EntityExpBottle(World worldIn)
+    public EntityExpBottle(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityExpBottle(World worldIn, EntityLivingBase p_i1786_2_)
+    public EntityExpBottle(World world, EntityLivingBase p_i1786_2_)
     {
-        super(worldIn, p_i1786_2_);
+        super(world, p_i1786_2_);
     }
 
-    public EntityExpBottle(World worldIn, double p_i1787_2_, double p_i1787_4_, double p_i1787_6_)
+    public EntityExpBottle(World world, double p_i1787_2_, double p_i1787_4_, double p_i1787_6_)
     {
-        super(worldIn, p_i1787_2_, p_i1787_4_, p_i1787_6_);
+        super(world, p_i1787_2_, p_i1787_4_, p_i1787_6_);
     }
 
     /**

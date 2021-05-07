@@ -26,11 +26,11 @@ public class WorldGeneratorBonusChest extends WorldGenerator
         this.itemsToGenerateInBonusChest = p_i45634_2_;
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         Block block;
 
-        while (((block = worldIn.getBlockState(position).getBlock()).getMaterial() == Material.air || block.getMaterial() == Material.leaves) && position.getY() > 1)
+        while (((block = world.getBlockState(position).getBlock()).getMaterial() == Material.air || block.getMaterial() == Material.leaves) && position.getY() > 1)
         {
             position = position.down();
         }
@@ -47,10 +47,10 @@ public class WorldGeneratorBonusChest extends WorldGenerator
             {
                 BlockPos blockpos = position.add(rand.nextInt(4) - rand.nextInt(4), rand.nextInt(3) - rand.nextInt(3), rand.nextInt(4) - rand.nextInt(4));
 
-                if (worldIn.isAirBlock(blockpos) && World.doesBlockHaveSolidTopSurface(worldIn, blockpos.down()))
+                if (world.isAirBlock(blockpos) && World.doesBlockHaveSolidTopSurface(world, blockpos.down()))
                 {
-                    worldIn.setBlockState(blockpos, Blocks.chest.getDefaultState(), 2);
-                    TileEntity tileentity = worldIn.getTileEntity(blockpos);
+                    world.setBlockState(blockpos, Blocks.chest.getDefaultState(), 2);
+                    TileEntity tileentity = world.getTileEntity(blockpos);
 
                     if (tileentity instanceof TileEntityChest)
                     {
@@ -62,24 +62,24 @@ public class WorldGeneratorBonusChest extends WorldGenerator
                     BlockPos blockpos3 = blockpos.north();
                     BlockPos blockpos4 = blockpos.south();
 
-                    if (worldIn.isAirBlock(blockpos2) && World.doesBlockHaveSolidTopSurface(worldIn, blockpos2.down()))
+                    if (world.isAirBlock(blockpos2) && World.doesBlockHaveSolidTopSurface(world, blockpos2.down()))
                     {
-                        worldIn.setBlockState(blockpos2, Blocks.torch.getDefaultState(), 2);
+                        world.setBlockState(blockpos2, Blocks.torch.getDefaultState(), 2);
                     }
 
-                    if (worldIn.isAirBlock(blockpos1) && World.doesBlockHaveSolidTopSurface(worldIn, blockpos1.down()))
+                    if (world.isAirBlock(blockpos1) && World.doesBlockHaveSolidTopSurface(world, blockpos1.down()))
                     {
-                        worldIn.setBlockState(blockpos1, Blocks.torch.getDefaultState(), 2);
+                        world.setBlockState(blockpos1, Blocks.torch.getDefaultState(), 2);
                     }
 
-                    if (worldIn.isAirBlock(blockpos3) && World.doesBlockHaveSolidTopSurface(worldIn, blockpos3.down()))
+                    if (world.isAirBlock(blockpos3) && World.doesBlockHaveSolidTopSurface(world, blockpos3.down()))
                     {
-                        worldIn.setBlockState(blockpos3, Blocks.torch.getDefaultState(), 2);
+                        world.setBlockState(blockpos3, Blocks.torch.getDefaultState(), 2);
                     }
 
-                    if (worldIn.isAirBlock(blockpos4) && World.doesBlockHaveSolidTopSurface(worldIn, blockpos4.down()))
+                    if (world.isAirBlock(blockpos4) && World.doesBlockHaveSolidTopSurface(world, blockpos4.down()))
                     {
-                        worldIn.setBlockState(blockpos4, Blocks.torch.getDefaultState(), 2);
+                        world.setBlockState(blockpos4, Blocks.torch.getDefaultState(), 2);
                     }
 
                     return true;

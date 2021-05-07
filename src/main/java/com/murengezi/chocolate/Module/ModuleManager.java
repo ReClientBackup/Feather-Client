@@ -23,11 +23,11 @@ public class ModuleManager {
         load(new MouseCircle());
         load(new Blur());
         load(new Keystrokes());
-        load(new BetterHat());
         load(new FPS());
         load(new Scoreboard());
         load(new PotionEffects());
         load(new Perspective());
+        load(new MotionBlur());
 
         EventManager.register(this);
     }

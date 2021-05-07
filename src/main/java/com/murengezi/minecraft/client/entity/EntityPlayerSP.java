@@ -54,6 +54,7 @@ import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 
 public class EntityPlayerSP extends AbstractClientPlayer {
+
     public final NetHandlerPlayClient sendQueue;
     private final StatFileWriter statWriter;
 
@@ -122,14 +123,10 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             this.serverSprintState = this.isSprinting();
         }
 
-        if (this.isSneaking() != this.serverSneakState)
-        {
-            if (this.isSneaking())
-            {
+        if (this.isSneaking() != this.serverSneakState) {
+            if (this.isSneaking()) {
                 this.sendQueue.addToSendQueue(new C0BPacketEntityAction(this, C0BPacketEntityAction.Action.START_SNEAKING));
-            }
-            else
-            {
+            } else {
                 this.sendQueue.addToSendQueue(new C0BPacketEntityAction(this, C0BPacketEntityAction.Action.STOP_SNEAKING));
             }
 
@@ -179,9 +176,8 @@ public class EntityPlayerSP extends AbstractClientPlayer {
     /**
      * Called when player presses the drop item key
      */
-    public EntityItem dropOneItem(boolean dropAll) {
+    public void dropOneItem(boolean dropAll) {
         this.sendQueue.addToSendQueue(new C07PacketPlayerDigging(dropAll ? C07PacketPlayerDigging.Action.DROP_ALL_ITEMS : C07PacketPlayerDigging.Action.DROP_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN));
-        return null;
     }
 
     protected void joinEntityItemWithWorld(EntityItem itemIn) {}
@@ -246,8 +242,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         }
     }
 
-    public void addStat(StatBase stat, int amount)
-    {
+    public void addStat(StatBase stat, int amount) {
         if (stat != null) {
             if (stat.isIndependent) {
                 super.addStat(stat, amount);

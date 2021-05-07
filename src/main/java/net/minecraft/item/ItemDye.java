@@ -43,9 +43,9 @@ public class ItemDye extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (!playerIn.canPlayerEdit(pos.offset(side), side, stack))
+        if (!player.canPlayerEdit(pos.offset(side), side, stack))
         {
             return false;
         }
@@ -55,11 +55,11 @@ public class ItemDye extends Item
 
             if (enumdyecolor == EnumDyeColor.WHITE)
             {
-                if (applyBonemeal(stack, worldIn, pos))
+                if (applyBonemeal(stack, world, pos))
                 {
-                    if (!worldIn.isRemote)
+                    if (!world.isRemote)
                     {
-                        worldIn.playAuxSFX(2005, pos, 0);
+                        world.playAuxSFX(2005, pos, 0);
                     }
 
                     return true;
@@ -67,7 +67,7 @@ public class ItemDye extends Item
             }
             else if (enumdyecolor == EnumDyeColor.BROWN)
             {
-                IBlockState iblockstate = worldIn.getBlockState(pos);
+                IBlockState iblockstate = world.getBlockState(pos);
                 Block block = iblockstate.getBlock();
 
                 if (block == Blocks.log && iblockstate.getValue(BlockPlanks.VARIANT) == BlockPlanks.EnumType.JUNGLE)
@@ -84,12 +84,12 @@ public class ItemDye extends Item
 
                     pos = pos.offset(side);
 
-                    if (worldIn.isAirBlock(pos))
+                    if (world.isAirBlock(pos))
                     {
-                        IBlockState iblockstate1 = Blocks.cocoa.onBlockPlaced(worldIn, pos, side, hitX, hitY, hitZ, 0, playerIn);
-                        worldIn.setBlockState(pos, iblockstate1, 2);
+                        IBlockState iblockstate1 = Blocks.cocoa.onBlockPlaced(world, pos, side, hitX, hitY, hitZ, 0, player);
+                        world.setBlockState(pos, iblockstate1, 2);
 
-                        if (!playerIn.capabilities.isCreativeMode)
+                        if (!player.capabilities.isCreativeMode)
                         {
                             --stack.stackSize;
                         }
@@ -103,21 +103,21 @@ public class ItemDye extends Item
         }
     }
 
-    public static boolean applyBonemeal(ItemStack stack, World worldIn, BlockPos target)
+    public static boolean applyBonemeal(ItemStack stack, World world, BlockPos target)
     {
-        IBlockState iblockstate = worldIn.getBlockState(target);
+        IBlockState iblockstate = world.getBlockState(target);
 
         if (iblockstate.getBlock() instanceof IGrowable)
         {
             IGrowable igrowable = (IGrowable)iblockstate.getBlock();
 
-            if (igrowable.canGrow(worldIn, target, iblockstate, worldIn.isRemote))
+            if (igrowable.canGrow(world, target, iblockstate, world.isRemote))
             {
-                if (!worldIn.isRemote)
+                if (!world.isRemote)
                 {
-                    if (igrowable.canUseBonemeal(worldIn, worldIn.rand, target, iblockstate))
+                    if (igrowable.canUseBonemeal(world, world.rand, target, iblockstate))
                     {
-                        igrowable.grow(worldIn, worldIn.rand, target, iblockstate);
+                        igrowable.grow(world, world.rand, target, iblockstate);
                     }
 
                     --stack.stackSize;
@@ -130,25 +130,25 @@ public class ItemDye extends Item
         return false;
     }
 
-    public static void spawnBonemealParticles(World worldIn, BlockPos pos, int amount)
+    public static void spawnBonemealParticles(World world, BlockPos pos, int amount)
     {
         if (amount == 0)
         {
             amount = 15;
         }
 
-        Block block = worldIn.getBlockState(pos).getBlock();
+        Block block = world.getBlockState(pos).getBlock();
 
         if (block.getMaterial() != Material.air)
         {
-            block.setBlockBoundsBasedOnState(worldIn, pos);
+            block.setBlockBoundsBasedOnState(world, pos);
 
             for (int i = 0; i < amount; ++i)
             {
                 double d0 = itemRand.nextGaussian() * 0.02D;
                 double d1 = itemRand.nextGaussian() * 0.02D;
                 double d2 = itemRand.nextGaussian() * 0.02D;
-                worldIn.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, (float)pos.getX() + itemRand.nextFloat(), (double)pos.getY() + (double)itemRand.nextFloat() * block.getBlockBoundsMaxY(), (float)pos.getZ() + itemRand.nextFloat(), d0, d1, d2);
+                world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, (float)pos.getX() + itemRand.nextFloat(), (double)pos.getY() + (double)itemRand.nextFloat() * block.getBlockBoundsMaxY(), (float)pos.getZ() + itemRand.nextFloat(), d0, d1, d2);
             }
         }
     }
@@ -156,7 +156,7 @@ public class ItemDye extends Item
     /**
      * Returns true if the item can be used on the given entity, e.g. shears on sheep.
      */
-    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target)
+    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target)
     {
         if (target instanceof EntitySheep)
         {

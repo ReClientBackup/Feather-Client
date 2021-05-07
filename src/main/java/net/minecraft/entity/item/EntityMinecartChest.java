@@ -14,14 +14,14 @@ import net.minecraft.world.World;
 
 public class EntityMinecartChest extends EntityMinecartContainer
 {
-    public EntityMinecartChest(World worldIn)
+    public EntityMinecartChest(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityMinecartChest(World worldIn, double p_i1715_2_, double p_i1715_4_, double p_i1715_6_)
+    public EntityMinecartChest(World world, double p_i1715_2_, double p_i1715_4_, double p_i1715_6_)
     {
-        super(worldIn, p_i1715_2_, p_i1715_4_, p_i1715_6_);
+        super(world, p_i1715_2_, p_i1715_4_, p_i1715_6_);
     }
 
     public void killMinecart(DamageSource p_94095_1_)
@@ -62,8 +62,8 @@ public class EntityMinecartChest extends EntityMinecartContainer
         return "minecraft:chest";
     }
 
-    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer player)
     {
-        return new ContainerChest(playerInventory, this, playerIn);
+        return new ContainerChest(playerInventory, this, player);
     }
 }

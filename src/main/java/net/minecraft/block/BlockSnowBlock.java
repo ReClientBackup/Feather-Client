@@ -37,12 +37,12 @@ public class BlockSnowBlock extends Block
         return 4;
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11)
+        if (world.getLightFor(EnumSkyBlock.BLOCK, pos) > 11)
         {
-            this.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
-            worldIn.setBlockToAir(pos);
+            this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+            world.setBlockToAir(pos);
         }
     }
 }

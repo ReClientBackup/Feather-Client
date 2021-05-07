@@ -16,14 +16,14 @@ public class WorldGenIcePath extends WorldGenerator
         this.basePathWidth = p_i45454_1_;
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
-        while (worldIn.isAirBlock(position) && position.getY() > 2)
+        while (world.isAirBlock(position) && position.getY() > 2)
         {
             position = position.down();
         }
 
-        if (worldIn.getBlockState(position).getBlock() != Blocks.snow)
+        if (world.getBlockState(position).getBlock() != Blocks.snow)
         {
             return false;
         }
@@ -44,11 +44,11 @@ public class WorldGenIcePath extends WorldGenerator
                         for (int k1 = position.getY() - j; k1 <= position.getY() + j; ++k1)
                         {
                             BlockPos blockpos = new BlockPos(k, k1, l);
-                            Block block = worldIn.getBlockState(blockpos).getBlock();
+                            Block block = world.getBlockState(blockpos).getBlock();
 
                             if (block == Blocks.dirt || block == Blocks.snow || block == Blocks.ice)
                             {
-                                worldIn.setBlockState(blockpos, this.block.getDefaultState(), 2);
+                                world.setBlockState(blockpos, this.block.getDefaultState(), 2);
                             }
                         }
                     }

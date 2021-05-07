@@ -28,43 +28,43 @@ public class ItemMap extends ItemMapBase
         this.setHasSubtypes(true);
     }
 
-    public static MapData loadMapData(int mapId, World worldIn)
+    public static MapData loadMapData(int mapId, World world)
     {
         String s = "map_" + mapId;
-        MapData mapdata = (MapData)worldIn.loadItemData(MapData.class, s);
+        MapData mapdata = (MapData)world.loadItemData(MapData.class, s);
 
         if (mapdata == null)
         {
             mapdata = new MapData(s);
-            worldIn.setItemData(s, mapdata);
+            world.setItemData(s, mapdata);
         }
 
         return mapdata;
     }
 
-    public MapData getMapData(ItemStack stack, World worldIn)
+    public MapData getMapData(ItemStack stack, World world)
     {
         String s = "map_" + stack.getMetadata();
-        MapData mapdata = (MapData)worldIn.loadItemData(MapData.class, s);
+        MapData mapdata = (MapData)world.loadItemData(MapData.class, s);
 
-        if (mapdata == null && !worldIn.isRemote)
+        if (mapdata == null && !world.isRemote)
         {
-            stack.setItemDamage(worldIn.getUniqueDataId("map"));
+            stack.setItemDamage(world.getUniqueDataId("map"));
             s = "map_" + stack.getMetadata();
             mapdata = new MapData(s);
             mapdata.scale = 3;
-            mapdata.calculateMapCenter(worldIn.getWorldInfo().getSpawnX(), worldIn.getWorldInfo().getSpawnZ(), mapdata.scale);
-            mapdata.dimension = (byte)worldIn.provider.getDimensionId();
+            mapdata.calculateMapCenter(world.getWorldInfo().getSpawnX(), world.getWorldInfo().getSpawnZ(), mapdata.scale);
+            mapdata.dimension = (byte)world.provider.getDimensionId();
             mapdata.markDirty();
-            worldIn.setItemData(s, mapdata);
+            world.setItemData(s, mapdata);
         }
 
         return mapdata;
     }
 
-    public void updateMapData(World worldIn, Entity viewer, MapData data)
+    public void updateMapData(World world, Entity viewer, MapData data)
     {
-        if (worldIn.provider.getDimensionId() == data.dimension && viewer instanceof EntityPlayer)
+        if (world.provider.getDimensionId() == data.dimension && viewer instanceof EntityPlayer)
         {
             int i = 1 << data.scale;
             int j = data.xCenter;
@@ -73,7 +73,7 @@ public class ItemMap extends ItemMapBase
             int i1 = MathHelper.floor_double(viewer.posZ - (double)k) / i + 64;
             int j1 = 128 / i;
 
-            if (worldIn.provider.getHasNoSky())
+            if (world.provider.getHasNoSky())
             {
                 j1 /= 2;
             }
@@ -99,7 +99,7 @@ public class ItemMap extends ItemMapBase
                             int k2 = (j / i + k1 - 64) * i;
                             int l2 = (k / i + l1 - 64) * i;
                             Multiset<MapColor> multiset = HashMultiset.create();
-                            Chunk chunk = worldIn.getChunkFromBlockCoords(new BlockPos(k2, 0, l2));
+                            Chunk chunk = world.getChunkFromBlockCoords(new BlockPos(k2, 0, l2));
 
                             if (!chunk.isEmpty())
                             {
@@ -108,7 +108,7 @@ public class ItemMap extends ItemMapBase
                                 int k3 = 0;
                                 double d1 = 0.0D;
 
-                                if (worldIn.provider.getHasNoSky())
+                                if (world.provider.getHasNoSky())
                                 {
                                     int l3 = k2 + l2 * 231871;
                                     l3 = l3 * l3 * 31287121 + l3 * 11;
@@ -232,11 +232,11 @@ public class ItemMap extends ItemMapBase
      * Called each tick as long the item is on a player inventory. Uses by maps to check if is on a player hand and
      * update it's contents.
      */
-    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+    public void onUpdate(ItemStack stack, World world, Entity entityIn, int itemSlot, boolean isSelected)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            MapData mapdata = this.getMapData(stack, worldIn);
+            MapData mapdata = this.getMapData(stack, world);
 
             if (entityIn instanceof EntityPlayer)
             {
@@ -246,25 +246,25 @@ public class ItemMap extends ItemMapBase
 
             if (isSelected)
             {
-                this.updateMapData(worldIn, entityIn, mapdata);
+                this.updateMapData(world, entityIn, mapdata);
             }
         }
     }
 
-    public Packet createMapDataPacket(ItemStack stack, World worldIn, EntityPlayer player)
+    public Packet createMapDataPacket(ItemStack stack, World world, EntityPlayer player)
     {
-        return this.getMapData(stack, worldIn).getMapPacket(stack, worldIn, player);
+        return this.getMapData(stack, world).getMapPacket(stack, world, player);
     }
 
     /**
      * Called when item is crafted/smelted. Used only by maps so far.
      */
-    public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn)
+    public void onCreated(ItemStack stack, World world, EntityPlayer player)
     {
         if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("map_is_scaling"))
         {
-            MapData mapdata = Items.filled_map.getMapData(stack, worldIn);
-            stack.setItemDamage(worldIn.getUniqueDataId("map"));
+            MapData mapdata = Items.filled_map.getMapData(stack, world);
+            stack.setItemDamage(world.getUniqueDataId("map"));
             MapData mapdata1 = new MapData("map_" + stack.getMetadata());
             mapdata1.scale = (byte)(mapdata.scale + 1);
 
@@ -276,7 +276,7 @@ public class ItemMap extends ItemMapBase
             mapdata1.calculateMapCenter(mapdata.xCenter, mapdata.zCenter, mapdata1.scale);
             mapdata1.dimension = mapdata.dimension;
             mapdata1.markDirty();
-            worldIn.setItemData("map_" + stack.getMetadata(), mapdata1);
+            world.setItemData("map_" + stack.getMetadata(), mapdata1);
         }
     }
 
@@ -286,9 +286,9 @@ public class ItemMap extends ItemMapBase
      * @param tooltip All lines to display in the Item's tooltip. This is a List of Strings.
      * @param advanced Whether the setting "Advanced tooltips" is enabled
      */
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
     {
-        MapData mapdata = this.getMapData(stack, playerIn.worldObj);
+        MapData mapdata = this.getMapData(stack, player.worldObj);
 
         if (advanced)
         {

@@ -27,20 +27,20 @@ public class VillageCollection extends WorldSavedData
         super(name);
     }
 
-    public VillageCollection(World worldIn)
+    public VillageCollection(World world)
     {
-        super(fileNameForProvider(worldIn.provider));
-        this.worldObj = worldIn;
+        super(fileNameForProvider(world.provider));
+        this.worldObj = world;
         this.markDirty();
     }
 
-    public void setWorldsForAll(World worldIn)
+    public void setWorldsForAll(World world)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
 
         for (Village village : this.villageList)
         {
-            village.setWorld(worldIn);
+            village.setWorld(world);
         }
     }
 

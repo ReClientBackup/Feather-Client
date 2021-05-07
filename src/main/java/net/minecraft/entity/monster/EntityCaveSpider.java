@@ -12,9 +12,9 @@ import net.minecraft.world.World;
 
 public class EntityCaveSpider extends EntitySpider
 {
-    public EntityCaveSpider(World worldIn)
+    public EntityCaveSpider(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.7F, 0.5F);
     }
 
@@ -24,11 +24,11 @@ public class EntityCaveSpider extends EntitySpider
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12.0D);
     }
 
-    public boolean attackEntityAsMob(Entity entityIn)
+    public boolean attackEntityAsMob(Entity entity)
     {
-        if (super.attackEntityAsMob(entityIn))
+        if (super.attackEntityAsMob(entity))
         {
-            if (entityIn instanceof EntityLivingBase)
+            if (entity instanceof EntityLivingBase)
             {
                 int i = 0;
 
@@ -43,7 +43,7 @@ public class EntityCaveSpider extends EntitySpider
 
                 if (i > 0)
                 {
-                    ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(Potion.poison.id, i * 20, 0));
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, i * 20, 0));
                 }
             }
 

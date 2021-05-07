@@ -35,9 +35,9 @@ public class ChunkProviderEnd implements IChunkProvider
     double[] noiseData4;
     double[] noiseData5;
 
-    public ChunkProviderEnd(World worldIn, long p_i2007_2_)
+    public ChunkProviderEnd(World world, long p_i2007_2_)
     {
-        this.endWorld = worldIn;
+        this.endWorld = world;
         this.endRNG = new Random(p_i2007_2_);
         this.noiseGen1 = new NoiseGeneratorOctaves(this.endRNG, 16);
         this.noiseGen2 = new NoiseGeneratorOctaves(this.endRNG, 16);
@@ -345,7 +345,7 @@ public class ChunkProviderEnd implements IChunkProvider
         return this.endWorld.getBiomeGenForCoords(pos).getSpawnableList(creatureType);
     }
 
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position)
+    public BlockPos getStrongholdGen(World world, String structureName, BlockPos position)
     {
         return null;
     }

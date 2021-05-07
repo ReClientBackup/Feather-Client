@@ -31,11 +31,11 @@ public class BlockNewLeaf extends BlockLeaves
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockPlanks.EnumType.ACACIA).withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
     }
 
-    protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance)
+    protected void dropApple(World world, BlockPos pos, IBlockState state, int chance)
     {
-        if (state.getValue(VARIANT) == BlockPlanks.EnumType.DARK_OAK && worldIn.rand.nextInt(chance) == 0)
+        if (state.getValue(VARIANT) == BlockPlanks.EnumType.DARK_OAK && world.rand.nextInt(chance) == 0)
         {
-            spawnAsEntity(worldIn, pos, new ItemStack(Items.apple, 1, 0));
+            spawnAsEntity(world, pos, new ItemStack(Items.apple, 1, 0));
         }
     }
 
@@ -48,19 +48,19 @@ public class BlockNewLeaf extends BlockLeaves
         return state.getValue(VARIANT).getMetadata();
     }
 
-    public int getDamageValue(World worldIn, BlockPos pos)
+    public int getDamageValue(World world, BlockPos pos)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         return iblockstate.getBlock().getMetaFromState(iblockstate) & 3;
     }
 
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
-        list.add(new ItemStack(itemIn, 1, 0));
-        list.add(new ItemStack(itemIn, 1, 1));
+        list.add(new ItemStack(item, 1, 0));
+        list.add(new ItemStack(item, 1, 1));
     }
 
     protected ItemStack createStackedBlock(IBlockState state)
@@ -107,16 +107,16 @@ public class BlockNewLeaf extends BlockLeaves
         return new BlockState(this, VARIANT, CHECK_DECAY, DECAYABLE);
     }
 
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
     {
-        if (!worldIn.isRemote && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.shears)
+        if (!world.isRemote && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.shears)
         {
             player.triggerAchievement(StatList.mineBlockStatArray[Block.getIdFromBlock(this)]);
-            spawnAsEntity(worldIn, pos, new ItemStack(Item.getItemFromBlock(this), 1, state.getValue(VARIANT).getMetadata() - 4));
+            spawnAsEntity(world, pos, new ItemStack(Item.getItemFromBlock(this), 1, state.getValue(VARIANT).getMetadata() - 4));
         }
         else
         {
-            super.harvestBlock(worldIn, player, pos, state, te);
+            super.harvestBlock(world, player, pos, state, te);
         }
     }
 }

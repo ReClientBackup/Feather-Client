@@ -21,9 +21,9 @@ public class ItemLilyPad extends ItemColored
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
-        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(worldIn, playerIn, true);
+        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, player, true);
 
         if (movingobjectposition == null)
         {
@@ -35,29 +35,29 @@ public class ItemLilyPad extends ItemColored
             {
                 BlockPos blockpos = movingobjectposition.getBlockPos();
 
-                if (!worldIn.isBlockModifiable(playerIn, blockpos))
+                if (!world.isBlockModifiable(player, blockpos))
                 {
                     return itemStackIn;
                 }
 
-                if (!playerIn.canPlayerEdit(blockpos.offset(movingobjectposition.sideHit), movingobjectposition.sideHit, itemStackIn))
+                if (!player.canPlayerEdit(blockpos.offset(movingobjectposition.sideHit), movingobjectposition.sideHit, itemStackIn))
                 {
                     return itemStackIn;
                 }
 
                 BlockPos blockpos1 = blockpos.up();
-                IBlockState iblockstate = worldIn.getBlockState(blockpos);
+                IBlockState iblockstate = world.getBlockState(blockpos);
 
-                if (iblockstate.getBlock().getMaterial() == Material.water && iblockstate.getValue(BlockLiquid.LEVEL).intValue() == 0 && worldIn.isAirBlock(blockpos1))
+                if (iblockstate.getBlock().getMaterial() == Material.water && iblockstate.getValue(BlockLiquid.LEVEL).intValue() == 0 && world.isAirBlock(blockpos1))
                 {
-                    worldIn.setBlockState(blockpos1, Blocks.waterlily.getDefaultState());
+                    world.setBlockState(blockpos1, Blocks.waterlily.getDefaultState());
 
-                    if (!playerIn.capabilities.isCreativeMode)
+                    if (!player.capabilities.isCreativeMode)
                     {
                         --itemStackIn.stackSize;
                     }
 
-                    playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+                    player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
                 }
             }
 

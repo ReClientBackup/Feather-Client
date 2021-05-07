@@ -49,37 +49,37 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
     private double velocityY;
     private double velocityZ;
 
-    public EntityMinecart(World worldIn)
+    public EntityMinecart(World world)
     {
-        super(worldIn);
+        super(world);
         this.preventEntitySpawning = true;
         this.setSize(0.98F, 0.7F);
     }
 
-    public static EntityMinecart func_180458_a(World worldIn, double p_180458_1_, double p_180458_3_, double p_180458_5_, EntityMinecart.EnumMinecartType p_180458_7_)
+    public static EntityMinecart func_180458_a(World world, double p_180458_1_, double p_180458_3_, double p_180458_5_, EntityMinecart.EnumMinecartType p_180458_7_)
     {
         switch (p_180458_7_)
         {
             case CHEST:
-                return new EntityMinecartChest(worldIn, p_180458_1_, p_180458_3_, p_180458_5_);
+                return new EntityMinecartChest(world, p_180458_1_, p_180458_3_, p_180458_5_);
 
             case FURNACE:
-                return new EntityMinecartFurnace(worldIn, p_180458_1_, p_180458_3_, p_180458_5_);
+                return new EntityMinecartFurnace(world, p_180458_1_, p_180458_3_, p_180458_5_);
 
             case TNT:
-                return new EntityMinecartTNT(worldIn, p_180458_1_, p_180458_3_, p_180458_5_);
+                return new EntityMinecartTNT(world, p_180458_1_, p_180458_3_, p_180458_5_);
 
             case SPAWNER:
-                return new EntityMinecartMobSpawner(worldIn, p_180458_1_, p_180458_3_, p_180458_5_);
+                return new EntityMinecartMobSpawner(world, p_180458_1_, p_180458_3_, p_180458_5_);
 
             case HOPPER:
-                return new EntityMinecartHopper(worldIn, p_180458_1_, p_180458_3_, p_180458_5_);
+                return new EntityMinecartHopper(world, p_180458_1_, p_180458_3_, p_180458_5_);
 
             case COMMAND_BLOCK:
-                return new EntityMinecartCommandBlock(worldIn, p_180458_1_, p_180458_3_, p_180458_5_);
+                return new EntityMinecartCommandBlock(world, p_180458_1_, p_180458_3_, p_180458_5_);
 
             default:
-                return new EntityMinecartEmpty(worldIn, p_180458_1_, p_180458_3_, p_180458_5_);
+                return new EntityMinecartEmpty(world, p_180458_1_, p_180458_3_, p_180458_5_);
         }
     }
 
@@ -127,9 +127,9 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         return true;
     }
 
-    public EntityMinecart(World worldIn, double x, double y, double z)
+    public EntityMinecart(World world, double x, double y, double z)
     {
-        this(worldIn);
+        this(world);
         this.setPosition(x, y, z);
         this.motionX = 0.0D;
         this.motionY = 0.0D;

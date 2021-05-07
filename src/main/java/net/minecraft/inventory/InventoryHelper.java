@@ -12,17 +12,17 @@ public class InventoryHelper
 {
     private static final Random RANDOM = new Random();
 
-    public static void dropInventoryItems(World worldIn, BlockPos pos, IInventory p_180175_2_)
+    public static void dropInventoryItems(World world, BlockPos pos, IInventory p_180175_2_)
     {
-        func_180174_a(worldIn, pos.getX(), pos.getY(), pos.getZ(), p_180175_2_);
+        func_180174_a(world, pos.getX(), pos.getY(), pos.getZ(), p_180175_2_);
     }
 
-    public static void func_180176_a(World worldIn, Entity p_180176_1_, IInventory p_180176_2_)
+    public static void func_180176_a(World world, Entity p_180176_1_, IInventory p_180176_2_)
     {
-        func_180174_a(worldIn, p_180176_1_.posX, p_180176_1_.posY, p_180176_1_.posZ, p_180176_2_);
+        func_180174_a(world, p_180176_1_.posX, p_180176_1_.posY, p_180176_1_.posZ, p_180176_2_);
     }
 
-    private static void func_180174_a(World worldIn, double x, double y, double z, IInventory p_180174_7_)
+    private static void func_180174_a(World world, double x, double y, double z, IInventory p_180174_7_)
     {
         for (int i = 0; i < p_180174_7_.getSizeInventory(); ++i)
         {
@@ -30,12 +30,12 @@ public class InventoryHelper
 
             if (itemstack != null)
             {
-                spawnItemStack(worldIn, x, y, z, itemstack);
+                spawnItemStack(world, x, y, z, itemstack);
             }
         }
     }
 
-    private static void spawnItemStack(World worldIn, double x, double y, double z, ItemStack stack)
+    private static void spawnItemStack(World world, double x, double y, double z, ItemStack stack)
     {
         float f = RANDOM.nextFloat() * 0.8F + 0.1F;
         float f1 = RANDOM.nextFloat() * 0.8F + 0.1F;
@@ -51,7 +51,7 @@ public class InventoryHelper
             }
 
             stack.stackSize -= i;
-            EntityItem entityitem = new EntityItem(worldIn, x + (double)f, y + (double)f1, z + (double)f2, new ItemStack(stack.getItem(), i, stack.getMetadata()));
+            EntityItem entityitem = new EntityItem(world, x + (double)f, y + (double)f1, z + (double)f2, new ItemStack(stack.getItem(), i, stack.getMetadata()));
 
             if (stack.hasTagCompound())
             {
@@ -62,7 +62,7 @@ public class InventoryHelper
             entityitem.motionX = RANDOM.nextGaussian() * (double)f3;
             entityitem.motionY = RANDOM.nextGaussian() * (double)f3 + 0.20000000298023224D;
             entityitem.motionZ = RANDOM.nextGaussian() * (double)f3;
-            worldIn.spawnEntityInWorld(entityitem);
+            world.spawnEntityInWorld(entityitem);
         }
     }
 }

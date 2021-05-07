@@ -446,7 +446,7 @@ public class PlayerSelector
         return list;
     }
 
-    private static <T extends Entity> List<T> filterResults(Map<String, String> params, Class <? extends T > entityClass, List<Predicate<Entity>> inputList, String type, World worldIn, BlockPos position)
+    private static <T extends Entity> List<T> filterResults(Map<String, String> params, Class <? extends T > entityClass, List<Predicate<Entity>> inputList, String type, World world, BlockPos position)
     {
         List<T> list = Lists.newArrayList();
         String s = func_179651_b(params, "type");
@@ -462,8 +462,8 @@ public class PlayerSelector
 
         if (position != null)
         {
-            int i1 = worldIn.playerEntities.size();
-            int j1 = worldIn.loadedEntityList.size();
+            int i1 = world.playerEntities.size();
+            int j1 = world.loadedEntityList.size();
             boolean flag2 = i1 < j1 / 16;
 
             if (!params.containsKey("dx") && !params.containsKey("dy") && !params.containsKey("dz"))
@@ -474,24 +474,24 @@ public class PlayerSelector
 
                     if (flag && flag2 && !flag1)
                     {
-                        list.addAll(worldIn.<T>getPlayers(entityClass, predicate1));
+                        list.addAll(world.<T>getPlayers(entityClass, predicate1));
                     }
                     else
                     {
-                        list.addAll(worldIn.<T>getEntitiesWithinAABB(entityClass, axisalignedbb1, predicate1));
+                        list.addAll(world.<T>getEntitiesWithinAABB(entityClass, axisalignedbb1, predicate1));
                     }
                 }
                 else if (type.equals("a"))
                 {
-                    list.addAll(worldIn.<T>getPlayers(entityClass, predicate));
+                    list.addAll(world.<T>getPlayers(entityClass, predicate));
                 }
                 else if (!type.equals("p") && (!type.equals("r") || flag1))
                 {
-                    list.addAll(worldIn.<T>getEntities(entityClass, predicate1));
+                    list.addAll(world.<T>getEntities(entityClass, predicate1));
                 }
                 else
                 {
-                    list.addAll(worldIn.<T>getPlayers(entityClass, predicate1));
+                    list.addAll(world.<T>getPlayers(entityClass, predicate1));
                 }
             }
             else
@@ -507,25 +507,25 @@ public class PlayerSelector
                             return p_apply_1_.posX >= axisalignedbb.minX && p_apply_1_.posY >= axisalignedbb.minY && p_apply_1_.posZ >= axisalignedbb.minZ && p_apply_1_.posX < axisalignedbb.maxX && p_apply_1_.posY < axisalignedbb.maxY && p_apply_1_.posZ < axisalignedbb.maxZ;
                         }
                     };
-                    list.addAll(worldIn.<T>getPlayers(entityClass, Predicates.and (predicate1, predicate2)));
+                    list.addAll(world.<T>getPlayers(entityClass, Predicates.and (predicate1, predicate2)));
                 }
                 else
                 {
-                    list.addAll(worldIn.<T>getEntitiesWithinAABB(entityClass, axisalignedbb, predicate1));
+                    list.addAll(world.<T>getEntitiesWithinAABB(entityClass, axisalignedbb, predicate1));
                 }
             }
         }
         else if (type.equals("a"))
         {
-            list.addAll(worldIn.<T>getPlayers(entityClass, predicate));
+            list.addAll(world.<T>getPlayers(entityClass, predicate));
         }
         else if (!type.equals("p") && (!type.equals("r") || flag1))
         {
-            list.addAll(worldIn.<T>getEntities(entityClass, predicate1));
+            list.addAll(world.<T>getEntities(entityClass, predicate1));
         }
         else
         {
-            list.addAll(worldIn.<T>getPlayers(entityClass, predicate1));
+            list.addAll(world.<T>getPlayers(entityClass, predicate1));
         }
 
         return list;

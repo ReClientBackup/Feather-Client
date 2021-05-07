@@ -35,9 +35,9 @@ public class EntityItem extends Entity
     /** The EntityItem's random initial float height. */
     public float hoverStart;
 
-    public EntityItem(World worldIn, double x, double y, double z)
+    public EntityItem(World world, double x, double y, double z)
     {
-        super(worldIn);
+        super(world);
         this.health = 5;
         this.hoverStart = (float)(Math.random() * Math.PI * 2.0D);
         this.setSize(0.25F, 0.25F);
@@ -48,9 +48,9 @@ public class EntityItem extends Entity
         this.motionZ = (float)(Math.random() * 0.20000000298023224D - 0.10000000149011612D);
     }
 
-    public EntityItem(World worldIn, double x, double y, double z, ItemStack stack)
+    public EntityItem(World world, double x, double y, double z, ItemStack stack)
     {
-        this(worldIn, x, y, z);
+        this(world, x, y, z);
         this.setEntityItemStack(stack);
     }
 
@@ -63,9 +63,9 @@ public class EntityItem extends Entity
         return false;
     }
 
-    public EntityItem(World worldIn)
+    public EntityItem(World world)
     {
-        super(worldIn);
+        super(world);
         this.health = 5;
         this.hoverStart = (float)(Math.random() * Math.PI * 2.0D);
         this.setSize(0.25F, 0.25F);

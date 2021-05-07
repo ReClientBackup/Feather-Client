@@ -27,9 +27,9 @@ public class EntityBlaze extends EntityMob
     /** ticks until heightOffset is randomized */
     private int heightOffsetUpdateTime;
 
-    public EntityBlaze(World worldIn)
+    public EntityBlaze(World world)
     {
-        super(worldIn);
+        super(world);
         this.isImmuneToFire = true;
         this.experienceValue = 10;
         this.tasks.addTask(4, new EntityBlaze.AIFireballAttack(this));

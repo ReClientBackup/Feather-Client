@@ -19,9 +19,9 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimals
     private int inLove;
     private EntityPlayer playerInLove;
 
-    public EntityAnimal(World worldIn)
+    public EntityAnimal(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
     protected void updateAITasks()

@@ -54,8 +54,8 @@ public class S49PacketUpdateEntityNBT implements Packet<INetHandlerPlayClient>
         return this.tagCompound;
     }
 
-    public Entity getEntity(World worldIn)
+    public Entity getEntity(World world)
     {
-        return worldIn.getEntityByID(this.entityId);
+        return world.getEntityByID(this.entityId);
     }
 }

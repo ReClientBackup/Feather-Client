@@ -23,10 +23,10 @@ public class Teleporter
     private final LongHashMap<Teleporter.PortalPosition> destinationCoordinateCache = new LongHashMap();
     private final List<Long> destinationCoordinateKeys = Lists.newArrayList();
 
-    public Teleporter(WorldServer worldIn)
+    public Teleporter(WorldServer world)
     {
-        this.worldServerInstance = worldIn;
-        this.random = new Random(worldIn.getSeed());
+        this.worldServerInstance = world;
+        this.random = new Random(world.getSeed());
     }
 
     public void placeInPortal(Entity entityIn, float rotationYaw)

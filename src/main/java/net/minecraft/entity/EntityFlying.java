@@ -7,9 +7,9 @@ import net.minecraft.world.World;
 
 public abstract class EntityFlying extends EntityLiving
 {
-    public EntityFlying(World worldIn)
+    public EntityFlying(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
     public void fall(float distance, float damageMultiplier)

@@ -6,8 +6,8 @@ import net.minecraft.world.World;
 
 public class VboChunkFactory implements IRenderChunkFactory
 {
-    public RenderChunk makeRenderChunk(World worldIn, RenderGlobal globalRenderer, BlockPos pos, int index)
+    public RenderChunk makeRenderChunk(World world, RenderGlobal globalRenderer, BlockPos pos, int index)
     {
-        return new RenderChunk(worldIn, globalRenderer, pos, index);
+        return new RenderChunk(world, globalRenderer, pos, index);
     }
 }

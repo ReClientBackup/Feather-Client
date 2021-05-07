@@ -21,16 +21,16 @@ public class BiomeGenDesert extends BiomeGenBase
         this.spawnableCreatureList.clear();
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
-        super.decorate(worldIn, rand, pos);
+        super.decorate(world, rand, pos);
 
         if (rand.nextInt(1000) == 0)
         {
             int i = rand.nextInt(16) + 8;
             int j = rand.nextInt(16) + 8;
-            BlockPos blockpos = worldIn.getHeight(pos.add(i, 0, j)).up();
-            (new WorldGenDesertWells()).generate(worldIn, rand, blockpos);
+            BlockPos blockpos = world.getHeight(pos.add(i, 0, j)).up();
+            (new WorldGenDesertWells()).generate(world, rand, blockpos);
         }
     }
 }

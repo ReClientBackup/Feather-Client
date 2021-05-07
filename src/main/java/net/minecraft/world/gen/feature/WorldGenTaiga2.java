@@ -22,7 +22,7 @@ public class WorldGenTaiga2 extends WorldGenAbstractTree
         super(p_i2025_1_);
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         int i = rand.nextInt(4) + 6;
         int j = 1 + rand.nextInt(2);
@@ -53,7 +53,7 @@ public class WorldGenTaiga2 extends WorldGenAbstractTree
                     {
                         if (i1 >= 0 && i1 < 256)
                         {
-                            Block block = worldIn.getBlockState(blockpos$mutableblockpos.func_181079_c(k1, i1, l1)).getBlock();
+                            Block block = world.getBlockState(blockpos$mutableblockpos.func_181079_c(k1, i1, l1)).getBlock();
 
                             if (block.getMaterial() != Material.air && block.getMaterial() != Material.leaves)
                             {
@@ -74,11 +74,11 @@ public class WorldGenTaiga2 extends WorldGenAbstractTree
             }
             else
             {
-                Block block1 = worldIn.getBlockState(position.down()).getBlock();
+                Block block1 = world.getBlockState(position.down()).getBlock();
 
                 if ((block1 == Blocks.grass || block1 == Blocks.dirt || block1 == Blocks.farmland) && position.getY() < 256 - i - 1)
                 {
-                    this.func_175921_a(worldIn, position.down());
+                    this.func_175921_a(world, position.down());
                     int i3 = rand.nextInt(2);
                     int j3 = 1;
                     int k3 = 0;
@@ -99,9 +99,9 @@ public class WorldGenTaiga2 extends WorldGenAbstractTree
                                 {
                                     BlockPos blockpos = new BlockPos(i2, j4, k2);
 
-                                    if (!worldIn.getBlockState(blockpos).getBlock().isFullBlock())
+                                    if (!world.getBlockState(blockpos).getBlock().isFullBlock())
                                     {
-                                        this.setBlockAndNotifyAdequately(worldIn, blockpos, field_181646_b);
+                                        this.setBlockAndNotifyAdequately(world, blockpos, field_181646_b);
                                     }
                                 }
                             }
@@ -128,11 +128,11 @@ public class WorldGenTaiga2 extends WorldGenAbstractTree
 
                     for (int k4 = 0; k4 < i - i4; ++k4)
                     {
-                        Block block2 = worldIn.getBlockState(position.up(k4)).getBlock();
+                        Block block2 = world.getBlockState(position.up(k4)).getBlock();
 
                         if (block2.getMaterial() == Material.air || block2.getMaterial() == Material.leaves)
                         {
-                            this.setBlockAndNotifyAdequately(worldIn, position.up(k4), field_181645_a);
+                            this.setBlockAndNotifyAdequately(world, position.up(k4), field_181645_a);
                         }
                     }
 

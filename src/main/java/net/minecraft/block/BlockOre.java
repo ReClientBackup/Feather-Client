@@ -72,40 +72,40 @@ public class BlockOre extends Block
      * @param chance The chance that each Item is actually spawned (1.0 = always, 0.0 = never)
      * @param fortune The player's fortune level
      */
-    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+    public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune)
     {
-        super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
+        super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
 
-        if (this.getItemDropped(state, worldIn.rand, fortune) != Item.getItemFromBlock(this))
+        if (this.getItemDropped(state, world.rand, fortune) != Item.getItemFromBlock(this))
         {
             int i = 0;
 
             if (this == Blocks.coal_ore)
             {
-                i = MathHelper.getRandomIntegerInRange(worldIn.rand, 0, 2);
+                i = MathHelper.getRandomIntegerInRange(world.rand, 0, 2);
             }
             else if (this == Blocks.diamond_ore)
             {
-                i = MathHelper.getRandomIntegerInRange(worldIn.rand, 3, 7);
+                i = MathHelper.getRandomIntegerInRange(world.rand, 3, 7);
             }
             else if (this == Blocks.emerald_ore)
             {
-                i = MathHelper.getRandomIntegerInRange(worldIn.rand, 3, 7);
+                i = MathHelper.getRandomIntegerInRange(world.rand, 3, 7);
             }
             else if (this == Blocks.lapis_ore)
             {
-                i = MathHelper.getRandomIntegerInRange(worldIn.rand, 2, 5);
+                i = MathHelper.getRandomIntegerInRange(world.rand, 2, 5);
             }
             else if (this == Blocks.quartz_ore)
             {
-                i = MathHelper.getRandomIntegerInRange(worldIn.rand, 2, 5);
+                i = MathHelper.getRandomIntegerInRange(world.rand, 2, 5);
             }
 
-            this.dropXpOnBlockBreak(worldIn, pos, i);
+            this.dropXpOnBlockBreak(world, pos, i);
         }
     }
 
-    public int getDamageValue(World worldIn, BlockPos pos)
+    public int getDamageValue(World world, BlockPos pos)
     {
         return 0;
     }

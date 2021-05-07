@@ -20,15 +20,15 @@ public class ItemShears extends Item
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, Block blockIn, BlockPos pos, EntityLivingBase playerIn)
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block blockIn, BlockPos pos, EntityLivingBase player)
     {
         if (blockIn.getMaterial() != Material.leaves && blockIn != Blocks.web && blockIn != Blocks.tallgrass && blockIn != Blocks.vine && blockIn != Blocks.tripwire && blockIn != Blocks.wool)
         {
-            return super.onBlockDestroyed(stack, worldIn, blockIn, pos, playerIn);
+            return super.onBlockDestroyed(stack, world, blockIn, pos, player);
         }
         else
         {
-            stack.damageItem(1, playerIn);
+            stack.damageItem(1, player);
             return true;
         }
     }

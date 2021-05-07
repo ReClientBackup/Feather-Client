@@ -63,9 +63,9 @@ public class EntityFishHook extends Entity
         return FISH;
     }
 
-    public EntityFishHook(World worldIn)
+    public EntityFishHook(World world)
     {
-        super(worldIn);
+        super(world);
         this.xTile = -1;
         this.yTile = -1;
         this.zTile = -1;
@@ -73,18 +73,18 @@ public class EntityFishHook extends Entity
         this.ignoreFrustumCheck = true;
     }
 
-    public EntityFishHook(World worldIn, double x, double y, double z, EntityPlayer anglerIn)
+    public EntityFishHook(World world, double x, double y, double z, EntityPlayer anglerIn)
     {
-        this(worldIn);
+        this(world);
         this.setPosition(x, y, z);
         this.ignoreFrustumCheck = true;
         this.angler = anglerIn;
         anglerIn.fishEntity = this;
     }
 
-    public EntityFishHook(World worldIn, EntityPlayer fishingPlayer)
+    public EntityFishHook(World world, EntityPlayer fishingPlayer)
     {
-        super(worldIn);
+        super(world);
         this.xTile = -1;
         this.yTile = -1;
         this.zTile = -1;

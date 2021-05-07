@@ -8,5 +8,5 @@ public interface ITileEntityProvider
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    TileEntity createNewTileEntity(World worldIn, int meta);
+    TileEntity createNewTileEntity(World world, int meta);
 }

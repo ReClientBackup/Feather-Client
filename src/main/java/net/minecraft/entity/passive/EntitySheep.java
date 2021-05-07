@@ -41,7 +41,7 @@ public class EntitySheep extends EntityAnimal
      */
     private final InventoryCrafting inventoryCrafting = new InventoryCrafting(new Container()
     {
-        public boolean canInteractWith(EntityPlayer playerIn)
+        public boolean canInteractWith(EntityPlayer player)
         {
             return false;
         }
@@ -60,9 +60,9 @@ public class EntitySheep extends EntityAnimal
         return DYE_TO_RGB.get(dyeColor);
     }
 
-    public EntitySheep(World worldIn)
+    public EntitySheep(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.9F, 1.3F);
         ((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));

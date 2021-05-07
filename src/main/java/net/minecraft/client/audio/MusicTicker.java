@@ -6,15 +6,14 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
-public class MusicTicker implements ITickable
-{
+public class MusicTicker implements ITickable {
+    
     private final Random rand = new Random();
     private final Minecraft mc;
     private ISound currentMusic;
     private int timeUntilNextMusic = 100;
 
-    public MusicTicker(Minecraft mcIn)
-    {
+    public MusicTicker(Minecraft mcIn) {
         this.mc = mcIn;
     }
 

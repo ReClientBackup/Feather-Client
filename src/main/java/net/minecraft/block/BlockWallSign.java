@@ -18,9 +18,9 @@ public class BlockWallSign extends BlockSign
     }
 
     @SuppressWarnings("incomplete-switch")
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
     {
-        EnumFacing enumfacing = worldIn.getBlockState(pos).getValue(FACING);
+        EnumFacing enumfacing = world.getBlockState(pos).getValue(FACING);
         float f = 0.28125F;
         float f1 = 0.78125F;
         float f2 = 0.0F;
@@ -50,17 +50,17 @@ public class BlockWallSign extends BlockSign
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         EnumFacing enumfacing = state.getValue(FACING);
 
-        if (!worldIn.getBlockState(pos.offset(enumfacing.getOpposite())).getBlock().getMaterial().isSolid())
+        if (!world.getBlockState(pos.offset(enumfacing.getOpposite())).getBlock().getMaterial().isSolid())
         {
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-            worldIn.setBlockToAir(pos);
+            this.dropBlockAsItem(world, pos, state, 0);
+            world.setBlockToAir(pos);
         }
 
-        super.onNeighborBlockChange(worldIn, pos, state, neighborBlock);
+        super.onNeighborBlockChange(world, pos, state, neighborBlock);
     }
 
     /**

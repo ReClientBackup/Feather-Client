@@ -160,7 +160,7 @@ public class MapData extends WorldSavedData
         }
     }
 
-    private void updatePlayersVisibleOnMap(int type, World worldIn, String entityIdentifier, double worldX, double worldZ, double rotation)
+    private void updatePlayersVisibleOnMap(int type, World world, String entityIdentifier, double worldX, double worldZ, double rotation)
     {
         int i = 1 << this.scale;
         float f = (float)(worldX - (double)this.xCenter) / (float)i;
@@ -177,7 +177,7 @@ public class MapData extends WorldSavedData
 
             if (this.dimension < 0)
             {
-                int k = (int)(worldIn.getWorldInfo().getWorldTime() / 10L);
+                int k = (int)(world.getWorldInfo().getWorldTime() / 10L);
                 b2 = (byte)(k * k * 34187121 + k * 121 >> 15 & 15);
             }
         }
@@ -216,7 +216,7 @@ public class MapData extends WorldSavedData
         this.playersVisibleOnMap.put(entityIdentifier, new Vec4b((byte)type, b0, b1, b2));
     }
 
-    public Packet getMapPacket(ItemStack mapStack, World worldIn, EntityPlayer player)
+    public Packet getMapPacket(ItemStack mapStack, World world, EntityPlayer player)
     {
         MapData.MapInfo mapdata$mapinfo = this.playersHashMap.get(player);
         return mapdata$mapinfo == null ? null : mapdata$mapinfo.getPacket(mapStack);

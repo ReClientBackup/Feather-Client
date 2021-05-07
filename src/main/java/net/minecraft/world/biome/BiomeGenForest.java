@@ -93,7 +93,7 @@ public class BiomeGenForest extends BiomeGenBase
         }
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
         if (this.field_150632_aF == 3)
         {
@@ -103,21 +103,21 @@ public class BiomeGenForest extends BiomeGenBase
                 {
                     int k = i * 4 + 1 + 8 + rand.nextInt(3);
                     int l = j * 4 + 1 + 8 + rand.nextInt(3);
-                    BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
+                    BlockPos blockpos = world.getHeight(pos.add(k, 0, l));
 
                     if (rand.nextInt(20) == 0)
                     {
                         WorldGenBigMushroom worldgenbigmushroom = new WorldGenBigMushroom();
-                        worldgenbigmushroom.generate(worldIn, rand, blockpos);
+                        worldgenbigmushroom.generate(world, rand, blockpos);
                     }
                     else
                     {
                         WorldGenAbstractTree worldgenabstracttree = this.genBigTreeChance(rand);
                         worldgenabstracttree.func_175904_e();
 
-                        if (worldgenabstracttree.generate(worldIn, rand, blockpos))
+                        if (worldgenabstracttree.generate(world, rand, blockpos))
                         {
-                            worldgenabstracttree.func_180711_a(worldIn, rand, blockpos);
+                            worldgenabstracttree.func_180711_a(world, rand, blockpos);
                         }
                     }
                 }
@@ -152,16 +152,16 @@ public class BiomeGenForest extends BiomeGenBase
             {
                 int j2 = rand.nextInt(16) + 8;
                 int k2 = rand.nextInt(16) + 8;
-                int i1 = rand.nextInt(worldIn.getHeight(pos.add(j2, 0, k2)).getY() + 32);
+                int i1 = rand.nextInt(world.getHeight(pos.add(j2, 0, k2)).getY() + 32);
 
-                if (DOUBLE_PLANT_GENERATOR.generate(worldIn, rand, new BlockPos(pos.getX() + j2, i1, pos.getZ() + k2)))
+                if (DOUBLE_PLANT_GENERATOR.generate(world, rand, new BlockPos(pos.getX() + j2, i1, pos.getZ() + k2)))
                 {
                     break;
                 }
             }
         }
 
-        super.decorate(worldIn, rand, pos);
+        super.decorate(world, rand, pos);
     }
 
     public int getGrassColorAtPos(BlockPos pos)
@@ -185,9 +185,9 @@ public class BiomeGenForest extends BiomeGenBase
         {
             return this.biomeID != BiomeGenBase.birchForest.biomeID && this.biomeID != BiomeGenBase.birchForestHills.biomeID ? new BiomeGenMutated(p_180277_1_, this)
             {
-                public void decorate(World worldIn, Random rand, BlockPos pos)
+                public void decorate(World world, Random rand, BlockPos pos)
                 {
-                    this.baseBiome.decorate(worldIn, rand, pos);
+                    this.baseBiome.decorate(world, rand, pos);
                 }
             }: new BiomeGenMutated(p_180277_1_, this)
             {

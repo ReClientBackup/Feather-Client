@@ -37,7 +37,7 @@ public class MapGenStructureIO
         return componentClassToNameMap.get(component.getClass());
     }
 
-    public static StructureStart getStructureStart(NBTTagCompound tagCompound, World worldIn)
+    public static StructureStart getStructureStart(NBTTagCompound tagCompound, World world)
     {
         StructureStart structurestart = null;
 
@@ -58,7 +58,7 @@ public class MapGenStructureIO
 
         if (structurestart != null)
         {
-            structurestart.readStructureComponentsFromNBT(worldIn, tagCompound);
+            structurestart.readStructureComponentsFromNBT(world, tagCompound);
         }
         else
         {
@@ -68,7 +68,7 @@ public class MapGenStructureIO
         return structurestart;
     }
 
-    public static StructureComponent getStructureComponent(NBTTagCompound tagCompound, World worldIn)
+    public static StructureComponent getStructureComponent(NBTTagCompound tagCompound, World world)
     {
         StructureComponent structurecomponent = null;
 
@@ -89,7 +89,7 @@ public class MapGenStructureIO
 
         if (structurecomponent != null)
         {
-            structurecomponent.readStructureBaseNBT(worldIn, tagCompound);
+            structurecomponent.readStructureBaseNBT(world, tagCompound);
         }
         else
         {

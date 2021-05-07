@@ -669,18 +669,18 @@ public class TileEntityHopper extends TileEntityLockable implements IHopper, ITi
     /**
      * Returns the IInventory (if applicable) of the TileEntity at the specified position
      */
-    public static IInventory getInventoryAtPosition(World worldIn, double x, double y, double z)
+    public static IInventory getInventoryAtPosition(World world, double x, double y, double z)
     {
         IInventory iinventory = null;
         int i = MathHelper.floor_double(x);
         int j = MathHelper.floor_double(y);
         int k = MathHelper.floor_double(z);
         BlockPos blockpos = new BlockPos(i, j, k);
-        Block block = worldIn.getBlockState(blockpos).getBlock();
+        Block block = world.getBlockState(blockpos).getBlock();
 
         if (block.hasTileEntity())
         {
-            TileEntity tileentity = worldIn.getTileEntity(blockpos);
+            TileEntity tileentity = world.getTileEntity(blockpos);
 
             if (tileentity instanceof IInventory)
             {
@@ -688,18 +688,18 @@ public class TileEntityHopper extends TileEntityLockable implements IHopper, ITi
 
                 if (iinventory instanceof TileEntityChest && block instanceof BlockChest)
                 {
-                    iinventory = ((BlockChest)block).getLockableContainer(worldIn, blockpos);
+                    iinventory = ((BlockChest)block).getLockableContainer(world, blockpos);
                 }
             }
         }
 
         if (iinventory == null)
         {
-            List<Entity> list = worldIn.getEntitiesInAABBexcluding(null, new AxisAlignedBB(x - 0.5D, y - 0.5D, z - 0.5D, x + 0.5D, y + 0.5D, z + 0.5D), EntitySelectors.selectInventories);
+            List<Entity> list = world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(x - 0.5D, y - 0.5D, z - 0.5D, x + 0.5D, y + 0.5D, z + 0.5D), EntitySelectors.selectInventories);
 
             if (list.size() > 0)
             {
-                iinventory = (IInventory)list.get(worldIn.rand.nextInt(list.size()));
+                iinventory = (IInventory)list.get(world.rand.nextInt(list.size()));
             }
         }
 
@@ -755,9 +755,9 @@ public class TileEntityHopper extends TileEntityLockable implements IHopper, ITi
         return "minecraft:hopper";
     }
 
-    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer player)
     {
-        return new ContainerHopper(playerInventory, this, playerIn);
+        return new ContainerHopper(playerInventory, this, player);
     }
 
     public int getField(int id)

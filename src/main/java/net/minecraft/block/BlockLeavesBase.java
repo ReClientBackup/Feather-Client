@@ -23,8 +23,8 @@ public class BlockLeavesBase extends Block
         return false;
     }
 
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
     {
-        return (this.fancyGraphics || worldIn.getBlockState(pos).getBlock() != this) && super.shouldSideBeRendered(worldIn, pos, side);
+        return (this.fancyGraphics || world.getBlockState(pos).getBlock() != this) && super.shouldSideBeRendered(world, pos, side);
     }
 }

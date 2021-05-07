@@ -58,7 +58,7 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return Items.comparator;
     }
@@ -89,20 +89,20 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         return this.isRepeaterPowered || state.getValue(POWERED).booleanValue();
     }
 
-    protected int getActiveSignal(IBlockAccess worldIn, BlockPos pos, IBlockState state)
+    protected int getActiveSignal(IBlockAccess world, BlockPos pos, IBlockState state)
     {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        TileEntity tileentity = world.getTileEntity(pos);
         return tileentity instanceof TileEntityComparator ? ((TileEntityComparator)tileentity).getOutputSignal() : 0;
     }
 
-    private int calculateOutput(World worldIn, BlockPos pos, IBlockState state)
+    private int calculateOutput(World world, BlockPos pos, IBlockState state)
     {
-        return state.getValue(MODE) == BlockRedstoneComparator.Mode.SUBTRACT ? Math.max(this.calculateInputStrength(worldIn, pos, state) - this.getPowerOnSides(worldIn, pos, state), 0) : this.calculateInputStrength(worldIn, pos, state);
+        return state.getValue(MODE) == BlockRedstoneComparator.Mode.SUBTRACT ? Math.max(this.calculateInputStrength(world, pos, state) - this.getPowerOnSides(world, pos, state), 0) : this.calculateInputStrength(world, pos, state);
     }
 
-    protected boolean shouldBePowered(World worldIn, BlockPos pos, IBlockState state)
+    protected boolean shouldBePowered(World world, BlockPos pos, IBlockState state)
     {
-        int i = this.calculateInputStrength(worldIn, pos, state);
+        int i = this.calculateInputStrength(world, pos, state);
 
         if (i >= 15)
         {
@@ -114,34 +114,34 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         }
         else
         {
-            int j = this.getPowerOnSides(worldIn, pos, state);
+            int j = this.getPowerOnSides(world, pos, state);
             return j == 0 || i >= j;
         }
     }
 
-    protected int calculateInputStrength(World worldIn, BlockPos pos, IBlockState state)
+    protected int calculateInputStrength(World world, BlockPos pos, IBlockState state)
     {
-        int i = super.calculateInputStrength(worldIn, pos, state);
+        int i = super.calculateInputStrength(world, pos, state);
         EnumFacing enumfacing = state.getValue(FACING);
         BlockPos blockpos = pos.offset(enumfacing);
-        Block block = worldIn.getBlockState(blockpos).getBlock();
+        Block block = world.getBlockState(blockpos).getBlock();
 
         if (block.hasComparatorInputOverride())
         {
-            i = block.getComparatorInputOverride(worldIn, blockpos);
+            i = block.getComparatorInputOverride(world, blockpos);
         }
         else if (i < 15 && block.isNormalCube())
         {
             blockpos = blockpos.offset(enumfacing);
-            block = worldIn.getBlockState(blockpos).getBlock();
+            block = world.getBlockState(blockpos).getBlock();
 
             if (block.hasComparatorInputOverride())
             {
-                i = block.getComparatorInputOverride(worldIn, blockpos);
+                i = block.getComparatorInputOverride(world, blockpos);
             }
             else if (block.getMaterial() == Material.air)
             {
-                EntityItemFrame entityitemframe = this.findItemFrame(worldIn, enumfacing, blockpos);
+                EntityItemFrame entityitemframe = this.findItemFrame(world, enumfacing, blockpos);
 
                 if (entityitemframe != null)
                 {
@@ -153,9 +153,9 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         return i;
     }
 
-    private EntityItemFrame findItemFrame(World worldIn, final EnumFacing facing, BlockPos pos)
+    private EntityItemFrame findItemFrame(World world, final EnumFacing facing, BlockPos pos)
     {
-        List<EntityItemFrame> list = worldIn.getEntitiesWithinAABB(EntityItemFrame.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1), new Predicate<Entity>()
+        List<EntityItemFrame> list = world.getEntitiesWithinAABB(EntityItemFrame.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1), new Predicate<Entity>()
         {
             public boolean apply(Entity p_apply_1_)
             {
@@ -165,48 +165,48 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         return list.size() == 1 ? list.get(0) : null;
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (!playerIn.capabilities.allowEdit)
+        if (!player.capabilities.allowEdit)
         {
             return false;
         }
         else
         {
             state = state.cycleProperty(MODE);
-            worldIn.playSoundEffect((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, "random.click", 0.3F, state.getValue(MODE) == BlockRedstoneComparator.Mode.SUBTRACT ? 0.55F : 0.5F);
-            worldIn.setBlockState(pos, state, 2);
-            this.onStateChange(worldIn, pos, state);
+            world.playSoundEffect((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, "random.click", 0.3F, state.getValue(MODE) == BlockRedstoneComparator.Mode.SUBTRACT ? 0.55F : 0.5F);
+            world.setBlockState(pos, state, 2);
+            this.onStateChange(world, pos, state);
             return true;
         }
     }
 
-    protected void updateState(World worldIn, BlockPos pos, IBlockState state)
+    protected void updateState(World world, BlockPos pos, IBlockState state)
     {
-        if (!worldIn.isBlockTickPending(pos, this))
+        if (!world.isBlockTickPending(pos, this))
         {
-            int i = this.calculateOutput(worldIn, pos, state);
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            int i = this.calculateOutput(world, pos, state);
+            TileEntity tileentity = world.getTileEntity(pos);
             int j = tileentity instanceof TileEntityComparator ? ((TileEntityComparator)tileentity).getOutputSignal() : 0;
 
-            if (i != j || this.isPowered(state) != this.shouldBePowered(worldIn, pos, state))
+            if (i != j || this.isPowered(state) != this.shouldBePowered(world, pos, state))
             {
-                if (this.isFacingTowardsRepeater(worldIn, pos, state))
+                if (this.isFacingTowardsRepeater(world, pos, state))
                 {
-                    worldIn.updateBlockTick(pos, this, 2, -1);
+                    world.updateBlockTick(pos, this, 2, -1);
                 }
                 else
                 {
-                    worldIn.updateBlockTick(pos, this, 2, 0);
+                    world.updateBlockTick(pos, this, 2, 0);
                 }
             }
         }
     }
 
-    private void onStateChange(World worldIn, BlockPos pos, IBlockState state)
+    private void onStateChange(World world, BlockPos pos, IBlockState state)
     {
-        int i = this.calculateOutput(worldIn, pos, state);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        int i = this.calculateOutput(world, pos, state);
+        TileEntity tileentity = world.getTileEntity(pos);
         int j = 0;
 
         if (tileentity instanceof TileEntityComparator)
@@ -218,59 +218,59 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
 
         if (j != i || state.getValue(MODE) == BlockRedstoneComparator.Mode.COMPARE)
         {
-            boolean flag1 = this.shouldBePowered(worldIn, pos, state);
+            boolean flag1 = this.shouldBePowered(world, pos, state);
             boolean flag = this.isPowered(state);
 
             if (flag && !flag1)
             {
-                worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(false)), 2);
+                world.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(false)), 2);
             }
             else if (!flag && flag1)
             {
-                worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(true)), 2);
+                world.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(true)), 2);
             }
 
-            this.notifyNeighbors(worldIn, pos, state);
+            this.notifyNeighbors(world, pos, state);
         }
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
         if (this.isRepeaterPowered)
         {
-            worldIn.setBlockState(pos, this.getUnpoweredState(state).withProperty(POWERED, Boolean.valueOf(true)), 4);
+            world.setBlockState(pos, this.getUnpoweredState(state).withProperty(POWERED, Boolean.valueOf(true)), 4);
         }
 
-        this.onStateChange(worldIn, pos, state);
+        this.onStateChange(world, pos, state);
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        super.onBlockAdded(worldIn, pos, state);
-        worldIn.setTileEntity(pos, this.createNewTileEntity(worldIn, 0));
+        super.onBlockAdded(world, pos, state);
+        world.setTileEntity(pos, this.createNewTileEntity(world, 0));
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
     {
-        super.breakBlock(worldIn, pos, state);
-        worldIn.removeTileEntity(pos);
-        this.notifyNeighbors(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
+        world.removeTileEntity(pos);
+        this.notifyNeighbors(world, pos, state);
     }
 
     /**
      * Called on both Client and Server when World#addBlockEvent is called
      */
-    public boolean onBlockEventReceived(World worldIn, BlockPos pos, IBlockState state, int eventID, int eventParam)
+    public boolean onBlockEventReceived(World world, BlockPos pos, IBlockState state, int eventID, int eventParam)
     {
-        super.onBlockEventReceived(worldIn, pos, state, eventID, eventParam);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        super.onBlockEventReceived(world, pos, state, eventID, eventParam);
+        TileEntity tileentity = world.getTileEntity(pos);
         return tileentity != null && tileentity.receiveClientEvent(eventID, eventParam);
     }
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World worldIn, int meta)
+    public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileEntityComparator();
     }
@@ -313,7 +313,7 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(POWERED, Boolean.valueOf(false)).withProperty(MODE, BlockRedstoneComparator.Mode.COMPARE);
     }

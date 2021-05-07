@@ -42,7 +42,7 @@ public class BlockDeadBush extends BlockBush
     /**
      * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
      */
-    public boolean isReplaceable(World worldIn, BlockPos pos)
+    public boolean isReplaceable(World world, BlockPos pos)
     {
         return true;
     }
@@ -57,16 +57,16 @@ public class BlockDeadBush extends BlockBush
         return null;
     }
 
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
     {
-        if (!worldIn.isRemote && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.shears)
+        if (!world.isRemote && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.shears)
         {
             player.triggerAchievement(StatList.mineBlockStatArray[Block.getIdFromBlock(this)]);
-            spawnAsEntity(worldIn, pos, new ItemStack(Blocks.deadbush, 1, 0));
+            spawnAsEntity(world, pos, new ItemStack(Blocks.deadbush, 1, 0));
         }
         else
         {
-            super.harvestBlock(worldIn, player, pos, state, te);
+            super.harvestBlock(world, player, pos, state, te);
         }
     }
 }

@@ -23,7 +23,7 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
         super(p_i45463_1_);
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         int i = rand.nextInt(3) + rand.nextInt(3) + 5;
         boolean flag = true;
@@ -52,7 +52,7 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                     {
                         if (j >= 0 && j < 256)
                         {
-                            if (!this.func_150523_a(worldIn.getBlockState(blockpos$mutableblockpos.func_181079_c(l, j, i1)).getBlock()))
+                            if (!this.func_150523_a(world.getBlockState(blockpos$mutableblockpos.func_181079_c(l, j, i1)).getBlock()))
                             {
                                 flag = false;
                             }
@@ -71,11 +71,11 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
             }
             else
             {
-                Block block = worldIn.getBlockState(position.down()).getBlock();
+                Block block = world.getBlockState(position.down()).getBlock();
 
                 if ((block == Blocks.grass || block == Blocks.dirt) && position.getY() < 256 - i - 1)
                 {
-                    this.func_175921_a(worldIn, position.down());
+                    this.func_175921_a(world, position.down());
                     EnumFacing enumfacing = EnumFacing.Plane.HORIZONTAL.random(rand);
                     int k2 = i - rand.nextInt(4) - 1;
                     int l2 = 3 - rand.nextInt(3);
@@ -95,11 +95,11 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                         }
 
                         BlockPos blockpos = new BlockPos(i3, i2, j1);
-                        Material material = worldIn.getBlockState(blockpos).getBlock().getMaterial();
+                        Material material = world.getBlockState(blockpos).getBlock().getMaterial();
 
                         if (material == Material.air || material == Material.leaves)
                         {
-                            this.func_181642_b(worldIn, blockpos);
+                            this.func_181642_b(world, blockpos);
                             k1 = i2;
                         }
                     }
@@ -112,7 +112,7 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                         {
                             if (Math.abs(j3) != 3 || Math.abs(i4) != 3)
                             {
-                                this.func_175924_b(worldIn, blockpos2.add(j3, 0, i4));
+                                this.func_175924_b(world, blockpos2.add(j3, 0, i4));
                             }
                         }
                     }
@@ -123,14 +123,14 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                     {
                         for (int j4 = -1; j4 <= 1; ++j4)
                         {
-                            this.func_175924_b(worldIn, blockpos2.add(k3, 0, j4));
+                            this.func_175924_b(world, blockpos2.add(k3, 0, j4));
                         }
                     }
 
-                    this.func_175924_b(worldIn, blockpos2.east(2));
-                    this.func_175924_b(worldIn, blockpos2.west(2));
-                    this.func_175924_b(worldIn, blockpos2.south(2));
-                    this.func_175924_b(worldIn, blockpos2.north(2));
+                    this.func_175924_b(world, blockpos2.east(2));
+                    this.func_175924_b(world, blockpos2.west(2));
+                    this.func_175924_b(world, blockpos2.south(2));
+                    this.func_175924_b(world, blockpos2.north(2));
                     i3 = position.getX();
                     j1 = position.getZ();
                     EnumFacing enumfacing1 = EnumFacing.Plane.HORIZONTAL.random(rand);
@@ -149,11 +149,11 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                                 i3 += enumfacing1.getFrontOffsetX();
                                 j1 += enumfacing1.getFrontOffsetZ();
                                 BlockPos blockpos1 = new BlockPos(i3, j2, j1);
-                                Material material1 = worldIn.getBlockState(blockpos1).getBlock().getMaterial();
+                                Material material1 = world.getBlockState(blockpos1).getBlock().getMaterial();
 
                                 if (material1 == Material.air || material1 == Material.leaves)
                                 {
-                                    this.func_181642_b(worldIn, blockpos1);
+                                    this.func_181642_b(world, blockpos1);
                                     k1 = j2;
                                 }
                             }
@@ -171,7 +171,7 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                                 {
                                     if (Math.abs(i5) != 2 || Math.abs(k5) != 2)
                                     {
-                                        this.func_175924_b(worldIn, blockpos3.add(i5, 0, k5));
+                                        this.func_175924_b(world, blockpos3.add(i5, 0, k5));
                                     }
                                 }
                             }
@@ -182,7 +182,7 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
                             {
                                 for (int l5 = -1; l5 <= 1; ++l5)
                                 {
-                                    this.func_175924_b(worldIn, blockpos3.add(j5, 0, l5));
+                                    this.func_175924_b(world, blockpos3.add(j5, 0, l5));
                                 }
                             }
                         }
@@ -207,13 +207,13 @@ public class WorldGenSavannaTree extends WorldGenAbstractTree
         this.setBlockAndNotifyAdequately(p_181642_1_, p_181642_2_, field_181643_a);
     }
 
-    private void func_175924_b(World worldIn, BlockPos p_175924_2_)
+    private void func_175924_b(World world, BlockPos p_175924_2_)
     {
-        Material material = worldIn.getBlockState(p_175924_2_).getBlock().getMaterial();
+        Material material = world.getBlockState(p_175924_2_).getBlock().getMaterial();
 
         if (material == Material.air || material == Material.leaves)
         {
-            this.setBlockAndNotifyAdequately(worldIn, p_175924_2_, field_181644_b);
+            this.setBlockAndNotifyAdequately(world, p_175924_2_, field_181644_b);
         }
     }
 }

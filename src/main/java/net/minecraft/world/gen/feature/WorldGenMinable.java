@@ -29,7 +29,7 @@ public class WorldGenMinable extends WorldGenerator
         this.predicate = p_i45631_3_;
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         float f = rand.nextFloat() * (float)Math.PI;
         double d0 = (float)(position.getX() + 8) + MathHelper.sin(f) * (float)this.numberOfBlocks / 8.0F;
@@ -75,9 +75,9 @@ public class WorldGenMinable extends WorldGenerator
                                 {
                                     BlockPos blockpos = new BlockPos(l1, i2, j2);
 
-                                    if (this.predicate.apply(worldIn.getBlockState(blockpos)))
+                                    if (this.predicate.apply(world.getBlockState(blockpos)))
                                     {
-                                        worldIn.setBlockState(blockpos, this.oreBlock, 2);
+                                        world.setBlockState(blockpos, this.oreBlock, 2);
                                     }
                                 }
                             }

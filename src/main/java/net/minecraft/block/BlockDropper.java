@@ -24,14 +24,14 @@ public class BlockDropper extends BlockDispenser
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World worldIn, int meta)
+    public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileEntityDropper();
     }
 
-    protected void dispense(World worldIn, BlockPos pos)
+    protected void dispense(World world, BlockPos pos)
     {
-        BlockSourceImpl blocksourceimpl = new BlockSourceImpl(worldIn, pos);
+        BlockSourceImpl blocksourceimpl = new BlockSourceImpl(world, pos);
         TileEntityDispenser tileentitydispenser = blocksourceimpl.getBlockTileEntity();
 
         if (tileentitydispenser != null)
@@ -40,7 +40,7 @@ public class BlockDropper extends BlockDispenser
 
             if (i < 0)
             {
-                worldIn.playAuxSFX(1001, pos, 0);
+                world.playAuxSFX(1001, pos, 0);
             }
             else
             {
@@ -48,9 +48,9 @@ public class BlockDropper extends BlockDispenser
 
                 if (itemstack != null)
                 {
-                    EnumFacing enumfacing = worldIn.getBlockState(pos).getValue(FACING);
+                    EnumFacing enumfacing = world.getBlockState(pos).getValue(FACING);
                     BlockPos blockpos = pos.offset(enumfacing);
-                    IInventory iinventory = TileEntityHopper.getInventoryAtPosition(worldIn, blockpos.getX(), blockpos.getY(), blockpos.getZ());
+                    IInventory iinventory = TileEntityHopper.getInventoryAtPosition(world, blockpos.getX(), blockpos.getY(), blockpos.getZ());
                     ItemStack itemstack1;
 
                     if (iinventory == null)

@@ -63,26 +63,26 @@ public class BiomeGenMesa extends BiomeGenBase
         return 9470285;
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
-        super.decorate(worldIn, rand, pos);
+        super.decorate(world, rand, pos);
     }
 
-    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
+    public void genTerrainBlocks(World world, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
     {
-        if (this.field_150621_aC == null || this.field_150622_aD != worldIn.getSeed())
+        if (this.field_150621_aC == null || this.field_150622_aD != world.getSeed())
         {
-            this.func_150619_a(worldIn.getSeed());
+            this.func_150619_a(world.getSeed());
         }
 
-        if (this.field_150623_aE == null || this.field_150624_aF == null || this.field_150622_aD != worldIn.getSeed())
+        if (this.field_150623_aE == null || this.field_150624_aF == null || this.field_150622_aD != world.getSeed())
         {
             Random random = new Random(this.field_150622_aD);
             this.field_150623_aE = new NoiseGeneratorPerlin(random, 4);
             this.field_150624_aF = new NoiseGeneratorPerlin(random, 1);
         }
 
-        this.field_150622_aD = worldIn.getSeed();
+        this.field_150622_aD = world.getSeed();
         double d4 = 0.0D;
 
         if (this.field_150626_aH)
@@ -109,7 +109,7 @@ public class BiomeGenMesa extends BiomeGenBase
 
         int j1 = p_180622_4_ & 15;
         int k1 = p_180622_5_ & 15;
-        int l1 = worldIn.func_181545_F();
+        int l1 = world.func_181545_F();
         IBlockState iblockstate = Blocks.stained_hardened_clay.getDefaultState();
         IBlockState iblockstate3 = this.fillerBlock;
         int k = (int)(p_180622_6_ / 3.0D + 3.0D + rand.nextDouble() * 0.25D);

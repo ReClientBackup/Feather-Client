@@ -36,7 +36,7 @@ public class ItemSkull extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (side == EnumFacing.DOWN)
         {
@@ -44,13 +44,13 @@ public class ItemSkull extends Item
         }
         else
         {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
+            IBlockState iblockstate = world.getBlockState(pos);
             Block block = iblockstate.getBlock();
-            boolean flag = block.isReplaceable(worldIn, pos);
+            boolean flag = block.isReplaceable(world, pos);
 
             if (!flag)
             {
-                if (!worldIn.getBlockState(pos).getBlock().getMaterial().isSolid())
+                if (!world.getBlockState(pos).getBlock().getMaterial().isSolid())
                 {
                     return false;
                 }
@@ -58,27 +58,27 @@ public class ItemSkull extends Item
                 pos = pos.offset(side);
             }
 
-            if (!playerIn.canPlayerEdit(pos, side, stack))
+            if (!player.canPlayerEdit(pos, side, stack))
             {
                 return false;
             }
-            else if (!Blocks.skull.canPlaceBlockAt(worldIn, pos))
+            else if (!Blocks.skull.canPlaceBlockAt(world, pos))
             {
                 return false;
             }
             else
             {
-                if (!worldIn.isRemote)
+                if (!world.isRemote)
                 {
-                    worldIn.setBlockState(pos, Blocks.skull.getDefaultState().withProperty(BlockSkull.FACING, side), 3);
+                    world.setBlockState(pos, Blocks.skull.getDefaultState().withProperty(BlockSkull.FACING, side), 3);
                     int i = 0;
 
                     if (side == EnumFacing.UP)
                     {
-                        i = MathHelper.floor_double((double)(playerIn.rotationYaw * 16.0F / 360.0F) + 0.5D) & 15;
+                        i = MathHelper.floor_double((double)(player.rotationYaw * 16.0F / 360.0F) + 0.5D) & 15;
                     }
 
-                    TileEntity tileentity = worldIn.getTileEntity(pos);
+                    TileEntity tileentity = world.getTileEntity(pos);
 
                     if (tileentity instanceof TileEntitySkull)
                     {
@@ -110,7 +110,7 @@ public class ItemSkull extends Item
                         }
 
                         tileentityskull.setSkullRotation(i);
-                        Blocks.skull.checkWitherSpawn(worldIn, pos, tileentityskull);
+                        Blocks.skull.checkWitherSpawn(world, pos, tileentityskull);
                     }
 
                     --stack.stackSize;

@@ -17,14 +17,14 @@ public class EntityMinecartTNT extends EntityMinecart
 {
     private int minecartTNTFuse = -1;
 
-    public EntityMinecartTNT(World worldIn)
+    public EntityMinecartTNT(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityMinecartTNT(World worldIn, double p_i1728_2_, double p_i1728_4_, double p_i1728_6_)
+    public EntityMinecartTNT(World world, double p_i1728_2_, double p_i1728_4_, double p_i1728_6_)
     {
-        super(worldIn, p_i1728_2_, p_i1728_4_, p_i1728_6_);
+        super(world, p_i1728_2_, p_i1728_4_, p_i1728_6_);
     }
 
     public EntityMinecart.EnumMinecartType getMinecartType()
@@ -191,14 +191,14 @@ public class EntityMinecartTNT extends EntityMinecart
     /**
      * Explosion resistance of a block relative to this entity
      */
-    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn)
+    public float getExplosionResistance(Explosion explosionIn, World world, BlockPos pos, IBlockState blockStateIn)
     {
-        return !this.isIgnited() || !BlockRailBase.isRailBlock(blockStateIn) && !BlockRailBase.isRailBlock(worldIn, pos.up()) ? super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn) : 0.0F;
+        return !this.isIgnited() || !BlockRailBase.isRailBlock(blockStateIn) && !BlockRailBase.isRailBlock(world, pos.up()) ? super.getExplosionResistance(explosionIn, world, pos, blockStateIn) : 0.0F;
     }
 
-    public boolean verifyExplosion(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn, float p_174816_5_)
+    public boolean verifyExplosion(Explosion explosionIn, World world, BlockPos pos, IBlockState blockStateIn, float p_174816_5_)
     {
-        return (!this.isIgnited() || !BlockRailBase.isRailBlock(blockStateIn) && !BlockRailBase.isRailBlock(worldIn, pos.up())) && super.verifyExplosion(explosionIn, worldIn, pos, blockStateIn, p_174816_5_);
+        return (!this.isIgnited() || !BlockRailBase.isRailBlock(blockStateIn) && !BlockRailBase.isRailBlock(world, pos.up())) && super.verifyExplosion(explosionIn, world, pos, blockStateIn, p_174816_5_);
     }
 
     /**

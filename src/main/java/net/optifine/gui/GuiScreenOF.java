@@ -11,8 +11,8 @@ public class GuiScreenOF extends Screen {
 
    protected void actionPerformedRightClick(GuiButton button) throws IOException {}
 
+   @Override
    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-      super.mouseClicked(mouseX, mouseY, mouseButton);
       if(mouseButton == 1) {
          GuiButton guibutton = getSelectedButton(mouseX, mouseY, this.getButtonList());
          if(guibutton != null && guibutton.isEnabled()) {
@@ -24,6 +24,7 @@ public class GuiScreenOF extends Screen {
             }
          }
       }
+      super.mouseClicked(mouseX, mouseY, mouseButton);
    }
 
    public static GuiButton getSelectedButton(int x, int y, List<GuiButton> listButtons) {

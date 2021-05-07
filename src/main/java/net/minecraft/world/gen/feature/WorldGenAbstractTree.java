@@ -20,15 +20,15 @@ public abstract class WorldGenAbstractTree extends WorldGenerator
         return material == Material.air || material == Material.leaves || p_150523_1_ == Blocks.grass || p_150523_1_ == Blocks.dirt || p_150523_1_ == Blocks.log || p_150523_1_ == Blocks.log2 || p_150523_1_ == Blocks.sapling || p_150523_1_ == Blocks.vine;
     }
 
-    public void func_180711_a(World worldIn, Random p_180711_2_, BlockPos p_180711_3_)
+    public void func_180711_a(World world, Random p_180711_2_, BlockPos p_180711_3_)
     {
     }
 
-    protected void func_175921_a(World worldIn, BlockPos p_175921_2_)
+    protected void func_175921_a(World world, BlockPos p_175921_2_)
     {
-        if (worldIn.getBlockState(p_175921_2_).getBlock() != Blocks.dirt)
+        if (world.getBlockState(p_175921_2_).getBlock() != Blocks.dirt)
         {
-            this.setBlockAndNotifyAdequately(worldIn, p_175921_2_, Blocks.dirt.getDefaultState());
+            this.setBlockAndNotifyAdequately(world, p_175921_2_, Blocks.dirt.getDefaultState());
         }
     }
 }

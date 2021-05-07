@@ -25,11 +25,11 @@ public class ItemBow extends Item
      *  
      * @param timeLeft The amount of ticks left before the using would have been complete
      */
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft)
+    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int timeLeft)
     {
-        boolean flag = playerIn.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, stack) > 0;
+        boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, stack) > 0;
 
-        if (flag || playerIn.inventory.hasItem(Items.arrow))
+        if (flag || player.inventory.hasItem(Items.arrow))
         {
             int i = this.getMaxItemUseDuration(stack) - timeLeft;
             float f = (float)i / 20.0F;
@@ -45,7 +45,7 @@ public class ItemBow extends Item
                 f = 1.0F;
             }
 
-            EntityArrow entityarrow = new EntityArrow(worldIn, playerIn, f * 2.0F);
+            EntityArrow entityarrow = new EntityArrow(world, player, f * 2.0F);
 
             if (f == 1.0F)
             {
@@ -71,8 +71,8 @@ public class ItemBow extends Item
                 entityarrow.setFire(100);
             }
 
-            stack.damageItem(1, playerIn);
-            worldIn.playSoundAtEntity(playerIn, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+            stack.damageItem(1, player);
+            world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
             if (flag)
             {
@@ -80,14 +80,14 @@ public class ItemBow extends Item
             }
             else
             {
-                playerIn.inventory.consumeInventoryItem(Items.arrow);
+                player.inventory.consumeInventoryItem(Items.arrow);
             }
 
-            playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+            player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
 
-            if (!worldIn.isRemote)
+            if (!world.isRemote)
             {
-                worldIn.spawnEntityInWorld(entityarrow);
+                world.spawnEntityInWorld(entityarrow);
             }
         }
     }
@@ -96,7 +96,7 @@ public class ItemBow extends Item
      * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
      * the Item before the action is complete.
      */
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player)
     {
         return stack;
     }
@@ -120,11 +120,11 @@ public class ItemBow extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
-        if (playerIn.capabilities.isCreativeMode || playerIn.inventory.hasItem(Items.arrow))
+        if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.arrow))
         {
-            playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
+            player.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
         }
 
         return itemStackIn;

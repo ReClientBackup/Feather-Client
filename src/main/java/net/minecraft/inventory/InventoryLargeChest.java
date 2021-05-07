@@ -214,9 +214,9 @@ public class InventoryLargeChest implements ILockableContainer
         return this.upperChest.getGuiID();
     }
 
-    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer player)
     {
-        return new ContainerChest(playerInventory, this, playerIn);
+        return new ContainerChest(playerInventory, this, player);
     }
 
     public void clear()

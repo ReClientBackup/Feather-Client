@@ -1,5 +1,7 @@
 package net.minecraft.client.renderer.entity;
 
+import com.murengezi.chocolate.Util.MinecraftUtils;
+import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -395,8 +397,8 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
             int j = fontrenderer.getStringWidth(str) / 2;
             GlStateManager.disableTexture2D();
             worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
-            worldrenderer.pos(-j - 1 /*- 6*/, -1 + i, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-            worldrenderer.pos(-j - 1 /*- 6*/, 8 + i, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+            worldrenderer.pos(-j - 1 - 8, -1 + i, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+            worldrenderer.pos(-j - 1 - 8, 8 + i, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
             worldrenderer.pos(j + 1, 8 + i, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
             worldrenderer.pos(j + 1, -1 + i, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
             tessellator.draw();
@@ -405,11 +407,11 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
             fontrenderer.drawString(str, -j, i, 553648127);
             GlStateManager.enableDepth();
             GlStateManager.depthMask(true);
-            /*if (entityIn == MinecraftUtils.getPlayer()) {
-                bindTexture(new ResourceLocation("feather/logo.png"));
+            if (entityIn == MinecraftUtils.getPlayer()) {
+                bindTexture(new ResourceLocation("chocolate/logo_16x16.png"));
                 GlStateManager.colorAllMax();
-                Gui.drawModalRectWithCustomSizedTexture(-j - 6, i, 0, 0, 5, 6, 5, 6);
-            }*/
+                GUI.drawModalRectWithCustomSizedTexture(-j - 8, i, 0, 0, 8, 8, 8, 8);
+            }
             fontrenderer.drawString(str, -j, i, -1);
             GlStateManager.enableLightning();
             GlStateManager.disableBlend();

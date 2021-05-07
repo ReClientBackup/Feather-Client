@@ -45,8 +45,8 @@ public class C18PacketSpectate implements Packet<INetHandlerPlayServer>
         handler.handleSpectate(this);
     }
 
-    public Entity getEntity(WorldServer worldIn)
+    public Entity getEntity(WorldServer world)
     {
-        return worldIn.getEntityFromUuid(this.id);
+        return world.getEntityFromUuid(this.id);
     }
 }

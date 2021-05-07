@@ -27,11 +27,11 @@ public class BlockSlime extends BlockBreakable
      *  
      * @param fallDistance The distance the entity has fallen before landing
      */
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
+    public void onFallenUpon(World world, BlockPos pos, Entity entityIn, float fallDistance)
     {
         if (entityIn.isSneaking())
         {
-            super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
+            super.onFallenUpon(world, pos, entityIn, fallDistance);
         }
         else
         {
@@ -43,11 +43,11 @@ public class BlockSlime extends BlockBreakable
      * Called when an Entity lands on this Block. This method *must* update motionY because the entity will not do that
      * on its own
      */
-    public void onLanded(World worldIn, Entity entityIn)
+    public void onLanded(World world, Entity entityIn)
     {
         if (entityIn.isSneaking())
         {
-            super.onLanded(worldIn, entityIn);
+            super.onLanded(world, entityIn);
         }
         else if (entityIn.motionY < 0.0D)
         {
@@ -58,15 +58,15 @@ public class BlockSlime extends BlockBreakable
     /**
      * Triggered whenever an entity collides with this block (enters into the block)
      */
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entityIn)
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity)
     {
-        if (Math.abs(entityIn.motionY) < 0.1D && !entityIn.isSneaking())
+        if (Math.abs(entity.motionY) < 0.1D && !entity.isSneaking())
         {
-            double d0 = 0.4D + Math.abs(entityIn.motionY) * 0.2D;
-            entityIn.motionX *= d0;
-            entityIn.motionZ *= d0;
+            double d0 = 0.4D + Math.abs(entity.motionY) * 0.2D;
+            entity.motionX *= d0;
+            entity.motionZ *= d0;
         }
 
-        super.onEntityCollidedWithBlock(worldIn, pos, entityIn);
+        super.onEntityCollidedWithBlock(world, pos, entity);
     }
 }

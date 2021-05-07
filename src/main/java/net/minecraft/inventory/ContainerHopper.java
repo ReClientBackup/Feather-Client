@@ -33,15 +33,15 @@ public class ContainerHopper extends Container
         }
     }
 
-    public boolean canInteractWith(EntityPlayer playerIn)
+    public boolean canInteractWith(EntityPlayer player)
     {
-        return this.hopperInventory.isUseableByPlayer(playerIn);
+        return this.hopperInventory.isUseableByPlayer(player);
     }
 
     /**
      * Take a stack from the specified inventory slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    public ItemStack transferStackInSlot(EntityPlayer player, int index)
     {
         ItemStack itemstack = null;
         Slot slot = this.inventorySlots.get(index);
@@ -79,9 +79,9 @@ public class ContainerHopper extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer playerIn)
+    public void onContainerClosed(EntityPlayer player)
     {
-        super.onContainerClosed(playerIn);
-        this.hopperInventory.closeInventory(playerIn);
+        super.onContainerClosed(player);
+        this.hopperInventory.closeInventory(player);
     }
 }

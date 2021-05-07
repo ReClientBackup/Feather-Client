@@ -89,14 +89,14 @@ public class ItemPotion extends Item
      * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
      * the Item before the action is complete.
      */
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player)
     {
-        if (!playerIn.capabilities.isCreativeMode)
+        if (!player.capabilities.isCreativeMode)
         {
             --stack.stackSize;
         }
 
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
             List<PotionEffect> list = this.getEffects(stack);
 
@@ -104,21 +104,21 @@ public class ItemPotion extends Item
             {
                 for (PotionEffect potioneffect : list)
                 {
-                    playerIn.addPotionEffect(new PotionEffect(potioneffect));
+                    player.addPotionEffect(new PotionEffect(potioneffect));
                 }
             }
         }
 
-        playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+        player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
 
-        if (!playerIn.capabilities.isCreativeMode)
+        if (!player.capabilities.isCreativeMode)
         {
             if (stack.stackSize <= 0)
             {
                 return new ItemStack(Items.glass_bottle);
             }
 
-            playerIn.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+            player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
         }
 
         return stack;
@@ -143,28 +143,28 @@ public class ItemPotion extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
         if (isSplash(itemStackIn.getMetadata()))
         {
-            if (!playerIn.capabilities.isCreativeMode)
+            if (!player.capabilities.isCreativeMode)
             {
                 --itemStackIn.stackSize;
             }
 
-            worldIn.playSoundAtEntity(playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-            if (!worldIn.isRemote)
+            if (!world.isRemote)
             {
-                worldIn.spawnEntityInWorld(new EntityPotion(worldIn, playerIn, itemStackIn));
+                world.spawnEntityInWorld(new EntityPotion(world, player, itemStackIn));
             }
 
-            playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+            player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
             return itemStackIn;
         }
         else
         {
-            playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
+            player.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
             return itemStackIn;
         }
     }
@@ -246,7 +246,7 @@ public class ItemPotion extends Item
      * @param tooltip All lines to display in the Item's tooltip. This is a List of Strings.
      * @param advanced Whether the setting "Advanced tooltips" is enabled
      */
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
     {
         if (stack.getMetadata() != 0)
         {

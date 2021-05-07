@@ -133,5 +133,5 @@ public abstract class EntityAIMoveToBlock extends EntityAIBase
     /**
      * Return true to set given position as destination
      */
-    protected abstract boolean shouldMoveTo(World worldIn, BlockPos pos);
+    protected abstract boolean shouldMoveTo(World world, BlockPos pos);
 }

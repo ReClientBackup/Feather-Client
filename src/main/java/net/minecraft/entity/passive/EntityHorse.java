@@ -85,9 +85,9 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
     private final String[] horseTexturesArray = new String[3];
     private boolean field_175508_bO = false;
 
-    public EntityHorse(World worldIn)
+    public EntityHorse(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(1.4F, 1.6F);
         this.isImmuneToFire = false;
         this.setChested(false);

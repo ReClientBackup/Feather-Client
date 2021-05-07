@@ -20,9 +20,9 @@ public class EntityPickupFX extends EntityFX
     private final float field_174841_aA;
     private final RenderManager field_174842_aB = Minecraft.getMinecraft().getRenderManager();
 
-    public EntityPickupFX(World worldIn, Entity p_i1233_2_, Entity p_i1233_3_, float p_i1233_4_)
+    public EntityPickupFX(World world, Entity p_i1233_2_, Entity p_i1233_3_, float p_i1233_4_)
     {
-        super(worldIn, p_i1233_2_.posX, p_i1233_2_.posY, p_i1233_2_.posZ, p_i1233_2_.motionX, p_i1233_2_.motionY, p_i1233_2_.motionZ);
+        super(world, p_i1233_2_.posX, p_i1233_2_.posY, p_i1233_2_.posZ, p_i1233_2_.motionX, p_i1233_2_.motionY, p_i1233_2_.motionZ);
         this.field_174840_a = p_i1233_2_;
         this.field_174843_ax = p_i1233_3_;
         this.maxAge = 3;

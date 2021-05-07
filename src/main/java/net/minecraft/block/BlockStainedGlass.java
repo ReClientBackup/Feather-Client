@@ -38,11 +38,11 @@ public class BlockStainedGlass extends BlockBreakable
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
         for (EnumDyeColor enumdyecolor : EnumDyeColor.values())
         {
-            list.add(new ItemStack(itemIn, 1, enumdyecolor.getMetadata()));
+            list.add(new ItemStack(item, 1, enumdyecolor.getMetadata()));
         }
     }
 
@@ -85,19 +85,19 @@ public class BlockStainedGlass extends BlockBreakable
         return this.getDefaultState().withProperty(COLOR, EnumDyeColor.byMetadata(meta));
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            BlockBeacon.updateColorAsync(worldIn, pos);
+            BlockBeacon.updateColorAsync(world, pos);
         }
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            BlockBeacon.updateColorAsync(worldIn, pos);
+            BlockBeacon.updateColorAsync(world, pos);
         }
     }
 

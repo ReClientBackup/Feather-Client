@@ -33,14 +33,14 @@ public class EntityFallingBlock extends Entity
     private float fallHurtAmount = 2.0F;
     public NBTTagCompound tileEntityData;
 
-    public EntityFallingBlock(World worldIn)
+    public EntityFallingBlock(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityFallingBlock(World worldIn, double x, double y, double z, IBlockState fallingBlockState)
+    public EntityFallingBlock(World world, double x, double y, double z, IBlockState fallingBlockState)
     {
-        super(worldIn);
+        super(world);
         this.fallTile = fallingBlockState;
         this.preventEntitySpawning = true;
         this.setSize(0.98F, 0.98F);
@@ -128,7 +128,7 @@ public class EntityFallingBlock extends Entity
 
                         if (!this.canSetAsBlock)
                         {
-                            if (this.worldObj.canBlockBePlaced(block, blockpos1, true, EnumFacing.UP, null, null) && !BlockFalling.canFallInto(this.worldObj, blockpos1.down()) && this.worldObj.setBlockState(blockpos1, this.fallTile, 3))
+                            if (this.worldObj.canBlockBePlaced(block, blockpos1, true, EnumFacing.UP, null) && !BlockFalling.canFallInto(this.worldObj, blockpos1.down()) && this.worldObj.setBlockState(blockpos1, this.fallTile, 3))
                             {
                                 if (block instanceof BlockFalling)
                                 {

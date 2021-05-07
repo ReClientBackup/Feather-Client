@@ -74,9 +74,9 @@ public class BlockSkull extends BlockContainer
         return false;
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
     {
-        switch (worldIn.getBlockState(pos).getValue(FACING))
+        switch (world.getBlockState(pos).getValue(FACING))
         {
             case UP:
             default:
@@ -100,17 +100,17 @@ public class BlockSkull extends BlockContainer
         }
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
     {
-        this.setBlockBoundsBasedOnState(worldIn, pos);
-        return super.getCollisionBoundingBox(worldIn, pos, state);
+        this.setBlockBoundsBasedOnState(world, pos);
+        return super.getCollisionBoundingBox(world, pos, state);
     }
 
     /**
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(NODROP, Boolean.valueOf(false));
     }
@@ -118,7 +118,7 @@ public class BlockSkull extends BlockContainer
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World worldIn, int meta)
+    public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileEntitySkull();
     }
@@ -126,15 +126,15 @@ public class BlockSkull extends BlockContainer
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return Items.skull;
     }
 
-    public int getDamageValue(World worldIn, BlockPos pos)
+    public int getDamageValue(World world, BlockPos pos)
     {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
-        return tileentity instanceof TileEntitySkull ? ((TileEntitySkull)tileentity).getSkullType() : super.getDamageValue(worldIn, pos);
+        TileEntity tileentity = world.getTileEntity(pos);
+        return tileentity instanceof TileEntitySkull ? ((TileEntitySkull)tileentity).getSkullType() : super.getDamageValue(world, pos);
     }
 
     /**
@@ -143,33 +143,33 @@ public class BlockSkull extends BlockContainer
      * @param chance The chance that each Item is actually spawned (1.0 = always, 0.0 = never)
      * @param fortune The player's fortune level
      */
-    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+    public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune)
     {
     }
 
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
+    public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
     {
         if (player.capabilities.isCreativeMode)
         {
             state = state.withProperty(NODROP, Boolean.valueOf(true));
-            worldIn.setBlockState(pos, state, 4);
+            world.setBlockState(pos, state, 4);
         }
 
-        super.onBlockHarvested(worldIn, pos, state, player);
+        super.onBlockHarvested(world, pos, state, player);
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
             if (!state.getValue(NODROP).booleanValue())
             {
-                TileEntity tileentity = worldIn.getTileEntity(pos);
+                TileEntity tileentity = world.getTileEntity(pos);
 
                 if (tileentity instanceof TileEntitySkull)
                 {
                     TileEntitySkull tileentityskull = (TileEntitySkull)tileentity;
-                    ItemStack itemstack = new ItemStack(Items.skull, 1, this.getDamageValue(worldIn, pos));
+                    ItemStack itemstack = new ItemStack(Items.skull, 1, this.getDamageValue(world, pos));
 
                     if (tileentityskull.getSkullType() == 3 && tileentityskull.getPlayerProfile() != null)
                     {
@@ -179,11 +179,11 @@ public class BlockSkull extends BlockContainer
                         itemstack.getTagCompound().setTag("SkullOwner", nbttagcompound);
                     }
 
-                    spawnAsEntity(worldIn, pos, itemstack);
+                    spawnAsEntity(world, pos, itemstack);
                 }
             }
 
-            super.breakBlock(worldIn, pos, state);
+            super.breakBlock(world, pos, state);
         }
     }
 
@@ -197,24 +197,24 @@ public class BlockSkull extends BlockContainer
         return Items.skull;
     }
 
-    public boolean canDispenserPlace(World worldIn, BlockPos pos, ItemStack stack)
+    public boolean canDispenserPlace(World world, BlockPos pos, ItemStack stack)
     {
-        return stack.getMetadata() == 1 && pos.getY() >= 2 && worldIn.getDifficulty() != EnumDifficulty.PEACEFUL && !worldIn.isRemote && this.getWitherBasePattern().match(worldIn, pos) != null;
+        return stack.getMetadata() == 1 && pos.getY() >= 2 && world.getDifficulty() != EnumDifficulty.PEACEFUL && !world.isRemote && this.getWitherBasePattern().match(world, pos) != null;
     }
 
-    public void checkWitherSpawn(World worldIn, BlockPos pos, TileEntitySkull te)
+    public void checkWitherSpawn(World world, BlockPos pos, TileEntitySkull te)
     {
-        if (te.getSkullType() == 1 && pos.getY() >= 2 && worldIn.getDifficulty() != EnumDifficulty.PEACEFUL && !worldIn.isRemote)
+        if (te.getSkullType() == 1 && pos.getY() >= 2 && world.getDifficulty() != EnumDifficulty.PEACEFUL && !world.isRemote)
         {
             BlockPattern blockpattern = this.getWitherPattern();
-            BlockPattern.PatternHelper blockpattern$patternhelper = blockpattern.match(worldIn, pos);
+            BlockPattern.PatternHelper blockpattern$patternhelper = blockpattern.match(world, pos);
 
             if (blockpattern$patternhelper != null)
             {
                 for (int i = 0; i < 3; ++i)
                 {
                     BlockWorldState blockworldstate = blockpattern$patternhelper.translateOffset(i, 0, 0);
-                    worldIn.setBlockState(blockworldstate.getPos(), blockworldstate.getBlockState().withProperty(NODROP, Boolean.valueOf(true)), 2);
+                    world.setBlockState(blockworldstate.getPos(), blockworldstate.getBlockState().withProperty(NODROP, Boolean.valueOf(true)), 2);
                 }
 
                 for (int j = 0; j < blockpattern.getPalmLength(); ++j)
@@ -222,27 +222,27 @@ public class BlockSkull extends BlockContainer
                     for (int k = 0; k < blockpattern.getThumbLength(); ++k)
                     {
                         BlockWorldState blockworldstate1 = blockpattern$patternhelper.translateOffset(j, k, 0);
-                        worldIn.setBlockState(blockworldstate1.getPos(), Blocks.air.getDefaultState(), 2);
+                        world.setBlockState(blockworldstate1.getPos(), Blocks.air.getDefaultState(), 2);
                     }
                 }
 
                 BlockPos blockpos = blockpattern$patternhelper.translateOffset(1, 0, 0).getPos();
-                EntityWither entitywither = new EntityWither(worldIn);
+                EntityWither entitywither = new EntityWither(world);
                 BlockPos blockpos1 = blockpattern$patternhelper.translateOffset(1, 2, 0).getPos();
                 entitywither.setLocationAndAngles((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.55D, (double)blockpos1.getZ() + 0.5D, blockpattern$patternhelper.getFinger().getAxis() == EnumFacing.Axis.X ? 0.0F : 90.0F, 0.0F);
                 entitywither.renderYawOffset = blockpattern$patternhelper.getFinger().getAxis() == EnumFacing.Axis.X ? 0.0F : 90.0F;
                 entitywither.func_82206_m();
 
-                for (EntityPlayer entityplayer : worldIn.getEntitiesWithinAABB(EntityPlayer.class, entitywither.getEntityBoundingBox().expand(50.0D, 50.0D, 50.0D)))
+                for (EntityPlayer entityplayer : world.getEntitiesWithinAABB(EntityPlayer.class, entitywither.getEntityBoundingBox().expand(50.0D, 50.0D, 50.0D)))
                 {
                     entityplayer.triggerAchievement(AchievementList.spawnWither);
                 }
 
-                worldIn.spawnEntityInWorld(entitywither);
+                world.spawnEntityInWorld(entitywither);
 
                 for (int l = 0; l < 120; ++l)
                 {
-                    worldIn.spawnParticle(EnumParticleTypes.SNOWBALL, (double)blockpos.getX() + worldIn.rand.nextDouble(), (double)(blockpos.getY() - 2) + worldIn.rand.nextDouble() * 3.9D, (double)blockpos.getZ() + worldIn.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+                    world.spawnParticle(EnumParticleTypes.SNOWBALL, (double)blockpos.getX() + world.rand.nextDouble(), (double)(blockpos.getY() - 2) + world.rand.nextDouble() * 3.9D, (double)blockpos.getZ() + world.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
                 }
 
                 for (int i1 = 0; i1 < blockpattern.getPalmLength(); ++i1)
@@ -250,7 +250,7 @@ public class BlockSkull extends BlockContainer
                     for (int j1 = 0; j1 < blockpattern.getThumbLength(); ++j1)
                     {
                         BlockWorldState blockworldstate2 = blockpattern$patternhelper.translateOffset(i1, j1, 0);
-                        worldIn.notifyNeighborsRespectDebug(blockworldstate2.getPos(), Blocks.air);
+                        world.notifyNeighborsRespectDebug(blockworldstate2.getPos(), Blocks.air);
                     }
                 }
             }

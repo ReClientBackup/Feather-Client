@@ -42,9 +42,9 @@ public class EntityIronGolem extends EntityGolem
     private int attackTimer;
     private int holdRoseTick;
 
-    public EntityIronGolem(World worldIn)
+    public EntityIronGolem(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(1.4F, 2.9F);
         ((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
@@ -102,14 +102,14 @@ public class EntityIronGolem extends EntityGolem
         return p_70682_1_;
     }
 
-    protected void collideWithEntity(Entity p_82167_1_)
+    protected void collideWithEntity(Entity entity)
     {
-        if (p_82167_1_ instanceof IMob && !(p_82167_1_ instanceof EntityCreeper) && this.getRNG().nextInt(20) == 0)
+        if (entity instanceof IMob && !(entity instanceof EntityCreeper) && this.getRNG().nextInt(20) == 0)
         {
-            this.setAttackTarget((EntityLivingBase)p_82167_1_);
+            this.setAttackTarget((EntityLivingBase) entity);
         }
 
-        super.collideWithEntity(p_82167_1_);
+        super.collideWithEntity(entity);
     }
 
     /**
@@ -171,16 +171,16 @@ public class EntityIronGolem extends EntityGolem
         this.setPlayerCreated(tagCompund.getBoolean("PlayerCreated"));
     }
 
-    public boolean attackEntityAsMob(Entity entityIn)
+    public boolean attackEntityAsMob(Entity entity)
     {
         this.attackTimer = 10;
         this.worldObj.setEntityState(this, (byte)4);
-        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float)(7 + this.rand.nextInt(15)));
+        boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)(7 + this.rand.nextInt(15)));
 
         if (flag)
         {
-            entityIn.motionY += 0.4000000059604645D;
-            this.applyEnchantments(this, entityIn);
+            entity.motionY += 0.4000000059604645D;
+            this.applyEnchantments(this, entity);
         }
 
         this.playSound("mob.irongolem.throw", 1.0F, 1.0F);

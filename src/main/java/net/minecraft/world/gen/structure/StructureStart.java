@@ -38,7 +38,7 @@ public abstract class StructureStart
     /**
      * Keeps iterating Structure Pieces and spawning them until the checks tell it to stop
      */
-    public void generateStructure(World worldIn, Random rand, StructureBoundingBox structurebb)
+    public void generateStructure(World world, Random rand, StructureBoundingBox structurebb)
     {
         Iterator<StructureComponent> iterator = this.components.iterator();
 
@@ -46,7 +46,7 @@ public abstract class StructureStart
         {
             StructureComponent structurecomponent = iterator.next();
 
-            if (structurecomponent.getBoundingBox().intersectsWith(structurebb) && !structurecomponent.addComponentParts(worldIn, rand, structurebb))
+            if (structurecomponent.getBoundingBox().intersectsWith(structurebb) && !structurecomponent.addComponentParts(world, rand, structurebb))
             {
                 iterator.remove();
             }
@@ -89,7 +89,7 @@ public abstract class StructureStart
     {
     }
 
-    public void readStructureComponentsFromNBT(World worldIn, NBTTagCompound tagCompound)
+    public void readStructureComponentsFromNBT(World world, NBTTagCompound tagCompound)
     {
         this.chunkPosX = tagCompound.getInteger("ChunkX");
         this.chunkPosZ = tagCompound.getInteger("ChunkZ");
@@ -103,7 +103,7 @@ public abstract class StructureStart
 
         for (int i = 0; i < nbttaglist.tagCount(); ++i)
         {
-            this.components.add(MapGenStructureIO.getStructureComponent(nbttaglist.getCompoundTagAt(i), worldIn));
+            this.components.add(MapGenStructureIO.getStructureComponent(nbttaglist.getCompoundTagAt(i), world));
         }
 
         this.readFromNBT(tagCompound);
@@ -116,9 +116,9 @@ public abstract class StructureStart
     /**
      * offsets the structure Bounding Boxes up to a certain height, typically 63 - 10
      */
-    protected void markAvailableHeight(World worldIn, Random rand, int p_75067_3_)
+    protected void markAvailableHeight(World world, Random rand, int p_75067_3_)
     {
-        int i = worldIn.func_181545_F() - p_75067_3_;
+        int i = world.func_181545_F() - p_75067_3_;
         int j = this.boundingBox.getYSize() + 1;
 
         if (j < i)
@@ -135,7 +135,7 @@ public abstract class StructureStart
         }
     }
 
-    protected void setRandomHeight(World worldIn, Random rand, int p_75070_3_, int p_75070_4_)
+    protected void setRandomHeight(World world, Random rand, int p_75070_3_, int p_75070_4_)
     {
         int i = p_75070_4_ - p_75070_3_ + 1 - this.boundingBox.getYSize();
         int j = 1;

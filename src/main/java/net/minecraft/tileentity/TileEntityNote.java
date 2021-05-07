@@ -37,11 +37,11 @@ public class TileEntityNote extends TileEntity
         this.markDirty();
     }
 
-    public void triggerNote(World worldIn, BlockPos p_175108_2_)
+    public void triggerNote(World world, BlockPos p_175108_2_)
     {
-        if (worldIn.getBlockState(p_175108_2_.up()).getBlock().getMaterial() == Material.air)
+        if (world.getBlockState(p_175108_2_.up()).getBlock().getMaterial() == Material.air)
         {
-            Material material = worldIn.getBlockState(p_175108_2_.down()).getBlock().getMaterial();
+            Material material = world.getBlockState(p_175108_2_.down()).getBlock().getMaterial();
             int i = 0;
 
             if (material == Material.rock)
@@ -64,7 +64,7 @@ public class TileEntityNote extends TileEntity
                 i = 4;
             }
 
-            worldIn.addBlockEvent(p_175108_2_, Blocks.noteblock, i, this.note);
+            world.addBlockEvent(p_175108_2_, Blocks.noteblock, i, this.note);
         }
     }
 }

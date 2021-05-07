@@ -57,9 +57,9 @@ public abstract class TileEntity
     /**
      * Sets the worldObj for this tileEntity.
      */
-    public void setWorldObj(World worldIn)
+    public void setWorldObj(World world)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
     }
 
     /**

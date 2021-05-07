@@ -84,15 +84,15 @@ public class ContainerFurnace extends Container
         this.tileFurnace.setField(id, data);
     }
 
-    public boolean canInteractWith(EntityPlayer playerIn)
+    public boolean canInteractWith(EntityPlayer player)
     {
-        return this.tileFurnace.isUseableByPlayer(playerIn);
+        return this.tileFurnace.isUseableByPlayer(player);
     }
 
     /**
      * Take a stack from the specified inventory slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    public ItemStack transferStackInSlot(EntityPlayer player, int index)
     {
         ItemStack itemstack = null;
         Slot slot = this.inventorySlots.get(index);
@@ -158,7 +158,7 @@ public class ContainerFurnace extends Container
                 return null;
             }
 
-            slot.onPickupFromSlot(playerIn, itemstack1);
+            slot.onPickupFromSlot(player, itemstack1);
         }
 
         return itemstack;

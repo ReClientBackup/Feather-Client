@@ -48,9 +48,9 @@ public class EntityGuardian extends EntityMob
     private boolean field_175480_bp;
     private final EntityAIWander wander;
 
-    public EntityGuardian(World worldIn)
+    public EntityGuardian(World world)
     {
-        super(worldIn);
+        super(world);
         this.experienceValue = 10;
         this.setSize(0.85F, 0.85F);
         this.tasks.addTask(4, new EntityGuardian.AIGuardianAttack(this));
@@ -97,9 +97,9 @@ public class EntityGuardian extends EntityMob
     /**
      * Returns new PathNavigateGround instance
      */
-    protected PathNavigate getNewNavigator(World worldIn)
+    protected PathNavigate getNewNavigator(World world)
     {
-        return new PathNavigateSwimmer(this, worldIn);
+        return new PathNavigateSwimmer(this, world);
     }
 
     protected void entityInit()

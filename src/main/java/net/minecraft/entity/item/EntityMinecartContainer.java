@@ -21,14 +21,14 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
      */
     private boolean dropContentsWhenDead = true;
 
-    public EntityMinecartContainer(World worldIn)
+    public EntityMinecartContainer(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityMinecartContainer(World worldIn, double p_i1717_2_, double p_i1717_4_, double p_i1717_6_)
+    public EntityMinecartContainer(World world, double p_i1717_2_, double p_i1717_4_, double p_i1717_6_)
     {
-        super(worldIn, p_i1717_2_, p_i1717_4_, p_i1717_6_);
+        super(world, p_i1717_2_, p_i1717_4_, p_i1717_6_);
     }
 
     public void killMinecart(DamageSource p_94095_1_)
@@ -233,11 +233,11 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer playerIn)
+    public boolean interactFirst(EntityPlayer player)
     {
         if (!this.worldObj.isRemote)
         {
-            playerIn.displayGUIChest(this);
+            player.displayGUIChest(this);
         }
 
         return true;

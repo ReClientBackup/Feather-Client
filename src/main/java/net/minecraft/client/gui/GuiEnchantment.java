@@ -54,9 +54,9 @@ public class GuiEnchantment extends GuiContainer
     ItemStack field_147077_B;
     private final IWorldNameable field_175380_I;
 
-    public GuiEnchantment(InventoryPlayer inventory, World worldIn, IWorldNameable p_i45502_3_)
+    public GuiEnchantment(InventoryPlayer inventory, World world, IWorldNameable p_i45502_3_)
     {
-        super(new ContainerEnchantment(inventory, worldIn));
+        super(new ContainerEnchantment(inventory, world));
         this.playerInventory = inventory;
         this.container = (ContainerEnchantment)this.inventorySlots;
         this.field_175380_I = p_i45502_3_;

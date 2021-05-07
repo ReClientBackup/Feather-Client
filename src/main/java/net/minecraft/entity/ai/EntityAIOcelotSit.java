@@ -75,20 +75,20 @@ public class EntityAIOcelotSit extends EntityAIMoveToBlock
     /**
      * Return true to set given position as destination
      */
-    protected boolean shouldMoveTo(World worldIn, BlockPos pos)
+    protected boolean shouldMoveTo(World world, BlockPos pos)
     {
-        if (!worldIn.isAirBlock(pos.up()))
+        if (!world.isAirBlock(pos.up()))
         {
             return false;
         }
         else
         {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
+            IBlockState iblockstate = world.getBlockState(pos);
             Block block = iblockstate.getBlock();
 
             if (block == Blocks.chest)
             {
-                TileEntity tileentity = worldIn.getTileEntity(pos);
+                TileEntity tileentity = world.getTileEntity(pos);
 
 	            return tileentity instanceof TileEntityChest && ((TileEntityChest) tileentity).numPlayersUsing < 1;
             }

@@ -35,22 +35,21 @@ public class BlockNetherWart extends BlockBush
         return ground == Blocks.soul_sand;
     }
 
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
-    {
-        return this.canPlaceBlockOn(worldIn.getBlockState(pos.down()).getBlock());
+    public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
+        return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
         int i = state.getValue(AGE).intValue();
 
         if (i < 3 && rand.nextInt(10) == 0)
         {
             state = state.withProperty(AGE, Integer.valueOf(i + 1));
-            worldIn.setBlockState(pos, state, 2);
+            world.setBlockState(pos, state, 2);
         }
 
-        super.updateTick(worldIn, pos, state, rand);
+        super.updateTick(world, pos, state, rand);
     }
 
     /**
@@ -59,25 +58,25 @@ public class BlockNetherWart extends BlockBush
      * @param chance The chance that each Item is actually spawned (1.0 = always, 0.0 = never)
      * @param fortune The player's fortune level
      */
-    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+    public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
             int i = 1;
 
             if (state.getValue(AGE).intValue() >= 3)
             {
-                i = 2 + worldIn.rand.nextInt(3);
+                i = 2 + world.rand.nextInt(3);
 
                 if (fortune > 0)
                 {
-                    i += worldIn.rand.nextInt(fortune + 1);
+                    i += world.rand.nextInt(fortune + 1);
                 }
             }
 
             for (int j = 0; j < i; ++j)
             {
-                spawnAsEntity(worldIn, pos, new ItemStack(Items.nether_wart));
+                spawnAsEntity(world, pos, new ItemStack(Items.nether_wart));
             }
         }
     }
@@ -103,7 +102,7 @@ public class BlockNetherWart extends BlockBush
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return Items.nether_wart;
     }

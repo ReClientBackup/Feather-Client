@@ -22,7 +22,7 @@ public class WorldGenDungeons extends WorldGenerator
     private static final String[] SPAWNERTYPES = new String[] {"Skeleton", "Zombie", "Zombie", "Spider"};
     private static final List<WeightedRandomChestContent> CHESTCONTENT = Lists.newArrayList(new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 10), new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 4, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 1, 10), new WeightedRandomChestContent(Items.wheat, 0, 1, 4, 10), new WeightedRandomChestContent(Items.gunpowder, 0, 1, 4, 10), new WeightedRandomChestContent(Items.string, 0, 1, 4, 10), new WeightedRandomChestContent(Items.bucket, 0, 1, 1, 10), new WeightedRandomChestContent(Items.golden_apple, 0, 1, 1, 1), new WeightedRandomChestContent(Items.redstone, 0, 1, 4, 10), new WeightedRandomChestContent(Items.record_13, 0, 1, 1, 4), new WeightedRandomChestContent(Items.record_cat, 0, 1, 1, 4), new WeightedRandomChestContent(Items.name_tag, 0, 1, 1, 10), new WeightedRandomChestContent(Items.golden_horse_armor, 0, 1, 1, 2), new WeightedRandomChestContent(Items.iron_horse_armor, 0, 1, 1, 5), new WeightedRandomChestContent(Items.diamond_horse_armor, 0, 1, 1, 1));
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         int i = 3;
         int j = rand.nextInt(2) + 2;
@@ -42,7 +42,7 @@ public class WorldGenDungeons extends WorldGenerator
                 for (int i3 = l1; i3 <= i2; ++i3)
                 {
                     BlockPos blockpos = position.add(k2, l2, i3);
-                    Material material = worldIn.getBlockState(blockpos).getBlock().getMaterial();
+                    Material material = world.getBlockState(blockpos).getBlock().getMaterial();
                     boolean flag = material.isSolid();
 
                     if (l2 == -1 && !flag)
@@ -55,7 +55,7 @@ public class WorldGenDungeons extends WorldGenerator
                         return false;
                     }
 
-                    if ((k2 == k || k2 == l || i3 == l1 || i3 == i2) && l2 == 0 && worldIn.isAirBlock(blockpos) && worldIn.isAirBlock(blockpos.up()))
+                    if ((k2 == k || k2 == l || i3 == l1 || i3 == i2) && l2 == 0 && world.isAirBlock(blockpos) && world.isAirBlock(blockpos.up()))
                     {
                         ++j2;
                     }
@@ -75,24 +75,24 @@ public class WorldGenDungeons extends WorldGenerator
 
                         if (k3 != k && i4 != -1 && k4 != l1 && k3 != l && i4 != 4 && k4 != i2)
                         {
-                            if (worldIn.getBlockState(blockpos1).getBlock() != Blocks.chest)
+                            if (world.getBlockState(blockpos1).getBlock() != Blocks.chest)
                             {
-                                worldIn.setBlockToAir(blockpos1);
+                                world.setBlockToAir(blockpos1);
                             }
                         }
-                        else if (blockpos1.getY() >= 0 && !worldIn.getBlockState(blockpos1.down()).getBlock().getMaterial().isSolid())
+                        else if (blockpos1.getY() >= 0 && !world.getBlockState(blockpos1.down()).getBlock().getMaterial().isSolid())
                         {
-                            worldIn.setBlockToAir(blockpos1);
+                            world.setBlockToAir(blockpos1);
                         }
-                        else if (worldIn.getBlockState(blockpos1).getBlock().getMaterial().isSolid() && worldIn.getBlockState(blockpos1).getBlock() != Blocks.chest)
+                        else if (world.getBlockState(blockpos1).getBlock().getMaterial().isSolid() && world.getBlockState(blockpos1).getBlock() != Blocks.chest)
                         {
                             if (i4 == -1 && rand.nextInt(4) != 0)
                             {
-                                worldIn.setBlockState(blockpos1, Blocks.mossy_cobblestone.getDefaultState(), 2);
+                                world.setBlockState(blockpos1, Blocks.mossy_cobblestone.getDefaultState(), 2);
                             }
                             else
                             {
-                                worldIn.setBlockState(blockpos1, Blocks.cobblestone.getDefaultState(), 2);
+                                world.setBlockState(blockpos1, Blocks.cobblestone.getDefaultState(), 2);
                             }
                         }
                     }
@@ -108,13 +108,13 @@ public class WorldGenDungeons extends WorldGenerator
                     int j5 = position.getZ() + rand.nextInt(k1 * 2 + 1) - k1;
                     BlockPos blockpos2 = new BlockPos(l4, i5, j5);
 
-                    if (worldIn.isAirBlock(blockpos2))
+                    if (world.isAirBlock(blockpos2))
                     {
                         int j3 = 0;
 
                         for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
                         {
-                            if (worldIn.getBlockState(blockpos2.offset(enumfacing)).getBlock().getMaterial().isSolid())
+                            if (world.getBlockState(blockpos2.offset(enumfacing)).getBlock().getMaterial().isSolid())
                             {
                                 ++j3;
                             }
@@ -122,9 +122,9 @@ public class WorldGenDungeons extends WorldGenerator
 
                         if (j3 == 1)
                         {
-                            worldIn.setBlockState(blockpos2, Blocks.chest.correctFacing(worldIn, blockpos2, Blocks.chest.getDefaultState()), 2);
+                            world.setBlockState(blockpos2, Blocks.chest.correctFacing(world, blockpos2, Blocks.chest.getDefaultState()), 2);
                             List<WeightedRandomChestContent> list = WeightedRandomChestContent.func_177629_a(CHESTCONTENT, Items.enchanted_book.getRandom(rand));
-                            TileEntity tileentity1 = worldIn.getTileEntity(blockpos2);
+                            TileEntity tileentity1 = world.getTileEntity(blockpos2);
 
                             if (tileentity1 instanceof TileEntityChest)
                             {
@@ -137,8 +137,8 @@ public class WorldGenDungeons extends WorldGenerator
                 }
             }
 
-            worldIn.setBlockState(position, Blocks.mob_spawner.getDefaultState(), 2);
-            TileEntity tileentity = worldIn.getTileEntity(position);
+            world.setBlockState(position, Blocks.mob_spawner.getDefaultState(), 2);
+            TileEntity tileentity = world.getTileEntity(position);
 
             if (tileentity instanceof TileEntityMobSpawner)
             {

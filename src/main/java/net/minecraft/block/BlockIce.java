@@ -30,7 +30,7 @@ public class BlockIce extends BlockBreakable
         return EnumWorldBlockLayer.TRANSLUCENT;
     }
 
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
     {
         player.triggerAchievement(StatList.mineBlockStatArray[Block.getIdFromBlock(this)]);
         player.addExhaustion(0.025F);
@@ -41,24 +41,24 @@ public class BlockIce extends BlockBreakable
 
             if (itemstack != null)
             {
-                spawnAsEntity(worldIn, pos, itemstack);
+                spawnAsEntity(world, pos, itemstack);
             }
         }
         else
         {
-            if (worldIn.provider.doesWaterVaporize())
+            if (world.provider.doesWaterVaporize())
             {
-                worldIn.setBlockToAir(pos);
+                world.setBlockToAir(pos);
                 return;
             }
 
             int i = EnchantmentHelper.getFortuneModifier(player);
-            this.dropBlockAsItem(worldIn, pos, state, i);
-            Material material = worldIn.getBlockState(pos.down()).getBlock().getMaterial();
+            this.dropBlockAsItem(world, pos, state, i);
+            Material material = world.getBlockState(pos.down()).getBlock().getMaterial();
 
             if (material.blocksMovement() || material.isLiquid())
             {
-                worldIn.setBlockState(pos, Blocks.flowing_water.getDefaultState());
+                world.setBlockState(pos, Blocks.flowing_water.getDefaultState());
             }
         }
     }
@@ -71,18 +71,18 @@ public class BlockIce extends BlockBreakable
         return 0;
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - this.getLightOpacity())
+        if (world.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - this.getLightOpacity())
         {
-            if (worldIn.provider.doesWaterVaporize())
+            if (world.provider.doesWaterVaporize())
             {
-                worldIn.setBlockToAir(pos);
+                world.setBlockToAir(pos);
             }
             else
             {
-                this.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
-                worldIn.setBlockState(pos, Blocks.water.getDefaultState());
+                this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+                world.setBlockState(pos, Blocks.water.getDefaultState());
             }
         }
     }

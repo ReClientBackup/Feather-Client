@@ -47,9 +47,9 @@ public class WorldChunkManager
         this.biomeIndexLayer = agenlayer[1];
     }
 
-    public WorldChunkManager(World worldIn)
+    public WorldChunkManager(World world)
     {
-        this(worldIn.getSeed(), worldIn.getWorldInfo().getTerrainType(), worldIn.getWorldInfo().getGeneratorOptions());
+        this(world.getSeed(), world.getWorldInfo().getTerrainType(), world.getWorldInfo().getGeneratorOptions());
     }
 
     public List<BiomeGenBase> getBiomesToSpawnIn()

@@ -39,7 +39,7 @@ public class ItemFishFood extends ItemFood
         return ItemFishFood.FishType.byItemStack(stack) == ItemFishFood.FishType.PUFFERFISH ? PotionHelper.pufferfishEffect : null;
     }
 
-    protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
+    protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player)
     {
         ItemFishFood.FishType itemfishfood$fishtype = ItemFishFood.FishType.byItemStack(stack);
 
@@ -50,7 +50,7 @@ public class ItemFishFood extends ItemFood
             player.addPotionEffect(new PotionEffect(Potion.confusion.id, 300, 1));
         }
 
-        super.onFoodEaten(stack, worldIn, player);
+        super.onFoodEaten(stack, world, player);
     }
 
     /**

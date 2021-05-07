@@ -37,14 +37,14 @@ public class BiomeGenMutated extends BiomeGenBase
         this.maxHeight = biome.maxHeight + 0.2F;
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
-        this.baseBiome.theBiomeDecorator.decorate(worldIn, rand, this, pos);
+        this.baseBiome.theBiomeDecorator.decorate(world, rand, this, pos);
     }
 
-    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
+    public void genTerrainBlocks(World world, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
     {
-        this.baseBiome.genTerrainBlocks(worldIn, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
+        this.baseBiome.genTerrainBlocks(world, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
     }
 
     /**

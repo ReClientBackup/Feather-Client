@@ -300,16 +300,14 @@ public class WorldClient extends World
         return this.mc.gameSettings.renderDistanceChunks;
     }
 
-    public void doVoidFogParticles(int p_73029_1_, int p_73029_2_, int p_73029_3_)
-    {
+    public void doVoidFogParticles(int p_73029_1_, int p_73029_2_, int p_73029_3_) {
         int i = 16;
         Random random = new Random();
         ItemStack itemstack = this.mc.player.getHeldItem();
         boolean flag = this.mc.playerController.getCurrentGameType() == WorldSettings.GameType.CREATIVE && itemstack != null && Block.getBlockFromItem(itemstack.getItem()) == Blocks.barrier;
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-        for (int j = 0; j < 1000; ++j)
-        {
+        for (int j = 0; j < 1000; ++j) {
             int k = p_73029_1_ + this.rand.nextInt(i) - this.rand.nextInt(i);
             int l = p_73029_2_ + this.rand.nextInt(i) - this.rand.nextInt(i);
             int i1 = p_73029_3_ + this.rand.nextInt(i) - this.rand.nextInt(i);
@@ -317,8 +315,7 @@ public class WorldClient extends World
             IBlockState iblockstate = this.getBlockState(blockpos$mutableblockpos);
             iblockstate.getBlock().randomDisplayTick(this, blockpos$mutableblockpos, iblockstate, random);
 
-            if (flag && iblockstate.getBlock() == Blocks.barrier)
-            {
+            if (flag && iblockstate.getBlock() == Blocks.barrier) {
                 this.spawnParticle(EnumParticleTypes.BARRIER, (float)k + 0.5F, (float)l + 0.5F, (float)i1 + 0.5F, 0.0D, 0.0D, 0.0D);
             }
         }

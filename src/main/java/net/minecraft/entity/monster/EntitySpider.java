@@ -30,9 +30,9 @@ import net.minecraft.world.World;
 
 public class EntitySpider extends EntityMob
 {
-    public EntitySpider(World worldIn)
+    public EntitySpider(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(1.4F, 0.9F);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
@@ -57,9 +57,9 @@ public class EntitySpider extends EntityMob
     /**
      * Returns new PathNavigateGround instance
      */
-    protected PathNavigate getNewNavigator(World worldIn)
+    protected PathNavigate getNewNavigator(World world)
     {
-        return new PathNavigateClimber(this, worldIn);
+        return new PathNavigateClimber(this, world);
     }
 
     protected void entityInit()
@@ -158,9 +158,9 @@ public class EntitySpider extends EntityMob
         return EnumCreatureAttribute.ARTHROPOD;
     }
 
-    public boolean isPotionApplicable(PotionEffect potioneffectIn)
+    public boolean isPotionApplicable(PotionEffect potionEffect)
     {
-        return potioneffectIn.getPotionID() != Potion.poison.id && super.isPotionApplicable(potioneffectIn);
+        return potionEffect.getPotionID() != Potion.poison.id && super.isPotionApplicable(potionEffect);
     }
 
     /**

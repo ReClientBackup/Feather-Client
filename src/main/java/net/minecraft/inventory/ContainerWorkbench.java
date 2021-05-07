@@ -18,9 +18,9 @@ public class ContainerWorkbench extends Container
     /** Position of the workbench */
     private final BlockPos pos;
 
-    public ContainerWorkbench(InventoryPlayer playerInventory, World worldIn, BlockPos posIn)
+    public ContainerWorkbench(InventoryPlayer playerInventory, World world, BlockPos posIn)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
         this.pos = posIn;
         this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 0, 124, 35));
 
@@ -59,9 +59,9 @@ public class ContainerWorkbench extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer playerIn)
+    public void onContainerClosed(EntityPlayer player)
     {
-        super.onContainerClosed(playerIn);
+        super.onContainerClosed(player);
 
         if (!this.worldObj.isRemote)
         {
@@ -71,21 +71,21 @@ public class ContainerWorkbench extends Container
 
                 if (itemstack != null)
                 {
-                    playerIn.dropPlayerItemWithRandomChoice(itemstack, false);
+                    player.dropPlayerItemWithRandomChoice(itemstack);
                 }
             }
         }
     }
 
-    public boolean canInteractWith(EntityPlayer playerIn)
+    public boolean canInteractWith(EntityPlayer player)
     {
-        return this.worldObj.getBlockState(this.pos).getBlock() == Blocks.crafting_table && playerIn.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+        return this.worldObj.getBlockState(this.pos).getBlock() == Blocks.crafting_table && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     /**
      * Take a stack from the specified inventory slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    public ItemStack transferStackInSlot(EntityPlayer player, int index)
     {
         ItemStack itemstack = null;
         Slot slot = this.inventorySlots.get(index);
@@ -137,7 +137,7 @@ public class ContainerWorkbench extends Container
                 return null;
             }
 
-            slot.onPickupFromSlot(playerIn, itemstack1);
+            slot.onPickupFromSlot(player, itemstack1);
         }
 
         return itemstack;

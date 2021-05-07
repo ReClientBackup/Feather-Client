@@ -27,29 +27,29 @@ public class EntityLightningBolt extends EntityWeatherEffect
      */
     private int boltLivingTime;
 
-    public EntityLightningBolt(World worldIn, double posX, double posY, double posZ)
+    public EntityLightningBolt(World world, double posX, double posY, double posZ)
     {
-        super(worldIn);
+        super(world);
         this.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
         this.lightningState = 2;
         this.boltVertex = this.rand.nextLong();
         this.boltLivingTime = this.rand.nextInt(3) + 1;
         BlockPos blockpos = new BlockPos(this);
 
-        if (!worldIn.isRemote && worldIn.getGameRules().getGameRuleBooleanValue("doFireTick") && (worldIn.getDifficulty() == EnumDifficulty.NORMAL || worldIn.getDifficulty() == EnumDifficulty.HARD) && worldIn.isAreaLoaded(blockpos, 10))
+        if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doFireTick") && (world.getDifficulty() == EnumDifficulty.NORMAL || world.getDifficulty() == EnumDifficulty.HARD) && world.isAreaLoaded(blockpos, 10))
         {
-            if (worldIn.getBlockState(blockpos).getBlock().getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(worldIn, blockpos))
+            if (world.getBlockState(blockpos).getBlock().getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(world, blockpos))
             {
-                worldIn.setBlockState(blockpos, Blocks.fire.getDefaultState());
+                world.setBlockState(blockpos, Blocks.fire.getDefaultState());
             }
 
             for (int i = 0; i < 4; ++i)
             {
                 BlockPos blockpos1 = blockpos.add(this.rand.nextInt(3) - 1, this.rand.nextInt(3) - 1, this.rand.nextInt(3) - 1);
 
-                if (worldIn.getBlockState(blockpos1).getBlock().getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(worldIn, blockpos1))
+                if (world.getBlockState(blockpos1).getBlock().getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(world, blockpos1))
                 {
-                    worldIn.setBlockState(blockpos1, Blocks.fire.getDefaultState());
+                    world.setBlockState(blockpos1, Blocks.fire.getDefaultState());
                 }
             }
         }

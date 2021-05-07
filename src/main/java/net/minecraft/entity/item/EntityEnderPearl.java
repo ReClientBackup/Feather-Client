@@ -19,15 +19,15 @@ public class EntityEnderPearl extends EntityThrowable
         super(p_i46455_1_);
     }
 
-    public EntityEnderPearl(World worldIn, EntityLivingBase p_i1783_2_)
+    public EntityEnderPearl(World world, EntityLivingBase p_i1783_2_)
     {
-        super(worldIn, p_i1783_2_);
+        super(world, p_i1783_2_);
         this.field_181555_c = p_i1783_2_;
     }
 
-    public EntityEnderPearl(World worldIn, double p_i1784_2_, double p_i1784_4_, double p_i1784_6_)
+    public EntityEnderPearl(World world, double p_i1784_2_, double p_i1784_4_, double p_i1784_6_)
     {
-        super(worldIn, p_i1784_2_, p_i1784_4_, p_i1784_6_);
+        super(world, p_i1784_2_, p_i1784_4_, p_i1784_6_);
     }
 
     /**

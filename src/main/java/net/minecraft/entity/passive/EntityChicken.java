@@ -33,9 +33,9 @@ public class EntityChicken extends EntityAnimal
     public int timeUntilNextEgg;
     public boolean chickenJockey;
 
-    public EntityChicken(World worldIn)
+    public EntityChicken(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.4F, 0.7F);
         this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         this.tasks.addTask(0, new EntityAISwimming(this));

@@ -94,13 +94,13 @@ public class ItemMinecart extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
 
         if (BlockRailBase.isRailBlock(iblockstate))
         {
-            if (!worldIn.isRemote)
+            if (!world.isRemote)
             {
                 BlockRailBase.EnumRailDirection blockrailbase$enumraildirection = iblockstate.getBlock() instanceof BlockRailBase ? iblockstate.getValue(((BlockRailBase)iblockstate.getBlock()).getShapeProperty()) : BlockRailBase.EnumRailDirection.NORTH_SOUTH;
                 double d0 = 0.0D;
@@ -110,14 +110,14 @@ public class ItemMinecart extends Item
                     d0 = 0.5D;
                 }
 
-                EntityMinecart entityminecart = EntityMinecart.func_180458_a(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.0625D + d0, (double)pos.getZ() + 0.5D, this.minecartType);
+                EntityMinecart entityminecart = EntityMinecart.func_180458_a(world, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.0625D + d0, (double)pos.getZ() + 0.5D, this.minecartType);
 
                 if (stack.hasDisplayName())
                 {
                     entityminecart.setCustomNameTag(stack.getDisplayName());
                 }
 
-                worldIn.spawnEntityInWorld(entityminecart);
+                world.spawnEntityInWorld(entityminecart);
             }
 
             --stack.stackSize;

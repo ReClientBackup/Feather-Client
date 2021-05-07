@@ -29,9 +29,9 @@ public class EntityPig extends EntityAnimal
     /** AI task for player control. */
     private final EntityAIControlledByPlayer aiControlledByPlayer;
 
-    public EntityPig(World worldIn)
+    public EntityPig(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.9F, 0.9F);
         ((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));

@@ -127,7 +127,7 @@ public class EntityList
     /**
      * Create a new instance of an entity in the world by using the entity name.
      */
-    public static Entity createEntityByName(String entityName, World worldIn)
+    public static Entity createEntityByName(String entityName, World world)
     {
         Entity entity = null;
 
@@ -137,7 +137,7 @@ public class EntityList
 
             if (oclass != null)
             {
-                entity = oclass.getConstructor(new Class[] {World.class}).newInstance(worldIn);
+                entity = oclass.getConstructor(new Class[] {World.class}).newInstance(world);
             }
         }
         catch (Exception exception)
@@ -153,7 +153,7 @@ public class EntityList
      *  
      * @param nbt The NBT compound
      */
-    public static Entity createEntityFromNBT(NBTTagCompound nbt, World worldIn)
+    public static Entity createEntityFromNBT(NBTTagCompound nbt, World world)
     {
         Entity entity = null;
 
@@ -169,7 +169,7 @@ public class EntityList
 
             if (oclass != null)
             {
-                entity = oclass.getConstructor(new Class[] {World.class}).newInstance(worldIn);
+                entity = oclass.getConstructor(new Class[] {World.class}).newInstance(world);
             }
         }
         catch (Exception exception)
@@ -192,7 +192,7 @@ public class EntityList
     /**
      * Create a new instance of an entity in the world by using an entity ID.
      */
-    public static Entity createEntityByID(int entityID, World worldIn)
+    public static Entity createEntityByID(int entityID, World world)
     {
         Entity entity = null;
 
@@ -202,7 +202,7 @@ public class EntityList
 
             if (oclass != null)
             {
-                entity = oclass.getConstructor(new Class[] {World.class}).newInstance(worldIn);
+                entity = oclass.getConstructor(new Class[] {World.class}).newInstance(world);
             }
         }
         catch (Exception exception)

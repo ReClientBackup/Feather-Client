@@ -66,13 +66,13 @@ public class BiomeGenJungle extends BiomeGenBase
         return rand.nextInt(4) == 0 ? new WorldGenTallGrass(BlockTallGrass.EnumType.FERN) : new WorldGenTallGrass(BlockTallGrass.EnumType.GRASS);
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
-        super.decorate(worldIn, rand, pos);
+        super.decorate(world, rand, pos);
         int i = rand.nextInt(16) + 8;
         int j = rand.nextInt(16) + 8;
-        int k = rand.nextInt(worldIn.getHeight(pos.add(i, 0, j)).getY() * 2);
-        (new WorldGenMelon()).generate(worldIn, rand, pos.add(i, k, j));
+        int k = rand.nextInt(world.getHeight(pos.add(i, 0, j)).getY() * 2);
+        (new WorldGenMelon()).generate(world, rand, pos.add(i, k, j));
         WorldGenVines worldgenvines = new WorldGenVines();
 
         for (j = 0; j < 50; ++j)
@@ -80,7 +80,7 @@ public class BiomeGenJungle extends BiomeGenBase
             k = rand.nextInt(16) + 8;
             int l = 128;
             int i1 = rand.nextInt(16) + 8;
-            worldgenvines.generate(worldIn, rand, pos.add(k, 128, i1));
+            worldgenvines.generate(world, rand, pos.add(k, 128, i1));
         }
     }
 }

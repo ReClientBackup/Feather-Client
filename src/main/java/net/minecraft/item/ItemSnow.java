@@ -24,26 +24,26 @@ public class ItemSnow extends ItemBlock
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (stack.stackSize == 0)
         {
             return false;
         }
-        else if (!playerIn.canPlayerEdit(pos, side, stack))
+        else if (!player.canPlayerEdit(pos, side, stack))
         {
             return false;
         }
         else
         {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
+            IBlockState iblockstate = world.getBlockState(pos);
             Block block = iblockstate.getBlock();
             BlockPos blockpos = pos;
 
-            if ((side != EnumFacing.UP || block != this.block) && !block.isReplaceable(worldIn, pos))
+            if ((side != EnumFacing.UP || block != this.block) && !block.isReplaceable(world, pos))
             {
                 blockpos = pos.offset(side);
-                iblockstate = worldIn.getBlockState(blockpos);
+                iblockstate = world.getBlockState(blockpos);
                 block = iblockstate.getBlock();
             }
 
@@ -54,18 +54,18 @@ public class ItemSnow extends ItemBlock
                 if (i <= 7)
                 {
                     IBlockState iblockstate1 = iblockstate.withProperty(BlockSnow.LAYERS, Integer.valueOf(i + 1));
-                    AxisAlignedBB axisalignedbb = this.block.getCollisionBoundingBox(worldIn, blockpos, iblockstate1);
+                    AxisAlignedBB axisalignedbb = this.block.getCollisionBoundingBox(world, blockpos, iblockstate1);
 
-                    if (axisalignedbb != null && worldIn.checkNoEntityCollision(axisalignedbb) && worldIn.setBlockState(blockpos, iblockstate1, 2))
+                    if (axisalignedbb != null && world.checkNoEntityCollision(axisalignedbb) && world.setBlockState(blockpos, iblockstate1, 2))
                     {
-                        worldIn.playSoundEffect((float)blockpos.getX() + 0.5F, (float)blockpos.getY() + 0.5F, (float)blockpos.getZ() + 0.5F, this.block.stepSound.getPlaceSound(), (this.block.stepSound.getVolume() + 1.0F) / 2.0F, this.block.stepSound.getFrequency() * 0.8F);
+                        world.playSoundEffect((float)blockpos.getX() + 0.5F, (float)blockpos.getY() + 0.5F, (float)blockpos.getZ() + 0.5F, this.block.stepSound.getPlaceSound(), (this.block.stepSound.getVolume() + 1.0F) / 2.0F, this.block.stepSound.getFrequency() * 0.8F);
                         --stack.stackSize;
                         return true;
                     }
                 }
             }
 
-            return super.onItemUse(stack, playerIn, worldIn, blockpos, side, hitX, hitY, hitZ);
+            return super.onItemUse(stack, player, world, blockpos, side, hitX, hitY, hitZ);
         }
     }
 

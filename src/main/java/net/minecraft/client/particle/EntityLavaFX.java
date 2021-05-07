@@ -10,9 +10,9 @@ public class EntityLavaFX extends EntityFX
 {
     private final float lavaParticleScale;
 
-    protected EntityLavaFX(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn)
+    protected EntityLavaFX(World world, double xCoordIn, double yCoordIn, double zCoordIn)
     {
-        super(worldIn, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
+        super(world, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
         this.motionX *= 0.800000011920929D;
         this.motionY *= 0.800000011920929D;
         this.motionZ *= 0.800000011920929D;
@@ -91,9 +91,9 @@ public class EntityLavaFX extends EntityFX
 
     public static class Factory implements IParticleFactory
     {
-        public EntityFX getEntityFX(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
+        public EntityFX getEntityFX(int particleID, World world, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
         {
-            return new EntityLavaFX(worldIn, xCoordIn, yCoordIn, zCoordIn);
+            return new EntityLavaFX(world, xCoordIn, yCoordIn, zCoordIn);
         }
     }
 }

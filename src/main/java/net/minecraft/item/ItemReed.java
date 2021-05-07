@@ -24,21 +24,21 @@ public class ItemReed extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         Block block = iblockstate.getBlock();
 
         if (block == Blocks.snow_layer && iblockstate.getValue(BlockSnow.LAYERS).intValue() < 1)
         {
             side = EnumFacing.UP;
         }
-        else if (!block.isReplaceable(worldIn, pos))
+        else if (!block.isReplaceable(world, pos))
         {
             pos = pos.offset(side);
         }
 
-        if (!playerIn.canPlayerEdit(pos, side, stack))
+        if (!player.canPlayerEdit(pos, side, stack))
         {
             return false;
         }
@@ -48,21 +48,21 @@ public class ItemReed extends Item
         }
         else
         {
-            if (worldIn.canBlockBePlaced(this.block, pos, false, side, null, stack))
+            if (world.canBlockBePlaced(this.block, pos, false, side, null))
             {
-                IBlockState iblockstate1 = this.block.onBlockPlaced(worldIn, pos, side, hitX, hitY, hitZ, 0, playerIn);
+                IBlockState iblockstate1 = this.block.onBlockPlaced(world, pos, side, hitX, hitY, hitZ, 0, player);
 
-                if (worldIn.setBlockState(pos, iblockstate1, 3))
+                if (world.setBlockState(pos, iblockstate1, 3))
                 {
-                    iblockstate1 = worldIn.getBlockState(pos);
+                    iblockstate1 = world.getBlockState(pos);
 
                     if (iblockstate1.getBlock() == this.block)
                     {
-                        ItemBlock.setTileEntityNBT(worldIn, playerIn, pos, stack);
-                        iblockstate1.getBlock().onBlockPlacedBy(worldIn, pos, iblockstate1, playerIn, stack);
+                        ItemBlock.setTileEntityNBT(world, player, pos, stack);
+                        iblockstate1.getBlock().onBlockPlacedBy(world, pos, iblockstate1, player, stack);
                     }
 
-                    worldIn.playSoundEffect((float)pos.getX() + 0.5F, (float)pos.getY() + 0.5F, (float)pos.getZ() + 0.5F, this.block.stepSound.getPlaceSound(), (this.block.stepSound.getVolume() + 1.0F) / 2.0F, this.block.stepSound.getFrequency() * 0.8F);
+                    world.playSoundEffect((float)pos.getX() + 0.5F, (float)pos.getY() + 0.5F, (float)pos.getZ() + 0.5F, this.block.stepSound.getPlaceSound(), (this.block.stepSound.getVolume() + 1.0F) / 2.0F, this.block.stepSound.getFrequency() * 0.8F);
                     --stack.stackSize;
                     return true;
                 }

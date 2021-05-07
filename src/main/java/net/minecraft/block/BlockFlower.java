@@ -36,11 +36,11 @@ public abstract class BlockFlower extends BlockBush
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
         for (BlockFlower.EnumFlowerType blockflower$enumflowertype : BlockFlower.EnumFlowerType.getTypes(this.getBlockType()))
         {
-            list.add(new ItemStack(itemIn, 1, blockflower$enumflowertype.getMeta()));
+            list.add(new ItemStack(item, 1, blockflower$enumflowertype.getMeta()));
         }
     }
 

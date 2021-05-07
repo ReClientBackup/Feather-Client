@@ -32,7 +32,7 @@ public class RecipesBanners
         {
         }
 
-        public boolean matches(InventoryCrafting inv, World worldIn)
+        public boolean matches(InventoryCrafting inv, World world)
         {
             boolean flag = false;
 
@@ -256,7 +256,7 @@ public class RecipesBanners
         {
         }
 
-        public boolean matches(InventoryCrafting inv, World worldIn)
+        public boolean matches(InventoryCrafting inv, World world)
         {
             ItemStack itemstack = null;
             ItemStack itemstack1 = null;

@@ -23,11 +23,11 @@ public class WorldGenSwamp extends WorldGenAbstractTree
         super(false);
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         int i;
 
-        for (i = rand.nextInt(4) + 5; worldIn.getBlockState(position.down()).getBlock().getMaterial() == Material.water; position = position.down())
+        for (i = rand.nextInt(4) + 5; world.getBlockState(position.down()).getBlock().getMaterial() == Material.water; position = position.down())
         {
         }
 
@@ -57,7 +57,7 @@ public class WorldGenSwamp extends WorldGenAbstractTree
                     {
                         if (j >= 0 && j < 256)
                         {
-                            Block block = worldIn.getBlockState(blockpos$mutableblockpos.func_181079_c(l, j, i1)).getBlock();
+                            Block block = world.getBlockState(blockpos$mutableblockpos.func_181079_c(l, j, i1)).getBlock();
 
                             if (block.getMaterial() != Material.air && block.getMaterial() != Material.leaves)
                             {
@@ -85,11 +85,11 @@ public class WorldGenSwamp extends WorldGenAbstractTree
             }
             else
             {
-                Block block1 = worldIn.getBlockState(position.down()).getBlock();
+                Block block1 = world.getBlockState(position.down()).getBlock();
 
                 if ((block1 == Blocks.grass || block1 == Blocks.dirt) && position.getY() < 256 - i - 1)
                 {
-                    this.func_175921_a(worldIn, position.down());
+                    this.func_175921_a(world, position.down());
 
                     for (int l1 = position.getY() - 3 + i; l1 <= position.getY() + i; ++l1)
                     {
@@ -108,9 +108,9 @@ public class WorldGenSwamp extends WorldGenAbstractTree
                                 {
                                     BlockPos blockpos = new BlockPos(k3, l1, j1);
 
-                                    if (!worldIn.getBlockState(blockpos).getBlock().isFullBlock())
+                                    if (!world.getBlockState(blockpos).getBlock().isFullBlock())
                                     {
-                                        this.setBlockAndNotifyAdequately(worldIn, blockpos, field_181649_b);
+                                        this.setBlockAndNotifyAdequately(world, blockpos, field_181649_b);
                                     }
                                 }
                             }
@@ -119,11 +119,11 @@ public class WorldGenSwamp extends WorldGenAbstractTree
 
                     for (int i2 = 0; i2 < i; ++i2)
                     {
-                        Block block2 = worldIn.getBlockState(position.up(i2)).getBlock();
+                        Block block2 = world.getBlockState(position.up(i2)).getBlock();
 
                         if (block2.getMaterial() == Material.air || block2.getMaterial() == Material.leaves || block2 == Blocks.flowing_water || block2 == Blocks.water)
                         {
-                            this.setBlockAndNotifyAdequately(worldIn, position.up(i2), field_181648_a);
+                            this.setBlockAndNotifyAdequately(world, position.up(i2), field_181648_a);
                         }
                     }
 
@@ -139,31 +139,31 @@ public class WorldGenSwamp extends WorldGenAbstractTree
                             {
                                 blockpos$mutableblockpos1.func_181079_c(i4, j2, j4);
 
-                                if (worldIn.getBlockState(blockpos$mutableblockpos1).getBlock().getMaterial() == Material.leaves)
+                                if (world.getBlockState(blockpos$mutableblockpos1).getBlock().getMaterial() == Material.leaves)
                                 {
                                     BlockPos blockpos3 = blockpos$mutableblockpos1.west();
                                     BlockPos blockpos4 = blockpos$mutableblockpos1.east();
                                     BlockPos blockpos1 = blockpos$mutableblockpos1.north();
                                     BlockPos blockpos2 = blockpos$mutableblockpos1.south();
 
-                                    if (rand.nextInt(4) == 0 && worldIn.getBlockState(blockpos3).getBlock().getMaterial() == Material.air)
+                                    if (rand.nextInt(4) == 0 && world.getBlockState(blockpos3).getBlock().getMaterial() == Material.air)
                                     {
-                                        this.func_181647_a(worldIn, blockpos3, BlockVine.EAST);
+                                        this.func_181647_a(world, blockpos3, BlockVine.EAST);
                                     }
 
-                                    if (rand.nextInt(4) == 0 && worldIn.getBlockState(blockpos4).getBlock().getMaterial() == Material.air)
+                                    if (rand.nextInt(4) == 0 && world.getBlockState(blockpos4).getBlock().getMaterial() == Material.air)
                                     {
-                                        this.func_181647_a(worldIn, blockpos4, BlockVine.WEST);
+                                        this.func_181647_a(world, blockpos4, BlockVine.WEST);
                                     }
 
-                                    if (rand.nextInt(4) == 0 && worldIn.getBlockState(blockpos1).getBlock().getMaterial() == Material.air)
+                                    if (rand.nextInt(4) == 0 && world.getBlockState(blockpos1).getBlock().getMaterial() == Material.air)
                                     {
-                                        this.func_181647_a(worldIn, blockpos1, BlockVine.SOUTH);
+                                        this.func_181647_a(world, blockpos1, BlockVine.SOUTH);
                                     }
 
-                                    if (rand.nextInt(4) == 0 && worldIn.getBlockState(blockpos2).getBlock().getMaterial() == Material.air)
+                                    if (rand.nextInt(4) == 0 && world.getBlockState(blockpos2).getBlock().getMaterial() == Material.air)
                                     {
-                                        this.func_181647_a(worldIn, blockpos2, BlockVine.NORTH);
+                                        this.func_181647_a(world, blockpos2, BlockVine.NORTH);
                                     }
                                 }
                             }

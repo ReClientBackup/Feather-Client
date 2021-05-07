@@ -37,23 +37,23 @@ public class BlockDaylightDetector extends BlockContainer
         this.setUnlocalizedName("daylightDetector");
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
     {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.375F, 1.0F);
     }
 
-    public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+    public int isProvidingWeakPower(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side)
     {
         return state.getValue(POWER).intValue();
     }
 
-    public void updatePower(World worldIn, BlockPos pos)
+    public void updatePower(World world, BlockPos pos)
     {
-        if (!worldIn.provider.getHasNoSky())
+        if (!world.provider.getHasNoSky())
         {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
-            int i = worldIn.getLightFor(EnumSkyBlock.SKY, pos) - worldIn.getSkylightSubtracted();
-            float f = worldIn.getCelestialAngleRadians(1.0F);
+            IBlockState iblockstate = world.getBlockState(pos);
+            int i = world.getLightFor(EnumSkyBlock.SKY, pos) - world.getSkylightSubtracted();
+            float f = world.getCelestialAngleRadians(1.0F);
             float f1 = f < (float)Math.PI ? 0.0F : ((float)Math.PI * 2F);
             f = f + (f1 - f) * 0.2F;
             i = Math.round((float)i * MathHelper.cos(f));
@@ -66,16 +66,16 @@ public class BlockDaylightDetector extends BlockContainer
 
             if (iblockstate.getValue(POWER).intValue() != i)
             {
-                worldIn.setBlockState(pos, iblockstate.withProperty(POWER, Integer.valueOf(i)), 3);
+                world.setBlockState(pos, iblockstate.withProperty(POWER, Integer.valueOf(i)), 3);
             }
         }
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (playerIn.isAllowEdit())
+        if (player.isAllowEdit())
         {
-            if (worldIn.isRemote)
+            if (world.isRemote)
             {
                 return true;
             }
@@ -83,13 +83,13 @@ public class BlockDaylightDetector extends BlockContainer
             {
                 if (this.inverted)
                 {
-                    worldIn.setBlockState(pos, Blocks.daylight_detector.getDefaultState().withProperty(POWER, state.getValue(POWER)), 4);
-                    Blocks.daylight_detector.updatePower(worldIn, pos);
+                    world.setBlockState(pos, Blocks.daylight_detector.getDefaultState().withProperty(POWER, state.getValue(POWER)), 4);
+                    Blocks.daylight_detector.updatePower(world, pos);
                 }
                 else
                 {
-                    worldIn.setBlockState(pos, Blocks.daylight_detector_inverted.getDefaultState().withProperty(POWER, state.getValue(POWER)), 4);
-                    Blocks.daylight_detector_inverted.updatePower(worldIn, pos);
+                    world.setBlockState(pos, Blocks.daylight_detector_inverted.getDefaultState().withProperty(POWER, state.getValue(POWER)), 4);
+                    Blocks.daylight_detector_inverted.updatePower(world, pos);
                 }
 
                 return true;
@@ -97,7 +97,7 @@ public class BlockDaylightDetector extends BlockContainer
         }
         else
         {
-            return super.onBlockActivated(worldIn, pos, state, playerIn, side, hitX, hitY, hitZ);
+            return super.onBlockActivated(world, pos, state, player, side, hitX, hitY, hitZ);
         }
     }
 
@@ -114,7 +114,7 @@ public class BlockDaylightDetector extends BlockContainer
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return Item.getItemFromBlock(Blocks.daylight_detector);
     }
@@ -151,7 +151,7 @@ public class BlockDaylightDetector extends BlockContainer
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World worldIn, int meta)
+    public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileEntityDaylightDetector();
     }
@@ -180,11 +180,11 @@ public class BlockDaylightDetector extends BlockContainer
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
         if (!this.inverted)
         {
-            super.getSubBlocks(itemIn, tab, list);
+            super.getSubBlocks(item, tab, list);
         }
     }
 }

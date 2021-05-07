@@ -32,9 +32,9 @@ public class EntityXPOrb extends Entity
     /** Threshold color for tracking players */
     private int xpTargetColor;
 
-    public EntityXPOrb(World worldIn, double x, double y, double z, int expValue)
+    public EntityXPOrb(World world, double x, double y, double z, int expValue)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.5F, 0.5F);
         this.setPosition(x, y, z);
         this.rotationYaw = (float)(Math.random() * 360.0D);
@@ -53,9 +53,9 @@ public class EntityXPOrb extends Entity
         return false;
     }
 
-    public EntityXPOrb(World worldIn)
+    public EntityXPOrb(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.25F, 0.25F);
     }
 

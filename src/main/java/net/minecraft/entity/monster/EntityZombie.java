@@ -66,9 +66,9 @@ public class EntityZombie extends EntityMob
     /** The height of the the entity. */
     private float zombieHeight;
 
-    public EntityZombie(World worldIn)
+    public EntityZombie(World world)
     {
-        super(worldIn);
+        super(world);
         ((PathNavigateGround)this.getNavigator()).setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
@@ -324,9 +324,9 @@ public class EntityZombie extends EntityMob
         super.onUpdate();
     }
 
-    public boolean attackEntityAsMob(Entity entityIn)
+    public boolean attackEntityAsMob(Entity entity)
     {
-        boolean flag = super.attackEntityAsMob(entityIn);
+        boolean flag = super.attackEntityAsMob(entity);
 
         if (flag)
         {
@@ -334,7 +334,7 @@ public class EntityZombie extends EntityMob
 
             if (this.getHeldItem() == null && this.isBurning() && this.rand.nextFloat() < (float)i * 0.3F)
             {
-                entityIn.setFire(2 * i);
+                entity.setFire(2 * i);
             }
         }
 

@@ -29,16 +29,16 @@ public class ItemAppleGold extends ItemFood
         return stack.getMetadata() == 0 ? EnumRarity.RARE : EnumRarity.EPIC;
     }
 
-    protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
+    protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
             player.addPotionEffect(new PotionEffect(Potion.absorption.id, 2400, 0));
         }
 
         if (stack.getMetadata() > 0)
         {
-            if (!worldIn.isRemote)
+            if (!world.isRemote)
             {
                 player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 600, 4));
                 player.addPotionEffect(new PotionEffect(Potion.resistance.id, 6000, 0));
@@ -47,7 +47,7 @@ public class ItemAppleGold extends ItemFood
         }
         else
         {
-            super.onFoodEaten(stack, worldIn, player);
+            super.onFoodEaten(stack, world, player);
         }
     }
 

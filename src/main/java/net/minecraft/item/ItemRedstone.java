@@ -21,27 +21,27 @@ public class ItemRedstone extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        boolean flag = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
+        boolean flag = world.getBlockState(pos).getBlock().isReplaceable(world, pos);
         BlockPos blockpos = flag ? pos : pos.offset(side);
 
-        if (!playerIn.canPlayerEdit(blockpos, side, stack))
+        if (!player.canPlayerEdit(blockpos, side, stack))
         {
             return false;
         }
         else
         {
-            Block block = worldIn.getBlockState(blockpos).getBlock();
+            Block block = world.getBlockState(blockpos).getBlock();
 
-            if (!worldIn.canBlockBePlaced(block, blockpos, false, side, null, stack))
+            if (!world.canBlockBePlaced(block, blockpos, false, side, null))
             {
                 return false;
             }
-            else if (Blocks.redstone_wire.canPlaceBlockAt(worldIn, blockpos))
+            else if (Blocks.redstone_wire.canPlaceBlockAt(world, blockpos))
             {
                 --stack.stackSize;
-                worldIn.setBlockState(blockpos, Blocks.redstone_wire.getDefaultState());
+                world.setBlockState(blockpos, Blocks.redstone_wire.getDefaultState());
                 return true;
             }
             else

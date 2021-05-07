@@ -21,9 +21,9 @@ import net.minecraft.world.World;
 
 public class EntityCow extends EntityAnimal
 {
-    public EntityCow(World worldIn)
+    public EntityCow(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.9F, 1.3F);
         ((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -127,7 +127,7 @@ public class EntityCow extends EntityAnimal
             }
             else if (!player.inventory.addItemStackToInventory(new ItemStack(Items.milk_bucket)))
             {
-                player.dropPlayerItemWithRandomChoice(new ItemStack(Items.milk_bucket, 1, 0), false);
+                player.dropPlayerItemWithRandomChoice(new ItemStack(Items.milk_bucket, 1, 0));
             }
 
             return true;

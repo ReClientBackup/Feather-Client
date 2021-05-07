@@ -246,9 +246,9 @@ public class RenderManager
         }
     }
 
-    public void cacheActiveRenderInfo(World worldIn, FontRenderer textRendererIn, Entity livingPlayerIn, Entity pointedEntityIn, GameSettings optionsIn, float partialTicks)
+    public void cacheActiveRenderInfo(World world, FontRenderer textRendererIn, Entity livingPlayerIn, Entity pointedEntityIn, GameSettings optionsIn, float partialTicks)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
         this.options = optionsIn;
         this.livingPlayer = livingPlayerIn;
         this.pointedEntity = pointedEntityIn;
@@ -256,12 +256,12 @@ public class RenderManager
 
         if (livingPlayerIn instanceof EntityLivingBase && ((EntityLivingBase)livingPlayerIn).isPlayerSleeping())
         {
-            IBlockState iblockstate = worldIn.getBlockState(new BlockPos(livingPlayerIn));
+            IBlockState iblockstate = world.getBlockState(new BlockPos(livingPlayerIn));
             Block block = iblockstate.getBlock();
 
-            if (Reflector.callBoolean(block, Reflector.ForgeBlock_isBed, iblockstate, worldIn, new BlockPos(livingPlayerIn), livingPlayerIn))
+            if (Reflector.callBoolean(block, Reflector.ForgeBlock_isBed, iblockstate, world, new BlockPos(livingPlayerIn), livingPlayerIn))
             {
-                EnumFacing enumfacing = (EnumFacing)Reflector.call(block, Reflector.ForgeBlock_getBedDirection, new Object[] {iblockstate, worldIn, new BlockPos(livingPlayerIn)});
+                EnumFacing enumfacing = (EnumFacing)Reflector.call(block, Reflector.ForgeBlock_getBedDirection, new Object[] {iblockstate, world, new BlockPos(livingPlayerIn)});
                 int i = enumfacing.getHorizontalIndex();
                 this.playerViewY = (float)(i * 90 + 180);
                 this.playerViewX = 0.0F;
@@ -484,9 +484,9 @@ public class RenderManager
     /**
      * World sets this RenderManager's worldObj to the world provided
      */
-    public void set(World worldIn)
+    public void set(World world)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
     }
 
     public double getDistanceToCamera(double p_78714_1_, double p_78714_3_, double p_78714_5_)

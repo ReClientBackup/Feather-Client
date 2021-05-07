@@ -20,21 +20,21 @@ public class WorldGenShrub extends WorldGenTrees
         this.leavesMetadata = p_i46450_2_;
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         Block block;
 
-        while (((block = worldIn.getBlockState(position).getBlock()).getMaterial() == Material.air || block.getMaterial() == Material.leaves) && position.getY() > 0)
+        while (((block = world.getBlockState(position).getBlock()).getMaterial() == Material.air || block.getMaterial() == Material.leaves) && position.getY() > 0)
         {
             position = position.down();
         }
 
-        Block block1 = worldIn.getBlockState(position).getBlock();
+        Block block1 = world.getBlockState(position).getBlock();
 
         if (block1 == Blocks.dirt || block1 == Blocks.grass)
         {
             position = position.up();
-            this.setBlockAndNotifyAdequately(worldIn, position, this.woodMetadata);
+            this.setBlockAndNotifyAdequately(world, position, this.woodMetadata);
 
             for (int i = position.getY(); i <= position.getY() + 2; ++i)
             {
@@ -53,9 +53,9 @@ public class WorldGenShrub extends WorldGenTrees
                         {
                             BlockPos blockpos = new BlockPos(l, i, j1);
 
-                            if (!worldIn.getBlockState(blockpos).getBlock().isFullBlock())
+                            if (!world.getBlockState(blockpos).getBlock().isFullBlock())
                             {
-                                this.setBlockAndNotifyAdequately(worldIn, blockpos, this.leavesMetadata);
+                                this.setBlockAndNotifyAdequately(world, blockpos, this.leavesMetadata);
                             }
                         }
                     }

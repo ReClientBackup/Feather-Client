@@ -23,14 +23,14 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements IHo
     private int transferTicker = -1;
     private final BlockPos field_174900_c = BlockPos.ORIGIN;
 
-    public EntityMinecartHopper(World worldIn)
+    public EntityMinecartHopper(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityMinecartHopper(World worldIn, double p_i1721_2_, double p_i1721_4_, double p_i1721_6_)
+    public EntityMinecartHopper(World world, double p_i1721_2_, double p_i1721_4_, double p_i1721_6_)
     {
-        super(worldIn, p_i1721_2_, p_i1721_4_, p_i1721_6_);
+        super(world, p_i1721_2_, p_i1721_4_, p_i1721_6_);
     }
 
     public EntityMinecart.EnumMinecartType getMinecartType()
@@ -59,11 +59,11 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements IHo
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer playerIn)
+    public boolean interactFirst(EntityPlayer player)
     {
         if (!this.worldObj.isRemote)
         {
-            playerIn.displayGUIChest(this);
+            player.displayGUIChest(this);
         }
 
         return true;
@@ -231,8 +231,8 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements IHo
         return "minecraft:hopper";
     }
 
-    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer player)
     {
-        return new ContainerHopper(playerInventory, this, playerIn);
+        return new ContainerHopper(playerInventory, this, player);
     }
 }

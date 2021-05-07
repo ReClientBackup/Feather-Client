@@ -45,9 +45,9 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
     private final EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
     private final EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
 
-    public EntitySkeleton(World worldIn)
+    public EntitySkeleton(World world)
     {
-        super(worldIn);
+        super(world);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIRestrictSun(this));
         this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
@@ -59,7 +59,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
 
-        if (worldIn != null && !worldIn.isRemote)
+        if (world != null && !world.isRemote)
         {
             this.setCombatTask();
         }
@@ -106,13 +106,13 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         this.playSound("mob.skeleton.step", 0.15F, 1.0F);
     }
 
-    public boolean attackEntityAsMob(Entity entityIn)
+    public boolean attackEntityAsMob(Entity entity)
     {
-        if (super.attackEntityAsMob(entityIn))
+        if (super.attackEntityAsMob(entity))
         {
-            if (this.getSkeletonType() == 1 && entityIn instanceof EntityLivingBase)
+            if (this.getSkeletonType() == 1 && entity instanceof EntityLivingBase)
             {
-                ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(Potion.wither.id, 200));
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.wither.id, 200));
             }
 
             return true;

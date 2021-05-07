@@ -31,14 +31,14 @@ public abstract class BlockLiquid extends Block
         this.setTickRandomly(true);
     }
 
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
+    public boolean isPassable(IBlockAccess world, BlockPos pos)
     {
         return this.blockMaterial != Material.lava;
     }
 
-    public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
+    public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)
     {
-        return this.blockMaterial == Material.water ? BiomeColorHelper.getWaterColorAtPos(worldIn, pos) : 16777215;
+        return this.blockMaterial == Material.water ? BiomeColorHelper.getWaterColorAtPos(world, pos) : 16777215;
     }
 
     /**
@@ -54,14 +54,14 @@ public abstract class BlockLiquid extends Block
         return (float)(meta + 1) / 9.0F;
     }
 
-    protected int getLevel(IBlockAccess worldIn, BlockPos pos)
+    protected int getLevel(IBlockAccess world, BlockPos pos)
     {
-        return worldIn.getBlockState(pos).getBlock().getMaterial() == this.blockMaterial ? worldIn.getBlockState(pos).getValue(LEVEL).intValue() : -1;
+        return world.getBlockState(pos).getBlock().getMaterial() == this.blockMaterial ? world.getBlockState(pos).getValue(LEVEL).intValue() : -1;
     }
 
-    protected int getEffectiveFlowDecay(IBlockAccess worldIn, BlockPos pos)
+    protected int getEffectiveFlowDecay(IBlockAccess world, BlockPos pos)
     {
-        int i = this.getLevel(worldIn, pos);
+        int i = this.getLevel(world, pos);
         return i >= 8 ? 0 : i;
     }
 
@@ -86,15 +86,15 @@ public abstract class BlockLiquid extends Block
     /**
      * Whether this Block is solid on the given Side
      */
-    public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+    public boolean isBlockSolid(IBlockAccess world, BlockPos pos, EnumFacing side)
     {
-        Material material = worldIn.getBlockState(pos).getBlock().getMaterial();
-        return material != this.blockMaterial && (side == EnumFacing.UP || (material != Material.ice && super.isBlockSolid(worldIn, pos, side)));
+        Material material = world.getBlockState(pos).getBlock().getMaterial();
+        return material != this.blockMaterial && (side == EnumFacing.UP || (material != Material.ice && super.isBlockSolid(world, pos, side)));
     }
 
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
     {
-        return worldIn.getBlockState(pos).getBlock().getMaterial() != this.blockMaterial && (side == EnumFacing.UP || super.shouldSideBeRendered(worldIn, pos, side));
+        return world.getBlockState(pos).getBlock().getMaterial() != this.blockMaterial && (side == EnumFacing.UP || super.shouldSideBeRendered(world, pos, side));
     }
 
     public boolean func_176364_g(IBlockAccess blockAccess, BlockPos pos)
@@ -117,7 +117,7 @@ public abstract class BlockLiquid extends Block
         return false;
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
     {
         return null;
     }
@@ -148,21 +148,21 @@ public abstract class BlockLiquid extends Block
         return 0;
     }
 
-    protected Vec3 getFlowVector(IBlockAccess worldIn, BlockPos pos)
+    protected Vec3 getFlowVector(IBlockAccess world, BlockPos pos)
     {
         Vec3 vec3 = new Vec3(0.0D, 0.0D, 0.0D);
-        int i = this.getEffectiveFlowDecay(worldIn, pos);
+        int i = this.getEffectiveFlowDecay(world, pos);
 
         for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
         {
             BlockPos blockpos = pos.offset(enumfacing);
-            int j = this.getEffectiveFlowDecay(worldIn, blockpos);
+            int j = this.getEffectiveFlowDecay(world, blockpos);
 
             if (j < 0)
             {
-                if (!worldIn.getBlockState(blockpos).getBlock().getMaterial().blocksMovement())
+                if (!world.getBlockState(blockpos).getBlock().getMaterial().blocksMovement())
                 {
-                    j = this.getEffectiveFlowDecay(worldIn, blockpos.down());
+                    j = this.getEffectiveFlowDecay(world, blockpos.down());
 
                     if (j >= 0)
                     {
@@ -178,13 +178,13 @@ public abstract class BlockLiquid extends Block
             }
         }
 
-        if (worldIn.getBlockState(pos).getValue(LEVEL).intValue() >= 8)
+        if (world.getBlockState(pos).getValue(LEVEL).intValue() >= 8)
         {
             for (EnumFacing enumfacing1 : EnumFacing.Plane.HORIZONTAL)
             {
                 BlockPos blockpos1 = pos.offset(enumfacing1);
 
-                if (this.isBlockSolid(worldIn, blockpos1, enumfacing1) || this.isBlockSolid(worldIn, blockpos1.up(), enumfacing1))
+                if (this.isBlockSolid(world, blockpos1, enumfacing1) || this.isBlockSolid(world, blockpos1.up(), enumfacing1))
                 {
                     vec3 = vec3.normalize().addVector(0.0D, -6.0D, 0.0D);
                     break;
@@ -195,23 +195,23 @@ public abstract class BlockLiquid extends Block
         return vec3.normalize();
     }
 
-    public Vec3 modifyAcceleration(World worldIn, BlockPos pos, Entity entityIn, Vec3 motion)
+    public Vec3 modifyAcceleration(World world, BlockPos pos, Entity entityIn, Vec3 motion)
     {
-        return motion.add(this.getFlowVector(worldIn, pos));
+        return motion.add(this.getFlowVector(world, pos));
     }
 
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World worldIn)
+    public int tickRate(World world)
     {
-        return this.blockMaterial == Material.water ? 5 : (this.blockMaterial == Material.lava ? (worldIn.provider.getHasNoSky() ? 10 : 30) : 0);
+        return this.blockMaterial == Material.water ? 5 : (this.blockMaterial == Material.lava ? (world.provider.getHasNoSky() ? 10 : 30) : 0);
     }
 
-    public int getMixedBrightnessForBlock(IBlockAccess worldIn, BlockPos pos)
+    public int getMixedBrightnessForBlock(IBlockAccess world, BlockPos pos)
     {
-        int i = worldIn.getCombinedLight(pos, 0);
-        int j = worldIn.getCombinedLight(pos.up(), 0);
+        int i = world.getCombinedLight(pos, 0);
+        int j = world.getCombinedLight(pos.up(), 0);
         int k = i & 255;
         int l = j & 255;
         int i1 = i >> 16 & 255;
@@ -224,7 +224,7 @@ public abstract class BlockLiquid extends Block
         return this.blockMaterial == Material.water ? EnumWorldBlockLayer.TRANSLUCENT : EnumWorldBlockLayer.SOLID;
     }
 
-    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
         double d0 = pos.getX();
         double d1 = pos.getY();
@@ -238,35 +238,35 @@ public abstract class BlockLiquid extends Block
             {
                 if (rand.nextInt(64) == 0)
                 {
-                    worldIn.playSound(d0 + 0.5D, d1 + 0.5D, d2 + 0.5D, "liquid.water", rand.nextFloat() * 0.25F + 0.75F, rand.nextFloat() * 1.0F + 0.5F, false);
+                    world.playSound(d0 + 0.5D, d1 + 0.5D, d2 + 0.5D, "liquid.water", rand.nextFloat() * 0.25F + 0.75F, rand.nextFloat() * 1.0F + 0.5F, false);
                 }
             }
             else if (rand.nextInt(10) == 0)
             {
-                worldIn.spawnParticle(EnumParticleTypes.SUSPENDED, d0 + (double)rand.nextFloat(), d1 + (double)rand.nextFloat(), d2 + (double)rand.nextFloat(), 0.0D, 0.0D, 0.0D);
+                world.spawnParticle(EnumParticleTypes.SUSPENDED, d0 + (double)rand.nextFloat(), d1 + (double)rand.nextFloat(), d2 + (double)rand.nextFloat(), 0.0D, 0.0D, 0.0D);
             }
         }
 
-        if (this.blockMaterial == Material.lava && worldIn.getBlockState(pos.up()).getBlock().getMaterial() == Material.air && !worldIn.getBlockState(pos.up()).getBlock().isOpaqueCube())
+        if (this.blockMaterial == Material.lava && world.getBlockState(pos.up()).getBlock().getMaterial() == Material.air && !world.getBlockState(pos.up()).getBlock().isOpaqueCube())
         {
             if (rand.nextInt(100) == 0)
             {
                 double d8 = d0 + (double)rand.nextFloat();
                 double d4 = d1 + this.maxY;
                 double d6 = d2 + (double)rand.nextFloat();
-                worldIn.spawnParticle(EnumParticleTypes.LAVA, d8, d4, d6, 0.0D, 0.0D, 0.0D);
-                worldIn.playSound(d8, d4, d6, "liquid.lavapop", 0.2F + rand.nextFloat() * 0.2F, 0.9F + rand.nextFloat() * 0.15F, false);
+                world.spawnParticle(EnumParticleTypes.LAVA, d8, d4, d6, 0.0D, 0.0D, 0.0D);
+                world.playSound(d8, d4, d6, "liquid.lavapop", 0.2F + rand.nextFloat() * 0.2F, 0.9F + rand.nextFloat() * 0.15F, false);
             }
 
             if (rand.nextInt(200) == 0)
             {
-                worldIn.playSound(d0, d1, d2, "liquid.lava", 0.2F + rand.nextFloat() * 0.2F, 0.9F + rand.nextFloat() * 0.15F, false);
+                world.playSound(d0, d1, d2, "liquid.lava", 0.2F + rand.nextFloat() * 0.2F, 0.9F + rand.nextFloat() * 0.15F, false);
             }
         }
 
-        if (rand.nextInt(10) == 0 && World.doesBlockHaveSolidTopSurface(worldIn, pos.down()))
+        if (rand.nextInt(10) == 0 && World.doesBlockHaveSolidTopSurface(world, pos.down()))
         {
-            Material material = worldIn.getBlockState(pos.down(2)).getBlock().getMaterial();
+            Material material = world.getBlockState(pos.down(2)).getBlock().getMaterial();
 
             if (!material.blocksMovement() && !material.isLiquid())
             {
@@ -276,36 +276,36 @@ public abstract class BlockLiquid extends Block
 
                 if (this.blockMaterial == Material.water)
                 {
-                    worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d3, d5, d7, 0.0D, 0.0D, 0.0D);
+                    world.spawnParticle(EnumParticleTypes.DRIP_WATER, d3, d5, d7, 0.0D, 0.0D, 0.0D);
                 }
                 else
                 {
-                    worldIn.spawnParticle(EnumParticleTypes.DRIP_LAVA, d3, d5, d7, 0.0D, 0.0D, 0.0D);
+                    world.spawnParticle(EnumParticleTypes.DRIP_LAVA, d3, d5, d7, 0.0D, 0.0D, 0.0D);
                 }
             }
         }
     }
 
-    public static double getFlowDirection(IBlockAccess worldIn, BlockPos pos, Material materialIn)
+    public static double getFlowDirection(IBlockAccess world, BlockPos pos, Material materialIn)
     {
-        Vec3 vec3 = getFlowingBlock(materialIn).getFlowVector(worldIn, pos);
+        Vec3 vec3 = getFlowingBlock(materialIn).getFlowVector(world, pos);
         return vec3.xCoord == 0.0D && vec3.zCoord == 0.0D ? -1000.0D : MathHelper.func_181159_b(vec3.zCoord, vec3.xCoord) - (Math.PI / 2D);
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        this.checkForMixing(worldIn, pos, state);
+        this.checkForMixing(world, pos, state);
     }
 
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        this.checkForMixing(worldIn, pos, state);
+        this.checkForMixing(world, pos, state);
     }
 
-    public boolean checkForMixing(World worldIn, BlockPos pos, IBlockState state)
+    public boolean checkForMixing(World world, BlockPos pos, IBlockState state)
     {
         if (this.blockMaterial == Material.lava)
         {
@@ -313,7 +313,7 @@ public abstract class BlockLiquid extends Block
 
             for (EnumFacing enumfacing : EnumFacing.values())
             {
-                if (enumfacing != EnumFacing.DOWN && worldIn.getBlockState(pos.offset(enumfacing)).getBlock().getMaterial() == Material.water)
+                if (enumfacing != EnumFacing.DOWN && world.getBlockState(pos.offset(enumfacing)).getBlock().getMaterial() == Material.water)
                 {
                     flag = true;
                     break;
@@ -326,15 +326,15 @@ public abstract class BlockLiquid extends Block
 
                 if (integer.intValue() == 0)
                 {
-                    worldIn.setBlockState(pos, Blocks.obsidian.getDefaultState());
-                    this.triggerMixEffects(worldIn, pos);
+                    world.setBlockState(pos, Blocks.obsidian.getDefaultState());
+                    this.triggerMixEffects(world, pos);
                     return true;
                 }
 
                 if (integer.intValue() <= 4)
                 {
-                    worldIn.setBlockState(pos, Blocks.cobblestone.getDefaultState());
-                    this.triggerMixEffects(worldIn, pos);
+                    world.setBlockState(pos, Blocks.cobblestone.getDefaultState());
+                    this.triggerMixEffects(world, pos);
                     return true;
                 }
             }
@@ -343,16 +343,16 @@ public abstract class BlockLiquid extends Block
         return false;
     }
 
-    protected void triggerMixEffects(World worldIn, BlockPos pos)
+    protected void triggerMixEffects(World world, BlockPos pos)
     {
         double d0 = pos.getX();
         double d1 = pos.getY();
         double d2 = pos.getZ();
-        worldIn.playSoundEffect(d0 + 0.5D, d1 + 0.5D, d2 + 0.5D, "random.fizz", 0.5F, 2.6F + (worldIn.rand.nextFloat() - worldIn.rand.nextFloat()) * 0.8F);
+        world.playSoundEffect(d0 + 0.5D, d1 + 0.5D, d2 + 0.5D, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 
         for (int i = 0; i < 8; ++i)
         {
-            worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0 + Math.random(), d1 + 1.2D, d2 + Math.random(), 0.0D, 0.0D, 0.0D);
+            world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0 + Math.random(), d1 + 1.2D, d2 + Math.random(), 0.0D, 0.0D, 0.0D);
         }
     }
 

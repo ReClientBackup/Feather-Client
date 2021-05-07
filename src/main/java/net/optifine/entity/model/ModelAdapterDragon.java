@@ -10,6 +10,7 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.optifine.reflect.Reflector;
 
 public class ModelAdapterDragon extends ModelAdapter {
+
    public ModelAdapterDragon() {
       super(EntityDragon.class, "dragon", 0.5F);
    }

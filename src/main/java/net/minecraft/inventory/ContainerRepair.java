@@ -41,12 +41,12 @@ public class ContainerRepair extends Container
     /** The player that has this container open. */
     private final EntityPlayer thePlayer;
 
-    public ContainerRepair(InventoryPlayer playerInventory, World worldIn, EntityPlayer player)
+    public ContainerRepair(InventoryPlayer playerInventory, World world, EntityPlayer player)
     {
-        this(playerInventory, worldIn, BlockPos.ORIGIN, player);
+        this(playerInventory, world, BlockPos.ORIGIN, player);
     }
 
-    public ContainerRepair(InventoryPlayer playerInventory, final World worldIn, final BlockPos blockPosIn, EntityPlayer player)
+    public ContainerRepair(InventoryPlayer playerInventory, final World world, final BlockPos blockPosIn, EntityPlayer player)
     {
         this.outputSlot = new InventoryCraftResult();
         this.inputSlots = new InventoryBasic("Repair", true, 2)
@@ -58,7 +58,7 @@ public class ContainerRepair extends Container
             }
         };
         this.selfPosition = blockPosIn;
-        this.theWorld = worldIn;
+        this.theWorld = world;
         this.thePlayer = player;
         this.addSlotToContainer(new Slot(this.inputSlots, 0, 27, 47));
         this.addSlotToContainer(new Slot(this.inputSlots, 1, 76, 47));
@@ -68,15 +68,15 @@ public class ContainerRepair extends Container
             {
                 return false;
             }
-            public boolean canTakeStack(EntityPlayer playerIn)
+            public boolean canTakeStack(EntityPlayer player)
             {
-                return (playerIn.capabilities.isCreativeMode || playerIn.experienceLevel >= ContainerRepair.this.maximumCost) && ContainerRepair.this.maximumCost > 0 && this.getHasStack();
+                return (player.capabilities.isCreativeMode || player.experienceLevel >= ContainerRepair.this.maximumCost) && ContainerRepair.this.maximumCost > 0 && this.getHasStack();
             }
-            public void onPickupFromSlot(EntityPlayer playerIn, ItemStack stack)
+            public void onPickupFromSlot(EntityPlayer player, ItemStack stack)
             {
-                if (!playerIn.capabilities.isCreativeMode)
+                if (!player.capabilities.isCreativeMode)
                 {
-                    playerIn.addExperienceLevel(-ContainerRepair.this.maximumCost);
+                    player.addExperienceLevel(-ContainerRepair.this.maximumCost);
                 }
 
                 ContainerRepair.this.inputSlots.setInventorySlotContents(0, null);
@@ -101,27 +101,27 @@ public class ContainerRepair extends Container
                 }
 
                 ContainerRepair.this.maximumCost = 0;
-                IBlockState iblockstate = worldIn.getBlockState(blockPosIn);
+                IBlockState iblockstate = world.getBlockState(blockPosIn);
 
-                if (!playerIn.capabilities.isCreativeMode && !worldIn.isRemote && iblockstate.getBlock() == Blocks.anvil && playerIn.getRNG().nextFloat() < 0.12F)
+                if (!player.capabilities.isCreativeMode && !world.isRemote && iblockstate.getBlock() == Blocks.anvil && player.getRNG().nextFloat() < 0.12F)
                 {
                     int l = iblockstate.getValue(BlockAnvil.DAMAGE).intValue();
                     ++l;
 
                     if (l > 2)
                     {
-                        worldIn.setBlockToAir(blockPosIn);
-                        worldIn.playAuxSFX(1020, blockPosIn, 0);
+                        world.setBlockToAir(blockPosIn);
+                        world.playAuxSFX(1020, blockPosIn, 0);
                     }
                     else
                     {
-                        worldIn.setBlockState(blockPosIn, iblockstate.withProperty(BlockAnvil.DAMAGE, Integer.valueOf(l)), 2);
-                        worldIn.playAuxSFX(1021, blockPosIn, 0);
+                        world.setBlockState(blockPosIn, iblockstate.withProperty(BlockAnvil.DAMAGE, Integer.valueOf(l)), 2);
+                        world.playAuxSFX(1021, blockPosIn, 0);
                     }
                 }
-                else if (!worldIn.isRemote)
+                else if (!world.isRemote)
                 {
-                    worldIn.playAuxSFX(1021, blockPosIn, 0);
+                    world.playAuxSFX(1021, blockPosIn, 0);
                 }
             }
         });
@@ -403,9 +403,9 @@ public class ContainerRepair extends Container
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer playerIn)
+    public void onContainerClosed(EntityPlayer player)
     {
-        super.onContainerClosed(playerIn);
+        super.onContainerClosed(player);
 
         if (!this.theWorld.isRemote)
         {
@@ -415,21 +415,21 @@ public class ContainerRepair extends Container
 
                 if (itemstack != null)
                 {
-                    playerIn.dropPlayerItemWithRandomChoice(itemstack, false);
+                    player.dropPlayerItemWithRandomChoice(itemstack);
                 }
             }
         }
     }
 
-    public boolean canInteractWith(EntityPlayer playerIn)
+    public boolean canInteractWith(EntityPlayer player)
     {
-        return this.theWorld.getBlockState(this.selfPosition).getBlock() == Blocks.anvil && playerIn.getDistanceSq((double) this.selfPosition.getX() + 0.5D, (double) this.selfPosition.getY() + 0.5D, (double) this.selfPosition.getZ() + 0.5D) <= 64.0D;
+        return this.theWorld.getBlockState(this.selfPosition).getBlock() == Blocks.anvil && player.getDistanceSq((double) this.selfPosition.getX() + 0.5D, (double) this.selfPosition.getY() + 0.5D, (double) this.selfPosition.getZ() + 0.5D) <= 64.0D;
     }
 
     /**
      * Take a stack from the specified inventory slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    public ItemStack transferStackInSlot(EntityPlayer player, int index)
     {
         ItemStack itemstack = null;
         Slot slot = this.inventorySlots.get(index);
@@ -474,7 +474,7 @@ public class ContainerRepair extends Container
                 return null;
             }
 
-            slot.onPickupFromSlot(playerIn, itemstack1);
+            slot.onPickupFromSlot(player, itemstack1);
         }
 
         return itemstack;

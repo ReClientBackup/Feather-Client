@@ -39,9 +39,9 @@ public class EntityOcelot extends EntityTameable
      */
     private final EntityAITempt aiTempt;
 
-    public EntityOcelot(World worldIn)
+    public EntityOcelot(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.6F, 0.7F);
         ((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -166,9 +166,9 @@ public class EntityOcelot extends EntityTameable
         return Items.leather;
     }
 
-    public boolean attackEntityAsMob(Entity entityIn)
+    public boolean attackEntityAsMob(Entity entity)
     {
-        return entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
+        return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
     }
 
     /**

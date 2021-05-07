@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.optifine.config.Config;
 
 public class CustomModelRegistry {
+
    private static final Map<String, ModelAdapter> mapModelAdapters = makeMapModelAdapters();
 
    private static Map<String, ModelAdapter> makeMapModelAdapters() {

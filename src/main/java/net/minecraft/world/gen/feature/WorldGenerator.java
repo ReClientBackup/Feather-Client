@@ -23,21 +23,21 @@ public abstract class WorldGenerator
         this.doBlockNotify = notify;
     }
 
-    public abstract boolean generate(World worldIn, Random rand, BlockPos position);
+    public abstract boolean generate(World world, Random rand, BlockPos position);
 
     public void func_175904_e()
     {
     }
 
-    protected void setBlockAndNotifyAdequately(World worldIn, BlockPos pos, IBlockState state)
+    protected void setBlockAndNotifyAdequately(World world, BlockPos pos, IBlockState state)
     {
         if (this.doBlockNotify)
         {
-            worldIn.setBlockState(pos, state, 3);
+            world.setBlockState(pos, state, 3);
         }
         else
         {
-            worldIn.setBlockState(pos, state, 2);
+            world.setBlockState(pos, state, 2);
         }
     }
 }

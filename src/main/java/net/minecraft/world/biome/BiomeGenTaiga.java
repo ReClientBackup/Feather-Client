@@ -59,7 +59,7 @@ public class BiomeGenTaiga extends BiomeGenBase
         return rand.nextInt(5) > 0 ? new WorldGenTallGrass(BlockTallGrass.EnumType.FERN) : new WorldGenTallGrass(BlockTallGrass.EnumType.GRASS);
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
         if (this.field_150644_aH == 1 || this.field_150644_aH == 2)
         {
@@ -69,8 +69,8 @@ public class BiomeGenTaiga extends BiomeGenBase
             {
                 int k = rand.nextInt(16) + 8;
                 int l = rand.nextInt(16) + 8;
-                BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
-                field_150643_aG.generate(worldIn, rand, blockpos);
+                BlockPos blockpos = world.getHeight(pos.add(k, 0, l));
+                field_150643_aG.generate(world, rand, blockpos);
             }
         }
 
@@ -80,14 +80,14 @@ public class BiomeGenTaiga extends BiomeGenBase
         {
             int j1 = rand.nextInt(16) + 8;
             int k1 = rand.nextInt(16) + 8;
-            int l1 = rand.nextInt(worldIn.getHeight(pos.add(j1, 0, k1)).getY() + 32);
-            DOUBLE_PLANT_GENERATOR.generate(worldIn, rand, pos.add(j1, l1, k1));
+            int l1 = rand.nextInt(world.getHeight(pos.add(j1, 0, k1)).getY() + 32);
+            DOUBLE_PLANT_GENERATOR.generate(world, rand, pos.add(j1, l1, k1));
         }
 
-        super.decorate(worldIn, rand, pos);
+        super.decorate(world, rand, pos);
     }
 
-    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
+    public void genTerrainBlocks(World world, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
     {
         if (this.field_150644_aH == 1 || this.field_150644_aH == 2)
         {
@@ -104,7 +104,7 @@ public class BiomeGenTaiga extends BiomeGenBase
             }
         }
 
-        this.generateBiomeTerrain(worldIn, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
+        this.generateBiomeTerrain(world, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
     }
 
     protected BiomeGenBase createMutatedBiome(int p_180277_1_)

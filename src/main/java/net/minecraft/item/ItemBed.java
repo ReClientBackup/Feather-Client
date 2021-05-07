@@ -24,9 +24,9 @@ public class ItemBed extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (worldIn.isRemote)
+        if (world.isRemote)
         {
             return true;
         }
@@ -36,33 +36,33 @@ public class ItemBed extends Item
         }
         else
         {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
+            IBlockState iblockstate = world.getBlockState(pos);
             Block block = iblockstate.getBlock();
-            boolean flag = block.isReplaceable(worldIn, pos);
+            boolean flag = block.isReplaceable(world, pos);
 
             if (!flag)
             {
                 pos = pos.up();
             }
 
-            int i = MathHelper.floor_double((double)(playerIn.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+            int i = MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
             EnumFacing enumfacing = EnumFacing.getHorizontal(i);
             BlockPos blockpos = pos.offset(enumfacing);
 
-            if (playerIn.canPlayerEdit(pos, side, stack) && playerIn.canPlayerEdit(blockpos, side, stack))
+            if (player.canPlayerEdit(pos, side, stack) && player.canPlayerEdit(blockpos, side, stack))
             {
-                boolean flag1 = worldIn.getBlockState(blockpos).getBlock().isReplaceable(worldIn, blockpos);
-                boolean flag2 = flag || worldIn.isAirBlock(pos);
-                boolean flag3 = flag1 || worldIn.isAirBlock(blockpos);
+                boolean flag1 = world.getBlockState(blockpos).getBlock().isReplaceable(world, blockpos);
+                boolean flag2 = flag || world.isAirBlock(pos);
+                boolean flag3 = flag1 || world.isAirBlock(blockpos);
 
-                if (flag2 && flag3 && World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && World.doesBlockHaveSolidTopSurface(worldIn, blockpos.down()))
+                if (flag2 && flag3 && World.doesBlockHaveSolidTopSurface(world, pos.down()) && World.doesBlockHaveSolidTopSurface(world, blockpos.down()))
                 {
                     IBlockState iblockstate1 = Blocks.bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 
-                    if (worldIn.setBlockState(pos, iblockstate1, 3))
+                    if (world.setBlockState(pos, iblockstate1, 3))
                     {
                         IBlockState iblockstate2 = iblockstate1.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
-                        worldIn.setBlockState(blockpos, iblockstate2, 3);
+                        world.setBlockState(blockpos, iblockstate2, 3);
                     }
 
                     --stack.stackSize;

@@ -18,9 +18,9 @@ public class EntityFootStepFX extends EntityFX
     private final int footstepMaxAge;
     private final TextureManager currentFootSteps;
 
-    protected EntityFootStepFX(TextureManager currentFootStepsIn, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn)
+    protected EntityFootStepFX(TextureManager currentFootStepsIn, World world, double xCoordIn, double yCoordIn, double zCoordIn)
     {
-        super(worldIn, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
+        super(world, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
         this.currentFootSteps = currentFootStepsIn;
         this.motionX = this.motionY = this.motionZ = 0.0D;
         this.footstepMaxAge = 200;
@@ -82,9 +82,9 @@ public class EntityFootStepFX extends EntityFX
 
     public static class Factory implements IParticleFactory
     {
-        public EntityFX getEntityFX(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
+        public EntityFX getEntityFX(int particleID, World world, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
         {
-            return new EntityFootStepFX(Minecraft.getMinecraft().getTextureManager(), worldIn, xCoordIn, yCoordIn, zCoordIn);
+            return new EntityFootStepFX(Minecraft.getMinecraft().getTextureManager(), world, xCoordIn, yCoordIn, zCoordIn);
         }
     }
 }

@@ -81,11 +81,11 @@ public class ActiveRenderInfo
         return new Vec3(d3, d4, d5);
     }
 
-    public static Block getBlockAtEntityViewpoint(World worldIn, Entity p_180786_1_, float p_180786_2_)
+    public static Block getBlockAtEntityViewpoint(World world, Entity p_180786_1_, float p_180786_2_)
     {
         Vec3 vec3 = projectViewFromEntity(p_180786_1_, p_180786_2_);
         BlockPos blockpos = new BlockPos(vec3);
-        IBlockState iblockstate = worldIn.getBlockState(blockpos);
+        IBlockState iblockstate = world.getBlockState(blockpos);
         Block block = iblockstate.getBlock();
 
         if (block.getMaterial().isLiquid())
@@ -101,7 +101,7 @@ public class ActiveRenderInfo
 
             if (vec3.yCoord >= (double)f1)
             {
-                block = worldIn.getBlockState(blockpos.up()).getBlock();
+                block = world.getBlockState(blockpos.up()).getBlock();
             }
         }
 

@@ -131,10 +131,10 @@ public class SlotCrafting extends Slot
         }
     }
 
-    public void onPickupFromSlot(EntityPlayer playerIn, ItemStack stack)
+    public void onPickupFromSlot(EntityPlayer player, ItemStack stack)
     {
         this.onCrafting(stack);
-        ItemStack[] aitemstack = CraftingManager.getInstance().func_180303_b(this.craftMatrix, playerIn.worldObj);
+        ItemStack[] aitemstack = CraftingManager.getInstance().func_180303_b(this.craftMatrix, player.worldObj);
 
         for (int i = 0; i < aitemstack.length; ++i)
         {
@@ -154,7 +154,7 @@ public class SlotCrafting extends Slot
                 }
                 else if (!this.thePlayer.inventory.addItemStackToInventory(itemstack1))
                 {
-                    this.thePlayer.dropPlayerItemWithRandomChoice(itemstack1, false);
+                    this.thePlayer.dropPlayerItemWithRandomChoice(itemstack1);
                 }
             }
         }

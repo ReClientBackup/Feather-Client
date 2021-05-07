@@ -25,7 +25,7 @@ public class ItemHangingEntity extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (side == EnumFacing.DOWN)
         {
@@ -39,19 +39,19 @@ public class ItemHangingEntity extends Item
         {
             BlockPos blockpos = pos.offset(side);
 
-            if (!playerIn.canPlayerEdit(blockpos, side, stack))
+            if (!player.canPlayerEdit(blockpos, side, stack))
             {
                 return false;
             }
             else
             {
-                EntityHanging entityhanging = this.createEntity(worldIn, blockpos, side);
+                EntityHanging entityhanging = this.createEntity(world, blockpos, side);
 
                 if (entityhanging != null && entityhanging.onValidSurface())
                 {
-                    if (!worldIn.isRemote)
+                    if (!world.isRemote)
                     {
-                        worldIn.spawnEntityInWorld(entityhanging);
+                        world.spawnEntityInWorld(entityhanging);
                     }
 
                     --stack.stackSize;
@@ -62,8 +62,8 @@ public class ItemHangingEntity extends Item
         }
     }
 
-    private EntityHanging createEntity(World worldIn, BlockPos pos, EnumFacing clickedSide)
+    private EntityHanging createEntity(World world, BlockPos pos, EnumFacing clickedSide)
     {
-        return this.hangingEntityClass == EntityPainting.class ? new EntityPainting(worldIn, pos, clickedSide) : (this.hangingEntityClass == EntityItemFrame.class ? new EntityItemFrame(worldIn, pos, clickedSide) : null);
+        return this.hangingEntityClass == EntityPainting.class ? new EntityPainting(world, pos, clickedSide) : (this.hangingEntityClass == EntityItemFrame.class ? new EntityItemFrame(world, pos, clickedSide) : null);
     }
 }

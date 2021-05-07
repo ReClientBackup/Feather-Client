@@ -43,9 +43,9 @@ public class BlockVine extends Block
      * Get the actual Block state of this Block at the given position. This applies properties not visible in the
      * metadata, such as fence connections.
      */
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
     {
-        return state.withProperty(UP, Boolean.valueOf(worldIn.getBlockState(pos.up()).getBlock().isBlockNormalCube()));
+        return state.withProperty(UP, Boolean.valueOf(world.getBlockState(pos.up()).getBlock().isBlockNormalCube()));
     }
 
     /**
@@ -72,12 +72,12 @@ public class BlockVine extends Block
     /**
      * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
      */
-    public boolean isReplaceable(World worldIn, BlockPos pos)
+    public boolean isReplaceable(World world, BlockPos pos)
     {
         return true;
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
     {
         float f = 0.0625F;
         float f1 = 1.0F;
@@ -88,7 +88,7 @@ public class BlockVine extends Block
         float f6 = 0.0F;
         boolean flag = false;
 
-        if (worldIn.getBlockState(pos).getValue(WEST).booleanValue())
+        if (world.getBlockState(pos).getValue(WEST).booleanValue())
         {
             f4 = Math.max(f4, 0.0625F);
             f1 = 0.0F;
@@ -99,7 +99,7 @@ public class BlockVine extends Block
             flag = true;
         }
 
-        if (worldIn.getBlockState(pos).getValue(EAST).booleanValue())
+        if (world.getBlockState(pos).getValue(EAST).booleanValue())
         {
             f1 = Math.min(f1, 0.9375F);
             f4 = 1.0F;
@@ -110,7 +110,7 @@ public class BlockVine extends Block
             flag = true;
         }
 
-        if (worldIn.getBlockState(pos).getValue(NORTH).booleanValue())
+        if (world.getBlockState(pos).getValue(NORTH).booleanValue())
         {
             f6 = Math.max(f6, 0.0625F);
             f3 = 0.0F;
@@ -121,7 +121,7 @@ public class BlockVine extends Block
             flag = true;
         }
 
-        if (worldIn.getBlockState(pos).getValue(SOUTH).booleanValue())
+        if (world.getBlockState(pos).getValue(SOUTH).booleanValue())
         {
             f3 = Math.min(f3, 0.9375F);
             f6 = 1.0F;
@@ -132,7 +132,7 @@ public class BlockVine extends Block
             flag = true;
         }
 
-        if (!flag && this.canPlaceOn(worldIn.getBlockState(pos.up()).getBlock()))
+        if (!flag && this.canPlaceOn(world.getBlockState(pos.up()).getBlock()))
         {
             f2 = Math.min(f2, 0.9375F);
             f5 = 1.0F;
@@ -145,7 +145,7 @@ public class BlockVine extends Block
         this.setBlockBounds(f1, f2, f3, f4, f5, f6);
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
     {
         return null;
     }
@@ -153,18 +153,18 @@ public class BlockVine extends Block
     /**
      * Check whether this Block can be placed on the given side
      */
-    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
+    public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side)
     {
         switch (side)
         {
             case UP:
-                return this.canPlaceOn(worldIn.getBlockState(pos.up()).getBlock());
+                return this.canPlaceOn(world.getBlockState(pos.up()).getBlock());
 
             case NORTH:
             case SOUTH:
             case EAST:
             case WEST:
-                return this.canPlaceOn(worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock());
+                return this.canPlaceOn(world.getBlockState(pos.offset(side.getOpposite())).getBlock());
 
             default:
                 return false;
@@ -176,7 +176,7 @@ public class BlockVine extends Block
         return blockIn.isFullCube() && blockIn.blockMaterial.blocksMovement();
     }
 
-    private boolean recheckGrownSides(World worldIn, BlockPos pos, IBlockState state)
+    private boolean recheckGrownSides(World world, BlockPos pos, IBlockState state)
     {
         IBlockState iblockstate = state;
 
@@ -184,9 +184,9 @@ public class BlockVine extends Block
         {
             PropertyBool propertybool = getPropertyFor(enumfacing);
 
-            if (state.getValue(propertybool).booleanValue() && !this.canPlaceOn(worldIn.getBlockState(pos.offset(enumfacing)).getBlock()))
+            if (state.getValue(propertybool).booleanValue() && !this.canPlaceOn(world.getBlockState(pos.offset(enumfacing)).getBlock()))
             {
-                IBlockState iblockstate1 = worldIn.getBlockState(pos.up());
+                IBlockState iblockstate1 = world.getBlockState(pos.up());
 
                 if (iblockstate1.getBlock() != this || !iblockstate1.getValue(propertybool).booleanValue())
                 {
@@ -203,7 +203,7 @@ public class BlockVine extends Block
         {
             if (iblockstate != state)
             {
-                worldIn.setBlockState(pos, state, 2);
+                world.setBlockState(pos, state, 2);
             }
 
             return true;
@@ -220,28 +220,28 @@ public class BlockVine extends Block
         return ColorizerFoliage.getFoliageColorBasic();
     }
 
-    public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
+    public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)
     {
-        return worldIn.getBiomeGenForCoords(pos).getFoliageColorAtPos(pos);
+        return world.getBiomeGenForCoords(pos).getFoliageColorAtPos(pos);
     }
 
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        if (!worldIn.isRemote && !this.recheckGrownSides(worldIn, pos, state))
+        if (!world.isRemote && !this.recheckGrownSides(world, pos, state))
         {
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-            worldIn.setBlockToAir(pos);
+            this.dropBlockAsItem(world, pos, state, 0);
+            world.setBlockToAir(pos);
         }
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            if (worldIn.rand.nextInt(4) == 0)
+            if (world.rand.nextInt(4) == 0)
             {
                 int i = 4;
                 int j = 5;
@@ -254,7 +254,7 @@ public class BlockVine extends Block
                     {
                         for (int i1 = -1; i1 <= 1; ++i1)
                         {
-                            if (worldIn.getBlockState(pos.add(k, i1, l)).getBlock() == this)
+                            if (world.getBlockState(pos.add(k, i1, l)).getBlock() == this)
                             {
                                 --j;
 
@@ -271,7 +271,7 @@ public class BlockVine extends Block
                 EnumFacing enumfacing1 = EnumFacing.random(rand);
                 BlockPos blockpos1 = pos.up();
 
-                if (enumfacing1 == EnumFacing.UP && pos.getY() < 255 && worldIn.isAirBlock(blockpos1))
+                if (enumfacing1 == EnumFacing.UP && pos.getY() < 255 && world.isAirBlock(blockpos1))
                 {
                     if (!flag)
                     {
@@ -279,7 +279,7 @@ public class BlockVine extends Block
 
                         for (EnumFacing enumfacing3 : EnumFacing.Plane.HORIZONTAL)
                         {
-                            if (rand.nextBoolean() || !this.canPlaceOn(worldIn.getBlockState(blockpos1.offset(enumfacing3)).getBlock()))
+                            if (rand.nextBoolean() || !this.canPlaceOn(world.getBlockState(blockpos1.offset(enumfacing3)).getBlock()))
                             {
                                 iblockstate2 = iblockstate2.withProperty(getPropertyFor(enumfacing3), Boolean.valueOf(false));
                             }
@@ -287,7 +287,7 @@ public class BlockVine extends Block
 
                         if (iblockstate2.getValue(NORTH).booleanValue() || iblockstate2.getValue(EAST).booleanValue() || iblockstate2.getValue(SOUTH).booleanValue() || iblockstate2.getValue(WEST).booleanValue())
                         {
-                            worldIn.setBlockState(blockpos1, iblockstate2, 2);
+                            world.setBlockState(blockpos1, iblockstate2, 2);
                         }
                     }
                 }
@@ -296,7 +296,7 @@ public class BlockVine extends Block
                     if (!flag)
                     {
                         BlockPos blockpos3 = pos.offset(enumfacing1);
-                        Block block1 = worldIn.getBlockState(blockpos3).getBlock();
+                        Block block1 = world.getBlockState(blockpos3).getBlock();
 
                         if (block1.blockMaterial == Material.air)
                         {
@@ -307,30 +307,30 @@ public class BlockVine extends Block
                             BlockPos blockpos4 = blockpos3.offset(enumfacing2);
                             BlockPos blockpos = blockpos3.offset(enumfacing4);
 
-                            if (flag1 && this.canPlaceOn(worldIn.getBlockState(blockpos4).getBlock()))
+                            if (flag1 && this.canPlaceOn(world.getBlockState(blockpos4).getBlock()))
                             {
-                                worldIn.setBlockState(blockpos3, this.getDefaultState().withProperty(getPropertyFor(enumfacing2), Boolean.valueOf(true)), 2);
+                                world.setBlockState(blockpos3, this.getDefaultState().withProperty(getPropertyFor(enumfacing2), Boolean.valueOf(true)), 2);
                             }
-                            else if (flag2 && this.canPlaceOn(worldIn.getBlockState(blockpos).getBlock()))
+                            else if (flag2 && this.canPlaceOn(world.getBlockState(blockpos).getBlock()))
                             {
-                                worldIn.setBlockState(blockpos3, this.getDefaultState().withProperty(getPropertyFor(enumfacing4), Boolean.valueOf(true)), 2);
+                                world.setBlockState(blockpos3, this.getDefaultState().withProperty(getPropertyFor(enumfacing4), Boolean.valueOf(true)), 2);
                             }
-                            else if (flag1 && worldIn.isAirBlock(blockpos4) && this.canPlaceOn(worldIn.getBlockState(pos.offset(enumfacing2)).getBlock()))
+                            else if (flag1 && world.isAirBlock(blockpos4) && this.canPlaceOn(world.getBlockState(pos.offset(enumfacing2)).getBlock()))
                             {
-                                worldIn.setBlockState(blockpos4, this.getDefaultState().withProperty(getPropertyFor(enumfacing1.getOpposite()), Boolean.valueOf(true)), 2);
+                                world.setBlockState(blockpos4, this.getDefaultState().withProperty(getPropertyFor(enumfacing1.getOpposite()), Boolean.valueOf(true)), 2);
                             }
-                            else if (flag2 && worldIn.isAirBlock(blockpos) && this.canPlaceOn(worldIn.getBlockState(pos.offset(enumfacing4)).getBlock()))
+                            else if (flag2 && world.isAirBlock(blockpos) && this.canPlaceOn(world.getBlockState(pos.offset(enumfacing4)).getBlock()))
                             {
-                                worldIn.setBlockState(blockpos, this.getDefaultState().withProperty(getPropertyFor(enumfacing1.getOpposite()), Boolean.valueOf(true)), 2);
+                                world.setBlockState(blockpos, this.getDefaultState().withProperty(getPropertyFor(enumfacing1.getOpposite()), Boolean.valueOf(true)), 2);
                             }
-                            else if (this.canPlaceOn(worldIn.getBlockState(blockpos3.up()).getBlock()))
+                            else if (this.canPlaceOn(world.getBlockState(blockpos3.up()).getBlock()))
                             {
-                                worldIn.setBlockState(blockpos3, this.getDefaultState(), 2);
+                                world.setBlockState(blockpos3, this.getDefaultState(), 2);
                             }
                         }
                         else if (block1.blockMaterial.isOpaque() && block1.isFullCube())
                         {
-                            worldIn.setBlockState(pos, state.withProperty(getPropertyFor(enumfacing1), Boolean.valueOf(true)), 2);
+                            world.setBlockState(pos, state.withProperty(getPropertyFor(enumfacing1), Boolean.valueOf(true)), 2);
                         }
                     }
                 }
@@ -339,7 +339,7 @@ public class BlockVine extends Block
                     if (pos.getY() > 1)
                     {
                         BlockPos blockpos2 = pos.down();
-                        IBlockState iblockstate = worldIn.getBlockState(blockpos2);
+                        IBlockState iblockstate = world.getBlockState(blockpos2);
                         Block block = iblockstate.getBlock();
 
                         if (block.blockMaterial == Material.air)
@@ -356,7 +356,7 @@ public class BlockVine extends Block
 
                             if (iblockstate1.getValue(NORTH).booleanValue() || iblockstate1.getValue(EAST).booleanValue() || iblockstate1.getValue(SOUTH).booleanValue() || iblockstate1.getValue(WEST).booleanValue())
                             {
-                                worldIn.setBlockState(blockpos2, iblockstate1, 2);
+                                world.setBlockState(blockpos2, iblockstate1, 2);
                             }
                         }
                         else if (block == this)
@@ -375,7 +375,7 @@ public class BlockVine extends Block
 
                             if (iblockstate3.getValue(NORTH).booleanValue() || iblockstate3.getValue(EAST).booleanValue() || iblockstate3.getValue(SOUTH).booleanValue() || iblockstate3.getValue(WEST).booleanValue())
                             {
-                                worldIn.setBlockState(blockpos2, iblockstate3, 2);
+                                world.setBlockState(blockpos2, iblockstate3, 2);
                             }
                         }
                     }
@@ -388,7 +388,7 @@ public class BlockVine extends Block
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         IBlockState iblockstate = this.getDefaultState().withProperty(UP, Boolean.valueOf(false)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false));
         return facing.getAxis().isHorizontal() ? iblockstate.withProperty(getPropertyFor(facing.getOpposite()), Boolean.valueOf(true)) : iblockstate;
@@ -412,16 +412,16 @@ public class BlockVine extends Block
         return 0;
     }
 
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
     {
-        if (!worldIn.isRemote && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.shears)
+        if (!world.isRemote && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.shears)
         {
             player.triggerAchievement(StatList.mineBlockStatArray[Block.getIdFromBlock(this)]);
-            spawnAsEntity(worldIn, pos, new ItemStack(Blocks.vine, 1, 0));
+            spawnAsEntity(world, pos, new ItemStack(Blocks.vine, 1, 0));
         }
         else
         {
-            super.harvestBlock(worldIn, player, pos, state, te);
+            super.harvestBlock(world, player, pos, state, te);
         }
     }
 

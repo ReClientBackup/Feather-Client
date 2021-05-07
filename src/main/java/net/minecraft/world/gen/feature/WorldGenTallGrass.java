@@ -18,11 +18,11 @@ public class WorldGenTallGrass extends WorldGenerator
         this.tallGrassState = Blocks.tallgrass.getDefaultState().withProperty(BlockTallGrass.TYPE, p_i45629_1_);
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         Block block;
 
-        while (((block = worldIn.getBlockState(position).getBlock()).getMaterial() == Material.air || block.getMaterial() == Material.leaves) && position.getY() > 0)
+        while (((block = world.getBlockState(position).getBlock()).getMaterial() == Material.air || block.getMaterial() == Material.leaves) && position.getY() > 0)
         {
             position = position.down();
         }
@@ -31,9 +31,9 @@ public class WorldGenTallGrass extends WorldGenerator
         {
             BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-            if (worldIn.isAirBlock(blockpos) && Blocks.tallgrass.canBlockStay(worldIn, blockpos, this.tallGrassState))
+            if (world.isAirBlock(blockpos) && Blocks.tallgrass.canBlockStay(world, blockpos, this.tallGrassState))
             {
-                worldIn.setBlockState(blockpos, this.tallGrassState, 2);
+                world.setBlockState(blockpos, this.tallGrassState, 2);
             }
         }
 

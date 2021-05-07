@@ -56,9 +56,9 @@ public class EntityWolf extends EntityTameable
     private float timeWolfIsShaking;
     private float prevTimeWolfIsShaking;
 
-    public EntityWolf(World worldIn)
+    public EntityWolf(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.6F, 0.8F);
         ((PathNavigateGround)this.getNavigator()).setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -352,13 +352,13 @@ public class EntityWolf extends EntityTameable
         }
     }
 
-    public boolean attackEntityAsMob(Entity entityIn)
+    public boolean attackEntityAsMob(Entity entity)
     {
-        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float)((int)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue()));
+        boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)((int)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue()));
 
         if (flag)
         {
-            this.applyEnchantments(this, entityIn);
+            this.applyEnchantments(this, entity);
         }
 
         return flag;

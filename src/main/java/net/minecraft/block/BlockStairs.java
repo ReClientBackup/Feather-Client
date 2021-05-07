@@ -48,7 +48,7 @@ public class BlockStairs extends Block
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
     {
         if (this.hasRaytraced)
         {
@@ -76,9 +76,9 @@ public class BlockStairs extends Block
     /**
      * Set the block bounds as the collision bounds for the stairs at the given position
      */
-    public void setBaseCollisionBounds(IBlockAccess worldIn, BlockPos pos)
+    public void setBaseCollisionBounds(IBlockAccess world, BlockPos pos)
     {
-        if (worldIn.getBlockState(pos).getValue(HALF) == BlockStairs.EnumHalf.TOP)
+        if (world.getBlockState(pos).getValue(HALF) == BlockStairs.EnumHalf.TOP)
         {
             this.setBlockBounds(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
         }
@@ -99,9 +99,9 @@ public class BlockStairs extends Block
     /**
      * Check whether there is a stair block at the given position and it has the same properties as the given BlockState
      */
-    public static boolean isSameStair(IBlockAccess worldIn, BlockPos pos, IBlockState state)
+    public static boolean isSameStair(IBlockAccess world, BlockPos pos, IBlockState state)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         Block block = iblockstate.getBlock();
         return isBlockStairs(block) && iblockstate.getValue(HALF) == state.getValue(HALF) && iblockstate.getValue(FACING) == state.getValue(FACING);
     }
@@ -531,42 +531,42 @@ public class BlockStairs extends Block
      *  
      * @param collidingEntity the Entity colliding with this Block
      */
-    public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
+    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
     {
-        this.setBaseCollisionBounds(worldIn, pos);
-        super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
-        boolean flag = this.func_176306_h(worldIn, pos);
-        super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+        this.setBaseCollisionBounds(world, pos);
+        super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
+        boolean flag = this.func_176306_h(world, pos);
+        super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
 
-        if (flag && this.func_176304_i(worldIn, pos))
+        if (flag && this.func_176304_i(world, pos))
         {
-            super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+            super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
         }
 
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        this.modelBlock.randomDisplayTick(worldIn, pos, state, rand);
+        this.modelBlock.randomDisplayTick(world, pos, state, rand);
     }
 
-    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
+    public void onBlockClicked(World world, BlockPos pos, EntityPlayer player)
     {
-        this.modelBlock.onBlockClicked(worldIn, pos, playerIn);
+        this.modelBlock.onBlockClicked(world, pos, player);
     }
 
     /**
      * Called when a player destroys this Block
      */
-    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state)
     {
-        this.modelBlock.onBlockDestroyedByPlayer(worldIn, pos, state);
+        this.modelBlock.onBlockDestroyedByPlayer(world, pos, state);
     }
 
-    public int getMixedBrightnessForBlock(IBlockAccess worldIn, BlockPos pos)
+    public int getMixedBrightnessForBlock(IBlockAccess world, BlockPos pos)
     {
-        return this.modelBlock.getMixedBrightnessForBlock(worldIn, pos);
+        return this.modelBlock.getMixedBrightnessForBlock(world, pos);
     }
 
     /**
@@ -585,19 +585,19 @@ public class BlockStairs extends Block
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World worldIn)
+    public int tickRate(World world)
     {
-        return this.modelBlock.tickRate(worldIn);
+        return this.modelBlock.tickRate(world);
     }
 
-    public AxisAlignedBB getSelectedBoundingBox(World worldIn, BlockPos pos)
+    public AxisAlignedBB getSelectedBoundingBox(World world, BlockPos pos)
     {
-        return this.modelBlock.getSelectedBoundingBox(worldIn, pos);
+        return this.modelBlock.getSelectedBoundingBox(world, pos);
     }
 
-    public Vec3 modifyAcceleration(World worldIn, BlockPos pos, Entity entityIn, Vec3 motion)
+    public Vec3 modifyAcceleration(World world, BlockPos pos, Entity entityIn, Vec3 motion)
     {
-        return this.modelBlock.modifyAcceleration(worldIn, pos, entityIn, motion);
+        return this.modelBlock.modifyAcceleration(world, pos, entityIn, motion);
     }
 
     /**
@@ -613,46 +613,46 @@ public class BlockStairs extends Block
         return this.modelBlock.canCollideCheck(state, hitIfLiquid);
     }
 
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+    public boolean canPlaceBlockAt(World world, BlockPos pos)
     {
-        return this.modelBlock.canPlaceBlockAt(worldIn, pos);
+        return this.modelBlock.canPlaceBlockAt(world, pos);
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        this.onNeighborBlockChange(worldIn, pos, this.modelState, Blocks.air);
-        this.modelBlock.onBlockAdded(worldIn, pos, this.modelState);
+        this.onNeighborBlockChange(world, pos, this.modelState, Blocks.air);
+        this.modelBlock.onBlockAdded(world, pos, this.modelState);
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
     {
-        this.modelBlock.breakBlock(worldIn, pos, this.modelState);
+        this.modelBlock.breakBlock(world, pos, this.modelState);
     }
 
     /**
      * Triggered whenever an entity collides with this block (enters into the block)
      */
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entityIn)
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity)
     {
-        this.modelBlock.onEntityCollidedWithBlock(worldIn, pos, entityIn);
+        this.modelBlock.onEntityCollidedWithBlock(world, pos, entity);
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        this.modelBlock.updateTick(worldIn, pos, state, rand);
+        this.modelBlock.updateTick(world, pos, state, rand);
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        return this.modelBlock.onBlockActivated(worldIn, pos, this.modelState, playerIn, EnumFacing.DOWN, 0.0F, 0.0F, 0.0F);
+        return this.modelBlock.onBlockActivated(world, pos, this.modelState, player, EnumFacing.DOWN, 0.0F, 0.0F, 0.0F);
     }
 
     /**
      * Called when this Block is destroyed by an Explosion
      */
-    public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn)
+    public void onBlockDestroyedByExplosion(World world, BlockPos pos, Explosion explosionIn)
     {
-        this.modelBlock.onBlockDestroyedByExplosion(worldIn, pos, explosionIn);
+        this.modelBlock.onBlockDestroyedByExplosion(world, pos, explosionIn);
     }
 
     /**
@@ -667,9 +667,9 @@ public class BlockStairs extends Block
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
-        IBlockState iblockstate = super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
+        IBlockState iblockstate = super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
         iblockstate = iblockstate.withProperty(FACING, placer.getHorizontalFacing()).withProperty(SHAPE, BlockStairs.EnumShape.STRAIGHT);
         return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double)hitY <= 0.5D) ? iblockstate.withProperty(HALF, BlockStairs.EnumHalf.BOTTOM) : iblockstate.withProperty(HALF, BlockStairs.EnumHalf.TOP);
     }
@@ -680,10 +680,10 @@ public class BlockStairs extends Block
      * @param start The start vector
      * @param end The end vector
      */
-    public MovingObjectPosition collisionRayTrace(World worldIn, BlockPos pos, Vec3 start, Vec3 end)
+    public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 start, Vec3 end)
     {
         MovingObjectPosition[] amovingobjectposition = new MovingObjectPosition[8];
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         int i = iblockstate.getValue(FACING).getHorizontalIndex();
         boolean flag = iblockstate.getValue(HALF) == BlockStairs.EnumHalf.TOP;
         int[] aint = field_150150_a[i + (flag ? 4 : 0)];
@@ -695,7 +695,7 @@ public class BlockStairs extends Block
 
             if (Arrays.binarySearch(aint, j) < 0)
             {
-                amovingobjectposition[j] = super.collisionRayTrace(worldIn, pos, start, end);
+                amovingobjectposition[j] = super.collisionRayTrace(world, pos, start, end);
             }
         }
 
@@ -754,11 +754,11 @@ public class BlockStairs extends Block
      * Get the actual Block state of this Block at the given position. This applies properties not visible in the
      * metadata, such as fence connections.
      */
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
     {
-        if (this.func_176306_h(worldIn, pos))
+        if (this.func_176306_h(world, pos))
         {
-            switch (this.func_176305_g(worldIn, pos))
+            switch (this.func_176305_g(world, pos))
             {
                 case 0:
                     state = state.withProperty(SHAPE, BlockStairs.EnumShape.STRAIGHT);
@@ -774,7 +774,7 @@ public class BlockStairs extends Block
         }
         else
         {
-            switch (this.func_176307_f(worldIn, pos))
+            switch (this.func_176307_f(world, pos))
             {
                 case 0:
                     state = state.withProperty(SHAPE, BlockStairs.EnumShape.STRAIGHT);

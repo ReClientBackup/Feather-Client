@@ -26,13 +26,13 @@ public class ItemSign extends Item
      * @param pos The block being right-clicked
      * @param side The side being right-clicked
      */
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (side == EnumFacing.DOWN)
         {
             return false;
         }
-        else if (!worldIn.getBlockState(pos).getBlock().getMaterial().isSolid())
+        else if (!world.getBlockState(pos).getBlock().getMaterial().isSolid())
         {
             return false;
         }
@@ -40,15 +40,15 @@ public class ItemSign extends Item
         {
             pos = pos.offset(side);
 
-            if (!playerIn.canPlayerEdit(pos, side, stack))
+            if (!player.canPlayerEdit(pos, side, stack))
             {
                 return false;
             }
-            else if (!Blocks.standing_sign.canPlaceBlockAt(worldIn, pos))
+            else if (!Blocks.standing_sign.canPlaceBlockAt(world, pos))
             {
                 return false;
             }
-            else if (worldIn.isRemote)
+            else if (world.isRemote)
             {
                 return true;
             }
@@ -56,20 +56,20 @@ public class ItemSign extends Item
             {
                 if (side == EnumFacing.UP)
                 {
-                    int i = MathHelper.floor_double((double)((playerIn.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
-                    worldIn.setBlockState(pos, Blocks.standing_sign.getDefaultState().withProperty(BlockStandingSign.ROTATION, Integer.valueOf(i)), 3);
+                    int i = MathHelper.floor_double((double)((player.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
+                    world.setBlockState(pos, Blocks.standing_sign.getDefaultState().withProperty(BlockStandingSign.ROTATION, Integer.valueOf(i)), 3);
                 }
                 else
                 {
-                    worldIn.setBlockState(pos, Blocks.wall_sign.getDefaultState().withProperty(BlockWallSign.FACING, side), 3);
+                    world.setBlockState(pos, Blocks.wall_sign.getDefaultState().withProperty(BlockWallSign.FACING, side), 3);
                 }
 
                 --stack.stackSize;
-                TileEntity tileentity = worldIn.getTileEntity(pos);
+                TileEntity tileentity = world.getTileEntity(pos);
 
-                if (tileentity instanceof TileEntitySign && !ItemBlock.setTileEntityNBT(worldIn, playerIn, pos, stack))
+                if (tileentity instanceof TileEntitySign && !ItemBlock.setTileEntityNBT(world, player, pos, stack))
                 {
-                    playerIn.openEditSign((TileEntitySign)tileentity);
+                    player.openEditSign((TileEntitySign)tileentity);
                 }
 
                 return true;

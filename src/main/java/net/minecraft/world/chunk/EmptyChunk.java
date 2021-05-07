@@ -14,9 +14,9 @@ import net.minecraft.world.World;
 
 public class EmptyChunk extends Chunk
 {
-    public EmptyChunk(World worldIn, int x, int z)
+    public EmptyChunk(World world, int x, int z)
     {
-        super(worldIn, x, z);
+        super(world, x, z);
     }
 
     /**

@@ -74,8 +74,8 @@ public class MobAppearance extends EntityFX {
     }
 
     public static class Factory implements IParticleFactory {
-        public EntityFX getEntityFX(int particleID, World worldIn, double xCoord, double yCoord, double zCoord, double xSpeed, double ySpeed, double zSpeed, int... p_178902_15_) {
-            return new MobAppearance(worldIn, xCoord, yCoord, zCoord);
+        public EntityFX getEntityFX(int particleID, World world, double xCoord, double yCoord, double zCoord, double xSpeed, double ySpeed, double zSpeed, int... p_178902_15_) {
+            return new MobAppearance(world, xCoord, yCoord, zCoord);
         }
     }
 }

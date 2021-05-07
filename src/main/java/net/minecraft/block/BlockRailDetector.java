@@ -41,7 +41,7 @@ public class BlockRailDetector extends BlockRailBase
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World worldIn)
+    public int tickRate(World world)
     {
         return 20;
     }
@@ -57,13 +57,13 @@ public class BlockRailDetector extends BlockRailBase
     /**
      * Called When an Entity Collided with the Block
      */
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entityIn)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
             if (!state.getValue(POWERED).booleanValue())
             {
-                this.updatePoweredState(worldIn, pos, state);
+                this.updatePoweredState(world, pos, state);
             }
         }
     }
@@ -71,33 +71,33 @@ public class BlockRailDetector extends BlockRailBase
     /**
      * Called randomly when setTickRandomly is set to true (used by e.g. crops to grow, etc.)
      */
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random random)
     {
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        if (!worldIn.isRemote && state.getValue(POWERED).booleanValue())
+        if (!world.isRemote && state.getValue(POWERED).booleanValue())
         {
-            this.updatePoweredState(worldIn, pos, state);
+            this.updatePoweredState(world, pos, state);
         }
     }
 
-    public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+    public int isProvidingWeakPower(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side)
     {
         return state.getValue(POWERED).booleanValue() ? 15 : 0;
     }
 
-    public int isProvidingStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+    public int isProvidingStrongPower(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side)
     {
         return !state.getValue(POWERED).booleanValue() ? 0 : (side == EnumFacing.UP ? 15 : 0);
     }
 
-    private void updatePoweredState(World worldIn, BlockPos pos, IBlockState state)
+    private void updatePoweredState(World world, BlockPos pos, IBlockState state)
     {
         boolean flag = state.getValue(POWERED).booleanValue();
         boolean flag1 = false;
-        List<EntityMinecart> list = this.findMinecarts(worldIn, pos, EntityMinecart.class);
+        List<EntityMinecart> list = this.findMinecarts(world, pos, EntityMinecart.class);
 
         if (!list.isEmpty())
         {
@@ -106,32 +106,32 @@ public class BlockRailDetector extends BlockRailBase
 
         if (flag1 && !flag)
         {
-            worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(true)), 3);
-            worldIn.notifyNeighborsOfStateChange(pos, this);
-            worldIn.notifyNeighborsOfStateChange(pos.down(), this);
-            worldIn.markBlockRangeForRenderUpdate(pos, pos);
+            world.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(true)), 3);
+            world.notifyNeighborsOfStateChange(pos, this);
+            world.notifyNeighborsOfStateChange(pos.down(), this);
+            world.markBlockRangeForRenderUpdate(pos, pos);
         }
 
         if (!flag1 && flag)
         {
-            worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(false)), 3);
-            worldIn.notifyNeighborsOfStateChange(pos, this);
-            worldIn.notifyNeighborsOfStateChange(pos.down(), this);
-            worldIn.markBlockRangeForRenderUpdate(pos, pos);
+            world.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(false)), 3);
+            world.notifyNeighborsOfStateChange(pos, this);
+            world.notifyNeighborsOfStateChange(pos.down(), this);
+            world.markBlockRangeForRenderUpdate(pos, pos);
         }
 
         if (flag1)
         {
-            worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+            world.scheduleUpdate(pos, this, this.tickRate(world));
         }
 
-        worldIn.updateComparatorOutputLevel(pos, this);
+        world.updateComparatorOutputLevel(pos, this);
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        super.onBlockAdded(worldIn, pos, state);
-        this.updatePoweredState(worldIn, pos, state);
+        super.onBlockAdded(world, pos, state);
+        this.updatePoweredState(world, pos, state);
     }
 
     public IProperty<BlockRailBase.EnumRailDirection> getShapeProperty()
@@ -144,18 +144,18 @@ public class BlockRailDetector extends BlockRailBase
         return true;
     }
 
-    public int getComparatorInputOverride(World worldIn, BlockPos pos)
+    public int getComparatorInputOverride(World world, BlockPos pos)
     {
-        if (worldIn.getBlockState(pos).getValue(POWERED).booleanValue())
+        if (world.getBlockState(pos).getValue(POWERED).booleanValue())
         {
-            List<EntityMinecartCommandBlock> list = this.findMinecarts(worldIn, pos, EntityMinecartCommandBlock.class);
+            List<EntityMinecartCommandBlock> list = this.findMinecarts(world, pos, EntityMinecartCommandBlock.class);
 
             if (!list.isEmpty())
             {
                 return list.get(0).getCommandBlockLogic().getSuccessCount();
             }
 
-            List<EntityMinecart> list1 = this.findMinecarts(worldIn, pos, EntityMinecart.class, EntitySelectors.selectInventories);
+            List<EntityMinecart> list1 = this.findMinecarts(world, pos, EntityMinecart.class, EntitySelectors.selectInventories);
 
             if (!list1.isEmpty())
             {
@@ -166,10 +166,10 @@ public class BlockRailDetector extends BlockRailBase
         return 0;
     }
 
-    protected <T extends EntityMinecart> List<T> findMinecarts(World worldIn, BlockPos pos, Class<T> clazz, Predicate<Entity>... filter)
+    protected <T extends EntityMinecart> List<T> findMinecarts(World world, BlockPos pos, Class<T> clazz, Predicate<Entity>... filter)
     {
         AxisAlignedBB axisalignedbb = this.getDectectionBox(pos);
-        return filter.length != 1 ? worldIn.getEntitiesWithinAABB(clazz, axisalignedbb) : worldIn.getEntitiesWithinAABB(clazz, axisalignedbb, filter[0]);
+        return filter.length != 1 ? world.getEntitiesWithinAABB(clazz, axisalignedbb) : world.getEntitiesWithinAABB(clazz, axisalignedbb, filter[0]);
     }
 
     private AxisAlignedBB getDectectionBox(BlockPos pos)

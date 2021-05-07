@@ -12,14 +12,14 @@ import net.minecraft.world.World;
 
 public class EntityLeashKnot extends EntityHanging
 {
-    public EntityLeashKnot(World worldIn)
+    public EntityLeashKnot(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityLeashKnot(World worldIn, BlockPos hangingPositionIn)
+    public EntityLeashKnot(World world, BlockPos hangingPositionIn)
     {
-        super(worldIn, hangingPositionIn);
+        super(world, hangingPositionIn);
         this.setPosition((double)hangingPositionIn.getX() + 0.5D, (double)hangingPositionIn.getY() + 0.5D, (double)hangingPositionIn.getZ() + 0.5D);
         float f = 0.125F;
         float f1 = 0.1875F;
@@ -99,9 +99,9 @@ public class EntityLeashKnot extends EntityHanging
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer playerIn)
+    public boolean interactFirst(EntityPlayer player)
     {
-        ItemStack itemstack = playerIn.getHeldItem();
+        ItemStack itemstack = player.getHeldItem();
         boolean flag = false;
 
         if (itemstack != null && itemstack.getItem() == Items.lead && !this.worldObj.isRemote)
@@ -110,7 +110,7 @@ public class EntityLeashKnot extends EntityHanging
 
             for (EntityLiving entityliving : this.worldObj.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(this.posX - d0, this.posY - d0, this.posZ - d0, this.posX + d0, this.posY + d0, this.posZ + d0)))
             {
-                if (entityliving.getLeashed() && entityliving.getLeashedToEntity() == playerIn)
+                if (entityliving.getLeashed() && entityliving.getLeashedToEntity() == player)
                 {
                     entityliving.setLeashedToEntity(this, true);
                     flag = true;
@@ -122,7 +122,7 @@ public class EntityLeashKnot extends EntityHanging
         {
             this.setDead();
 
-            if (playerIn.capabilities.isCreativeMode)
+            if (player.capabilities.isCreativeMode)
             {
                 double d1 = 7.0D;
 
@@ -147,21 +147,21 @@ public class EntityLeashKnot extends EntityHanging
         return this.worldObj.getBlockState(this.hangingPosition).getBlock() instanceof BlockFence;
     }
 
-    public static EntityLeashKnot createKnot(World worldIn, BlockPos fence)
+    public static EntityLeashKnot createKnot(World world, BlockPos fence)
     {
-        EntityLeashKnot entityleashknot = new EntityLeashKnot(worldIn, fence);
+        EntityLeashKnot entityleashknot = new EntityLeashKnot(world, fence);
         entityleashknot.forceSpawn = true;
-        worldIn.spawnEntityInWorld(entityleashknot);
+        world.spawnEntityInWorld(entityleashknot);
         return entityleashknot;
     }
 
-    public static EntityLeashKnot getKnotForPosition(World worldIn, BlockPos pos)
+    public static EntityLeashKnot getKnotForPosition(World world, BlockPos pos)
     {
         int i = pos.getX();
         int j = pos.getY();
         int k = pos.getZ();
 
-        for (EntityLeashKnot entityleashknot : worldIn.getEntitiesWithinAABB(EntityLeashKnot.class, new AxisAlignedBB((double)i - 1.0D, (double)j - 1.0D, (double)k - 1.0D, (double)i + 1.0D, (double)j + 1.0D, (double)k + 1.0D)))
+        for (EntityLeashKnot entityleashknot : world.getEntitiesWithinAABB(EntityLeashKnot.class, new AxisAlignedBB((double)i - 1.0D, (double)j - 1.0D, (double)k - 1.0D, (double)i + 1.0D, (double)j + 1.0D, (double)k + 1.0D)))
         {
             if (entityleashknot.getHangingPosition().equals(pos))
             {

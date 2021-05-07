@@ -40,20 +40,20 @@ public class BlockRedstoneRepeater extends BlockRedstoneDiode
      * Get the actual Block state of this Block at the given position. This applies properties not visible in the
      * metadata, such as fence connections.
      */
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
     {
-        return state.withProperty(LOCKED, Boolean.valueOf(this.isLocked(worldIn, pos, state)));
+        return state.withProperty(LOCKED, Boolean.valueOf(this.isLocked(world, pos, state)));
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (!playerIn.capabilities.allowEdit)
+        if (!player.capabilities.allowEdit)
         {
             return false;
         }
         else
         {
-            worldIn.setBlockState(pos, state.cycleProperty(DELAY), 3);
+            world.setBlockState(pos, state.cycleProperty(DELAY), 3);
             return true;
         }
     }
@@ -92,14 +92,14 @@ public class BlockRedstoneRepeater extends BlockRedstoneDiode
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return Items.repeater;
     }
 
-    public boolean isLocked(IBlockAccess worldIn, BlockPos pos, IBlockState state)
+    public boolean isLocked(IBlockAccess world, BlockPos pos, IBlockState state)
     {
-        return this.getPowerOnSides(worldIn, pos, state) > 0;
+        return this.getPowerOnSides(world, pos, state) > 0;
     }
 
     protected boolean canPowerSide(Block blockIn)
@@ -107,7 +107,7 @@ public class BlockRedstoneRepeater extends BlockRedstoneDiode
         return isRedstoneRepeaterBlockID(blockIn);
     }
 
-    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
         if (this.isRepeaterPowered)
         {
@@ -125,14 +125,14 @@ public class BlockRedstoneRepeater extends BlockRedstoneDiode
             f = f / 16.0F;
             double d3 = f * (float)enumfacing.getFrontOffsetX();
             double d4 = f * (float)enumfacing.getFrontOffsetZ();
-            worldIn.spawnParticle(EnumParticleTypes.REDSTONE, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+            world.spawnParticle(EnumParticleTypes.REDSTONE, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
         }
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
     {
-        super.breakBlock(worldIn, pos, state);
-        this.notifyNeighbors(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
+        this.notifyNeighbors(world, pos, state);
     }
 
     /**

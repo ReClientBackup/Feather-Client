@@ -17,15 +17,15 @@ public class ItemEmptyMap extends ItemMapBase
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
-        ItemStack itemstack = new ItemStack(Items.filled_map, 1, worldIn.getUniqueDataId("map"));
+        ItemStack itemstack = new ItemStack(Items.filled_map, 1, world.getUniqueDataId("map"));
         String s = "map_" + itemstack.getMetadata();
         MapData mapdata = new MapData(s);
-        worldIn.setItemData(s, mapdata);
+        world.setItemData(s, mapdata);
         mapdata.scale = 0;
-        mapdata.calculateMapCenter(playerIn.posX, playerIn.posZ, mapdata.scale);
-        mapdata.dimension = (byte)worldIn.provider.getDimensionId();
+        mapdata.calculateMapCenter(player.posX, player.posZ, mapdata.scale);
+        mapdata.dimension = (byte)world.provider.getDimensionId();
         mapdata.markDirty();
         --itemStackIn.stackSize;
 
@@ -35,12 +35,12 @@ public class ItemEmptyMap extends ItemMapBase
         }
         else
         {
-            if (!playerIn.inventory.addItemStackToInventory(itemstack.copy()))
+            if (!player.inventory.addItemStackToInventory(itemstack.copy()))
             {
-                playerIn.dropPlayerItemWithRandomChoice(itemstack, false);
+                player.dropPlayerItemWithRandomChoice(itemstack);
             }
 
-            playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+            player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
             return itemStackIn;
         }
     }

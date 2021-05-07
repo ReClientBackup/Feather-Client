@@ -32,8 +32,8 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class Block
-{
+public class Block {
+
     /** ResourceLocation for the Air block */
     private static final ResourceLocation AIR_ID = new ResourceLocation("air");
     public static final RegistryNamespacedDefaultedByKey<ResourceLocation, Block> blockRegistry = new RegistryNamespacedDefaultedByKey(AIR_ID);
@@ -49,50 +49,42 @@ public class Block
     public static final Block.SoundType soundTypeGrass = new Block.SoundType("grass", 1.0F, 1.0F);
     public static final Block.SoundType soundTypePiston = new Block.SoundType("stone", 1.0F, 1.0F);
     public static final Block.SoundType soundTypeMetal = new Block.SoundType("stone", 1.0F, 1.5F);
-    public static final Block.SoundType soundTypeGlass = new Block.SoundType("stone", 1.0F, 1.0F)
-    {
-        public String getBreakSound()
-        {
+    public static final Block.SoundType soundTypeGlass = new Block.SoundType("stone", 1.0F, 1.0F) {
+        public String getBreakSound() {
             return "dig.glass";
         }
-        public String getPlaceSound()
-        {
+
+        public String getPlaceSound() {
             return "step.stone";
         }
     };
     public static final Block.SoundType soundTypeCloth = new Block.SoundType("cloth", 1.0F, 1.0F);
     public static final Block.SoundType soundTypeSand = new Block.SoundType("sand", 1.0F, 1.0F);
     public static final Block.SoundType soundTypeSnow = new Block.SoundType("snow", 1.0F, 1.0F);
-    public static final Block.SoundType soundTypeLadder = new Block.SoundType("ladder", 1.0F, 1.0F)
-    {
-        public String getBreakSound()
-        {
+    public static final Block.SoundType soundTypeLadder = new Block.SoundType("ladder", 1.0F, 1.0F) {
+        public String getBreakSound() {
             return "dig.wood";
         }
     };
-    public static final Block.SoundType soundTypeAnvil = new Block.SoundType("anvil", 0.3F, 1.0F)
-    {
-        public String getBreakSound()
-        {
+    public static final Block.SoundType soundTypeAnvil = new Block.SoundType("anvil", 0.3F, 1.0F) {
+        public String getBreakSound() {
             return "dig.stone";
         }
-        public String getPlaceSound()
-        {
+
+        public String getPlaceSound() {
             return "random.anvil_land";
         }
     };
-    public static final Block.SoundType SLIME_SOUND = new Block.SoundType("slime", 1.0F, 1.0F)
-    {
-        public String getBreakSound()
-        {
+    public static final Block.SoundType SLIME_SOUND = new Block.SoundType("slime", 1.0F, 1.0F) {
+        public String getBreakSound() {
             return "mob.slime.big";
         }
-        public String getPlaceSound()
-        {
+
+        public String getPlaceSound() {
             return "mob.slime.big";
         }
-        public String getStepSound()
-        {
+
+        public String getStepSound() {
             return "mob.slime.small";
         }
     };
@@ -125,18 +117,13 @@ public class Block
 
     /** true if the Block contains a Tile Entity */
     protected boolean isBlockContainer;
-    protected double minX;
-    protected double minY;
-    protected double minZ;
-    protected double maxX;
-    protected double maxY;
-    protected double maxZ;
+    protected double minX, minY, minZ, maxX, maxY, maxZ;
 
     /** Sound of stepping on the block */
     public Block.SoundType stepSound;
     public float blockParticleGravity;
     protected final Material blockMaterial;
-    protected final MapColor field_181083_K;
+    protected final MapColor mapColor;
 
     /**
      * Determines how much velocity is maintained while moving on top of this block
@@ -146,127 +133,103 @@ public class Block
     private IBlockState defaultBlockState;
     private String unlocalizedName;
 
-    public static int getIdFromBlock(Block blockIn)
-    {
+    public static int getIdFromBlock(Block blockIn) {
         return blockRegistry.getIDForObject(blockIn);
     }
 
     /**
      * Get a unique ID for the given BlockState, containing both BlockID and metadata
      */
-    public static int getStateId(IBlockState state)
-    {
+    public static int getStateId(IBlockState state) {
         Block block = state.getBlock();
         return getIdFromBlock(block) + (block.getMetaFromState(state) << 12);
     }
 
-    public static Block getBlockById(int id)
-    {
+    public static Block getBlockById(int id) {
         return blockRegistry.getObjectById(id);
     }
 
     /**
      * Get a BlockState by it's ID (see getStateId)
      */
-    public static IBlockState getStateById(int id)
-    {
+    public static IBlockState getStateById(int id) {
         int i = id & 4095;
         int j = id >> 12 & 15;
         return getBlockById(i).getStateFromMeta(j);
     }
 
-    public static Block getBlockFromItem(Item itemIn)
-    {
-        return itemIn instanceof ItemBlock ? ((ItemBlock)itemIn).getBlock() : null;
+    public static Block getBlockFromItem(Item item) {
+        return item instanceof ItemBlock ? ((ItemBlock)item).getBlock() : null;
     }
 
-    public static Block getBlockFromName(String name)
-    {
+    public static Block getBlockFromName(String name) {
         ResourceLocation resourcelocation = new ResourceLocation(name);
 
-        if (blockRegistry.containsKey(resourcelocation))
-        {
+        if (blockRegistry.containsKey(resourcelocation)) {
             return blockRegistry.getObject(resourcelocation);
-        }
-        else
-        {
-            try
-            {
+        } else {
+            try {
                 return blockRegistry.getObjectById(Integer.parseInt(name));
-            }
-            catch (NumberFormatException var3)
-            {
+            } catch (NumberFormatException exception) {
                 return null;
             }
         }
     }
 
-    public boolean isFullBlock()
-    {
+    public boolean isFullBlock() {
         return this.fullBlock;
     }
 
-    public int getLightOpacity()
-    {
+    public int getLightOpacity() {
         return this.lightOpacity;
     }
 
     /**
      * Used in the renderer to apply ambient occlusion
      */
-    public boolean isTranslucent()
-    {
+    public boolean isTranslucent() {
         return this.translucent;
     }
 
-    public int getLightValue()
-    {
+    public int getLightValue() {
         return this.lightValue;
     }
 
     /**
      * Should block use the brightest neighbor light value as its own
      */
-    public boolean getUseNeighborBrightness()
-    {
+    public boolean getUseNeighborBrightness() {
         return this.useNeighborBrightness;
     }
 
     /**
      * Get a material of block
      */
-    public Material getMaterial()
-    {
+    public Material getMaterial() {
         return this.blockMaterial;
     }
 
     /**
      * Get the MapColor for this Block and the given BlockState
      */
-    public MapColor getMapColor(IBlockState state)
-    {
-        return this.field_181083_K;
+    public MapColor getMapColor(IBlockState state) {
+        return this.mapColor;
     }
 
     /**
      * Convert the given metadata into a BlockState for this Block
      */
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState();
     }
 
     /**
      * Convert the BlockState into the correct metadata value
      */
-    public int getMetaFromState(IBlockState state)
-    {
-        if (state != null && !state.getPropertyNames().isEmpty())
-        {
+    public int getMetaFromState(IBlockState state) {
+        if (state != null && !state.getPropertyNames().isEmpty()) {
             throw new IllegalArgumentException("Don't know how to convert " + state + " back into data...");
-        }
-        else
-        {
+        } else {
             return 0;
         }
     }
@@ -275,37 +238,33 @@ public class Block
      * Get the actual Block state of this Block at the given position. This applies properties not visible in the
      * metadata, such as fence connections.
      */
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         return state;
     }
 
-    public Block(Material p_i46399_1_, MapColor p_i46399_2_)
-    {
+    public Block(Material material, MapColor mapColor) {
         this.enableStats = true;
         this.stepSound = soundTypeStone;
         this.blockParticleGravity = 1.0F;
         this.slipperiness = 0.6F;
-        this.blockMaterial = p_i46399_1_;
-        this.field_181083_K = p_i46399_2_;
+        this.blockMaterial = material;
+        this.mapColor = mapColor;
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         this.fullBlock = this.isOpaqueCube();
         this.lightOpacity = this.isOpaqueCube() ? 255 : 0;
-        this.translucent = !p_i46399_1_.blocksLight();
+        this.translucent = !material.blocksLight();
         this.blockState = this.createBlockState();
         this.setDefaultState(this.blockState.getBaseState());
     }
 
-    protected Block(Material materialIn)
-    {
+    protected Block(Material materialIn) {
         this(materialIn, materialIn.getMaterialMapColor());
     }
 
     /**
      * Sets the footstep sound for the block. Returns the object for convenience in constructing.
      */
-    protected Block setStepSound(Block.SoundType sound)
-    {
+    protected Block setStepSound(Block.SoundType sound) {
         this.stepSound = sound;
         return this;
     }
@@ -313,8 +272,7 @@ public class Block
     /**
      * Sets how much light is blocked going through this block. Returns the object for convenience in constructing.
      */
-    protected Block setLightOpacity(int opacity)
-    {
+    protected Block setLightOpacity(int opacity) {
         this.lightOpacity = opacity;
         return this;
     }
@@ -323,8 +281,7 @@ public class Block
      * Sets the light value that the block emits. Returns resulting block instance for constructing convenience. Args:
      * level
      */
-    protected Block setLightLevel(float value)
-    {
+    protected Block setLightLevel(float value) {
         this.lightValue = (int)(15.0F * value);
         return this;
     }
@@ -332,8 +289,7 @@ public class Block
     /**
      * Sets the the blocks resistance to explosions. Returns the object for convenience in constructing.
      */
-    protected Block setResistance(float resistance)
-    {
+    protected Block setResistance(float resistance) {
         this.blockResistance = resistance * 3.0F;
         return this;
     }
@@ -341,8 +297,7 @@ public class Block
     /**
      * Indicate if a material is a normal solid opaque cube
      */
-    public boolean isBlockNormalCube()
-    {
+    public boolean isBlockNormalCube() {
         return this.blockMaterial.blocksMovement() && this.isFullCube();
     }
 
@@ -350,73 +305,62 @@ public class Block
      * Used for nearly all game logic (non-rendering) purposes. Use Forge-provided isNormalCube(IBlockAccess, BlockPos)
      * instead.
      */
-    public boolean isNormalCube()
-    {
+    public boolean isNormalCube() {
         return this.blockMaterial.isOpaque() && this.isFullCube() && !this.canProvidePower();
     }
 
-    public boolean isVisuallyOpaque()
-    {
+    public boolean isVisuallyOpaque() {
         return this.blockMaterial.blocksMovement() && this.isFullCube();
     }
 
-    public boolean isFullCube()
-    {
+    public boolean isFullCube() {
         return true;
     }
 
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
-    {
+    public boolean isPassable(IBlockAccess world, BlockPos pos) {
         return !this.blockMaterial.blocksMovement();
     }
 
     /**
      * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
      */
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return 3;
     }
 
     /**
      * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
      */
-    public boolean isReplaceable(World worldIn, BlockPos pos)
-    {
+    public boolean isReplaceable(World world, BlockPos pos) {
         return false;
     }
 
     /**
      * Sets how many hits it takes to break a block.
      */
-    protected Block setHardness(float hardness)
-    {
+    protected Block setHardness(float hardness) {
         this.blockHardness = hardness;
 
-        if (this.blockResistance < hardness * 5.0F)
-        {
+        if (this.blockResistance < hardness * 5.0F) {
             this.blockResistance = hardness * 5.0F;
         }
 
         return this;
     }
 
-    protected Block setBlockUnbreakable()
-    {
+    protected Block setBlockUnbreakable() {
         this.setHardness(-1.0F);
         return this;
     }
 
-    public float getBlockHardness(World worldIn, BlockPos pos)
-    {
+    public float getBlockHardness() {
         return this.blockHardness;
     }
 
     /**
      * Sets whether this block type will receive random update ticks
      */
-    protected Block setTickRandomly(boolean shouldTick)
-    {
+    protected Block setTickRandomly(boolean shouldTick) {
         this.needsRandomTick = shouldTick;
         return this;
     }
@@ -425,18 +369,15 @@ public class Block
      * Returns whether or not this block is of a type that needs random ticking. Called for ref-counting purposes by
      * ExtendedBlockStorage in order to broadly cull a chunk from the random chunk update list for efficiency's sake.
      */
-    public boolean getTickRandomly()
-    {
+    public boolean getTickRandomly() {
         return this.needsRandomTick;
     }
 
-    public boolean hasTileEntity()
-    {
+    public boolean hasTileEntity() {
         return this.isBlockContainer;
     }
 
-    protected final void setBlockBounds(float minX, float minY, float minZ, float maxX, float maxY, float maxZ)
-    {
+    protected final void setBlockBounds(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
         this.minX = minX;
         this.minY = minY;
         this.minZ = minZ;
@@ -445,38 +386,31 @@ public class Block
         this.maxZ = maxZ;
     }
 
-    public int getMixedBrightnessForBlock(IBlockAccess worldIn, BlockPos pos)
-    {
-        Block block = worldIn.getBlockState(pos).getBlock();
-        int i = worldIn.getCombinedLight(pos, block.getLightValue());
+    public int getMixedBrightnessForBlock(IBlockAccess world, BlockPos pos) {
+        Block block = world.getBlockState(pos).getBlock();
+        int i = world.getCombinedLight(pos, block.getLightValue());
 
-        if (i == 0 && block instanceof BlockSlab)
-        {
+        if (i == 0 && block instanceof BlockSlab) {
             pos = pos.down();
-            block = worldIn.getBlockState(pos).getBlock();
-            return worldIn.getCombinedLight(pos, block.getLightValue());
-        }
-        else
-        {
+            block = world.getBlockState(pos).getBlock();
+            return world.getCombinedLight(pos, block.getLightValue());
+        } else {
             return i;
         }
     }
 
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
-    {
-        return side == EnumFacing.DOWN && this.minY > 0.0D || (side == EnumFacing.UP && this.maxY < 1.0D || (side == EnumFacing.NORTH && this.minZ > 0.0D || (side == EnumFacing.SOUTH && this.maxZ < 1.0D || (side == EnumFacing.WEST && this.minX > 0.0D || (side == EnumFacing.EAST && this.maxX < 1.0D || !worldIn.getBlockState(pos).getBlock().isOpaqueCube())))));
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return side == EnumFacing.DOWN && this.minY > 0.0D || (side == EnumFacing.UP && this.maxY < 1.0D || (side == EnumFacing.NORTH && this.minZ > 0.0D || (side == EnumFacing.SOUTH && this.maxZ < 1.0D || (side == EnumFacing.WEST && this.minX > 0.0D || (side == EnumFacing.EAST && this.maxX < 1.0D || !world.getBlockState(pos).getBlock().isOpaqueCube())))));
     }
 
     /**
      * Whether this Block is solid on the given Side
      */
-    public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
-    {
-        return worldIn.getBlockState(pos).getBlock().getMaterial().isSolid();
+    public boolean isBlockSolid(IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return world.getBlockState(pos).getBlock().getMaterial().isSolid();
     }
 
-    public AxisAlignedBB getSelectedBoundingBox(World worldIn, BlockPos pos)
-    {
+    public AxisAlignedBB getSelectedBoundingBox(World world, BlockPos pos) {
         return new AxisAlignedBB((double)pos.getX() + this.minX, (double)pos.getY() + this.minY, (double)pos.getZ() + this.minZ, (double)pos.getX() + this.maxX, (double)pos.getY() + this.maxY, (double)pos.getZ() + this.maxZ);
     }
 
@@ -485,93 +419,72 @@ public class Block
      *  
      * @param collidingEntity the Entity colliding with this Block
      */
-    public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
-    {
-        AxisAlignedBB axisalignedbb = this.getCollisionBoundingBox(worldIn, pos, state);
+    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity) {
+        AxisAlignedBB axisalignedbb = this.getCollisionBoundingBox(world, pos, state);
 
-        if (axisalignedbb != null && mask.intersectsWith(axisalignedbb))
-        {
+        if (axisalignedbb != null && mask.intersectsWith(axisalignedbb)) {
             list.add(axisalignedbb);
         }
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state) {
         return new AxisAlignedBB((double)pos.getX() + this.minX, (double)pos.getY() + this.minY, (double)pos.getZ() + this.minZ, (double)pos.getX() + this.maxX, (double)pos.getY() + this.maxY, (double)pos.getZ() + this.maxZ);
     }
 
     /**
      * Used to determine ambient occlusion and culling when rebuilding chunks for render
      */
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return true;
     }
 
-    public boolean canCollideCheck(IBlockState state, boolean hitIfLiquid)
-    {
+    public boolean canCollideCheck(IBlockState state, boolean hitIfLiquid) {
         return this.isCollidable();
     }
 
     /**
      * Returns if this block is collidable (only used by Fire). Args: x, y, z
      */
-    public boolean isCollidable()
-    {
+    public boolean isCollidable() {
         return true;
     }
 
     /**
      * Called randomly when setTickRandomly is set to true (used by e.g. crops to grow, etc.)
      */
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
-    {
-        this.updateTick(worldIn, pos, state, random);
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+        this.updateTick(world, pos, state, random);
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-    }
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {}
 
-    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-    }
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {}
 
     /**
      * Called when a player destroys this Block
      */
-    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
-    {
-    }
+    public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {}
 
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
-    {
-    }
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock) {}
 
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World worldIn)
-    {
+    public int tickRate(World world) {
         return 10;
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-    {
-    }
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {}
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
-    }
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {}
 
     /**
      * Returns the quantity of items to drop on block destruction.
      */
-    public int quantityDropped(Random random)
-    {
+    public int quantityDropped(Random random) {
         return 1;
     }
 
@@ -580,18 +493,16 @@ public class Block
      *  
      * @param fortune the level of the Fortune enchantment on the player's tool
      */
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(this);
     }
 
     /**
      * Get the hardness of this Block relative to the ability of the given player
      */
-    public float getPlayerRelativeBlockHardness(EntityPlayer playerIn, World worldIn, BlockPos pos)
-    {
-        float f = this.getBlockHardness(worldIn, pos);
-        return f < 0.0F ? 0.0F : (!playerIn.canHarvestBlock(this) ? playerIn.getToolDigEfficiency(this) / f / 100.0F : playerIn.getToolDigEfficiency(this) / f / 30.0F);
+    public float getPlayerRelativeBlockHardness(EntityPlayer player) {
+        float hardness = this.getBlockHardness();
+        return hardness < 0.0F ? 0.0F : (!player.canHarvestBlock(this) ? player.getToolDigEfficiency(this) / hardness / 100.0F : player.getToolDigEfficiency(this) / hardness / 30.0F);
     }
 
     /**
@@ -599,9 +510,8 @@ public class Block
      *  
      * @param forture the level of the Fortune enchantment on the player's tool
      */
-    public final void dropBlockAsItem(World worldIn, BlockPos pos, IBlockState state, int forture)
-    {
-        this.dropBlockAsItemWithChance(worldIn, pos, state, 1.0F, forture);
+    public final void dropBlockAsItem(World world, BlockPos pos, IBlockState state, int forture) {
+        this.dropBlockAsItemWithChance(world, pos, state, 1.0F, forture);
     }
 
     /**
@@ -610,21 +520,16 @@ public class Block
      * @param chance The chance that each Item is actually spawned (1.0 = always, 0.0 = never)
      * @param fortune The player's fortune level
      */
-    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
-    {
-        if (!worldIn.isRemote)
-        {
-            int i = this.quantityDroppedWithBonus(fortune, worldIn.rand);
+    public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune) {
+        if (!world.isRemote) {
+            int i = this.quantityDroppedWithBonus(fortune, world.rand);
 
-            for (int j = 0; j < i; ++j)
-            {
-                if (worldIn.rand.nextFloat() <= chance)
-                {
-                    Item item = this.getItemDropped(state, worldIn.rand, fortune);
+            for (int j = 0; j < i; ++j) {
+                if (world.rand.nextFloat() <= chance) {
+                    Item item = this.getItemDropped(state, world.rand, fortune);
 
-                    if (item != null)
-                    {
-                        spawnAsEntity(worldIn, pos, new ItemStack(item, 1, this.damageDropped(state)));
+                    if (item != null) {
+                        spawnAsEntity(world, pos, new ItemStack(item, 1, this.damageDropped(state)));
                     }
                 }
             }
@@ -634,17 +539,15 @@ public class Block
     /**
      * Spawns the given ItemStack as an EntityItem into the World at the given position
      */
-    public static void spawnAsEntity(World worldIn, BlockPos pos, ItemStack stack)
-    {
-        if (!worldIn.isRemote && worldIn.getGameRules().getGameRuleBooleanValue("doTileDrops"))
-        {
+    public static void spawnAsEntity(World world, BlockPos pos, ItemStack stack) {
+        if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
             float f = 0.5F;
-            double d0 = (double)(worldIn.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-            double d1 = (double)(worldIn.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-            double d2 = (double)(worldIn.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-            EntityItem entityitem = new EntityItem(worldIn, (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, stack);
+            double d0 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+            double d1 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+            double d2 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+            EntityItem entityitem = new EntityItem(world, (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, stack);
             entityitem.setDefaultPickupDelay();
-            worldIn.spawnEntityInWorld(entityitem);
+            world.spawnEntityInWorld(entityitem);
         }
     }
 
@@ -653,15 +556,12 @@ public class Block
      *  
      * @param amount The amount of XP to spawn
      */
-    protected void dropXpOnBlockBreak(World worldIn, BlockPos pos, int amount)
-    {
-        if (!worldIn.isRemote)
-        {
-            while (amount > 0)
-            {
+    protected void dropXpOnBlockBreak(World world, BlockPos pos, int amount) {
+        if (!world.isRemote) {
+            while (amount > 0) {
                 int i = EntityXPOrb.getXPSplit(amount);
                 amount -= i;
-                worldIn.spawnEntityInWorld(new EntityXPOrb(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, i));
+                world.spawnEntityInWorld(new EntityXPOrb(world, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, i));
             }
         }
     }
@@ -670,16 +570,14 @@ public class Block
      * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
      * returns the metadata of the dropped item based on the old metadata of the block.
      */
-    public int damageDropped(IBlockState state)
-    {
+    public int damageDropped(IBlockState state) {
         return 0;
     }
 
     /**
      * Returns how much this block can resist explosions from the passed in entity.
      */
-    public float getExplosionResistance(Entity exploder)
-    {
+    public float getExplosionResistance(Entity exploder) {
         return this.blockResistance / 5.0F;
     }
 
@@ -689,9 +587,8 @@ public class Block
      * @param start The start vector
      * @param end The end vector
      */
-    public MovingObjectPosition collisionRayTrace(World worldIn, BlockPos pos, Vec3 start, Vec3 end)
-    {
-        this.setBlockBoundsBasedOnState(worldIn, pos);
+    public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 start, Vec3 end) {
+        this.setBlockBoundsBasedOnState(world, pos);
         start = start.addVector(-pos.getX(), -pos.getY(), -pos.getZ());
         end = end.addVector(-pos.getX(), -pos.getY(), -pos.getZ());
         Vec3 vec3 = start.getIntermediateWithXValue(end, this.minX);
@@ -701,103 +598,82 @@ public class Block
         Vec3 vec34 = start.getIntermediateWithZValue(end, this.minZ);
         Vec3 vec35 = start.getIntermediateWithZValue(end, this.maxZ);
 
-        if (!this.isVecInsideYZBounds(vec3))
-        {
+        if (this.isVecInsideYZBounds(vec3)) {
             vec3 = null;
         }
 
-        if (!this.isVecInsideYZBounds(vec31))
-        {
+        if (this.isVecInsideYZBounds(vec31)) {
             vec31 = null;
         }
 
-        if (!this.isVecInsideXZBounds(vec32))
-        {
+        if (this.isVecInsideXZBounds(vec32)) {
             vec32 = null;
         }
 
-        if (!this.isVecInsideXZBounds(vec33))
-        {
+        if (this.isVecInsideXZBounds(vec33)) {
             vec33 = null;
         }
 
-        if (!this.isVecInsideXYBounds(vec34))
-        {
+        if (this.isVecInsideXYBounds(vec34)) {
             vec34 = null;
         }
 
-        if (!this.isVecInsideXYBounds(vec35))
-        {
+        if (this.isVecInsideXYBounds(vec35)) {
             vec35 = null;
         }
 
         Vec3 vec36 = null;
 
-        if (vec3 != null && (vec36 == null || start.squareDistanceTo(vec3) < start.squareDistanceTo(vec36)))
-        {
+        if (vec3 != null) {
             vec36 = vec3;
         }
 
-        if (vec31 != null && (vec36 == null || start.squareDistanceTo(vec31) < start.squareDistanceTo(vec36)))
-        {
+        if (vec31 != null && (vec36 == null || start.squareDistanceTo(vec31) < start.squareDistanceTo(vec36))) {
             vec36 = vec31;
         }
 
-        if (vec32 != null && (vec36 == null || start.squareDistanceTo(vec32) < start.squareDistanceTo(vec36)))
-        {
+        if (vec32 != null && (vec36 == null || start.squareDistanceTo(vec32) < start.squareDistanceTo(vec36))) {
             vec36 = vec32;
         }
 
-        if (vec33 != null && (vec36 == null || start.squareDistanceTo(vec33) < start.squareDistanceTo(vec36)))
-        {
+        if (vec33 != null && (vec36 == null || start.squareDistanceTo(vec33) < start.squareDistanceTo(vec36))) {
             vec36 = vec33;
         }
 
-        if (vec34 != null && (vec36 == null || start.squareDistanceTo(vec34) < start.squareDistanceTo(vec36)))
-        {
+        if (vec34 != null && (vec36 == null || start.squareDistanceTo(vec34) < start.squareDistanceTo(vec36))) {
             vec36 = vec34;
         }
 
-        if (vec35 != null && (vec36 == null || start.squareDistanceTo(vec35) < start.squareDistanceTo(vec36)))
-        {
+        if (vec35 != null && (vec36 == null || start.squareDistanceTo(vec35) < start.squareDistanceTo(vec36))) {
             vec36 = vec35;
         }
 
-        if (vec36 == null)
-        {
+        if (vec36 == null) {
             return null;
-        }
-        else
-        {
+        } else {
             EnumFacing enumfacing = null;
 
-            if (vec36 == vec3)
-            {
+            if (vec36 == vec3) {
                 enumfacing = EnumFacing.WEST;
             }
 
-            if (vec36 == vec31)
-            {
+            if (vec36 == vec31) {
                 enumfacing = EnumFacing.EAST;
             }
 
-            if (vec36 == vec32)
-            {
+            if (vec36 == vec32) {
                 enumfacing = EnumFacing.DOWN;
             }
 
-            if (vec36 == vec33)
-            {
+            if (vec36 == vec33) {
                 enumfacing = EnumFacing.UP;
             }
 
-            if (vec36 == vec34)
-            {
+            if (vec36 == vec34) {
                 enumfacing = EnumFacing.NORTH;
             }
 
-            if (vec36 == vec35)
-            {
+            if (vec36 == vec35) {
                 enumfacing = EnumFacing.SOUTH;
             }
 
@@ -808,224 +684,181 @@ public class Block
     /**
      * Checks if a vector is within the Y and Z bounds of the block.
      */
-    private boolean isVecInsideYZBounds(Vec3 point)
-    {
-        return point != null && point.yCoord >= this.minY && point.yCoord <= this.maxY && point.zCoord >= this.minZ && point.zCoord <= this.maxZ;
+    private boolean isVecInsideYZBounds(Vec3 point) {
+        return point == null || !(point.yCoord >= this.minY) || !(point.yCoord <= this.maxY) || !(point.zCoord >= this.minZ) || !(point.zCoord <= this.maxZ);
     }
 
     /**
      * Checks if a vector is within the X and Z bounds of the block.
      */
-    private boolean isVecInsideXZBounds(Vec3 point)
-    {
-        return point != null && point.xCoord >= this.minX && point.xCoord <= this.maxX && point.zCoord >= this.minZ && point.zCoord <= this.maxZ;
+    private boolean isVecInsideXZBounds(Vec3 point) {
+        return point == null || !(point.xCoord >= this.minX) || !(point.xCoord <= this.maxX) || !(point.zCoord >= this.minZ) || !(point.zCoord <= this.maxZ);
     }
 
     /**
      * Checks if a vector is within the X and Y bounds of the block.
      */
-    private boolean isVecInsideXYBounds(Vec3 point)
-    {
-        return point != null && point.xCoord >= this.minX && point.xCoord <= this.maxX && point.yCoord >= this.minY && point.yCoord <= this.maxY;
+    private boolean isVecInsideXYBounds(Vec3 point) {
+        return point == null || !(point.xCoord >= this.minX) || !(point.xCoord <= this.maxX) || !(point.yCoord >= this.minY) || !(point.yCoord <= this.maxY);
     }
 
     /**
      * Called when this Block is destroyed by an Explosion
      */
-    public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn)
-    {
-    }
+    public void onBlockDestroyedByExplosion(World world, BlockPos pos, Explosion explosionIn) {}
 
-    public EnumWorldBlockLayer getBlockLayer()
-    {
+    public EnumWorldBlockLayer getBlockLayer() {
         return EnumWorldBlockLayer.SOLID;
     }
 
-    public boolean canReplace(World worldIn, BlockPos pos, EnumFacing side, ItemStack stack)
-    {
-        return this.canPlaceBlockOnSide(worldIn, pos, side);
+    public boolean canReplace(World world, BlockPos pos, EnumFacing side) {
+        return this.canPlaceBlockOnSide(world, pos, side);
     }
 
     /**
      * Check whether this Block can be placed on the given side
      */
-    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
-    {
-        return this.canPlaceBlockAt(worldIn, pos);
+    public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side) {
+        return this.canPlaceBlockAt(world, pos);
     }
 
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-    {
-        return worldIn.getBlockState(pos).getBlock().blockMaterial.isReplaceable();
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return world.getBlockState(pos).getBlock().blockMaterial.isReplaceable();
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
         return false;
     }
 
     /**
      * Triggered whenever an entity collides with this block (enters into the block)
      */
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entityIn)
-    {
-    }
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {}
 
     /**
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-    {
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         return this.getStateFromMeta(meta);
     }
 
-    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
-    {
-    }
+    public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {}
 
-    public Vec3 modifyAcceleration(World worldIn, BlockPos pos, Entity entityIn, Vec3 motion)
-    {
+    public Vec3 modifyAcceleration(World world, BlockPos pos, Entity entityIn, Vec3 motion) {
         return motion;
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
-    {
-    }
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos) {}
 
     /**
      * returns the block bounderies minX value
      */
-    public final double getBlockBoundsMinX()
-    {
+    public final double getBlockBoundsMinX() {
         return this.minX;
     }
 
     /**
      * returns the block bounderies maxX value
      */
-    public final double getBlockBoundsMaxX()
-    {
+    public final double getBlockBoundsMaxX() {
         return this.maxX;
     }
 
     /**
      * returns the block bounderies minY value
      */
-    public final double getBlockBoundsMinY()
-    {
+    public final double getBlockBoundsMinY() {
         return this.minY;
     }
 
     /**
      * returns the block bounderies maxY value
      */
-    public final double getBlockBoundsMaxY()
-    {
+    public final double getBlockBoundsMaxY() {
         return this.maxY;
     }
 
     /**
      * returns the block bounderies minZ value
      */
-    public final double getBlockBoundsMinZ()
-    {
+    public final double getBlockBoundsMinZ() {
         return this.minZ;
     }
 
     /**
      * returns the block bounderies maxZ value
      */
-    public final double getBlockBoundsMaxZ()
-    {
+    public final double getBlockBoundsMaxZ() {
         return this.maxZ;
     }
 
-    public int getBlockColor()
-    {
+    public int getBlockColor() {
         return 16777215;
     }
 
-    public int getRenderColor(IBlockState state)
-    {
+    public int getRenderColor(IBlockState state) {
         return 16777215;
     }
 
-    public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
-    {
+    public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass) {
         return 16777215;
     }
 
-    public final int colorMultiplier(IBlockAccess worldIn, BlockPos pos)
-    {
-        return this.colorMultiplier(worldIn, pos, 0);
+    public final int colorMultiplier(IBlockAccess world, BlockPos pos) {
+        return this.colorMultiplier(world, pos, 0);
     }
 
-    public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
-    {
+    public int isProvidingWeakPower(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side) {
         return 0;
     }
 
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
-    public boolean canProvidePower()
-    {
+    public boolean canProvidePower() {
         return false;
     }
 
     /**
      * Called When an Entity Collided with the Block
      */
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
-    {
-    }
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entityIn) {}
 
-    public int isProvidingStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
-    {
+    public int isProvidingStrongPower(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side) {
         return 0;
     }
 
     /**
      * Sets the block's bounds for rendering it as an item
      */
-    public void setBlockBoundsForItemRender()
-    {
-    }
+    public void setBlockBoundsForItemRender() {}
 
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
-    {
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te) {
         player.triggerAchievement(StatList.mineBlockStatArray[getIdFromBlock(this)]);
         player.addExhaustion(0.025F);
 
-        if (this.canSilkHarvest() && EnchantmentHelper.getSilkTouchModifier(player))
-        {
+        if (this.canSilkHarvest() && EnchantmentHelper.getSilkTouchModifier(player)) {
             ItemStack itemstack = this.createStackedBlock(state);
 
-            if (itemstack != null)
-            {
-                spawnAsEntity(worldIn, pos, itemstack);
+            if (itemstack != null) {
+                spawnAsEntity(world, pos, itemstack);
             }
-        }
-        else
-        {
+        } else {
             int i = EnchantmentHelper.getFortuneModifier(player);
-            this.dropBlockAsItem(worldIn, pos, state, i);
+            this.dropBlockAsItem(world, pos, state, i);
         }
     }
 
-    protected boolean canSilkHarvest()
-    {
+    protected boolean canSilkHarvest() {
         return this.isFullCube() && !this.isBlockContainer;
     }
 
-    protected ItemStack createStackedBlock(IBlockState state)
-    {
+    protected ItemStack createStackedBlock(IBlockState state) {
         int i = 0;
         Item item = Item.getItemFromBlock(this);
 
-        if (item != null && item.getHasSubtypes())
-        {
+        if (item != null && item.getHasSubtypes()) {
             i = this.getMetaFromState(state);
         }
 
@@ -1035,25 +868,20 @@ public class Block
     /**
      * Get the quantity dropped based on the given fortune level
      */
-    public int quantityDroppedWithBonus(int fortune, Random random)
-    {
+    public int quantityDroppedWithBonus(int fortune, Random random) {
         return this.quantityDropped(random);
     }
 
     /**
      * Called by ItemBlocks after a block is set in the world, to allow post-place logic
      */
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-    {
-    }
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {}
 
-    public boolean canSpawnInBlock()
-    {
+    public boolean canSpawnInBlock() {
         return !this.blockMaterial.isSolid() && !this.blockMaterial.isLiquid();
     }
 
-    public Block setUnlocalizedName(String name)
-    {
+    public Block setUnlocalizedName(String name) {
         this.unlocalizedName = name;
         return this;
     }
@@ -1061,51 +889,44 @@ public class Block
     /**
      * Gets the localized name of this block. Used for the statistics page.
      */
-    public String getLocalizedName()
-    {
+    public String getLocalizedName() {
         return StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
     }
 
     /**
      * Returns the unlocalized name of the block with "tile." appended to the front.
      */
-    public String getUnlocalizedName()
-    {
+    public String getUnlocalizedName() {
         return "tile." + this.unlocalizedName;
     }
 
     /**
      * Called on both Client and Server when World#addBlockEvent is called
      */
-    public boolean onBlockEventReceived(World worldIn, BlockPos pos, IBlockState state, int eventID, int eventParam)
-    {
+    public boolean onBlockEventReceived(World world, BlockPos pos, IBlockState state, int eventID, int eventParam) {
         return false;
     }
 
     /**
      * Return the state of blocks statistics flags - if the block is counted for mined and placed.
      */
-    public boolean getEnableStats()
-    {
+    public boolean getEnableStats() {
         return this.enableStats;
     }
 
-    protected Block disableStats()
-    {
+    protected Block disableStats() {
         this.enableStats = false;
         return this;
     }
 
-    public int getMobilityFlag()
-    {
+    public int getMobilityFlag() {
         return this.blockMaterial.getMaterialMobility();
     }
 
     /**
      * Returns the default ambient occlusion value based on block opacity
      */
-    public float getAmbientOcclusionLightValue()
-    {
+    public float getAmbientOcclusionLightValue() {
         return this.isBlockNormalCube() ? 0.2F : 1.0F;
     }
 
@@ -1114,8 +935,7 @@ public class Block
      *  
      * @param fallDistance The distance the entity has fallen before landing
      */
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
-    {
+    public void onFallenUpon(World world, BlockPos pos, Entity entityIn, float fallDistance) {
         entityIn.fall(fallDistance, 1.0F);
     }
 
@@ -1123,141 +943,116 @@ public class Block
      * Called when an Entity lands on this Block. This method *must* update motionY because the entity will not do that
      * on its own
      */
-    public void onLanded(World worldIn, Entity entityIn)
-    {
+    public void onLanded(World world, Entity entityIn) {
         entityIn.motionY = 0.0D;
     }
 
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
-    {
+    public Item getItem(World world, BlockPos pos) {
         return Item.getItemFromBlock(this);
     }
 
-    public int getDamageValue(World worldIn, BlockPos pos)
-    {
-        return this.damageDropped(worldIn.getBlockState(pos));
+    public int getDamageValue(World world, BlockPos pos) {
+        return this.damageDropped(world.getBlockState(pos));
     }
 
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
-    {
-        list.add(new ItemStack(itemIn, 1, 0));
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {
+        list.add(new ItemStack(item, 1, 0));
     }
 
     /**
      * Returns the CreativeTab to display the given block on.
      */
-    public CreativeTabs getCreativeTabToDisplayOn()
-    {
+    public CreativeTabs getCreativeTabToDisplayOn() {
         return this.displayOnCreativeTab;
     }
 
-    public Block setCreativeTab(CreativeTabs tab)
-    {
+    public Block setCreativeTab(CreativeTabs tab) {
         this.displayOnCreativeTab = tab;
         return this;
     }
 
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
-    {
-    }
+    public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {}
 
     /**
      * Called similar to random ticks, but only when it is raining.
      */
-    public void fillWithRain(World worldIn, BlockPos pos)
-    {
-    }
+    public void fillWithRain(World world, BlockPos pos) {}
 
     /**
      * Returns true only if block is flowerPot
      */
-    public boolean isFlowerPot()
-    {
+    public boolean isFlowerPot() {
         return false;
     }
 
-    public boolean requiresUpdates()
-    {
+    public boolean requiresUpdates() {
         return true;
     }
 
     /**
      * Return whether this block can drop from an explosion.
      */
-    public boolean canDropFromExplosion(Explosion explosionIn)
-    {
+    public boolean canDropFromExplosion(Explosion explosionIn) {
         return true;
     }
 
-    public boolean isAssociatedBlock(Block other)
-    {
+    public boolean isAssociatedBlock(Block other) {
         return this == other;
     }
 
-    public static boolean isEqualTo(Block blockIn, Block other)
-    {
-        return blockIn != null && other != null && (blockIn == other || blockIn.isAssociatedBlock(other));
+    public static boolean isEqualTo(Block block, Block other) {
+        return block != null && other != null && (block == other || block.isAssociatedBlock(other));
     }
 
-    public boolean hasComparatorInputOverride()
-    {
+    public boolean hasComparatorInputOverride() {
         return false;
     }
 
-    public int getComparatorInputOverride(World worldIn, BlockPos pos)
-    {
+    public int getComparatorInputOverride(World world, BlockPos pos) {
         return 0;
     }
 
     /**
      * Possibly modify the given BlockState before rendering it on an Entity (Minecarts, Endermen, ...)
      */
-    public IBlockState getStateForEntityRender(IBlockState state)
-    {
+    public IBlockState getStateForEntityRender(IBlockState state) {
         return state;
     }
 
-    protected BlockState createBlockState()
-    {
+    protected BlockState createBlockState() {
         return new BlockState(this);
     }
 
-    public BlockState getBlockState()
-    {
+    public BlockState getBlockState() {
         return this.blockState;
     }
 
-    protected final void setDefaultState(IBlockState state)
-    {
+    protected final void setDefaultState(IBlockState state) {
         this.defaultBlockState = state;
     }
 
-    public final IBlockState getDefaultState()
-    {
+    public final IBlockState getDefaultState() {
         return this.defaultBlockState;
     }
 
     /**
      * Get the OffsetType for this Block. Determines if the model is rendered slightly offset.
      */
-    public Block.EnumOffsetType getOffsetType()
-    {
+    public Block.EnumOffsetType getOffsetType() {
         return Block.EnumOffsetType.NONE;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return "Block{" + blockRegistry.getNameForObject(this) + "}";
     }
 
-    public static void registerBlocks()
-    {
+    public static void registerBlocks() {
         registerBlock(0, AIR_ID, (new BlockAir()).setUnlocalizedName("air"));
         registerBlock(1, "stone", (new BlockStone()).setHardness(1.5F).setResistance(10.0F).setStepSound(soundTypePiston).setUnlocalizedName("stone"));
         registerBlock(2, "grass", (new BlockGrass()).setHardness(0.6F).setStepSound(soundTypeGrass).setUnlocalizedName("grass"));
@@ -1471,14 +1266,10 @@ public class Block
         registerBlock(197, "dark_oak_door", (new BlockDoor(Material.wood)).setHardness(3.0F).setStepSound(soundTypeWood).setUnlocalizedName("doorDarkOak").disableStats());
         blockRegistry.validateKey();
 
-        for (Block block13 : blockRegistry)
-        {
-            if (block13.blockMaterial == Material.air)
-            {
+        for (Block block13 : blockRegistry) {
+            if (block13.blockMaterial == Material.air) {
                 block13.useNeighborBrightness = false;
-            }
-            else
-            {
+            } else {
                 boolean flag = false;
                 boolean flag1 = block13 instanceof BlockStairs;
                 boolean flag2 = block13 instanceof BlockSlab;
@@ -1486,8 +1277,7 @@ public class Block
                 boolean flag4 = block13.translucent;
                 boolean flag5 = block13.lightOpacity == 0;
 
-                if (flag1 || flag2 || flag3 || flag4 || flag5)
-                {
+                if (flag1 || flag2 || flag3 || flag4 || flag5) {
                     flag = true;
                 }
 
@@ -1495,69 +1285,56 @@ public class Block
             }
         }
 
-        for (Block block14 : blockRegistry)
-        {
-            for (IBlockState iblockstate : block14.getBlockState().getValidStates())
-            {
+        for (Block block14 : blockRegistry) {
+            for (IBlockState iblockstate : block14.getBlockState().getValidStates()) {
                 int i = blockRegistry.getIDForObject(block14) << 4 | block14.getMetaFromState(iblockstate);
                 BLOCK_STATE_IDS.put(iblockstate, i);
             }
         }
     }
 
-    private static void registerBlock(int id, ResourceLocation textualID, Block block_)
-    {
+    private static void registerBlock(int id, ResourceLocation textualID, Block block_) {
         blockRegistry.register(id, textualID, block_);
     }
 
-    private static void registerBlock(int id, String textualID, Block block_)
-    {
+    private static void registerBlock(int id, String textualID, Block block_) {
         registerBlock(id, new ResourceLocation(textualID), block_);
     }
 
-    public enum EnumOffsetType
-    {
-        NONE,
-        XZ,
-        XYZ
+    public enum EnumOffsetType {
+        NONE, XZ, XYZ
     }
 
-    public static class SoundType
-    {
+    public static class SoundType {
         public final String soundName;
         public final float volume;
         public final float frequency;
 
-        public SoundType(String name, float volume, float frequency)
-        {
+        public SoundType(String name, float volume, float frequency) {
             this.soundName = name;
             this.volume = volume;
             this.frequency = frequency;
         }
 
-        public float getVolume()
-        {
+        public float getVolume() {
             return this.volume;
         }
 
-        public float getFrequency()
-        {
+        public float getFrequency() {
             return this.frequency;
         }
 
-        public String getBreakSound()
-        {
+        public String getBreakSound() {
             return "dig." + this.soundName;
         }
 
-        public String getStepSound()
-        {
+        public String getStepSound() {
             return "step." + this.soundName;
         }
 
-        public String getPlaceSound()
-        {
+        public String getPlaceSound() {
             return this.getBreakSound();
         }
     }
+
 }

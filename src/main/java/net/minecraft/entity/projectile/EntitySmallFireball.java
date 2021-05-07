@@ -10,21 +10,21 @@ import net.minecraft.world.World;
 
 public class EntitySmallFireball extends EntityFireball
 {
-    public EntitySmallFireball(World worldIn)
+    public EntitySmallFireball(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.3125F, 0.3125F);
     }
 
-    public EntitySmallFireball(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
+    public EntitySmallFireball(World world, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
     {
-        super(worldIn, shooter, accelX, accelY, accelZ);
+        super(world, shooter, accelX, accelY, accelZ);
         this.setSize(0.3125F, 0.3125F);
     }
 
-    public EntitySmallFireball(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ)
+    public EntitySmallFireball(World world, double x, double y, double z, double accelX, double accelY, double accelZ)
     {
-        super(worldIn, x, y, z, accelX, accelY, accelZ);
+        super(world, x, y, z, accelX, accelY, accelZ);
         this.setSize(0.3125F, 0.3125F);
     }
 

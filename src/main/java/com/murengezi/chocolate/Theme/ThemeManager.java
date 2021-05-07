@@ -15,10 +15,9 @@ public class ThemeManager {
 
     public ThemeManager() {
         themes = new LinkedList<>();
-        load(new Theme("Chocolate", "Default theme", "Tobias Sjöblom", ThemeType.DEFAULT, new Color(244, 241, 214)));
+        load(new Theme("Chocolate", "Karl-Johan theme", "Tobias Sjöblom", ThemeType.BUILTIN, new Color(170, 143, 121)));
         load(new Theme("Speed", "Speed theme", "Tobias Sjöblom", ThemeType.BUILTIN, new Color(174, 198, 207)));
         load(new Theme("Ophelia", "Ophelia theme", "Molly Wågström", ThemeType.BUILTIN, new Color(255, 209, 220)));
-        load(new Theme("Karl-Johan", "Karl-Johan theme", "Tobias Sjöblom", ThemeType.BUILTIN, new Color(170, 143, 121)));
         setActiveTheme(get("Chocolate"));
     }
 

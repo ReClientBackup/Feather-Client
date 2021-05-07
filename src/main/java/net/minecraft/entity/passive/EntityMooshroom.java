@@ -11,9 +11,9 @@ import net.minecraft.world.World;
 
 public class EntityMooshroom extends EntityCow
 {
-    public EntityMooshroom(World worldIn)
+    public EntityMooshroom(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.9F, 1.3F);
         this.spawnableBlock = Blocks.mycelium;
     }

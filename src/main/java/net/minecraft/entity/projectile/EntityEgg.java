@@ -11,19 +11,19 @@ import net.minecraft.world.World;
 
 public class EntityEgg extends EntityThrowable
 {
-    public EntityEgg(World worldIn)
+    public EntityEgg(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityEgg(World worldIn, EntityLivingBase throwerIn)
+    public EntityEgg(World world, EntityLivingBase throwerIn)
     {
-        super(worldIn, throwerIn);
+        super(world, throwerIn);
     }
 
-    public EntityEgg(World worldIn, double x, double y, double z)
+    public EntityEgg(World world, double x, double y, double z)
     {
-        super(worldIn, x, y, z);
+        super(world, x, y, z);
     }
 
     /**

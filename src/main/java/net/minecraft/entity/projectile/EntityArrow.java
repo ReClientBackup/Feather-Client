@@ -49,24 +49,24 @@ public class EntityArrow extends Entity implements IProjectile
     /** The amount of knockback an arrow applies when it hits a mob. */
     private int knockbackStrength;
 
-    public EntityArrow(World worldIn)
+    public EntityArrow(World world)
     {
-        super(worldIn);
+        super(world);
         this.renderDistanceWeight = 10.0D;
         this.setSize(0.5F, 0.5F);
     }
 
-    public EntityArrow(World worldIn, double x, double y, double z)
+    public EntityArrow(World world, double x, double y, double z)
     {
-        super(worldIn);
+        super(world);
         this.renderDistanceWeight = 10.0D;
         this.setSize(0.5F, 0.5F);
         this.setPosition(x, y, z);
     }
 
-    public EntityArrow(World worldIn, EntityLivingBase shooter, EntityLivingBase p_i1755_3_, float p_i1755_4_, float p_i1755_5_)
+    public EntityArrow(World world, EntityLivingBase shooter, EntityLivingBase p_i1755_3_, float p_i1755_4_, float p_i1755_5_)
     {
-        super(worldIn);
+        super(world);
         this.renderDistanceWeight = 10.0D;
         this.shootingEntity = shooter;
 
@@ -93,9 +93,9 @@ public class EntityArrow extends Entity implements IProjectile
         }
     }
 
-    public EntityArrow(World worldIn, EntityLivingBase shooter, float velocity)
+    public EntityArrow(World world, EntityLivingBase shooter, float velocity)
     {
-        super(worldIn);
+        super(world);
         this.renderDistanceWeight = 10.0D;
         this.shootingEntity = shooter;
 

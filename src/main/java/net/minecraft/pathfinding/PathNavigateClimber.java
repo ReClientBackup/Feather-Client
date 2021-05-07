@@ -11,9 +11,9 @@ public class PathNavigateClimber extends PathNavigateGround
     /** Current path navigation target */
     private BlockPos targetPosition;
 
-    public PathNavigateClimber(EntityLiving entityLivingIn, World worldIn)
+    public PathNavigateClimber(EntityLiving entityLivingIn, World world)
     {
-        super(entityLivingIn, worldIn);
+        super(entityLivingIn, world);
     }
 
     /**

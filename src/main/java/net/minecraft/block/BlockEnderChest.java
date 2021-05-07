@@ -80,7 +80,7 @@ public class BlockEnderChest extends BlockContainer
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
@@ -88,31 +88,31 @@ public class BlockEnderChest extends BlockContainer
     /**
      * Called by ItemBlocks after a block is set in the world, to allow post-place logic
      */
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
-        worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+        world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        InventoryEnderChest inventoryenderchest = playerIn.getInventoryEnderChest();
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        InventoryEnderChest inventoryenderchest = player.getInventoryEnderChest();
+        TileEntity tileentity = world.getTileEntity(pos);
 
         if (inventoryenderchest != null && tileentity instanceof TileEntityEnderChest)
         {
-            if (worldIn.getBlockState(pos.up()).getBlock().isNormalCube())
+            if (world.getBlockState(pos.up()).getBlock().isNormalCube())
             {
                 return true;
             }
-            else if (worldIn.isRemote)
+            else if (world.isRemote)
             {
                 return true;
             }
             else
             {
                 inventoryenderchest.setChestTileEntity((TileEntityEnderChest)tileentity);
-                playerIn.displayGUIChest(inventoryenderchest);
-                playerIn.triggerAchievement(StatList.field_181738_V);
+                player.displayGUIChest(inventoryenderchest);
+                player.triggerAchievement(StatList.field_181738_V);
                 return true;
             }
         }
@@ -125,12 +125,12 @@ public class BlockEnderChest extends BlockContainer
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World worldIn, int meta)
+    public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileEntityEnderChest();
     }
 
-    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
         for (int i = 0; i < 3; ++i)
         {
@@ -142,7 +142,7 @@ public class BlockEnderChest extends BlockContainer
             double d3 = rand.nextFloat() * (float)j;
             double d4 = ((double)rand.nextFloat() - 0.5D) * 0.125D;
             double d5 = rand.nextFloat() * (float)k;
-            worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
+            world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
         }
     }
 

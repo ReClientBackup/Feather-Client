@@ -28,13 +28,13 @@ public class BlockJukebox extends BlockContainer
         this.setCreativeTab(CreativeTabs.tabDecorations);
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (state.getValue(HAS_RECORD).booleanValue())
         {
-            this.dropRecord(worldIn, pos, state);
+            this.dropRecord(world, pos, state);
             state = state.withProperty(HAS_RECORD, Boolean.valueOf(false));
-            worldIn.setBlockState(pos, state, 2);
+            world.setBlockState(pos, state, 2);
             return true;
         }
         else
@@ -43,25 +43,25 @@ public class BlockJukebox extends BlockContainer
         }
     }
 
-    public void insertRecord(World worldIn, BlockPos pos, IBlockState state, ItemStack recordStack)
+    public void insertRecord(World world, BlockPos pos, IBlockState state, ItemStack recordStack)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = world.getTileEntity(pos);
 
             if (tileentity instanceof BlockJukebox.TileEntityJukebox)
             {
                 ((BlockJukebox.TileEntityJukebox)tileentity).setRecord(new ItemStack(recordStack.getItem(), 1, recordStack.getMetadata()));
-                worldIn.setBlockState(pos, state.withProperty(HAS_RECORD, Boolean.valueOf(true)), 2);
+                world.setBlockState(pos, state.withProperty(HAS_RECORD, Boolean.valueOf(true)), 2);
             }
         }
     }
 
-    private void dropRecord(World worldIn, BlockPos pos, IBlockState state)
+    private void dropRecord(World world, BlockPos pos, IBlockState state)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = world.getTileEntity(pos);
 
             if (tileentity instanceof BlockJukebox.TileEntityJukebox)
             {
@@ -70,26 +70,26 @@ public class BlockJukebox extends BlockContainer
 
                 if (itemstack != null)
                 {
-                    worldIn.playAuxSFX(1005, pos, 0);
-                    worldIn.playRecord(pos, null);
+                    world.playAuxSFX(1005, pos, 0);
+                    world.playRecord(pos, null);
                     blockjukebox$tileentityjukebox.setRecord(null);
                     float f = 0.7F;
-                    double d0 = (double)(worldIn.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-                    double d1 = (double)(worldIn.rand.nextFloat() * f) + (double)(1.0F - f) * 0.2D + 0.6D;
-                    double d2 = (double)(worldIn.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+                    double d0 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+                    double d1 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.2D + 0.6D;
+                    double d2 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
                     ItemStack itemstack1 = itemstack.copy();
-                    EntityItem entityitem = new EntityItem(worldIn, (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, itemstack1);
+                    EntityItem entityitem = new EntityItem(world, (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, itemstack1);
                     entityitem.setDefaultPickupDelay();
-                    worldIn.spawnEntityInWorld(entityitem);
+                    world.spawnEntityInWorld(entityitem);
                 }
             }
         }
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
     {
-        this.dropRecord(worldIn, pos, state);
-        super.breakBlock(worldIn, pos, state);
+        this.dropRecord(world, pos, state);
+        super.breakBlock(world, pos, state);
     }
 
     /**
@@ -98,18 +98,18 @@ public class BlockJukebox extends BlockContainer
      * @param chance The chance that each Item is actually spawned (1.0 = always, 0.0 = never)
      * @param fortune The player's fortune level
      */
-    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+    public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune)
     {
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            super.dropBlockAsItemWithChance(worldIn, pos, state, chance, 0);
+            super.dropBlockAsItemWithChance(world, pos, state, chance, 0);
         }
     }
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World worldIn, int meta)
+    public TileEntity createNewTileEntity(World world, int meta)
     {
         return new BlockJukebox.TileEntityJukebox();
     }
@@ -119,9 +119,9 @@ public class BlockJukebox extends BlockContainer
         return true;
     }
 
-    public int getComparatorInputOverride(World worldIn, BlockPos pos)
+    public int getComparatorInputOverride(World world, BlockPos pos)
     {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        TileEntity tileentity = world.getTileEntity(pos);
 
         if (tileentity instanceof BlockJukebox.TileEntityJukebox)
         {

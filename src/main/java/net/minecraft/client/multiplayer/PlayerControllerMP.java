@@ -103,9 +103,9 @@ public class PlayerControllerMP
     /**
      * Flips the player around.
      */
-    public void flipPlayer(EntityPlayer playerIn)
+    public void flipPlayer(EntityPlayer player)
     {
-        playerIn.rotationYaw = -180.0F;
+        player.rotationYaw = -180.0F;
     }
 
     public boolean shouldDrawHUD()
@@ -251,7 +251,7 @@ public class PlayerControllerMP
                     block1.onBlockClicked(this.mc.world, loc, this.mc.player);
                 }
 
-                if (flag && block1.getPlayerRelativeBlockHardness(this.mc.player, this.mc.player.worldObj, loc) >= 1.0F)
+                if (flag && block1.getPlayerRelativeBlockHardness(this.mc.player) >= 1.0F)
                 {
                     this.onPlayerDestroyBlock(loc, face);
                 }
@@ -311,7 +311,7 @@ public class PlayerControllerMP
             }
             else
             {
-                this.curBlockDamageMP += block.getPlayerRelativeBlockHardness(this.mc.player, this.mc.player.worldObj, posBlock);
+                this.curBlockDamageMP += block.getPlayerRelativeBlockHardness(this.mc.player);
 
                 if (this.stepSoundTickCounter % 4.0F == 0.0F)
                 {
@@ -389,7 +389,7 @@ public class PlayerControllerMP
         }
     }
 
-    public boolean onPlayerRightClick(EntityPlayerSP player, WorldClient worldIn, ItemStack heldStack, BlockPos hitPos, EnumFacing side, Vec3 hitVec)
+    public boolean onPlayerRightClick(EntityPlayerSP player, WorldClient world, ItemStack heldStack, BlockPos hitPos, EnumFacing side, Vec3 hitVec)
     {
         this.syncCurrentPlayItem();
         float f = (float)(hitVec.xCoord - (double)hitPos.getX());
@@ -405,9 +405,9 @@ public class PlayerControllerMP
         {
             if (this.currentGameType != WorldSettings.GameType.SPECTATOR)
             {
-                IBlockState iblockstate = worldIn.getBlockState(hitPos);
+                IBlockState iblockstate = world.getBlockState(hitPos);
 
-                if ((!player.isSneaking() || player.getHeldItem() == null) && iblockstate.getBlock().onBlockActivated(worldIn, hitPos, iblockstate, player, side, f, f1, f2))
+                if ((!player.isSneaking() || player.getHeldItem() == null) && iblockstate.getBlock().onBlockActivated(world, hitPos, iblockstate, player, side, f, f1, f2))
                 {
                     flag = true;
                 }
@@ -416,7 +416,7 @@ public class PlayerControllerMP
                 {
                     ItemBlock itemblock = (ItemBlock)heldStack.getItem();
 
-                    if (!itemblock.canPlaceBlockOnSide(worldIn, hitPos, side, player, heldStack))
+                    if (!itemblock.canPlaceBlockOnSide(world, hitPos, side, player, heldStack))
                     {
                         return false;
                     }
@@ -435,14 +435,14 @@ public class PlayerControllerMP
                 {
                     int i = heldStack.getMetadata();
                     int j = heldStack.stackSize;
-                    boolean flag1 = heldStack.onItemUse(player, worldIn, hitPos, side, f, f1, f2);
+                    boolean flag1 = heldStack.onItemUse(player, world, hitPos, side, f, f1, f2);
                     heldStack.setItemDamage(i);
                     heldStack.stackSize = j;
                     return flag1;
                 }
                 else
                 {
-                    return heldStack.onItemUse(player, worldIn, hitPos, side, f, f1, f2);
+                    return heldStack.onItemUse(player, world, hitPos, side, f, f1, f2);
                 }
             }
             else
@@ -455,7 +455,7 @@ public class PlayerControllerMP
     /**
      * Notifies the server of things like consuming food, etc...
      */
-    public boolean sendUseItem(EntityPlayer playerIn, World worldIn, ItemStack itemStackIn)
+    public boolean sendUseItem(EntityPlayer player, World world, ItemStack itemStackIn)
     {
         if (this.currentGameType == WorldSettings.GameType.SPECTATOR)
         {
@@ -464,17 +464,17 @@ public class PlayerControllerMP
         else
         {
             this.syncCurrentPlayItem();
-            this.netClientHandler.addToSendQueue(new C08PacketPlayerBlockPlacement(playerIn.inventory.getCurrentItem()));
+            this.netClientHandler.addToSendQueue(new C08PacketPlayerBlockPlacement(player.inventory.getCurrentItem()));
             int i = itemStackIn.stackSize;
-            ItemStack itemstack = itemStackIn.useItemRightClick(worldIn, playerIn);
+            ItemStack itemstack = itemStackIn.useItemRightClick(world, player);
 
             if (itemstack != itemStackIn || itemstack != null && itemstack.stackSize != i)
             {
-                playerIn.inventory.mainInventory[playerIn.inventory.currentItem] = itemstack;
+                player.inventory.mainInventory[player.inventory.currentItem] = itemstack;
 
                 if (itemstack.stackSize == 0)
                 {
-                    playerIn.inventory.mainInventory[playerIn.inventory.currentItem] = null;
+                    player.inventory.mainInventory[player.inventory.currentItem] = null;
                 }
 
                 return true;
@@ -486,33 +486,33 @@ public class PlayerControllerMP
         }
     }
 
-    public EntityPlayerSP func_178892_a(World worldIn, StatFileWriter p_178892_2_)
+    public EntityPlayerSP func_178892_a(World world, StatFileWriter p_178892_2_)
     {
-        return new EntityPlayerSP(this.mc, worldIn, this.netClientHandler, p_178892_2_);
+        return new EntityPlayerSP(this.mc, world, this.netClientHandler, p_178892_2_);
     }
 
     /**
      * Attacks an entity
      */
-    public void attackEntity(EntityPlayer playerIn, Entity targetEntity)
+    public void attackEntity(EntityPlayer player, Entity targetEntity)
     {
         this.syncCurrentPlayItem();
         this.netClientHandler.addToSendQueue(new C02PacketUseEntity(targetEntity, C02PacketUseEntity.Action.ATTACK));
 
         if (this.currentGameType != WorldSettings.GameType.SPECTATOR)
         {
-            playerIn.attackTargetEntityWithCurrentItem(targetEntity);
+            player.attackTargetEntityWithCurrentItem(targetEntity);
         }
     }
 
     /**
      * Send packet to server - player is interacting with another entity (left click)
      */
-    public boolean interactWithEntitySendPacket(EntityPlayer playerIn, Entity targetEntity)
+    public boolean interactWithEntitySendPacket(EntityPlayer player, Entity targetEntity)
     {
         this.syncCurrentPlayItem();
         this.netClientHandler.addToSendQueue(new C02PacketUseEntity(targetEntity, C02PacketUseEntity.Action.INTERACT));
-        return this.currentGameType != WorldSettings.GameType.SPECTATOR && playerIn.interactWith(targetEntity);
+        return this.currentGameType != WorldSettings.GameType.SPECTATOR && player.interactWith(targetEntity);
     }
 
     public boolean func_178894_a(EntityPlayer p_178894_1_, Entity p_178894_2_, MovingObjectPosition p_178894_3_)
@@ -526,10 +526,10 @@ public class PlayerControllerMP
     /**
      * Handles slot clicks sends a packet to the server.
      */
-    public ItemStack windowClick(int windowId, int slotId, int mouseButtonClicked, int mode, EntityPlayer playerIn)
+    public ItemStack windowClick(int windowId, int slotId, int mouseButtonClicked, int mode, EntityPlayer player)
     {
-        short short1 = playerIn.openContainer.getNextTransactionID(playerIn.inventory);
-        ItemStack itemstack = playerIn.openContainer.slotClick(slotId, mouseButtonClicked, mode, playerIn);
+        short short1 = player.openContainer.getNextTransactionID(player.inventory);
+        ItemStack itemstack = player.openContainer.slotClick(slotId, mouseButtonClicked, mode, player);
         this.netClientHandler.addToSendQueue(new C0EPacketClickWindow(windowId, slotId, mouseButtonClicked, mode, itemstack, short1));
         return itemstack;
     }
@@ -565,11 +565,11 @@ public class PlayerControllerMP
         }
     }
 
-    public void onStoppedUsingItem(EntityPlayer playerIn)
+    public void onStoppedUsingItem(EntityPlayer player)
     {
         this.syncCurrentPlayItem();
         this.netClientHandler.addToSendQueue(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN));
-        playerIn.stopUsingItem();
+        player.stopUsingItem();
     }
 
     public boolean gameIsSurvivalOrAdventure()

@@ -33,11 +33,11 @@ public class BlockRedSandstone extends Block
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
         for (BlockRedSandstone.EnumType blockredsandstone$enumtype : BlockRedSandstone.EnumType.values())
         {
-            list.add(new ItemStack(itemIn, 1, blockredsandstone$enumtype.getMetadata()));
+            list.add(new ItemStack(item, 1, blockredsandstone$enumtype.getMetadata()));
         }
     }
 

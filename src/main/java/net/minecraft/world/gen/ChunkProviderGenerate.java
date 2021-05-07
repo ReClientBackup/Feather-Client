@@ -75,11 +75,11 @@ public class ChunkProviderGenerate implements IChunkProvider
     double[] field_147425_f;
     double[] field_147426_g;
 
-    public ChunkProviderGenerate(World worldIn, long p_i45636_2_, boolean p_i45636_4_, String p_i45636_5_)
+    public ChunkProviderGenerate(World world, long p_i45636_2_, boolean p_i45636_4_, String p_i45636_5_)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
         this.mapFeaturesEnabled = p_i45636_4_;
-        this.field_177475_o = worldIn.getWorldInfo().getTerrainType();
+        this.field_177475_o = world.getWorldInfo().getTerrainType();
         this.rand = new Random(p_i45636_2_);
         this.field_147431_j = new NoiseGeneratorOctaves(this.rand, 16);
         this.field_147432_k = new NoiseGeneratorOctaves(this.rand, 16);
@@ -104,7 +104,7 @@ public class ChunkProviderGenerate implements IChunkProvider
         {
             this.settings = ChunkProviderSettings.Factory.jsonToFactory(p_i45636_5_).func_177864_b();
             this.field_177476_s = this.settings.useLavaOceans ? Blocks.lava : Blocks.water;
-            worldIn.func_181544_b(this.settings.seaLevel);
+            world.func_181544_b(this.settings.seaLevel);
         }
     }
 
@@ -550,9 +550,9 @@ public class ChunkProviderGenerate implements IChunkProvider
         return biomegenbase.getSpawnableList(creatureType);
     }
 
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position)
+    public BlockPos getStrongholdGen(World world, String structureName, BlockPos position)
     {
-        return "Stronghold".equals(structureName) && this.strongholdGenerator != null ? this.strongholdGenerator.getClosestStrongholdPos(worldIn, position) : null;
+        return "Stronghold".equals(structureName) && this.strongholdGenerator != null ? this.strongholdGenerator.getClosestStrongholdPos(world, position) : null;
     }
 
     public int getLoadedChunkCount()

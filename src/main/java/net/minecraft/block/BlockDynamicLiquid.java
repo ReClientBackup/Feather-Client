@@ -19,22 +19,22 @@ public class BlockDynamicLiquid extends BlockLiquid
         super(materialIn);
     }
 
-    private void placeStaticBlock(World worldIn, BlockPos pos, IBlockState currentState)
+    private void placeStaticBlock(World world, BlockPos pos, IBlockState currentState)
     {
-        worldIn.setBlockState(pos, getStaticBlock(this.blockMaterial).getDefaultState().withProperty(LEVEL, currentState.getValue(LEVEL)), 2);
+        world.setBlockState(pos, getStaticBlock(this.blockMaterial).getDefaultState().withProperty(LEVEL, currentState.getValue(LEVEL)), 2);
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
         int i = state.getValue(LEVEL).intValue();
         int j = 1;
 
-        if (this.blockMaterial == Material.lava && !worldIn.provider.doesWaterVaporize())
+        if (this.blockMaterial == Material.lava && !world.provider.doesWaterVaporize())
         {
             j = 2;
         }
 
-        int k = this.tickRate(worldIn);
+        int k = this.tickRate(world);
 
         if (i > 0)
         {
@@ -43,7 +43,7 @@ public class BlockDynamicLiquid extends BlockLiquid
 
             for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
             {
-                l = this.checkAdjacentBlock(worldIn, pos.offset(enumfacing), l);
+                l = this.checkAdjacentBlock(world, pos.offset(enumfacing), l);
             }
 
             int i1 = l + j;
@@ -53,9 +53,9 @@ public class BlockDynamicLiquid extends BlockLiquid
                 i1 = -1;
             }
 
-            if (this.getLevel(worldIn, pos.up()) >= 0)
+            if (this.getLevel(world, pos.up()) >= 0)
             {
-                int j1 = this.getLevel(worldIn, pos.up());
+                int j1 = this.getLevel(world, pos.up());
 
                 if (j1 >= 8)
                 {
@@ -69,7 +69,7 @@ public class BlockDynamicLiquid extends BlockLiquid
 
             if (this.adjacentSourceBlocks >= 2 && this.blockMaterial == Material.water)
             {
-                IBlockState iblockstate1 = worldIn.getBlockState(pos.down());
+                IBlockState iblockstate1 = world.getBlockState(pos.down());
 
                 if (iblockstate1.getBlock().getMaterial().isSolid())
                 {
@@ -88,7 +88,7 @@ public class BlockDynamicLiquid extends BlockLiquid
 
             if (i1 == i)
             {
-                this.placeStaticBlock(worldIn, pos, state);
+                this.placeStaticBlock(world, pos, state);
             }
             else
             {
@@ -96,45 +96,45 @@ public class BlockDynamicLiquid extends BlockLiquid
 
                 if (i1 < 0)
                 {
-                    worldIn.setBlockToAir(pos);
+                    world.setBlockToAir(pos);
                 }
                 else
                 {
                     state = state.withProperty(LEVEL, Integer.valueOf(i1));
-                    worldIn.setBlockState(pos, state, 2);
-                    worldIn.scheduleUpdate(pos, this, k);
-                    worldIn.notifyNeighborsOfStateChange(pos, this);
+                    world.setBlockState(pos, state, 2);
+                    world.scheduleUpdate(pos, this, k);
+                    world.notifyNeighborsOfStateChange(pos, this);
                 }
             }
         }
         else
         {
-            this.placeStaticBlock(worldIn, pos, state);
+            this.placeStaticBlock(world, pos, state);
         }
 
-        IBlockState iblockstate = worldIn.getBlockState(pos.down());
+        IBlockState iblockstate = world.getBlockState(pos.down());
 
-        if (this.canFlowInto(worldIn, pos.down(), iblockstate))
+        if (this.canFlowInto(world, pos.down(), iblockstate))
         {
-            if (this.blockMaterial == Material.lava && worldIn.getBlockState(pos.down()).getBlock().getMaterial() == Material.water)
+            if (this.blockMaterial == Material.lava && world.getBlockState(pos.down()).getBlock().getMaterial() == Material.water)
             {
-                worldIn.setBlockState(pos.down(), Blocks.stone.getDefaultState());
-                this.triggerMixEffects(worldIn, pos.down());
+                world.setBlockState(pos.down(), Blocks.stone.getDefaultState());
+                this.triggerMixEffects(world, pos.down());
                 return;
             }
 
             if (i >= 8)
             {
-                this.tryFlowInto(worldIn, pos.down(), iblockstate, i);
+                this.tryFlowInto(world, pos.down(), iblockstate, i);
             }
             else
             {
-                this.tryFlowInto(worldIn, pos.down(), iblockstate, i + 8);
+                this.tryFlowInto(world, pos.down(), iblockstate, i + 8);
             }
         }
-        else if (i >= 0 && (i == 0 || this.isBlocked(worldIn, pos.down(), iblockstate)))
+        else if (i >= 0 && (i == 0 || this.isBlocked(world, pos.down(), iblockstate)))
         {
-            Set<EnumFacing> set = this.getPossibleFlowDirections(worldIn, pos);
+            Set<EnumFacing> set = this.getPossibleFlowDirections(world, pos);
             int k1 = i + j;
 
             if (i >= 8)
@@ -149,32 +149,32 @@ public class BlockDynamicLiquid extends BlockLiquid
 
             for (EnumFacing enumfacing1 : set)
             {
-                this.tryFlowInto(worldIn, pos.offset(enumfacing1), worldIn.getBlockState(pos.offset(enumfacing1)), k1);
+                this.tryFlowInto(world, pos.offset(enumfacing1), world.getBlockState(pos.offset(enumfacing1)), k1);
             }
         }
     }
 
-    private void tryFlowInto(World worldIn, BlockPos pos, IBlockState state, int level)
+    private void tryFlowInto(World world, BlockPos pos, IBlockState state, int level)
     {
-        if (this.canFlowInto(worldIn, pos, state))
+        if (this.canFlowInto(world, pos, state))
         {
             if (state.getBlock() != Blocks.air)
             {
                 if (this.blockMaterial == Material.lava)
                 {
-                    this.triggerMixEffects(worldIn, pos);
+                    this.triggerMixEffects(world, pos);
                 }
                 else
                 {
-                    state.getBlock().dropBlockAsItem(worldIn, pos, state, 0);
+                    state.getBlock().dropBlockAsItem(world, pos, state, 0);
                 }
             }
 
-            worldIn.setBlockState(pos, this.getDefaultState().withProperty(LEVEL, Integer.valueOf(level)), 3);
+            world.setBlockState(pos, this.getDefaultState().withProperty(LEVEL, Integer.valueOf(level)), 3);
         }
     }
 
-    private int func_176374_a(World worldIn, BlockPos pos, int distance, EnumFacing calculateFlowCost)
+    private int func_176374_a(World world, BlockPos pos, int distance, EnumFacing calculateFlowCost)
     {
         int i = 1000;
 
@@ -183,18 +183,18 @@ public class BlockDynamicLiquid extends BlockLiquid
             if (enumfacing != calculateFlowCost)
             {
                 BlockPos blockpos = pos.offset(enumfacing);
-                IBlockState iblockstate = worldIn.getBlockState(blockpos);
+                IBlockState iblockstate = world.getBlockState(blockpos);
 
-                if (!this.isBlocked(worldIn, blockpos, iblockstate) && (iblockstate.getBlock().getMaterial() != this.blockMaterial || iblockstate.getValue(LEVEL).intValue() > 0))
+                if (!this.isBlocked(world, blockpos, iblockstate) && (iblockstate.getBlock().getMaterial() != this.blockMaterial || iblockstate.getValue(LEVEL).intValue() > 0))
                 {
-                    if (!this.isBlocked(worldIn, blockpos.down(), iblockstate))
+                    if (!this.isBlocked(world, blockpos.down(), iblockstate))
                     {
                         return distance;
                     }
 
                     if (distance < 4)
                     {
-                        int j = this.func_176374_a(worldIn, blockpos, distance + 1, enumfacing.getOpposite());
+                        int j = this.func_176374_a(world, blockpos, distance + 1, enumfacing.getOpposite());
 
                         if (j < i)
                         {
@@ -208,7 +208,7 @@ public class BlockDynamicLiquid extends BlockLiquid
         return i;
     }
 
-    private Set<EnumFacing> getPossibleFlowDirections(World worldIn, BlockPos pos)
+    private Set<EnumFacing> getPossibleFlowDirections(World world, BlockPos pos)
     {
         int i = 1000;
         Set<EnumFacing> set = EnumSet.noneOf(EnumFacing.class);
@@ -216,15 +216,15 @@ public class BlockDynamicLiquid extends BlockLiquid
         for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
         {
             BlockPos blockpos = pos.offset(enumfacing);
-            IBlockState iblockstate = worldIn.getBlockState(blockpos);
+            IBlockState iblockstate = world.getBlockState(blockpos);
 
-            if (!this.isBlocked(worldIn, blockpos, iblockstate) && (iblockstate.getBlock().getMaterial() != this.blockMaterial || iblockstate.getValue(LEVEL).intValue() > 0))
+            if (!this.isBlocked(world, blockpos, iblockstate) && (iblockstate.getBlock().getMaterial() != this.blockMaterial || iblockstate.getValue(LEVEL).intValue() > 0))
             {
                 int j;
 
-                if (this.isBlocked(worldIn, blockpos.down(), worldIn.getBlockState(blockpos.down())))
+                if (this.isBlocked(world, blockpos.down(), world.getBlockState(blockpos.down())))
                 {
-                    j = this.func_176374_a(worldIn, blockpos, 1, enumfacing.getOpposite());
+                    j = this.func_176374_a(world, blockpos, 1, enumfacing.getOpposite());
                 }
                 else
                 {
@@ -247,15 +247,15 @@ public class BlockDynamicLiquid extends BlockLiquid
         return set;
     }
 
-    private boolean isBlocked(World worldIn, BlockPos pos, IBlockState state)
+    private boolean isBlocked(World world, BlockPos pos, IBlockState state)
     {
-        Block block = worldIn.getBlockState(pos).getBlock();
+        Block block = world.getBlockState(pos).getBlock();
         return block instanceof BlockDoor || block == Blocks.standing_sign || block == Blocks.ladder || block == Blocks.reeds || (block.blockMaterial == Material.portal || block.blockMaterial.blocksMovement());
     }
 
-    protected int checkAdjacentBlock(World worldIn, BlockPos pos, int currentMinLevel)
+    protected int checkAdjacentBlock(World world, BlockPos pos, int currentMinLevel)
     {
-        int i = this.getLevel(worldIn, pos);
+        int i = this.getLevel(world, pos);
 
         if (i < 0)
         {
@@ -277,17 +277,17 @@ public class BlockDynamicLiquid extends BlockLiquid
         }
     }
 
-    private boolean canFlowInto(World worldIn, BlockPos pos, IBlockState state)
+    private boolean canFlowInto(World world, BlockPos pos, IBlockState state)
     {
         Material material = state.getBlock().getMaterial();
-        return material != this.blockMaterial && material != Material.lava && !this.isBlocked(worldIn, pos, state);
+        return material != this.blockMaterial && material != Material.lava && !this.isBlocked(world, pos, state);
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        if (!this.checkForMixing(worldIn, pos, state))
+        if (!this.checkForMixing(world, pos, state))
         {
-            worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+            world.scheduleUpdate(pos, this, this.tickRate(world));
         }
     }
 }

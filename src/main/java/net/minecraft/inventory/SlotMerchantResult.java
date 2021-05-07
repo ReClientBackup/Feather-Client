@@ -67,7 +67,7 @@ public class SlotMerchantResult extends Slot
         this.field_75231_g = 0;
     }
 
-    public void onPickupFromSlot(EntityPlayer playerIn, ItemStack stack)
+    public void onPickupFromSlot(EntityPlayer player, ItemStack stack)
     {
         this.onCrafting(stack);
         MerchantRecipe merchantrecipe = this.theMerchantInventory.getCurrentRecipe();
@@ -80,7 +80,7 @@ public class SlotMerchantResult extends Slot
             if (this.doTrade(merchantrecipe, itemstack, itemstack1) || this.doTrade(merchantrecipe, itemstack1, itemstack))
             {
                 this.theMerchant.useRecipe(merchantrecipe);
-                playerIn.triggerAchievement(StatList.timesTradedWithVillagerStat);
+                player.triggerAchievement(StatList.timesTradedWithVillagerStat);
 
                 if (itemstack != null && itemstack.stackSize <= 0)
                 {

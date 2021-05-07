@@ -20,7 +20,7 @@ public class BlockMobSpawner extends BlockContainer
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World worldIn, int meta)
+    public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileEntityMobSpawner();
     }
@@ -49,11 +49,11 @@ public class BlockMobSpawner extends BlockContainer
      * @param chance The chance that each Item is actually spawned (1.0 = always, 0.0 = never)
      * @param fortune The player's fortune level
      */
-    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+    public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune)
     {
-        super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
-        int i = 15 + worldIn.rand.nextInt(15) + worldIn.rand.nextInt(15);
-        this.dropXpOnBlockBreak(worldIn, pos, i);
+        super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
+        int i = 15 + world.rand.nextInt(15) + world.rand.nextInt(15);
+        this.dropXpOnBlockBreak(world, pos, i);
     }
 
     /**
@@ -80,7 +80,7 @@ public class BlockMobSpawner extends BlockContainer
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return null;
     }

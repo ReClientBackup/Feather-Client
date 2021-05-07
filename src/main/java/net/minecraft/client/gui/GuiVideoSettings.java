@@ -69,9 +69,9 @@ public class GuiVideoSettings extends GuiScreenOF {
         this.actionPerformed(button, 1);
     }
 
-    protected void actionPerformedRightClick(GuiButton p_actionPerformedRightClick_1_) {
-        if (p_actionPerformedRightClick_1_.getId() == GameSettings.Options.GUI_SCALE.ordinal()) {
-            this.actionPerformed(p_actionPerformedRightClick_1_, -1);
+    protected void actionPerformedRightClick(GuiButton button) {
+        if (button.getId() == GameSettings.Options.GUI_SCALE.ordinal()) {
+            this.actionPerformed(button, -1);
         }
     }
 
@@ -149,6 +149,7 @@ public class GuiVideoSettings extends GuiScreenOF {
     /**
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
+    @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawWorldBackground(mouseX, mouseY, 60);
         getFr().drawCenteredString(I18n.format("options.videoTitle"), this.width / 2, 15, 16777215);
@@ -156,6 +157,7 @@ public class GuiVideoSettings extends GuiScreenOF {
         getFr().drawString(ofVersion, 2, this.height - 10, 8421504);
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.tooltipManager.drawTooltips(mouseX, mouseY, this.buttonList);
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     public static int getButtonWidth(GuiButton button) {

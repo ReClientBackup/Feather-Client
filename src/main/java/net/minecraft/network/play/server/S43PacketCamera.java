@@ -44,8 +44,8 @@ public class S43PacketCamera implements Packet<INetHandlerPlayClient>
         handler.handleCamera(this);
     }
 
-    public Entity getEntity(World worldIn)
+    public Entity getEntity(World world)
     {
-        return worldIn.getEntityByID(this.entityId);
+        return world.getEntityByID(this.entityId);
     }
 }

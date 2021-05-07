@@ -50,7 +50,7 @@ public class BlockWall extends Block
         return false;
     }
 
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
+    public boolean isPassable(IBlockAccess world, BlockPos pos)
     {
         return false;
     }
@@ -63,12 +63,12 @@ public class BlockWall extends Block
         return false;
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
     {
-        boolean flag = this.canConnectTo(worldIn, pos.north());
-        boolean flag1 = this.canConnectTo(worldIn, pos.south());
-        boolean flag2 = this.canConnectTo(worldIn, pos.west());
-        boolean flag3 = this.canConnectTo(worldIn, pos.east());
+        boolean flag = this.canConnectTo(world, pos.north());
+        boolean flag1 = this.canConnectTo(world, pos.south());
+        boolean flag2 = this.canConnectTo(world, pos.west());
+        boolean flag3 = this.canConnectTo(world, pos.east());
         float f = 0.25F;
         float f1 = 0.75F;
         float f2 = 0.25F;
@@ -111,27 +111,27 @@ public class BlockWall extends Block
         this.setBlockBounds(f, 0.0F, f2, f1, f4, f3);
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
     {
-        this.setBlockBoundsBasedOnState(worldIn, pos);
+        this.setBlockBoundsBasedOnState(world, pos);
         this.maxY = 1.5D;
-        return super.getCollisionBoundingBox(worldIn, pos, state);
+        return super.getCollisionBoundingBox(world, pos, state);
     }
 
-    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos)
+    public boolean canConnectTo(IBlockAccess world, BlockPos pos)
     {
-        Block block = worldIn.getBlockState(pos).getBlock();
+        Block block = world.getBlockState(pos).getBlock();
         return block != Blocks.barrier && (block == this || block instanceof BlockFenceGate || (block.blockMaterial.isOpaque() && block.isFullCube() && block.blockMaterial != Material.gourd));
     }
 
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
         for (BlockWall.EnumType blockwall$enumtype : BlockWall.EnumType.values())
         {
-            list.add(new ItemStack(itemIn, 1, blockwall$enumtype.getMetadata()));
+            list.add(new ItemStack(item, 1, blockwall$enumtype.getMetadata()));
         }
     }
 
@@ -144,9 +144,9 @@ public class BlockWall extends Block
         return state.getValue(VARIANT).getMetadata();
     }
 
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
     {
-        return side != EnumFacing.DOWN || super.shouldSideBeRendered(worldIn, pos, side);
+        return side != EnumFacing.DOWN || super.shouldSideBeRendered(world, pos, side);
     }
 
     /**
@@ -169,9 +169,9 @@ public class BlockWall extends Block
      * Get the actual Block state of this Block at the given position. This applies properties not visible in the
      * metadata, such as fence connections.
      */
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
     {
-        return state.withProperty(UP, Boolean.valueOf(!worldIn.isAirBlock(pos.up()))).withProperty(NORTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.north()))).withProperty(EAST, Boolean.valueOf(this.canConnectTo(worldIn, pos.east()))).withProperty(SOUTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.south()))).withProperty(WEST, Boolean.valueOf(this.canConnectTo(worldIn, pos.west())));
+        return state.withProperty(UP, Boolean.valueOf(!world.isAirBlock(pos.up()))).withProperty(NORTH, Boolean.valueOf(this.canConnectTo(world, pos.north()))).withProperty(EAST, Boolean.valueOf(this.canConnectTo(world, pos.east()))).withProperty(SOUTH, Boolean.valueOf(this.canConnectTo(world, pos.south()))).withProperty(WEST, Boolean.valueOf(this.canConnectTo(world, pos.west())));
     }
 
     protected BlockState createBlockState()

@@ -27,48 +27,48 @@ public class WorldGenMegaPineTree extends WorldGenHugeTrees
         this.useBaseHeight = p_i45457_2_;
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean generate(World world, Random rand, BlockPos position)
     {
         int i = this.func_150533_a(rand);
 
-        if (!this.func_175929_a(worldIn, rand, position, i))
+        if (!this.func_175929_a(world, rand, position, i))
         {
             return false;
         }
         else
         {
-            this.func_150541_c(worldIn, position.getX(), position.getZ(), position.getY() + i, 0, rand);
+            this.func_150541_c(world, position.getX(), position.getZ(), position.getY() + i, 0, rand);
 
             for (int j = 0; j < i; ++j)
             {
-                Block block = worldIn.getBlockState(position.up(j)).getBlock();
+                Block block = world.getBlockState(position.up(j)).getBlock();
 
                 if (block.getMaterial() == Material.air || block.getMaterial() == Material.leaves)
                 {
-                    this.setBlockAndNotifyAdequately(worldIn, position.up(j), this.woodMetadata);
+                    this.setBlockAndNotifyAdequately(world, position.up(j), this.woodMetadata);
                 }
 
                 if (j < i - 1)
                 {
-                    block = worldIn.getBlockState(position.add(1, j, 0)).getBlock();
+                    block = world.getBlockState(position.add(1, j, 0)).getBlock();
 
                     if (block.getMaterial() == Material.air || block.getMaterial() == Material.leaves)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, j, 0), this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(world, position.add(1, j, 0), this.woodMetadata);
                     }
 
-                    block = worldIn.getBlockState(position.add(1, j, 1)).getBlock();
+                    block = world.getBlockState(position.add(1, j, 1)).getBlock();
 
                     if (block.getMaterial() == Material.air || block.getMaterial() == Material.leaves)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, j, 1), this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(world, position.add(1, j, 1), this.woodMetadata);
                     }
 
-                    block = worldIn.getBlockState(position.add(0, j, 1)).getBlock();
+                    block = world.getBlockState(position.add(0, j, 1)).getBlock();
 
                     if (block.getMaterial() == Material.air || block.getMaterial() == Material.leaves)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(0, j, 1), this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(world, position.add(0, j, 1), this.woodMetadata);
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class WorldGenMegaPineTree extends WorldGenHugeTrees
         }
     }
 
-    private void func_150541_c(World worldIn, int p_150541_2_, int p_150541_3_, int p_150541_4_, int p_150541_5_, Random p_150541_6_)
+    private void func_150541_c(World world, int p_150541_2_, int p_150541_3_, int p_150541_4_, int p_150541_5_, Random p_150541_6_)
     {
         int i = p_150541_6_.nextInt(5) + (this.useBaseHeight ? this.baseHeight : 3);
         int j = 0;
@@ -86,17 +86,17 @@ public class WorldGenMegaPineTree extends WorldGenHugeTrees
         {
             int l = p_150541_4_ - k;
             int i1 = p_150541_5_ + MathHelper.floor_float((float)l / (float)i * 3.5F);
-            this.func_175925_a(worldIn, new BlockPos(p_150541_2_, k, p_150541_3_), i1 + (l > 0 && i1 == j && (k & 1) == 0 ? 1 : 0));
+            this.func_175925_a(world, new BlockPos(p_150541_2_, k, p_150541_3_), i1 + (l > 0 && i1 == j && (k & 1) == 0 ? 1 : 0));
             j = i1;
         }
     }
 
-    public void func_180711_a(World worldIn, Random p_180711_2_, BlockPos p_180711_3_)
+    public void func_180711_a(World world, Random p_180711_2_, BlockPos p_180711_3_)
     {
-        this.func_175933_b(worldIn, p_180711_3_.west().north());
-        this.func_175933_b(worldIn, p_180711_3_.east(2).north());
-        this.func_175933_b(worldIn, p_180711_3_.west().south(2));
-        this.func_175933_b(worldIn, p_180711_3_.east(2).south(2));
+        this.func_175933_b(world, p_180711_3_.west().north());
+        this.func_175933_b(world, p_180711_3_.east(2).north());
+        this.func_175933_b(world, p_180711_3_.west().south(2));
+        this.func_175933_b(world, p_180711_3_.east(2).south(2));
 
         for (int i = 0; i < 5; ++i)
         {
@@ -106,12 +106,12 @@ public class WorldGenMegaPineTree extends WorldGenHugeTrees
 
             if (k == 0 || k == 7 || l == 0 || l == 7)
             {
-                this.func_175933_b(worldIn, p_180711_3_.add(-3 + k, 0, -3 + l));
+                this.func_175933_b(world, p_180711_3_.add(-3 + k, 0, -3 + l));
             }
         }
     }
 
-    private void func_175933_b(World worldIn, BlockPos p_175933_2_)
+    private void func_175933_b(World world, BlockPos p_175933_2_)
     {
         for (int i = -2; i <= 2; ++i)
         {
@@ -119,22 +119,22 @@ public class WorldGenMegaPineTree extends WorldGenHugeTrees
             {
                 if (Math.abs(i) != 2 || Math.abs(j) != 2)
                 {
-                    this.func_175934_c(worldIn, p_175933_2_.add(i, 0, j));
+                    this.func_175934_c(world, p_175933_2_.add(i, 0, j));
                 }
             }
         }
     }
 
-    private void func_175934_c(World worldIn, BlockPos p_175934_2_)
+    private void func_175934_c(World world, BlockPos p_175934_2_)
     {
         for (int i = 2; i >= -3; --i)
         {
             BlockPos blockpos = p_175934_2_.up(i);
-            Block block = worldIn.getBlockState(blockpos).getBlock();
+            Block block = world.getBlockState(blockpos).getBlock();
 
             if (block == Blocks.grass || block == Blocks.dirt)
             {
-                this.setBlockAndNotifyAdequately(worldIn, blockpos, field_181635_g);
+                this.setBlockAndNotifyAdequately(world, blockpos, field_181635_g);
                 break;
             }
 

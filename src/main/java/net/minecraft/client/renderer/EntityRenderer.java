@@ -610,13 +610,17 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 zoom = GameSettings.isKeyDown(this.mc.gameSettings.ofKeyBindZoom);
             }
 
+
+
             if (zoom) {
                 if (!Config.zoomMode) {
                     Config.zoomMode = true;
+                    this.mc.gameSettings.smoothCamera = true;
                     this.mc.renderGlobal.displayListEntitiesDirty = true;
                 }
             } else if (Config.zoomMode) {
                 Config.zoomMode = false;
+                this.mc.gameSettings.smoothCamera = false;
                 this.mouseFilterXAxis = new MouseFilter();
                 this.mouseFilterYAxis = new MouseFilter();
                 this.mc.renderGlobal.displayListEntitiesDirty = true;

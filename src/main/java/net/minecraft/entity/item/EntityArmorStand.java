@@ -47,9 +47,9 @@ public class EntityArmorStand extends EntityLivingBase
     private Rotations leftLegRotation;
     private Rotations rightLegRotation;
 
-    public EntityArmorStand(World worldIn)
+    public EntityArmorStand(World world)
     {
-        super(worldIn);
+        super(world);
         this.contents = new ItemStack[5];
         this.headRotation = DEFAULT_HEAD_ROTATION;
         this.bodyRotation = DEFAULT_BODY_ROTATION;
@@ -62,9 +62,9 @@ public class EntityArmorStand extends EntityLivingBase
         this.setSize(0.5F, 1.975F);
     }
 
-    public EntityArmorStand(World worldIn, double posX, double posY, double posZ)
+    public EntityArmorStand(World world, double posX, double posY, double posZ)
     {
-        this(worldIn);
+        this(world);
         this.setPosition(posX, posY, posZ);
     }
 
@@ -345,7 +345,7 @@ public class EntityArmorStand extends EntityLivingBase
         return false;
     }
 
-    protected void collideWithEntity(Entity p_82167_1_)
+    protected void collideWithEntity(Entity entity)
     {
     }
 

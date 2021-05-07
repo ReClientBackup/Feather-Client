@@ -25,9 +25,9 @@ public class VillageSiege
     private int field_75538_h;
     private int field_75539_i;
 
-    public VillageSiege(World worldIn)
+    public VillageSiege(World world)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
     }
 
     /**

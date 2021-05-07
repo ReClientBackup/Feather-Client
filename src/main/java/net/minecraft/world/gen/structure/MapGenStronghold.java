@@ -143,7 +143,7 @@ public class MapGenStronghold extends MapGenStructure
         {
         }
 
-        public Start(World worldIn, Random p_i2067_2_, int p_i2067_3_, int p_i2067_4_)
+        public Start(World world, Random p_i2067_2_, int p_i2067_3_, int p_i2067_4_)
         {
             super(p_i2067_3_, p_i2067_4_);
             StructureStrongholdPieces.prepareStructurePieces();
@@ -160,7 +160,7 @@ public class MapGenStronghold extends MapGenStructure
             }
 
             this.updateBoundingBox();
-            this.markAvailableHeight(worldIn, p_i2067_2_, 10);
+            this.markAvailableHeight(world, p_i2067_2_, 10);
         }
     }
 }

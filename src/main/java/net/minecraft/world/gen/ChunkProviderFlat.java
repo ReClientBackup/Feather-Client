@@ -36,9 +36,9 @@ public class ChunkProviderFlat implements IChunkProvider
     private WorldGenLakes waterLakeGenerator;
     private WorldGenLakes lavaLakeGenerator;
 
-    public ChunkProviderFlat(World worldIn, long seed, boolean generateStructures, String flatGeneratorSettings)
+    public ChunkProviderFlat(World world, long seed, boolean generateStructures, String flatGeneratorSettings)
     {
-        this.worldObj = worldIn;
+        this.worldObj = world;
         this.random = new Random(seed);
         this.flatWorldGenInfo = FlatGeneratorInfo.createFlatGeneratorFromString(flatGeneratorSettings);
 
@@ -118,7 +118,7 @@ public class ChunkProviderFlat implements IChunkProvider
             }
         }
 
-        worldIn.func_181544_b(j);
+        world.func_181544_b(j);
         this.hasDecoration = !flag && this.flatWorldGenInfo.getWorldFeatures().containsKey("decoration");
     }
 
@@ -279,7 +279,7 @@ public class ChunkProviderFlat implements IChunkProvider
         return biomegenbase.getSpawnableList(creatureType);
     }
 
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position)
+    public BlockPos getStrongholdGen(World world, String structureName, BlockPos position)
     {
         if ("Stronghold".equals(structureName))
         {
@@ -287,7 +287,7 @@ public class ChunkProviderFlat implements IChunkProvider
             {
                 if (mapgenstructure instanceof MapGenStronghold)
                 {
-                    return mapgenstructure.getClosestStrongholdPos(worldIn, position);
+                    return mapgenstructure.getClosestStrongholdPos(world, position);
                 }
             }
         }

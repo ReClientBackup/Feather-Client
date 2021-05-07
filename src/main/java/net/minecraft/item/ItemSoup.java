@@ -16,9 +16,9 @@ public class ItemSoup extends ItemFood
      * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
      * the Item before the action is complete.
      */
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player)
     {
-        super.onItemUseFinish(stack, worldIn, playerIn);
+        super.onItemUseFinish(stack, world, player);
         return new ItemStack(Items.bowl);
     }
 }

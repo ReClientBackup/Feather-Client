@@ -16,9 +16,9 @@ public abstract class EntityAgeable extends EntityCreature
     private float ageWidth = -1.0F;
     private float ageHeight;
 
-    public EntityAgeable(World worldIn)
+    public EntityAgeable(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
     public abstract EntityAgeable createChild(EntityAgeable ageable);

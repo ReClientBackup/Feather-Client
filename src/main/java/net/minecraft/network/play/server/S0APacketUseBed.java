@@ -51,9 +51,9 @@ public class S0APacketUseBed implements Packet<INetHandlerPlayClient>
         handler.handleUseBed(this);
     }
 
-    public EntityPlayer getPlayer(World worldIn)
+    public EntityPlayer getPlayer(World world)
     {
-        return (EntityPlayer)worldIn.getEntityByID(this.playerID);
+        return (EntityPlayer)world.getEntityByID(this.playerID);
     }
 
     public BlockPos getBedPosition()

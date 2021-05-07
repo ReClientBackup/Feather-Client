@@ -44,9 +44,9 @@ public class ItemInWorldManager
     private int initialBlockDamage;
     private int durabilityRemainingOnBlock = -1;
 
-    public ItemInWorldManager(World worldIn)
+    public ItemInWorldManager(World world)
     {
-        this.theWorld = worldIn;
+        this.theWorld = world;
     }
 
     public void setGameType(WorldSettings.GameType type)
@@ -103,7 +103,7 @@ public class ItemInWorldManager
             }
             else
             {
-                float f = block.getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, this.field_180241_i) * (float)(i + 1);
+                float f = block.getPlayerRelativeBlockHardness(this.thisPlayerMP) * (float)(i + 1);
                 int j = (int)(f * 10.0F);
 
                 if (j != this.durabilityRemainingOnBlock)
@@ -132,7 +132,7 @@ public class ItemInWorldManager
             else
             {
                 int k = this.curblockDamage - this.initialDamage;
-                float f1 = block1.getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, this.field_180241_i) * (float)(k + 1);
+                float f1 = block1.getPlayerRelativeBlockHardness(this.thisPlayerMP) * (float)(k + 1);
                 int l = (int)(f1 * 10.0F);
 
                 if (l != this.durabilityRemainingOnBlock)
@@ -194,7 +194,7 @@ public class ItemInWorldManager
             if (block.getMaterial() != Material.air)
             {
                 block.onBlockClicked(this.theWorld, pos, this.thisPlayerMP);
-                f = block.getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, pos);
+                f = block.getPlayerRelativeBlockHardness(this.thisPlayerMP);
             }
 
             if (block.getMaterial() != Material.air && f >= 1.0F)
@@ -221,7 +221,7 @@ public class ItemInWorldManager
 
             if (block.getMaterial() != Material.air)
             {
-                float f = block.getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, pos) * (float)(i + 1);
+                float f = block.getPlayerRelativeBlockHardness(this.thisPlayerMP) * (float)(i + 1);
 
                 if (f >= 0.7F)
                 {
@@ -342,7 +342,7 @@ public class ItemInWorldManager
     /**
      * Attempts to right-click use an item by the given EntityPlayer in the given World
      */
-    public boolean tryUseItem(EntityPlayer player, World worldIn, ItemStack stack)
+    public boolean tryUseItem(EntityPlayer player, World world, ItemStack stack)
     {
         if (this.gameType == WorldSettings.GameType.SPECTATOR)
         {
@@ -352,7 +352,7 @@ public class ItemInWorldManager
         {
             int i = stack.stackSize;
             int j = stack.getMetadata();
-            ItemStack itemstack = stack.useItemRightClick(worldIn, player);
+            ItemStack itemstack = stack.useItemRightClick(world, player);
 
             if (itemstack != stack || itemstack != null && (itemstack.stackSize != i || itemstack.getMaxItemUseDuration() > 0 || itemstack.getMetadata() != j))
             {
@@ -393,20 +393,20 @@ public class ItemInWorldManager
      * @param pos The block's coordinates
      * @param side The side of the block that was clicked on
      */
-    public boolean activateBlockOrUseItem(EntityPlayer player, World worldIn, ItemStack stack, BlockPos pos, EnumFacing side, float offsetX, float offsetY, float offsetZ)
+    public boolean activateBlockOrUseItem(EntityPlayer player, World world, ItemStack stack, BlockPos pos, EnumFacing side, float offsetX, float offsetY, float offsetZ)
     {
         if (this.gameType == WorldSettings.GameType.SPECTATOR)
         {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = world.getTileEntity(pos);
 
             if (tileentity instanceof ILockableContainer)
             {
-                Block block = worldIn.getBlockState(pos).getBlock();
+                Block block = world.getBlockState(pos).getBlock();
                 ILockableContainer ilockablecontainer = (ILockableContainer)tileentity;
 
                 if (ilockablecontainer instanceof TileEntityChest && block instanceof BlockChest)
                 {
-                    ilockablecontainer = ((BlockChest)block).getLockableContainer(worldIn, pos);
+                    ilockablecontainer = ((BlockChest)block).getLockableContainer(world, pos);
                 }
 
                 if (ilockablecontainer != null)
@@ -427,9 +427,9 @@ public class ItemInWorldManager
         {
             if (!player.isSneaking() || player.getHeldItem() == null)
             {
-                IBlockState iblockstate = worldIn.getBlockState(pos);
+                IBlockState iblockstate = world.getBlockState(pos);
 
-                if (iblockstate.getBlock().onBlockActivated(worldIn, pos, iblockstate, player, side, offsetX, offsetY, offsetZ))
+                if (iblockstate.getBlock().onBlockActivated(world, pos, iblockstate, player, side, offsetX, offsetY, offsetZ))
                 {
                     return true;
                 }
@@ -443,14 +443,14 @@ public class ItemInWorldManager
             {
                 int j = stack.getMetadata();
                 int i = stack.stackSize;
-                boolean flag = stack.onItemUse(player, worldIn, pos, side, offsetX, offsetY, offsetZ);
+                boolean flag = stack.onItemUse(player, world, pos, side, offsetX, offsetY, offsetZ);
                 stack.setItemDamage(j);
                 stack.stackSize = i;
                 return flag;
             }
             else
             {
-                return stack.onItemUse(player, worldIn, pos, side, offsetX, offsetY, offsetZ);
+                return stack.onItemUse(player, world, pos, side, offsetX, offsetY, offsetZ);
             }
         }
     }

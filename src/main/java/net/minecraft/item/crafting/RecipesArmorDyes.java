@@ -15,7 +15,7 @@ public class RecipesArmorDyes implements IRecipe
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    public boolean matches(InventoryCrafting inv, World worldIn)
+    public boolean matches(InventoryCrafting inv, World world)
     {
         ItemStack itemstack = null;
         List<ItemStack> list = Lists.newArrayList();

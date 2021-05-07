@@ -71,32 +71,32 @@ public class Bootstrap
     {
         BlockDispenser.dispenseBehaviorRegistry.putObject(Items.arrow, new BehaviorProjectileDispense()
         {
-            protected IProjectile getProjectileEntity(World worldIn, IPosition position)
+            protected IProjectile getProjectileEntity(World world, IPosition position)
             {
-                EntityArrow entityarrow = new EntityArrow(worldIn, position.getX(), position.getY(), position.getZ());
+                EntityArrow entityarrow = new EntityArrow(world, position.getX(), position.getY(), position.getZ());
                 entityarrow.canBePickedUp = 1;
                 return entityarrow;
             }
         });
         BlockDispenser.dispenseBehaviorRegistry.putObject(Items.egg, new BehaviorProjectileDispense()
         {
-            protected IProjectile getProjectileEntity(World worldIn, IPosition position)
+            protected IProjectile getProjectileEntity(World world, IPosition position)
             {
-                return new EntityEgg(worldIn, position.getX(), position.getY(), position.getZ());
+                return new EntityEgg(world, position.getX(), position.getY(), position.getZ());
             }
         });
         BlockDispenser.dispenseBehaviorRegistry.putObject(Items.snowball, new BehaviorProjectileDispense()
         {
-            protected IProjectile getProjectileEntity(World worldIn, IPosition position)
+            protected IProjectile getProjectileEntity(World world, IPosition position)
             {
-                return new EntitySnowball(worldIn, position.getX(), position.getY(), position.getZ());
+                return new EntitySnowball(world, position.getX(), position.getY(), position.getZ());
             }
         });
         BlockDispenser.dispenseBehaviorRegistry.putObject(Items.experience_bottle, new BehaviorProjectileDispense()
         {
-            protected IProjectile getProjectileEntity(World worldIn, IPosition position)
+            protected IProjectile getProjectileEntity(World world, IPosition position)
             {
-                return new EntityExpBottle(worldIn, position.getX(), position.getY(), position.getZ());
+                return new EntityExpBottle(world, position.getX(), position.getY(), position.getZ());
             }
             protected float func_82498_a()
             {
@@ -114,9 +114,9 @@ public class Bootstrap
             {
                 return ItemPotion.isSplash(stack.getMetadata()) ? (new BehaviorProjectileDispense()
                 {
-                    protected IProjectile getProjectileEntity(World worldIn, IPosition position)
+                    protected IProjectile getProjectileEntity(World world, IPosition position)
                     {
-                        return new EntityPotion(worldIn, position.getX(), position.getY(), position.getZ(), stack.copy());
+                        return new EntityPotion(world, position.getX(), position.getY(), position.getZ(), stack.copy());
                     }
                     protected float func_82498_a()
                     {

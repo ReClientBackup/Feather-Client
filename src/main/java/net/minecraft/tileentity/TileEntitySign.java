@@ -151,9 +151,9 @@ public class TileEntitySign extends TileEntity
         }
     }
 
-    public void setPlayer(EntityPlayer playerIn)
+    public void setPlayer(EntityPlayer player)
     {
-        this.player = playerIn;
+        this.player = player;
     }
 
     public EntityPlayer getPlayer()
@@ -161,17 +161,17 @@ public class TileEntitySign extends TileEntity
         return this.player;
     }
 
-    public boolean executeCommand(final EntityPlayer playerIn)
+    public boolean executeCommand(final EntityPlayer player)
     {
         ICommandSender icommandsender = new ICommandSender()
         {
             public String getCommandSenderName()
             {
-                return playerIn.getCommandSenderName();
+                return player.getCommandSenderName();
             }
             public IChatComponent getDisplayName()
             {
-                return playerIn.getDisplayName();
+                return player.getDisplayName();
             }
             public void addChatMessage(IChatComponent component)
             {
@@ -190,11 +190,11 @@ public class TileEntitySign extends TileEntity
             }
             public World getEntityWorld()
             {
-                return playerIn.getEntityWorld();
+                return player.getEntityWorld();
             }
             public Entity getCommandSenderEntity()
             {
-                return playerIn;
+                return player;
             }
             public boolean sendCommandFeedback()
             {

@@ -221,14 +221,14 @@ public class ItemArmor extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
         int i = EntityLiving.getArmorPosition(itemStackIn) - 1;
-        ItemStack itemstack = playerIn.getCurrentArmor(i);
+        ItemStack itemstack = player.getCurrentArmor(i);
 
         if (itemstack == null)
         {
-            playerIn.setCurrentItemOrArmor(i, itemStackIn.copy());
+            player.setCurrentItemOrArmor(i, itemStackIn.copy());
             itemStackIn.stackSize = 0;
         }
 

@@ -52,9 +52,9 @@ public class BlockDoor extends Block
         return false;
     }
 
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
+    public boolean isPassable(IBlockAccess world, BlockPos pos)
     {
-        return isOpen(combineMetadata(worldIn, pos));
+        return isOpen(combineMetadata(world, pos));
     }
 
     public boolean isFullCube()
@@ -62,21 +62,21 @@ public class BlockDoor extends Block
         return false;
     }
 
-    public AxisAlignedBB getSelectedBoundingBox(World worldIn, BlockPos pos)
+    public AxisAlignedBB getSelectedBoundingBox(World world, BlockPos pos)
     {
-        this.setBlockBoundsBasedOnState(worldIn, pos);
-        return super.getSelectedBoundingBox(worldIn, pos);
+        this.setBlockBoundsBasedOnState(world, pos);
+        return super.getSelectedBoundingBox(world, pos);
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
     {
-        this.setBlockBoundsBasedOnState(worldIn, pos);
-        return super.getCollisionBoundingBox(worldIn, pos, state);
+        this.setBlockBoundsBasedOnState(world, pos);
+        return super.getCollisionBoundingBox(world, pos, state);
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+    public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
     {
-        this.setBoundBasedOnMeta(combineMetadata(worldIn, pos));
+        this.setBoundBasedOnMeta(combineMetadata(world, pos));
     }
 
     private void setBoundBasedOnMeta(int combinedMeta)
@@ -152,7 +152,7 @@ public class BlockDoor extends Block
         }
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (this.blockMaterial == Material.iron)
         {
@@ -161,7 +161,7 @@ public class BlockDoor extends Block
         else
         {
             BlockPos blockpos = state.getValue(HALF) == BlockDoor.EnumDoorHalf.LOWER ? pos : pos.down();
-            IBlockState iblockstate = pos.equals(blockpos) ? state : worldIn.getBlockState(blockpos);
+            IBlockState iblockstate = pos.equals(blockpos) ? state : world.getBlockState(blockpos);
 
             if (iblockstate.getBlock() != this)
             {
@@ -170,28 +170,28 @@ public class BlockDoor extends Block
             else
             {
                 state = iblockstate.cycleProperty(OPEN);
-                worldIn.setBlockState(blockpos, state, 2);
-                worldIn.markBlockRangeForRenderUpdate(blockpos, pos);
-                worldIn.playAuxSFXAtEntity(playerIn, state.getValue(OPEN).booleanValue() ? 1003 : 1006, pos, 0);
+                world.setBlockState(blockpos, state, 2);
+                world.markBlockRangeForRenderUpdate(blockpos, pos);
+                world.playAuxSFXAtEntity(player, state.getValue(OPEN).booleanValue() ? 1003 : 1006, pos, 0);
                 return true;
             }
         }
     }
 
-    public void toggleDoor(World worldIn, BlockPos pos, boolean open)
+    public void toggleDoor(World world, BlockPos pos, boolean open)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
 
         if (iblockstate.getBlock() == this)
         {
             BlockPos blockpos = iblockstate.getValue(HALF) == BlockDoor.EnumDoorHalf.LOWER ? pos : pos.down();
-            IBlockState iblockstate1 = pos == blockpos ? iblockstate : worldIn.getBlockState(blockpos);
+            IBlockState iblockstate1 = pos == blockpos ? iblockstate : world.getBlockState(blockpos);
 
             if (iblockstate1.getBlock() == this && iblockstate1.getValue(OPEN).booleanValue() != open)
             {
-                worldIn.setBlockState(blockpos, iblockstate1.withProperty(OPEN, Boolean.valueOf(open)), 2);
-                worldIn.markBlockRangeForRenderUpdate(blockpos, pos);
-                worldIn.playAuxSFXAtEntity(null, open ? 1003 : 1006, pos, 0);
+                world.setBlockState(blockpos, iblockstate1.withProperty(OPEN, Boolean.valueOf(open)), 2);
+                world.markBlockRangeForRenderUpdate(blockpos, pos);
+                world.playAuxSFXAtEntity(null, open ? 1003 : 1006, pos, 0);
             }
         }
     }
@@ -199,65 +199,65 @@ public class BlockDoor extends Block
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER)
         {
             BlockPos blockpos = pos.down();
-            IBlockState iblockstate = worldIn.getBlockState(blockpos);
+            IBlockState iblockstate = world.getBlockState(blockpos);
 
             if (iblockstate.getBlock() != this)
             {
-                worldIn.setBlockToAir(pos);
+                world.setBlockToAir(pos);
             }
             else if (neighborBlock != this)
             {
-                this.onNeighborBlockChange(worldIn, blockpos, iblockstate, neighborBlock);
+                this.onNeighborBlockChange(world, blockpos, iblockstate, neighborBlock);
             }
         }
         else
         {
             boolean flag1 = false;
             BlockPos blockpos1 = pos.up();
-            IBlockState iblockstate1 = worldIn.getBlockState(blockpos1);
+            IBlockState iblockstate1 = world.getBlockState(blockpos1);
 
             if (iblockstate1.getBlock() != this)
             {
-                worldIn.setBlockToAir(pos);
+                world.setBlockToAir(pos);
                 flag1 = true;
             }
 
-            if (!World.doesBlockHaveSolidTopSurface(worldIn, pos.down()))
+            if (!World.doesBlockHaveSolidTopSurface(world, pos.down()))
             {
-                worldIn.setBlockToAir(pos);
+                world.setBlockToAir(pos);
                 flag1 = true;
 
                 if (iblockstate1.getBlock() == this)
                 {
-                    worldIn.setBlockToAir(blockpos1);
+                    world.setBlockToAir(blockpos1);
                 }
             }
 
             if (flag1)
             {
-                if (!worldIn.isRemote)
+                if (!world.isRemote)
                 {
-                    this.dropBlockAsItem(worldIn, pos, state, 0);
+                    this.dropBlockAsItem(world, pos, state, 0);
                 }
             }
             else
             {
-                boolean flag = worldIn.isBlockPowered(pos) || worldIn.isBlockPowered(blockpos1);
+                boolean flag = world.isBlockPowered(pos) || world.isBlockPowered(blockpos1);
 
                 if ((flag || neighborBlock.canProvidePower()) && neighborBlock != this && flag != iblockstate1.getValue(POWERED).booleanValue())
                 {
-                    worldIn.setBlockState(blockpos1, iblockstate1.withProperty(POWERED, Boolean.valueOf(flag)), 2);
+                    world.setBlockState(blockpos1, iblockstate1.withProperty(POWERED, Boolean.valueOf(flag)), 2);
 
                     if (flag != state.getValue(OPEN).booleanValue())
                     {
-                        worldIn.setBlockState(pos, state.withProperty(OPEN, Boolean.valueOf(flag)), 2);
-                        worldIn.markBlockRangeForRenderUpdate(pos, pos);
-                        worldIn.playAuxSFXAtEntity(null, flag ? 1003 : 1006, pos, 0);
+                        world.setBlockState(pos, state.withProperty(OPEN, Boolean.valueOf(flag)), 2);
+                        world.markBlockRangeForRenderUpdate(pos, pos);
+                        world.playAuxSFXAtEntity(null, flag ? 1003 : 1006, pos, 0);
                     }
                 }
             }
@@ -280,15 +280,15 @@ public class BlockDoor extends Block
      * @param start The start vector
      * @param end The end vector
      */
-    public MovingObjectPosition collisionRayTrace(World worldIn, BlockPos pos, Vec3 start, Vec3 end)
+    public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 start, Vec3 end)
     {
-        this.setBlockBoundsBasedOnState(worldIn, pos);
-        return super.collisionRayTrace(worldIn, pos, start, end);
+        this.setBlockBoundsBasedOnState(world, pos);
+        return super.collisionRayTrace(world, pos, start, end);
     }
 
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+    public boolean canPlaceBlockAt(World world, BlockPos pos)
     {
-        return pos.getY() < 255 && World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && super.canPlaceBlockAt(worldIn, pos) && super.canPlaceBlockAt(worldIn, pos.up());
+        return pos.getY() < 255 && World.doesBlockHaveSolidTopSurface(world, pos.down()) && super.canPlaceBlockAt(world, pos) && super.canPlaceBlockAt(world, pos.up());
     }
 
     public int getMobilityFlag()
@@ -296,15 +296,15 @@ public class BlockDoor extends Block
         return 1;
     }
 
-    public static int combineMetadata(IBlockAccess worldIn, BlockPos pos)
+    public static int combineMetadata(IBlockAccess world, BlockPos pos)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
         int i = iblockstate.getBlock().getMetaFromState(iblockstate);
         boolean flag = isTop(i);
-        IBlockState iblockstate1 = worldIn.getBlockState(pos.down());
+        IBlockState iblockstate1 = world.getBlockState(pos.down());
         int j = iblockstate1.getBlock().getMetaFromState(iblockstate1);
         int k = flag ? j : i;
-        IBlockState iblockstate2 = worldIn.getBlockState(pos.up());
+        IBlockState iblockstate2 = world.getBlockState(pos.up());
         int l = iblockstate2.getBlock().getMetaFromState(iblockstate2);
         int i1 = flag ? i : l;
         boolean flag1 = (i1 & 1) != 0;
@@ -315,7 +315,7 @@ public class BlockDoor extends Block
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return this.getItem();
     }
@@ -325,13 +325,13 @@ public class BlockDoor extends Block
         return this == Blocks.iron_door ? Items.iron_door : (this == Blocks.spruce_door ? Items.spruce_door : (this == Blocks.birch_door ? Items.birch_door : (this == Blocks.jungle_door ? Items.jungle_door : (this == Blocks.acacia_door ? Items.acacia_door : (this == Blocks.dark_oak_door ? Items.dark_oak_door : Items.oak_door)))));
     }
 
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
+    public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
     {
         BlockPos blockpos = pos.down();
 
-        if (player.capabilities.isCreativeMode && state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER && worldIn.getBlockState(blockpos).getBlock() == this)
+        if (player.capabilities.isCreativeMode && state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER && world.getBlockState(blockpos).getBlock() == this)
         {
-            worldIn.setBlockToAir(blockpos);
+            world.setBlockToAir(blockpos);
         }
     }
 
@@ -344,11 +344,11 @@ public class BlockDoor extends Block
      * Get the actual Block state of this Block at the given position. This applies properties not visible in the
      * metadata, such as fence connections.
      */
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
     {
         if (state.getValue(HALF) == BlockDoor.EnumDoorHalf.LOWER)
         {
-            IBlockState iblockstate = worldIn.getBlockState(pos.up());
+            IBlockState iblockstate = world.getBlockState(pos.up());
 
             if (iblockstate.getBlock() == this)
             {
@@ -357,7 +357,7 @@ public class BlockDoor extends Block
         }
         else
         {
-            IBlockState iblockstate1 = worldIn.getBlockState(pos.down());
+            IBlockState iblockstate1 = world.getBlockState(pos.down());
 
             if (iblockstate1.getBlock() == this)
             {
@@ -415,14 +415,14 @@ public class BlockDoor extends Block
         return meta & 7;
     }
 
-    public static boolean isOpen(IBlockAccess worldIn, BlockPos pos)
+    public static boolean isOpen(IBlockAccess world, BlockPos pos)
     {
-        return isOpen(combineMetadata(worldIn, pos));
+        return isOpen(combineMetadata(world, pos));
     }
 
-    public static EnumFacing getFacing(IBlockAccess worldIn, BlockPos pos)
+    public static EnumFacing getFacing(IBlockAccess world, BlockPos pos)
     {
-        return getFacing(combineMetadata(worldIn, pos));
+        return getFacing(combineMetadata(world, pos));
     }
 
     public static EnumFacing getFacing(int combinedMeta)

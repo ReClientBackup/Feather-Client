@@ -19,15 +19,15 @@ public abstract class EntityHanging extends Entity
     /** The direction the entity is facing */
     public EnumFacing facingDirection;
 
-    public EntityHanging(World worldIn)
+    public EntityHanging(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.5F, 0.5F);
     }
 
-    public EntityHanging(World worldIn, BlockPos hangingPositionIn)
+    public EntityHanging(World world, BlockPos hangingPositionIn)
     {
-        this(worldIn);
+        this(world);
         this.hangingPosition = hangingPositionIn;
     }
 

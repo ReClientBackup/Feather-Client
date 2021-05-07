@@ -18,19 +18,19 @@ public class ItemBucketMilk extends Item
      * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
      * the Item before the action is complete.
      */
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player)
     {
-        if (!playerIn.capabilities.isCreativeMode)
+        if (!player.capabilities.isCreativeMode)
         {
             --stack.stackSize;
         }
 
-        if (!worldIn.isRemote)
+        if (!world.isRemote)
         {
-            playerIn.clearActivePotions();
+            player.clearActivePotions();
         }
 
-        playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
+        player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
         return stack.stackSize <= 0 ? new ItemStack(Items.bucket) : stack;
     }
 
@@ -53,9 +53,9 @@ public class ItemBucketMilk extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player)
     {
-        playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
+        player.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
         return itemStackIn;
     }
 }

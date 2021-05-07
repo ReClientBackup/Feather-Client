@@ -16,9 +16,9 @@ public class EntityDropParticleFX extends EntityFX
     /** The height of the current bob */
     private int bobTimer;
 
-    protected EntityDropParticleFX(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, Material p_i1203_8_)
+    protected EntityDropParticleFX(World world, double xCoordIn, double yCoordIn, double zCoordIn, Material p_i1203_8_)
     {
-        super(worldIn, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
+        super(world, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
         this.motionX = this.motionY = this.motionZ = 0.0D;
 
         if (p_i1203_8_ == Material.water)
@@ -142,17 +142,17 @@ public class EntityDropParticleFX extends EntityFX
 
     public static class LavaFactory implements IParticleFactory
     {
-        public EntityFX getEntityFX(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
+        public EntityFX getEntityFX(int particleID, World world, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
         {
-            return new EntityDropParticleFX(worldIn, xCoordIn, yCoordIn, zCoordIn, Material.lava);
+            return new EntityDropParticleFX(world, xCoordIn, yCoordIn, zCoordIn, Material.lava);
         }
     }
 
     public static class WaterFactory implements IParticleFactory
     {
-        public EntityFX getEntityFX(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
+        public EntityFX getEntityFX(int particleID, World world, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
         {
-            return new EntityDropParticleFX(worldIn, xCoordIn, yCoordIn, zCoordIn, Material.water);
+            return new EntityDropParticleFX(world, xCoordIn, yCoordIn, zCoordIn, Material.water);
         }
     }
 }

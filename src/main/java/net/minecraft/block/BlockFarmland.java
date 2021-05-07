@@ -29,7 +29,7 @@ public class BlockFarmland extends Block
         this.setLightOpacity(255);
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
     {
         return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
     }
@@ -47,24 +47,24 @@ public class BlockFarmland extends Block
         return false;
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
         int i = state.getValue(MOISTURE).intValue();
 
-        if (!this.hasWater(worldIn, pos) && !worldIn.canLightningStrike(pos.up()))
+        if (!this.hasWater(world, pos) && !world.canLightningStrike(pos.up()))
         {
             if (i > 0)
             {
-                worldIn.setBlockState(pos, state.withProperty(MOISTURE, Integer.valueOf(i - 1)), 2);
+                world.setBlockState(pos, state.withProperty(MOISTURE, Integer.valueOf(i - 1)), 2);
             }
-            else if (!this.hasCrops(worldIn, pos))
+            else if (!this.hasCrops(world, pos))
             {
-                worldIn.setBlockState(pos, Blocks.dirt.getDefaultState());
+                world.setBlockState(pos, Blocks.dirt.getDefaultState());
             }
         }
         else if (i < 7)
         {
-            worldIn.setBlockState(pos, state.withProperty(MOISTURE, Integer.valueOf(7)), 2);
+            world.setBlockState(pos, state.withProperty(MOISTURE, Integer.valueOf(7)), 2);
         }
     }
 
@@ -73,35 +73,35 @@ public class BlockFarmland extends Block
      *  
      * @param fallDistance The distance the entity has fallen before landing
      */
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
+    public void onFallenUpon(World world, BlockPos pos, Entity entityIn, float fallDistance)
     {
         if (entityIn instanceof EntityLivingBase)
         {
-            if (!worldIn.isRemote && worldIn.rand.nextFloat() < fallDistance - 0.5F)
+            if (!world.isRemote && world.rand.nextFloat() < fallDistance - 0.5F)
             {
-                if (!(entityIn instanceof EntityPlayer) && !worldIn.getGameRules().getGameRuleBooleanValue("mobGriefing"))
+                if (!(entityIn instanceof EntityPlayer) && !world.getGameRules().getGameRuleBooleanValue("mobGriefing"))
                 {
                     return;
                 }
 
-                worldIn.setBlockState(pos, Blocks.dirt.getDefaultState());
+                world.setBlockState(pos, Blocks.dirt.getDefaultState());
             }
 
-            super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
+            super.onFallenUpon(world, pos, entityIn, fallDistance);
         }
     }
 
-    private boolean hasCrops(World worldIn, BlockPos pos)
+    private boolean hasCrops(World world, BlockPos pos)
     {
-        Block block = worldIn.getBlockState(pos.up()).getBlock();
+        Block block = world.getBlockState(pos.up()).getBlock();
         return block instanceof BlockCrops || block instanceof BlockStem;
     }
 
-    private boolean hasWater(World worldIn, BlockPos pos)
+    private boolean hasWater(World world, BlockPos pos)
     {
         for (BlockPos.MutableBlockPos blockpos$mutableblockpos : BlockPos.getAllInBoxMutable(pos.add(-4, 0, -4), pos.add(4, 1, 4)))
         {
-            if (worldIn.getBlockState(blockpos$mutableblockpos).getBlock().getMaterial() == Material.water)
+            if (world.getBlockState(blockpos$mutableblockpos).getBlock().getMaterial() == Material.water)
             {
                 return true;
             }
@@ -113,17 +113,17 @@ public class BlockFarmland extends Block
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        super.onNeighborBlockChange(worldIn, pos, state, neighborBlock);
+        super.onNeighborBlockChange(world, pos, state, neighborBlock);
 
-        if (worldIn.getBlockState(pos.up()).getBlock().getMaterial().isSolid())
+        if (world.getBlockState(pos.up()).getBlock().getMaterial().isSolid())
         {
-            worldIn.setBlockState(pos, Blocks.dirt.getDefaultState());
+            world.setBlockState(pos, Blocks.dirt.getDefaultState());
         }
     }
 
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
     {
         switch (side)
         {
@@ -134,11 +134,11 @@ public class BlockFarmland extends Block
             case SOUTH:
             case WEST:
             case EAST:
-                Block block = worldIn.getBlockState(pos).getBlock();
+                Block block = world.getBlockState(pos).getBlock();
                 return !block.isOpaqueCube() && block != Blocks.farmland;
 
             default:
-                return super.shouldSideBeRendered(worldIn, pos, side);
+                return super.shouldSideBeRendered(world, pos, side);
         }
     }
 
@@ -155,7 +155,7 @@ public class BlockFarmland extends Block
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return Item.getItemFromBlock(Blocks.dirt);
     }

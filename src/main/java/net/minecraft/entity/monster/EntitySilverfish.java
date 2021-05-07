@@ -25,9 +25,9 @@ public class EntitySilverfish extends EntityMob
 {
     private final EntitySilverfish.AISummonSilverfish summonSilverfish;
 
-    public EntitySilverfish(World worldIn)
+    public EntitySilverfish(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.4F, 0.3F);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(3, this.summonSilverfish = new EntitySilverfish.AISummonSilverfish(this));

@@ -9,9 +9,9 @@ import net.minecraft.world.World;
 
 public class EntityMagmaCube extends EntitySlime
 {
-    public EntityMagmaCube(World worldIn)
+    public EntityMagmaCube(World world)
     {
-        super(worldIn);
+        super(world);
         this.isImmuneToFire = true;
     }
 

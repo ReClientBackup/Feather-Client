@@ -82,16 +82,16 @@ public abstract class EntityLiving extends EntityLivingBase
     private UUID teamUuid = null;
     private String teamUuidString = null;
 
-    public EntityLiving(World worldIn)
+    public EntityLiving(World world)
     {
-        super(worldIn);
-        this.tasks = new EntityAITasks(worldIn != null && worldIn.theProfiler != null ? worldIn.theProfiler : null);
-        this.targetTasks = new EntityAITasks(worldIn != null && worldIn.theProfiler != null ? worldIn.theProfiler : null);
+        super(world);
+        this.tasks = new EntityAITasks(world != null && world.theProfiler != null ? world.theProfiler : null);
+        this.targetTasks = new EntityAITasks(world != null && world.theProfiler != null ? world.theProfiler : null);
         this.lookHelper = new EntityLookHelper(this);
         this.moveHelper = new EntityMoveHelper(this);
         this.jumpHelper = new EntityJumpHelper(this);
         this.bodyHelper = new EntityBodyHelper(this);
-        this.navigator = this.getNewNavigator(worldIn);
+        this.navigator = this.getNewNavigator(world);
         this.senses = new EntitySenses(this);
 
         for (int i = 0; i < this.equipmentDropChances.length; ++i)
@@ -109,9 +109,9 @@ public abstract class EntityLiving extends EntityLivingBase
     /**
      * Returns new PathNavigateGround instance
      */
-    protected PathNavigate getNewNavigator(World worldIn)
+    protected PathNavigate getNewNavigator(World world)
     {
-        return new PathNavigateGround(this, worldIn);
+        return new PathNavigateGround(this, world);
     }
 
     public EntityLookHelper getLookHelper()
@@ -452,10 +452,10 @@ public abstract class EntityLiving extends EntityLivingBase
     /**
      * set the movespeed used for the new AI system
      */
-    public void setAIMoveSpeed(float speedIn)
+    public void setAIMoveSpeed(float speed)
     {
-        super.setAIMoveSpeed(speedIn);
-        this.setMoveForward(speedIn);
+        super.setAIMoveSpeed(speed);
+        this.setMoveForward(speed);
     }
 
     /**
@@ -1109,41 +1109,41 @@ public abstract class EntityLiving extends EntityLivingBase
     /**
      * First layer of player interaction
      */
-    public final boolean interactFirst(EntityPlayer playerIn)
+    public final boolean interactFirst(EntityPlayer player)
     {
-        if (this.getLeashed() && this.getLeashedToEntity() == playerIn)
+        if (this.getLeashed() && this.getLeashedToEntity() == player)
         {
-            this.clearLeashed(true, !playerIn.capabilities.isCreativeMode);
+            this.clearLeashed(true, !player.capabilities.isCreativeMode);
             return true;
         }
         else
         {
-            ItemStack itemstack = playerIn.inventory.getCurrentItem();
+            ItemStack itemstack = player.inventory.getCurrentItem();
 
             if (itemstack != null && itemstack.getItem() == Items.lead && this.allowLeashing())
             {
                 if (!(this instanceof EntityTameable) || !((EntityTameable)this).isTamed())
                 {
-                    this.setLeashedToEntity(playerIn, true);
+                    this.setLeashedToEntity(player, true);
                     --itemstack.stackSize;
                     return true;
                 }
 
-                if (((EntityTameable)this).isOwner(playerIn))
+                if (((EntityTameable)this).isOwner(player))
                 {
-                    this.setLeashedToEntity(playerIn, true);
+                    this.setLeashedToEntity(player, true);
                     --itemstack.stackSize;
                     return true;
                 }
             }
 
-            if (this.interact(playerIn))
+            if (this.interact(player))
             {
                 return true;
             }
             else
             {
-                return super.interactFirst(playerIn);
+                return super.interactFirst(player);
             }
         }
     }

@@ -419,9 +419,9 @@ public abstract class BiomeGenBase
         }
     }
 
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random rand, BlockPos pos)
     {
-        this.theBiomeDecorator.decorate(worldIn, rand, this, pos);
+        this.theBiomeDecorator.decorate(world, rand, this, pos);
     }
 
     public int getGrassColorAtPos(BlockPos pos)
@@ -443,14 +443,14 @@ public abstract class BiomeGenBase
         return this.enableSnow;
     }
 
-    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
+    public void genTerrainBlocks(World world, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
     {
-        this.generateBiomeTerrain(worldIn, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
+        this.generateBiomeTerrain(world, rand, chunkPrimerIn, p_180622_4_, p_180622_5_, p_180622_6_);
     }
 
-    public final void generateBiomeTerrain(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180628_4_, int p_180628_5_, double p_180628_6_)
+    public final void generateBiomeTerrain(World world, Random rand, ChunkPrimer chunkPrimerIn, int p_180628_4_, int p_180628_5_, double p_180628_6_)
     {
-        int i = worldIn.func_181545_F();
+        int i = world.func_181545_F();
         IBlockState iblockstate = this.topBlock;
         IBlockState iblockstate1 = this.fillerBlock;
         int j = -1;

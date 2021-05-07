@@ -75,11 +75,11 @@ public class BlockPrismarine extends Block
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
     {
-        list.add(new ItemStack(itemIn, 1, ROUGH_META));
-        list.add(new ItemStack(itemIn, 1, BRICKS_META));
-        list.add(new ItemStack(itemIn, 1, DARK_META));
+        list.add(new ItemStack(item, 1, ROUGH_META));
+        list.add(new ItemStack(item, 1, BRICKS_META));
+        list.add(new ItemStack(item, 1, DARK_META));
     }
 
     public enum EnumType implements IStringSerializable

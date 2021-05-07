@@ -17,9 +17,9 @@ public class EntityFireworkRocket extends Entity
      */
     private int lifetime;
 
-    public EntityFireworkRocket(World worldIn)
+    public EntityFireworkRocket(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(0.25F, 0.25F);
     }
 
@@ -37,9 +37,9 @@ public class EntityFireworkRocket extends Entity
         return distance < 4096.0D;
     }
 
-    public EntityFireworkRocket(World worldIn, double x, double y, double z, ItemStack givenItem)
+    public EntityFireworkRocket(World world, double x, double y, double z, ItemStack givenItem)
     {
-        super(worldIn);
+        super(world);
         this.fireworkAge = 0;
         this.setSize(0.25F, 0.25F);
         this.setPosition(x, y, z);

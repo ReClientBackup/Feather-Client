@@ -5,26 +5,26 @@ import net.minecraft.world.World;
 
 public class EntityMinecartEmpty extends EntityMinecart
 {
-    public EntityMinecartEmpty(World worldIn)
+    public EntityMinecartEmpty(World world)
     {
-        super(worldIn);
+        super(world);
     }
 
-    public EntityMinecartEmpty(World worldIn, double p_i1723_2_, double p_i1723_4_, double p_i1723_6_)
+    public EntityMinecartEmpty(World world, double p_i1723_2_, double p_i1723_4_, double p_i1723_6_)
     {
-        super(worldIn, p_i1723_2_, p_i1723_4_, p_i1723_6_);
+        super(world, p_i1723_2_, p_i1723_4_, p_i1723_6_);
     }
 
     /**
      * First layer of player interaction
      */
-    public boolean interactFirst(EntityPlayer playerIn)
+    public boolean interactFirst(EntityPlayer player)
     {
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != playerIn)
+        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != player)
         {
             return true;
         }
-        else if (this.riddenByEntity != null && this.riddenByEntity != playerIn)
+        else if (this.riddenByEntity != null && this.riddenByEntity != player)
         {
             return false;
         }
@@ -32,7 +32,7 @@ public class EntityMinecartEmpty extends EntityMinecart
         {
             if (!this.worldObj.isRemote)
             {
-                playerIn.mountEntity(this);
+                player.mountEntity(this);
             }
 
             return true;

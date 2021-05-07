@@ -29,8 +29,8 @@ public abstract class AbstractClientPlayer extends EntityPlayer {
     private long reloadCapeTimeMs;
     private String nameClear;
 
-    public AbstractClientPlayer(World worldIn, GameProfile playerProfile) {
-        super(worldIn, playerProfile);
+    public AbstractClientPlayer(World world, GameProfile playerProfile) {
+        super(world, playerProfile);
         this.nameClear = playerProfile.getName();
 
 
@@ -74,7 +74,7 @@ public abstract class AbstractClientPlayer extends EntityPlayer {
             return null;
         } else {
             if (this.getReloadCapeTimeMs() != 0L && System.currentTimeMillis() > this.getReloadCapeTimeMs()) {
-                CapeUtils.reloadCape(this);
+                //CapeUtils.reloadCape(this);
                 this.setReloadCapeTimeMs(0L);
             }
 

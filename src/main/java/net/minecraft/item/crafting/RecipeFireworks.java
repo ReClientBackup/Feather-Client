@@ -17,7 +17,7 @@ public class RecipeFireworks implements IRecipe
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    public boolean matches(InventoryCrafting inv, World worldIn)
+    public boolean matches(InventoryCrafting inv, World world)
     {
         this.field_92102_a = null;
         int i = 0;

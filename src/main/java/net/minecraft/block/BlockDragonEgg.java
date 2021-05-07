@@ -21,92 +21,92 @@ public class BlockDragonEgg extends Block
         this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 1.0F, 0.9375F);
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
     {
-        worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+        world.scheduleUpdate(pos, this, this.tickRate(world));
     }
 
     /**
      * Called when a neighboring block changes.
      */
-    public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
     {
-        worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+        world.scheduleUpdate(pos, this, this.tickRate(world));
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
     {
-        this.checkFall(worldIn, pos);
+        this.checkFall(world, pos);
     }
 
-    private void checkFall(World worldIn, BlockPos pos)
+    private void checkFall(World world, BlockPos pos)
     {
-        if (BlockFalling.canFallInto(worldIn, pos.down()) && pos.getY() >= 0)
+        if (BlockFalling.canFallInto(world, pos.down()) && pos.getY() >= 0)
         {
             int i = 32;
 
-            if (!BlockFalling.fallInstantly && worldIn.isAreaLoaded(pos.add(-i, -i, -i), pos.add(i, i, i)))
+            if (!BlockFalling.fallInstantly && world.isAreaLoaded(pos.add(-i, -i, -i), pos.add(i, i, i)))
             {
-                worldIn.spawnEntityInWorld(new EntityFallingBlock(worldIn, (float)pos.getX() + 0.5F, pos.getY(), (float)pos.getZ() + 0.5F, this.getDefaultState()));
+                world.spawnEntityInWorld(new EntityFallingBlock(world, (float)pos.getX() + 0.5F, pos.getY(), (float)pos.getZ() + 0.5F, this.getDefaultState()));
             }
             else
             {
-                worldIn.setBlockToAir(pos);
+                world.setBlockToAir(pos);
                 BlockPos blockpos;
 
-                for (blockpos = pos; BlockFalling.canFallInto(worldIn, blockpos) && blockpos.getY() > 0; blockpos = blockpos.down())
+                for (blockpos = pos; BlockFalling.canFallInto(world, blockpos) && blockpos.getY() > 0; blockpos = blockpos.down())
                 {
                 }
 
                 if (blockpos.getY() > 0)
                 {
-                    worldIn.setBlockState(blockpos, this.getDefaultState(), 2);
+                    world.setBlockState(blockpos, this.getDefaultState(), 2);
                 }
             }
         }
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        this.teleport(worldIn, pos);
+        this.teleport(world, pos);
         return true;
     }
 
-    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
+    public void onBlockClicked(World world, BlockPos pos, EntityPlayer player)
     {
-        this.teleport(worldIn, pos);
+        this.teleport(world, pos);
     }
 
-    private void teleport(World worldIn, BlockPos pos)
+    private void teleport(World world, BlockPos pos)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState iblockstate = world.getBlockState(pos);
 
         if (iblockstate.getBlock() == this)
         {
             for (int i = 0; i < 1000; ++i)
             {
-                BlockPos blockpos = pos.add(worldIn.rand.nextInt(16) - worldIn.rand.nextInt(16), worldIn.rand.nextInt(8) - worldIn.rand.nextInt(8), worldIn.rand.nextInt(16) - worldIn.rand.nextInt(16));
+                BlockPos blockpos = pos.add(world.rand.nextInt(16) - world.rand.nextInt(16), world.rand.nextInt(8) - world.rand.nextInt(8), world.rand.nextInt(16) - world.rand.nextInt(16));
 
-                if (worldIn.getBlockState(blockpos).getBlock().blockMaterial == Material.air)
+                if (world.getBlockState(blockpos).getBlock().blockMaterial == Material.air)
                 {
-                    if (worldIn.isRemote)
+                    if (world.isRemote)
                     {
                         for (int j = 0; j < 128; ++j)
                         {
-                            double d0 = worldIn.rand.nextDouble();
-                            float f = (worldIn.rand.nextFloat() - 0.5F) * 0.2F;
-                            float f1 = (worldIn.rand.nextFloat() - 0.5F) * 0.2F;
-                            float f2 = (worldIn.rand.nextFloat() - 0.5F) * 0.2F;
-                            double d1 = (double)blockpos.getX() + (double)(pos.getX() - blockpos.getX()) * d0 + (worldIn.rand.nextDouble() - 0.5D) * 1.0D + 0.5D;
-                            double d2 = (double)blockpos.getY() + (double)(pos.getY() - blockpos.getY()) * d0 + worldIn.rand.nextDouble() * 1.0D - 0.5D;
-                            double d3 = (double)blockpos.getZ() + (double)(pos.getZ() - blockpos.getZ()) * d0 + (worldIn.rand.nextDouble() - 0.5D) * 1.0D + 0.5D;
-                            worldIn.spawnParticle(EnumParticleTypes.PORTAL, d1, d2, d3, f, f1, f2);
+                            double d0 = world.rand.nextDouble();
+                            float f = (world.rand.nextFloat() - 0.5F) * 0.2F;
+                            float f1 = (world.rand.nextFloat() - 0.5F) * 0.2F;
+                            float f2 = (world.rand.nextFloat() - 0.5F) * 0.2F;
+                            double d1 = (double)blockpos.getX() + (double)(pos.getX() - blockpos.getX()) * d0 + (world.rand.nextDouble() - 0.5D) * 1.0D + 0.5D;
+                            double d2 = (double)blockpos.getY() + (double)(pos.getY() - blockpos.getY()) * d0 + world.rand.nextDouble() * 1.0D - 0.5D;
+                            double d3 = (double)blockpos.getZ() + (double)(pos.getZ() - blockpos.getZ()) * d0 + (world.rand.nextDouble() - 0.5D) * 1.0D + 0.5D;
+                            world.spawnParticle(EnumParticleTypes.PORTAL, d1, d2, d3, f, f1, f2);
                         }
                     }
                     else
                     {
-                        worldIn.setBlockState(blockpos, iblockstate, 2);
-                        worldIn.setBlockToAir(pos);
+                        world.setBlockState(blockpos, iblockstate, 2);
+                        world.setBlockToAir(pos);
                     }
 
                     return;
@@ -118,7 +118,7 @@ public class BlockDragonEgg extends Block
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World worldIn)
+    public int tickRate(World world)
     {
         return 5;
     }
@@ -136,7 +136,7 @@ public class BlockDragonEgg extends Block
         return false;
     }
 
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
     {
         return true;
     }
@@ -144,7 +144,7 @@ public class BlockDragonEgg extends Block
     /**
      * Used by pick block on the client to get a block's item form, if it exists.
      */
-    public Item getItem(World worldIn, BlockPos pos)
+    public Item getItem(World world, BlockPos pos)
     {
         return null;
     }

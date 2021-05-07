@@ -6,9 +6,9 @@ import net.minecraft.world.World;
 
 public class EntityGiantZombie extends EntityMob
 {
-    public EntityGiantZombie(World worldIn)
+    public EntityGiantZombie(World world)
     {
-        super(worldIn);
+        super(world);
         this.setSize(this.width * 6.0F, this.height * 6.0F);
     }
 

@@ -31,9 +31,9 @@ public class EntityPigZombie extends EntityZombie
     private int randomSoundDelay;
     private UUID angerTargetUUID;
 
-    public EntityPigZombie(World worldIn)
+    public EntityPigZombie(World world)
     {
-        super(worldIn);
+        super(world);
         this.isImmuneToFire = true;
     }
 
