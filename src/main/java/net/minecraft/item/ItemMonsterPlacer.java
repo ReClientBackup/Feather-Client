@@ -1,9 +1,9 @@
 package net.minecraft.item;
 
 import java.util.List;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockFence;
+import com.murengezi.minecraft.block.BlockLiquid;
+import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

@@ -3,7 +3,7 @@ package net.minecraft.entity.passive;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import java.util.Random;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -245,7 +245,7 @@ public class EntitySheep extends EntityAnimal
         return "mob.sheep.say";
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    protected void playStepSound(BlockPos pos, Block block)
     {
         this.playSound("mob.sheep.step", 0.15F, 1.0F);
     }

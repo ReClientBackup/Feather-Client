@@ -4,15 +4,15 @@ import com.mojang.authlib.GameProfile;
 import java.io.PrintStream;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.BlockFire;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.BlockPumpkin;
-import net.minecraft.block.BlockSkull;
-import net.minecraft.block.BlockTNT;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockDispenser;
+import com.murengezi.minecraft.block.BlockFire;
+import com.murengezi.minecraft.block.BlockLiquid;
+import com.murengezi.minecraft.block.BlockPumpkin;
+import com.murengezi.minecraft.block.BlockSkull;
+import com.murengezi.minecraft.block.BlockTNT;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
@@ -309,7 +309,7 @@ public class Bootstrap
                 }
                 else if (world.getBlockState(blockpos).getBlock() == Blocks.tnt)
                 {
-                    Blocks.tnt.onBlockDestroyedByPlayer(world, blockpos, Blocks.tnt.getDefaultState().withProperty(BlockTNT.EXPLODE, Boolean.valueOf(true)));
+                    Blocks.tnt.onBlockDestroyedByPlayer(world, blockpos, Blocks.tnt.getDefaultState().withProperty(BlockTNT.EXPLODE, true));
                     world.setBlockToAir(blockpos);
                 }
                 else

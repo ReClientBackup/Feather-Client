@@ -3,7 +3,7 @@ package net.minecraft.entity.monster;
 import com.google.common.base.Predicate;
 import com.murengezi.minecraft.potion.Potion;
 import com.murengezi.minecraft.potion.PotionEffect;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

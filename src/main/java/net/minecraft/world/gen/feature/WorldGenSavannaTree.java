@@ -1,13 +1,13 @@
 package net.minecraft.world.gen.feature;
 
 import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockNewLeaf;
-import net.minecraft.block.BlockNewLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockLeaves;
+import com.murengezi.minecraft.block.BlockNewLeaf;
+import com.murengezi.minecraft.block.BlockNewLog;
+import com.murengezi.minecraft.block.BlockPlanks;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class WorldGenSavannaTree extends WorldGenAbstractTree
 {
     private static final IBlockState field_181643_a = Blocks.log2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA);
-    private static final IBlockState field_181644_b = Blocks.leaves2.getDefaultState().withProperty(BlockNewLeaf.VARIANT, BlockPlanks.EnumType.ACACIA).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
+    private static final IBlockState field_181644_b = Blocks.leaves2.getDefaultState().withProperty(BlockNewLeaf.VARIANT, BlockPlanks.EnumType.ACACIA).withProperty(BlockLeaves.CHECK_DECAY, false);
 
     public WorldGenSavannaTree(boolean p_i45463_1_)
     {

@@ -2,10 +2,10 @@ package net.minecraft.entity.item;
 
 import com.google.common.collect.Maps;
 import java.util.Map;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRailBase;
-import net.minecraft.block.BlockRailPowered;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockRailBase;
+import com.murengezi.minecraft.block.BlockRailPowered;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityMinecartCommandBlock;
@@ -351,7 +351,7 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
 
                 if (iblockstate.getBlock() == Blocks.activator_rail)
                 {
-                    this.onActivatorRailPass(k, l, i1, iblockstate.getValue(BlockRailPowered.POWERED).booleanValue());
+                    this.onActivatorRailPass(k, l, i1, iblockstate.getValue(BlockRailPowered.POWERED));
                 }
             }
             else
@@ -459,7 +459,7 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
 
         if (blockrailbase == Blocks.golden_rail)
         {
-            flag = p_180460_2_.getValue(BlockRailPowered.POWERED).booleanValue();
+            flag = p_180460_2_.getValue(BlockRailPowered.POWERED);
             flag1 = !flag;
         }
 

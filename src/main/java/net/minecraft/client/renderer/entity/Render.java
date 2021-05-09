@@ -2,7 +2,7 @@ package net.minecraft.client.renderer.entity;
 
 import com.murengezi.chocolate.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.GUI;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBiped;
@@ -258,9 +258,9 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
         return this.renderManager.worldObj;
     }
 
-    private void func_180549_a(Block blockIn, double p_180549_2_, double p_180549_4_, double p_180549_6_, BlockPos pos, float p_180549_9_, float p_180549_10_, double p_180549_11_, double p_180549_13_, double p_180549_15_)
+    private void func_180549_a(Block block, double p_180549_2_, double p_180549_4_, double p_180549_6_, BlockPos pos, float p_180549_9_, float p_180549_10_, double p_180549_11_, double p_180549_13_, double p_180549_15_)
     {
-        if (blockIn.isFullCube())
+        if (block.isFullCube())
         {
             Tessellator tessellator = Tessellator.getInstance();
             WorldRenderer worldrenderer = tessellator.getWorldRenderer();
@@ -273,11 +273,11 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
                     d0 = 1.0D;
                 }
 
-                double d1 = (double)pos.getX() + blockIn.getBlockBoundsMinX() + p_180549_11_;
-                double d2 = (double)pos.getX() + blockIn.getBlockBoundsMaxX() + p_180549_11_;
-                double d3 = (double)pos.getY() + blockIn.getBlockBoundsMinY() + p_180549_13_ + 0.015625D;
-                double d4 = (double)pos.getZ() + blockIn.getBlockBoundsMinZ() + p_180549_15_;
-                double d5 = (double)pos.getZ() + blockIn.getBlockBoundsMaxZ() + p_180549_15_;
+                double d1 = (double)pos.getX() + block.getBlockBoundsMinX() + p_180549_11_;
+                double d2 = (double)pos.getX() + block.getBlockBoundsMaxX() + p_180549_11_;
+                double d3 = (double)pos.getY() + block.getBlockBoundsMinY() + p_180549_13_ + 0.015625D;
+                double d4 = (double)pos.getZ() + block.getBlockBoundsMinZ() + p_180549_15_;
+                double d5 = (double)pos.getZ() + block.getBlockBoundsMaxZ() + p_180549_15_;
                 float f = (float)((p_180549_2_ - d1) / 2.0D / (double)p_180549_10_ + 0.5D);
                 float f1 = (float)((p_180549_2_ - d2) / 2.0D / (double)p_180549_10_ + 0.5D);
                 float f2 = (float)((p_180549_6_ - d4) / 2.0D / (double)p_180549_10_ + 0.5D);

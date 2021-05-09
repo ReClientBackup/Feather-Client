@@ -1,6 +1,6 @@
 package net.minecraft.entity;
 
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityAnimal;

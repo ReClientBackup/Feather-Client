@@ -1,6 +1,6 @@
 package net.minecraft.client.particle;
 
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 

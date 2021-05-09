@@ -2,11 +2,11 @@ package net.minecraft.world.gen.feature;
 
 import com.google.common.base.Predicates;
 import java.util.Random;
-import net.minecraft.block.BlockSand;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStoneSlab;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockStateHelper;
+import com.murengezi.minecraft.block.BlockSand;
+import com.murengezi.minecraft.block.BlockSlab;
+import com.murengezi.minecraft.block.BlockStoneSlab;
+import com.murengezi.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.state.pattern.BlockStateHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;

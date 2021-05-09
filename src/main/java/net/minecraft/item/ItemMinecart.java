@@ -1,9 +1,9 @@
 package net.minecraft.item;
 
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.BlockRailBase;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockDispenser;
+import com.murengezi.minecraft.block.BlockRailBase;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBehaviorDispenseItem;

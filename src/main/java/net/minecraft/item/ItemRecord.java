@@ -3,8 +3,8 @@ package net.minecraft.item;
 import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
-import net.minecraft.block.BlockJukebox;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockJukebox;
+import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -39,7 +39,7 @@ public class ItemRecord extends Item
     {
         IBlockState iblockstate = world.getBlockState(pos);
 
-        if (iblockstate.getBlock() == Blocks.jukebox && !iblockstate.getValue(BlockJukebox.HAS_RECORD).booleanValue())
+        if (iblockstate.getBlock() == Blocks.jukebox && !iblockstate.getValue(BlockJukebox.HAS_RECORD))
         {
             if (world.isRemote)
             {

@@ -1,23 +1,23 @@
 package net.optifine;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockFlowerPot;
-import net.minecraft.block.BlockLever;
-import net.minecraft.block.BlockMushroom;
-import net.minecraft.block.BlockPane;
-import net.minecraft.block.BlockRedstoneTorch;
-import net.minecraft.block.BlockReed;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.block.BlockSnow;
-import net.minecraft.block.BlockTallGrass;
-import net.minecraft.block.BlockTorch;
-import net.minecraft.block.BlockWall;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockBush;
+import com.murengezi.minecraft.block.BlockDoublePlant;
+import com.murengezi.minecraft.block.BlockFence;
+import com.murengezi.minecraft.block.BlockFenceGate;
+import com.murengezi.minecraft.block.BlockFlower;
+import com.murengezi.minecraft.block.BlockFlowerPot;
+import com.murengezi.minecraft.block.BlockLever;
+import com.murengezi.minecraft.block.BlockMushroom;
+import com.murengezi.minecraft.block.BlockPane;
+import com.murengezi.minecraft.block.BlockRedstoneTorch;
+import com.murengezi.minecraft.block.BlockReed;
+import com.murengezi.minecraft.block.BlockSapling;
+import com.murengezi.minecraft.block.BlockSnow;
+import com.murengezi.minecraft.block.BlockTallGrass;
+import com.murengezi.minecraft.block.BlockTorch;
+import com.murengezi.minecraft.block.BlockWall;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.init.Blocks;
 import net.optifine.config.Config;
@@ -40,9 +40,9 @@ public class BetterSnow {
       return Blocks.snow_layer.getDefaultState();
    }
 
-   public static boolean shouldRender(IBlockAccess blockAccess, IBlockState blockState, BlockPos blockPos) {
+   public static boolean shouldRender(IBlockAccess blockAccess, IBlockState blockState, BlockPos pos) {
       Block block = blockState.getBlock();
-      return checkBlock(block, blockState) && hasSnowNeighbours(blockAccess, blockPos);
+      return checkBlock(block, blockState) && hasSnowNeighbours(blockAccess, pos);
    }
 
    private static boolean hasSnowNeighbours(IBlockAccess blockAccess, BlockPos pos) {

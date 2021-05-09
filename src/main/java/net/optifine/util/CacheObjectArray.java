@@ -2,7 +2,7 @@ package net.optifine.util;
 
 import java.lang.reflect.Array;
 import java.util.ArrayDeque;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.optifine.config.Config;
 
 public class CacheObjectArray {

@@ -1,6 +1,6 @@
 package net.minecraft.dispenser;
 
-import net.minecraft.block.BlockDispenser;
+import com.murengezi.minecraft.block.BlockDispenser;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;

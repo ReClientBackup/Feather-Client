@@ -1,7 +1,7 @@
 package net.minecraft.world.chunk;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 
 public class ChunkPrimer

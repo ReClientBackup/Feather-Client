@@ -3,7 +3,7 @@ package net.minecraft.command;
 import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

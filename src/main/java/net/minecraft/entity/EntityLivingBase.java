@@ -12,9 +12,9 @@ import java.util.UUID;
 import com.murengezi.minecraft.potion.Potion;
 import com.murengezi.minecraft.potion.PotionEffect;
 import com.murengezi.minecraft.potion.PotionHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.BaseAttributeMap;
@@ -204,17 +204,17 @@ public abstract class EntityLivingBase extends Entity {
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.movementSpeed);
     }
 
-    protected void updateFallState(double y, boolean onGroundIn, Block blockIn, BlockPos pos) {
+    protected void updateFallState(double y, boolean onGroundIn, Block block, BlockPos pos) {
         if (!this.isInWater()) {
             this.handleWaterMovement();
         }
 
         if (!this.worldObj.isRemote && this.fallDistance > 3.0F && onGroundIn) {
             IBlockState iblockstate = this.worldObj.getBlockState(pos);
-            Block block = iblockstate.getBlock();
+            Block block2 = iblockstate.getBlock();
             float f = (float)MathHelper.ceiling_float_int(this.fallDistance - 3.0F);
 
-            if (block.getMaterial() != Material.air) {
+            if (block2.getMaterial() != Material.air) {
                 double d0 = Math.min(0.2F + f / 15.0F, 10.0F);
 
                 if (d0 > 2.5D) {
@@ -226,7 +226,7 @@ public abstract class EntityLivingBase extends Entity {
             }
         }
 
-        super.updateFallState(y, onGroundIn, blockIn, pos);
+        super.updateFallState(y, onGroundIn, block, pos);
     }
 
     public boolean canBreatheUnderwater() {

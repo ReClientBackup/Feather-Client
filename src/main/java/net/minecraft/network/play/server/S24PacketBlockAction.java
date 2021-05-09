@@ -1,7 +1,7 @@
 package net.minecraft.network.play.server;
 
 import java.io.IOException;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;
@@ -18,12 +18,12 @@ public class S24PacketBlockAction implements Packet<INetHandlerPlayClient>
     {
     }
 
-    public S24PacketBlockAction(BlockPos blockPositionIn, Block blockIn, int instrumentIn, int pitchIn)
+    public S24PacketBlockAction(BlockPos blockPositionIn, Block block, int instrumentIn, int pitchIn)
     {
         this.blockPosition = blockPositionIn;
         this.instrument = instrumentIn;
         this.pitch = pitchIn;
-        this.block = blockIn;
+        this.block = block;
     }
 
     /**

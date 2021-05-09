@@ -1,6 +1,6 @@
 package net.minecraft.entity;
 
-import net.minecraft.block.BlockFence;
+import com.murengezi.minecraft.block.BlockFence;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

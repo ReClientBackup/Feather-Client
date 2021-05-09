@@ -1,8 +1,8 @@
 package net.minecraft.world.gen.feature;
 
 import java.util.Random;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockFlower;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 

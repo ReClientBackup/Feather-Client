@@ -3,9 +3,9 @@ package net.minecraft.client.renderer.block.statemap;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import java.util.Map.Entry;
-import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.properties.IProperty;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 
 public abstract class StateMapperBase implements IStateMapper
@@ -38,9 +38,9 @@ public abstract class StateMapperBase implements IStateMapper
         return stringbuilder.toString();
     }
 
-    public Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block blockIn)
+    public Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block block)
     {
-        for (IBlockState iblockstate : blockIn.getBlockState().getValidStates())
+        for (IBlockState iblockstate : block.getBlockState().getValidStates())
         {
             this.mapStateModelLocations.put(iblockstate, this.getModelResourceLocation(iblockstate));
         }

@@ -1,8 +1,8 @@
 package net.minecraft.command.server;
 
 import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.CommandResultStats;

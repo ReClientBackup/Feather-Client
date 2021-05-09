@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import net.minecraft.block.material.MapColor;
+import com.murengezi.minecraft.block.material.MapColor;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.item.EnumDyeColor;
 import net.optifine.config.Config;

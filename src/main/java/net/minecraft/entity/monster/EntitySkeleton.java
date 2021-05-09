@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 import com.murengezi.minecraft.potion.Potion;
 import com.murengezi.minecraft.potion.PotionEffect;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -101,7 +101,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         return "mob.skeleton.death";
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    protected void playStepSound(BlockPos pos, Block block)
     {
         this.playSound("mob.skeleton.step", 0.15F, 1.0F);
     }

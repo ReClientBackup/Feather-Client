@@ -1,8 +1,8 @@
 package net.minecraft.entity.ai;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockBed;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;

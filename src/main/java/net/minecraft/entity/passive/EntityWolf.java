@@ -1,7 +1,7 @@
 package net.minecraft.entity.passive;
 
 import com.google.common.base.Predicate;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -133,7 +133,7 @@ public class EntityWolf extends EntityTameable
         this.dataWatcher.addObject(20, (byte) EnumDyeColor.RED.getMetadata());
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    protected void playStepSound(BlockPos pos, Block block)
     {
         this.playSound("mob.wolf.step", 0.15F, 1.0F);
     }

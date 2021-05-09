@@ -1,7 +1,7 @@
 package net.minecraft.client.particle;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;

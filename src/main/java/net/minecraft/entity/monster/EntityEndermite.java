@@ -1,6 +1,6 @@
 package net.minecraft.entity.monster;
 
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -82,7 +82,7 @@ public class EntityEndermite extends EntityMob
         return "mob.silverfish.kill";
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    protected void playStepSound(BlockPos pos, Block block)
     {
         this.playSound("mob.silverfish.step", 0.15F, 1.0F);
     }

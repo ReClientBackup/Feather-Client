@@ -1121,7 +1121,7 @@ public abstract class MinecraftServer implements Runnable, ICommandSender, IThre
 
     public void addServerStatsToSnooper(PlayerUsageSnooper playerSnooper)
     {
-        playerSnooper.addClientStat("whitelist_enabled", Boolean.valueOf(false));
+        playerSnooper.addClientStat("whitelist_enabled", false);
         playerSnooper.addClientStat("whitelist_count", Integer.valueOf(0));
 
         if (this.serverConfigManager != null)

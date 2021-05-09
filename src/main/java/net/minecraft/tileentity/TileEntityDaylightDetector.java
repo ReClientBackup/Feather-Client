@@ -1,6 +1,6 @@
 package net.minecraft.tileentity;
 
-import net.minecraft.block.BlockDaylightDetector;
+import com.murengezi.minecraft.block.BlockDaylightDetector;
 import net.minecraft.util.ITickable;
 
 public class TileEntityDaylightDetector extends TileEntity implements ITickable

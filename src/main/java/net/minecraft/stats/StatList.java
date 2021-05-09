@@ -6,7 +6,7 @@ import com.google.common.collect.Sets;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;

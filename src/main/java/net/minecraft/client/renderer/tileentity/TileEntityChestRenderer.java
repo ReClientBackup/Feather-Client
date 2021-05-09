@@ -1,8 +1,8 @@
 package net.minecraft.client.renderer.tileentity;
 
 import java.util.Calendar;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.GlStateManager;

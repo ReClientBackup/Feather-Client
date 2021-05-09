@@ -1,7 +1,7 @@
 package net.minecraft.entity.player;
 
 import java.util.concurrent.Callable;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.crash.CrashReport;
 import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.inventory.IInventory;
@@ -550,13 +550,13 @@ public class InventoryPlayer implements IInventory
         aitemstack[index] = stack;
     }
 
-    public float getStrVsBlock(Block blockIn)
+    public float getStrVsBlock(Block block)
     {
         float f = 1.0F;
 
         if (this.mainInventory[this.currentItem] != null)
         {
-            f *= this.mainInventory[this.currentItem].getStrVsBlock(blockIn);
+            f *= this.mainInventory[this.currentItem].getStrVsBlock(block);
         }
 
         return f;
@@ -680,16 +680,16 @@ public class InventoryPlayer implements IInventory
         return 64;
     }
 
-    public boolean canHeldItemHarvest(Block blockIn)
+    public boolean canHeldItemHarvest(Block block)
     {
-        if (blockIn.getMaterial().isToolNotRequired())
+        if (block.getMaterial().isToolNotRequired())
         {
             return true;
         }
         else
         {
             ItemStack itemstack = this.getStackInSlot(this.currentItem);
-            return itemstack != null && itemstack.canHarvestBlock(blockIn);
+            return itemstack != null && itemstack.canHarvestBlock(block);
         }
     }
 

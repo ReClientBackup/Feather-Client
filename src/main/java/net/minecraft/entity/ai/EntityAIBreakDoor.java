@@ -1,7 +1,7 @@
 package net.minecraft.entity.ai;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoor;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockDoor;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.EnumDifficulty;
 

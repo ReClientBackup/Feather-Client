@@ -1,10 +1,10 @@
 package net.minecraft.client.renderer.tileentity;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockPistonBase;
-import net.minecraft.block.BlockPistonExtension;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockPistonBase;
+import com.murengezi.minecraft.block.BlockPistonExtension;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.GlStateManager;
@@ -53,7 +53,7 @@ public class TileEntityPistonRenderer extends TileEntitySpecialRenderer<TileEnti
 
             if (block == Blocks.piston_head && te.getProgress(partialTicks) < 0.5F)
             {
-                iblockstate = iblockstate.withProperty(BlockPistonExtension.SHORT, Boolean.valueOf(true));
+                iblockstate = iblockstate.withProperty(BlockPistonExtension.SHORT, true);
                 this.blockRenderer.getBlockModelRenderer().renderModel(world, this.blockRenderer.getModelFromBlockState(iblockstate, world, blockpos), iblockstate, blockpos, worldrenderer, true);
             }
             else if (te.shouldPistonHeadBeRendered() && !te.isExtending())
@@ -63,7 +63,7 @@ public class TileEntityPistonRenderer extends TileEntitySpecialRenderer<TileEnti
                 iblockstate1 = iblockstate1.withProperty(BlockPistonExtension.SHORT, Boolean.valueOf(te.getProgress(partialTicks) >= 0.5F));
                 this.blockRenderer.getBlockModelRenderer().renderModel(world, this.blockRenderer.getModelFromBlockState(iblockstate1, world, blockpos), iblockstate1, blockpos, worldrenderer, true);
                 worldrenderer.setTranslation((float)x - (float)blockpos.getX(), (float)y - (float)blockpos.getY(), (float)z - (float)blockpos.getZ());
-                iblockstate.withProperty(BlockPistonBase.EXTENDED, Boolean.valueOf(true));
+                iblockstate.withProperty(BlockPistonBase.EXTENDED, true);
                 this.blockRenderer.getBlockModelRenderer().renderModel(world, this.blockRenderer.getModelFromBlockState(iblockstate, world, blockpos), iblockstate, blockpos, worldrenderer, true);
             }
             else

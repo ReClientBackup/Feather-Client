@@ -1,8 +1,8 @@
 package net.minecraft.entity.ai;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockCrops;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

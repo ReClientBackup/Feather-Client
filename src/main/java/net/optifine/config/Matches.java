@@ -1,6 +1,6 @@
 package net.optifine.config;
 
-import net.minecraft.block.state.BlockStateBase;
+import com.murengezi.minecraft.block.state.BlockStateBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.world.biome.BiomeGenBase;
 

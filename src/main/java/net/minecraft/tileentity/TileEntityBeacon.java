@@ -6,10 +6,10 @@ import java.util.List;
 
 import com.murengezi.minecraft.potion.Potion;
 import com.murengezi.minecraft.potion.PotionEffect;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockStainedGlass;
-import net.minecraft.block.BlockStainedGlassPane;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockStainedGlass;
+import com.murengezi.minecraft.block.BlockStainedGlassPane;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

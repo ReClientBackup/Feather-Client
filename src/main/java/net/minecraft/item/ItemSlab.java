@@ -1,9 +1,9 @@
 package net.minecraft.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockSlab;
+import com.murengezi.minecraft.block.properties.IProperty;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;

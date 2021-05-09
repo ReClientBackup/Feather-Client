@@ -1,13 +1,13 @@
 package net.minecraft.world.gen.feature;
 
 import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockLeaves;
+import com.murengezi.minecraft.block.BlockOldLeaf;
+import com.murengezi.minecraft.block.BlockOldLog;
+import com.murengezi.minecraft.block.BlockPlanks;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class WorldGenTaiga2 extends WorldGenAbstractTree
 {
     private static final IBlockState field_181645_a = Blocks.log.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE);
-    private static final IBlockState field_181646_b = Blocks.leaves.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.SPRUCE).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
+    private static final IBlockState field_181646_b = Blocks.leaves.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.SPRUCE).withProperty(BlockLeaves.CHECK_DECAY, false);
 
     public WorldGenTaiga2(boolean p_i2025_1_)
     {

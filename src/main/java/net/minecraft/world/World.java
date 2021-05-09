@@ -11,14 +11,14 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Callable;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockHopper;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockSnow;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockHopper;
+import com.murengezi.minecraft.block.BlockLiquid;
+import com.murengezi.minecraft.block.BlockSlab;
+import com.murengezi.minecraft.block.BlockSnow;
+import com.murengezi.minecraft.block.BlockStairs;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.crash.CrashReport;
 import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
@@ -532,7 +532,7 @@ public abstract class World implements IBlockAccess
         }
     }
 
-    public void notifyBlockOfStateChange(BlockPos pos, final Block blockIn)
+    public void notifyBlockOfStateChange(BlockPos pos, final Block block)
     {
         if (!this.isRemote)
         {
@@ -540,7 +540,7 @@ public abstract class World implements IBlockAccess
 
             try
             {
-                iblockstate.getBlock().onNeighborBlockChange(this, pos, iblockstate, blockIn);
+                iblockstate.getBlock().onNeighborBlockChange(this, pos, iblockstate, block);
             }
             catch (Throwable throwable)
             {
@@ -552,11 +552,11 @@ public abstract class World implements IBlockAccess
                     {
                         try
                         {
-                            return String.format("ID #%d (%s // %s)", Integer.valueOf(Block.getIdFromBlock(blockIn)), blockIn.getUnlocalizedName(), blockIn.getClass().getCanonicalName());
+                            return String.format("ID #%d (%s // %s)", Integer.valueOf(Block.getIdFromBlock(block)), block.getUnlocalizedName(), block.getClass().getCanonicalName());
                         }
                         catch (Throwable var2)
                         {
-                            return "ID #" + Block.getIdFromBlock(blockIn);
+                            return "ID #" + Block.getIdFromBlock(block);
                         }
                     }
                 });
@@ -1609,15 +1609,15 @@ public abstract class World implements IBlockAccess
         return f1 * f1 * 0.5F;
     }
 
-    public void scheduleUpdate(BlockPos pos, Block blockIn, int delay)
+    public void scheduleUpdate(BlockPos pos, Block block, int delay)
     {
     }
 
-    public void updateBlockTick(BlockPos pos, Block blockIn, int delay, int priority)
+    public void updateBlockTick(BlockPos pos, Block block, int delay, int priority)
     {
     }
 
-    public void scheduleBlockUpdate(BlockPos pos, Block blockIn, int delay, int priority)
+    public void scheduleBlockUpdate(BlockPos pos, Block block, int delay, int priority)
     {
     }
 
@@ -2082,7 +2082,7 @@ public abstract class World implements IBlockAccess
     /**
      * handles the acceleration of an object whilst in water. Not sure if it is used elsewhere.
      */
-    public boolean handleMaterialAcceleration(AxisAlignedBB bb, Material materialIn, Entity entityIn)
+    public boolean handleMaterialAcceleration(AxisAlignedBB bb, Material material, Entity entityIn)
     {
         int i = MathHelper.floor_double(bb.minX);
         int j = MathHelper.floor_double(bb.maxX + 1.0D);
@@ -2111,7 +2111,7 @@ public abstract class World implements IBlockAccess
                         IBlockState iblockstate = this.getBlockState(blockpos$mutableblockpos);
                         Block block = iblockstate.getBlock();
 
-                        if (block.getMaterial() == materialIn)
+                        if (block.getMaterial() == material)
                         {
                             double d0 = (float)(l1 + 1) - BlockLiquid.getLiquidHeightPercent(iblockstate.getValue(BlockLiquid.LEVEL).intValue());
 
@@ -2141,7 +2141,7 @@ public abstract class World implements IBlockAccess
     /**
      * Returns true if the given bounding box contains the given material
      */
-    public boolean isMaterialInBB(AxisAlignedBB bb, Material materialIn)
+    public boolean isMaterialInBB(AxisAlignedBB bb, Material material)
     {
         int i = MathHelper.floor_double(bb.minX);
         int j = MathHelper.floor_double(bb.maxX + 1.0D);
@@ -2157,7 +2157,7 @@ public abstract class World implements IBlockAccess
             {
                 for (int i2 = i1; i2 < j1; ++i2)
                 {
-                    if (this.getBlockState(blockpos$mutableblockpos.func_181079_c(k1, l1, i2)).getBlock().getMaterial() == materialIn)
+                    if (this.getBlockState(blockpos$mutableblockpos.func_181079_c(k1, l1, i2)).getBlock().getMaterial() == material)
                     {
                         return true;
                     }
@@ -2171,7 +2171,7 @@ public abstract class World implements IBlockAccess
     /**
      * checks if the given AABB is in the material given. Used while swimming.
      */
-    public boolean isAABBInMaterial(AxisAlignedBB bb, Material materialIn)
+    public boolean isAABBInMaterial(AxisAlignedBB bb, Material material)
     {
         int i = MathHelper.floor_double(bb.minX);
         int j = MathHelper.floor_double(bb.maxX + 1.0D);
@@ -2190,7 +2190,7 @@ public abstract class World implements IBlockAccess
                     IBlockState iblockstate = this.getBlockState(blockpos$mutableblockpos.func_181079_c(k1, l1, i2));
                     Block block = iblockstate.getBlock();
 
-                    if (block.getMaterial() == materialIn)
+                    if (block.getMaterial() == material)
                     {
                         int j2 = iblockstate.getValue(BlockLiquid.LEVEL).intValue();
                         double d0 = l1 + 1;
@@ -3163,11 +3163,11 @@ public abstract class World implements IBlockAccess
         this.unloadedEntityList.addAll(entityCollection);
     }
 
-    public boolean canBlockBePlaced(Block blockIn, BlockPos pos, boolean p_175716_3_, EnumFacing side, Entity entityIn)
+    public boolean canBlockBePlaced(Block block, BlockPos pos, boolean p_175716_3_, EnumFacing side, Entity entityIn)
     {
-        Block block = this.getBlockState(pos).getBlock();
-        AxisAlignedBB axisalignedbb = p_175716_3_ ? null : blockIn.getCollisionBoundingBox(this, pos, blockIn.getDefaultState());
-        return (axisalignedbb == null || this.checkNoEntityCollision(axisalignedbb, entityIn)) && (block.getMaterial() == Material.circuits && blockIn == Blocks.anvil || block.getMaterial().isReplaceable() && blockIn.canReplace(this, pos, side));
+        Block block2 = this.getBlockState(pos).getBlock();
+        AxisAlignedBB axisalignedbb = p_175716_3_ ? null : block.getCollisionBoundingBox(this, pos, block2.getDefaultState());
+        return (axisalignedbb == null || this.checkNoEntityCollision(axisalignedbb, entityIn)) && (block2.getMaterial() == Material.circuits && block2 == Blocks.anvil || block2.getMaterial().isReplaceable() && block2.canReplace(this, pos, side));
     }
 
     public int func_181545_F()
@@ -3488,9 +3488,9 @@ public abstract class World implements IBlockAccess
         return this.chunkProvider;
     }
 
-    public void addBlockEvent(BlockPos pos, Block blockIn, int eventID, int eventParam)
+    public void addBlockEvent(BlockPos pos, Block block, int eventID, int eventParam)
     {
-        blockIn.onBlockEventReceived(this, pos, this.getBlockState(pos), eventID, eventParam);
+        block.onBlockEventReceived(this, pos, this.getBlockState(pos), eventID, eventParam);
     }
 
     /**
@@ -3776,7 +3776,7 @@ public abstract class World implements IBlockAccess
         return this.worldScoreboard;
     }
 
-    public void updateComparatorOutputLevel(BlockPos pos, Block blockIn)
+    public void updateComparatorOutputLevel(BlockPos pos, Block block)
     {
         for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
         {
@@ -3788,7 +3788,7 @@ public abstract class World implements IBlockAccess
 
                 if (Blocks.unpowered_comparator.isAssociated(iblockstate.getBlock()))
                 {
-                    iblockstate.getBlock().onNeighborBlockChange(this, blockpos, iblockstate, blockIn);
+                    iblockstate.getBlock().onNeighborBlockChange(this, blockpos, iblockstate, block);
                 }
                 else if (iblockstate.getBlock().isNormalCube())
                 {
@@ -3797,7 +3797,7 @@ public abstract class World implements IBlockAccess
 
                     if (Blocks.unpowered_comparator.isAssociated(iblockstate.getBlock()))
                     {
-                        iblockstate.getBlock().onNeighborBlockChange(this, blockpos, iblockstate, blockIn);
+                        iblockstate.getBlock().onNeighborBlockChange(this, blockpos, iblockstate, block);
                     }
                 }
             }

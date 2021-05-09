@@ -10,11 +10,11 @@ import java.util.UUID;
 
 import com.murengezi.chocolate.Event.EntityHitEvent;
 import com.murengezi.minecraft.potion.Potion;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
-import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockBed;
+import com.murengezi.minecraft.block.BlockDirectional;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.command.server.CommandBlockLogic;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;

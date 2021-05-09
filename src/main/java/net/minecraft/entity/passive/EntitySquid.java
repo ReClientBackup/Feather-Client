@@ -1,6 +1,6 @@
 package net.minecraft.entity.passive;
 
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Items;

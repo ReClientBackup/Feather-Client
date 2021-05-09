@@ -1,7 +1,7 @@
 package net.minecraft.tileentity;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

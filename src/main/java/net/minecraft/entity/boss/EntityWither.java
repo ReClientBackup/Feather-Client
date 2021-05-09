@@ -5,8 +5,8 @@ import com.google.common.base.Predicates;
 import java.util.List;
 
 import com.murengezi.minecraft.potion.PotionEffect;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;

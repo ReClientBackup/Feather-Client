@@ -1,6 +1,6 @@
 package net.minecraft.item;
 
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 
 public class ItemColored extends ItemBlock
 {

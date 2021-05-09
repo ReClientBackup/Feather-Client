@@ -3,7 +3,7 @@ package net.minecraft.world.gen.feature;
 import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.tileentity.TileEntity;

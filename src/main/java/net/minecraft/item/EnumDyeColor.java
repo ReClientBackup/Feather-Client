@@ -1,6 +1,6 @@
 package net.minecraft.item;
 
-import net.minecraft.block.material.MapColor;
+import com.murengezi.minecraft.block.material.MapColor;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IStringSerializable;
 

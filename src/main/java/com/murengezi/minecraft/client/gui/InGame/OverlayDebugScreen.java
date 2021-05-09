@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
-import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.properties.IProperty;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.ClientBrandRetriever;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -86,7 +86,7 @@ public class OverlayDebugScreen extends GUI {
 
     @SuppressWarnings("incomplete-switch")
     protected List<String> call() {
-        BlockPos blockPos = new BlockPos(getMc().getRenderViewEntity().posX, getMc().getRenderViewEntity().getEntityBoundingBox().minY, getMc().getRenderViewEntity().posZ);
+        BlockPos pos = new BlockPos(getMc().getRenderViewEntity().posX, getMc().getRenderViewEntity().getEntityBoundingBox().minY, getMc().getRenderViewEntity().posZ);
 
         if (!getMc().debug.equals(this.debugOF)) {
             StringBuilder stringBuilder = new StringBuilder(getMc().debug);
@@ -139,7 +139,7 @@ public class OverlayDebugScreen extends GUI {
         String s1 = stringbuilder.toString();
 
         if (this.isReducedDebug()) {
-            return Lists.newArrayList("Minecraft 1.8.10 (" + getMc().getVersion() + "/" + ClientBrandRetriever.getClientModName() + ")", getMc().debug, getMc().renderGlobal.getDebugInfoRenders(), getMc().renderGlobal.getDebugInfoEntities(), "P: " + getMc().effectRenderer.getStatistics() + ". T: " + getWorld().getDebugLoadedEntities() + s1, getWorld().getProviderName(), "", String.format("Chunk-relative: %d %d %d", blockPos.getX() & 15, blockPos.getY() & 15, blockPos.getZ() & 15));
+            return Lists.newArrayList("Minecraft 1.8.10 (" + getMc().getVersion() + "/" + ClientBrandRetriever.getClientModName() + ")", getMc().debug, getMc().renderGlobal.getDebugInfoRenders(), getMc().renderGlobal.getDebugInfoEntities(), "P: " + getMc().effectRenderer.getStatistics() + ". T: " + getWorld().getDebugLoadedEntities() + s1, getWorld().getProviderName(), "", String.format("Chunk-relative: %d %d %d", pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15));
         } else {
             Entity entity = getMc().getRenderViewEntity();
             EnumFacing enumfacing = entity.getHorizontalFacing();
@@ -159,13 +159,13 @@ public class OverlayDebugScreen extends GUI {
                     s = "Towards positive X";
             }
 
-            List<String> list = Lists.newArrayList("Minecraft 1.8.10 (" + getMc().getVersion() + "/" + ClientBrandRetriever.getClientModName() + ")", getMc().debug, getMc().renderGlobal.getDebugInfoRenders(), getMc().renderGlobal.getDebugInfoEntities(), "P: " + getMc().effectRenderer.getStatistics() + ". T: " + getWorld().getDebugLoadedEntities() + s1, getWorld().getProviderName(), "", String.format("XYZ: %.3f / %.5f / %.3f", getMc().getRenderViewEntity().posX, getMc().getRenderViewEntity().getEntityBoundingBox().minY, getMc().getRenderViewEntity().posZ), String.format("Block: %d %d %d", blockPos.getX(), blockPos.getY(), blockPos.getZ()), String.format("Chunk: %d %d %d in %d %d %d", blockPos.getX() & 15, blockPos.getY() & 15, blockPos.getZ() & 15, blockPos.getX() >> 4, blockPos.getY() >> 4, blockPos.getZ() >> 4), String.format("Facing: %s (%s) (%.1f / %.1f)", enumfacing, s, MathHelper.wrapAngleTo180_float(entity.rotationYaw), MathHelper.wrapAngleTo180_float(entity.rotationPitch)));
+            List<String> list = Lists.newArrayList("Minecraft 1.8.10 (" + getMc().getVersion() + "/" + ClientBrandRetriever.getClientModName() + ")", getMc().debug, getMc().renderGlobal.getDebugInfoRenders(), getMc().renderGlobal.getDebugInfoEntities(), "P: " + getMc().effectRenderer.getStatistics() + ". T: " + getWorld().getDebugLoadedEntities() + s1, getWorld().getProviderName(), "", String.format("XYZ: %.3f / %.5f / %.3f", getMc().getRenderViewEntity().posX, getMc().getRenderViewEntity().getEntityBoundingBox().minY, getMc().getRenderViewEntity().posZ), String.format("Block: %d %d %d", pos.getX(), pos.getY(), pos.getZ()), String.format("Chunk: %d %d %d in %d %d %d", pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15, pos.getX() >> 4, pos.getY() >> 4, pos.getZ() >> 4), String.format("Facing: %s (%s) (%.1f / %.1f)", enumfacing, s, MathHelper.wrapAngleTo180_float(entity.rotationYaw), MathHelper.wrapAngleTo180_float(entity.rotationPitch)));
 
-            if (getWorld() != null && getWorld().isBlockLoaded(blockPos)) {
-                Chunk chunk = getWorld().getChunkFromBlockCoords(blockPos);
-                list.add("Biome: " + chunk.getBiome(blockPos, getWorld().getWorldChunkManager()).biomeName);
-                list.add("Light: " + chunk.getLightSubtracted(blockPos, 0) + " (" + chunk.getLightFor(EnumSkyBlock.SKY, blockPos) + " sky, " + chunk.getLightFor(EnumSkyBlock.BLOCK, blockPos) + " block)");
-                DifficultyInstance difficultyForLocation = getWorld().getDifficultyForLocation(blockPos);
+            if (getWorld() != null && getWorld().isBlockLoaded(pos)) {
+                Chunk chunk = getWorld().getChunkFromBlockCoords(pos);
+                list.add("Biome: " + chunk.getBiome(pos, getWorld().getWorldChunkManager()).biomeName);
+                list.add("Light: " + chunk.getLightSubtracted(pos, 0) + " (" + chunk.getLightFor(EnumSkyBlock.SKY, pos) + " sky, " + chunk.getLightFor(EnumSkyBlock.BLOCK, pos) + " block)");
+                DifficultyInstance difficultyForLocation = getWorld().getDifficultyForLocation(pos);
 
                 if (getMc().isIntegratedServerRunning() && getMc().getIntegratedServer() != null) {
                     EntityPlayerMP playerMP = getMc().getIntegratedServer().getConfigurationManager().getPlayerByUUID(getPlayer().getUniqueID());

@@ -15,8 +15,8 @@ import net.minecraft.world.IWorldNameable;
 import net.optifine.reflect.Reflector;
 
 public class TileEntityUtils {
-   public static String getTileEntityName(IBlockAccess blockAccess, BlockPos blockPos) {
-      TileEntity tileentity = blockAccess.getTileEntity(blockPos);
+   public static String getTileEntityName(IBlockAccess blockAccess, BlockPos pos) {
+      TileEntity tileentity = blockAccess.getTileEntity(pos);
       return getTileEntityName(tileentity);
    }
 
@@ -40,8 +40,8 @@ public class TileEntityUtils {
       }
    }
 
-   public static String getServerTileEntityRawName(BlockPos blockPos) {
-      TileEntity tileentity = IntegratedServerUtils.getTileEntity(blockPos);
+   public static String getServerTileEntityRawName(BlockPos pos) {
+      TileEntity tileentity = IntegratedServerUtils.getTileEntity(pos);
       return tileentity == null?null:getTileEntityRawName(tileentity);
    }
 

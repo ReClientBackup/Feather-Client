@@ -1,10 +1,10 @@
 package net.minecraft.entity.monster;
 
 import com.google.common.base.Predicate;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockFlower;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
@@ -236,7 +236,7 @@ public class EntityIronGolem extends EntityGolem
         return "mob.irongolem.death";
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    protected void playStepSound(BlockPos pos, Block block)
     {
         this.playSound("mob.irongolem.walk", 1.0F, 1.0F);
     }

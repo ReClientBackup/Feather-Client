@@ -177,13 +177,13 @@ public class ChatScreen extends Screen {
 
     private void sendAutocompleteRequest(String string) {
         if (string.length() >= 1) {
-            BlockPos blockPos = null;
+            BlockPos pos = null;
 
             if (getMc().objectMouseOver != null && getMc().objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                blockPos = getMc().objectMouseOver.getBlockPos();
+                pos = getMc().objectMouseOver.getBlockPos();
             }
 
-            getPlayer().sendQueue.addToSendQueue(new C14PacketTabComplete(string, blockPos));
+            getPlayer().sendQueue.addToSendQueue(new C14PacketTabComplete(string, pos));
             this.waitingOnAutocomplete = true;
         }
     }

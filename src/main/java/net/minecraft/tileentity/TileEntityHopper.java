@@ -1,9 +1,9 @@
 package net.minecraft.tileentity;
 
 import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
-import net.minecraft.block.BlockHopper;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockChest;
+import com.murengezi.minecraft.block.BlockHopper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

@@ -2,7 +2,7 @@ package net.minecraft.item;
 
 import com.google.common.collect.Sets;
 import java.util.Set;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
 public class ItemSpade extends ItemTool
@@ -17,8 +17,8 @@ public class ItemSpade extends ItemTool
     /**
      * Check whether this Item can harvest the given Block
      */
-    public boolean canHarvestBlock(Block blockIn)
+    public boolean canHarvestBlock(Block block)
     {
-        return blockIn == Blocks.snow_layer || blockIn == Blocks.snow;
+        return block == Blocks.snow_layer || block == Blocks.snow;
     }
 }

@@ -2,11 +2,11 @@ package net.minecraft.world.gen.structure;
 
 import java.util.List;
 import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockDirectional;
+import com.murengezi.minecraft.block.BlockDoor;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.nbt.NBTTagCompound;
@@ -255,9 +255,9 @@ public abstract class StructureComponent
      *  
      * @param meta block direction meta data
      */
-    protected int getMetadataWithOffset(Block blockIn, int meta)
+    protected int getMetadataWithOffset(Block block, int meta)
     {
-        if (blockIn == Blocks.rail)
+        if (block == Blocks.rail)
         {
             if (this.coordBaseMode == EnumFacing.WEST || this.coordBaseMode == EnumFacing.EAST)
             {
@@ -269,7 +269,7 @@ public abstract class StructureComponent
                 return 1;
             }
         }
-        else if (blockIn instanceof BlockDoor)
+        else if (block instanceof BlockDoor)
         {
             if (this.coordBaseMode == EnumFacing.SOUTH)
             {
@@ -296,9 +296,9 @@ public abstract class StructureComponent
                 }
             }
         }
-        else if (blockIn != Blocks.stone_stairs && blockIn != Blocks.oak_stairs && blockIn != Blocks.nether_brick_stairs && blockIn != Blocks.stone_brick_stairs && blockIn != Blocks.sandstone_stairs)
+        else if (block != Blocks.stone_stairs && block != Blocks.oak_stairs && block != Blocks.nether_brick_stairs && block != Blocks.stone_brick_stairs && block != Blocks.sandstone_stairs)
         {
-            if (blockIn == Blocks.ladder)
+            if (block == Blocks.ladder)
             {
                 if (this.coordBaseMode == EnumFacing.SOUTH)
                 {
@@ -357,7 +357,7 @@ public abstract class StructureComponent
                     }
                 }
             }
-            else if (blockIn == Blocks.stone_button)
+            else if (block == Blocks.stone_button)
             {
                 if (this.coordBaseMode == EnumFacing.SOUTH)
                 {
@@ -416,9 +416,9 @@ public abstract class StructureComponent
                     }
                 }
             }
-            else if (blockIn != Blocks.tripwire_hook && !(blockIn instanceof BlockDirectional))
+            else if (block != Blocks.tripwire_hook && !(block instanceof BlockDirectional))
             {
-                if (blockIn == Blocks.piston || blockIn == Blocks.sticky_piston || blockIn == Blocks.lever || blockIn == Blocks.dispenser)
+                if (block == Blocks.piston || block == Blocks.sticky_piston || block == Blocks.lever || block == Blocks.dispenser)
                 {
                     if (this.coordBaseMode == EnumFacing.SOUTH)
                     {

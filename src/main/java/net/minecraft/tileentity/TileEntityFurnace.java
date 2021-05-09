@@ -1,8 +1,8 @@
 package net.minecraft.tileentity;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFurnace;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockFurnace;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;

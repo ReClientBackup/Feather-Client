@@ -1,7 +1,7 @@
 package net.minecraft.world.pathfinder;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.BlockPos;

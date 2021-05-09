@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.creativetab;
 
 import java.util.List;
-import net.minecraft.block.BlockDoublePlant;
+import com.murengezi.minecraft.block.BlockDoublePlant;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnumEnchantmentType;

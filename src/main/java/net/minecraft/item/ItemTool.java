@@ -2,7 +2,7 @@ package net.minecraft.item;
 
 import com.google.common.collect.Multimap;
 import java.util.Set;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -53,9 +53,9 @@ public class ItemTool extends Item
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
-    public boolean onBlockDestroyed(ItemStack stack, World world, Block blockIn, BlockPos pos, EntityLivingBase player)
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos, EntityLivingBase player)
     {
-        if ((double)blockIn.getBlockHardness() != 0.0D)
+        if ((double)block.getBlockHardness() != 0.0D)
         {
             stack.damageItem(1, player);
         }

@@ -1,6 +1,6 @@
 package net.minecraft.entity;
 
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -16,7 +16,7 @@ public abstract class EntityFlying extends EntityLiving
     {
     }
 
-    protected void updateFallState(double y, boolean onGroundIn, Block blockIn, BlockPos pos)
+    protected void updateFallState(double y, boolean onGroundIn, Block block, BlockPos pos)
     {
     }
 

@@ -13,10 +13,10 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEventData;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockEventData;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.crash.CrashReport;
 import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
@@ -454,19 +454,19 @@ public class WorldServer extends World implements IThreadListener
         return this.pendingTickListEntriesThisTick.contains(nextticklistentry);
     }
 
-    public void scheduleUpdate(BlockPos pos, Block blockIn, int delay)
+    public void scheduleUpdate(BlockPos pos, Block block, int delay)
     {
-        this.updateBlockTick(pos, blockIn, delay, 0);
+        this.updateBlockTick(pos, block, delay, 0);
     }
 
-    public void updateBlockTick(BlockPos pos, Block blockIn, int delay, int priority)
+    public void updateBlockTick(BlockPos pos, Block block, int delay, int priority)
     {
-        NextTickListEntry nextticklistentry = new NextTickListEntry(pos, blockIn);
+        NextTickListEntry nextticklistentry = new NextTickListEntry(pos, block);
         int i = 0;
 
-        if (this.scheduledUpdatesAreImmediate && blockIn.getMaterial() != Material.air)
+        if (this.scheduledUpdatesAreImmediate && block.getMaterial() != Material.air)
         {
-            if (blockIn.requiresUpdates())
+            if (block.requiresUpdates())
             {
                 i = 8;
 
@@ -488,7 +488,7 @@ public class WorldServer extends World implements IThreadListener
 
         if (this.isAreaLoaded(pos.add(-i, -i, -i), pos.add(i, i, i)))
         {
-            if (blockIn.getMaterial() != Material.air)
+            if (block.getMaterial() != Material.air)
             {
                 nextticklistentry.setScheduledTime((long)delay + this.worldInfo.getWorldTotalTime());
                 nextticklistentry.setPriority(priority);
@@ -502,12 +502,12 @@ public class WorldServer extends World implements IThreadListener
         }
     }
 
-    public void scheduleBlockUpdate(BlockPos pos, Block blockIn, int delay, int priority)
+    public void scheduleBlockUpdate(BlockPos pos, Block block, int delay, int priority)
     {
-        NextTickListEntry nextticklistentry = new NextTickListEntry(pos, blockIn);
+        NextTickListEntry nextticklistentry = new NextTickListEntry(pos, block);
         nextticklistentry.setPriority(priority);
 
-        if (blockIn.getMaterial() != Material.air)
+        if (block.getMaterial() != Material.air)
         {
             nextticklistentry.setScheduledTime((long)delay + this.worldInfo.getWorldTotalTime());
         }
@@ -1021,9 +1021,9 @@ public class WorldServer extends World implements IThreadListener
         return explosion;
     }
 
-    public void addBlockEvent(BlockPos pos, Block blockIn, int eventID, int eventParam)
+    public void addBlockEvent(BlockPos pos, Block block, int eventID, int eventParam)
     {
-        BlockEventData blockeventdata = new BlockEventData(pos, blockIn, eventID, eventParam);
+        BlockEventData blockeventdata = new BlockEventData(pos, block, eventID, eventParam);
 
         for (BlockEventData blockeventdata1 : this.field_147490_S[this.blockEventCacheIndex])
         {

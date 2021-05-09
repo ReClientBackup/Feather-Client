@@ -1,7 +1,7 @@
 package net.minecraft.item;
 
-import net.minecraft.block.BlockEndPortalFrame;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockEndPortalFrame;
+import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityEnderEye;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +30,7 @@ public class ItemEnderEye extends Item
     {
         IBlockState iblockstate = world.getBlockState(pos);
 
-        if (player.canPlayerEdit(pos.offset(side), side, stack) && iblockstate.getBlock() == Blocks.end_portal_frame && !iblockstate.getValue(BlockEndPortalFrame.EYE).booleanValue())
+        if (player.canPlayerEdit(pos.offset(side), side, stack) && iblockstate.getBlock() == Blocks.end_portal_frame && !iblockstate.getValue(BlockEndPortalFrame.EYE))
         {
             if (world.isRemote)
             {
@@ -38,7 +38,7 @@ public class ItemEnderEye extends Item
             }
             else
             {
-                world.setBlockState(pos, iblockstate.withProperty(BlockEndPortalFrame.EYE, Boolean.valueOf(true)), 2);
+                world.setBlockState(pos, iblockstate.withProperty(BlockEndPortalFrame.EYE, true), 2);
                 world.updateComparatorOutputLevel(pos, Blocks.end_portal_frame);
                 --stack.stackSize;
 
@@ -67,7 +67,7 @@ public class ItemEnderEye extends Item
 
                     if (iblockstate1.getBlock() == Blocks.end_portal_frame)
                     {
-                        if (!iblockstate1.getValue(BlockEndPortalFrame.EYE).booleanValue())
+                        if (!iblockstate1.getValue(BlockEndPortalFrame.EYE))
                         {
                             flag = false;
                             break;
@@ -92,7 +92,7 @@ public class ItemEnderEye extends Item
                         BlockPos blockpos2 = blockpos.offset(enumfacing1, i1);
                         IBlockState iblockstate3 = world.getBlockState(blockpos2);
 
-                        if (iblockstate3.getBlock() != Blocks.end_portal_frame || !iblockstate3.getValue(BlockEndPortalFrame.EYE).booleanValue())
+                        if (iblockstate3.getBlock() != Blocks.end_portal_frame || !iblockstate3.getValue(BlockEndPortalFrame.EYE))
                         {
                             flag = false;
                             break;
@@ -108,7 +108,7 @@ public class ItemEnderEye extends Item
                             BlockPos blockpos3 = blockpos.offset(enumfacing, l1);
                             IBlockState iblockstate2 = world.getBlockState(blockpos3);
 
-                            if (iblockstate2.getBlock() != Blocks.end_portal_frame || !iblockstate2.getValue(BlockEndPortalFrame.EYE).booleanValue())
+                            if (iblockstate2.getBlock() != Blocks.end_portal_frame || !iblockstate2.getValue(BlockEndPortalFrame.EYE))
                             {
                                 flag = false;
                                 break;

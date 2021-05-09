@@ -5,7 +5,7 @@ import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.biome.BiomeGenBase;

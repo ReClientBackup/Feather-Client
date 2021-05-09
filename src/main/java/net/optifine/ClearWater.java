@@ -1,8 +1,8 @@
 package net.optifine;
 
-import net.minecraft.block.BlockAir;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockAir;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;

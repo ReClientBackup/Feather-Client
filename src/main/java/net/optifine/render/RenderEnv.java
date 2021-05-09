@@ -3,10 +3,10 @@ package net.optifine.render;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.state.BlockStateBase;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockLeaves;
+import com.murengezi.minecraft.block.state.BlockStateBase;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.BlockModelRenderer;
 import net.minecraft.client.renderer.RegionRenderCacheBuilder;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -20,7 +20,7 @@ import net.optifine.model.ListQuadsOverlay;
 
 public class RenderEnv {
    private IBlockState blockState;
-   private BlockPos blockPos;
+   private BlockPos pos;
    private int blockId = -1;
    private int metadata = -1;
    private int breakingAnimation = -1;
@@ -46,15 +46,15 @@ public class RenderEnv {
    private static final int FALSE = 0;
    private static final int TRUE = 1;
 
-   public RenderEnv(IBlockState blockState, BlockPos blockPos) {
+   public RenderEnv(IBlockState blockState, BlockPos pos) {
       this.blockState = blockState;
-      this.blockPos = blockPos;
+      this.pos = pos;
    }
 
    public void reset(IBlockState blockStateIn, BlockPos blockPosIn) {
-      if(this.blockState != blockStateIn || this.blockPos != blockPosIn) {
+      if(this.blockState != blockStateIn || this.pos != blockPosIn) {
          this.blockState = blockStateIn;
-         this.blockPos = blockPosIn;
+         this.pos = blockPosIn;
          this.blockId = -1;
          this.metadata = -1;
          this.breakingAnimation = -1;

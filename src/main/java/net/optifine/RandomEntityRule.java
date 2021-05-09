@@ -276,7 +276,7 @@ public class RandomEntityRule {
             Entity entity2 = randomentity2.getEntity();
             if(entity2 instanceof EntityLiving) {
                EntityLiving entityliving = (EntityLiving)entity2;
-               if(entityliving.isChild() != this.baby.booleanValue()) {
+               if(entityliving.isChild() != this.baby) {
                   return false;
                }
             }

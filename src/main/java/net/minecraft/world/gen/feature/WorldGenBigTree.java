@@ -3,11 +3,11 @@ package net.minecraft.world.gen.feature;
 import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockLeaves;
+import com.murengezi.minecraft.block.BlockLog;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
@@ -157,7 +157,7 @@ public class WorldGenBigTree extends WorldGenAbstractTree
     {
         for (int i = 0; i < this.leafDistanceLimit; ++i)
         {
-            this.func_181631_a(pos.up(i), this.leafSize(i), Blocks.leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false)));
+            this.func_181631_a(pos.up(i), this.leafSize(i), Blocks.leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, false));
         }
     }
 

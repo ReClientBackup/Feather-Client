@@ -1,13 +1,13 @@
 package net.minecraft.world.gen.feature;
 
 import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockNewLeaf;
-import net.minecraft.block.BlockNewLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockLeaves;
+import com.murengezi.minecraft.block.BlockNewLeaf;
+import com.murengezi.minecraft.block.BlockNewLog;
+import com.murengezi.minecraft.block.BlockPlanks;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class WorldGenCanopyTree extends WorldGenAbstractTree
 {
     private static final IBlockState field_181640_a = Blocks.log2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK);
-    private static final IBlockState field_181641_b = Blocks.leaves2.getDefaultState().withProperty(BlockNewLeaf.VARIANT, BlockPlanks.EnumType.DARK_OAK).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
+    private static final IBlockState field_181641_b = Blocks.leaves2.getDefaultState().withProperty(BlockNewLeaf.VARIANT, BlockPlanks.EnumType.DARK_OAK).withProperty(BlockLeaves.CHECK_DECAY, false);
 
     public WorldGenCanopyTree(boolean p_i45461_1_)
     {

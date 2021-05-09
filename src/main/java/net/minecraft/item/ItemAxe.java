@@ -2,8 +2,8 @@ package net.minecraft.item;
 
 import com.google.common.collect.Sets;
 import java.util.Set;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 
 public class ItemAxe extends ItemTool

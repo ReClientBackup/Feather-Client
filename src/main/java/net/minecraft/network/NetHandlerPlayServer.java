@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.command.server.CommandBlockLogic;
 import com.murengezi.minecraft.crash.CrashReport;
 import com.murengezi.minecraft.crash.CrashReportCategory;

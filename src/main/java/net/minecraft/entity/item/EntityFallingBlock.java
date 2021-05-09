@@ -2,12 +2,12 @@ package net.minecraft.entity.item;
 
 import com.google.common.collect.Lists;
 import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAnvil;
-import net.minecraft.block.BlockFalling;
-import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockAnvil;
+import com.murengezi.minecraft.block.BlockFalling;
+import com.murengezi.minecraft.block.ITileEntityProvider;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;

@@ -1,7 +1,7 @@
 package net.minecraft.entity.item;
 
-import net.minecraft.block.BlockRailBase;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockRailBase;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;

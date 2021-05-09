@@ -1,12 +1,12 @@
 package net.minecraft.world.biome;
 
 import java.util.Random;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockTallGrass;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockLeaves;
+import com.murengezi.minecraft.block.BlockOldLeaf;
+import com.murengezi.minecraft.block.BlockOldLog;
+import com.murengezi.minecraft.block.BlockPlanks;
+import com.murengezi.minecraft.block.BlockTallGrass;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.init.Blocks;
@@ -25,8 +25,8 @@ public class BiomeGenJungle extends BiomeGenBase
 {
     private final boolean field_150614_aC;
     private static final IBlockState field_181620_aE = Blocks.log.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE);
-    private static final IBlockState field_181621_aF = Blocks.leaves.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
-    private static final IBlockState field_181622_aG = Blocks.leaves.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.OAK).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
+    private static final IBlockState field_181621_aF = Blocks.leaves.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE).withProperty(BlockLeaves.CHECK_DECAY, false);
+    private static final IBlockState field_181622_aG = Blocks.leaves.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.OAK).withProperty(BlockLeaves.CHECK_DECAY, false);
 
     public BiomeGenJungle(int p_i45379_1_, boolean p_i45379_2_)
     {

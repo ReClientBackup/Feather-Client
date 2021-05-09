@@ -1,9 +1,9 @@
 package net.minecraft.world.gen.feature;
 
 import java.util.Random;
-import net.minecraft.block.BlockVine;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockVine;
+import com.murengezi.minecraft.block.properties.PropertyBool;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
@@ -117,7 +117,7 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
     {
         if (p_181632_2_.nextInt(3) > 0 && p_181632_1_.isAirBlock(p_181632_3_))
         {
-            this.setBlockAndNotifyAdequately(p_181632_1_, p_181632_3_, Blocks.vine.getDefaultState().withProperty(p_181632_4_, Boolean.valueOf(true)));
+            this.setBlockAndNotifyAdequately(p_181632_1_, p_181632_3_, Blocks.vine.getDefaultState().withProperty(p_181632_4_, true));
         }
     }
 

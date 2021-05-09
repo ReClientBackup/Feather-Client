@@ -1,7 +1,7 @@
 package net.minecraft.entity.passive;
 
 import java.util.Calendar;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -197,7 +197,7 @@ public class EntityBat extends EntityAmbientCreature
     {
     }
 
-    protected void updateFallState(double y, boolean onGroundIn, Block blockIn, BlockPos pos)
+    protected void updateFallState(double y, boolean onGroundIn, Block block, BlockPos pos)
     {
     }
 

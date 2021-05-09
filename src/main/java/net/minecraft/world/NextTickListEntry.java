@@ -1,6 +1,6 @@
 package net.minecraft.world;
 
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.util.BlockPos;
 
 public class NextTickListEntry implements Comparable<NextTickListEntry>

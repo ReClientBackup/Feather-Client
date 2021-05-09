@@ -8,11 +8,11 @@ import io.netty.buffer.Unpooled;
 
 import java.util.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockWall;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockFence;
+import com.murengezi.minecraft.block.BlockFenceGate;
+import com.murengezi.minecraft.block.BlockWall;
+import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.crash.CrashReport;
 import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
@@ -158,11 +158,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         super(world, profile);
         interactionManager.thisPlayerMP = this;
         this.theItemInWorldManager = interactionManager;
-        BlockPos blockPos = world.getSpawnPoint();
+        BlockPos pos = world.getSpawnPoint();
 
         if (!world.provider.getHasNoSky() && world.getWorldInfo().getGameType() != WorldSettings.GameType.ADVENTURE) {
             int i = Math.max(5, server.getSpawnProtectionSize() - 6);
-            int j = MathHelper.floor_double(world.getWorldBorder().getClosestDistance(blockPos.getX(), blockPos.getZ()));
+            int j = MathHelper.floor_double(world.getWorldBorder().getClosestDistance(pos.getX(), pos.getZ()));
 
             if (j < i) {
                 i = j;
@@ -172,13 +172,13 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                 i = 1;
             }
 
-            blockPos = world.getTopSolidOrLiquidBlock(blockPos.add(this.rand.nextInt(i * 2) - i, 0, this.rand.nextInt(i * 2) - i));
+            pos = world.getTopSolidOrLiquidBlock(pos.add(this.rand.nextInt(i * 2) - i, 0, this.rand.nextInt(i * 2) - i));
         }
 
         this.mcServer = server;
         this.statsFile = server.getConfigurationManager().getPlayerStatsFile(this);
         this.stepHeight = 0.0F;
-        this.moveToBlockPosAndAngles(blockPos, 0.0F, 0.0F);
+        this.moveToBlockPosAndAngles(pos, 0.0F, 0.0F);
 
         while (!world.getCollidingBoundingBoxes(this, this.getEntityBoundingBox()).isEmpty() && this.posY < 255.0D) {
             this.setPosition(this.posX, this.posY + 1.0D, this.posZ);
@@ -589,7 +589,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         }
     }
 
-    protected void updateFallState(double y, boolean onGroundIn, Block blockIn, BlockPos pos) {}
+    protected void updateFallState(double y, boolean onGroundIn, Block block, BlockPos pos) {}
 
     /**
      * process player falling based on movement packet

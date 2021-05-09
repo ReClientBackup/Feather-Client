@@ -9,7 +9,7 @@ import net.minecraft.util.BlockPos;
 
 public class S35PacketUpdateTileEntity implements Packet<INetHandlerPlayClient>
 {
-    private BlockPos blockPos;
+    private BlockPos pos;
 
     /** Used only for vanilla tile entities */
     private int metadata;
@@ -21,7 +21,7 @@ public class S35PacketUpdateTileEntity implements Packet<INetHandlerPlayClient>
 
     public S35PacketUpdateTileEntity(BlockPos blockPosIn, int metadataIn, NBTTagCompound nbtIn)
     {
-        this.blockPos = blockPosIn;
+        this.pos = blockPosIn;
         this.metadata = metadataIn;
         this.nbt = nbtIn;
     }
@@ -31,7 +31,7 @@ public class S35PacketUpdateTileEntity implements Packet<INetHandlerPlayClient>
      */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
-        this.blockPos = buf.readBlockPos();
+        this.pos = buf.readBlockPos();
         this.metadata = buf.readUnsignedByte();
         this.nbt = buf.readNBTTagCompoundFromBuffer();
     }
@@ -41,7 +41,7 @@ public class S35PacketUpdateTileEntity implements Packet<INetHandlerPlayClient>
      */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
-        buf.writeBlockPos(this.blockPos);
+        buf.writeBlockPos(this.pos);
         buf.writeByte((byte)this.metadata);
         buf.writeNBTTagCompoundToBuffer(this.nbt);
     }
@@ -56,7 +56,7 @@ public class S35PacketUpdateTileEntity implements Packet<INetHandlerPlayClient>
 
     public BlockPos getPos()
     {
-        return this.blockPos;
+        return this.pos;
     }
 
     public int getTileEntityType()

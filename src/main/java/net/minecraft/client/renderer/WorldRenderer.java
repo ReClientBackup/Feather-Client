@@ -9,7 +9,7 @@ import java.nio.ShortBuffer;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Comparator;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;

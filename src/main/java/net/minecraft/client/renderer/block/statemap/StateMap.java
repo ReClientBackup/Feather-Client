@@ -5,9 +5,9 @@ import com.google.common.collect.Maps;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.properties.IProperty;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 
 public class StateMap extends StateMapperBase

@@ -1,7 +1,7 @@
 package net.minecraft.client.renderer;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
@@ -78,8 +78,8 @@ public class ItemRenderer
     /**
      * Returns true if given block is translucent
      */
-    private boolean isBlockTranslucent(Block blockIn) {
-        return blockIn != null && blockIn.getBlockLayer() == EnumWorldBlockLayer.TRANSLUCENT;
+    private boolean isBlockTranslucent(Block block) {
+        return block != null && block.getBlockLayer() == EnumWorldBlockLayer.TRANSLUCENT;
     }
 
     private void func_178101_a(float angle, float p_178101_2_) {

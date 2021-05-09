@@ -2,8 +2,8 @@ package net.minecraft.entity.projectile;
 
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;

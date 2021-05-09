@@ -1,6 +1,6 @@
 package net.minecraft.entity.passive;
 
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -122,7 +122,7 @@ public class EntityChicken extends EntityAnimal
         return "mob.chicken.hurt";
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    protected void playStepSound(BlockPos pos, Block block)
     {
         this.playSound("mob.chicken.step", 0.15F, 1.0F);
     }

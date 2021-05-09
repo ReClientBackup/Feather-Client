@@ -1916,7 +1916,7 @@ public class Config {
     }
 
     public static boolean isTrue(Boolean p_isTrue_0_) {
-        return p_isTrue_0_ != null && p_isTrue_0_.booleanValue();
+        return p_isTrue_0_ != null && p_isTrue_0_;
     }
 
     public static boolean isQuadsToTriangles() {

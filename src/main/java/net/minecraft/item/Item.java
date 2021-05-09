@@ -11,19 +11,19 @@ import java.util.UUID;
 
 import com.murengezi.minecraft.potion.Potion;
 import com.murengezi.minecraft.potion.PotionHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockPrismarine;
-import net.minecraft.block.BlockRedSandstone;
-import net.minecraft.block.BlockSand;
-import net.minecraft.block.BlockSandStone;
-import net.minecraft.block.BlockSilverfish;
-import net.minecraft.block.BlockStone;
-import net.minecraft.block.BlockStoneBrick;
-import net.minecraft.block.BlockWall;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockDirt;
+import com.murengezi.minecraft.block.BlockDoublePlant;
+import com.murengezi.minecraft.block.BlockFlower;
+import com.murengezi.minecraft.block.BlockPlanks;
+import com.murengezi.minecraft.block.BlockPrismarine;
+import com.murengezi.minecraft.block.BlockRedSandstone;
+import com.murengezi.minecraft.block.BlockSand;
+import com.murengezi.minecraft.block.BlockSandStone;
+import com.murengezi.minecraft.block.BlockSilverfish;
+import com.murengezi.minecraft.block.BlockStone;
+import com.murengezi.minecraft.block.BlockStoneBrick;
+import com.murengezi.minecraft.block.BlockWall;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -88,9 +88,9 @@ public class Item
         return itemRegistry.getObjectById(id);
     }
 
-    public static Item getItemFromBlock(Block blockIn)
+    public static Item getItemFromBlock(Block block)
     {
-        return BLOCK_TO_ITEM.get(blockIn);
+        return BLOCK_TO_ITEM.get(block);
     }
 
     /**
@@ -227,7 +227,7 @@ public class Item
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
-    public boolean onBlockDestroyed(ItemStack stack, World world, Block blockIn, BlockPos pos, EntityLivingBase player)
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos, EntityLivingBase player)
     {
         return false;
     }
@@ -235,7 +235,7 @@ public class Item
     /**
      * Check whether this Item can harvest the given Block
      */
-    public boolean canHarvestBlock(Block blockIn)
+    public boolean canHarvestBlock(Block block)
     {
         return false;
     }
@@ -971,18 +971,18 @@ public class Item
     /**
      * Register a default ItemBlock for the given Block.
      */
-    private static void registerItemBlock(Block blockIn)
+    private static void registerItemBlock(Block block)
     {
-        registerItemBlock(blockIn, new ItemBlock(blockIn));
+        registerItemBlock(block, new ItemBlock(block));
     }
 
     /**
      * Register the given Item as the ItemBlock for the given Block.
      */
-    protected static void registerItemBlock(Block blockIn, Item itemIn)
+    protected static void registerItemBlock(Block block, Item itemIn)
     {
-        registerItem(Block.getIdFromBlock(blockIn), Block.blockRegistry.getNameForObject(blockIn), itemIn);
-        BLOCK_TO_ITEM.put(blockIn, itemIn);
+        registerItem(Block.getIdFromBlock(block), Block.blockRegistry.getNameForObject(block), itemIn);
+        BLOCK_TO_ITEM.put(block, itemIn);
     }
 
     private static void registerItem(int id, String textualID, Item itemIn)

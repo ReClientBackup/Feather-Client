@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import com.murengezi.minecraft.scoreboard.Team;

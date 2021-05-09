@@ -1,8 +1,8 @@
 package net.minecraft.network.play.server;
 
 import java.io.IOException;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;

@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import com.murengezi.minecraft.potion.Potion;
 import com.murengezi.minecraft.potion.PotionEffect;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -365,7 +365,7 @@ public class EntityZombie extends EntityMob
         return "mob.zombie.death";
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    protected void playStepSound(BlockPos pos, Block block)
     {
         this.playSound("mob.zombie.step", 0.15F, 1.0F);
     }

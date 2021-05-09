@@ -2,8 +2,8 @@ package net.minecraft.inventory;
 
 import java.util.Iterator;
 import java.util.Map;
-import net.minecraft.block.BlockAnvil;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockAnvil;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;

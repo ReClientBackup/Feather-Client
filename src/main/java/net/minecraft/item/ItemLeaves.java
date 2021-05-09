@@ -1,6 +1,6 @@
 package net.minecraft.item;
 
-import net.minecraft.block.BlockLeaves;
+import com.murengezi.minecraft.block.BlockLeaves;
 
 public class ItemLeaves extends ItemBlock
 {

@@ -1,7 +1,7 @@
 package net.minecraft.entity.item;
 
-import net.minecraft.block.BlockChest;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockChest;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;

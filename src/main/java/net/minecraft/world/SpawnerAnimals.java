@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EnumCreatureType;
@@ -113,7 +113,7 @@ public final class SpawnerAnimals
             {
                 if ((!enumcreaturetype.getPeacefulCreature() || spawnPeacefulMobs) && (enumcreaturetype.getPeacefulCreature() || spawnHostileMobs) && (!enumcreaturetype.getAnimal() || p_77192_4_))
                 {
-                    int k4 = Reflector.ForgeWorld_countEntities.exists() ? Reflector.callInt(p_77192_1_, Reflector.ForgeWorld_countEntities, enumcreaturetype, Boolean.valueOf(true)): p_77192_1_.countEntities(enumcreaturetype.getCreatureClass());
+                    int k4 = Reflector.ForgeWorld_countEntities.exists() ? Reflector.callInt(p_77192_1_, Reflector.ForgeWorld_countEntities, enumcreaturetype, true): p_77192_1_.countEntities(enumcreaturetype.getCreatureClass());
                     int l4 = enumcreaturetype.getMaxNumberOfCreature() * this.countChunkPos / MOB_COUNT_DIV;
 
                     if (k4 <= l4)

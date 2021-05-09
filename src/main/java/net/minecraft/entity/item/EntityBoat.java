@@ -1,8 +1,8 @@
 package net.minecraft.entity.item;
 
 import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -528,7 +528,7 @@ public class EntityBoat extends Entity
         }
     }
 
-    protected void updateFallState(double y, boolean onGroundIn, Block blockIn, BlockPos pos)
+    protected void updateFallState(double y, boolean onGroundIn, Block block, BlockPos pos)
     {
         if (onGroundIn)
         {

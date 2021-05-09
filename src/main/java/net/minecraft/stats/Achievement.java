@@ -1,6 +1,6 @@
 package net.minecraft.stats;
 
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;

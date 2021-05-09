@@ -12,9 +12,9 @@ import com.murengezi.minecraft.client.gui.InGame.GuiHopper;
 import com.murengezi.minecraft.client.gui.MainMenuScreen;
 import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.potion.PotionEffect;
-import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.properties.IProperty;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiEnchantment;
 import net.minecraft.client.gui.inventory.GuiBeacon;
@@ -424,7 +424,7 @@ public class Reflector {
             return false;
          } else {
             Boolean obool = (Boolean)method.invoke(null, params);
-            return obool.booleanValue();
+            return obool;
          }
       } catch (Throwable throwable) {
          handleException(throwable, null, refMethod, params);
@@ -531,7 +531,7 @@ public class Reflector {
             return false;
          } else {
             Boolean obool = (Boolean)method.invoke(obj, params);
-            return obool.booleanValue();
+            return obool;
          }
       } catch (Throwable throwable) {
          handleException(throwable, obj, refMethod, params);
@@ -774,7 +774,7 @@ public class Reflector {
                return false;
             } else {
                Boolean obool = (Boolean)object1;
-               return obool.booleanValue();
+               return obool;
             }
          }
       }

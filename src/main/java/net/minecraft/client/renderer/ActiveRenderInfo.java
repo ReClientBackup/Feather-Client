@@ -2,9 +2,9 @@ package net.minecraft.client.renderer;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockLiquid;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;

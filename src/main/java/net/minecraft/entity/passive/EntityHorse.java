@@ -2,8 +2,8 @@ package net.minecraft.entity.passive;
 
 import com.google.common.base.Predicate;
 import com.murengezi.minecraft.potion.Potion;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -615,16 +615,16 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
         return i != 3 && i != 4 ? (i != 1 && i != 2 ? "mob.horse.angry" : "mob.horse.donkey.angry") : null;
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    protected void playStepSound(BlockPos pos, Block block)
     {
-        Block.SoundType block$soundtype = blockIn.stepSound;
+        Block.SoundType block$soundtype = block.stepSound;
 
         if (this.worldObj.getBlockState(pos.up()).getBlock() == Blocks.snow_layer)
         {
             block$soundtype = Blocks.snow_layer.stepSound;
         }
 
-        if (!blockIn.getMaterial().isLiquid())
+        if (!block.getMaterial().isLiquid())
         {
             int i = this.getHorseType();
 

@@ -2,7 +2,7 @@ package net.minecraft.util;
 
 import com.google.common.collect.Lists;
 import java.util.List;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

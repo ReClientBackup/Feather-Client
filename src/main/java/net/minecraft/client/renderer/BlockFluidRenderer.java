@@ -1,8 +1,8 @@
 package net.minecraft.client.renderer;
 
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockLiquid;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.FaceBakery;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;

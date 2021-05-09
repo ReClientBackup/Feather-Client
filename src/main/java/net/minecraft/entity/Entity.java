@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.BlockWall;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockPattern;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockFence;
+import com.murengezi.minecraft.block.BlockFenceGate;
+import com.murengezi.minecraft.block.BlockLiquid;
+import com.murengezi.minecraft.block.BlockWall;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.command.CommandResultStats;
 import net.minecraft.command.ICommandSender;
 import com.murengezi.minecraft.crash.CrashReport;
@@ -973,16 +973,16 @@ public abstract class Entity implements ICommandSender
         }
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    protected void playStepSound(BlockPos pos, Block block)
     {
-        Block.SoundType block$soundtype = blockIn.stepSound;
+        Block.SoundType block$soundtype = block.stepSound;
 
         if (this.worldObj.getBlockState(pos.up()).getBlock() == Blocks.snow_layer)
         {
             block$soundtype = Blocks.snow_layer.stepSound;
             this.playSound(block$soundtype.getStepSound(), block$soundtype.getVolume() * 0.15F, block$soundtype.getFrequency());
         }
-        else if (!blockIn.getMaterial().isLiquid())
+        else if (!block.getMaterial().isLiquid())
         {
             this.playSound(block$soundtype.getStepSound(), block$soundtype.getVolume() * 0.15F, block$soundtype.getFrequency());
         }
@@ -1023,15 +1023,15 @@ public abstract class Entity implements ICommandSender
         return true;
     }
 
-    protected void updateFallState(double y, boolean onGroundIn, Block blockIn, BlockPos pos)
+    protected void updateFallState(double y, boolean onGroundIn, Block block, BlockPos pos)
     {
         if (onGroundIn)
         {
             if (this.fallDistance > 0.0F)
             {
-                if (blockIn != null)
+                if (block != null)
                 {
-                    blockIn.onFallenUpon(this.worldObj, pos, this, this.fallDistance);
+                    block.onFallenUpon(this.worldObj, pos, this, this.fallDistance);
                 }
                 else
                 {
@@ -1185,14 +1185,14 @@ public abstract class Entity implements ICommandSender
     /**
      * Checks if the current block the entity is within of the specified material type
      */
-    public boolean isInsideOfMaterial(Material materialIn)
+    public boolean isInsideOfMaterial(Material material)
     {
         double d0 = this.posY + (double)this.getEyeHeight();
         BlockPos blockpos = new BlockPos(this.posX, d0, this.posZ);
         IBlockState iblockstate = this.worldObj.getBlockState(blockpos);
         Block block = iblockstate.getBlock();
 
-        if (block.getMaterial() == materialIn)
+        if (block.getMaterial() == material)
         {
             float f = BlockLiquid.getLiquidHeightPercent(iblockstate.getBlock().getMetaFromState(iblockstate)) - 0.11111111F;
             float f1 = (float)(blockpos.getY() + 1) - f;

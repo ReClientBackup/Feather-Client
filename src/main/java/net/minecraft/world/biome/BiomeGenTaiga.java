@@ -1,9 +1,9 @@
 package net.minecraft.world.biome;
 
 import java.util.Random;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockTallGrass;
+import com.murengezi.minecraft.block.BlockDirt;
+import com.murengezi.minecraft.block.BlockDoublePlant;
+import com.murengezi.minecraft.block.BlockTallGrass;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;

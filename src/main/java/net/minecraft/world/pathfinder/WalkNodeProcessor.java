@@ -1,12 +1,12 @@
 package net.minecraft.world.pathfinder;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockRailBase;
-import net.minecraft.block.BlockWall;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockDoor;
+import com.murengezi.minecraft.block.BlockFence;
+import com.murengezi.minecraft.block.BlockFenceGate;
+import com.murengezi.minecraft.block.BlockRailBase;
+import com.murengezi.minecraft.block.BlockWall;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathPoint;

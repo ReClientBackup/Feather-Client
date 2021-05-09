@@ -1,7 +1,7 @@
 package net.minecraft.world.gen.feature;
 
 import java.util.Random;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.init.Blocks;

@@ -6,8 +6,8 @@ import com.google.common.collect.Sets;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 
 public class BlockStateMapper

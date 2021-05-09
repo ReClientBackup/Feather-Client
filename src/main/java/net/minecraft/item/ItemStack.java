@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Random;
 import java.util.Map.Entry;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentDurability;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -59,19 +59,19 @@ public final class ItemStack
     private Block canPlaceOnCacheBlock;
     private boolean canPlaceOnCacheResult;
 
-    public ItemStack(Block blockIn)
+    public ItemStack(Block block)
     {
-        this(blockIn, 1);
+        this(block, 1);
     }
 
-    public ItemStack(Block blockIn, int amount)
+    public ItemStack(Block block, int amount)
     {
-        this(blockIn, amount, 0);
+        this(block, amount, 0);
     }
 
-    public ItemStack(Block blockIn, int amount, int meta)
+    public ItemStack(Block block, int amount, int meta)
     {
-        this(Item.getItemFromBlock(blockIn), amount, meta);
+        this(Item.getItemFromBlock(block), amount, meta);
     }
 
     public ItemStack(Item itemIn)
@@ -155,9 +155,9 @@ public final class ItemStack
         return flag;
     }
 
-    public float getStrVsBlock(Block blockIn)
+    public float getStrVsBlock(Block block)
     {
-        return this.getItem().getStrVsBlock(this, blockIn);
+        return this.getItem().getStrVsBlock(this, block);
     }
 
     /**
@@ -385,11 +385,11 @@ public final class ItemStack
     /**
      * Called when a Block is destroyed using this ItemStack
      *  
-     * @param blockIn The block being destroyed
+     * @param block The block being destroyed
      */
-    public void onBlockDestroyed(World world, Block blockIn, BlockPos pos, EntityPlayer player)
+    public void onBlockDestroyed(World world, Block block, BlockPos pos, EntityPlayer player)
     {
-        boolean flag = this.item.onBlockDestroyed(this, world, blockIn, pos, player);
+        boolean flag = this.item.onBlockDestroyed(this, world, block, pos, player);
 
         if (flag)
         {
@@ -400,9 +400,9 @@ public final class ItemStack
     /**
      * Check whether the given Block can be harvested using this ItemStack.
      */
-    public boolean canHarvestBlock(Block blockIn)
+    public boolean canHarvestBlock(Block block)
     {
-        return this.item.canHarvestBlock(blockIn);
+        return this.item.canHarvestBlock(block);
     }
 
     public boolean interactWithEntity(EntityPlayer player, EntityLivingBase entityIn)
@@ -1013,7 +1013,7 @@ public final class ItemStack
 
         if (this.hasDisplayName())
         {
-            chatcomponenttext.getChatStyle().setItalic(Boolean.valueOf(true));
+            chatcomponenttext.getChatStyle().setItalic(true);
         }
 
         IChatComponent ichatcomponent = (new ChatComponentText("[")).appendSibling(chatcomponenttext).appendText("]");
@@ -1029,15 +1029,15 @@ public final class ItemStack
         return ichatcomponent;
     }
 
-    public boolean canDestroy(Block blockIn)
+    public boolean canDestroy(Block block)
     {
-        if (blockIn == this.canDestroyCacheBlock)
+        if (block == this.canDestroyCacheBlock)
         {
             return this.canDestroyCacheResult;
         }
         else
         {
-            this.canDestroyCacheBlock = blockIn;
+            this.canDestroyCacheBlock = block;
 
             if (this.hasTagCompound() && this.stackTagCompound.hasKey("CanDestroy", 9))
             {
@@ -1045,9 +1045,9 @@ public final class ItemStack
 
                 for (int i = 0; i < nbttaglist.tagCount(); ++i)
                 {
-                    Block block = Block.getBlockFromName(nbttaglist.getStringTagAt(i));
+                    Block block2 = Block.getBlockFromName(nbttaglist.getStringTagAt(i));
 
-                    if (block == blockIn)
+                    if (block == block2)
                     {
                         this.canDestroyCacheResult = true;
                         return true;
@@ -1060,15 +1060,15 @@ public final class ItemStack
         }
     }
 
-    public boolean canPlaceOn(Block blockIn)
+    public boolean canPlaceOn(Block block)
     {
-        if (blockIn == this.canPlaceOnCacheBlock)
+        if (block == this.canPlaceOnCacheBlock)
         {
             return this.canPlaceOnCacheResult;
         }
         else
         {
-            this.canPlaceOnCacheBlock = blockIn;
+            this.canPlaceOnCacheBlock = block;
 
             if (this.hasTagCompound() && this.stackTagCompound.hasKey("CanPlaceOn", 9))
             {
@@ -1076,9 +1076,9 @@ public final class ItemStack
 
                 for (int i = 0; i < nbttaglist.tagCount(); ++i)
                 {
-                    Block block = Block.getBlockFromName(nbttaglist.getStringTagAt(i));
+                    Block block2 = Block.getBlockFromName(nbttaglist.getStringTagAt(i));
 
-                    if (block == blockIn)
+                    if (block == block2)
                     {
                         this.canPlaceOnCacheResult = true;
                         return true;

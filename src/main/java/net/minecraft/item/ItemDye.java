@@ -1,11 +1,11 @@
 package net.minecraft.item;
 
 import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockPlanks;
+import com.murengezi.minecraft.block.IGrowable;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;

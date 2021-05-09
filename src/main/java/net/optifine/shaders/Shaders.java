@@ -30,8 +30,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.murengezi.minecraft.potion.Potion;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -1988,7 +1988,7 @@ public class Shaders {
       for(int i = 0; i < aboolean1.length; ++i) {
          Boolean obool = aboolean1[i];
          if(obool != null) {
-            aboolean[i] = obool.booleanValue();
+            aboolean[i] = obool;
          }
       }
    }

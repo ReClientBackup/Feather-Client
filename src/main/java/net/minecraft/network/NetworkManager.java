@@ -360,7 +360,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
             {
                 try
                 {
-                    p_initChannel_1_.config().setOption(ChannelOption.TCP_NODELAY, Boolean.valueOf(true));
+                    p_initChannel_1_.config().setOption(ChannelOption.TCP_NODELAY, true);
                 }
                 catch (ChannelException var3)
                 {

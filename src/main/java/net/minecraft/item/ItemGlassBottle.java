@@ -1,6 +1,6 @@
 package net.minecraft.item;
 
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

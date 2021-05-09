@@ -1,7 +1,7 @@
 package net.minecraft.entity;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRedstoneDiode;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockRedstoneDiode;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;

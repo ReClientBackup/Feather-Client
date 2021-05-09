@@ -1,8 +1,8 @@
 package net.minecraft.world.gen.feature;
 
 import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -13,9 +13,9 @@ public class WorldGenLakes extends WorldGenerator
 {
     private final Block block;
 
-    public WorldGenLakes(Block blockIn)
+    public WorldGenLakes(Block block)
     {
-        this.block = blockIn;
+        this.block = block;
     }
 
     public boolean generate(World world, Random rand, BlockPos position)

@@ -1,6 +1,6 @@
 package net.minecraft.entity.passive;
 
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

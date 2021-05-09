@@ -2,8 +2,8 @@ package net.optifine;
 
 import java.util.HashSet;
 import java.util.Set;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.chunk.CompiledChunk;
 import net.minecraft.client.renderer.chunk.RenderChunk;

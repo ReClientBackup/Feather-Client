@@ -1,8 +1,8 @@
 package net.minecraft.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockBed;
+import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -57,7 +57,7 @@ public class ItemBed extends Item
 
                 if (flag2 && flag3 && World.doesBlockHaveSolidTopSurface(world, pos.down()) && World.doesBlockHaveSolidTopSurface(world, blockpos.down()))
                 {
-                    IBlockState iblockstate1 = Blocks.bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
+                    IBlockState iblockstate1 = Blocks.bed.getDefaultState().withProperty(BlockBed.OCCUPIED, false).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 
                     if (world.setBlockState(pos, iblockstate1, 3))
                     {

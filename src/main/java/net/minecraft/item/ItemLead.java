@@ -1,7 +1,7 @@
 package net.minecraft.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFence;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockFence;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLeashKnot;
 import net.minecraft.entity.EntityLiving;

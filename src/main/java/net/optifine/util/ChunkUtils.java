@@ -75,7 +75,7 @@ public class ChunkUtils {
             Field field3 = (Field)list.get(j);
             Boolean obool = (Boolean)list2.get(j);
             Boolean obool1 = (Boolean)list3.get(j);
-            if(!obool.booleanValue() && obool1.booleanValue()) {
+            if(!obool && obool1) {
                list4.add(field3);
                Boolean obool2 = (Boolean)list1.get(j);
                field3.set(chunk, obool2);

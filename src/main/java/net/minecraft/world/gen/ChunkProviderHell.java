@@ -2,10 +2,10 @@ package net.minecraft.world.gen;
 
 import java.util.List;
 import java.util.Random;
-import net.minecraft.block.BlockFalling;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockHelper;
+import com.murengezi.minecraft.block.BlockFalling;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;

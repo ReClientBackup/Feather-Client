@@ -2,10 +2,10 @@ package net.minecraft.entity.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockTallGrass;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockStateHelper;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockTallGrass;
+import com.murengezi.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.state.pattern.BlockStateHelper;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;

@@ -7,7 +7,7 @@ import com.murengezi.chocolate.Event.RenderScoreboardEvent;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.potion.Potion;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;

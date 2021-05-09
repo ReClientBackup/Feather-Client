@@ -1,9 +1,9 @@
 package net.minecraft.entity.ai;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockSlab;
+import com.murengezi.minecraft.block.BlockStairs;
+import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -194,9 +194,9 @@ public class EntityAIControlledByPlayer extends EntityAIBase
     /**
      * True if the block is a stair block or a slab block
      */
-    private boolean isStairOrSlab(Block blockIn)
+    private boolean isStairOrSlab(Block block)
     {
-        return blockIn instanceof BlockStairs || blockIn instanceof BlockSlab;
+        return block instanceof BlockStairs || block instanceof BlockSlab;
     }
 
     /**

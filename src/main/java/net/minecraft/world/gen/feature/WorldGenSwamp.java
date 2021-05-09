@@ -1,14 +1,14 @@
 package net.minecraft.world.gen.feature;
 
 import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockVine;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockOldLeaf;
+import com.murengezi.minecraft.block.BlockOldLog;
+import com.murengezi.minecraft.block.BlockPlanks;
+import com.murengezi.minecraft.block.BlockVine;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.properties.PropertyBool;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class WorldGenSwamp extends WorldGenAbstractTree
 {
     private static final IBlockState field_181648_a = Blocks.log.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK);
-    private static final IBlockState field_181649_b = Blocks.leaves.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.OAK).withProperty(BlockOldLeaf.CHECK_DECAY, Boolean.valueOf(false));
+    private static final IBlockState field_181649_b = Blocks.leaves.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.OAK).withProperty(BlockOldLeaf.CHECK_DECAY, false);
 
     public WorldGenSwamp()
     {
@@ -186,7 +186,7 @@ public class WorldGenSwamp extends WorldGenAbstractTree
 
     private void func_181647_a(World p_181647_1_, BlockPos p_181647_2_, PropertyBool p_181647_3_)
     {
-        IBlockState iblockstate = Blocks.vine.getDefaultState().withProperty(p_181647_3_, Boolean.valueOf(true));
+        IBlockState iblockstate = Blocks.vine.getDefaultState().withProperty(p_181647_3_, true);
         this.setBlockAndNotifyAdequately(p_181647_1_, p_181647_2_, iblockstate);
         int i = 4;
 

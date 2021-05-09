@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.murengezi.minecraft.potion.PotionEffect;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.attributes.ServersideAttributeMap;
 import net.minecraft.entity.item.EntityArmorStand;

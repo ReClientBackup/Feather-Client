@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 public class S33PacketUpdateSign implements Packet<INetHandlerPlayClient>
 {
     private World world;
-    private BlockPos blockPos;
+    private BlockPos pos;
     private IChatComponent[] lines;
 
     public S33PacketUpdateSign()
@@ -21,7 +21,7 @@ public class S33PacketUpdateSign implements Packet<INetHandlerPlayClient>
     public S33PacketUpdateSign(World world, BlockPos blockPosIn, IChatComponent[] linesIn)
     {
         this.world = world;
-        this.blockPos = blockPosIn;
+        this.pos = blockPosIn;
         this.lines = new IChatComponent[] {linesIn[0], linesIn[1], linesIn[2], linesIn[3]};
     }
 
@@ -30,7 +30,7 @@ public class S33PacketUpdateSign implements Packet<INetHandlerPlayClient>
      */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
-        this.blockPos = buf.readBlockPos();
+        this.pos = buf.readBlockPos();
         this.lines = new IChatComponent[4];
 
         for (int i = 0; i < 4; ++i)
@@ -44,7 +44,7 @@ public class S33PacketUpdateSign implements Packet<INetHandlerPlayClient>
      */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
-        buf.writeBlockPos(this.blockPos);
+        buf.writeBlockPos(this.pos);
 
         for (int i = 0; i < 4; ++i)
         {
@@ -62,7 +62,7 @@ public class S33PacketUpdateSign implements Packet<INetHandlerPlayClient>
 
     public BlockPos getPos()
     {
-        return this.blockPos;
+        return this.pos;
     }
 
     public IChatComponent[] getLines()

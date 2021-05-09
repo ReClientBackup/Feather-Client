@@ -1,6 +1,6 @@
 package net.optifine.config;
 
-import net.minecraft.block.state.BlockStateBase;
+import com.murengezi.minecraft.block.state.BlockStateBase;
 
 public class MatchBlock {
    private int blockId = -1;

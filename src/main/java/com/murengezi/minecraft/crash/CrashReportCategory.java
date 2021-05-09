@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 
 public class CrashReportCategory {
@@ -153,12 +153,12 @@ public class CrashReportCategory {
         return this.stackTrace;
     }
 
-    public static void addBlockInfo(CrashReportCategory category, final BlockPos pos, final Block blockIn, final int blockData)
+    public static void addBlockInfo(CrashReportCategory category, final BlockPos pos, final Block block, final int blockData)
     {
-        final int i = Block.getIdFromBlock(blockIn);
+        final int i = Block.getIdFromBlock(block);
         category.addCrashSectionCallable("Block type", () -> {
             try {
-                return String.format("ID #%d (%s // %s)", i, blockIn.getUnlocalizedName(), blockIn.getClass().getCanonicalName());
+                return String.format("ID #%d (%s // %s)", i, block.getUnlocalizedName(), block.getClass().getCanonicalName());
             } catch (Throwable var2) {
                 return "ID #" + i;
             }

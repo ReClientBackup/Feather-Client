@@ -2,10 +2,10 @@ package net.optifine;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockNewLeaf;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockNewLeaf;
+import com.murengezi.minecraft.block.BlockOldLeaf;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelManager;

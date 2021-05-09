@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.murengezi.minecraft.potion.PotionEffect;
 import com.murengezi.minecraft.potion.PotionHelper;
-import net.minecraft.block.BlockBrewingStand;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.BlockBrewingStand;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;

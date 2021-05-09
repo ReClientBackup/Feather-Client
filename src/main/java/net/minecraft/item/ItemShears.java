@@ -1,7 +1,7 @@
 package net.minecraft.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -20,11 +20,11 @@ public class ItemShears extends Item
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
-    public boolean onBlockDestroyed(ItemStack stack, World world, Block blockIn, BlockPos pos, EntityLivingBase player)
+    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos, EntityLivingBase player)
     {
-        if (blockIn.getMaterial() != Material.leaves && blockIn != Blocks.web && blockIn != Blocks.tallgrass && blockIn != Blocks.vine && blockIn != Blocks.tripwire && blockIn != Blocks.wool)
+        if (block.getMaterial() != Material.leaves && block != Blocks.web && block != Blocks.tallgrass && block != Blocks.vine && block != Blocks.tripwire && block != Blocks.wool)
         {
-            return super.onBlockDestroyed(stack, world, blockIn, pos, player);
+            return super.onBlockDestroyed(stack, world, block, pos, player);
         }
         else
         {
@@ -36,9 +36,9 @@ public class ItemShears extends Item
     /**
      * Check whether this Item can harvest the given Block
      */
-    public boolean canHarvestBlock(Block blockIn)
+    public boolean canHarvestBlock(Block block)
     {
-        return blockIn == Blocks.web || blockIn == Blocks.redstone_wire || blockIn == Blocks.tripwire;
+        return block == Blocks.web || block == Blocks.redstone_wire || block == Blocks.tripwire;
     }
 
     public float getStrVsBlock(ItemStack stack, Block block)

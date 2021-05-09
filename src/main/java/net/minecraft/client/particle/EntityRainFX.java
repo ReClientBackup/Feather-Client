@@ -1,9 +1,9 @@
 package net.minecraft.client.particle;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.block.Block;
+import com.murengezi.minecraft.block.BlockLiquid;
+import com.murengezi.minecraft.block.material.Material;
+import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;

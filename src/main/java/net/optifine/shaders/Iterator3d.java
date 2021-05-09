@@ -7,7 +7,7 @@ import net.optifine.BlockPosM;
 
 public class Iterator3d implements Iterator<BlockPos> {
    private final IteratorAxis iteratorAxis;
-   private final BlockPosM blockPos = new BlockPosM(0, 0, 0);
+   private final BlockPosM pos = new BlockPosM(0, 0, 0);
    private int axis = 0;
    private final int kX;
    private final int kY;
@@ -87,17 +87,17 @@ public class Iterator3d implements Iterator<BlockPos> {
       BlockPos blockpos = this.iteratorAxis.next();
       switch(this.axis) {
       case 0:
-         this.blockPos.setXyz(blockpos.getX() * this.kX, blockpos.getY() * this.kY, blockpos.getZ() * this.kZ);
-         return this.blockPos;
+         this.pos.setXyz(blockpos.getX() * this.kX, blockpos.getY() * this.kY, blockpos.getZ() * this.kZ);
+         return this.pos;
       case 1:
-         this.blockPos.setXyz(blockpos.getY() * this.kX, blockpos.getX() * this.kY, blockpos.getZ() * this.kZ);
-         return this.blockPos;
+         this.pos.setXyz(blockpos.getY() * this.kX, blockpos.getX() * this.kY, blockpos.getZ() * this.kZ);
+         return this.pos;
       case 2:
-         this.blockPos.setXyz(blockpos.getZ() * this.kX, blockpos.getY() * this.kY, blockpos.getX() * this.kZ);
-         return this.blockPos;
+         this.pos.setXyz(blockpos.getZ() * this.kX, blockpos.getY() * this.kY, blockpos.getX() * this.kZ);
+         return this.pos;
       default:
-         this.blockPos.setXyz(blockpos.getX() * this.kX, blockpos.getY() * this.kY, blockpos.getZ() * this.kZ);
-         return this.blockPos;
+         this.pos.setXyz(blockpos.getX() * this.kX, blockpos.getY() * this.kY, blockpos.getZ() * this.kZ);
+         return this.pos;
       }
    }
 

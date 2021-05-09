@@ -2,7 +2,7 @@ package net.optifine.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockFaceUV;
 import net.minecraft.client.renderer.block.model.BlockPartFace;

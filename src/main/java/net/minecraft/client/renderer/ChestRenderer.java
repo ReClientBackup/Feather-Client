@@ -1,6 +1,6 @@
 package net.minecraft.client.renderer;
 
-import net.minecraft.block.Block;
+import com.murengezi.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.item.ItemStack;
 
