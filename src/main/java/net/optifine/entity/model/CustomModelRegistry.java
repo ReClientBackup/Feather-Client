@@ -3,8 +3,8 @@ package net.optifine.entity.model;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 import net.optifine.config.Config;
 
 public class CustomModelRegistry {

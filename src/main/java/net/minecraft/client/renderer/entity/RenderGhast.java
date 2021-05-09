@@ -1,6 +1,6 @@
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.client.model.ModelGhast;
+import com.murengezi.minecraft.client.model.ModelGhast;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.util.ResourceLocation;

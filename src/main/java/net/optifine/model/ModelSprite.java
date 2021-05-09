@@ -1,6 +1,6 @@
 package net.optifine.model;
 
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;

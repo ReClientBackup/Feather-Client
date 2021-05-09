@@ -2,7 +2,7 @@ package net.minecraft.client.renderer.entity;
 
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.model.ModelPlayer;
+import com.murengezi.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerArrow;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;

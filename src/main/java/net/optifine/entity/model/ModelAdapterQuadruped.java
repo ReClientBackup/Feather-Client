@@ -1,8 +1,8 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelQuadruped;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelQuadruped;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 
 public abstract class ModelAdapterQuadruped extends ModelAdapter {
    public ModelAdapterQuadruped(Class entityClass, String name, float shadowSize) {

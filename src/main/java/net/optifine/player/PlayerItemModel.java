@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBiped;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureManager;

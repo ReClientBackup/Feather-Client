@@ -1,9 +1,9 @@
 package net.optifine.entity.model;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelCreeper;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelCreeper;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderCreeper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.monster.EntityCreeper;

@@ -16,7 +16,7 @@ import java.util.Set;
 
 import com.murengezi.minecraft.potion.Potion;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemModelGenerator;
 import net.minecraft.client.renderer.entity.RenderItem;

@@ -1,9 +1,9 @@
 package net.optifine.entity.model;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelZombie;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelBiped;
+import com.murengezi.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPigZombie;

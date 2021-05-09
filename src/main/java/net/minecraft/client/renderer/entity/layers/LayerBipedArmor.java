@@ -1,6 +1,6 @@
 package net.minecraft.client.renderer.entity.layers;
 
-import net.minecraft.client.model.ModelBiped;
+import com.murengezi.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 
 public class LayerBipedArmor extends LayerArmorBase<ModelBiped>

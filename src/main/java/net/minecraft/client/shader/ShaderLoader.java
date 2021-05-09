@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 import java.util.Map;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.util.JSONException;
+import com.murengezi.minecraft.client.util.JSONException;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;

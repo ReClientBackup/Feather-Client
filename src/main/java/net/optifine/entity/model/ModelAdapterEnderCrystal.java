@@ -1,9 +1,9 @@
 package net.optifine.entity.model;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelEnderCrystal;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelEnderCrystal;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.RenderEnderCrystal;
@@ -21,7 +21,7 @@ public class ModelAdapterEnderCrystal extends ModelAdapter {
    }
 
    public ModelBase makeModel() {
-      return new ModelEnderCrystal(0.0F, true);
+      return new ModelEnderCrystal(true);
    }
 
    public ModelRenderer getModelRenderer(ModelBase model, String modelPart) {

@@ -1,6 +1,6 @@
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.client.model.ModelLeashKnot;
+import com.murengezi.minecraft.client.model.ModelLeashKnot;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLeashKnot;
 import net.minecraft.util.ResourceLocation;

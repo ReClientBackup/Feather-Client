@@ -2,8 +2,8 @@ package com.murengezi.minecraft.client.gui;
 
 import com.murengezi.chocolate.Chocolate;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.audio.SoundHandler;
+import com.murengezi.minecraft.client.audio.PositionedSoundRecord;
+import com.murengezi.minecraft.client.audio.SoundHandler;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;

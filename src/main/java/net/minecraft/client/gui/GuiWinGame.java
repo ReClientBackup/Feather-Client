@@ -10,8 +10,8 @@ import java.util.Random;
 
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.audio.MusicTicker;
-import net.minecraft.client.audio.SoundHandler;
+import com.murengezi.minecraft.client.audio.MusicTicker;
+import com.murengezi.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;

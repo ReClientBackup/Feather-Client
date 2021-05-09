@@ -37,6 +37,7 @@ import javax.imageio.ImageIO;
 
 import com.murengezi.chocolate.Event.*;
 import com.murengezi.chocolate.Chocolate;
+import com.murengezi.minecraft.client.ClientBrandRetriever;
 import com.murengezi.minecraft.client.gui.InGame.InGameMenuScreen;
 import com.murengezi.minecraft.client.gui.InGame.InGameScreen;
 import com.murengezi.minecraft.client.gui.MainMenuScreen;
@@ -44,8 +45,8 @@ import com.murengezi.minecraft.client.gui.Multiplayer.ConnectingScreen;
 import com.murengezi.minecraft.client.main.GameConfiguration;
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.material.Material;
-import net.minecraft.client.audio.MusicTicker;
-import net.minecraft.client.audio.SoundHandler;
+import com.murengezi.minecraft.client.audio.MusicTicker;
+import com.murengezi.minecraft.client.audio.SoundHandler;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
@@ -187,7 +188,6 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
     public static byte[] memoryReserve = new byte[10485760];
     private static final List<DisplayMode> macDisplayModes = Lists.newArrayList(new DisplayMode(2560, 1600), new DisplayMode(2880, 1800));
     private final File fileResourcepacks;
-    //TODO Name this variable
     private final PropertyMap profileProperties;
     private ServerData currentServerData;
 
@@ -2145,7 +2145,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         report.getCategory().addCrashSectionCallable("GL Caps", OpenGlHelper::getLogText);
         report.getCategory().addCrashSectionCallable("Using VBOs", () -> this.gameSettings.useVbo ? "Yes" : "No");
         report.getCategory().addCrashSectionCallable("Is Modded", () -> {
-            String s = ClientBrandRetriever.getClientModName();
+            String s = com.murengezi.minecraft.client.ClientBrandRetriever.getClientModName();
             return !s.equals("vanilla") ? "Definitely; Client brand changed to '" + s + "'" : (Minecraft.class.getSigners() == null ? "Very likely; Jar signature invalidated" : "Probably not. Jar signature remains and client brand is untouched.");
         });
         report.getCategory().addCrashSectionCallable("Type", () -> "Client (map_client.txt)");

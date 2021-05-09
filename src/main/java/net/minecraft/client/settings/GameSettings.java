@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.murengezi.chocolate.Util.MinecraftUtils;
-import net.minecraft.client.audio.SoundCategory;
+import com.murengezi.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.gui.GuiNewChat;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.renderer.OpenGlHelper;

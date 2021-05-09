@@ -1,6 +1,6 @@
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.client.model.ModelSnowMan;
+import com.murengezi.minecraft.client.model.ModelSnowMan;
 import net.minecraft.client.renderer.entity.layers.LayerSnowmanHead;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.util.ResourceLocation;

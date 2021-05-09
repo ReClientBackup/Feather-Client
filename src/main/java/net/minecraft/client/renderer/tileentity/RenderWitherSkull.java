@@ -1,6 +1,6 @@
 package net.minecraft.client.renderer.tileentity;
 
-import net.minecraft.client.model.ModelSkeletonHead;
+import com.murengezi.minecraft.client.model.ModelSkeletonHead;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;

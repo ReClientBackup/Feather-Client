@@ -1,6 +1,6 @@
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.client.model.ModelDragon;
+import com.murengezi.minecraft.client.model.ModelDragon;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -24,7 +24,7 @@ public class RenderDragon extends RenderLiving<EntityDragon>
 
     public RenderDragon(RenderManager renderManagerIn)
     {
-        super(renderManagerIn, new ModelDragon(0.0F), 0.5F);
+        super(renderManagerIn, new ModelDragon(), 0.5F);
         this.modelDragon = (ModelDragon)this.mainModel;
         this.addLayer(new LayerEnderDragonEyes(this));
         this.addLayer(new LayerEnderDragonDeath());

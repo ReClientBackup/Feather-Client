@@ -1,7 +1,7 @@
 package net.optifine.player;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBiped;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 
 public class PlayerItemRenderer {
    private int attachTo = 0;

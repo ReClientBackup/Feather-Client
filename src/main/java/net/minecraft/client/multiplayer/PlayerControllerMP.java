@@ -4,7 +4,7 @@ import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
+import com.murengezi.minecraft.client.audio.PositionedSoundRecord;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.Entity;

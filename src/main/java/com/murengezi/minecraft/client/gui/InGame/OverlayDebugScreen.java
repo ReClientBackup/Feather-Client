@@ -11,7 +11,7 @@ import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.properties.IProperty;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.client.ClientBrandRetriever;
+import com.murengezi.minecraft.client.ClientBrandRetriever;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.TextureMap;

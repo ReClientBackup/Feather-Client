@@ -1,6 +1,6 @@
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.client.model.ModelSilverfish;
+import com.murengezi.minecraft.client.model.ModelSilverfish;
 import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.util.ResourceLocation;
 

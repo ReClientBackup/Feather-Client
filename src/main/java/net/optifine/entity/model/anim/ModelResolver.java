@@ -1,7 +1,7 @@
 package net.optifine.entity.model.anim;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 import net.optifine.config.Config;
 import net.minecraft.tileentity.TileEntity;
 import net.optifine.entity.model.CustomModelRenderer;

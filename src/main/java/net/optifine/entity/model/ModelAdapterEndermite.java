@@ -1,9 +1,9 @@
 package net.optifine.entity.model;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelEnderMite;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelEnderMite;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderEndermite;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.monster.EntityEndermite;

@@ -2,8 +2,8 @@ package net.optifine.entity.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 
 public abstract class ModelAdapter {
    private final Class entityClass;

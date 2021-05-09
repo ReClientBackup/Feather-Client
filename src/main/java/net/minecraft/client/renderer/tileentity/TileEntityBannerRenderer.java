@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBanner;
+import com.murengezi.minecraft.client.model.ModelBanner;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.LayeredColorMaskTexture;
 import net.minecraft.init.Blocks;

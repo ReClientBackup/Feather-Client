@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.gui.Singleplayer;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.YesNoScreen;
-import net.minecraft.client.AnvilConverterException;
+import com.murengezi.minecraft.client.AnvilConverterException;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.GuiSlot;

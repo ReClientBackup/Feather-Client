@@ -1,9 +1,9 @@
 package net.optifine.entity.model;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelDragon;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelDragon;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderDragon;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.boss.EntityDragon;
@@ -16,7 +16,7 @@ public class ModelAdapterDragon extends ModelAdapter {
    }
 
    public ModelBase makeModel() {
-      return new ModelDragon(0.0F);
+      return new ModelDragon();
    }
 
    public ModelRenderer getModelRenderer(ModelBase model, String modelPart) {

@@ -1,6 +1,6 @@
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.client.model.ModelWither;
+import com.murengezi.minecraft.client.model.ModelWither;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerWitherAura;
 import net.minecraft.entity.boss.BossStatus;

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBiped;
+import com.murengezi.minecraft.client.model.ModelBiped;
 import net.optifine.http.FileDownloadThread;
 import net.optifine.http.HttpUtils;
 

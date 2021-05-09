@@ -1,7 +1,7 @@
 package net.minecraft.client.renderer.tileentity;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelEnderCrystal;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelEnderCrystal;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderEnderCrystal extends Render<EntityEnderCrystal>
 {
     private static final ResourceLocation enderCrystalTextures = new ResourceLocation("textures/entity/endercrystal/endercrystal.png");
-    private final ModelBase modelEnderCrystal = new ModelEnderCrystal(0.0F, true);
+    private final ModelBase modelEnderCrystal = new ModelEnderCrystal(true);
 
     public RenderEnderCrystal(RenderManager renderManagerIn)
     {

@@ -1,7 +1,7 @@
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBoat;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.util.MathHelper;

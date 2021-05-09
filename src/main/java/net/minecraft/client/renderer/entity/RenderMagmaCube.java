@@ -1,6 +1,6 @@
 package net.minecraft.client.renderer.entity;
 
-import net.minecraft.client.model.ModelMagmaCube;
+import com.murengezi.minecraft.client.model.ModelMagmaCube;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.util.ResourceLocation;

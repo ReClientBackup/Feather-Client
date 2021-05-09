@@ -1,6 +1,6 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 import net.optifine.entity.model.anim.ModelUpdater;
 
 public class CustomModelRenderer {

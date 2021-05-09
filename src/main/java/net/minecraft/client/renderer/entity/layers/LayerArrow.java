@@ -1,8 +1,8 @@
 package net.minecraft.client.renderer.entity.layers;
 
 import java.util.Random;
-import net.minecraft.client.model.ModelBox;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBox;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;

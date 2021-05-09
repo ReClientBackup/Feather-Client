@@ -1,8 +1,8 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelRenderer;
+import com.murengezi.minecraft.client.model.ModelBase;
+import com.murengezi.minecraft.client.model.ModelBiped;
+import com.murengezi.minecraft.client.model.ModelRenderer;
 
 public abstract class ModelAdapterBiped extends ModelAdapter {
    public ModelAdapterBiped(Class entityClass, String name, float shadowSize) {
