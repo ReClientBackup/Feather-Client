@@ -221,13 +221,13 @@ public class ShadersRender {
          GlStateManager.matrixMode(5888);
          GlStateManager.pushMatrix();
          GlStateManager.disableAlpha();
-         renderglobal.renderBlockLayer(EnumWorldBlockLayer.SOLID, partialTicks, 2, entity);
+         renderglobal.renderBlockLayer(EnumWorldBlockLayer.SOLID, entity);
          Shaders.checkGLError("shadow terrain solid");
          GlStateManager.enableAlpha();
-         renderglobal.renderBlockLayer(EnumWorldBlockLayer.CUTOUT_MIPPED, partialTicks, 2, entity);
+         renderglobal.renderBlockLayer(EnumWorldBlockLayer.CUTOUT_MIPPED, entity);
          Shaders.checkGLError("shadow terrain cutoutmipped");
          minecraft.getTextureManager().getTexture(TextureMap.locationBlocksTexture).setBlurMipmap(false, false);
-         renderglobal.renderBlockLayer(EnumWorldBlockLayer.CUTOUT, partialTicks, 2, entity);
+         renderglobal.renderBlockLayer(EnumWorldBlockLayer.CUTOUT, entity);
          Shaders.checkGLError("shadow terrain cutout");
          minecraft.getTextureManager().getTexture(TextureMap.locationBlocksTexture).restoreLastBlurMipmap();
          GlStateManager.shadeModel(7424);
@@ -267,7 +267,7 @@ public class ShadersRender {
          Shaders.checkFramebufferStatus("shadow pre-translucent");
          if(Shaders.isRenderShadowTranslucent()) {
             minecraft.mcProfiler.endStartSection("shadow translucent");
-            renderglobal.renderBlockLayer(EnumWorldBlockLayer.TRANSLUCENT, partialTicks, 2, entity);
+            renderglobal.renderBlockLayer(EnumWorldBlockLayer.TRANSLUCENT, entity);
             Shaders.checkGLError("shadow translucent");
          }
 

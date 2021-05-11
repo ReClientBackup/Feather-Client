@@ -2,6 +2,8 @@ package net.minecraft.client.renderer;
 
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.state.IBlockState;
+import com.murengezi.minecraft.crash.CrashReport;
+import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourceManagerReloadListener;
@@ -9,165 +11,122 @@ import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.client.resources.model.WeightedBakedModel;
 import net.minecraft.client.settings.GameSettings;
-import com.murengezi.minecraft.crash.CrashReport;
-import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ReportedException;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldType;
 
-public class BlockRendererDispatcher implements IResourceManagerReloadListener
-{
-    private final BlockModelShapes blockModelShapes;
-    private final GameSettings gameSettings;
-    private final BlockModelRenderer blockModelRenderer = new BlockModelRenderer();
-    private final ChestRenderer chestRenderer = new ChestRenderer();
-    private final BlockFluidRenderer fluidRenderer = new BlockFluidRenderer();
+public class BlockRendererDispatcher implements IResourceManagerReloadListener {
 
-    public BlockRendererDispatcher(BlockModelShapes blockModelShapesIn, GameSettings gameSettingsIn)
-    {
-        this.blockModelShapes = blockModelShapesIn;
-        this.gameSettings = gameSettingsIn;
-    }
+	private final BlockModelShapes blockModelShapes;
+	private final GameSettings gameSettings;
+	private final BlockModelRenderer blockModelRenderer = new BlockModelRenderer();
+	private final ChestRenderer chestRenderer = new ChestRenderer();
+	private final BlockFluidRenderer fluidRenderer = new BlockFluidRenderer();
 
-    public BlockModelShapes getBlockModelShapes()
-    {
-        return this.blockModelShapes;
-    }
+	public BlockRendererDispatcher(BlockModelShapes blockModelShapesIn, GameSettings gameSettingsIn) {
+		this.blockModelShapes = blockModelShapesIn;
+		this.gameSettings = gameSettingsIn;
+	}
 
-    public void renderBlockDamage(IBlockState state, BlockPos pos, TextureAtlasSprite texture, IBlockAccess blockAccess)
-    {
-        Block block = state.getBlock();
-        int i = block.getRenderType();
+	public BlockModelShapes getBlockModelShapes() {
+		return this.blockModelShapes;
+	}
 
-        if (i == 3)
-        {
-            state = block.getActualState(state, blockAccess, pos);
-            IBakedModel ibakedmodel = this.blockModelShapes.getModelForState(state);
-            IBakedModel ibakedmodel1 = (new SimpleBakedModel.Builder(ibakedmodel, texture)).makeBakedModel();
-            this.blockModelRenderer.renderModel(blockAccess, ibakedmodel1, state, pos, Tessellator.getInstance().getWorldRenderer());
-        }
-    }
+	public void renderBlockDamage(IBlockState state, BlockPos pos, TextureAtlasSprite texture, IBlockAccess blockAccess) {
+		Block block = state.getBlock();
+		int i = block.getRenderType();
 
-    public boolean renderBlock(IBlockState state, BlockPos pos, IBlockAccess blockAccess, WorldRenderer worldRendererIn)
-    {
-        try
-        {
-            int i = state.getBlock().getRenderType();
+		if (i == 3) {
+			state = block.getActualState(state, blockAccess, pos);
+			IBakedModel ibakedmodel = this.blockModelShapes.getModelForState(state);
+			IBakedModel ibakedmodel1 = (new SimpleBakedModel.Builder(ibakedmodel, texture)).makeBakedModel();
+			this.blockModelRenderer.renderModel(blockAccess, ibakedmodel1, state, pos, Tessellator.getInstance().getWorldRenderer());
+		}
+	}
 
-            if (i == -1)
-            {
-                return false;
-            }
-            else
-            {
-                switch (i)
-                {
-                    case 1:
-                        return this.fluidRenderer.renderFluid(blockAccess, state, pos, worldRendererIn);
+	public boolean renderBlock(IBlockState state, BlockPos pos, IBlockAccess blockAccess, WorldRenderer worldRendererIn) {
+		try {
+			int i = state.getBlock().getRenderType();
 
-                    case 2:
-                        return false;
+			if (i == -1) {
+				return false;
+			} else {
+				switch (i) {
+					case 1:
+						return this.fluidRenderer.renderFluid(blockAccess, state, pos, worldRendererIn);
+					case 3:
+						IBakedModel ibakedmodel = this.getModelFromBlockState(state, blockAccess, pos);
+						return this.blockModelRenderer.renderModel(blockAccess, ibakedmodel, state, pos, worldRendererIn);
+					default:
+						return false;
+				}
+			}
+		} catch (Throwable throwable) {
+			CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Tesselating block in world");
+			CrashReportCategory crashreportcategory = crashreport.makeCategory("Block being tesselated");
+			CrashReportCategory.addBlockInfo(crashreportcategory, pos, state.getBlock(), state.getBlock().getMetaFromState(state));
+			throw new ReportedException(crashreport);
+		}
+	}
 
-                    case 3:
-                        IBakedModel ibakedmodel = this.getModelFromBlockState(state, blockAccess, pos);
-                        return this.blockModelRenderer.renderModel(blockAccess, ibakedmodel, state, pos, worldRendererIn);
+	public BlockModelRenderer getBlockModelRenderer() {
+		return this.blockModelRenderer;
+	}
 
-                    default:
-                        return false;
-                }
-            }
-        }
-        catch (Throwable throwable)
-        {
-            CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Tesselating block in world");
-            CrashReportCategory crashreportcategory = crashreport.makeCategory("Block being tesselated");
-            CrashReportCategory.addBlockInfo(crashreportcategory, pos, state.getBlock(), state.getBlock().getMetaFromState(state));
-            throw new ReportedException(crashreport);
-        }
-    }
+	private IBakedModel getBakedModel(IBlockState state) {
+		return this.blockModelShapes.getModelForState(state);
+	}
 
-    public BlockModelRenderer getBlockModelRenderer()
-    {
-        return this.blockModelRenderer;
-    }
+	public IBakedModel getModelFromBlockState(IBlockState state, IBlockAccess world, BlockPos pos) {
+		Block block = state.getBlock();
 
-    private IBakedModel getBakedModel(IBlockState state, BlockPos pos)
-    {
-        IBakedModel ibakedmodel = this.blockModelShapes.getModelForState(state);
+		if (world.getWorldType() != WorldType.DEBUG_WORLD) {
+			try {
+				state = block.getActualState(state, world, pos);
+			} catch (Exception ignored) {
+			}
+		}
 
-        if (pos != null && this.gameSettings.allowBlockAlternatives && ibakedmodel instanceof WeightedBakedModel)
-        {
-            ibakedmodel = ((WeightedBakedModel)ibakedmodel).getAlternativeModel(MathHelper.getPositionRandom(pos));
-        }
+		IBakedModel ibakedmodel = this.blockModelShapes.getModelForState(state);
 
-        return ibakedmodel;
-    }
+		if (pos != null && this.gameSettings.allowBlockAlternatives && ibakedmodel instanceof WeightedBakedModel) {
+			ibakedmodel = ((WeightedBakedModel) ibakedmodel).getAlternativeModel(MathHelper.getPositionRandom(pos));
+		}
 
-    public IBakedModel getModelFromBlockState(IBlockState state, IBlockAccess world, BlockPos pos)
-    {
-        Block block = state.getBlock();
+		return ibakedmodel;
+	}
 
-        if (world.getWorldType() != WorldType.DEBUG_WORLD)
-        {
-            try
-            {
-                state = block.getActualState(state, world, pos);
-            }
-            catch (Exception var6)
-            {
-            }
-        }
+	public void renderBlockBrightness(IBlockState state, float brightness) {
+		int i = state.getBlock().getRenderType();
 
-        IBakedModel ibakedmodel = this.blockModelShapes.getModelForState(state);
+		if (i != -1) {
+			switch (i) {
+				case 1:
+				default:
+					break;
+				case 2:
+					this.chestRenderer.renderChestBrightness(state.getBlock(), brightness);
+					break;
+				case 3:
+					IBakedModel ibakedmodel = this.getBakedModel(state);
+					this.blockModelRenderer.renderModelBrightness(ibakedmodel, state, brightness, true);
+			}
+		}
+	}
 
-        if (pos != null && this.gameSettings.allowBlockAlternatives && ibakedmodel instanceof WeightedBakedModel)
-        {
-            ibakedmodel = ((WeightedBakedModel)ibakedmodel).getAlternativeModel(MathHelper.getPositionRandom(pos));
-        }
+	public boolean isRenderTypeChest(Block block) {
+		if (block == null) {
+			return false;
+		} else {
+			int i = block.getRenderType();
+			return i == 2;
+		}
+	}
 
-        return ibakedmodel;
-    }
+	public void onResourceManagerReload(IResourceManager resourceManager) {
+		this.fluidRenderer.initAtlasSprites();
+	}
 
-    public void renderBlockBrightness(IBlockState state, float brightness)
-    {
-        int i = state.getBlock().getRenderType();
-
-        if (i != -1)
-        {
-            switch (i)
-            {
-                case 1:
-                default:
-                    break;
-
-                case 2:
-                    this.chestRenderer.renderChestBrightness(state.getBlock(), brightness);
-                    break;
-
-                case 3:
-                    IBakedModel ibakedmodel = this.getBakedModel(state, null);
-                    this.blockModelRenderer.renderModelBrightness(ibakedmodel, state, brightness, true);
-            }
-        }
-    }
-
-    public boolean isRenderTypeChest(Block p_175021_1_, int p_175021_2_)
-    {
-        if (p_175021_1_ == null)
-        {
-            return false;
-        }
-        else
-        {
-            int i = p_175021_1_.getRenderType();
-            return i != 3 && i == 2;
-        }
-    }
-
-    public void onResourceManagerReload(IResourceManager resourceManager)
-    {
-        this.fluidRenderer.initAtlasSprites();
-    }
 }

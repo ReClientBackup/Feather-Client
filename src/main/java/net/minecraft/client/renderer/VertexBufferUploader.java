@@ -3,24 +3,22 @@ package net.minecraft.client.renderer;
 import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.optifine.config.Config;
 
-public class VertexBufferUploader extends WorldVertexBufferUploader
-{
-    private VertexBuffer vertexBuffer = null;
+public class VertexBufferUploader extends WorldVertexBufferUploader {
 
-    public void func_181679_a(WorldRenderer p_181679_1_)
-    {
-        if (p_181679_1_.getDrawMode() == 7 && Config.isQuadsToTriangles())
-        {
-            p_181679_1_.quadsToTriangles();
-            this.vertexBuffer.setDrawMode(p_181679_1_.getDrawMode());
-        }
+	private VertexBuffer vertexBuffer = null;
 
-        this.vertexBuffer.func_181722_a(p_181679_1_.getByteBuffer());
-        p_181679_1_.reset();
-    }
+	public void func_181679_a(WorldRenderer renderer) {
+		if (renderer.getDrawMode() == 7 && Config.isQuadsToTriangles()) {
+			renderer.quadsToTriangles();
+			this.vertexBuffer.setDrawMode(renderer.getDrawMode());
+		}
 
-    public void setVertexBuffer(VertexBuffer vertexBufferIn)
-    {
-        this.vertexBuffer = vertexBufferIn;
-    }
+		this.vertexBuffer.func_181722_a(renderer.getByteBuffer());
+		renderer.reset();
+	}
+
+	public void setVertexBuffer(VertexBuffer vertexBufferIn) {
+		this.vertexBuffer = vertexBufferIn;
+	}
+
 }

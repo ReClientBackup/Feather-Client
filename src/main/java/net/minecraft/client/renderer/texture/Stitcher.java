@@ -53,7 +53,7 @@ public class Stitcher {
 		for (Stitcher.Holder holder : astitcher$holder) {
 			if (!this.allocateSlot(holder)) {
 				String s = String.format("Unable to fit: %s, size: %dx%d, atlas: %dx%d, atlasMax: %dx%d - Maybe try a lower resolution resourcepack?", holder.getAtlasSprite().getIconName(), Integer.valueOf(holder.getAtlasSprite().getIconWidth()), Integer.valueOf(holder.getAtlasSprite().getIconHeight()), Integer.valueOf(this.currentWidth), Integer.valueOf(this.currentHeight), Integer.valueOf(this.maxWidth), Integer.valueOf(this.maxHeight));
-				throw new StitcherException(holder, s);
+				throw new StitcherException(s);
 			}
 		}
 

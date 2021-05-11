@@ -1,71 +1,60 @@
 package net.minecraft.client.renderer;
 
 import com.google.common.collect.Lists;
-import java.util.BitSet;
-import java.util.List;
 import net.minecraft.client.renderer.chunk.RenderChunk;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.optifine.SmartAnimations;
 
-public abstract class ChunkRenderContainer
-{
-    private double viewEntityX;
-    private double viewEntityY;
-    private double viewEntityZ;
-    protected List<RenderChunk> renderChunks = Lists.newArrayListWithCapacity(17424);
-    protected boolean initialized;
-    private BitSet animatedSpritesRendered;
-    private final BitSet animatedSpritesCached = new BitSet();
+import java.util.BitSet;
+import java.util.List;
 
-    public void initialize(double viewEntityXIn, double viewEntityYIn, double viewEntityZIn)
-    {
-        this.initialized = true;
-        this.renderChunks.clear();
-        this.viewEntityX = viewEntityXIn;
-        this.viewEntityY = viewEntityYIn;
-        this.viewEntityZ = viewEntityZIn;
+public abstract class ChunkRenderContainer {
 
-        if (SmartAnimations.isActive())
-        {
-            if (this.animatedSpritesRendered != null)
-            {
-                SmartAnimations.spritesRendered(this.animatedSpritesRendered);
-            }
-            else
-            {
-                this.animatedSpritesRendered = this.animatedSpritesCached;
-            }
+	private double viewEntityX, viewEntityY, viewEntityZ;
+	protected List<RenderChunk> renderChunks = Lists.newArrayListWithCapacity(17424);
+	protected boolean initialized;
+	private BitSet animatedSpritesRendered;
+	private final BitSet animatedSpritesCached = new BitSet();
 
-            this.animatedSpritesRendered.clear();
-        }
-        else if (this.animatedSpritesRendered != null)
-        {
-            SmartAnimations.spritesRendered(this.animatedSpritesRendered);
-            this.animatedSpritesRendered = null;
-        }
-    }
+	public void initialize(double viewEntityXIn, double viewEntityYIn, double viewEntityZIn) {
+		this.initialized = true;
+		this.renderChunks.clear();
+		this.viewEntityX = viewEntityXIn;
+		this.viewEntityY = viewEntityYIn;
+		this.viewEntityZ = viewEntityZIn;
 
-    public void preRenderChunk(RenderChunk renderChunkIn)
-    {
-        BlockPos blockpos = renderChunkIn.getPosition();
-        GlStateManager.translate((float)((double)blockpos.getX() - this.viewEntityX), (float)((double)blockpos.getY() - this.viewEntityY), (float)((double)blockpos.getZ() - this.viewEntityZ));
-    }
+		if (SmartAnimations.isActive()) {
+			if (this.animatedSpritesRendered != null) {
+				SmartAnimations.spritesRendered(this.animatedSpritesRendered);
+			} else {
+				this.animatedSpritesRendered = this.animatedSpritesCached;
+			}
 
-    public void addRenderChunk(RenderChunk renderChunkIn, EnumWorldBlockLayer layer)
-    {
-        this.renderChunks.add(renderChunkIn);
+			this.animatedSpritesRendered.clear();
+		} else if (this.animatedSpritesRendered != null) {
+			SmartAnimations.spritesRendered(this.animatedSpritesRendered);
+			this.animatedSpritesRendered = null;
+		}
+	}
 
-        if (this.animatedSpritesRendered != null)
-        {
-            BitSet bitset = renderChunkIn.compiledChunk.getAnimatedSprites(layer);
+	public void preRenderChunk(RenderChunk renderChunkIn) {
+		BlockPos blockpos = renderChunkIn.getPosition();
+		GlStateManager.translate((float) ((double) blockpos.getX() - this.viewEntityX), (float) ((double) blockpos.getY() - this.viewEntityY), (float) ((double) blockpos.getZ() - this.viewEntityZ));
+	}
 
-            if (bitset != null)
-            {
-                this.animatedSpritesRendered.or(bitset);
-            }
-        }
-    }
+	public void addRenderChunk(RenderChunk renderChunkIn, EnumWorldBlockLayer layer) {
+		this.renderChunks.add(renderChunkIn);
 
-    public abstract void renderChunkLayer(EnumWorldBlockLayer layer);
+		if (this.animatedSpritesRendered != null) {
+			BitSet bitset = renderChunkIn.compiledChunk.getAnimatedSprites(layer);
+
+			if (bitset != null) {
+				this.animatedSpritesRendered.or(bitset);
+			}
+		}
+	}
+
+	public abstract void renderChunkLayer(EnumWorldBlockLayer layer);
+
 }
