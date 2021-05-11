@@ -8,7 +8,7 @@ import com.murengezi.minecraft.client.renderer.ImageBufferDownload;
 import com.murengezi.minecraft.client.renderer.ThreadDownloadImageData;
 import com.murengezi.minecraft.client.renderer.texture.ITextureObject;
 import com.murengezi.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.resources.DefaultPlayerSkin;
+import com.murengezi.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;

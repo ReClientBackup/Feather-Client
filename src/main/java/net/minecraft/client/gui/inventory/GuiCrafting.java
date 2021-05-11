@@ -1,7 +1,7 @@
 package net.minecraft.client.gui.inventory;
 
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.util.BlockPos;

@@ -16,7 +16,7 @@ import com.murengezi.minecraft.client.renderer.RenderHelper;
 import com.murengezi.minecraft.client.renderer.Tessellator;
 import com.murengezi.minecraft.client.renderer.WorldRenderer;
 import com.murengezi.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

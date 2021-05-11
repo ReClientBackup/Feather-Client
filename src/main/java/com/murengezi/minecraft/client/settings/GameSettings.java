@@ -11,7 +11,7 @@ import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.renderer.OpenGlHelper;
 import com.murengezi.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.gui.GuiNewChat;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.network.play.client.C15PacketClientSettings;

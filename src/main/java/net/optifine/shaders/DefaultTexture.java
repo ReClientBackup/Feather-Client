@@ -1,7 +1,7 @@
 package net.optifine.shaders;
 
 import com.murengezi.minecraft.client.renderer.texture.AbstractTexture;
-import net.minecraft.client.resources.IResourceManager;
+import com.murengezi.minecraft.client.resources.IResourceManager;
 
 public class DefaultTexture extends AbstractTexture {
 

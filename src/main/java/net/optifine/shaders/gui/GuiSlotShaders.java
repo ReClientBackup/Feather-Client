@@ -7,7 +7,7 @@ import java.util.Properties;
 import com.murengezi.minecraft.client.gui.Singleplayer.YesNoCallback;
 import com.murengezi.minecraft.client.gui.YesNoScreen;
 import net.minecraft.client.gui.GuiSlot;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.optifine.config.Config;
 import net.optifine.Lang;
 import net.optifine.shaders.IShaderPack;

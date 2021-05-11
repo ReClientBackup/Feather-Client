@@ -10,7 +10,7 @@ import com.murengezi.minecraft.client.renderer.InventoryEffectRenderer;
 import com.murengezi.minecraft.client.renderer.OpenGlHelper;
 import com.murengezi.minecraft.client.renderer.RenderHelper;
 import com.murengezi.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 

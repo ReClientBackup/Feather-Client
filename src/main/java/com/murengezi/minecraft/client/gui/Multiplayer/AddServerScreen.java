@@ -4,7 +4,7 @@ import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiTextField;
 import com.murengezi.minecraft.client.multiplayer.ServerData;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;

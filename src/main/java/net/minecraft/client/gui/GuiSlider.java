@@ -3,7 +3,7 @@ package net.minecraft.client.gui;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 
 public class GuiSlider extends GuiButton
 {

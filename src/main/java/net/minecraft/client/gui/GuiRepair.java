@@ -6,7 +6,7 @@ import java.util.List;
 import com.murengezi.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerRepair;

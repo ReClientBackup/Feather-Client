@@ -6,7 +6,7 @@ import io.netty.buffer.Unpooled;
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.command.server.CommandBlockLogic;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C17PacketCustomPayload;

@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui.Options.ResourcePack;
 
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 
 import java.util.List;
 

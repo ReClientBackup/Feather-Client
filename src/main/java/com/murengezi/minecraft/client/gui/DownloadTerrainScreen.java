@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.gui;
 
 import com.murengezi.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.network.play.client.C00PacketKeepAlive;
 
 import java.io.IOException;

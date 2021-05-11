@@ -8,7 +8,7 @@ import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.Tessellator;
 import com.murengezi.minecraft.client.renderer.WorldRenderer;
 import com.murengezi.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.IResourceManager;
+import com.murengezi.minecraft.client.resources.IResourceManager;
 import org.lwjgl.util.vector.Matrix4f;
 
 public class Shader {

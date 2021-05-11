@@ -2,7 +2,7 @@ package com.murengezi.minecraft.client.renderer.block.statemap;
 
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import com.murengezi.minecraft.client.resources.model.ModelResourceLocation;
 
 public class DefaultStateMapper extends StateMapperBase {
 

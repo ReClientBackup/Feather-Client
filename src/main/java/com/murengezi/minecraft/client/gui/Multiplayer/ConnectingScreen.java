@@ -6,7 +6,7 @@ import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.multiplayer.ServerAddress;
 import com.murengezi.minecraft.client.multiplayer.ServerData;
 import com.murengezi.minecraft.client.network.NetHandlerLoginClient;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.network.EnumConnectionState;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.handshake.client.C00Handshake;

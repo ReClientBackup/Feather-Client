@@ -1,8 +1,8 @@
 package com.murengezi.minecraft.client.renderer.texture;
 
-import net.minecraft.client.resources.IResource;
-import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.resources.data.TextureMetadataSection;
+import com.murengezi.minecraft.client.resources.IResource;
+import com.murengezi.minecraft.client.resources.IResourceManager;
+import com.murengezi.minecraft.client.resources.data.TextureMetadataSection;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.EmissiveTextures;
 import net.optifine.config.Config;

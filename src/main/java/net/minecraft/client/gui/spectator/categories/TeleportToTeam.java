@@ -13,7 +13,7 @@ import net.minecraft.client.gui.spectator.ISpectatorMenuView;
 import net.minecraft.client.gui.spectator.SpectatorMenu;
 import com.murengezi.minecraft.client.network.NetworkPlayerInfo;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.DefaultPlayerSkin;
+import com.murengezi.minecraft.client.resources.DefaultPlayerSkin;
 import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;

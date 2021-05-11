@@ -18,7 +18,7 @@ import com.murengezi.minecraft.client.renderer.entity.RenderItem;
 import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
 import com.murengezi.minecraft.client.renderer.texture.TextureMap;
 import com.murengezi.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

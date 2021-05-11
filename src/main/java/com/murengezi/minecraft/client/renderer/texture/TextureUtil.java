@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.renderer.texture;
 import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.renderer.GLAllocation;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.IResourceManager;
+import com.murengezi.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.Mipmaps;
 import net.optifine.config.Config;

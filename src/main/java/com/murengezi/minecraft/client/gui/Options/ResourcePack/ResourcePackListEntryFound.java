@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui.Options.ResourcePack;
 
-import net.minecraft.client.resources.ResourcePackRepository;
+import com.murengezi.minecraft.client.resources.ResourcePackRepository;
 
 /**
  * @author Tobias Sjöblom

@@ -12,7 +12,7 @@ import net.minecraft.client.gui.achievement.GuiStats;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.InventoryEffectRenderer;
 import com.murengezi.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import com.murengezi.minecraft.client.settings.GameSettings;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;

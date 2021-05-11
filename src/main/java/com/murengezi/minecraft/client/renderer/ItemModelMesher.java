@@ -2,9 +2,9 @@ package com.murengezi.minecraft.client.renderer;
 
 import com.google.common.collect.Maps;
 import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.client.resources.model.ModelManager;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import com.murengezi.minecraft.client.resources.model.IBakedModel;
+import com.murengezi.minecraft.client.resources.model.ModelManager;
+import com.murengezi.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ISmartItemModel;

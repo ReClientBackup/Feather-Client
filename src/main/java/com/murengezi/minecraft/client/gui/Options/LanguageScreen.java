@@ -9,8 +9,8 @@ import net.minecraft.client.gui.GuiOptionButton;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.GuiSlot;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.resources.Language;
+import com.murengezi.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.Language;
 import com.murengezi.minecraft.client.settings.GameSettings;
 import org.lwjgl.opengl.GL11;
 

@@ -6,7 +6,7 @@ import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.*;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import com.murengezi.minecraft.client.settings.GameSettings;
 import com.murengezi.minecraft.client.settings.KeyBinding;
 import org.lwjgl.opengl.GL11;

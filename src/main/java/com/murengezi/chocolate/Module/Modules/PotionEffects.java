@@ -10,7 +10,7 @@ import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.potion.Potion;
 import com.murengezi.minecraft.potion.PotionEffect;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Collection;

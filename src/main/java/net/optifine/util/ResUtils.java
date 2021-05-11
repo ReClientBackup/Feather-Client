@@ -14,9 +14,9 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import net.minecraft.client.resources.AbstractResourcePack;
-import net.minecraft.client.resources.DefaultResourcePack;
-import net.minecraft.client.resources.IResourcePack;
+import com.murengezi.minecraft.client.resources.AbstractResourcePack;
+import com.murengezi.minecraft.client.resources.DefaultResourcePack;
+import com.murengezi.minecraft.client.resources.IResourcePack;
 import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 

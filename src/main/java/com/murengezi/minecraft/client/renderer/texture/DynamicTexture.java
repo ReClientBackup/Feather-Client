@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.renderer.texture;
 
-import net.minecraft.client.resources.IResourceManager;
+import com.murengezi.minecraft.client.resources.IResourceManager;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

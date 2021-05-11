@@ -13,7 +13,7 @@ import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.RenderHelper;
 import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
 import com.murengezi.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.C16PacketClientStatus;
 import net.minecraft.stats.Achievement;

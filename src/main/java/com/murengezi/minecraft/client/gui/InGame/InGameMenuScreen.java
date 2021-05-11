@@ -7,7 +7,7 @@ import com.murengezi.minecraft.client.gui.Options.OptionsScreen;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.client.gui.achievement.GuiStats;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 
 import java.io.IOException;
 

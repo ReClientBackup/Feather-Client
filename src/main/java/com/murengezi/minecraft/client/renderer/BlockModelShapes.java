@@ -9,9 +9,9 @@ import com.murengezi.minecraft.client.renderer.block.statemap.IStateMapper;
 import com.murengezi.minecraft.client.renderer.block.statemap.StateMap;
 import com.murengezi.minecraft.client.renderer.block.statemap.StateMapperBase;
 import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.client.resources.model.ModelManager;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import com.murengezi.minecraft.client.resources.model.IBakedModel;
+import com.murengezi.minecraft.client.resources.model.ModelManager;
+import com.murengezi.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 

@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.renderer;
 import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.renderer.texture.SimpleTexture;
 import com.murengezi.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.client.resources.IResourceManager;
+import com.murengezi.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.config.Config;
 import net.optifine.http.HttpPipeline;

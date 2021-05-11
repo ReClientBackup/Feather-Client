@@ -2,7 +2,7 @@ package com.murengezi.minecraft.client.settings;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.util.IntHashMap;
 
 import java.util.List;

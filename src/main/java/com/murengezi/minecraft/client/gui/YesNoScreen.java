@@ -2,7 +2,7 @@ package com.murengezi.minecraft.client.gui;
 
 import com.murengezi.minecraft.client.gui.Singleplayer.YesNoCallback;
 import net.minecraft.client.gui.GuiOptionButton;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 
 import java.io.IOException;
 import java.util.ArrayList;

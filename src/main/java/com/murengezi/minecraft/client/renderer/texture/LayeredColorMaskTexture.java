@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.renderer.texture;
 
 import com.murengezi.minecraft.block.material.MapColor;
-import net.minecraft.client.resources.IResourceManager;
+import com.murengezi.minecraft.client.resources.IResourceManager;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;

@@ -3,8 +3,8 @@ package net.optifine.model;
 import java.util.ArrayList;
 import java.util.List;
 import com.murengezi.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.client.resources.model.SimpleBakedModel;
+import com.murengezi.minecraft.client.resources.model.IBakedModel;
+import com.murengezi.minecraft.client.resources.model.SimpleBakedModel;
 import net.optifine.config.Config;
 import net.minecraft.util.EnumFacing;
 

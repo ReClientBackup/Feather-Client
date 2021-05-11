@@ -2,7 +2,7 @@ package com.murengezi.minecraft.client.gui.Options.Controls;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.GuiListExtended;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import com.murengezi.minecraft.client.settings.GameSettings;
 import com.murengezi.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.EnumChatFormatting;

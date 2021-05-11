@@ -8,7 +8,7 @@ import com.murengezi.minecraft.client.model.ModelHumanoidHead;
 import com.murengezi.minecraft.client.model.ModelSkeletonHead;
 import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.DefaultPlayerSkin;
+import com.murengezi.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.EnumFacing;

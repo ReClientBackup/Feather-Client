@@ -6,7 +6,7 @@ import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.RenderHelper;
 import com.murengezi.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.ResourceLocation;
 

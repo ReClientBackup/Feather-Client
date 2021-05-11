@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.network;
 import com.google.common.base.Objects;
 import com.mojang.authlib.GameProfile;
 import com.murengezi.minecraft.client.Minecraft;
-import net.minecraft.client.resources.DefaultPlayerSkin;
+import com.murengezi.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.network.play.server.S38PacketPlayerListItem;
 import com.murengezi.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.IChatComponent;

@@ -39,7 +39,7 @@ import com.murengezi.minecraft.client.multiplayer.WorldClient;
 import com.murengezi.minecraft.client.particle.EntityPickupFX;
 import com.murengezi.minecraft.client.player.inventory.ContainerLocalMenu;
 import com.murengezi.minecraft.client.player.inventory.LocalBlockIntercommunication;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import com.murengezi.minecraft.client.settings.GameSettings;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.DataWatcher;

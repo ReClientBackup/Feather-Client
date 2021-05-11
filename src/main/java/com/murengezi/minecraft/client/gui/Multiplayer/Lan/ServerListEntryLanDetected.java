@@ -4,7 +4,7 @@ import com.murengezi.chocolate.Chocolate;
 import com.murengezi.chocolate.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.GuiListExtended;
 import com.murengezi.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import org.apache.commons.io.FilenameUtils;
 
 /**

@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.gui;
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiOptionButton;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 
 public class MemoryErrorScreen extends Screen {
 

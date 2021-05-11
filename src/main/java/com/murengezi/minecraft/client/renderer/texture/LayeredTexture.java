@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.renderer.texture;
 
 import com.google.common.collect.Lists;
-import net.minecraft.client.resources.IResourceManager;
+import com.murengezi.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.config.Config;
 import net.optifine.shaders.ShadersTex;

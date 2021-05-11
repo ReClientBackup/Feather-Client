@@ -5,7 +5,7 @@ import com.murengezi.minecraft.client.gui.GuiListExtended;
 import com.murengezi.minecraft.client.gui.YesNoScreen;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ResourceLocation;

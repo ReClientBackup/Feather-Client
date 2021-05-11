@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.gui;
 import java.io.IOException;
 
 import com.murengezi.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
 
 public class GameOverScreen extends Screen {

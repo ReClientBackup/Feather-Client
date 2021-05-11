@@ -2,7 +2,7 @@ package com.murengezi.minecraft.client.renderer.block.model;
 
 import com.murengezi.minecraft.client.renderer.EnumFaceDirection;
 import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.ModelRotation;
+import com.murengezi.minecraft.client.resources.model.ModelRotation;
 import net.optifine.config.Config;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;

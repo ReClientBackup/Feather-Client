@@ -8,7 +8,7 @@ import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.renderer.block.model.BakedQuad;
 import com.murengezi.minecraft.client.renderer.texture.TextureUtil;
 import com.murengezi.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.model.IBakedModel;
+import com.murengezi.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.util.*;
 import net.minecraft.world.IBlockAccess;
 import net.optifine.BetterSnow;

@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.shader;
 import com.google.common.collect.Maps;
 import com.murengezi.minecraft.client.renderer.OpenGlHelper;
 import com.murengezi.minecraft.client.util.JSONException;
-import net.minecraft.client.resources.IResourceManager;
+import com.murengezi.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;

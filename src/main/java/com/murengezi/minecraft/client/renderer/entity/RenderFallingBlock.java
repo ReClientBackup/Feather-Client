@@ -9,7 +9,7 @@ import com.murengezi.minecraft.client.renderer.Tessellator;
 import com.murengezi.minecraft.client.renderer.WorldRenderer;
 import com.murengezi.minecraft.client.renderer.texture.TextureMap;
 import com.murengezi.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.model.IBakedModel;
+import com.murengezi.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;

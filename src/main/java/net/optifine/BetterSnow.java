@@ -18,7 +18,7 @@ import com.murengezi.minecraft.block.BlockTallGrass;
 import com.murengezi.minecraft.block.BlockTorch;
 import com.murengezi.minecraft.block.BlockWall;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.model.IBakedModel;
+import com.murengezi.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.init.Blocks;
 import net.optifine.config.Config;
 import net.minecraft.util.BlockPos;

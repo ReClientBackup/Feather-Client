@@ -65,9 +65,9 @@ import com.murengezi.minecraft.client.renderer.tileentity.TileEntityEnderChestRe
 import com.murengezi.minecraft.client.renderer.tileentity.TileEntitySignRenderer;
 import com.murengezi.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import com.murengezi.minecraft.client.renderer.vertex.VertexFormatElement;
-import net.minecraft.client.resources.DefaultResourcePack;
-import net.minecraft.client.resources.model.ModelManager;
-import net.minecraft.client.resources.model.ModelRotation;
+import com.murengezi.minecraft.client.resources.DefaultResourcePack;
+import com.murengezi.minecraft.client.resources.model.ModelManager;
+import com.murengezi.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;

@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import javax.imageio.ImageIO;
-import net.minecraft.client.resources.IResourcePack;
+import com.murengezi.minecraft.client.resources.IResourcePack;
 import com.murengezi.minecraft.client.settings.GameSettings;
 import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;

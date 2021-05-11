@@ -5,7 +5,7 @@ import com.murengezi.minecraft.client.gui.Options.Controls.ControlsScreen;
 import com.murengezi.minecraft.client.gui.Options.ResourcePack.ResourcePacksScreen;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiVideoSettings;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import com.murengezi.minecraft.client.settings.GameSettings;
 import net.minecraft.util.EnumChatFormatting;
 

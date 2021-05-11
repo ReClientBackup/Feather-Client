@@ -24,7 +24,7 @@ import net.minecraft.client.gui.inventory.GuiDispenser;
 import net.minecraft.client.gui.inventory.GuiFurnace;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.gui.inventory.GuiScreenHorseInventory;
-import net.minecraft.client.resources.IResourcePack;
+import com.murengezi.minecraft.client.resources.IResourcePack;
 import net.minecraft.entity.Entity;
 import net.optifine.config.Config;
 import net.minecraft.util.BlockPos;

@@ -5,7 +5,7 @@ import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import com.murengezi.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.resources.LanguageManager;
+import com.murengezi.minecraft.client.resources.LanguageManager;
 import com.murengezi.minecraft.client.settings.GameSettings;
 
 /**

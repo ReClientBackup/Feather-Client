@@ -6,7 +6,7 @@ import com.murengezi.minecraft.client.gui.Multiplayer.ConnectingScreen;
 import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.client.multiplayer.ServerData;
-import net.minecraft.client.resources.I18n;
+import com.murengezi.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 

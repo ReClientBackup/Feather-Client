@@ -11,7 +11,7 @@ import com.murengezi.minecraft.block.BlockMycelium;
 import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
 import com.murengezi.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.model.IBakedModel;
+import com.murengezi.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.init.Blocks;
 import net.optifine.config.Config;
 import net.minecraft.util.BlockPos;
