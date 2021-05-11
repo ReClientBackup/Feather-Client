@@ -250,7 +250,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
                 }
                 else
                 {
-                    this.renderLivingLabel(entity, s, x, y, z, 64);
+                    this.renderLivingLabel(entity, s, x, y, z);
                 }
             }
         }

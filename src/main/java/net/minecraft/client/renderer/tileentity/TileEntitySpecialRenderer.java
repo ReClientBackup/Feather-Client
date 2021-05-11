@@ -61,12 +61,7 @@ public abstract class TileEntitySpecialRenderer<T extends TileEntity> implements
         this.tileEntityClass = p_setEntityClass_1_;
     }
 
-    public ResourceLocation getLocationTextureCustom()
-    {
-        return this.locationTextureCustom;
-    }
-
-    public void setLocationTextureCustom(ResourceLocation p_setLocationTextureCustom_1_)
+	public void setLocationTextureCustom(ResourceLocation p_setLocationTextureCustom_1_)
     {
         this.locationTextureCustom = p_setLocationTextureCustom_1_;
     }

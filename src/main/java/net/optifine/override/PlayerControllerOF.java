@@ -2,9 +2,9 @@ package net.optifine.override;
 
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.PlayerControllerMP;
-import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.network.NetHandlerPlayClient;
+import com.murengezi.minecraft.client.multiplayer.PlayerControllerMP;
+import com.murengezi.minecraft.client.multiplayer.WorldClient;
+import com.murengezi.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -4,25 +4,20 @@ import com.murengezi.minecraft.client.model.ModelSilverfish;
 import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderSilverfish extends RenderLiving<EntitySilverfish>
-{
-    private static final ResourceLocation silverfishTextures = new ResourceLocation("textures/entity/silverfish.png");
+public class RenderSilverfish extends RenderLiving<EntitySilverfish> {
 
-    public RenderSilverfish(RenderManager renderManagerIn)
-    {
-        super(renderManagerIn, new ModelSilverfish(), 0.3F);
-    }
+	private static final ResourceLocation silverfishTextures = new ResourceLocation("textures/entity/silverfish.png");
 
-    protected float getDeathMaxRotation(EntitySilverfish entityLivingBaseIn)
-    {
-        return 180.0F;
-    }
+	public RenderSilverfish(RenderManager renderManager) {
+		super(renderManager, new ModelSilverfish(), 0.3F);
+	}
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    protected ResourceLocation getEntityTexture(EntitySilverfish entity)
-    {
-        return silverfishTextures;
-    }
+	protected float getDeathMaxRotation(EntitySilverfish entityLivingBase) {
+		return 180.0F;
+	}
+
+	protected ResourceLocation getEntityTexture(EntitySilverfish entity) {
+		return silverfishTextures;
+	}
+
 }

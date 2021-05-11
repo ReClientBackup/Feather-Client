@@ -8,18 +8,15 @@ import com.murengezi.minecraft.block.properties.IProperty;
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 
-public abstract class StateMapperBase implements IStateMapper
-{
+public abstract class StateMapperBase implements IStateMapper {
+
     protected Map<IBlockState, ModelResourceLocation> mapStateModelLocations = Maps.newLinkedHashMap();
 
-    public String getPropertyString(Map<IProperty, Comparable> p_178131_1_)
-    {
+    public String getPropertyString(Map<IProperty, Comparable> p_178131_1_) {
         StringBuilder stringbuilder = new StringBuilder();
 
-        for (Entry<IProperty, Comparable> entry : p_178131_1_.entrySet())
-        {
-            if (stringbuilder.length() != 0)
-            {
+        for (Entry<IProperty, Comparable> entry : p_178131_1_.entrySet()) {
+            if (stringbuilder.length() != 0) {
                 stringbuilder.append(",");
             }
 
@@ -30,18 +27,15 @@ public abstract class StateMapperBase implements IStateMapper
             stringbuilder.append(iproperty.getName(comparable));
         }
 
-        if (stringbuilder.length() == 0)
-        {
+        if (stringbuilder.length() == 0) {
             stringbuilder.append("normal");
         }
 
         return stringbuilder.toString();
     }
 
-    public Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block block)
-    {
-        for (IBlockState iblockstate : block.getBlockState().getValidStates())
-        {
+    public Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block block) {
+        for (IBlockState iblockstate : block.getBlockState().getValidStates()) {
             this.mapStateModelLocations.put(iblockstate, this.getModelResourceLocation(iblockstate));
         }
 
@@ -49,4 +43,5 @@ public abstract class StateMapperBase implements IStateMapper
     }
 
     protected abstract ModelResourceLocation getModelResourceLocation(IBlockState state);
+
 }

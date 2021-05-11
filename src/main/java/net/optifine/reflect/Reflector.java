@@ -47,7 +47,7 @@ import com.murengezi.minecraft.client.model.ModelSquid;
 import com.murengezi.minecraft.client.model.ModelWitch;
 import com.murengezi.minecraft.client.model.ModelWither;
 import com.murengezi.minecraft.client.model.ModelWolf;
-import net.minecraft.client.multiplayer.ChunkProviderClient;
+import com.murengezi.minecraft.client.multiplayer.ChunkProviderClient;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.client.renderer.entity.RenderBoat;

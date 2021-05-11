@@ -4,7 +4,7 @@ import java.io.IOException;
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.network.NetHandlerPlayClient;
+import com.murengezi.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.resources.I18n;

@@ -4,8 +4,8 @@ import java.io.IOException;
 import net.minecraft.client.resources.IResourceManager;
 import net.optifine.shaders.MultiTexID;
 
-public interface ITextureObject
-{
+public interface ITextureObject {
+
     void setBlurMipmap(boolean p_174936_1_, boolean p_174936_2_);
 
     void restoreLastBlurMipmap();
@@ -15,4 +15,5 @@ public interface ITextureObject
     int getGlTextureId();
 
     MultiTexID getMultiTexID();
+
 }

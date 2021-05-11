@@ -2,48 +2,31 @@ package net.minecraft.client.renderer.culling;
 
 import net.minecraft.util.AxisAlignedBB;
 
-public class Frustum implements ICamera
-{
+public class Frustum implements ICamera {
+
     private final ClippingHelper clippingHelper;
-    private double xPosition;
-    private double yPosition;
-    private double zPosition;
+    private double xPosition, yPosition, zPosition;
 
-    public Frustum()
-    {
-        this(ClippingHelperImpl.getInstance());
+    public Frustum(ClippingHelper clippingHelper) {
+        this.clippingHelper = clippingHelper;
     }
 
-    public Frustum(ClippingHelper p_i46196_1_)
-    {
-        this.clippingHelper = p_i46196_1_;
-    }
-
-    public void setPosition(double x, double y, double z)
-    {
+    public void setPosition(double x, double y, double z) {
         this.xPosition = x;
         this.yPosition = y;
         this.zPosition = z;
     }
 
-    /**
-     * Calls the clipping helper. Returns true if the box is inside all 6 clipping planes, otherwise returns false.
-     */
-    public boolean isBoxInFrustum(double p_78548_1_, double p_78548_3_, double p_78548_5_, double p_78548_7_, double p_78548_9_, double p_78548_11_)
-    {
+    public boolean isBoxInFrustum(double p_78548_1_, double p_78548_3_, double p_78548_5_, double p_78548_7_, double p_78548_9_, double p_78548_11_) {
         return this.clippingHelper.isBoxInFrustum(p_78548_1_ - this.xPosition, p_78548_3_ - this.yPosition, p_78548_5_ - this.zPosition, p_78548_7_ - this.xPosition, p_78548_9_ - this.yPosition, p_78548_11_ - this.zPosition);
     }
 
-    /**
-     * Returns true if the bounding box is inside all 6 clipping planes, otherwise returns false.
-     */
-    public boolean isBoundingBoxInFrustum(AxisAlignedBB p_78546_1_)
-    {
-        return this.isBoxInFrustum(p_78546_1_.minX, p_78546_1_.minY, p_78546_1_.minZ, p_78546_1_.maxX, p_78546_1_.maxY, p_78546_1_.maxZ);
+    public boolean isBoundingBoxInFrustum(AxisAlignedBB axisAlignedBB) {
+        return this.isBoxInFrustum(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.minZ, axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.maxZ);
     }
 
-    public boolean isBoxInFrustumFully(double p_isBoxInFrustumFully_1_, double p_isBoxInFrustumFully_3_, double p_isBoxInFrustumFully_5_, double p_isBoxInFrustumFully_7_, double p_isBoxInFrustumFully_9_, double p_isBoxInFrustumFully_11_)
-    {
+    public boolean isBoxInFrustumFully(double p_isBoxInFrustumFully_1_, double p_isBoxInFrustumFully_3_, double p_isBoxInFrustumFully_5_, double p_isBoxInFrustumFully_7_, double p_isBoxInFrustumFully_9_, double p_isBoxInFrustumFully_11_) {
         return this.clippingHelper.isBoxInFrustumFully(p_isBoxInFrustumFully_1_ - this.xPosition, p_isBoxInFrustumFully_3_ - this.yPosition, p_isBoxInFrustumFully_5_ - this.zPosition, p_isBoxInFrustumFully_7_ - this.xPosition, p_isBoxInFrustumFully_9_ - this.yPosition, p_isBoxInFrustumFully_11_ - this.zPosition);
     }
+
 }

@@ -18,8 +18,8 @@ public class PlayerItemsLayer implements LayerRenderer {
       this.renderPlayer = renderPlayer;
    }
 
-   public void doRenderLayer(EntityLivingBase entityLiving, float limbSwing, float limbSwingAmount, float partialTicks, float ticksExisted, float headYaw, float rotationPitch, float scale) {
-      this.renderEquippedItems(entityLiving, scale, partialTicks);
+   public void doRenderLayer(EntityLivingBase entityLivingBase, float limbSwing, float limbSwingAmount, float partialTicks, float ticksExisted, float headYaw, float rotationPitch, float scale) {
+      this.renderEquippedItems(entityLivingBase, scale, partialTicks);
    }
 
    protected void renderEquippedItems(EntityLivingBase entityLiving, float scale, float partialTicks) {

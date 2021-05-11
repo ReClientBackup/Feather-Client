@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.gui;
 
-import net.minecraft.client.network.NetHandlerPlayClient;
+import com.murengezi.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.network.play.client.C00PacketKeepAlive;
 

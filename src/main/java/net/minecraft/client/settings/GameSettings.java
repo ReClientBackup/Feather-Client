@@ -73,10 +73,7 @@ public class GameSettings extends MinecraftUtils {
     };
 
     /** GUI scale values */
-    private static final String[] GUISCALES = new String[] {"options.guiScale.auto", "options.guiScale.small", "options.guiScale.normal", "options.guiScale.large"};
-    private static final String[] PARTICLES = new String[] {"options.particles.all", "options.particles.decreased", "options.particles.minimal"};
-    private static final String[] AMBIENT_OCCLUSIONS = new String[] {"options.ao.off", "options.ao.min", "options.ao.max"};
-    private static final String[] field_181149_aW = new String[] {"options.off", "options.graphics.fast", "options.graphics.fancy"};
+    private static final String[] GUISCALES = new String[] {"options.guiScale.auto", "options.guiScale.small", "options.guiScale.normal", "options.guiScale.large"}, PARTICLES = new String[] {"options.particles.all", "options.particles.decreased", "options.particles.minimal"}, AMBIENT_OCCLUSIONS = new String[] {"options.ao.off", "options.ao.min", "options.ao.max"}, GRAPHICS = new String[] {"options.off", "options.graphics.fast", "options.graphics.fancy"};
     public float mouseSensitivity = 0.5F;
     public boolean invertMouse;
     public int renderDistanceChunks = -1;
@@ -625,7 +622,7 @@ public class GameSettings extends MinecraftUtils {
             } else if (options == GameSettings.Options.AMBIENT_OCCLUSION) {
                 return s1 + getTranslation(AMBIENT_OCCLUSIONS, this.ambientOcclusion);
             } else if (options == GameSettings.Options.RENDER_CLOUDS) {
-                return s1 + getTranslation(field_181149_aW, this.clouds);
+                return s1 + getTranslation(GRAPHICS, this.clouds);
             } else if (options == GameSettings.Options.GRAPHICS) {
                 if (this.fancyGraphics) {
                     return s1 + I18n.format("options.graphics.fancy");
@@ -882,7 +879,7 @@ public class GameSettings extends MinecraftUtils {
                             }
 
                             for (KeyBinding keybinding : this.keyBindings) {
-                                if (astring[0].equals("key_" + keybinding.getKeyDescription())) {
+                                if (astring[0].equals("key_" + keybinding.getDescription())) {
                                     keybinding.setKeyCode(Integer.parseInt(astring[1]));
                                 }
                             }
@@ -1001,7 +998,7 @@ public class GameSettings extends MinecraftUtils {
             writer.println("realmsNotifications:" + this.field_183509_X);
 
             for (KeyBinding keybinding : this.keyBindings) {
-                writer.println("key_" + keybinding.getKeyDescription() + ":" + keybinding.getKeyCode());
+                writer.println("key_" + keybinding.getDescription() + ":" + keybinding.getKeyCode());
             }
 
             for (SoundCategory soundcategory : SoundCategory.values()) {
@@ -2212,7 +2209,7 @@ public class GameSettings extends MinecraftUtils {
                         this.ofTranslucentBlocks = Config.limit(this.ofTranslucentBlocks, 0, 2);
                     }
 
-                    if (astring[0].equals("key_" + this.ofKeyBindZoom.getKeyDescription())) {
+                    if (astring[0].equals("key_" + this.ofKeyBindZoom.getDescription())) {
                         this.ofKeyBindZoom.setKeyCode(Integer.parseInt(astring[1]));
                     }
                 } catch (Exception exception) {
@@ -2304,7 +2301,7 @@ public class GameSettings extends MinecraftUtils {
             writer.println("ofFastMath:" + this.ofFastMath);
             writer.println("ofFastRender:" + this.ofFastRender);
             writer.println("ofTranslucentBlocks:" + this.ofTranslucentBlocks);
-            writer.println("key_" + this.ofKeyBindZoom.getKeyDescription() + ":" + this.ofKeyBindZoom.getKeyCode());
+            writer.println("key_" + this.ofKeyBindZoom.getDescription() + ":" + this.ofKeyBindZoom.getKeyCode());
             writer.close();
         } catch (Exception exception) {
             Config.warn("Failed to save options");

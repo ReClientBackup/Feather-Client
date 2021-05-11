@@ -5,7 +5,8 @@ import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 
-public interface IStateMapper
-{
+public interface IStateMapper {
+
     Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block block);
+
 }

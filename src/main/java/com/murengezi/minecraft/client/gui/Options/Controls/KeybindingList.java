@@ -30,14 +30,14 @@ public class KeybindingList extends GuiListExtended {
 		String s = null;
 
 		for (KeyBinding keybinding : akeybinding) {
-			String s1 = keybinding.getKeyCategory();
+			String s1 = keybinding.getCategory();
 
 			if (!s1.equals(s)) {
 				s = s1;
 				this.listEntries[i++] = new KeybindingList.CategoryEntry(s1);
 			}
 
-			int j = getFr().getStringWidth(I18n.format(keybinding.getKeyDescription()));
+			int j = getFr().getStringWidth(I18n.format(keybinding.getDescription()));
 
 			if (j > this.maxListLabelWidth) {
 				this.maxListLabelWidth = j;
@@ -99,8 +99,8 @@ public class KeybindingList extends GuiListExtended {
 
 		private KeyEntry(KeyBinding keyBinding) {
 			this.keyBinding = keyBinding;
-			this.keyDesc = I18n.format(keyBinding.getKeyDescription());
-			this.btnChangeKeyBinding = new GuiButton(0, 0, 0, 75, 20, I18n.format(keyBinding.getKeyDescription()));
+			this.keyDesc = I18n.format(keyBinding.getDescription());
+			this.btnChangeKeyBinding = new GuiButton(0, 0, 0, 75, 20, I18n.format(keyBinding.getDescription()));
 			this.btnReset = new GuiButton(0, 0, 0, 50, 20, I18n.format("controls.reset"));
 		}
 

@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
-import net.minecraft.client.network.NetHandlerHandshakeMemory;
+import com.murengezi.minecraft.client.network.NetHandlerHandshakeMemory;
 import com.murengezi.minecraft.crash.CrashReport;
 import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.network.play.server.S40PacketDisconnect;

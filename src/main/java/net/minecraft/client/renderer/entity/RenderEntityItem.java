@@ -138,9 +138,9 @@ public class RenderEntityItem extends Render<EntityItem>
                 ibakedmodel.getItemCameraTransforms().func_181689_a(ItemCameraTransforms.TransformType.GROUND);
                 this.itemRenderer.renderItem(itemstack, ibakedmodel);
                 GlStateManager.popMatrix();
-                float f3 = ibakedmodel.getItemCameraTransforms().field_181699_o.scale.x;
-                float f4 = ibakedmodel.getItemCameraTransforms().field_181699_o.scale.y;
-                float f5 = ibakedmodel.getItemCameraTransforms().field_181699_o.scale.z;
+                float f3 = ibakedmodel.getItemCameraTransforms().ground.scale.x;
+                float f4 = ibakedmodel.getItemCameraTransforms().ground.scale.y;
+                float f5 = ibakedmodel.getItemCameraTransforms().ground.scale.z;
                 GlStateManager.translate(0.0F * f3, 0.0F * f4, 0.046875F * f5);
             }
         }

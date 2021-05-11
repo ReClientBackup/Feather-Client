@@ -2,7 +2,7 @@ package com.murengezi.minecraft.client.gui.Multiplayer.Lan;
 
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ThreadLanServerPing;
+import com.murengezi.minecraft.client.multiplayer.ThreadLanServerPing;
 import net.minecraft.util.HttpUtil;
 import org.json.JSONObject;
 

@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.entity;
 import com.mojang.authlib.GameProfile;
 import com.murengezi.chocolate.Util.CapeUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.NetworkPlayerInfo;
+import com.murengezi.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.ImageBufferDownload;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.ITextureObject;

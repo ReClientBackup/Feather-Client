@@ -3,59 +3,49 @@ package net.minecraft.client.renderer.texture;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MathHelper;
 
-public class TextureClock extends TextureAtlasSprite
-{
-    private double field_94239_h;
-    private double field_94240_i;
+public class TextureClock extends TextureAtlasSprite {
 
-    public TextureClock(String iconName)
-    {
-        super(iconName);
-    }
+	private double field_94239_h, field_94240_i;
 
-    public void updateAnimation()
-    {
-        if (!this.framesTextureData.isEmpty())
-        {
-            Minecraft minecraft = Minecraft.getMinecraft();
-            double d0 = 0.0D;
+	public TextureClock(String iconName) {
+		super(iconName);
+	}
 
-            if (minecraft.world != null && minecraft.player != null)
-            {
-                d0 = minecraft.world.getCelestialAngle(1.0F);
+	public void updateAnimation() {
+		if (!this.framesTextureData.isEmpty()) {
+			Minecraft minecraft = Minecraft.getMinecraft();
+			double d0 = 0.0D;
 
-                if (!minecraft.world.provider.isSurfaceWorld())
-                {
-                    d0 = Math.random();
-                }
-            }
+			if (minecraft.world != null && minecraft.player != null) {
+				d0 = minecraft.world.getCelestialAngle(1.0F);
 
-            double d1;
+				if (!minecraft.world.provider.isSurfaceWorld()) {
+					d0 = Math.random();
+				}
+			}
 
-            for (d1 = d0 - this.field_94239_h; d1 < -0.5D; ++d1)
-            {
-            }
+			double d1;
 
-            while (d1 >= 0.5D)
-            {
-                --d1;
-            }
+			for (d1 = d0 - this.field_94239_h; d1 < -0.5D; ++d1) {
+			}
 
-            d1 = MathHelper.clamp_double(d1, -1.0D, 1.0D);
-            this.field_94240_i += d1 * 0.1D;
-            this.field_94240_i *= 0.8D;
-            this.field_94239_h += this.field_94240_i;
-            int i;
+			while (d1 >= 0.5D) {
+				--d1;
+			}
 
-            for (i = (int)((this.field_94239_h + 1.0D) * (double)this.framesTextureData.size()) % this.framesTextureData.size(); i < 0; i = (i + this.framesTextureData.size()) % this.framesTextureData.size())
-            {
-            }
+			d1 = MathHelper.clamp_double(d1, -1.0D, 1.0D);
+			this.field_94240_i += d1 * 0.1D;
+			this.field_94240_i *= 0.8D;
+			this.field_94239_h += this.field_94240_i;
+			int i;
 
-            if (i != this.frameCounter)
-            {
-                this.frameCounter = i;
-                TextureUtil.uploadTextureMipMap(this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
-            }
-        }
-    }
+			for (i = (int) ((this.field_94239_h + 1.0D) * (double) this.framesTextureData.size()) % this.framesTextureData.size(); i < 0; i = (i + this.framesTextureData.size()) % this.framesTextureData.size()) {}
+
+			if (i != this.frameCounter) {
+				this.frameCounter = i;
+				TextureUtil.uploadTextureMipMap(this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
+			}
+		}
+	}
+
 }

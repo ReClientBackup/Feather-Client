@@ -3,7 +3,7 @@ package net.optifine.shaders;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import net.minecraft.client.multiplayer.WorldClient;
+import com.murengezi.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.ViewFrustum;
 import net.minecraft.client.renderer.chunk.RenderChunk;
 import net.minecraft.entity.Entity;

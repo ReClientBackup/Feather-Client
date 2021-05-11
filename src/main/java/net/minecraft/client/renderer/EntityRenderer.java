@@ -17,7 +17,7 @@ import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
 import net.minecraft.client.gui.MapItemRenderer;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.particle.EffectRenderer;
+import com.murengezi.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.chunk.RenderChunk;
 import net.minecraft.client.renderer.culling.ClippingHelper;
 import net.minecraft.client.renderer.culling.ClippingHelperImpl;

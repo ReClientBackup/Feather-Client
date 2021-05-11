@@ -8,8 +8,8 @@ import java.util.List;
 
 import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.client.network.NetworkPlayerInfo;
+import com.murengezi.minecraft.client.network.NetHandlerPlayClient;
+import com.murengezi.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumPlayerModelParts;

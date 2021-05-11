@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.gui.Multiplayer;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.multiplayer.ServerData;
+import com.murengezi.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
 

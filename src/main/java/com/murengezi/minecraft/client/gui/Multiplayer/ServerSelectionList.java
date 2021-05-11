@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.gui.Multiplayer;
 
 import com.murengezi.minecraft.client.gui.GuiListExtended;
-import net.minecraft.client.multiplayer.ServerList;
+import com.murengezi.minecraft.client.multiplayer.ServerList;
 
 import java.util.LinkedList;
 import java.util.List;

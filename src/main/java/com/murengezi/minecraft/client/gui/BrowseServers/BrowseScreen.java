@@ -7,9 +7,9 @@ import com.murengezi.minecraft.client.gui.GuiListExtended;
 import com.murengezi.minecraft.client.gui.Multiplayer.ConnectingScreen;
 import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.multiplayer.ServerData;
-import net.minecraft.client.multiplayer.ServerList;
-import net.minecraft.client.network.OldServerPinger;
+import com.murengezi.minecraft.client.multiplayer.ServerData;
+import com.murengezi.minecraft.client.multiplayer.ServerList;
+import com.murengezi.minecraft.client.network.OldServerPinger;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 

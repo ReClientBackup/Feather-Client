@@ -5,26 +5,21 @@ import net.minecraft.client.renderer.entity.layers.LayerSpiderEyes;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderSpider<T extends EntitySpider> extends RenderLiving<T>
-{
-    private static final ResourceLocation spiderTextures = new ResourceLocation("textures/entity/spider/spider.png");
+public class RenderSpider<T extends EntitySpider> extends RenderLiving<T> {
 
-    public RenderSpider(RenderManager renderManagerIn)
-    {
-        super(renderManagerIn, new ModelSpider(), 1.0F);
-        this.addLayer(new LayerSpiderEyes(this));
-    }
+	private static final ResourceLocation spiderTextures = new ResourceLocation("textures/entity/spider/spider.png");
 
-    protected float getDeathMaxRotation(T entityLivingBaseIn)
-    {
-        return 180.0F;
-    }
+	public RenderSpider(RenderManager renderManager) {
+		super(renderManager, new ModelSpider(), 1.0F);
+		this.addLayer(new LayerSpiderEyes(this));
+	}
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    protected ResourceLocation getEntityTexture(T entity)
-    {
-        return spiderTextures;
-    }
+	protected float getDeathMaxRotation(T entityLivingBaseIn) {
+		return 180.0F;
+	}
+
+	protected ResourceLocation getEntityTexture(T entity) {
+		return spiderTextures;
+	}
+
 }

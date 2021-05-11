@@ -23,7 +23,7 @@ import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.block.state.BlockStateBase;
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityFX;
+import com.murengezi.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;

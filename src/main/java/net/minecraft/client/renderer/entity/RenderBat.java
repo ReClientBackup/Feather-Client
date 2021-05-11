@@ -6,43 +6,30 @@ import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderBat extends RenderLiving<EntityBat>
-{
-    private static final ResourceLocation batTextures = new ResourceLocation("textures/entity/bat.png");
+public class RenderBat extends RenderLiving<EntityBat> {
 
-    public RenderBat(RenderManager renderManagerIn)
-    {
-        super(renderManagerIn, new ModelBat(), 0.25F);
-    }
+	private static final ResourceLocation batTextures = new ResourceLocation("textures/entity/bat.png");
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    protected ResourceLocation getEntityTexture(EntityBat entity)
-    {
-        return batTextures;
-    }
+	public RenderBat(RenderManager renderManagerIn) {
+		super(renderManagerIn, new ModelBat(), 0.25F);
+	}
 
-    /**
-     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-     * entityLiving, partialTickTime
-     */
-    protected void preRenderCallback(EntityBat entitylivingbaseIn, float partialTickTime)
-    {
-        GlStateManager.scale(0.35F, 0.35F, 0.35F);
-    }
+	protected ResourceLocation getEntityTexture(EntityBat entity) {
+		return batTextures;
+	}
 
-    protected void rotateCorpse(EntityBat bat, float p_77043_2_, float p_77043_3_, float partialTicks)
-    {
-        if (!bat.getIsBatHanging())
-        {
-            GlStateManager.translate(0.0F, MathHelper.cos(p_77043_2_ * 0.3F) * 0.1F, 0.0F);
-        }
-        else
-        {
-            GlStateManager.translate(0.0F, -0.1F, 0.0F);
-        }
+	protected void preRenderCallback(EntityBat entityBat, float partialTickTime) {
+		GlStateManager.scale(0.35F, 0.35F, 0.35F);
+	}
 
-        super.rotateCorpse(bat, p_77043_2_, p_77043_3_, partialTicks);
-    }
+	protected void rotateCorpse(EntityBat bat, float p_77043_2_, float p_77043_3_, float partialTicks) {
+		if (!bat.getIsBatHanging()) {
+			GlStateManager.translate(0.0F, MathHelper.cos(p_77043_2_ * 0.3F) * 0.1F, 0.0F);
+		} else {
+			GlStateManager.translate(0.0F, -0.1F, 0.0F);
+		}
+
+		super.rotateCorpse(bat, p_77043_2_, p_77043_3_, partialTicks);
+	}
+
 }

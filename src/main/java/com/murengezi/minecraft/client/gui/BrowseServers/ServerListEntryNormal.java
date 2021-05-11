@@ -9,7 +9,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.base64.Base64;
 import net.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.gui.GUI;
-import net.minecraft.client.multiplayer.ServerData;
+import com.murengezi.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;

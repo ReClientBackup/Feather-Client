@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.network.play.client.C0BPacketEntityAction;
 import org.lwjgl.input.Keyboard;
