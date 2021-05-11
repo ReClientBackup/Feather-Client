@@ -1,10 +1,10 @@
 package com.murengezi.minecraft.client.particle;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.OpenGlHelper;
+import com.murengezi.minecraft.client.renderer.WorldRenderer;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityGuardian;

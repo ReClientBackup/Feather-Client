@@ -4,11 +4,11 @@ import com.murengezi.chocolate.Util.MinecraftUtils;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Options.ResourcePack.ResourcePackList;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import com.murengezi.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.Tessellator;
+import com.murengezi.minecraft.client.renderer.WorldRenderer;
+import com.murengezi.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.input.Mouse;
 

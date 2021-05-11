@@ -1,11 +1,11 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBase;
 import com.murengezi.minecraft.client.model.ModelMinecart;
 import com.murengezi.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderMinecart;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.entity.item.EntityMinecart;
 import net.optifine.config.Config;
 import net.optifine.reflect.Reflector;

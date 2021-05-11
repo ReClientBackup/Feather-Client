@@ -6,7 +6,7 @@ import com.google.common.collect.Ordering;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.client.gui.GuiSpectator;
 import net.minecraft.client.gui.spectator.ISpectatorMenuObject;

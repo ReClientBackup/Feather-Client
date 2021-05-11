@@ -3,7 +3,7 @@ package net.optifine.model;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import com.murengezi.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.optifine.config.Config;
 import net.minecraft.util.BlockPos;

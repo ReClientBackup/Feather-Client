@@ -7,8 +7,8 @@ import com.murengezi.minecraft.client.gui.Screen;
 import io.netty.buffer.Unpooled;
 import java.io.IOException;
 import java.util.List;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
+
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import com.murengezi.minecraft.event.ClickEvent;

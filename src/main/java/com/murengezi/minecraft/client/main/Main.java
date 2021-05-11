@@ -6,7 +6,7 @@ import com.mojang.authlib.properties.PropertyMap;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.minecraft.util.Session;
 import net.minecraft.util.StringUtils;
 

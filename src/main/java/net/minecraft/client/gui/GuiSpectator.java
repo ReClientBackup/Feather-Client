@@ -2,14 +2,14 @@ package net.minecraft.client.gui;
 
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.minecraft.client.gui.spectator.ISpectatorMenuObject;
 import net.minecraft.client.gui.spectator.ISpectatorMenuRecipient;
 import net.minecraft.client.gui.spectator.SpectatorMenu;
 import net.minecraft.client.gui.spectator.categories.SpectatorDetails;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.RenderHelper;
+import com.murengezi.minecraft.client.settings.GameSettings;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 

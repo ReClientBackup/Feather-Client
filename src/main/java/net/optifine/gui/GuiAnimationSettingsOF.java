@@ -5,7 +5,7 @@ import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.settings.GameSettings;
 import net.optifine.Lang;
 
 public class GuiAnimationSettingsOF extends Screen {

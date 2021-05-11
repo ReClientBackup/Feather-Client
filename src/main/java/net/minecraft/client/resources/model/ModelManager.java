@@ -1,7 +1,7 @@
 package net.minecraft.client.resources.model;
 
-import net.minecraft.client.renderer.BlockModelShapes;
-import net.minecraft.client.renderer.texture.TextureMap;
+import com.murengezi.minecraft.client.renderer.BlockModelShapes;
+import com.murengezi.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourceManagerReloadListener;
 import net.minecraft.util.IRegistry;

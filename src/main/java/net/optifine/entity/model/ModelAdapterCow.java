@@ -1,10 +1,10 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBase;
 import com.murengezi.minecraft.client.model.ModelCow;
-import net.minecraft.client.renderer.entity.RenderCow;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderCow;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.passive.EntityCow;
 
 public class ModelAdapterCow extends ModelAdapterQuadruped {

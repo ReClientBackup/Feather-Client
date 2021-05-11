@@ -1,11 +1,11 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBase;
 import com.murengezi.minecraft.client.model.ModelGhast;
 import com.murengezi.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.RenderGhast;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderGhast;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.monster.EntityGhast;
 import net.optifine.config.Config;
 import net.optifine.reflect.Reflector;

@@ -3,7 +3,7 @@ package net.optifine.util;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import net.minecraft.client.settings.KeyBinding;
+import com.murengezi.minecraft.client.settings.KeyBinding;
 
 public class KeyUtils {
    public static void fixKeyConflicts(KeyBinding[] keys, KeyBinding[] keysPrio) {

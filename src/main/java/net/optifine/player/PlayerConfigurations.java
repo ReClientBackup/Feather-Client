@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBiped;
 import net.optifine.http.FileDownloadThread;
 import net.optifine.http.HttpUtils;

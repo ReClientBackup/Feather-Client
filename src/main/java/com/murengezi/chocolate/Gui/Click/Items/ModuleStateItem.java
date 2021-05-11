@@ -3,7 +3,7 @@ package com.murengezi.chocolate.Gui.Click.Items;
 import com.murengezi.chocolate.Gui.Click.Item;
 import com.murengezi.chocolate.Module.Module;
 import com.murengezi.minecraft.client.gui.GUI;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 
 /**
  * @author Tobias Sjöblom

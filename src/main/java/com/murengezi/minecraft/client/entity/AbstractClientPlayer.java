@@ -2,12 +2,12 @@ package com.murengezi.minecraft.client.entity;
 
 import com.mojang.authlib.GameProfile;
 import com.murengezi.chocolate.Util.CapeUtils;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.network.NetworkPlayerInfo;
-import net.minecraft.client.renderer.ImageBufferDownload;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.client.renderer.texture.TextureManager;
+import com.murengezi.minecraft.client.renderer.ImageBufferDownload;
+import com.murengezi.minecraft.client.renderer.ThreadDownloadImageData;
+import com.murengezi.minecraft.client.renderer.texture.ITextureObject;
+import com.murengezi.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;

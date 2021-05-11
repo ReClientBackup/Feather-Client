@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.client.renderer.GLAllocation;
+import com.murengezi.minecraft.client.renderer.GLAllocation;
 import net.optifine.config.Config;
 import net.optifine.util.TextureUtils;
 

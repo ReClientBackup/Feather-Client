@@ -1,7 +1,7 @@
 package net.optifine.gui;
 
 import net.minecraft.client.gui.GuiOptionSlider;
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.settings.GameSettings;
 
 public class GuiOptionSliderOF extends GuiOptionSlider implements IOptionControl {
    private GameSettings.Options option = null;

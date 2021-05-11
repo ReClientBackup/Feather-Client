@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.model;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.util.MathHelper;

@@ -1,6 +1,6 @@
 package net.optifine.shaders;
 
-import net.minecraft.client.renderer.vertex.VertexFormatElement;
+import com.murengezi.minecraft.client.renderer.vertex.VertexFormatElement;
 
 public class SVertexAttrib {
    public int index;

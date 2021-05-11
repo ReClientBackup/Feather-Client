@@ -2,12 +2,12 @@ package net.optifine.entity.model;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBase;
 import com.murengezi.minecraft.client.model.ModelHorse;
 import com.murengezi.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.RenderHorse;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderHorse;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.passive.EntityHorse;
 import net.optifine.reflect.Reflector;
 

@@ -1,6 +1,6 @@
 package net.optifine.http;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 
 public class FileDownloadThread extends Thread {
    private String urlString = null;

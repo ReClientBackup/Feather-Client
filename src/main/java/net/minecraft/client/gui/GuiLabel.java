@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 import com.murengezi.minecraft.client.gui.GUI;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 
 public class GuiLabel extends GUI {

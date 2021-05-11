@@ -1,9 +1,9 @@
 package net.minecraft.client.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.settings.GameSettings;
 import net.minecraft.util.MathHelper;
 
 public class GuiOptionSlider extends GuiButton

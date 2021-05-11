@@ -1,8 +1,8 @@
 package com.murengezi.minecraft.client.particle;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import com.murengezi.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.renderer.WorldRenderer;
+import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;

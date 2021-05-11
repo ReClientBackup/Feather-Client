@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.audio.MovingSoundMinecart;
 import com.murengezi.minecraft.client.audio.PositionedSoundRecord;
 import com.murengezi.minecraft.client.network.NetHandlerPlayClient;

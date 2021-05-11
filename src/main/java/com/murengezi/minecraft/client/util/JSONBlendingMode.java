@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.util;
 
 import com.google.gson.JsonObject;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.JsonUtils;
 import org.lwjgl.opengl.GL14;
 

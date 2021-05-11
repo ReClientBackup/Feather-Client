@@ -1,11 +1,11 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBase;
 import com.murengezi.minecraft.client.model.ModelRenderer;
 import com.murengezi.minecraft.client.model.ModelSnowMan;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderSnowMan;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderSnowMan;
 import net.minecraft.entity.monster.EntitySnowman;
 
 public class ModelAdapterSnowman extends ModelAdapter {

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import com.murengezi.minecraft.client.ClientBrandRetriever;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.multiplayer.ThreadLanServerPing;
 import net.minecraft.command.ServerCommandManager;
 import com.murengezi.minecraft.crash.CrashReport;

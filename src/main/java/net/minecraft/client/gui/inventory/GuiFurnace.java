@@ -1,6 +1,6 @@
 package net.minecraft.client.gui.inventory;
 
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerFurnace;
 import net.minecraft.inventory.IInventory;

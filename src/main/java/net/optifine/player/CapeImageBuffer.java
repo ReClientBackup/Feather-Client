@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import com.murengezi.chocolate.Util.CapeUtils;
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.renderer.ImageBufferDownload;
+import com.murengezi.minecraft.client.renderer.ImageBufferDownload;
 import net.minecraft.util.ResourceLocation;
 
 public class CapeImageBuffer extends ImageBufferDownload {

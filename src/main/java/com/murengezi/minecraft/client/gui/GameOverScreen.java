@@ -2,7 +2,7 @@ package com.murengezi.minecraft.client.gui;
 
 import java.io.IOException;
 
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
 

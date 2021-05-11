@@ -5,9 +5,9 @@ import com.murengezi.minecraft.client.gui.Screen;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.GuiSlot;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.settings.GameSettings;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;

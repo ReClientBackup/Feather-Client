@@ -1,7 +1,7 @@
 package net.optifine.util;
 
 import java.util.UUID;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.optifine.config.Config;

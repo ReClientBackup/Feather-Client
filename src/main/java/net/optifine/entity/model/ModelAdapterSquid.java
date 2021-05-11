@@ -1,11 +1,11 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBase;
 import com.murengezi.minecraft.client.model.ModelRenderer;
 import com.murengezi.minecraft.client.model.ModelSquid;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderSquid;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderSquid;
 import net.minecraft.entity.passive.EntitySquid;
 import net.optifine.config.Config;
 import net.optifine.reflect.Reflector;

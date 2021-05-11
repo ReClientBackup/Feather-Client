@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.multiplayer;
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.audio.PositionedSoundRecord;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import com.murengezi.minecraft.client.network.NetHandlerPlayClient;

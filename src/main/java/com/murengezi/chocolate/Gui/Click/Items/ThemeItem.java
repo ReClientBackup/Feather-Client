@@ -4,7 +4,7 @@ import com.murengezi.chocolate.Chocolate;
 import com.murengezi.chocolate.Gui.Click.Item;
 import com.murengezi.chocolate.Theme.Theme;
 import com.murengezi.minecraft.client.gui.GUI;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 
 /**
  * @author Tobias Sjöblom

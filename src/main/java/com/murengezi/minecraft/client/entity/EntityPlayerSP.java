@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.entity;
 import com.darkmagician6.eventapi.EventManager;
 import com.murengezi.chocolate.Event.PlayerUpdateEvent;
 import com.murengezi.minecraft.potion.Potion;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.audio.MovingSoundMinecartRiding;
 import com.murengezi.minecraft.client.audio.PositionedSoundRecord;
 import com.murengezi.minecraft.client.gui.InGame.CommandBlockScreen;

@@ -1,6 +1,6 @@
 package net.optifine.shaders;
 
-import net.minecraft.client.renderer.culling.ClippingHelper;
+import com.murengezi.minecraft.client.renderer.culling.ClippingHelper;
 import net.minecraft.util.MathHelper;
 
 public class ClippingHelperShadow extends ClippingHelper {

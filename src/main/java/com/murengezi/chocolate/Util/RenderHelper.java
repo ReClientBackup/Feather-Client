@@ -1,12 +1,12 @@
 package com.murengezi.chocolate.Util;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import com.murengezi.minecraft.client.renderer.OpenGlHelper;
+import com.murengezi.minecraft.client.renderer.Tessellator;
+import com.murengezi.minecraft.client.renderer.WorldRenderer;
+import com.murengezi.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 

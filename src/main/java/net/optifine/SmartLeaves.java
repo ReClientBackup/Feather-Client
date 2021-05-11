@@ -6,7 +6,7 @@ import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.BlockNewLeaf;
 import com.murengezi.minecraft.block.BlockOldLeaf;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import com.murengezi.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;

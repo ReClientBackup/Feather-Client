@@ -1,9 +1,9 @@
 package net.optifine.entity.model.anim;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RendererLivingEntity;
+import com.murengezi.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.renderer.entity.Render;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.EntityLivingBase;
 import net.optifine.expr.ExpressionType;
 import net.optifine.expr.IExpressionFloat;

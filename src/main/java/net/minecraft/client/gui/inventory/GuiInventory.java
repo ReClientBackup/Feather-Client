@@ -1,15 +1,15 @@
 package net.minecraft.client.gui.inventory;
 
 import java.io.IOException;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.client.gui.achievement.GuiStats;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.InventoryEffectRenderer;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.InventoryEffectRenderer;
+import com.murengezi.minecraft.client.renderer.OpenGlHelper;
+import com.murengezi.minecraft.client.renderer.RenderHelper;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

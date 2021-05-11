@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.model;
 
 import java.util.Random;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 

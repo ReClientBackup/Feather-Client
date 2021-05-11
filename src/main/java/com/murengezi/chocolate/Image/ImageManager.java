@@ -3,8 +3,8 @@ package com.murengezi.chocolate.Image;
 import com.murengezi.chocolate.Util.MinecraftUtils;
 import com.murengezi.chocolate.Util.TimerUtil;
 import com.murengezi.minecraft.client.gui.GUI;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.texture.DynamicTexture;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.image.BufferedImage;

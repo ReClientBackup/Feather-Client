@@ -1,7 +1,7 @@
 package net.optifine.shaders;
 
 import java.nio.ByteBuffer;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 

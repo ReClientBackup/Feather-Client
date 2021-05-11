@@ -1,7 +1,7 @@
 package net.optifine.shaders;
 
-import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.client.renderer.vertex.VertexFormatElement;
+import com.murengezi.minecraft.client.renderer.vertex.VertexFormat;
+import com.murengezi.minecraft.client.renderer.vertex.VertexFormatElement;
 
 public class SVertexFormat {
    public static final int vertexSizeBlock = 14;

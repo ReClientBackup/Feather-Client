@@ -1,7 +1,7 @@
 package net.optifine.shaders;
 
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.client.renderer.texture.TextureUtil;
+import com.murengezi.minecraft.client.renderer.texture.ITextureObject;
+import com.murengezi.minecraft.client.renderer.texture.TextureUtil;
 
 public class CustomTexture implements ICustomTexture {
    private int textureUnit = -1;

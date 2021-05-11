@@ -5,7 +5,7 @@ import com.murengezi.chocolate.Event.RenderOverlayEvent;
 import com.murengezi.chocolate.Module.Adjustable;
 import com.murengezi.chocolate.Module.ModuleInfo;
 import com.murengezi.chocolate.Module.Setting.Settings.ModeSetting;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.gui.GUI;
 import net.minecraft.util.EnumChatFormatting;
 

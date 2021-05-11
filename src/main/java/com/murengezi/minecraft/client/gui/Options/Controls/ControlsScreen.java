@@ -5,10 +5,10 @@ import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.GameSettings;
-import net.minecraft.client.settings.KeyBinding;
+import com.murengezi.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.settings.KeyBinding;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package net.optifine.shaders.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiButtonDownloadShaders extends GuiButton {

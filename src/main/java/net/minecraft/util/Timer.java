@@ -1,6 +1,6 @@
 package net.minecraft.util;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 
 public class Timer
 {

@@ -4,12 +4,12 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBiped;
 import com.murengezi.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.texture.TextureManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.texture.DynamicTexture;
+import com.murengezi.minecraft.client.renderer.texture.TextureManager;
 import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 

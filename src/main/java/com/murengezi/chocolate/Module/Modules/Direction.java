@@ -6,7 +6,7 @@ import com.murengezi.chocolate.Chocolate;
 import com.murengezi.chocolate.Module.Adjustable;
 import com.murengezi.chocolate.Module.ModuleInfo;
 import com.murengezi.minecraft.client.gui.GUI;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 

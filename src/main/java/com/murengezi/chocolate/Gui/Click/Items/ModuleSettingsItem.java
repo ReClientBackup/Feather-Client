@@ -6,7 +6,7 @@ import com.murengezi.chocolate.Module.Setting.Setting;
 import com.murengezi.chocolate.Module.Setting.Settings.BooleanSetting;
 import com.murengezi.chocolate.Module.Setting.Settings.ModeSetting;
 import com.murengezi.minecraft.client.gui.GUI;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 
 /**
  * @author Tobias Sjöblom

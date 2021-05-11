@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.state.BlockStateBase;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.texture.TextureUtil;
+import com.murengezi.minecraft.client.renderer.texture.TextureUtil;
 import net.optifine.config.Config;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;

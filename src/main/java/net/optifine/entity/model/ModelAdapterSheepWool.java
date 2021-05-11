@@ -2,15 +2,15 @@ package net.optifine.entity.model;
 
 import java.util.Iterator;
 import java.util.List;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBase;
 import com.murengezi.minecraft.client.model.ModelSheep1;
 import com.murengezi.minecraft.client.model.ModelSheep2;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderSheep;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.client.renderer.entity.layers.LayerSheepWool;
+import com.murengezi.minecraft.client.renderer.entity.Render;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderSheep;
+import com.murengezi.minecraft.client.renderer.entity.layers.LayerRenderer;
+import com.murengezi.minecraft.client.renderer.entity.layers.LayerSheepWool;
 import net.minecraft.entity.passive.EntitySheep;
 import net.optifine.config.Config;
 

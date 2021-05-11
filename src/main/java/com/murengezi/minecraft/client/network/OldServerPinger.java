@@ -21,7 +21,7 @@ import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.multiplayer.ServerAddress;
 import com.murengezi.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.EnumConnectionState;

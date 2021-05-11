@@ -1,12 +1,12 @@
 package com.murengezi.chocolate.Util;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.RenderHelper;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 
-import static net.minecraft.client.renderer.OpenGlHelper.defaultTexUnit;
-import static net.minecraft.client.renderer.OpenGlHelper.lightmapTexUnit;
+import static com.murengezi.minecraft.client.renderer.OpenGlHelper.defaultTexUnit;
+import static com.murengezi.minecraft.client.renderer.OpenGlHelper.lightmapTexUnit;
 
 /**
  * @author Tobias Sjöblom

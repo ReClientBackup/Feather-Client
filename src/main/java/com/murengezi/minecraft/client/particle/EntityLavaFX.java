@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.client.particle;
 
-import net.minecraft.client.renderer.WorldRenderer;
+import com.murengezi.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;

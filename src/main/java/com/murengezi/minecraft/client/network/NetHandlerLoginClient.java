@@ -10,7 +10,7 @@ import java.math.BigInteger;
 import java.security.PublicKey;
 import java.util.Objects;
 import javax.crypto.SecretKey;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.network.EnumConnectionState;
 import net.minecraft.network.NetworkManager;

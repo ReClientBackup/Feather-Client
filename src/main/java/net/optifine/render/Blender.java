@@ -1,6 +1,6 @@
 package net.optifine.render;
 
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.optifine.config.Config;
 
 public class Blender {

@@ -1,10 +1,10 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBase;
 import com.murengezi.minecraft.client.model.ModelEnderman;
-import net.minecraft.client.renderer.entity.RenderEnderman;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderEnderman;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.monster.EntityEnderman;
 
 public class ModelAdapterEnderman extends ModelAdapterBiped {

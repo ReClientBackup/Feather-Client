@@ -5,9 +5,9 @@ import java.util.Set;
 
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import com.murengezi.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderPlayer;
+import com.murengezi.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.optifine.config.Config;
 

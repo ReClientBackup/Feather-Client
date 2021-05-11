@@ -1,7 +1,7 @@
 package net.minecraft.client.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.settings.GameSettings;
 
 public class GuiOptionButton extends GuiButton {
 

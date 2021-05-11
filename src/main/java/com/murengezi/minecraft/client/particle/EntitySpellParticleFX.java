@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.particle;
 
 import java.util.Random;
-import net.minecraft.client.renderer.WorldRenderer;
+import com.murengezi.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;

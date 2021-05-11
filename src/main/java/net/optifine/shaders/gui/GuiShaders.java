@@ -7,7 +7,7 @@ import java.net.URI;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.settings.GameSettings;
 import net.optifine.config.Config;
 import net.optifine.Lang;
 import net.optifine.gui.GuiScreenOF;

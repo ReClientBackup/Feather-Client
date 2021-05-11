@@ -1,8 +1,8 @@
 package com.murengezi.minecraft.client.model;
 
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import com.murengezi.minecraft.client.renderer.Tessellator;
+import com.murengezi.minecraft.client.renderer.WorldRenderer;
+import com.murengezi.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.optifine.config.Config;
 import net.minecraft.util.Vec3;
 import net.optifine.shaders.SVertexFormat;

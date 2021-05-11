@@ -1,10 +1,10 @@
 package net.minecraft.client.gui.spectator;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
 import com.murengezi.minecraft.client.gui.GUI;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.network.play.client.C18PacketSpectate;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;

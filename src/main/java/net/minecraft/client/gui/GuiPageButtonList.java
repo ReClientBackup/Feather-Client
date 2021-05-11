@@ -9,7 +9,7 @@ import java.util.List;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.minecraft.util.IntHashMap;
 
 public class GuiPageButtonList extends GuiListExtended

@@ -1,8 +1,8 @@
 package net.optifine.shaders.gui;
 
 import com.murengezi.minecraft.client.gui.Screen;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.MathHelper;
 import net.optifine.shaders.config.ShaderOption;
 

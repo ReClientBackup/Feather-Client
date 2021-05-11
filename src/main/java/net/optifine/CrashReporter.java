@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.murengezi.minecraft.crash.CrashReport;
 import com.murengezi.minecraft.crash.CrashReportCategory;
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.settings.GameSettings;
 import net.optifine.config.Config;
 import net.optifine.http.FileUploadThread;
 import net.optifine.http.IFileUploadListener;

@@ -2,9 +2,9 @@ package net.optifine;
 
 import java.nio.ByteBuffer;
 import java.util.Properties;
-import net.minecraft.client.renderer.GLAllocation;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.texture.ITextureObject;
+import com.murengezi.minecraft.client.renderer.GLAllocation;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.texture.ITextureObject;
 import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.util.TextureUtils;

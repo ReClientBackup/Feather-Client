@@ -1,13 +1,10 @@
 package com.murengezi.chocolate.Util;
 
-import com.murengezi.chocolate.API.MurengeziAPI;
 import com.murengezi.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.client.renderer.texture.SimpleTexture;
-import net.minecraft.client.renderer.texture.TextureManager;
+import com.murengezi.minecraft.client.renderer.texture.ITextureObject;
+import com.murengezi.minecraft.client.renderer.texture.SimpleTexture;
+import com.murengezi.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
-import net.optifine.player.CapeImageBuffer;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

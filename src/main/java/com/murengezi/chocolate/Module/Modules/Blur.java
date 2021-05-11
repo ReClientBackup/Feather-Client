@@ -8,10 +8,10 @@ import com.murengezi.chocolate.Module.Module;
 import com.murengezi.chocolate.Module.ModuleInfo;
 import com.murengezi.chocolate.Util.TimerUtil;
 import com.murengezi.minecraft.client.gui.Chat.ChatScreen;
-import net.minecraft.client.renderer.EntityRenderer;
-import net.minecraft.client.shader.Shader;
-import net.minecraft.client.shader.ShaderGroup;
-import net.minecraft.client.shader.ShaderUniform;
+import com.murengezi.minecraft.client.renderer.EntityRenderer;
+import com.murengezi.minecraft.client.shader.Shader;
+import com.murengezi.minecraft.client.shader.ShaderGroup;
+import com.murengezi.minecraft.client.shader.ShaderUniform;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.List;

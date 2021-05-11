@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.RenderGlobal;
+import com.murengezi.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemMap;

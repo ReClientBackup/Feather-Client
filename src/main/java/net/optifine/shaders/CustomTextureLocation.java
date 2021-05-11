@@ -1,10 +1,10 @@
 package net.optifine.shaders;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.AbstractTexture;
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.client.renderer.texture.SimpleTexture;
-import net.minecraft.client.renderer.texture.TextureManager;
+import com.murengezi.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.renderer.texture.AbstractTexture;
+import com.murengezi.minecraft.client.renderer.texture.ITextureObject;
+import com.murengezi.minecraft.client.renderer.texture.SimpleTexture;
+import com.murengezi.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
 public class CustomTextureLocation implements ICustomTexture {

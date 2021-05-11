@@ -10,7 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import javax.imageio.ImageIO;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.http.HttpPipeline;

@@ -1,12 +1,12 @@
 package com.murengezi.chocolate.Util;
 
 import com.murengezi.minecraft.potion.Potion;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import com.murengezi.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.LanguageManager;
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.settings.GameSettings;
 
 /**
  * @author Tobias Sjöblom

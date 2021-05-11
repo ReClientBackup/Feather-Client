@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.audio;
 
 import java.util.Random;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;

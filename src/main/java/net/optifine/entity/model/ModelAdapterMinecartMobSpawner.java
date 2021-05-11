@@ -1,9 +1,9 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderMinecartMobSpawner;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderMinecartMobSpawner;
 import net.minecraft.entity.ai.EntityMinecartMobSpawner;
 import net.optifine.config.Config;
 import net.optifine.reflect.Reflector;

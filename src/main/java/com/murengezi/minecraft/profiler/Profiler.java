@@ -5,7 +5,7 @@ import com.google.common.collect.Maps;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.optifine.config.Config;
 import net.optifine.Lagometer;
 import org.apache.logging.log4j.LogManager;

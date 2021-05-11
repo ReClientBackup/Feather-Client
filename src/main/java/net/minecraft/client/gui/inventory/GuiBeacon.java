@@ -3,10 +3,10 @@ package net.minecraft.client.gui.inventory;
 import com.murengezi.minecraft.potion.Potion;
 import io.netty.buffer.Unpooled;
 import java.io.IOException;
-import net.minecraft.client.Minecraft;
+
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;

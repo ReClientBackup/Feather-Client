@@ -1,6 +1,6 @@
 package net.minecraft.util;
 
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.settings.GameSettings;
 
 public class MovementInputFromOptions extends MovementInput
 {

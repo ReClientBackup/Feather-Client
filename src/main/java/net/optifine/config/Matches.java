@@ -1,7 +1,7 @@
 package net.optifine.config;
 
 import com.murengezi.minecraft.block.state.BlockStateBase;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class Matches {

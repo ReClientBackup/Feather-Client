@@ -2,8 +2,8 @@ package com.murengezi.minecraft.client.gui.Options.ResourcePack;
 
 import com.google.gson.JsonParseException;
 import com.murengezi.chocolate.Chocolate;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.texture.TextureUtil;
+import com.murengezi.minecraft.client.renderer.texture.DynamicTexture;
+import com.murengezi.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResourcePack;
 import net.minecraft.client.resources.data.PackMetadataSection;
 import net.minecraft.util.EnumChatFormatting;

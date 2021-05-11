@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.entity;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;

@@ -1,12 +1,12 @@
 package net.optifine.entity.model;
 
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.model.ModelBase;
 import com.murengezi.minecraft.client.model.ModelBiped;
 import com.murengezi.minecraft.client.model.ModelZombie;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderPigZombie;
+import com.murengezi.minecraft.client.renderer.entity.Render;
+import com.murengezi.minecraft.client.renderer.entity.RenderManager;
+import com.murengezi.minecraft.client.renderer.entity.RenderPigZombie;
 import net.minecraft.entity.monster.EntityPigZombie;
 
 public class ModelAdapterPigZombie extends ModelAdapterBiped {

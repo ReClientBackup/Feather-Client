@@ -2,7 +2,7 @@ package net.optifine.expr;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.optifine.config.Config;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;

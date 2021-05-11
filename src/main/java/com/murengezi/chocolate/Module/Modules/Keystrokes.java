@@ -7,7 +7,7 @@ import com.murengezi.chocolate.Module.Adjustable;
 import com.murengezi.chocolate.Module.ModuleInfo;
 import com.murengezi.minecraft.client.gui.GUI;
 import com.murengezi.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
+import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.input.Keyboard;
 

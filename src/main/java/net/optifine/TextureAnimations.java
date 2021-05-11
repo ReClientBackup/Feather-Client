@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Properties;
 import javax.imageio.ImageIO;
 import net.minecraft.client.resources.IResourcePack;
-import net.minecraft.client.settings.GameSettings;
+import com.murengezi.minecraft.client.settings.GameSettings;
 import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.util.PropertiesOrdered;

@@ -1,7 +1,7 @@
 package net.minecraft.client.gui;
 
 import com.murengezi.minecraft.client.gui.GuiButton;
-import net.minecraft.client.Minecraft;
+import com.murengezi.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 
 public class GuiListButton extends GuiButton

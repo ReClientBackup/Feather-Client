@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import com.murengezi.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.init.Blocks;
 
 public class ListQuadsOverlay {
