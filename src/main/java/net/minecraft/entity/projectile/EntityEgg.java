@@ -2,7 +2,7 @@ package net.minecraft.entity.projectile;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;

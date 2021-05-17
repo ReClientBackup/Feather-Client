@@ -4,7 +4,7 @@ import com.murengezi.minecraft.block.BlockChest;
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.item.Item;

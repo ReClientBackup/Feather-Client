@@ -1,7 +1,7 @@
 package net.minecraft.command;
 
 import java.util.List;
-import net.minecraft.enchantment.Enchantment;
+import com.murengezi.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;

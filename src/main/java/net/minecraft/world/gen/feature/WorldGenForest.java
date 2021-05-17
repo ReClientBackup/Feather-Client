@@ -7,7 +7,7 @@ import com.murengezi.minecraft.block.BlockOldLog;
 import com.murengezi.minecraft.block.BlockPlanks;
 import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 

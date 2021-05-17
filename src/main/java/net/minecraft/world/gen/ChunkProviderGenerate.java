@@ -5,7 +5,7 @@ import java.util.Random;
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.MathHelper;

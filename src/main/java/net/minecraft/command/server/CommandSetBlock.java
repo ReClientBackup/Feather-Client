@@ -8,7 +8,7 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.CommandResultStats;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTException;

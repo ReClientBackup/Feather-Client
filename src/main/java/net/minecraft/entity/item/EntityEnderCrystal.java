@@ -1,7 +1,7 @@
 package net.minecraft.entity.item;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;

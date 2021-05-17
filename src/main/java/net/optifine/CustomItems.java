@@ -26,7 +26,7 @@ import com.murengezi.minecraft.client.resources.IResourcePack;
 import com.murengezi.minecraft.client.resources.model.IBakedModel;
 import com.murengezi.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;

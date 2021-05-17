@@ -5,7 +5,7 @@ import java.util.List;
 import com.murengezi.minecraft.potion.Potion;
 import com.murengezi.minecraft.potion.PotionEffect;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;

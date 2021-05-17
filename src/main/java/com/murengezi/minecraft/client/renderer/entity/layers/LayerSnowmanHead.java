@@ -5,7 +5,7 @@ import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import com.murengezi.minecraft.client.renderer.entity.RenderSnowMan;
 import net.minecraft.entity.monster.EntitySnowman;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 public class LayerSnowmanHead implements LayerRenderer<EntitySnowman> {

@@ -6,7 +6,7 @@ import com.murengezi.minecraft.client.model.ModelBanner;
 import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.texture.LayeredColorMaskTexture;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraft.util.BlockPos;

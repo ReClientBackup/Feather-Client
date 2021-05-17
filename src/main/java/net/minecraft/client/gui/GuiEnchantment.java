@@ -11,7 +11,7 @@ import com.murengezi.minecraft.client.model.ModelBook;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.RenderHelper;
 import com.murengezi.minecraft.client.resources.I18n;
-import net.minecraft.enchantment.Enchantment;
+import com.murengezi.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerEnchantment;
 import net.minecraft.item.ItemStack;

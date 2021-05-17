@@ -8,7 +8,7 @@ import com.murengezi.minecraft.client.renderer.OpenGlHelper;
 import com.murengezi.minecraft.client.renderer.entity.RenderIronGolem;
 import com.murengezi.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 
 public class LayerIronGolemFlower implements LayerRenderer<EntityIronGolem> {
 

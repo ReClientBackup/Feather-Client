@@ -11,7 +11,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;

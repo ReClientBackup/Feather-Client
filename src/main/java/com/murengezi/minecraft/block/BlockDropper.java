@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.block;
 
-import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
-import net.minecraft.dispenser.IBehaviorDispenseItem;
+import com.murengezi.minecraft.dispenser.BehaviorDefaultDispenseItem;
+import com.murengezi.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

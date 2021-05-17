@@ -8,7 +8,7 @@ import com.murengezi.minecraft.client.renderer.RenderGlobal;
 import com.murengezi.minecraft.client.renderer.chunk.CompiledChunk;
 import com.murengezi.minecraft.client.renderer.chunk.RenderChunk;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.optifine.config.Config;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;

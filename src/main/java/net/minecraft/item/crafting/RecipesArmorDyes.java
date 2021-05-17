@@ -3,7 +3,7 @@ package net.minecraft.item.crafting;
 import com.google.common.collect.Lists;
 import java.util.List;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemArmor;

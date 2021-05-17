@@ -53,8 +53,7 @@ public abstract class Screen extends GUI implements YesNoCallback {
 
     protected RenderItem itemRender;
 
-    public int width;
-    public int height;
+    public int width, height;
 
     protected List<GuiButton> buttonList = Lists.newArrayList();
     protected List<GuiLabel> labelList = Lists.newArrayList();

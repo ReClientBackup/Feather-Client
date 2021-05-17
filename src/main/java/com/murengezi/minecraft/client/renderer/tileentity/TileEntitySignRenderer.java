@@ -7,7 +7,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiUtilRenderComponents;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ResourceLocation;

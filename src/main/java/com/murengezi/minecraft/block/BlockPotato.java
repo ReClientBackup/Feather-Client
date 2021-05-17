@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.block;
 
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;

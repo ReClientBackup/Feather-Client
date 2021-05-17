@@ -10,8 +10,8 @@ import com.murengezi.minecraft.block.BlockStone;
 import com.murengezi.minecraft.block.BlockStoneBrick;
 import com.murengezi.minecraft.block.BlockStoneSlab;
 import com.murengezi.minecraft.block.BlockStoneSlabNew;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 

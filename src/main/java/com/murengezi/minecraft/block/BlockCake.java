@@ -6,7 +6,7 @@ import com.murengezi.minecraft.block.properties.PropertyInteger;
 import com.murengezi.minecraft.block.state.BlockState;
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.AxisAlignedBB;

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.BlockPos;

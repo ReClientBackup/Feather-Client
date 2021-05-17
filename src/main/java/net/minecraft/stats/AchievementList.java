@@ -2,8 +2,8 @@ package net.minecraft.stats;
 
 import com.google.common.collect.Lists;
 import java.util.List;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonSerializableSet;
 

@@ -7,7 +7,7 @@ import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.MathHelper;

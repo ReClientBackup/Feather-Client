@@ -12,7 +12,7 @@ import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
 import com.murengezi.minecraft.client.renderer.texture.TextureMap;
 import com.murengezi.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.optifine.config.Config;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;

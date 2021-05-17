@@ -9,7 +9,7 @@ import com.murengezi.minecraft.client.renderer.tileentity.TileEntitySkullRendere
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

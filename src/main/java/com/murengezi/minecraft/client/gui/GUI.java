@@ -35,6 +35,10 @@ public class GUI extends MinecraftUtils {
      * TODO Chocolate
      * TODO WorldRenderer deobfuscation
      */
+    public static void drawRect(int left, int top, int right, int bottom, int color) {
+        drawRect((float) left, (float) top, (float) right, (float) bottom, color);
+    }
+
     public static void drawRect(float left, float top, float right, float bottom, int color) {
         if (left < right) {
             float storeLeft = left;

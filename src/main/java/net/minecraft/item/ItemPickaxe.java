@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import java.util.Set;
 import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 
 public class ItemPickaxe extends ItemTool
 {

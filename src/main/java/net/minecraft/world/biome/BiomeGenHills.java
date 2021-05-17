@@ -2,7 +2,7 @@ package net.minecraft.world.biome;
 
 import java.util.Random;
 import com.murengezi.minecraft.block.BlockSilverfish;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;

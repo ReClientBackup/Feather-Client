@@ -2,7 +2,7 @@ package net.minecraft.inventory;
 
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class ContainerHorseInventory extends Container

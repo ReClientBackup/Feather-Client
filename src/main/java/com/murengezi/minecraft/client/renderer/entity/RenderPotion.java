@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.client.renderer.entity;
 
 import net.minecraft.entity.projectile.EntityPotion;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class RenderPotion extends RenderSnowball<EntityPotion> {

@@ -5,7 +5,7 @@ import com.murengezi.minecraft.client.renderer.BlockRendererDispatcher;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.item.EntityTNTPrimed;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 

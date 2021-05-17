@@ -34,7 +34,7 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.entity.projectile.EntityWitherSkull;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

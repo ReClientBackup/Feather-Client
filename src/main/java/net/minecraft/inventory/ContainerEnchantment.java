@@ -2,12 +2,12 @@ package net.minecraft.inventory;
 
 import java.util.List;
 import java.util.Random;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
+import com.murengezi.minecraft.enchantment.EnchantmentData;
+import com.murengezi.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;

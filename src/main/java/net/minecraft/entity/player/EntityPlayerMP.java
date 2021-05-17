@@ -21,7 +21,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IMerchant;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.ContainerHorseInventory;

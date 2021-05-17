@@ -26,7 +26,7 @@ import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.particle.EntityFX;
 import com.murengezi.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;

@@ -1,7 +1,7 @@
 package net.minecraft.entity;
 
 import java.util.UUID;
-import net.minecraft.enchantment.EnchantmentHelper;
+import com.murengezi.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.ai.EntityJumpHelper;
 import net.minecraft.entity.ai.EntityLookHelper;
@@ -14,8 +14,8 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;

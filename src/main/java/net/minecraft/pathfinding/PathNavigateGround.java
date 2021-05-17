@@ -5,7 +5,7 @@ import com.murengezi.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;

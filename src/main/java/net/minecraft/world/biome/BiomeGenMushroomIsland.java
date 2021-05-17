@@ -1,7 +1,7 @@
 package net.minecraft.world.biome;
 
 import net.minecraft.entity.passive.EntityMooshroom;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 
 public class BiomeGenMushroomIsland extends BiomeGenBase
 {

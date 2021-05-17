@@ -11,7 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerRepair;
 import net.minecraft.item.Item;

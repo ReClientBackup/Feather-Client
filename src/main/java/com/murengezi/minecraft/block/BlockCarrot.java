@@ -1,6 +1,6 @@
 package com.murengezi.minecraft.block;
 
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class BlockCarrot extends BlockCrops {

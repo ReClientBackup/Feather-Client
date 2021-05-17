@@ -1,7 +1,7 @@
 package net.minecraft.item.crafting;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;

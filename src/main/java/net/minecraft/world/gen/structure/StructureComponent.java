@@ -7,7 +7,7 @@ import com.murengezi.minecraft.block.BlockDirectional;
 import com.murengezi.minecraft.block.BlockDoor;
 import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

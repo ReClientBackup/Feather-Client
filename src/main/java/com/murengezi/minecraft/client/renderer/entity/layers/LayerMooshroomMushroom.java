@@ -8,7 +8,7 @@ import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.entity.RenderMooshroom;
 import com.murengezi.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.passive.EntityMooshroom;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.optifine.config.Config;

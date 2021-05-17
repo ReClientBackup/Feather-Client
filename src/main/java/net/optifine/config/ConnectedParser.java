@@ -15,7 +15,7 @@ import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.BlockDoublePlant;
 import com.murengezi.minecraft.block.properties.IProperty;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;

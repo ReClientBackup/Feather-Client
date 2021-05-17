@@ -2,7 +2,7 @@ package net.minecraft.entity.ai;
 
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import net.minecraft.util.BlockPos;

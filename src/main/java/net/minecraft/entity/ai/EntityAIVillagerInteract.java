@@ -2,7 +2,7 @@ package net.minecraft.entity.ai;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

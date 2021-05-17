@@ -7,7 +7,7 @@ import com.murengezi.minecraft.block.BlockJukebox;
 import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;

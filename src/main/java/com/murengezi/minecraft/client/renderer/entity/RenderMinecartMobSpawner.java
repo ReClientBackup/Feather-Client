@@ -3,7 +3,7 @@ package com.murengezi.minecraft.client.renderer.entity;
 import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.client.renderer.tileentity.TileEntityMobSpawnerRenderer;
 import net.minecraft.entity.ai.EntityMinecartMobSpawner;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 
 public class RenderMinecartMobSpawner extends RenderMinecart<EntityMinecartMobSpawner> {
 

@@ -3,8 +3,8 @@ package com.murengezi.minecraft.client.particle;
 import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 

@@ -1,7 +1,7 @@
 package net.minecraft.item;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.world.World;
 
 public class ItemSoup extends ItemFood

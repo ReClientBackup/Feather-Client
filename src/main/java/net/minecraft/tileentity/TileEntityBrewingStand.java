@@ -9,7 +9,7 @@ import com.murengezi.minecraft.block.BlockBrewingStand;
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerBrewingStand;
 import net.minecraft.inventory.ISidedInventory;

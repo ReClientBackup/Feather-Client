@@ -9,7 +9,7 @@ import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;

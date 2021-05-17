@@ -1,7 +1,7 @@
 package net.minecraft.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.ITickable;
 
 public class TileEntityEnderChest extends TileEntity implements ITickable

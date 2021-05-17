@@ -7,7 +7,7 @@ import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import com.murengezi.minecraft.client.renderer.entity.RenderWitch;
 import net.minecraft.entity.monster.EntityWitch;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

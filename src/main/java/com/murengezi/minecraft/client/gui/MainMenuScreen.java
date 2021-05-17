@@ -51,7 +51,7 @@ public class MainMenuScreen extends Screen {
                 changeScreen(new BrowseScreen(this));
                 break;
             case OPTIONS:
-                changeScreen(new OptionsScreen(this, getMc().gameSettings));
+                changeScreen(new OptionsScreen(this));
                 break;
             case QUIT:
                 getMc().shutdown();

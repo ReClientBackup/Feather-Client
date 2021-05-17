@@ -4,10 +4,15 @@ import com.murengezi.minecraft.client.gui.GuiButton;
 import com.murengezi.minecraft.client.gui.Options.Controls.ControlsScreen;
 import com.murengezi.minecraft.client.gui.Options.ResourcePack.ResourcePacksScreen;
 import com.murengezi.minecraft.client.gui.Screen;
+import net.minecraft.client.gui.GuiOptionSlider;
 import net.minecraft.client.gui.GuiVideoSettings;
 import com.murengezi.minecraft.client.resources.I18n;
 import com.murengezi.minecraft.client.settings.GameSettings;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.world.EnumDifficulty;
 
 import java.io.IOException;
 
@@ -18,27 +23,40 @@ import java.io.IOException;
 public class OptionsScreen extends Screen {
 
     private final Screen previousScreen;
-    private final GameSettings gameSettings;
 
     private static final int SOUNDS = 0, SKINCUSTOMISATION = 1, VIDEO = 2, CONTROLS = 3, LANGUAGE = 4, CHAT = 5, RESOURCEPACK = 6, SNOOPER = 7, DONE = 8;
 
-    public OptionsScreen(Screen previousScreen, GameSettings gameSettings) {
+    public OptionsScreen(Screen previousScreen) {
         this.previousScreen = previousScreen;
-        this.gameSettings = gameSettings;
     }
 
     @Override
     public void initGui() {
-        addButton(new GuiButton(SOUNDS, this.width / 2 - 155, this.height / 6 + 42, 150, 20, I18n.format("options.sounds")));
-        addButton(new GuiButton(SKINCUSTOMISATION, this.width / 2 + 5, this.height / 6 + 42, 150, 20, I18n.format("options.skinCustomisation")));
-        addButton(new GuiButton(VIDEO, this.width / 2 - 155, this.height / 6 + 66, 150, 20, I18n.format("options.video")));
-        addButton(new GuiButton(CONTROLS, this.width / 2 + 5, this.height / 6 + 66, 150, 20, I18n.format("options.controls")));
-        addButton(new GuiButton(LANGUAGE, this.width / 2 - 155, this.height / 6 + 90, 150, 20, I18n.format("options.language")));
-        addButton(new GuiButton(CHAT, this.width / 2 + 5, this.height / 6 + 90, 150, 20, I18n.format("options.chat.title")));
-        addButton(new GuiButton(RESOURCEPACK, this.width / 2 - 155, this.height / 6 + 114, 150, 20, I18n.format("options.resourcepack")));
-        addButton(new GuiButton(SNOOPER, this.width / 2 + 5, this.height / 6 + 114, 150, 20, I18n.format("options.snooper.view")));
-        addButton(new GuiButton(DONE, this.width / 2 - 75, this.height / 6 + 144, 150, 20, I18n.format("gui.done")));
+
+        addButton(new GuiOptionSlider(GameSettings.Options.FOV.returnEnumOrdinal(), this.width / 2 - 155, this.height / 6 + 42, GameSettings.Options.FOV));
+
+        if (getWorld() != null) {
+            addButton( new GuiButton(108, this.width / 2 - 155, this.height / 6 - 12 + 24, 150, 20, getDifficultyText(getWorld().getDifficulty())));
+        }
+
+        addButton(new GuiButton(SOUNDS, this.width / 2 - 155, this.height / 6 + 66, 150, 20, I18n.format("options.sounds")));
+        addButton(new GuiButton(SKINCUSTOMISATION, this.width / 2 + 5, this.height / 6 + 66, 150, 20, I18n.format("options.skinCustomisation")));
+        addButton(new GuiButton(VIDEO, this.width / 2 - 155, this.height / 6 + 90, 150, 20, I18n.format("options.video")));
+        addButton(new GuiButton(CONTROLS, this.width / 2 + 5, this.height / 6 + 90, 150, 20, I18n.format("options.controls")));
+        addButton(new GuiButton(LANGUAGE, this.width / 2 - 155, this.height / 6 + 114, 150, 20, I18n.format("options.language")));
+        addButton(new GuiButton(CHAT, this.width / 2 + 5, this.height / 6 + 114, 150, 20, I18n.format("options.chat.title")));
+        addButton(new GuiButton(RESOURCEPACK, this.width / 2 - 155, this.height / 6 + 138, 150, 20, I18n.format("options.resourcepack")));
+        addButton(new GuiButton(SNOOPER, this.width / 2 + 5, this.height / 6 + 138, 150, 20, I18n.format("options.snooper.view")));
+        addButton(new GuiButton(DONE, this.width / 2 - 75, this.height / 6 + 168, 150, 20, I18n.format("gui.done")));
         super.initGui();
+    }
+
+    public String getDifficultyText(EnumDifficulty difficulty) {
+        IChatComponent chatComponent = new ChatComponentText("");
+        chatComponent.appendSibling(new ChatComponentTranslation("options.difficulty"));
+        chatComponent.appendText(": ");
+        chatComponent.appendSibling(new ChatComponentTranslation(difficulty.getDifficultyResourceKey()));
+        return chatComponent.getFormattedText();
     }
 
     @Override
@@ -89,8 +107,7 @@ public class OptionsScreen extends Screen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawWorldBackground(mouseX, mouseY, 120);
-
-        drawRect(this.width / 2 - 160, this.height / 6 + 15, this.width / 2 + 160, this.height / 6 + 169, Integer.MIN_VALUE);
+        drawRect(this.width / 2 - 160, this.height / 6 + 15, this.width / 2 + 160, this.height / 6 + 193, Integer.MIN_VALUE);
         getFr().drawCenteredString(EnumChatFormatting.UNDERLINE + I18n.format("options.title"), this.width / 2, this.height / 6 + 20, 0xffffffff);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

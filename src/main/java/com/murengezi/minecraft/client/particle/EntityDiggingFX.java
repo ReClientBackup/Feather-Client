@@ -5,7 +5,7 @@ import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 

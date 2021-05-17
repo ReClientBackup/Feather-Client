@@ -9,7 +9,7 @@ import com.murengezi.minecraft.block.BlockPrismarine;
 import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntityGuardian;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;

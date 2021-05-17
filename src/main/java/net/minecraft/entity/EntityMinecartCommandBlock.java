@@ -5,7 +5,7 @@ import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.command.server.CommandBlockLogic;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.IChatComponent;

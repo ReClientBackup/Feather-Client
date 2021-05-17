@@ -1,6 +1,6 @@
 package net.minecraft.world.biome;
 
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 
 public class BiomeGenBeach extends BiomeGenBase
 {

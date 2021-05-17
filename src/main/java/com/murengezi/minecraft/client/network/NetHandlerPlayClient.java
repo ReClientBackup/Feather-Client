@@ -81,7 +81,7 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.entity.projectile.EntityWitherSkull;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.inventory.AnimalChest;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryBasic;

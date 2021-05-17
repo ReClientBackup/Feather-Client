@@ -12,7 +12,7 @@ import com.murengezi.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.optifine.config.Config;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;

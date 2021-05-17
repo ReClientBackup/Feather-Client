@@ -5,7 +5,7 @@ import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;

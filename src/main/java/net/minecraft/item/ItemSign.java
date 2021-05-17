@@ -4,7 +4,7 @@ import com.murengezi.minecraft.block.BlockStandingSign;
 import com.murengezi.minecraft.block.BlockWallSign;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.BlockPos;

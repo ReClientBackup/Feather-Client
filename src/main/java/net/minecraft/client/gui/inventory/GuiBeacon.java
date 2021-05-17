@@ -9,7 +9,7 @@ import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.RenderHelper;
 import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.inventory.ContainerBeacon;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

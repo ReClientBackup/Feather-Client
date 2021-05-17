@@ -24,7 +24,7 @@ import com.murengezi.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import com.murengezi.minecraft.profiler.Profiler;
 import com.murengezi.minecraft.scoreboard.Scoreboard;

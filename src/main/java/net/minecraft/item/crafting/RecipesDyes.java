@@ -2,8 +2,8 @@ package net.minecraft.item.crafting;
 
 import com.murengezi.minecraft.block.BlockDoublePlant;
 import com.murengezi.minecraft.block.BlockFlower;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

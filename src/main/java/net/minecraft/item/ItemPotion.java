@@ -17,7 +17,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityPotion;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.stats.StatList;

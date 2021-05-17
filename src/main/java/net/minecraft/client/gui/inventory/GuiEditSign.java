@@ -8,7 +8,7 @@ import com.murengezi.minecraft.client.network.NetHandlerPlayClient;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import com.murengezi.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.network.play.client.C12PacketUpdateSign;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.ChatAllowedCharacters;

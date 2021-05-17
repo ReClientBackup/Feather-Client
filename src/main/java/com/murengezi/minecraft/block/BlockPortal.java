@@ -9,7 +9,7 @@ import com.murengezi.minecraft.block.state.BlockWorldState;
 import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.util.AxisAlignedBB;

@@ -7,7 +7,7 @@ import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.block.state.BlockState;
 import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.EnchantmentHelper;
+import com.murengezi.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;

@@ -7,7 +7,7 @@ import com.murengezi.minecraft.block.BlockTallGrass;
 import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.block.state.pattern.BlockStateHelper;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 

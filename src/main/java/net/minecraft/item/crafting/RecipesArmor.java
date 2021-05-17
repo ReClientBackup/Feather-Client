@@ -1,6 +1,6 @@
 package net.minecraft.item.crafting;
 
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

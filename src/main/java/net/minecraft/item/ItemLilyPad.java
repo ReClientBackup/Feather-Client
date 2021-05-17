@@ -5,7 +5,7 @@ import com.murengezi.minecraft.block.BlockLiquid;
 import com.murengezi.minecraft.block.material.Material;
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;

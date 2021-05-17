@@ -12,7 +12,7 @@ import com.murengezi.minecraft.client.renderer.GlStateManager;
 import com.murengezi.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import com.murengezi.minecraft.event.ClickEvent;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.ItemEditableBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

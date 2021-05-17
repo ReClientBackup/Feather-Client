@@ -17,7 +17,7 @@ import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.WeightedRandom;

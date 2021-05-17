@@ -8,7 +8,7 @@ import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
 import com.murengezi.minecraft.client.renderer.texture.TextureMap;
 import com.murengezi.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.projectile.EntityFireball;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderFireball extends Render<EntityFireball> {

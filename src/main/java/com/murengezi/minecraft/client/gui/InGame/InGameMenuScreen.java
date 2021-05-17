@@ -56,7 +56,7 @@ public class InGameMenuScreen extends Screen {
                 changeScreen(new MultiplayerScreen(this));
                 break;
             case OPTIONS:
-                changeScreen(new OptionsScreen(this, getMc().gameSettings));
+                changeScreen(new OptionsScreen(this));
                 break;
             case LAN:
                 changeScreen(new ShareToLanScreen(this));

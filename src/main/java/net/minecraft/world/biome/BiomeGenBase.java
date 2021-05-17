@@ -29,7 +29,7 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntitySquid;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.WeightedRandom;

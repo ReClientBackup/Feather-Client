@@ -15,7 +15,7 @@ import com.murengezi.minecraft.client.renderer.texture.TextureMap;
 import com.murengezi.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
 import net.minecraft.world.storage.MapData;

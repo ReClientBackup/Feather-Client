@@ -15,7 +15,7 @@ import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;

@@ -10,7 +10,7 @@ import net.minecraft.entity.ai.EntityAIFindEntityNearest;
 import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;

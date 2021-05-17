@@ -10,7 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;

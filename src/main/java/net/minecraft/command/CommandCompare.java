@@ -2,7 +2,7 @@ package net.minecraft.command;
 
 import java.util.List;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;

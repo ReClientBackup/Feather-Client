@@ -12,7 +12,7 @@ import com.murengezi.minecraft.client.renderer.texture.TextureAtlasSprite;
 import com.murengezi.minecraft.client.resources.model.IBakedModel;
 import com.murengezi.minecraft.client.resources.model.ModelManager;
 import com.murengezi.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 
 import java.util.Map;

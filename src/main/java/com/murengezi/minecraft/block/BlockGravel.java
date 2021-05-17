@@ -3,7 +3,7 @@ package com.murengezi.minecraft.block;
 import java.util.Random;
 import com.murengezi.minecraft.block.material.MapColor;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class BlockGravel extends BlockFalling {

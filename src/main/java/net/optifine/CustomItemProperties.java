@@ -26,7 +26,7 @@ import com.murengezi.minecraft.client.resources.model.ModelManager;
 import com.murengezi.minecraft.client.resources.model.ModelResourceLocation;
 import com.murengezi.minecraft.client.resources.model.ModelRotation;
 import com.murengezi.minecraft.client.resources.model.SimpleBakedModel;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.optifine.config.Config;

@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import com.murengezi.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

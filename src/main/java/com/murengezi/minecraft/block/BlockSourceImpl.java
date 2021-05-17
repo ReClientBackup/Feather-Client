@@ -1,7 +1,7 @@
 package com.murengezi.minecraft.block;
 
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.dispenser.IBlockSource;
+import com.murengezi.minecraft.dispenser.IBlockSource;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;

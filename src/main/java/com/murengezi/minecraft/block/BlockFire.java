@@ -9,7 +9,7 @@ import com.murengezi.minecraft.block.properties.PropertyBool;
 import com.murengezi.minecraft.block.properties.PropertyInteger;
 import com.murengezi.minecraft.block.state.BlockState;
 import com.murengezi.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;

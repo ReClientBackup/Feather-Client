@@ -4,7 +4,7 @@ import com.murengezi.minecraft.block.Block;
 import com.murengezi.minecraft.block.BlockBed;
 import com.murengezi.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.BlockPos;

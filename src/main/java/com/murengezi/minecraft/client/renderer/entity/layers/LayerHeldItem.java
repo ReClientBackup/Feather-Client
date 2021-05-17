@@ -8,7 +8,7 @@ import com.murengezi.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import com.murengezi.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import com.murengezi.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

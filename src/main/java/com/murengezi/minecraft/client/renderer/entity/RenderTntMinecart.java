@@ -5,7 +5,7 @@ import com.murengezi.minecraft.client.Minecraft;
 import com.murengezi.minecraft.client.renderer.BlockRendererDispatcher;
 import com.murengezi.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.item.EntityMinecartTNT;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 
 public class RenderTntMinecart extends RenderMinecart<EntityMinecartTNT> {

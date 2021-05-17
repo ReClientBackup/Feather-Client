@@ -7,7 +7,7 @@ import com.murengezi.minecraft.block.BlockSlab;
 import com.murengezi.minecraft.block.BlockStoneSlab;
 import com.murengezi.minecraft.block.state.IBlockState;
 import com.murengezi.minecraft.block.state.pattern.BlockStateHelper;
-import net.minecraft.init.Blocks;
+import com.murengezi.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
