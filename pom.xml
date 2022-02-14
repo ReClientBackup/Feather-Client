@@ -13,7 +13,7 @@
                 <directory>src/main/resources</directory>
             </resource>
         </resources>
-
+		
         <plugins>
             <plugin>
                 <groupId>pl.project13.maven</groupId>
@@ -60,7 +60,7 @@
                 </configuration>
 
             </plugin>
-
+			<plugin> <groupId>com.googlecode.mavennatives</groupId> <artifactId>maven-nativedependencies-plugin</artifactId> <version>0.0.7</version> <executions> <execution> <id>unpacknatives</id> <goals> <goal>copy</goal> </goals> </execution> </executions> </plugin> 
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -106,7 +106,11 @@
             <artifactId>minecraft</artifactId>
             <version>1.8.9</version>
         </dependency>
-
+		<dependency>
+		    <groupId>org.lwjgl</groupId>
+		    <artifactId>lwjgl</artifactId>
+		    <version>3.1.0</version>
+		</dependency>
         <dependency>
             <groupId>oshi-project</groupId>
             <artifactId>oshi-core</artifactId>

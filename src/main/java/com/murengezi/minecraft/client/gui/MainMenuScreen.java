@@ -77,7 +77,7 @@ public class MainMenuScreen extends Screen {
         drawTexturedModalRect(x, 30, 0, 0, 155, 44);
         drawTexturedModalRect(x + 155, 30, 0, 45, 155, 44);
 
-        getMc().getTextureManager().bindTexture(new ResourceLocation("feather/edition.png"));
+        getMc().getTextureManager().bindTexture(new ResourceLocation("chocolate/edition.png"));
         drawModalRectWithCustomSizedTexture(x + 88, 67, 0, 0, 98, 14, 128, 16);
 
         String playerName = getMc().getSession().getUsername();
@@ -90,7 +90,7 @@ public class MainMenuScreen extends Screen {
 
         GlStateManager.pushMatrix();
         GlStateManager.colorAllMax();
-        getMc().getTextureManager().bindTexture(new ResourceLocation("feather/sign-in.png"));
+        getMc().getTextureManager().bindTexture(new ResourceLocation("chocolate/sign-in.png"));
         drawModalRectWithCustomSizedTexture(20 + 3 + getFr().getStringWidth(playerName), 6, 0, 0, 8, 8, 8, 8);
         GlStateManager.popMatrix();
 

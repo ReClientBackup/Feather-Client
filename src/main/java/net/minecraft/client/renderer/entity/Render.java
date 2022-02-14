@@ -25,6 +25,9 @@ import net.optifine.entity.model.IEntityRenderer;
 import net.optifine.shaders.Shaders;
 import org.lwjgl.opengl.GL11;
 
+import com.murengezi.chocolate.Util.MinecraftUtils;
+import com.murengezi.minecraft.client.gui.GUI;
+
 public abstract class Render<T extends Entity> implements IEntityRenderer
 {
     private static final ResourceLocation shadowTextures = new ResourceLocation("textures/misc/shadow.png");
@@ -405,11 +408,11 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
             fontrenderer.drawString(str, -j, i, 553648127);
             GlStateManager.enableDepth();
             GlStateManager.depthMask(true);
-            /*if (entityIn == MinecraftUtils.getPlayer()) {
-                bindTexture(new ResourceLocation("feather/logo.png"));
+            if (entityIn == MinecraftUtils.getPlayer()) {
+                bindTexture(new ResourceLocation("chocolate/logo.png"));
                 GlStateManager.colorAllMax();
-                Gui.drawModalRectWithCustomSizedTexture(-j - 6, i, 0, 0, 5, 6, 5, 6);
-            }*/
+                GUI.drawModalRectWithCustomSizedTexture(-j - 6 - 4, i, 0, 0, 5, 6, 5, 6);
+            }
             fontrenderer.drawString(str, -j, i, -1);
             GlStateManager.enableLightning();
             GlStateManager.disableBlend();
